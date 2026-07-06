@@ -59,6 +59,7 @@ RGBGFXFLAGS  ?= -Weverything
 	blue_vc \
 	wla-poc \
 	wla-unit-poc \
+	wla-check-field-move-names \
 	clean \
 	tidy \
 	compare \
@@ -230,3 +231,6 @@ wla-unit-poc:
 	mkdir -p wla/build
 	$(WLA) -v -o wla/build/field_move_names_poc.o wla/poc/field_move_names_poc_driver.asm
 	$(WLALINK) -v -s wla/unit_poc.link wla/build/field_move_names_poc.gb
+
+wla-check-field-move-names:
+	python3 wla/tools/check_field_move_names.py

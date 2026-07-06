@@ -16,7 +16,10 @@ The old monolithic `wla-dx` branch is reference material only. It may be useful 
 - WLA translation: `wla/data/moves/field_move_names.asm`
 - Driver: `wla/poc/field_move_names_poc_driver.asm`
 - Link file: `wla/unit_poc.link`
+- Drift check: `make wla-check-field-move-names`
 
 This file was chosen because it is a small data-only table: one label plus field-move name bytes, with no code flow, local labels, macros, includes, bank placement, or gameplay logic. Its only non-local translation concern is the Pokemon text charmap, so the WLA file expands the original string literals into explicit byte values from `constants/charmap.asm` (`A` = `$80`, `@` = `$50`, etc.).
 
 The target is intentionally standalone. It proves that one preserved-layout master-tree unit can live under `wla/` and pass through `wla-gb`/`wlalink` without changing the normal RGBDS source files or broadening into a full port.
+
+`make wla-check-field-move-names` runs `wla/tools/check_field_move_names.py`. The script is intentionally narrow: it encodes the expected Pokemon charmap bytes for the current `FieldMoveNames` strings and compares them with the `.DB` bytes in `wla/data/moves/field_move_names.asm`, so this first translated unit cannot silently drift from the RGBDS source expectation.
