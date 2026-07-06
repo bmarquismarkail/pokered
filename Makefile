@@ -58,6 +58,7 @@ RGBGFXFLAGS  ?= -Weverything
 	red_vc \
 	blue_vc \
 	wla-poc \
+	wla-unit-poc \
 	clean \
 	tidy \
 	compare \
@@ -224,3 +225,8 @@ wla-poc:
 	mkdir -p wla/build
 	$(WLA) -v -o wla/build/home_start_poc.o wla/poc/home_start_poc_driver.asm
 	$(WLALINK) -v -s wla/layout.link wla/build/home_start_poc.gb
+
+wla-unit-poc:
+	mkdir -p wla/build
+	$(WLA) -v -o wla/build/field_move_names_poc.o wla/poc/field_move_names_poc_driver.asm
+	$(WLALINK) -v -s wla/unit_poc.link wla/build/field_move_names_poc.gb
