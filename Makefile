@@ -217,8 +217,8 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 
 ### WLA-DX structured port scaffold
 
-WLA ?= /data/src/wla-dx/build/binaries/wla-gb
-WLALINK ?= /data/src/wla-dx/build/binaries/wlalink
+WLA ?= wla-gb
+WLALINK ?= wlalink
 
 wla-poc:
 	mkdir -p wla/build
