@@ -57,6 +57,7 @@ RGBGFXFLAGS  ?= -Weverything
 	blue_debug \
 	red_vc \
 	blue_vc \
+	wla-poc \
 	clean \
 	tidy \
 	compare \
@@ -213,3 +214,13 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 %.blk: ;
 %.bst: ;
 %.rle: ;
+
+### WLA-DX structured port scaffold
+
+WLA ?= /data/src/wla-dx/build/binaries/wla-gb
+WLALINK ?= /data/src/wla-dx/build/binaries/wlalink
+
+wla-poc:
+	mkdir -p wla/build
+	$(WLA) -v -o wla/build/home_start_poc.o wla/poc/home_start_poc_driver.asm
+	$(WLALINK) -v -s wla/layout.link wla/build/home_start_poc.gb
