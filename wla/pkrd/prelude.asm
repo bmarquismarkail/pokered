@@ -22,12 +22,51 @@ wChannelCommandPointers db
 .ende
 
 ; RAM symbols referenced by structured text banks.
+.enum $CC5B export
+wDexRatingNumMonsSeen db
+wDexRatingNumMonsOwned db
+.ende
+
+.enum $CCE5 export
+wTotalPayDayMoney db
+.ende
+
+.enum $CD05 export
+wEnemyNumHits db
+.ende
+
+.enum $CD3D export
+wBoxNumString db
+wDayCareNumLevelsGrown db
+wDayCareTotalCost db
+.ende
+
+.enum $CD3F export
+wNameOfPlayerMonToBeTraded db
+.ende
+
 .enum $CD6D export
 wNameBuffer db
 .ende
 
+.enum $CEFD export
+wHPBarHPDifference db
+.ende
+
 .enum $CF4B export
 wStringBuffer db
+.ende
+
+.enum $CF4B export
+wExpAmountGained db
+.ende
+
+.enum $CF5F export
+wGymCityName db
+.ende
+
+.enum $CF70 export
+wGymLeaderName db
 .ende
 
 .enum $CFDA export
@@ -38,6 +77,26 @@ wEnemyMonNick db
 wLearnMoveMonName db
 .ende
 
+.enum $D009 export
+wBattleMonNick db
+.ende
+
+.enum $D04A export
+wTrainerName db
+.ende
+
+.enum $D074 export
+wPlayerNumHits db
+.ende
+
+.enum $D079 export
+wAmountMoneyWon db
+.ende
+
+.enum $D127 export
+wCurEnemyLevel db
+.ende
+
 .enum $D5A4 export
 wPlayerCoins db
 .ende
@@ -46,8 +105,26 @@ wPlayerCoins db
 wBoxMonNicks db
 .ende
 
+.enum $D887 export
+wLinkEnemyTrainerName db
+.ende
+
+.enum $DA49 export
+wDayCareMonName db
+.ende
+
+.enum $FF8C export
+hTextID db
+.ende
+
 .enum $FF9F export
 hMoney db
+hCoins db
+.ende
+
+.enum $FFDB export
+hDexRatingNumMonsSeen db
+hDexRatingNumMonsOwned db
 .ende
 
 .enum $C012 export

@@ -236,6 +236,70 @@ PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
 wla-build-dir := wla/build
 wla-reference-dir := wla/reference
 
+bank34-text-sources := \
+	text/RockTunnelB1F_2.asm text/SeafoamIslandsB4F.asm \
+	data/text/text_2.asm text/DiglettsCaveRoute2.asm \
+	text/ViridianForestNorthGate.asm text/Route2TradeHouse.asm \
+	text/Route2Gate.asm text/ViridianForestSouthGate.asm \
+	text/MtMoonPokecenter.asm text/SaffronGates.asm text/Daycare.asm
+
+wla/banks/bank34_text.asm: $(bank34-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank34-text-sources)
+
+bank35-text-sources := \
+	text/Daycare_2.asm text/UndergroundPathRoute6.asm \
+	text/UndergroundPathRoute7.asm text/UndergroundPathRoute7Copy.asm \
+	text/UndergroundPathRoute8.asm text/RockTunnelPokecenter.asm \
+	text/RockTunnel1F.asm text/PowerPlant.asm text/Route11Gate1F.asm \
+	text/Route11Gate2F.asm text/DiglettsCaveRoute11.asm \
+	text/Route12Gate1F.asm text/Route12Gate2F.asm \
+	text/Route12SuperRodHouse.asm text/Route15Gate1F.asm \
+	text/Route15Gate2F.asm text/Route16Gate1F.asm text/Route16Gate2F.asm \
+	text/Route16FlyHouse.asm text/Route18Gate1F.asm text/Route18Gate2F.asm \
+	text/Route22Gate.asm text/VictoryRoad2F.asm text/BillsHouse.asm \
+	text/Route1.asm text/Route2.asm text/Route3.asm text/Route4.asm \
+	text/Route5.asm text/Route6.asm text/Route7.asm text/Route8.asm \
+	text/Route9.asm text/Route10.asm text/Route11.asm
+
+wla/banks/bank35_text.asm: $(bank35-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank35-text-sources)
+
+bank36-text-sources := \
+	text/Route11_2.asm text/Route12.asm text/Route13.asm text/Route14.asm \
+	text/Route15.asm text/Route16.asm text/Route17.asm text/Route18.asm \
+	text/Route19.asm text/Route20.asm text/Route21.asm text/Route22.asm \
+	text/Route23.asm text/Route24.asm
+
+wla/banks/bank36_text.asm: $(bank36-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank36-text-sources)
+
+bank37-text-sources := \
+	text/Route24_2.asm text/Route25.asm data/text/text_3.asm \
+	text/RedsHouse1F.asm text/BluesHouse.asm text/OaksLab.asm \
+	text/pokedex_ratings.asm text/ViridianPokecenter.asm \
+	text/ViridianMart.asm text/ViridianSchoolHouse.asm \
+	text/ViridianNicknameHouse.asm text/ViridianGym.asm \
+	text/Museum1F.asm text/Museum2F.asm text/PewterGym.asm
+
+wla/banks/bank37_text.asm: $(bank37-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank37-text-sources)
+
+bank38-text-sources := \
+	text/PewterGym_2.asm text/PewterNidoranHouse.asm text/PewterMart.asm \
+	text/PewterSpeechHouse.asm text/PewterPokecenter.asm \
+	text/CeruleanTrashedHouse.asm text/CeruleanTradeHouse.asm \
+	text/CeruleanPokecenter.asm text/CeruleanGym.asm text/BikeShop.asm \
+	text/CeruleanMart.asm text/CeruleanBadgeHouse.asm \
+	text/LavenderPokecenter.asm text/PokemonTower1F.asm \
+	text/PokemonTower2F.asm text/PokemonTower3F.asm text/PokemonTower4F.asm \
+	text/PokemonTower5F.asm text/PokemonTower6F.asm text/PokemonTower7F.asm \
+	text/MrFujisHouse.asm text/LavenderMart.asm text/LavenderCuboneHouse.asm \
+	text/NameRatersHouse.asm text/VermilionPokecenter.asm \
+	text/PokemonFanClub.asm text/VermilionMart.asm text/VermilionGym.asm
+
+wla/banks/bank38_text.asm: $(bank38-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank38-text-sources)
+
 bank39-text-sources := \
 	text/VermilionGym_2.asm text/VermilionPidgeyHouse.asm \
 	text/VermilionDock.asm text/VermilionOldRodHouse.asm \
@@ -305,7 +369,7 @@ wla-unit-poc:
 
 # Build the complete imported WLA-DX split. This is the migration baseline;
 # reconciled wla/data files are not substituted until their audits pass.
-wla-red wla-rom: wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
+wla-red wla-rom: wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

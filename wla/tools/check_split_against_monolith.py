@@ -113,6 +113,76 @@ def main() -> int:
         return 1
     print(f'OK bank42 uses structured Text 11 include: 29 records, end/size assertions, {len(table_lines)} charmap entries')
 
+    bank34_text = Path('wla/banks/bank34_text.asm')
+    bank34_source = banks[34].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank34_text.asm"' not in bank34_source:
+        print('FAIL bank34 is not using its structured Text 3 include')
+        return 1
+    bank34_labels = file_labels(bank34_text)
+    if len(bank34_labels) != 316 or bank34_labels[0] != '_RockTunnelB1FHiker3AfterBattleText' or bank34_labels[-1] != 'Bank34TextEnd':
+        print(f'FAIL structured bank34 label boundary changed: {len(bank34_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2cf9, $00' not in bank34_source or 'Bank34End::' not in bank34_source:
+        print('FAIL bank34 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank34 uses structured Text 3 include: 315 records, end/size assertions')
+
+    bank35_text = Path('wla/banks/bank35_text.asm')
+    bank35_source = banks[35].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank35_text.asm"' not in bank35_source:
+        print('FAIL bank35 is not using its structured Text 4 include')
+        return 1
+    bank35_labels = file_labels(bank35_text)
+    if len(bank35_labels) != 269 or bank35_labels[0] != '_DaycareGentlemanAllRightThenText' or bank35_labels[-1] != 'Bank35TextEnd':
+        print(f'FAIL structured bank35 label boundary changed: {len(bank35_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2c09, $00' not in bank35_source or 'Bank35End::' not in bank35_source:
+        print('FAIL bank35 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank35 uses structured Text 4 include: 268 records, end/size assertions')
+
+    bank36_text = Path('wla/banks/bank36_text.asm')
+    bank36_source = banks[36].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank36_text.asm"' not in bank36_source:
+        print('FAIL bank36 is not using its structured Text 5 include')
+        return 1
+    bank36_labels = file_labels(bank36_text)
+    if len(bank36_labels) != 308 or bank36_labels[0] != '_Route11SuperNerd2EndBattleText' or bank36_labels[-1] != 'Bank36TextEnd':
+        print(f'FAIL structured bank36 label boundary changed: {len(bank36_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2903, $00' not in bank36_source or 'Bank36End::' not in bank36_source:
+        print('FAIL bank36 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank36 uses structured Text 5 include: 307 records, end/size assertions')
+
+    bank37_text = Path('wla/banks/bank37_text.asm')
+    bank37_source = banks[37].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank37_text.asm"' not in bank37_source:
+        print('FAIL bank37 is not using its structured Text 6 include')
+        return 1
+    bank37_labels = file_labels(bank37_text)
+    if len(bank37_labels) != 250 or bank37_labels[0] != '_Route24CooltrainerM2EndBattleText' or bank37_labels[-1] != 'Bank37TextEnd':
+        print(f'FAIL structured bank37 label boundary changed: {len(bank37_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2a38, $00' not in bank37_source or 'Bank37End::' not in bank37_source:
+        print('FAIL bank37 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank37 uses structured Text 6 include: 249 records, end/size assertions')
+
+    bank38_text = Path('wla/banks/bank38_text.asm')
+    bank38_source = banks[38].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank38_text.asm"' not in bank38_source:
+        print('FAIL bank38 is not using its structured Text 7 include')
+        return 1
+    bank38_labels = file_labels(bank38_text)
+    if len(bank38_labels) != 182 or bank38_labels[0] != '_PewterGymBrockPostBattleAdviceText' or bank38_labels[-1] != 'Bank38TextEnd':
+        print(f'FAIL structured bank38 label boundary changed: {len(bank38_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2b7b, $00' not in bank38_source or 'Bank38End::' not in bank38_source:
+        print('FAIL bank38 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank38 uses structured Text 7 include: 181 records, end/size assertions')
+
     bank39_text = Path('wla/banks/bank39_text.asm')
     bank39_source = banks[39].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank39_text.asm"' not in bank39_source:

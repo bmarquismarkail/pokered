@@ -59,4 +59,19 @@ boundary and padding are checked before ROM parity.
 Bank 39 converts RGBDS section `Text 8` without additional compatibility
 commands: 201 records from 28 source includes occupy exactly `0x2aa4` bytes.
 
+Bank 38 converts RGBDS section `Text 7`: 181 records from 28 source includes
+occupy exactly `0x2b7b` bytes using the established strict command subset.
+
+Bank 37 converts RGBDS section `Text 6`: 249 records from 15 includes occupy
+`0x2a38` bytes. The converter explicitly emits its packed decimal commands.
+
+Bank 36 converts RGBDS section `Text 5`: 307 route-text records from 14 source
+includes occupy exactly `0x2903` bytes with no new compatibility commands.
+
+Bank 35 converts RGBDS section `Text 4`: 268 records from 35 source includes
+occupy exactly `0x2c09` bytes using the established command subset.
+
+Bank 34 converts RGBDS section `Text 3`: 315 records from 11 source includes
+occupy `0x2cf9` bytes and exercise the shared battle/general RAM aliases.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.

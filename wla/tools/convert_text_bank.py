@@ -12,6 +12,7 @@ LABEL_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*):{1,2}$")
 STRING_RE = re.compile(r'^\s*(text|next|line|para|cont)\s+"(.*)"$')
 RAM_RE = re.compile(r"^\s*text_ram\s+([A-Za-z_][A-Za-z0-9_]*)$")
 BCD_RE = re.compile(r"^\s*text_bcd\s+([A-Za-z_][A-Za-z0-9_]*),\s*([23])\s*\|\s*LEADING_ZEROES\s*\|\s*LEFT_ALIGN$")
+DECIMAL_RE = re.compile(r"^\s*text_decimal\s+([A-Za-z_][A-Za-z0-9_]*),\s*([0-9]+),\s*([0-9]+)$")
 STRING_COMMANDS = {"text": "$00", "next": "$4e", "line": "$4f", "para": "$51", "cont": "$55"}
 BYTE_COMMANDS = {"done": "$57", "prompt": "$58", "text_start": "$00", "text_end": "$50"}
 
@@ -65,6 +66,12 @@ def convert(sources: list[Path], end_label: str) -> str:
             bcd = BCD_RE.fullmatch(line)
             if bcd:
                 output.extend(("\t.DB $02", f"\t.DW {bcd.group(1)}", f"\t.DB $c{bcd.group(2)}"))
+                continue
+            decimal = DECIMAL_RE.fullmatch(line)
+            if decimal:
+                address, byte_count, digit_count = decimal.groups()
+                packed = (int(byte_count) << 4) | int(digit_count)
+                output.extend(("\t.DB $09", f"\t.DW {address}", f"\t.DB ${packed:02x}"))
                 continue
             raise ValueError(f"{source}:{line_number}: unsupported line: {raw}")
         output.append("")
