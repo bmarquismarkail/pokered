@@ -14,6 +14,7 @@ from reconcile_audit import audit_reconcile_tree, print_reconcile_audit
 BANK_RE = re.compile(r'^\.BANK\s+(\d+)(?:\s+SLOT\s+\d+)?')
 LABEL_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*:{1,2}\s*($|;|\.)')
 INCLUDE_BANK_RE = re.compile(r'^\.INCLUDE\s+"wla/pkrd/bank(\d{2})\.asm"', re.MULTILINE)
+INCLUDE_RE = re.compile(r'^\.INCLUDE\s+"([^"]+)"', re.MULTILINE)
 
 
 def labels_by_bank(path: Path) -> dict[int, list[str]]:
@@ -39,6 +40,16 @@ def file_labels(path: Path) -> list[str]:
         line = raw.rstrip()
         if LABEL_RE.match(line):
             labels.append(line.split(':', 1)[0].strip())
+    return labels
+
+
+def file_labels_with_includes(path: Path) -> list[str]:
+    labels = file_labels(path)
+    source = path.read_text(errors='replace')
+    for include in INCLUDE_RE.findall(source):
+        include_path = Path(include)
+        if include_path.is_file():
+            labels.extend(file_labels(include_path))
     return labels
 
 
@@ -319,6 +330,58 @@ def main() -> int:
         return 1
     print('OK bank08 uses structured Music Headers 2 include: 7 headers, 63-byte section')
 
+    sfx_headers_2 = Path('wla/banks/bank08_sfx_headers_2.asm')
+    if '.INCLUDE "wla/banks/bank08_sfx_headers_2.asm"' not in bank08_source:
+        print('FAIL bank08 is not using its structured Sound Effect Headers 2 include')
+        return 1
+    sfx_header_labels = file_labels(sfx_headers_2)
+    if len(sfx_header_labels) != 121 or sfx_header_labels[0] != 'SFX_Headers_2' or sfx_header_labels[-1] != 'SfxHeaders2End':
+        print(f'FAIL structured Sound Effect Headers 2 label boundary changed: {len(sfx_header_labels)} labels')
+        return 1
+    print('OK bank08 uses structured Sound Effect Headers 2 include: 119 headers, 702-byte section')
+
+    music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
+    bank31_source = banks[31].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank31_music_headers_3.asm"' not in bank31_source:
+        print('FAIL bank31 is not using its structured Music Headers 3 include')
+        return 1
+    music_header_labels = file_labels(music_headers_3)
+    if len(music_header_labels) != 19 or music_header_labels[0] != 'Music_TitleScreen' or music_header_labels[-1] != 'MusicHeaders3End':
+        print(f'FAIL structured Music Headers 3 label boundary changed: {len(music_header_labels)} labels')
+        return 1
+    print('OK bank31 uses structured Music Headers 3 include: 18 headers, 180-byte section')
+
+    sfx_headers_3 = Path('wla/banks/bank31_sfx_headers_3.asm')
+    if '.INCLUDE "wla/banks/bank31_sfx_headers_3.asm"' not in bank31_source:
+        print('FAIL bank31 is not using its structured Sound Effect Headers 3 include')
+        return 1
+    sfx_header_labels = file_labels(sfx_headers_3)
+    if len(sfx_header_labels) != 105 or sfx_header_labels[0] != 'SFX_Headers_3' or sfx_header_labels[-1] != 'SfxHeaders3End':
+        print(f'FAIL structured Sound Effect Headers 3 label boundary changed: {len(sfx_header_labels)} labels')
+        return 1
+    print('OK bank31 uses structured Sound Effect Headers 3 include: 103 headers, 585-byte section')
+
+    music_headers_1 = Path('wla/banks/bank02_music_headers_1.asm')
+    bank02_source = banks[2].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank02_music_headers_1.asm"' not in bank02_source:
+        print('FAIL bank02 is not using its structured Music Headers 1 include')
+        return 1
+    music_header_labels = file_labels(music_headers_1)
+    if len(music_header_labels) != 21 or music_header_labels[0] != 'Music_PalletTown' or music_header_labels[-1] != 'MusicHeaders1End':
+        print(f'FAIL structured Music Headers 1 label boundary changed: {len(music_header_labels)} labels')
+        return 1
+    print('OK bank02 uses structured Music Headers 1 include: 20 headers, 207-byte section')
+
+    sfx_headers_1 = Path('wla/banks/bank02_sfx_headers_1.asm')
+    if '.INCLUDE "wla/banks/bank02_sfx_headers_1.asm"' not in bank02_source:
+        print('FAIL bank02 is not using its structured Sound Effect Headers 1 include')
+        return 1
+    sfx_header_labels = file_labels(sfx_headers_1)
+    if len(sfx_header_labels) != 97 or sfx_header_labels[0] != 'SFX_Headers_1' or sfx_header_labels[-1] != 'SfxHeaders1End':
+        print(f'FAIL structured Sound Effect Headers 1 label boundary changed: {len(sfx_header_labels)} labels')
+        return 1
+    print('OK bank02 uses structured Sound Effect Headers 1 include: 95 headers, 558-byte section')
+
     if not args.monolith.is_file():
         print(f'FAIL monolith not found: {args.monolith}')
         return 1
@@ -332,7 +395,7 @@ def main() -> int:
     sample_failures: list[str] = []
     for i, bank_path in enumerate(banks):
         expected = monolith_labels.get(i, [])
-        actual = set(file_labels(bank_path))
+        actual = set(file_labels_with_includes(bank_path))
         total_monolith_labels += len(expected)
         total_split_labels += len(actual)
         sample = expected[:10]

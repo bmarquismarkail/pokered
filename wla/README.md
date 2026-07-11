@@ -88,4 +88,20 @@ The next two smallest sections are also native: Bank 22's 28-byte `Saffron
 Guards` routine and item list, and Bank 8's 63-byte `Music Headers 2` table.
 Both are spliced at their original boundaries and guarded by label checks.
 
+Bank 31's 180-byte `Music Headers 3` section is generated deterministically
+from its 18 RGBDS headers and the temporary RGBDS symbol oracle, preserving all
+60 channel IDs and target addresses at the original section boundary.
+
+Bank 2's 207-byte `Music Headers 1` section uses the same converter for 20
+named headers, preserving its 69 channel records and original boundary.
+
+Bank 2's adjacent 558-byte `Sound Effect Headers 1` section is likewise
+structured as its padding plus 95 headers and 185 channel records.
+
+Bank 31's 585-byte `Sound Effect Headers 3` section contains its padding plus
+103 named headers and 194 channel records immediately before Music Headers 3.
+
+Bank 8's 702-byte `Sound Effect Headers 2` section completes the header set
+with its padding, 119 named headers, and 233 channel records.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.

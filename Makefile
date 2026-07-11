@@ -236,6 +236,21 @@ PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
 wla-build-dir := wla/build
 wla-reference-dir := wla/reference
 
+wla/banks/bank31_music_headers_3.asm: audio/headers/musicheaders3.asm pokered.sym wla/tools/convert_music_headers.py
+	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ MusicHeaders3End
+
+wla/banks/bank31_sfx_headers_3.asm: audio/headers/sfxheaders3.asm pokered.sym wla/tools/convert_music_headers.py
+	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ SfxHeaders3End
+
+wla/banks/bank02_music_headers_1.asm: audio/headers/musicheaders1.asm pokered.sym wla/tools/convert_music_headers.py
+	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ MusicHeaders1End
+
+wla/banks/bank02_sfx_headers_1.asm: audio/headers/sfxheaders1.asm pokered.sym wla/tools/convert_music_headers.py
+	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ SfxHeaders1End
+
+wla/banks/bank08_sfx_headers_2.asm: audio/headers/sfxheaders2.asm pokered.sym wla/tools/convert_music_headers.py
+	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ SfxHeaders2End
+
 bank32-text-sources := \
 	data/text/text_1.asm text/ViridianForest.asm text/MtMoon1F.asm \
 	text/MtMoonB1F.asm text/MtMoonB2F.asm text/SSAnne1F.asm \
@@ -399,7 +414,7 @@ wla-unit-poc:
 
 # Build the complete imported WLA-DX split. This is the migration baseline;
 # reconciled wla/data files are not substituted until their audits pass.
-wla-red wla-rom: wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
+wla-red wla-rom: wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
