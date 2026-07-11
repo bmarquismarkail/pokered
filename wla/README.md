@@ -104,4 +104,19 @@ Bank 31's 585-byte `Sound Effect Headers 3` section contains its padding plus
 Bank 8's 702-byte `Sound Effect Headers 2` section completes the header set
 with its padding, 119 named headers, and 233 channel records.
 
+Bank 8's 90-byte `Low Health Alarm` section is native WLA instructions plus
+its three tone records, retaining the complete timer, enable, and copy logic.
+
+Bank 12's 101-byte `Battle Engine 6` section is native WLA source for both the
+Mist and one-hit-KO move effects, including the Mist far-text record.
+
+Bank 18's 103-byte `Screen Effects` section is native WLA source for palette
+changes and the vertical and horizontal predef shake routines.
+
+Bank 6's 109-byte `Play Time` section is native WLA source for timer rollover,
+maximum-time handling, and the ignore-input countdown/reset routine.
+
+Bank 26's 127-byte `Battle Engine 11` section combines native PP-decrement
+instructions with an `INCBIN` of the reproducibly generated Red version graphic.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.

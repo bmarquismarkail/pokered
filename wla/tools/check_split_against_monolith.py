@@ -340,6 +340,63 @@ def main() -> int:
         return 1
     print('OK bank08 uses structured Sound Effect Headers 2 include: 119 headers, 702-byte section')
 
+    low_health = Path('wla/banks/bank08_low_health_alarm.asm')
+    if '.INCLUDE "wla/banks/bank08_low_health_alarm.asm"' not in bank08_source:
+        print('FAIL bank08 is not using its structured Low Health Alarm include')
+        return 1
+    low_health_labels = file_labels(low_health)
+    if len(low_health_labels) != 13 or low_health_labels[0] != 'Music_DoLowHealthAlarm' or low_health_labels[-1] != 'LowHealthAlarmEnd':
+        print(f'FAIL structured Low Health Alarm label boundary changed: {len(low_health_labels)} labels')
+        return 1
+    print('OK bank08 uses structured Low Health Alarm include: 90-byte executable/data section')
+
+    battle_engine_6 = Path('wla/banks/bank12_battle_engine_6.asm')
+    bank12_source = banks[12].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank12_battle_engine_6.asm"' not in bank12_source:
+        print('FAIL bank12 is not using its structured Battle Engine 6 include')
+        return 1
+    battle_engine_6_labels = file_labels(battle_engine_6)
+    if len(battle_engine_6_labels) != 8 or battle_engine_6_labels[0] != 'MistEffect_' or battle_engine_6_labels[-1] != 'BattleEngine6End':
+        print(f'FAIL structured Battle Engine 6 label boundary changed: {len(battle_engine_6_labels)} labels')
+        return 1
+    print('OK bank12 uses structured Battle Engine 6 include: 101-byte executable/text section')
+
+    screen_effects = Path('wla/banks/bank18_screen_effects.asm')
+    bank18_source = banks[18].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank18_screen_effects.asm"' not in bank18_source:
+        print('FAIL bank18 is not using its structured Screen Effects include')
+        return 1
+    screen_effect_labels = file_labels(screen_effects)
+    if len(screen_effect_labels) != 9 or screen_effect_labels[0] != 'ChangeBGPalColor0_4Frames' or screen_effect_labels[-1] != 'ScreenEffectsEnd':
+        print(f'FAIL structured Screen Effects label boundary changed: {len(screen_effect_labels)} labels')
+        return 1
+    print('OK bank18 uses structured Screen Effects include: 103-byte executable section')
+
+    play_time = Path('wla/banks/bank06_play_time.asm')
+    bank06_source = banks[6].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank06_play_time.asm"' not in bank06_source:
+        print('FAIL bank06 is not using its structured Play Time include')
+        return 1
+    play_time_labels = file_labels(play_time)
+    if len(play_time_labels) != 5 or play_time_labels[0] != 'TrackPlayTime' or play_time_labels[-1] != 'PlayTimeEnd':
+        print(f'FAIL structured Play Time label boundary changed: {len(play_time_labels)} labels')
+        return 1
+    print('OK bank06 uses structured Play Time include: 109-byte executable section')
+
+    battle_engine_11 = Path('wla/banks/bank26_battle_engine_11.asm')
+    bank26_source = banks[26].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank26_battle_engine_11.asm"' not in bank26_source:
+        print('FAIL bank26 is not using its structured Battle Engine 11 include')
+        return 1
+    battle_engine_11_labels = file_labels(battle_engine_11)
+    if len(battle_engine_11_labels) != 5 or battle_engine_11_labels[0] != 'DecrementPP' or battle_engine_11_labels[-1] != 'BattleEngine11End':
+        print(f'FAIL structured Battle Engine 11 label boundary changed: {len(battle_engine_11_labels)} labels')
+        return 1
+    if '.INCBIN "gfx/title/red_version.1bpp"' not in battle_engine_11.read_text(errors='replace'):
+        print('FAIL Battle Engine 11 is not using the reproducible Red version asset')
+        return 1
+    print('OK bank26 uses structured Battle Engine 11 include: 47-byte code + 80-byte asset')
+
     music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
     bank31_source = banks[31].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank31_music_headers_3.asm"' not in bank31_source:

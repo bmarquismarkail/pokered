@@ -22,6 +22,61 @@ wChannelCommandPointers db
 .ende
 
 ; RAM symbols referenced by structured text banks.
+.enum $CC2E export
+wPlayerMoveListIndex db
+wPlayerMonNumber db
+.ende
+
+.enum $D02D export
+wBattleMonPP db
+.ende
+
+.enum $D062 export
+wPlayerBattleStatus1 db
+.ende
+
+.enum $D064 export
+wPlayerBattleStatus3 db
+.ende
+
+.enum $D188 export
+wPartyMon1PP db
+.ende
+.enum $D13A export
+wIgnoreInputCounter db
+.ende
+
+.enum $DA41 export
+wPlayTimeHours db
+wPlayTimeMaxed db
+wPlayTimeMinutes db
+wPlayTimeSeconds db
+wPlayTimeFrames db
+.ende
+.enum $CFFA export
+wEnemyMonSpeed dw
+.ende
+
+.enum $D029 export
+wBattleMonSpeed dw
+.ende
+
+.enum $D05E export
+wCriticalHitOrOHKO db
+wMoveMissed db
+.ende
+
+.enum $D063 export
+wPlayerBattleStatus2 db
+.ende
+
+.enum $D068 export
+wEnemyBattleStatus2 db
+.ende
+
+.enum $D0D7 export
+wDamage dw
+.ende
 .enum $CC5B export
 wDexRatingNumMonsSeen db
 wDexRatingNumMonsOwned db
@@ -95,6 +150,10 @@ wPlayerNumHits db
 
 .enum $D079 export
 wAmountMoneyWon db
+.ende
+
+.enum $D083 export
+wLowHealthAlarm db
 .ende
 
 .enum $D127 export
