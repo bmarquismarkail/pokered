@@ -27,6 +27,10 @@ wDexRatingNumMonsSeen db
 wDexRatingNumMonsOwned db
 .ende
 
+.enum $CC5B export
+wOaksAideRewardItemName db
+.ende
+
 .enum $CCE5 export
 wTotalPayDayMoney db
 .ende
@@ -97,6 +101,10 @@ wAmountMoneyWon db
 wCurEnemyLevel db
 .ende
 
+.enum $D2F7 export
+wPokedexOwned db
+.ende
+
 .enum $D5A4 export
 wPlayerCoins db
 .ende
@@ -125,6 +133,18 @@ hCoins db
 .enum $FFDB export
 hDexRatingNumMonsSeen db
 hDexRatingNumMonsOwned db
+.ende
+
+.enum $FFDB export
+hItemToRemoveID db
+.ende
+
+.enum $FFDB export
+hOaksAideRequirement db
+.ende
+
+.enum $FFDD export
+hOaksAideNumMonsOwned db
 .ende
 
 .enum $C012 export

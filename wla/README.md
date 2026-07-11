@@ -74,4 +74,18 @@ occupy exactly `0x2c09` bytes using the established command subset.
 Bank 34 converts RGBDS section `Text 3`: 315 records from 11 source includes
 occupy `0x2cf9` bytes and exercise the shared battle/general RAM aliases.
 
+Bank 33 converts RGBDS section `Text 2`: 202 records from 28 source includes
+occupy `0x2ca1` bytes. Quoted semicolons are preserved as text, not comments.
+
+Bank 32 completes the contiguous text series with RGBDS section `Text 1`: 265
+records from 24 source includes occupy exactly `0x2aaf` bytes.
+
+Executable migration begins with Bank 23's 15-byte `Starter Dex` section. Its
+native WLA instructions retain the `StarterDex` entry point, named RAM target,
+and documented `ShowPokedexData` predef ID between unchanged map regions.
+
+The next two smallest sections are also native: Bank 22's 28-byte `Saffron
+Guards` routine and item list, and Bank 8's 63-byte `Music Headers 2` table.
+Both are spliced at their original boundaries and guarded by label checks.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.

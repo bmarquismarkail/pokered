@@ -113,6 +113,34 @@ def main() -> int:
         return 1
     print(f'OK bank42 uses structured Text 11 include: 29 records, end/size assertions, {len(table_lines)} charmap entries')
 
+    bank32_text = Path('wla/banks/bank32_text.asm')
+    bank32_source = banks[32].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank32_text.asm"' not in bank32_source:
+        print('FAIL bank32 is not using its structured Text 1 include')
+        return 1
+    bank32_labels = file_labels(bank32_text)
+    if len(bank32_labels) != 266 or bank32_labels[0] != '_CardKeySuccessText1' or bank32_labels[-1] != 'Bank32TextEnd':
+        print(f'FAIL structured bank32 label boundary changed: {len(bank32_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2aaf, $00' not in bank32_source or 'Bank32End::' not in bank32_source:
+        print('FAIL bank32 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank32 uses structured Text 1 include: 265 records, end/size assertions')
+
+    bank33_text = Path('wla/banks/bank33_text.asm')
+    bank33_source = banks[33].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank33_text.asm"' not in bank33_source:
+        print('FAIL bank33 is not using its structured Text 2 include')
+        return 1
+    bank33_labels = file_labels(bank33_text)
+    if len(bank33_labels) != 203 or bank33_labels[0] != '_SilphCo5FRockerEndBattleText' or bank33_labels[-1] != 'Bank33TextEnd':
+        print(f'FAIL structured bank33 label boundary changed: {len(bank33_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2ca1, $00' not in bank33_source or 'Bank33End::' not in bank33_source:
+        print('FAIL bank33 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank33 uses structured Text 2 include: 202 records, end/size assertions')
+
     bank34_text = Path('wla/banks/bank34_text.asm')
     bank34_source = banks[34].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank34_text.asm"' not in bank34_source:
@@ -256,6 +284,40 @@ def main() -> int:
         print('FAIL bank44 is missing its end-label and linked-size assertion')
         return 1
     print('OK bank44 uses structured Move Names include: 165 records, end/size assertions')
+
+    starter_dex = Path('wla/banks/bank23_starter_dex.asm')
+    bank23_source = banks[23].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank23_starter_dex.asm"' not in bank23_source:
+        print('FAIL bank23 is not using its structured Starter Dex include')
+        return 1
+    if file_labels(starter_dex) != ['StarterDex', 'StarterDexEnd']:
+        print('FAIL structured Starter Dex label boundary changed')
+        return 1
+    if '$3d ; ShowPokedexData predef ID' not in starter_dex.read_text(errors='replace'):
+        print('FAIL structured Starter Dex lost its named predef ID')
+        return 1
+    print('OK bank23 uses structured Starter Dex include: 15-byte executable section')
+
+    saffron_guards = Path('wla/banks/bank22_saffron_guards.asm')
+    bank22_source = banks[22].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank22_saffron_guards.asm"' not in bank22_source:
+        print('FAIL bank22 is not using its structured Saffron Guards include')
+        return 1
+    if file_labels(saffron_guards) != ['RemoveGuardDrink', 'RemoveGuardDrinkDrinkLoop', 'GuardDrinksList', 'SaffronGuardsEnd']:
+        print('FAIL structured Saffron Guards label boundary changed')
+        return 1
+    print('OK bank22 uses structured Saffron Guards include: 28-byte executable/data section')
+
+    music_headers_2 = Path('wla/banks/bank08_music_headers_2.asm')
+    bank08_source = banks[8].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank08_music_headers_2.asm"' not in bank08_source:
+        print('FAIL bank08 is not using its structured Music Headers 2 include')
+        return 1
+    music_header_labels = file_labels(music_headers_2)
+    if len(music_header_labels) != 8 or music_header_labels[0] != 'Music_GymLeaderBattle' or music_header_labels[-1] != 'MusicHeaders2End':
+        print(f'FAIL structured Music Headers 2 label boundary changed: {len(music_header_labels)} labels')
+        return 1
+    print('OK bank08 uses structured Music Headers 2 include: 7 headers, 63-byte section')
 
     if not args.monolith.is_file():
         print(f'FAIL monolith not found: {args.monolith}')

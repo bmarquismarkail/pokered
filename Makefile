@@ -236,6 +236,36 @@ PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
 wla-build-dir := wla/build
 wla-reference-dir := wla/reference
 
+bank32-text-sources := \
+	data/text/text_1.asm text/ViridianForest.asm text/MtMoon1F.asm \
+	text/MtMoonB1F.asm text/MtMoonB2F.asm text/SSAnne1F.asm \
+	text/SSAnne2F.asm text/SSAnne3F.asm text/SSAnneBow.asm \
+	text/SSAnneKitchen.asm text/SSAnneCaptainsRoom.asm \
+	text/SSAnne1FRooms.asm text/SSAnne2FRooms.asm text/SSAnneB1FRooms.asm \
+	text/VictoryRoad3F.asm text/RocketHideoutB1F.asm \
+	text/RocketHideoutB2F.asm text/RocketHideoutB3F.asm \
+	text/RocketHideoutB4F.asm text/RocketHideoutElevator.asm \
+	text/SilphCo2F.asm text/SilphCo3F.asm text/SilphCo4F.asm text/SilphCo5F.asm
+
+wla/banks/bank32_text.asm: $(bank32-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank32-text-sources)
+
+bank33-text-sources := \
+	text/SilphCo5F_2.asm text/SilphCo6F.asm text/SilphCo7F.asm \
+	text/SilphCo8F.asm text/SilphCo9F.asm text/SilphCo10F.asm \
+	text/SilphCo11F.asm text/PokemonMansion2F.asm \
+	text/PokemonMansion3F.asm text/PokemonMansionB1F.asm \
+	text/SafariZoneEast.asm text/SafariZoneNorth.asm text/SafariZoneWest.asm \
+	text/SafariZoneCenter.asm text/SafariZoneCenterRestHouse.asm \
+	text/SafariZoneSecretHouse.asm text/SafariZoneWestRestHouse.asm \
+	text/SafariZoneEastRestHouse.asm text/SafariZoneNorthRestHouse.asm \
+	text/CeruleanCaveB1F.asm text/VictoryRoad1F.asm text/LancesRoom.asm \
+	text/HallOfFame.asm text/ChampionsRoom.asm text/LoreleisRoom.asm \
+	text/BrunosRoom.asm text/AgathasRoom.asm text/RockTunnelB1F.asm
+
+wla/banks/bank33_text.asm: $(bank33-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank33-text-sources)
+
 bank34-text-sources := \
 	text/RockTunnelB1F_2.asm text/SeafoamIslandsB4F.asm \
 	data/text/text_2.asm text/DiglettsCaveRoute2.asm \
@@ -369,7 +399,7 @@ wla-unit-poc:
 
 # Build the complete imported WLA-DX split. This is the migration baseline;
 # reconciled wla/data files are not substituted until their audits pass.
-wla-red wla-rom: wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
+wla-red wla-rom: wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
