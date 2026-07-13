@@ -435,6 +435,29 @@ def main() -> int:
         return 1
     print('OK bank29 uses structured Maps 19 include: 5 assets, 92-byte section')
 
+    vending_machine = Path('wla/banks/bank29_vending_machine.asm')
+    if '.INCLUDE "wla/banks/bank29_vending_machine.asm"' not in bank29_source:
+        print('FAIL bank29 is not using its structured Vending Machine include')
+        return 1
+    vending_machine_labels = file_labels(vending_machine)
+    if len(vending_machine_labels) != 11 or vending_machine_labels[0] != 'VendingMachineMenu' or vending_machine_labels[-1] != 'VendingMachineEnd':
+        print(f'FAIL structured Vending Machine label boundary changed: {len(vending_machine_labels)} global labels')
+        return 1
+    vending_machine_source = vending_machine.read_text(errors='replace')
+    expected_local_labels = (
+        'VendingMachineMenu.enoughMoney:',
+        'VendingMachineMenu.playDeliverySound:',
+        'VendingMachineMenu.BagFull:',
+        'VendingMachineMenu.notThirsty:',
+    )
+    if any(label not in vending_machine_source for label in expected_local_labels):
+        print('FAIL Vending Machine is missing an authoritative local label')
+        return 1
+    if '.STRINGMAPTABLE pokemon "wla/pokemon.tbl"' not in vending_machine_source:
+        print('FAIL Vending Machine is not using the synchronized Pokemon string map')
+        return 1
+    print('OK bank29 uses structured Vending Machine include: native purchase logic + BCD prices, 300-byte section')
+
     maps_9 = Path('wla/banks/bank19_maps_9.asm')
     bank19_source = banks[19].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank19_maps_9.asm"' not in bank19_source:
@@ -472,8 +495,31 @@ def main() -> int:
         return 1
     print('OK bank20 uses structured Battle Engine 8 include: 196-byte executable section')
 
-    pokedex_rating = Path('wla/banks/bank17_pokedex_rating.asm')
     bank17_source = banks[17].read_text(errors='replace')
+    maps_5 = Path('wla/banks/bank17_maps_5.asm')
+    if '.INCLUDE "wla/banks/bank17_maps_5.asm"' not in bank17_source:
+        print('FAIL bank17 is not using its structured Maps 5 include')
+        return 1
+    maps_5_labels = file_labels(maps_5)
+    if len(maps_5_labels) != 18 or maps_5_labels[0] != 'LavenderTown_h' or maps_5_labels[-1] != 'Maps5End':
+        print(f'FAIL structured Maps 5 label boundary changed: {len(maps_5_labels)} global labels')
+        return 1
+    maps_5_source = maps_5.read_text(errors='replace')
+    expected_maps_5_locals = (
+        'LavenderTownLittleGirlText.got_text:',
+        'LavenderTownLittleGirlText.DoYouBelieveInGhostsText:',
+        'LavenderTownLittleGirlText.SoThereAreBelieversText:',
+        'LavenderTownLittleGirlText.HaHaGuessNotText:',
+    )
+    if any(label not in maps_5_source for label in expected_maps_5_locals):
+        print('FAIL Maps 5 is missing an authoritative local label')
+        return 1
+    if maps_5_source.count('.INCBIN "maps/') != 3:
+        print('FAIL Maps 5 must reference exactly three reproducible map assets')
+        return 1
+    print('OK bank17 uses structured Maps 5 include: Lavender Town + 3 assets, 361-byte section')
+
+    pokedex_rating = Path('wla/banks/bank17_pokedex_rating.asm')
     if '.INCLUDE "wla/banks/bank17_pokedex_rating.asm"' not in bank17_source:
         print('FAIL bank17 is not using its structured Pokédex Rating include')
         return 1
@@ -506,6 +552,77 @@ def main() -> int:
         print('FAIL Maps 15 must reference exactly seven reproducible map assets')
         return 1
     print('OK bank23 uses structured Maps 15 include: 7 assets + Red\'s House 2F, 220-byte section')
+
+    cinnabar_lab_fossils = Path('wla/banks/bank24_cinnabar_lab_fossils.asm')
+    bank24_source = banks[24].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank24_cinnabar_lab_fossils.asm"' not in bank24_source:
+        print('FAIL bank24 is not using its structured Cinnabar Lab Fossils include')
+        return 1
+    cinnabar_lab_labels = file_labels(cinnabar_lab_fossils)
+    if len(cinnabar_lab_labels) != 4 or cinnabar_lab_labels[0] != 'GiveFossilToCinnabarLab' or cinnabar_lab_labels[-1] != 'CinnabarLabFossilsEnd':
+        print(f'FAIL structured Cinnabar Lab Fossils label boundary changed: {len(cinnabar_lab_labels)} global labels')
+        return 1
+    expected_cinnabar_locals = (
+        'GiveFossilToCinnabarLab.choseHelixFossil:',
+        'GiveFossilToCinnabarLab.choseDomeFossil:',
+        'GiveFossilToCinnabarLab.fossilSelected:',
+        'GiveFossilToCinnabarLab.cancelledGivingFossil:',
+        'GiveFossilToCinnabarLab.ScientistSeesFossilText:',
+        'GiveFossilToCinnabarLab.ScientistTakesFossilText:',
+        'GiveFossilToCinnabarLab.GoForAWalkText:',
+        'GiveFossilToCinnabarLab.ComeAgainText:',
+        'PrintFossilsInBag.loop:',
+    )
+    cinnabar_lab_source = cinnabar_lab_fossils.read_text(errors='replace')
+    if any(label not in cinnabar_lab_source for label in expected_cinnabar_locals):
+        print('FAIL Cinnabar Lab Fossils is missing an authoritative local label')
+        return 1
+    print('OK bank24 uses structured Cinnabar Lab Fossils include: native menu/revival logic, 251-byte section')
+
+    hidden_events_4 = Path('wla/banks/bank24_hidden_events_4.asm')
+    if '.INCLUDE "wla/banks/bank24_hidden_events_4.asm"' not in bank24_source:
+        print('FAIL bank24 is not using its structured Hidden Events 4 include')
+        return 1
+    hidden_events_4_labels = file_labels(hidden_events_4)
+    if len(hidden_events_4_labels) != 29 or hidden_events_4_labels[0] != 'GymStatues' or hidden_events_4_labels[-1] != 'HiddenEvents4End':
+        print(f'FAIL structured Hidden Events 4 label boundary changed: {len(hidden_events_4_labels)} global labels')
+        return 1
+    expected_hidden_events_4_locals = (
+        'GymStatues.loop:',
+        'GymStatues.match:',
+        'GymStatues.haveBadge:',
+        'PrintBenchGuyText.loop:',
+        'PrintBenchGuyText.match:',
+        'SaffronCityPokecenterBenchGuyText.printText:',
+    )
+    hidden_events_4_source = hidden_events_4.read_text(errors='replace')
+    if any(label not in hidden_events_4_source for label in expected_hidden_events_4_locals):
+        print('FAIL Hidden Events 4 is missing an authoritative local label')
+        return 1
+    print('OK bank24 uses structured Hidden Events 4 include: 4 event systems + text/data, 273-byte section')
+
+    diploma = Path('wla/banks/bank21_diploma.asm')
+    bank21_source = banks[21].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank21_diploma.asm"' not in bank21_source:
+        print('FAIL bank21 is not using its structured Diploma include')
+        return 1
+    diploma_labels = file_labels(diploma)
+    if len(diploma_labels) != 9 or diploma_labels[0] != 'DisplayDiploma' or diploma_labels[-1] != 'DiplomaEnd':
+        print(f'FAIL structured Diploma label boundary changed: {len(diploma_labels)} global labels')
+        return 1
+    expected_diploma_locals = (
+        'DisplayDiploma.placeTextLoop:',
+        'DisplayDiploma.adjustPlayerGfxLoop:',
+        'UnusedPlayerNameLengthFunc.loop:',
+    )
+    diploma_source = diploma.read_text(errors='replace')
+    if any(label not in diploma_source for label in expected_diploma_locals):
+        print('FAIL Diploma is missing an authoritative local label')
+        return 1
+    if '.STRINGMAPTABLE pokemon "wla/pokemon.tbl"' not in diploma_source:
+        print('FAIL Diploma is not using the synchronized Pokemon string map')
+        return 1
+    print('OK bank21 uses structured Diploma include: native rendering + charmap text, 279-byte section')
 
     music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
     bank31_source = banks[31].read_text(errors='replace')

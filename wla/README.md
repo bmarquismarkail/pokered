@@ -144,4 +144,24 @@ Bank 18's 235-byte `Maps 7` section expresses Route 7's header, connections,
 objects, and warp-return records natively and references four reproducible block
 assets with all shared Pokécenter and gate aliases intact.
 
+Bank 24's 251-byte `Cinnabar Lab Fossils` section contains native fossil menu,
+selection, revival-event, and name-loading logic plus four named far-text
+records, preserving every original entry point and local label.
+
+Bank 24's 273-byte `Hidden Events 4` section contains native gym-statue,
+bench-NPC, bookcase, and Pokécenter-PC logic, with named badge/bench tables and
+all associated far-text records.
+
+Bank 21's 279-byte `Diploma` section contains native screen, palette, OAM, and
+text-placement logic plus named coordinate records and `.STRINGMAP`-encoded
+diploma text.
+
+Bank 29's 300-byte `Vending Machine` section contains native menu, purchase,
+delivery-sound, and BCD money logic plus `.STRINGMAP` drink/price text and named
+far-text records.
+
+Bank 17's 361-byte `Maps 5` section expresses Lavender Town's header, object
+events, script, text records, and shared map aliases natively while referencing
+three reproducible block-layout assets.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.

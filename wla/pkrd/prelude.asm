@@ -237,6 +237,10 @@ wCurEnemyLevel db
 wNumSetBits db
 .ende
 
+.enum $D11E export
+wNamedObjectIndex db
+.ende
+
 .enum $D2F7 export
 wPokedexOwned db
 .ende
@@ -489,8 +493,16 @@ wShadowOAMSprite10 db
 wShadowOAMSprite36 db
 .ende
 
+.enum $C301 export
+wShadowOAMSprite00XCoord db
+.ende
+
 .enum $C3A0 export
 wShadowOAMEnd db
+.ende
+
+.enum $C3A0 export
+wTileMap db
 .ende
 
 .enum $C3AA export
@@ -644,6 +656,10 @@ wNPCMovementScriptBank db
 
 .enum $CC5B export
 wAnimationType db
+.ende
+
+.enum $CC5B export
+wFilteredBagItems db
 .ende
 
 .enum $CC97 export
@@ -845,6 +861,10 @@ wPartySpecies db
 wRivalName db
 .ende
 
+.enum $D347 export
+wPlayerMoney db
+.ende
+
 .enum $D358 export
 wLetterPrintingDelayFlags db
 .ende
@@ -989,6 +1009,11 @@ wRedsHouse2FCurScript db
 wWalkBikeSurfState db
 .ende
 
+.enum $D70F export
+wFossilItem db
+wFossilMon db
+.ende
+
 .enum $D70D export
 wSafariSteps db
 .ende
@@ -1007,6 +1032,10 @@ wTileInFrontOfBoulderAndBoulderCollisionResult db
 
 .enum $D728 export
 wStatusFlags1 db
+.ende
+
+.enum $D72A export
+wBeatGymFlags db
 .ende
 
 .enum $D72D export
@@ -1037,6 +1066,14 @@ wEventFlags_plus_4 db
 
 .enum $D790 export
 wEventFlags_plus_49 db
+.ende
+
+.enum $D7A3 export
+wLabFossilEvents db
+.ende
+
+.enum $D838 export
+wSilphCoGiovanniEvent db
 .ende
 
 .enum $D887 export
