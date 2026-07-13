@@ -22,6 +22,79 @@ wChannelCommandPointers db
 .ende
 
 ; RAM symbols referenced by structured text banks.
+.enum $C214 export
+wSprite01StateData2MapY db
+wSprite01StateData2MapX db
+.ende
+
+.enum $D72D export
+wStatusFlags3 db
+.ende
+.DEFINE PrintText $3c49
+.enum $CFEA export
+wEnemyMonType1 db
+.ende
+
+.enum $D019 export
+wBattleMonType1 db
+.ende
+
+; RAM symbols referenced by structured Battle Engine 8.
+.enum $CC2B export
+wPartyAndBillsPCSavedMenuItem db
+.ende
+.enum $CC36 export
+wListScrollOffset db
+.ende
+.enum $CCD3 export
+wCanEvolveFlags db
+.ende
+.enum $CCD3 export
+wMiscBattleData db
+.ende
+.enum $CCD9 export
+wTestBattlePlayerSelectedMove db
+.ende
+.enum $CD0F export
+wMiscBattleDataEnd db
+.ende
+.enum $CD6A export
+wActionResultOrTookBattleTurn db
+.ende
+.enum $CF0B export
+wBattleResult db
+.ende
+.enum $CF1D export
+wPlayerHPBarColor db
+wEnemyHPBarColor db
+.ende
+.enum $CFCF export
+wEnemyMoveType db
+.ende
+.enum $CFD5 export
+wPlayerMoveType db
+.ende
+.enum $CFE9 export
+wEnemyMonStatus db
+.ende
+.enum $D014 export
+wBattleMonSpecies db
+.ende
+.enum $D018 export
+wBattleMonStatus db
+.ende
+.enum $D058 export
+wPartyGainExpFlags db
+.ende
+.enum $D05A export
+wBattleType db
+.ende
+.enum $D078 export
+wEscapedFromBattle db
+.ende
+.enum $D0D4 export
+wSavedTileAnimations db
+.ende
 .enum $CC2E export
 wPlayerMoveListIndex db
 wPlayerMonNumber db
@@ -160,8 +233,22 @@ wLowHealthAlarm db
 wCurEnemyLevel db
 .ende
 
+.enum $D11E export
+wNumSetBits db
+.ende
+
 .enum $D2F7 export
 wPokedexOwned db
+.ende
+
+.enum $D30A export
+wPokedexOwnedEnd db
+.ende
+.enum $D30A export
+wPokedexSeen db
+.ende
+.enum $D31D export
+wPokedexSeenEnd db
 .ende
 
 .enum $D5A4 export
@@ -894,6 +981,10 @@ wSavedSpriteImageIndex db
 wToggleableObjectList db
 .ende
 
+.enum $D60C export
+wRedsHouse2FCurScript db
+.ende
+
 .enum $D700 export
 wWalkBikeSurfState db
 .ende
@@ -934,6 +1025,10 @@ wStatusFlags7 db
 
 .enum $D736 export
 wMovementFlags db
+.ende
+
+.enum $D747 export
+wEventFlags db
 .ende
 
 .enum $D74B export

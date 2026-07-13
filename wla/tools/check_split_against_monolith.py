@@ -372,6 +372,19 @@ def main() -> int:
         return 1
     print('OK bank18 uses structured Screen Effects include: 103-byte executable section')
 
+    maps_7 = Path('wla/banks/bank18_maps_7.asm')
+    if '.INCLUDE "wla/banks/bank18_maps_7.asm"' not in bank18_source:
+        print('FAIL bank18 is not using its structured Maps 7 include')
+        return 1
+    maps_7_labels = file_labels(maps_7)
+    if len(maps_7_labels) != 15 or maps_7_labels[0] != 'Route7_h' or maps_7_labels[-1] != 'Maps7End':
+        print(f'FAIL structured Maps 7 label boundary changed: {len(maps_7_labels)} labels')
+        return 1
+    if maps_7.read_text(errors='replace').count('.INCBIN "maps/') != 4:
+        print('FAIL Maps 7 must reference exactly four reproducible map assets')
+        return 1
+    print('OK bank18 uses structured Maps 7 include: Route 7 + 4 assets, 235-byte section')
+
     play_time = Path('wla/banks/bank06_play_time.asm')
     bank06_source = banks[6].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank06_play_time.asm"' not in bank06_source:
@@ -396,6 +409,103 @@ def main() -> int:
         print('FAIL Battle Engine 11 is not using the reproducible Red version asset')
         return 1
     print('OK bank26 uses structured Battle Engine 11 include: 47-byte code + 80-byte asset')
+
+    leech_seed = Path('wla/banks/bank10_leech_seed.asm')
+    bank10_source = banks[10].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank10_leech_seed.asm"' not in bank10_source:
+        print('FAIL bank10 is not using its structured Battle Engine 4 include')
+        return 1
+    leech_seed_labels = file_labels(leech_seed)
+    if len(leech_seed_labels) != 6 or leech_seed_labels[0] != 'LeechSeedEffect_' or leech_seed_labels[-1] != 'LeechSeedSectionEnd':
+        print(f'FAIL structured Battle Engine 4 label boundary changed: {len(leech_seed_labels)} labels')
+        return 1
+    print('OK bank10 uses structured Battle Engine 4 include: 83-byte executable/text section')
+
+    maps_19 = Path('wla/banks/bank29_maps_19.asm')
+    bank29_source = banks[29].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank29_maps_19.asm"' not in bank29_source:
+        print('FAIL bank29 is not using its structured Maps 19 include')
+        return 1
+    maps_19_labels = file_labels(maps_19)
+    if len(maps_19_labels) != 8 or maps_19_labels[0] != 'CopycatsHouse1F_Blocks' or maps_19_labels[-1] != 'Maps19End':
+        print(f'FAIL structured Maps 19 label boundary changed: {len(maps_19_labels)} labels')
+        return 1
+    if maps_19.read_text(errors='replace').count('.INCBIN "maps/') != 5:
+        print('FAIL Maps 19 must reference exactly five reproducible map assets')
+        return 1
+    print('OK bank29 uses structured Maps 19 include: 5 assets, 92-byte section')
+
+    maps_9 = Path('wla/banks/bank19_maps_9.asm')
+    bank19_source = banks[19].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank19_maps_9.asm"' not in bank19_source:
+        print('FAIL bank19 is not using its structured Maps 9 include')
+        return 1
+    maps_9_labels = file_labels(maps_9)
+    if len(maps_9_labels) != 14 or maps_9_labels[0] != 'TradeCenter_h' or maps_9_labels[-1] != 'Maps9End':
+        print(f'FAIL structured Maps 9 label boundary changed: {len(maps_9_labels)} labels')
+        return 1
+    if maps_9.read_text(errors='replace').count('.INCBIN "maps/') != 2:
+        print('FAIL Maps 9 must reference exactly two reproducible map assets')
+        return 1
+    print('OK bank19 uses structured Maps 9 include: 2 link-room maps, 161-byte section')
+
+    battle_engine_8 = Path('wla/banks/bank20_battle_engine_8.asm')
+    bank20_source = banks[20].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank20_battle_engine_8.asm"' not in bank20_source:
+        print('FAIL bank20 is not using its structured Battle Engine 8 include')
+        return 1
+    battle_engine_8_labels = file_labels(battle_engine_8)
+    if len(battle_engine_8_labels) != 3 or battle_engine_8_labels[0] != 'InitBattleVariables' or battle_engine_8_labels[-1] != 'BattleEngine8End':
+        print(f'FAIL structured Battle Engine 8 label boundary changed: {len(battle_engine_8_labels)} global labels')
+        return 1
+    expected_local_labels = (
+        'InitBattleVariables.loop:',
+        'InitBattleVariables.notSafariBattle:',
+        'ParalyzeEffect_.next:',
+        'ParalyzeEffect_.hitTest:',
+        'ParalyzeEffect_.didntAffect:',
+        'ParalyzeEffect_.doesntAffect:',
+    )
+    battle_engine_8_source = battle_engine_8.read_text(errors='replace')
+    if any(label not in battle_engine_8_source for label in expected_local_labels):
+        print('FAIL Battle Engine 8 is missing an authoritative local label')
+        return 1
+    print('OK bank20 uses structured Battle Engine 8 include: 196-byte executable section')
+
+    pokedex_rating = Path('wla/banks/bank17_pokedex_rating.asm')
+    bank17_source = banks[17].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank17_pokedex_rating.asm"' not in bank17_source:
+        print('FAIL bank17 is not using its structured Pokédex Rating include')
+        return 1
+    pokedex_rating_labels = file_labels(pokedex_rating)
+    if len(pokedex_rating_labels) != 20 or pokedex_rating_labels[0] != 'DisplayDexRating' or pokedex_rating_labels[-1] != 'PokedexRatingEnd':
+        print(f'FAIL structured Pokédex Rating label boundary changed: {len(pokedex_rating_labels)} global labels')
+        return 1
+    expected_rating_locals = (
+        'DisplayDexRating.findRating:',
+        'DisplayDexRating.foundRating:',
+        'DisplayDexRating.hallOfFame:',
+        'DisplayDexRating.copyRatingTextLoop:',
+        'DisplayDexRating.doneCopying:',
+    )
+    pokedex_rating_source = pokedex_rating.read_text(errors='replace')
+    if any(label not in pokedex_rating_source for label in expected_rating_locals):
+        print('FAIL Pokédex Rating is missing an authoritative local label')
+        return 1
+    print('OK bank17 uses structured Pokédex Rating include: native logic + 16 ratings, 232-byte section')
+
+    maps_15 = Path('wla/banks/bank23_maps_15.asm')
+    if '.INCLUDE "wla/banks/bank23_maps_15.asm"' not in bank23_source:
+        print('FAIL bank23 is not using its structured Maps 15 include')
+        return 1
+    maps_15_labels = file_labels(maps_15)
+    if len(maps_15_labels) != 27 or maps_15_labels[0] != 'SaffronMart_Blocks' or maps_15_labels[-1] != 'Maps15End':
+        print(f'FAIL structured Maps 15 label boundary changed: {len(maps_15_labels)} labels')
+        return 1
+    if maps_15.read_text(errors='replace').count('.INCBIN "maps/') != 7:
+        print('FAIL Maps 15 must reference exactly seven reproducible map assets')
+        return 1
+    print('OK bank23 uses structured Maps 15 include: 7 assets + Red\'s House 2F, 220-byte section')
 
     music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
     bank31_source = banks[31].read_text(errors='replace')

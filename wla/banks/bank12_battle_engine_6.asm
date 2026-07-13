@@ -1,5 +1,4 @@
 ; Native WLA-DX form of Mist and one-hit-KO move effects.
-.DEFINE PrintText $3c49
 MistEffect_:
 	LD HL, wPlayerBattleStatus2
 	LDH A, ($f3)

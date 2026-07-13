@@ -119,4 +119,29 @@ maximum-time handling, and the ignore-input countdown/reset routine.
 Bank 26's 127-byte `Battle Engine 11` section combines native PP-decrement
 instructions with an `INCBIN` of the reproducibly generated Red version graphic.
 
+Bank 10's 83-byte `Battle Engine 4` section is native WLA source for the Leech
+Seed effect, including its success and failure far-text records.
+
+Bank 29's 92-byte `Maps 19` section uses five named `INCBIN` map assets and
+retains the shared mart and Pokécenter alias labels from RGBDS.
+
+Bank 19's 161-byte `Maps 9` section contains native Trade Center/Colosseum
+headers, scripts, objects, far-text records, and two `INCBIN` block layouts.
+
+Bank 20's 196-byte `Battle Engine 8` section is native WLA source for battle
+variable initialization and the paralysis move effect, retaining all original
+entry points and local labels at the exact linked section boundary.
+
+Bank 23's 220-byte `Maps 15` section references seven reproducible block-layout
+assets and expresses the Red's House 2F header, script, text, and object records
+natively, including all shared map aliases.
+
+Bank 17's 232-byte `Pokédex Rating` section contains native rating-selection
+and Hall of Fame copy logic, its named threshold table, and 17 explicit far-text
+records while preserving all original entry points and local labels.
+
+Bank 18's 235-byte `Maps 7` section expresses Route 7's header, connections,
+objects, and warp-return records natively and references four reproducible block
+assets with all shared Pokécenter and gate aliases intact.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.
