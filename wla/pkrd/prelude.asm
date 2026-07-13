@@ -1095,6 +1095,91 @@ wSafariZoneGameOver db
 wNumSafariBalls db
 .ende
 
+; RAM aliases referenced by the structured Predefs section.
+.enum $CF91 export
+wCurPartySpecies db
+.ende
+.enum $CFD8 export
+wEnemyMonSpecies2 db
+.ende
+.enum $D069 export
+wEnemyBattleStatus3 db
+.ende
+.enum $D11E export
+wPokedexNum db
+.ende
+.enum $D5A0 export
+wCurrentBoxNum db
+.ende
+.enum $DA80 export
+wBoxCount db
+.ende
+
+; RAM aliases referenced by the structured Trainer Sight section.
+.enum $C100 export
+wSpriteStateData1 db
+.ende
+.enum $C106 export
+wSpritePlayerStateData1XPixels db
+.ende
+.enum $C204 export
+wSpritePlayerStateData2MapY db
+.ende
+.enum $CD3D export
+wTrainerSpriteOffset db
+wTrainerEngageDistance db
+wTrainerFacingDirection db
+wTrainerScreenY db
+wTrainerScreenX db
+.ende
+.enum $D130 export
+wSavedSpriteScreenY db
+wSavedSpriteScreenX db
+wSavedSpriteMapY db
+wSavedSpriteMapX db
+.ende
+
+; RAM aliases referenced by the structured Battle Engine 9 section.
+.enum $CC5B export
+wBoostExpByExpAll db
+.ende
+.enum $CCF5 export
+wPartyFoughtCurrentEnemyFlags db
+.ende
+.enum $CD0F export
+wPlayerMonUnmodifiedLevel db
+.ende
+.enum $CF4D export
+wGainBoostedExp db
+.ende
+.enum $CFF3 export
+wEnemyMonLevel db
+.ende
+.enum $D002 export
+wEnemyMonBaseStats db
+.ende
+.enum $D008 export
+wEnemyMonBaseExp db
+.ende
+.enum $D015 export
+wBattleMonHP db
+.ende
+.enum $D022 export
+wBattleMonLevel db
+.ende
+.enum $D11E export
+wTempByteValue db
+.ende
+.enum $D16B export
+wPartyMon1 db
+.ende
+.enum $D2B5 export
+wPartyMonNicks db
+.ende
+.enum $D359 export
+wPlayerID db
+.ende
+
 .enum $FF80 export
 hDMARoutine db
 hDMARoutine_plus_1 db
@@ -1122,6 +1207,25 @@ hMultiplyBuffer db
 hSavedNumToPrint db
 hNPCPlayerRelativePosFlags db
 hNPCPlayerRelativePosFlags_plus_1 db
+.ende
+
+.enum $FF8C export
+hSpriteIndex db
+.ende
+.enum $FF95 export
+hQuotient db
+.ende
+.enum $FF96 export
+hMultiplicand db
+.ende
+.enum $FF99 export
+hMultiplier db
+.ende
+.enum $FFEB export
+hSpriteScreenYCoord db
+hSpriteScreenXCoord db
+hSpriteMapYCoord db
+hSpriteMapXCoord db
 .ende
 
 .enum $FFA9 export

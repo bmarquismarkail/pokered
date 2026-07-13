@@ -421,6 +421,38 @@ def main() -> int:
         return 1
     print('OK bank10 uses structured Battle Engine 4 include: 83-byte executable/text section')
 
+    maps_3 = Path('wla/banks/bank07_maps_3.asm')
+    bank07_source = banks[7].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank07_maps_3.asm"' not in bank07_source:
+        print('FAIL bank07 is not using its structured Maps 3 include')
+        return 1
+    maps_3_labels = file_labels(maps_3)
+    if len(maps_3_labels) != 26 or maps_3_labels[0] != 'CinnabarIsland_h' or maps_3_labels[-1] != 'Maps3End':
+        print(f'FAIL structured Maps 3 label boundary changed: {len(maps_3_labels)} labels')
+        return 1
+    if maps_3.read_text(errors='replace').count('.INCBIN "maps/') != 8:
+        print('FAIL Maps 3 must reference exactly eight reproducible map assets')
+        return 1
+    print('OK bank07 uses structured Maps 3 include: 2 maps + 8 assets, 542-byte section')
+
+    battle_engine_3 = Path('wla/banks/bank09_battle_engine_3.asm')
+    bank09_source = banks[9].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank09_battle_engine_3.asm"' not in bank09_source:
+        print('FAIL bank09 is not using its structured Battle Engine 3 include')
+        return 1
+    battle_engine_3_labels = file_labels(battle_engine_3)
+    if len(battle_engine_3_labels) != 11 or battle_engine_3_labels[0] != 'PrintMonType' or battle_engine_3_labels[-1] != 'BattleEngine3End':
+        print(f'FAIL structured Battle Engine 3 label boundary changed: {len(battle_engine_3_labels)} global labels')
+        return 1
+    battle_engine_3_source = battle_engine_3.read_text(errors='replace')
+    if '.STRINGMAPTABLE pokemon "wla/pokemon.tbl"' not in battle_engine_3_source:
+        print('FAIL Battle Engine 3 is not using the synchronized Pokemon string map')
+        return 1
+    if battle_engine_3_source.count('TrainerNamePointers.') < 21:
+        print('FAIL Battle Engine 3 lost named trainer-name records')
+        return 1
+    print('OK bank09 uses structured Battle Engine 3 include: type/trainer tables + Focus Energy, 589-byte section')
+
     maps_19 = Path('wla/banks/bank29_maps_19.asm')
     bank29_source = banks[29].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank29_maps_19.asm"' not in bank29_source:
@@ -471,6 +503,20 @@ def main() -> int:
         print('FAIL Maps 9 must reference exactly two reproducible map assets')
         return 1
     print('OK bank19 uses structured Maps 9 include: 2 link-room maps, 161-byte section')
+
+    predefs = Path('wla/banks/bank19_predefs.asm')
+    if '.INCLUDE "wla/banks/bank19_predefs.asm"' not in bank19_source:
+        print('FAIL bank19 is not using its structured Predefs include')
+        return 1
+    predefs_labels = file_labels(predefs)
+    if len(predefs_labels) != 107 or predefs_labels[0] != '_GivePokemon' or predefs_labels[-1] != 'PredefsEnd':
+        print(f'FAIL structured Predefs label boundary changed: {len(predefs_labels)} global labels')
+        return 1
+    predefs_source = predefs.read_text(errors='replace')
+    if predefs_source.count('Predef:') != 99:
+        print('FAIL Predefs must retain exactly 99 named pointer records')
+        return 1
+    print('OK bank19 uses structured Predefs include: native give-Pokemon logic + 99 records, 509-byte section')
 
     battle_engine_8 = Path('wla/banks/bank20_battle_engine_8.asm')
     bank20_source = banks[20].read_text(errors='replace')
@@ -623,6 +669,46 @@ def main() -> int:
         print('FAIL Diploma is not using the synchronized Pokemon string map')
         return 1
     print('OK bank21 uses structured Diploma include: native rendering + charmap text, 279-byte section')
+
+    battle_engine_9 = Path('wla/banks/bank21_battle_engine_9.asm')
+    if '.INCLUDE "wla/banks/bank21_battle_engine_9.asm"' not in bank21_source:
+        print('FAIL bank21 is not using its structured Battle Engine 9 include')
+        return 1
+    battle_engine_9_labels = file_labels(battle_engine_9)
+    if len(battle_engine_9_labels) != 9 or battle_engine_9_labels[0] != 'GainExperience' or battle_engine_9_labels[-1] != 'BattleEngine9End':
+        print(f'FAIL structured Battle Engine 9 label boundary changed: {len(battle_engine_9_labels)} global labels')
+        return 1
+    battle_engine_9_source = battle_engine_9.read_text(errors='replace')
+    expected_battle_engine_9_locals = (
+        'GainExperience.partyMonLoop:',
+        'GainExperience.recalcStatChanges:',
+        'GainExperience.nextMon:',
+        'DivideExpDataByNumMonsGainingExp.divideLoop:',
+    )
+    if any(label not in battle_engine_9_source for label in expected_battle_engine_9_locals):
+        print('FAIL Battle Engine 9 is missing an authoritative local label')
+        return 1
+    print('OK bank21 uses structured Battle Engine 9 include: native experience/level-up logic, 660-byte section')
+
+    trainer_sight = Path('wla/banks/bank21_trainer_sight.asm')
+    if '.INCLUDE "wla/banks/bank21_trainer_sight.asm"' not in bank21_source:
+        print('FAIL bank21 is not using its structured Trainer Sight include')
+        return 1
+    trainer_sight_labels = file_labels(trainer_sight)
+    if len(trainer_sight_labels) != 11 or trainer_sight_labels[0] != '_GetSpritePosition1' or trainer_sight_labels[-1] != 'TrainerSightEnd':
+        print(f'FAIL structured Trainer Sight label boundary changed: {len(trainer_sight_labels)} global labels')
+        return 1
+    trainer_sight_source = trainer_sight.read_text(errors='replace')
+    expected_trainer_sight_locals = (
+        'TrainerWalkUpToPlayer.writeWalkScript:',
+        'TrainerEngage.engage:',
+        'CheckSpriteCanSeePlayer.inLine:',
+        'CheckPlayerIsInFrontOfSprite.done:',
+    )
+    if any(label not in trainer_sight_source for label in expected_trainer_sight_locals):
+        print('FAIL Trainer Sight is missing an authoritative local label')
+        return 1
+    print('OK bank21 uses structured Trainer Sight include: native positioning/engagement logic, 594-byte section')
 
     music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
     bank31_source = banks[31].read_text(errors='replace')

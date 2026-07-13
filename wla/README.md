@@ -164,4 +164,21 @@ Bank 17's 361-byte `Maps 5` section expresses Lavender Town's header, object
 events, script, text records, and shared map aliases natively while referencing
 three reproducible block-layout assets.
 
+Bank 19's 509-byte `Predefs` section contains native give-Pokémon and predef
+lookup logic plus all 99 named bank/address records from the authoritative table.
+
+Bank 7's 542-byte `Maps 3` section expresses the Cinnabar Island and Route 1
+headers and objects natively and references eight reproducible block assets.
+
+Bank 9's 589-byte `Battle Engine 3` section contains native type printing,
+trainer-name copying, and Focus Energy logic plus synchronized named strings.
+
+Bank 21's 594-byte `Trainer Sight` section contains native sprite positioning,
+trainer approach, line-of-sight, and engagement logic with every entry point and
+local label preserved.
+
+Bank 21's 660-byte `Battle Engine 9` section contains native experience,
+stat-experience, level-up, boost, and battle-mon synchronization logic plus its
+named text command records.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.
