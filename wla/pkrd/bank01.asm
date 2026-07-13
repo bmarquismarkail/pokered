@@ -2332,9 +2332,7 @@ LoadTrainerInfoTextBoxTiles:
 .db $C7, $06, $03, $00, $01, $04, $EF, $0B, $C7, $04, $03, $00, $01, $15, $EF, $0D
 .db $C7, $04, $06, $00, $00, $15, $F0, $0B, $C7, $04, $03, $00, $01, $15, $F0, $0D
 
-; 1st entry of Pointer Table from 3140 (indexed by wNPCMovementScriptPointerTableNum)
 ; Data from 6442 to 650F (206 bytes)
-PalletMovementScriptPointerTable:
 .db $C7, $04, $06, $00, $00, $15, $00, $00, $7C, $64, $01, $00, $82, $64, $02, $00
 .db $88, $64, $03, $00, $8E, $64, $04, $00, $94, $64, $05, $00, $9A, $64, $06, $00
 .db $A0, $64, $07, $00, $A6, $64, $08, $00, $AC, $64, $09, $00, $B2, $64, $0A, $00
@@ -2351,7 +2349,6 @@ PalletMovementScriptPointerTable:
 
 ; 2nd entry of Pointer Table from 3140 (indexed by wNPCMovementScriptPointerTableNum)
 ; Data from 6510 to 657C (109 bytes)
-PewterMuseumGuyMovementScriptPointerTable:
 .db $3A, $C4, $01, $0F, $08, $3E, $14, $EA, $25, $D1, $CD, $E8, $30, $E1, $FA, $26
 .db $CC, $A7, $20, $28, $FA, $CB, $CF, $F5, $AF, $EA, $CB, $CF, $E5, $3E, $02, $EA
 .db $7D, $D0, $CD, $96, $65, $FA, $57, $D0, $A7, $20, $03, $CD, $08, $3E, $CD, $25
@@ -2362,7 +2359,6 @@ PewterMuseumGuyMovementScriptPointerTable:
 
 ; 3rd entry of Pointer Table from 3140 (indexed by wNPCMovementScriptPointerTableNum)
 ; Data from 657D to 7094 (2840 bytes)
-PewterGymGuyMovementScriptPointerTable:
 .db $D2, $01, $0B, $00, $FA, $92, $CF, $CD, $87, $3A, $5D, $54, $21, $E9, $CE, $01
 .db $0B, $00, $CD, $B5, $00, $A7, $C9, $37, $C9, $E5, $21, $30, $D7, $CB, $F6, $CD
 .db $D4, $3D, $CD, $0F, $19, $CD, $29, $24, $06, $08, $CD, $EF, $3D, $CD, $C0, $36
@@ -3073,4 +3069,3 @@ TwoOptionMenuStrings:
 .db $CD, $6D, $3E, $FA, $1E, $D1, $3D, $4F, $06, $01, $21, $0A, $D3, $3E, $10, $CD
 .db $6D, $3E, $3E, $01, $EA, $3C, $CC, $C9
 .dsb 951, $00
-

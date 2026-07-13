@@ -422,6 +422,7 @@ wla-red wla-rom: wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_heade
 rgbds-red: pokered.gbc
 
 wla-compare: rgbds-red wla-red
+	$(PYTHON) wla/tools/check_linked_boundaries.py $(wla-build-dir)/pkrd.sym
 	cmp pokered.gbc $(wla-build-dir)/pkrd.gb
 	@echo "WLA-DX ROM matches the verified RGBDS Pokemon Red ROM byte-for-byte."
 

@@ -710,6 +710,25 @@ def main() -> int:
         return 1
     print('OK bank21 uses structured Trainer Sight include: native positioning/engagement logic, 594-byte section')
 
+    migrated_sections = (
+        (29, 'bank29_itemfinder_2.asm', 'PKMNLeaguePC', 'Itemfinder2End', 15, 765, 'Itemfinder 2'),
+        (22, 'bank22_battle_engine_10.asm', 'PrintBeginningBattleText', 'BattleEngine10End', 33, 791, 'Battle Engine 10'),
+        (6, 'bank06_doors_and_ledges.asm', 'PlayerStepOutFromDoor', 'DoorsAndLedgesEnd', 30, 824, 'Doors and Ledges'),
+        (7, 'bank07_hidden_events_1.asm', 'OpenOaksPC', 'HiddenEvents1End', 47, 941, 'Hidden Events 1'),
+        (23, 'bank23_hidden_events_3.asm', 'SetPartyMonTypes', 'HiddenEvents3End', 42, 951, 'Hidden Events 3'),
+    )
+    for bank, filename, first, last, count, size, description in migrated_sections:
+        section = Path('wla/banks') / filename
+        include = f'.INCLUDE "{section}"'
+        if include not in banks[bank].read_text(errors='replace'):
+            print(f'FAIL bank{bank:02d} is not using its structured {description} include')
+            return 1
+        labels = file_labels(section)
+        if len(labels) != count or labels[0] != first or labels[-1] != last:
+            print(f'FAIL structured {description} label boundary changed: {len(labels)} global labels')
+            return 1
+        print(f'OK bank{bank:02d} uses structured {description} include: {size}-byte source-driven section')
+
     music_headers_3 = Path('wla/banks/bank31_music_headers_3.asm')
     bank31_source = banks[31].read_text(errors='replace')
     if '.INCLUDE "wla/banks/bank31_music_headers_3.asm"' not in bank31_source:

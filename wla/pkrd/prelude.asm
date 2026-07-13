@@ -10,6 +10,7 @@ BANKSTOTAL 64
 BANKSIZE $4000
 BANKS 64
 .ENDRO
+.INCLUDE "wla/pkrd/migration_compat.asm"
 
 .enum $C000 export
 wUnusedMusicByte db

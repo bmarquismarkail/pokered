@@ -1,7 +1,5 @@
 ; Native WLA-DX form of engine/battle/experience.asm.
 .DEFINE LINK_STATE_BATTLING $04
-.DEFINE FLAG_SET 1
-.DEFINE FLAG_TEST 2
 .DEFINE NUM_STATS 5
 .DEFINE MAX_LEVEL 100
 .DEFINE LEVEL_UP_STATS_BOX 1
@@ -424,4 +422,3 @@ GrewLevelText:
 	.DB $0b
 	.DB $50
 BattleEngine9End:
-

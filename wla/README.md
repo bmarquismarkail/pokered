@@ -181,4 +181,11 @@ Bank 21's 660-byte `Battle Engine 9` section contains native experience,
 stat-experience, level-up, boost, and battle-mon synchronization logic plus its
 named text command records.
 
+Banks 6, 7, 22, 23, and 29 now source the complete `Doors and Ledges`, `Hidden
+Events 1`, `Battle Engine 10`, `Hidden Events 3`, and `Itemfinder 2` sections
+from native WLA instructions, named event/data tables, synchronized
+`.STRINGMAP` strings, and the existing ledge-shadow asset. Their named end
+labels preserve the original 824-, 941-, 791-, 951-, and 765-byte boundaries;
+the full-ROM comparison enforces those linked sizes and addresses.
+
 Use `../WLA_DX_PORTING.md` for the branch workflow and source-of-truth rules.
