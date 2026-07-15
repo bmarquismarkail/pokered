@@ -17,6 +17,7 @@ EXPECTED = (
     ('Maps 15', 0x17, 'SaffronMart_Blocks', 0x4000, 'Maps15End', 0x40DC),
     ('Maps 9', 0x13, 'TradeCenter_h', 0x7D04, 'Maps9End', 0x7DA5),
     ('Maps 19', 0x1D, 'CopycatsHouse1F_Blocks', 0x4000, 'Maps19End', 0x405C),
+    ('Predefs', 0x13, '_GivePokemon', 0x7DA5, 'PredefsEnd', 0x7FA2),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),
