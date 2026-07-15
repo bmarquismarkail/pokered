@@ -87,11 +87,11 @@
 .INCLUDE "wla/banks/bank23_vermilion_pokecenter_header.asm"
 .INCLUDE "wla/banks/bank23_vermilion_pokecenter_dispatch.asm"
 .INCLUDE "wla/banks/bank23_vermilion_pokecenter_object.asm"
-.db $02, $04, $04, $00, $40, $E4, $49, $E1, $49, $00, $F4
-.db $49, $C3, $3C, $3C, $61, $24, $EA, $49, $EF, $49, $17, $C1, $69, $26, $50, $17
-.db $67, $6A, $26, $50, $00, $02, $07, $03, $02, $FF, $07, $04, $02, $FF, $00, $03
-.db $26, $09, $04, $FF, $D3, $01, $07, $0A, $09, $FF, $FF, $02, $06, $07, $07, $FE
-.db $02, $03, $12, $C7, $07, $03, $13, $C7, $07, $04, $07, $09, $05, $38, $4C, $E8
+.INCLUDE "wla/banks/bank23_vermilion_mart_header.asm"
+.INCLUDE "wla/banks/bank23_vermilion_mart_dispatch.asm"
+.INCLUDE "wla/banks/bank23_vermilion_mart_texts.asm"
+.INCLUDE "wla/banks/bank23_vermilion_mart_object.asm"
+.db $07, $09, $05, $38, $4C, $E8
 .db $4A, $26, $4A, $00, $FE, $4B, $21, $26, $D1, $CB, $6E, $CB, $AE, $E5, $C4, $4C
 .db $4A, $E1, $CB, $76, $CB, $B6, $C4, $6D, $4A, $CD, $3C, $3C, $21, $F8, $4A, $11
 .db $95, $4A, $FA, $FE, $D5, $CD, $60, $31, $EA, $FE, $D5, $C9, $21, $55, $4A, $11
