@@ -14,6 +14,7 @@ EXPECTED = (
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),
     ('Saffron Guards', 0x16, 'RemoveGuardDrink', 0x659F, 'SaffronGuardsEnd', 0x65BB),
     ('Starter Dex', 0x17, 'StarterDex', 0x40DC, 'StarterDexEnd', 0x40EB),
+    ('Maps 15', 0x17, 'SaffronMart_Blocks', 0x4000, 'Maps15End', 0x40DC),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),
