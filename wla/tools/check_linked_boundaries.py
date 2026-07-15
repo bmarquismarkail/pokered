@@ -112,6 +112,7 @@ EXPECTED = (
     ('Fighting Dojo Post Battle', 0x17, 'FightingDojoKarateMasterPostBattleScript', 0x4DC6, 'FightingDojoPostBattleEnd', 0x4E03),
     ('Fighting Dojo Text Pointers', 0x17, 'FightingDojo_TextPointers', 0x4E03, 'FightingDojoTextPointersEnd', 0x4E13),
     ('Fighting Dojo Trainer Headers', 0x17, 'FightingDojoTrainerHeaders', 0x4E13, 'FightingDojoTrainerHeadersEnd', 0x4E44),
+    ('Fighting Dojo Master Text', 0x17, 'FightingDojoKarateMasterText', 0x4E44, 'FightingDojoMasterTextEnd', 0x4EA2),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),
