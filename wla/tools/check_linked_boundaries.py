@@ -44,6 +44,7 @@ EXPECTED = (
     ('Light Slot Balls', 0x0D, 'SlotMachine_LightBalls', 0x77D5, 'SlotMachineLightBallsEnd', 0x77E3),
     ('Update Coin Ball Tiles', 0x0D, 'SlotMachine_UpdateThreeCoinBallTiles', 0x77E3, 'SlotMachine_UpdateBallTilesEnd', 0x7813),
     ('Yeah Text', 0x0D, 'YeahText', 0x7722, 'YeahTextEnd', 0x7728),
+    ('Slot Reward 300', 0x0D, 'SlotReward300Func', 0x7702, 'SlotReward300FuncEnd', 0x7722),
 )
 
 
