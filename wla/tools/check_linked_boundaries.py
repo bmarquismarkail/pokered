@@ -20,6 +20,7 @@ EXPECTED = (
     ('Predefs', 0x13, '_GivePokemon', 0x7DA5, 'PredefsEnd', 0x7FA2),
     ('Battle Engine 11', 0x1A, 'DecrementPP', 0x4000, 'BattleEngine11End', 0x407F),
     ('Version Graphics', 0x1A, 'Version_GFX', 0x402F, 'Version_GFXEnd', 0x407F),
+    ('Leech Seed', 0x0A, 'LeechSeedEffect_', 0x7EA9, 'LeechSeedSectionEnd', 0x7EFC),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),
