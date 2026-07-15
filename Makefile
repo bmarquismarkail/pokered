@@ -500,6 +500,7 @@ wla-red wla-rom: wla/banks/bank23_vermilion_gym_trainer_texts.asm
 wla-red wla-rom: wla/banks/bank23_vermilion_gym_guide_text.asm
 wla-red wla-rom: wla/banks/bank23_vermilion_gym_object.asm
 wla-red wla-rom: wla/banks/bank23_vermilion_gym_blocks.asm maps/VermilionGym.blk
+wla-red wla-rom: wla/banks/bank23_copycats_house_2f_entry.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm

@@ -101,8 +101,8 @@
 .INCLUDE "wla/banks/bank23_vermilion_gym_guide_text.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_object.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_blocks.asm"
-.db $04, $04, $04, $10, $40, $74, $4C, $71, $4C, $00, $21, $4D, $C3, $3C, $3C, $82, $4C
-.db $F4, $4C, $F9, $4C, $F9, $4C, $F9, $4C, $FE, $4C, $03, $4D, $08, $FA, $AF, $D7
+.INCLUDE "wla/banks/bank23_copycats_house_2f_entry.asm"
+.db $08, $FA, $AF, $D7
 .db $CB, $47, $20, $41, $3E, $01, $EA, $3C, $CC, $21, $D4, $4C, $CD, $49, $3C, $06
 .db $33, $CD, $93, $34, $28, $35, $21, $D9, $4C, $CD, $49, $3C, $01, $01, $E7, $CD
 .db $2E, $3E, $30, $19, $21, $DE, $4C, $CD, $49, $3C, $3E, $33, $E0, $DB, $06, $05
