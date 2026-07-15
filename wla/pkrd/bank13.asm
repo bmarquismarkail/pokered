@@ -878,7 +878,9 @@
 .db $01, $C9, $17, $36, $42, $22, $0A, $50
 .INCLUDE "wla/banks/bank13_print_winning_symbol.asm"
 .db $21, $4B, $CD, $FA, $50, $CD, $32, $AF, $22, $11, $A5, $D5, $0E, $02, $3E
-.db $0C, $CD, $6D, $3E, $21, $B9, $C3, $11, $A4, $D5, $0E, $02, $C3, $CD, $15, $21
+.db $0C, $CD, $6D, $3E
+.INCLUDE "wla/banks/bank13_print_credit_coins.asm"
+.db $21
 .db $BF, $C3, $11, $4A, $CD, $01, $04, $82, $C3, $5F, $3C, $3E, $01, $EA, $02, $C0
 .db $CD, $48, $37, $21, $46, $CD, $AF, $22, $3C, $77, $3E, $05, $EA, $8B, $D0, $FA
 .db $4B, $CD, $6F, $FA, $4A, $CD, $67, $B5, $C8, $11, $FF, $FF, $19, $7D, $EA, $4B
