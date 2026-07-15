@@ -77,12 +77,9 @@
 .INCLUDE "wla/banks/bank23_cerulean_mart_dispatch.asm"
 .INCLUDE "wla/banks/bank23_cerulean_mart_texts.asm"
 .INCLUDE "wla/banks/bank23_cerulean_mart_object.asm"
-.db $06, $04
-.db $07, $64, $40, $E0, $48, $DA, $48, $00, $F4, $48, $CD, $FA, $22, $C3, $3C, $3C
-.db $E9, $48, $EA, $48, $EF, $48, $E8, $48, $F6, $FF, $17, $0E, $54, $26, $50, $17
-.db $42, $54, $26, $50, $00, $02, $07, $03, $00, $FF, $07, $04, $00, $FF, $00, $04
-.db $29, $05, $07, $FF, $D0, $01, $10, $07, $09, $FF, $FF, $02, $08, $0A, $06, $FE
-.db $01, $03, $2A, $06, $0F, $FF, $D0, $04, $1E, $C7, $07, $03, $1F, $C7, $07, $04
+.INCLUDE "wla/banks/bank23_lavender_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank23_lavender_pokecenter_dispatch.asm"
+.INCLUDE "wla/banks/bank23_lavender_pokecenter_object.asm"
 .db $02, $04, $04, $00, $40, $2F, $49, $2C, $49, $00, $5D, $49, $C3, $3C, $3C, $6A
 .db $24, $35, $49, $3A, $49, $17, $04, $61, $26, $50, $08, $FA, $E0, $D7, $CB, $7F
 .db $20, $08, $21, $53, $49, $CD, $49, $3C, $18, $06, $21, $58, $49, $CD, $49, $3C
