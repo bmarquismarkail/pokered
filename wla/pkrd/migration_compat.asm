@@ -683,4 +683,5 @@
 .DEFINE STARTER2 $b1
 .DEFINE STARTER3 $99
 .DEFINE wSlotMachineFlags $CD4C
+.DEFINE wTempCoins2 $CD4A
 .DEFINE wSlotMachineAllowMatchesCounter $D096

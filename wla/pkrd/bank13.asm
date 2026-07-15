@@ -877,8 +877,7 @@
 .INCLUDE "wla/banks/bank13_slot_reward_300.asm"
 .INCLUDE "wla/banks/bank13_yeah_text.asm"
 .INCLUDE "wla/banks/bank13_print_winning_symbol.asm"
-.db $21, $4B, $CD, $FA, $50, $CD, $32, $AF, $22, $11, $A5, $D5, $0E, $02, $3E
-.db $0C, $CD, $6D, $3E
+.INCLUDE "wla/banks/bank13_subtract_bet.asm"
 .INCLUDE "wla/banks/bank13_print_credit_coins.asm"
 .INCLUDE "wla/banks/bank13_print_payout_coins.asm"
 .db $3E, $01, $EA, $02, $C0
