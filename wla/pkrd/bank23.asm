@@ -110,13 +110,7 @@
 .INCLUDE "wla/banks/bank23_fighting_dojo_post_battle.asm"
 .INCLUDE "wla/banks/bank23_fighting_dojo_tables.asm"
 .INCLUDE "wla/banks/bank23_fighting_dojo_master_text.asm"
-.db $08, $21, $13, $4E
-.db $CD, $CC, $31, $C3, $D7, $24, $17, $99, $59, $28, $50, $17, $B7, $59, $28, $50
-.db $17, $C3, $59, $28, $50, $08, $21, $1F, $4E, $CD, $CC, $31, $C3, $D7, $24, $17
-.db $05, $5A, $28, $50, $17, $22, $5A, $28, $50, $17, $33, $5A, $28, $50, $08, $21
-.db $2B, $4E, $CD, $CC, $31, $C3, $D7, $24, $17, $51, $5A, $28, $50, $17, $8D, $5A
-.db $28, $50, $17, $A4, $5A, $28, $50, $08, $21, $37, $4E, $CD, $CC, $31, $C3, $D7
-.db $24, $17, $D8, $5A, $28, $50, $17, $09, $5B, $28, $50, $17, $1A, $5B, $28, $50
+.INCLUDE "wla/banks/bank23_fighting_dojo_blackbelt_texts.asm"
 .db $08, $FA, $B1, $D7, $E6, $C0, $28, $08, $21, $96, $4F, $CD, $49, $3C, $18, $30
 .db $3E, $2B, $CD, $9B, $34, $21, $49, $4F, $CD, $49, $3C, $CD, $EC, $35, $FA, $26
 .db $CC, $A7, $20, $1C, $FA, $91, $CF, $47, $0E, $1E, $CD, $48, $3E, $30, $11, $3E

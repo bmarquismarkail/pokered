@@ -509,6 +509,7 @@ wla-red wla-rom: wla/banks/bank23_fighting_dojo_default.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_post_battle.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_tables.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_master_text.asm
+wla-red wla-rom: wla/banks/bank23_fighting_dojo_blackbelt_texts.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
