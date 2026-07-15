@@ -8,8 +8,8 @@
 .INCLUDE "wla/banks/bank23_museum_1f_script.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_script_pointers.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_default_script.asm"
-.db $35, $41, $47, $42, $56
-.db $42, $A3, $42, $B2, $42, $08, $FA, $61, $D3, $FE, $04, $20, $0A, $FA, $62, $D3
+.INCLUDE "wla/banks/bank23_museum_1f_text_pointers.asm"
+.db $08, $FA, $61, $D3, $FE, $04, $20, $0A, $FA, $62, $D3
 .db $FE, $0D, $CA, $F9, $41, $18, $1C, $FE, $03, $20, $08, $FA, $62, $D3, $FE, $0C
 .db $CA, $F9, $41, $FA, $54, $D7, $CB, $47, $20, $10, $21, $3D, $42, $CD, $49, $3C
 .db $C3, $17, $42, $FA, $54, $D7, $CB, $47, $28, $09, $21, $42, $42, $CD, $49, $3C
