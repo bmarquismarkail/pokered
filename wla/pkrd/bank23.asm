@@ -54,17 +54,11 @@
 .INCLUDE "wla/banks/bank23_pewter_gym_blocks.asm"
 .INCLUDE "wla/banks/bank23_pewter_pokecenter_header.asm"
 .INCLUDE "wla/banks/bank23_pewter_pokecenter_dispatch.asm"
-.db $FF, $17, $04, $47, $26, $50, $08, $3E, $01, $EA, $3C
-.db $CC, $21, $03, $46, $CD, $49, $3C, $3E, $FF, $CD, $B1, $23, $0E, $20, $CD, $39
-.db $37, $21, $08, $46, $11, $3F, $CD, $01, $04, $00, $CD, $B5, $00, $FA, $32, $C1
-.db $21, $3F, $CD, $BE, $23, $20, $FC, $2B, $E5, $0E, $1F, $3E, $D0, $CD, $A1, $23
-.db $E1, $7E, $EA, $32, $C1, $E5, $21, $3F, $CD, $11, $3E, $CD, $01, $04, $00, $CD
-.db $B5, $00, $FA, $3E, $CD, $EA, $42, $CD, $E1, $0E, $18, $CD, $39, $37, $FA, $26
-.db $C0, $47, $FA, $27, $C0, $B0, $20, $D9, $0E, $30, $CD, $39, $37, $CD, $07, $23
-.db $C3, $D7, $24, $17, $44, $47, $26, $50, $30, $38, $34, $3C, $F6, $00, $02, $07
-.db $03, $06, $FF, $07, $04, $06, $FF, $00, $04, $29, $05, $07, $FF, $D0, $01, $10
-.db $0B, $0F, $FF, $D2, $02, $38, $07, $05, $FF, $D0, $03, $2A, $06, $0F, $FF, $D0
-.db $04, $1E, $C7, $07, $03, $1F, $C7, $07, $04, $06, $04, $07, $8B, $46, $4B, $46
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_small_texts.asm"
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_jigglypuff.asm"
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_receptionist.asm"
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_object.asm"
+.db $06, $04, $07, $8B, $46, $4B, $46
 .db $45, $46, $00, $5F, $46, $CD, $FA, $22, $C3, $3C, $3C, $54, $46, $55, $46, $5A
 .db $46, $53, $46, $F6, $FF, $17, $E5, $48, $26, $50, $17, $2A, $49, $26, $50, $00
 .db $02, $07, $03, $02, $FF, $07, $04, $02, $FF, $00, $04, $29, $05, $07, $FF, $D0
