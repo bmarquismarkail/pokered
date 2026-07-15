@@ -93,6 +93,7 @@ EXPECTED = (
     ('Vermilion Gym Text Pointers', 0x17, 'VermilionGym_TextPointers', 0x4AE8, 'VermilionGymTextPointersEnd', 0x4AF8),
     ('Vermilion Gym Trainer Headers', 0x17, 'VermilionGymTrainerHeaders', 0x4AF8, 'VermilionGymTrainerHeadersEnd', 0x4B1D),
     ('Vermilion Gym Surge Text', 0x17, 'VermilionGymLTSurgeText', 0x4B1D, 'VermilionGymLTSurgeTextEnd', 0x4B77),
+    ('Vermilion Gym Surge Records', 0x17, 'VermilionGymLTSurgeThunderBadgeInfoText', 0x4B77, 'VermilionGymSurgeRecordsEnd', 0x4B90),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),
