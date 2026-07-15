@@ -2,9 +2,7 @@
 .ORG $0000
 
 ; Data from 3C000 to 3F0CF (12496 bytes)
-.db $18, $19, $1C, $2E, $2F, $31, $38, $39, $40, $41, $42, $43, $4F, $52, $54, $55
-.db $FF, $28, $29, $FF, $01, $0A, $0B, $0C, $0D, $0E, $0F, $12, $13, $14, $15, $16
-.db $17, $1A, $20, $32, $33, $34, $35, $36, $37, $3A, $3B, $3C, $3D, $3E, $3F, $FF
+.INCLUDE "wla/banks/bank15_residual_effects.asm"
 .INCLUDE "wla/banks/bank15_always_happen_effects.asm"
 .db $03, $07, $08, $10, $11
 .db $1D, $1E, $27, $28, $29, $2B, $2C, $2D, $30, $1B, $2A, $FF, $CD, $92, $6C, $3E
