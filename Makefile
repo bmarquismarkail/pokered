@@ -446,6 +446,7 @@ wla-red wla-rom: wla/banks/bank13_update_coin_ball_tiles.asm
 wla-red wla-rom: wla/banks/bank13_yeah_text.asm
 wla-red wla-rom: wla/banks/bank13_slot_reward_300.asm
 wla-red wla-rom: wla/banks/bank13_subtract_bet.asm
+wla-red wla-rom: wla/banks/bank13_slot_rewards_small.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

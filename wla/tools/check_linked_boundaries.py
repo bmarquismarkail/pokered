@@ -46,6 +46,8 @@ EXPECTED = (
     ('Yeah Text', 0x0D, 'YeahText', 0x7722, 'YeahTextEnd', 0x7728),
     ('Slot Reward 300', 0x0D, 'SlotReward300Func', 0x7702, 'SlotReward300FuncEnd', 0x7722),
     ('Subtract Bet', 0x0D, 'SlotMachine_SubtractBetFromPlayerCoins', 0x7741, 'SlotMachine_SubtractBetFromPlayerCoinsEnd', 0x7754),
+    ('Slot Reward 8', 0x0D, 'SlotReward8Func', 0x76D7, 'SlotReward8FuncEnd', 0x76E5),
+    ('Slot Reward 15', 0x0D, 'SlotReward15Func', 0x76E5, 'SlotReward15FuncEnd', 0x76F3),
 )
 
 
