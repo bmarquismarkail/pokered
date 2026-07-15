@@ -52,9 +52,9 @@
 .INCLUDE "wla/banks/bank23_pewter_gym_guide_text.asm"
 .INCLUDE "wla/banks/bank23_pewter_gym_object.asm"
 .INCLUDE "wla/banks/bank23_pewter_gym_blocks.asm"
-.db $06, $04, $07, $64, $40
-.db $8D, $45, $87, $45, $00, $0D, $46, $CD, $FA, $22, $C3, $3C, $3C, $95, $45, $96
-.db $45, $9B, $45, $0C, $46, $FF, $17, $04, $47, $26, $50, $08, $3E, $01, $EA, $3C
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank23_pewter_pokecenter_dispatch.asm"
+.db $FF, $17, $04, $47, $26, $50, $08, $3E, $01, $EA, $3C
 .db $CC, $21, $03, $46, $CD, $49, $3C, $3E, $FF, $CD, $B1, $23, $0E, $20, $CD, $39
 .db $37, $21, $08, $46, $11, $3F, $CD, $01, $04, $00, $CD, $B5, $00, $FA, $32, $C1
 .db $21, $3F, $CD, $BE, $23, $20, $FC, $2B, $E5, $0E, $1F, $3E, $D0, $CD, $A1, $23
