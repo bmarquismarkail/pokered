@@ -434,6 +434,7 @@ wla-red wla-rom: wla/banks/bank23_museum_1f_default_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_text_pointers.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_gambler_text.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_small_texts.asm
+wla-red wla-rom: wla/banks/bank23_museum_1f_object.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
