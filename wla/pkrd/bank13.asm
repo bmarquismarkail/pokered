@@ -889,8 +889,8 @@
 .db $3D, $20, $08, $F0, $48, $EE, $40, $E0, $48, $3E, $05, $EA, $8B, $D0, $FA, $41
 .db $CD, $FE, $07, $0E, $08, $30, $02, $CB, $39, $CD, $39, $37, $18, $B1
 .INCLUDE "wla/banks/bank13_put_out_lit_balls.asm"
-.db $3E, $14, $EA, $8A, $D0, $FA, $50, $CD, $3D, $28, $1B
-.db $3D, $28, $0C, $21, $CB, $C3, $CD, $FE, $77, $21, $6B, $C4, $CD, $FE, $77, $21
+.INCLUDE "wla/banks/bank13_light_balls.asm"
+.db $21, $CB, $C3, $CD, $FE, $77, $21, $6B, $C4, $CD, $FE, $77, $21
 .db $F3, $C3, $CD, $FE, $77, $21, $43, $C4, $CD, $FE, $77, $21, $1B, $C4, $FA, $8A
 .db $D0, $77, $01, $0D, $00, $09, $77, $01, $07, $00, $09, $3C, $77, $01, $0D, $00
 .db $09, $77, $C9

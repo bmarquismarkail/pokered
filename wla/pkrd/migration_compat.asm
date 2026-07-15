@@ -668,6 +668,7 @@
 .DEFINE wSlotMachineWinningSymbol $cd41
 .DEFINE wPayoutCoins $cd4a
 .DEFINE wNewSlotMachineBallTile $d08a
+.DEFINE wSlotMachineBet $cd50
 .DEFINE SLOTS7 $0200
 .DEFINE SLOTSBAR $0604
 .DEFINE SLOTSCHERRY $0a08
