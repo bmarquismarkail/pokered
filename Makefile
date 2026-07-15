@@ -513,6 +513,9 @@ wla-red wla-rom: wla/banks/bank23_fighting_dojo_blackbelt_texts.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_prizes.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_object.asm
 wla-red wla-rom: wla/banks/bank23_fighting_dojo_blocks.asm maps/FightingDojo.blk
+wla-red wla-rom: wla/banks/bank23_saffron_gym_entry.asm
+wla-red wla-rom: wla/banks/bank23_saffron_gym_battle_control.asm
+wla-red wla-rom: wla/banks/bank23_saffron_gym_tables.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
