@@ -73,11 +73,11 @@
 .INCLUDE "wla/banks/bank23_cerulean_gym_guide_text.asm"
 .INCLUDE "wla/banks/bank23_cerulean_gym_object.asm"
 .INCLUDE "wla/banks/bank23_cerulean_gym_blocks.asm"
-.db $02, $04, $04, $00, $40, $98, $48
-.db $95, $48, $00, $A8, $48, $C3, $3C, $3C, $53, $24, $9E, $48, $A3, $48, $17, $12
-.db $50, $26, $50, $17, $7F, $50, $26, $50, $00, $02, $07, $03, $05, $FF, $07, $04
-.db $05, $FF, $00, $03, $26, $09, $04, $FF, $D3, $01, $07, $08, $07, $FE, $01, $02
-.db $06, $06, $0A, $FE, $02, $03, $12, $C7, $07, $03, $13, $C7, $07, $04, $06, $04
+.INCLUDE "wla/banks/bank23_cerulean_mart_header.asm"
+.INCLUDE "wla/banks/bank23_cerulean_mart_dispatch.asm"
+.INCLUDE "wla/banks/bank23_cerulean_mart_texts.asm"
+.INCLUDE "wla/banks/bank23_cerulean_mart_object.asm"
+.db $06, $04
 .db $07, $64, $40, $E0, $48, $DA, $48, $00, $F4, $48, $CD, $FA, $22, $C3, $3C, $3C
 .db $E9, $48, $EA, $48, $EF, $48, $E8, $48, $F6, $FF, $17, $0E, $54, $26, $50, $17
 .db $42, $54, $26, $50, $00, $02, $07, $03, $00, $FF, $07, $04, $00, $FF, $00, $04

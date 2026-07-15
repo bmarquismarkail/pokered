@@ -472,6 +472,10 @@ wla-red wla-rom: wla/banks/bank23_cerulean_gym_trainer_texts.asm
 wla-red wla-rom: wla/banks/bank23_cerulean_gym_guide_text.asm
 wla-red wla-rom: wla/banks/bank23_cerulean_gym_object.asm
 wla-red wla-rom: wla/banks/bank23_cerulean_gym_blocks.asm maps/CeruleanGym.blk
+wla-red wla-rom: wla/banks/bank23_cerulean_mart_header.asm
+wla-red wla-rom: wla/banks/bank23_cerulean_mart_dispatch.asm
+wla-red wla-rom: wla/banks/bank23_cerulean_mart_texts.asm
+wla-red wla-rom: wla/banks/bank23_cerulean_mart_object.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
