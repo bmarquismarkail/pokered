@@ -3,6 +3,8 @@
 
 ; Data from 3C000 to 3F0CF (12496 bytes)
 .INCLUDE "wla/banks/bank15_residual_effects.asm"
+.INCLUDE "wla/banks/bank15_set_damage_effects.asm"
+.INCLUDE "wla/banks/bank15_residual_effects_2.asm"
 .INCLUDE "wla/banks/bank15_always_happen_effects.asm"
 .INCLUDE "wla/banks/bank15_special_effects.asm"
 .db $CD, $92, $6C, $3E

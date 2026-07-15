@@ -430,6 +430,8 @@ wla-unit-poc:
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
+wla-red wla-rom: wla/banks/bank15_set_damage_effects.asm
+wla-red wla-rom: wla/banks/bank15_residual_effects_2.asm
 wla-red wla-rom: wla/banks/bank15_special_effects.asm
 wla-red wla-rom: wla/banks/bank03_vitamin_stats.asm
 wla-red wla-rom: wla/banks/bank15_stat_mod_names.asm
