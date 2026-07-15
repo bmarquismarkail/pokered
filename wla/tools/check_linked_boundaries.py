@@ -25,6 +25,7 @@ EXPECTED = (
     ('Hidden Events 3', 0x17, 'SetPartyMonTypes', 0x5B5E, 'HiddenEvents3End', 0x5F15),
     ('Itemfinder 2', 0x1D, 'PKMNLeaguePC', 0x657E, 'Itemfinder2End', 0x687B),
     ('Pewter Guys', 0x0D, '+PewterGuys', 0x7CA1, 'PewterGuysEnd', 0x7D41),
+    ('Multiply', 0x0D, '+_Multiply', 0x7D41, 'MultiplyEnd', 0x7DA5),
 )
 
 

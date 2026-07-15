@@ -974,14 +974,7 @@
 .db $FF, $00, $FF, $00, $FF, $00, $FF, $00, $FF, $3C, $FF, $66, $FF, $5A, $FF, $5A
 .db $FF, $66, $FF, $3C, $FF, $00, $FF, $00, $FF, $00, $FF, $00, $FF, $00, $FF
 .INCLUDE "wla/banks/bank13_pewter_guys.asm"
-.db $3E
-.db $08, $47, $AF, $E0, $95, $E0, $9B, $E0, $9C, $E0, $9D, $E0, $9E, $F0, $99, $CB
-.db $3F, $E0, $99, $30, $20, $F0, $9E, $4F, $F0, $98, $81, $E0, $9E, $F0, $9D, $4F
-.db $F0, $97, $89, $E0, $9D, $F0, $9C, $4F, $F0, $96, $89, $E0, $9C, $F0, $9B, $4F
-.db $F0, $95, $89, $E0, $9B, $05, $28, $1A, $F0, $98, $CB, $27, $E0, $98, $F0, $97
-.db $CB, $17, $E0, $97, $F0, $96, $CB, $17, $E0, $96, $F0, $95, $CB, $17, $E0, $95
-.db $18, $BB, $F0, $9E, $E0, $98, $F0, $9D, $E0, $97, $F0, $9C, $E0, $96, $F0, $9B
-.db $E0, $95, $C9
+.INCLUDE "wla/banks/bank13_multiply.asm"
 
 _Divide:
 	XOR A
