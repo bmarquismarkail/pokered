@@ -67,24 +67,13 @@
 .INCLUDE "wla/banks/bank23_cerulean_gym_script_pointers.asm"
 .INCLUDE "wla/banks/bank23_cerulean_gym_misty_post_battle.asm"
 .INCLUDE "wla/banks/bank23_cerulean_gym_tables.asm"
-.db $08, $FA, $5E, $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $0D, $47
-.db $CD, $B6, $30, $18, $36, $21, $C3, $47, $CD, $49, $3C, $18, $2E, $21, $BE, $47
-.db $CD, $49, $3C, $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $D8, $47, $11, $D8, $47
-.db $CD, $54, $33, $F0, $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $3E, $02
-.db $EA, $5C, $D0, $AF, $E0, $B4, $3E, $03, $EA, $FD, $D5, $C3, $D7, $24, $17, $C1
-.db $49, $26, $50, $17, $7B, $4A, $26, $50, $17, $B0, $4A, $26, $50, $17, $7D, $4B
-.db $26, $0B, $50, $17, $90, $4B, $26, $50, $17, $B0, $4B, $26, $11, $06, $50, $08
-.db $21, $58, $47, $CD, $CC, $31, $C3, $D7, $24, $17, $05, $4C, $26, $50, $17, $38
-.db $4C, $26, $50, $17, $4D, $4C, $26, $50, $08, $21, $64, $47, $CD, $CC, $31, $C3
-.db $D7, $24, $17, $93, $4C, $26, $50, $17, $B5, $4C, $26, $50, $17, $C4, $4C, $26
-.db $50, $08, $FA, $5E, $D7, $CB, $7F, $20, $08, $21, $2A, $48, $CD, $49, $3C, $18
-.db $06, $21, $2F, $48, $CD, $49, $3C, $C3, $D7, $24, $17, $0A, $4D, $26, $50, $17
-.db $B0, $4D, $26, $50, $03, $02, $0D, $04, $03, $FF, $0D, $05, $03, $FF, $00, $04
-.db $1D, $06, $08, $FF, $D0, $41, $EB, $01, $06, $07, $06, $FF, $D3, $42, $CE, $01
-.db $22, $0B, $0C, $FF, $D2, $43, $D7, $01, $24, $0E, $0B, $FF, $D0, $04, $38, $C7
-.db $0D, $04, $38, $C7, $0D, $05, $14, $14, $21, $14, $14, $15, $23, $22, $23, $16
-.db $15, $1E, $1E, $1F, $16, $15, $1C, $1D, $20, $16, $15, $1B, $05, $17, $16, $15
-.db $1A, $05, $19, $16, $18, $18, $04, $18, $18, $02, $04, $04, $00, $40, $98, $48
+.INCLUDE "wla/banks/bank23_cerulean_gym_misty_text.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_misty_records.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_trainer_texts.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_guide_text.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_object.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_blocks.asm"
+.db $02, $04, $04, $00, $40, $98, $48
 .db $95, $48, $00, $A8, $48, $C3, $3C, $3C, $53, $24, $9E, $48, $A3, $48, $17, $12
 .db $50, $26, $50, $17, $7F, $50, $26, $50, $00, $02, $07, $03, $05, $FF, $07, $04
 .db $05, $FF, $00, $03, $26, $09, $04, $FF, $D3, $01, $07, $08, $07, $FE, $01, $02
