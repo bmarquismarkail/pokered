@@ -84,12 +84,10 @@
 .INCLUDE "wla/banks/bank23_lavender_mart_dispatch.asm"
 .INCLUDE "wla/banks/bank23_lavender_mart_cooltrainer_text.asm"
 .INCLUDE "wla/banks/bank23_lavender_mart_object.asm"
-.db $06, $04, $07, $64, $40, $95, $49, $8F, $49, $00, $A9, $49, $CD
-.db $FA, $22, $C3, $3C, $3C, $9D, $49, $9E, $49, $A3, $49, $A8, $49, $FF, $17, $B2
-.db $64, $26, $50, $17, $39, $65, $26, $50, $F6, $00, $02, $07, $03, $00, $FF, $07
-.db $04, $00, $FF, $00, $04, $29, $05, $07, $FF, $D0, $01, $27, $09, $0E, $FF, $FF
-.db $02, $13, $08, $09, $FF, $FF, $03, $2A, $06, $0F, $FF, $D0, $04, $1E, $C7, $07
-.db $03, $1F, $C7, $07, $04, $02, $04, $04, $00, $40, $E4, $49, $E1, $49, $00, $F4
+.INCLUDE "wla/banks/bank23_vermilion_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank23_vermilion_pokecenter_dispatch.asm"
+.INCLUDE "wla/banks/bank23_vermilion_pokecenter_object.asm"
+.db $02, $04, $04, $00, $40, $E4, $49, $E1, $49, $00, $F4
 .db $49, $C3, $3C, $3C, $61, $24, $EA, $49, $EF, $49, $17, $C1, $69, $26, $50, $17
 .db $67, $6A, $26, $50, $00, $02, $07, $03, $02, $FF, $07, $04, $02, $FF, $00, $03
 .db $26, $09, $04, $FF, $D3, $01, $07, $0A, $09, $FF, $FF, $02, $06, $07, $07, $FE
