@@ -441,7 +441,7 @@ def main() -> int:
         print('FAIL bank09 is not using its structured Battle Engine 3 include')
         return 1
     battle_engine_3_labels = file_labels(battle_engine_3)
-    if len(battle_engine_3_labels) != 11 or battle_engine_3_labels[0] != 'PrintMonType' or battle_engine_3_labels[-1] != 'BattleEngine3End':
+    if len(battle_engine_3_labels) != 12 or battle_engine_3_labels[0] != 'PrintMonType' or battle_engine_3_labels[-1] != 'BattleEngine3End':
         print(f'FAIL structured Battle Engine 3 label boundary changed: {len(battle_engine_3_labels)} global labels')
         return 1
     battle_engine_3_source = battle_engine_3.read_text(errors='replace')

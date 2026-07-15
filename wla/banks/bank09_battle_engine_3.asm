@@ -84,6 +84,7 @@ TypeNames.Ghost:
 	.STRINGMAP pokemon, "GHOST@"
 TypeNames.Dragon:
 	.STRINGMAP pokemon, "DRAGON@"
+TypeNamesEnd:
 
 SaveTrainerName:
 	LD HL, TrainerNamePointers
@@ -206,4 +207,3 @@ GettingPumpedText:
 	.DW $499b
 	.DB $25, $50
 BattleEngine3End:
-
