@@ -29,6 +29,8 @@ EXPECTED = (
     ('SFX Headers 1', 0x02, 'SFX_Headers_1', 0x4000, 'SfxHeaders1End', 0x422E),
     ('SFX Headers 2', 0x08, 'SFX_Headers_2', 0x4000, 'SfxHeaders2End', 0x42BE),
     ('SFX Headers 3', 0x1F, 'SFX_Headers_3', 0x4000, 'SfxHeaders3End', 0x4249),
+    ('Unused Critical Moves', 0x0F, 'UnusedHighCriticalMoves', 0x601E, 'UnusedHighCriticalMovesEnd', 0x6023),
+    ('Critical Hit Moves', 0x0F, 'HighCriticalMoves', 0x608E, 'HighCriticalMovesEnd', 0x6093),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),
