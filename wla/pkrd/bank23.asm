@@ -38,9 +38,8 @@
 .INCLUDE "wla/banks/bank23_museum_1f_object.asm"
 .INCLUDE "wla/banks/bank23_museum_2f_header.asm"
 .INCLUDE "wla/banks/bank23_museum_2f_dispatch.asm"
-.db $17, $41, $68, $25, $50, $17, $69, $68
-.db $25, $50, $17, $B1, $68, $25, $50, $17, $CF, $68, $25, $50, $17, $11, $69, $25
-.db $50, $17, $33, $69, $25, $50, $17, $4B, $69, $25, $50, $0A, $01, $07, $07, $04
+.INCLUDE "wla/banks/bank23_museum_2f_texts.asm"
+.db $0A, $01, $07, $07, $04
 .db $34, $02, $02, $0B, $06, $05, $02, $07, $05, $04, $0B, $05, $FE, $02, $01, $25
 .db $09, $04, $FF, $D0, $02, $20, $09, $0B, $FF, $D0, $03, $1D, $09, $0F, $FF, $FF
 .db $04, $0E, $09, $10, $FF, $D0, $05, $20, $C7, $07, $07, $07, $07, $05, $58, $45
