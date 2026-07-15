@@ -660,6 +660,11 @@
 .DEFINE SLOTSFISH $0e0c
 .DEFINE SLOTSBIRD $1210
 .DEFINE SLOTSMOUSE $1614
+.DEFINE vChars0 $8000
+.DEFINE wSlotMachineWheel1Offset $cd3e
+.DEFINE SlotMachine_AnimWheel1 $7813
+.DEFINE SlotMachine_AnimWheel2 $7823
+.DEFINE SlotMachine_AnimWheel3 $7833
 .DEFINE wTitleMonSpecies $cd3d
 .DEFINE wShadowOAMSprite10YCoord $c328
 .DEFINE STARTER1 $b0

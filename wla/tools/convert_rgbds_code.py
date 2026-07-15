@@ -420,6 +420,10 @@ def convert(paths: list[Path], symbols: dict[str, tuple[int, int]], defines: dic
                         values = operands(re.sub(r'^hlcoord\s+', '', stripped, flags=re.IGNORECASE))
                         origin = values[2] if len(values) > 2 else 'wTileMap'
                         converted = f'\tld hl, {origin} + ({values[1]} * 20) + {values[0]}'
+                    elif re.match(r'^decoord\s+', stripped, re.IGNORECASE):
+                        values = operands(re.sub(r'^decoord\s+', '', stripped, flags=re.IGNORECASE))
+                        origin = values[2] if len(values) > 2 else 'wTileMap'
+                        converted = f'\tld de, {origin} + ({values[1]} * 20) + {values[0]}'
                     elif re.match(r'^lda_coord\s+', stripped, re.IGNORECASE):
                         values = operands(re.sub(r'^lda_coord\s+', '', stripped, flags=re.IGNORECASE))
                         origin = values[2] if len(values) > 2 else 'wTileMap'

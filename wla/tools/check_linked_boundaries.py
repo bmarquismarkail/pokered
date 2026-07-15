@@ -35,6 +35,7 @@ EXPECTED = (
     ('Slot Machine Wheel 2', 0x0D, 'SlotMachineWheel2', 0x7A09, 'SlotMachineWheel2End', 0x7A2D),
     ('Slot Machine Wheel 3', 0x0D, 'SlotMachineWheel3', 0x7A2D, 'SlotMachineWheel3End', 0x7A51),
     ('Slot Machine Map', 0x0D, 'SlotMachineMap', 0x78F5, 'SlotMachineMapEnd', 0x79E5),
+    ('Load Slot Machine Tiles', 0x0D, '+LoadSlotMachineTiles', 0x78A8, 'LoadSlotMachineTilesEnd', 0x78F5),
 )
 
 

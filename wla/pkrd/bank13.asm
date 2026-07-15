@@ -899,12 +899,8 @@
 .db $08, $EA, $82, $D0, $FE, $28, $20, $D6, $D1, $1A, $3C, $FE, $1E, $20, $01, $AF
 .db $12, $C9, $CD, $AF, $20, $CD, $31, $38, $F0, $B5, $E6, $01, $C8, $21, $3D, $CD
 .db $7E, $3D, $11, $4D, $CD, $28, $0C, $3D, $11, $4E, $CD, $28, $06, $34, $3E, $BE
-.db $C3, $B1, $23, $1A, $A7, $C0, $18, $F5, $CD, $61, $00, $21, $DE, $4B, $11, $00
-.db $80, $01, $C0, $01, $3E, $1E, $CD, $F7, $17, $21, $51, $7A, $11, $00, $90, $01
-.db $50, $02, $3E, $0D, $CD, $F7, $17, $21, $DE, $4B, $11, $50, $92, $01, $C0, $01
-.db $3E, $1E, $CD, $F7, $17, $21, $F5, $78, $11, $A0, $C3, $01, $F0, $00, $CD, $B5
-.db $00, $CD, $7B, $00, $21, $3E, $CD, $3E, $1C, $22, $22, $77, $CD, $13, $78, $CD
-.db $23, $78, $C3, $33, $78
+.db $C3, $B1, $23, $1A, $A7, $C0, $18, $F5
+.INCLUDE "wla/banks/bank13_load_slot_machine_tiles.asm"
 SlotMachineMap:
 .INCLUDE "wla/banks/bank13_slot_machine_map.asm"
 SlotMachineMapEnd:
