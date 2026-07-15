@@ -62,20 +62,12 @@
 .INCLUDE "wla/banks/bank23_cerulean_pokecenter_dispatch.asm"
 .INCLUDE "wla/banks/bank23_cerulean_pokecenter_object.asm"
 .INCLUDE "wla/banks/bank23_cerulean_pokecenter_blocks.asm"
-.db $07, $07, $05, $66, $48, $4A, $47, $B3, $46
-.db $00, $34, $48, $21, $26, $D1, $CB, $76, $CB, $B6, $C4, $D0, $46, $CD, $3C, $3C
-.db $21, $58, $47, $11, $F8, $46, $FA, $FD, $D5, $CD, $60, $31, $EA, $FD, $D5, $C9
-.db $21, $D9, $46, $11, $E7, $46, $C3, $7F, $31, $82, $84, $91, $94, $8B, $84, $80
-.db $8D, $7F, $82, $88, $93, $98, $50, $8C, $88, $92, $93, $98, $50, $AF, $EA, $6B
-.db $CD, $EA, $FD, $D5, $EA, $39, $DA, $C9, $19, $32, $4C, $32, $75, $32, $00, $47
-.db $FA, $57, $D0, $FE, $FF, $CA, $ED, $46, $3E, $F0, $EA, $6B, $CD, $3E, $05, $E0
-.db $8C, $CD, $20, $29, $21, $5E, $D7, $CB, $FE, $01, $01, $D3, $CD, $2E, $3E, $30
-.db $0E, $3E, $06, $E0, $8C, $CD, $20, $29, $21, $5E, $D7, $CB, $F6, $18, $07, $3E
-.db $07, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $CE, $21, $2A, $D7, $CB, $CE
-.db $21, $5E, $D7, $CB, $D6, $CB, $DE, $C3, $ED, $46, $71, $47, $DF, $47, $F8, $47
-.db $11, $48, $C8, $47, $CD, $47, $D3, $47, $02, $30, $5E, $D7, $E9, $47, $F3, $47
-.db $EE, $47, $EE, $47, $03, $30, $5E, $D7, $02, $48, $0C, $48, $07, $48, $07, $48
-.db $FF, $08, $FA, $5E, $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $0D, $47
+.INCLUDE "wla/banks/bank23_cerulean_gym_header.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_dispatch.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_script_pointers.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_misty_post_battle.asm"
+.INCLUDE "wla/banks/bank23_cerulean_gym_tables.asm"
+.db $08, $FA, $5E, $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $0D, $47
 .db $CD, $B6, $30, $18, $36, $21, $C3, $47, $CD, $49, $3C, $18, $2E, $21, $BE, $47
 .db $CD, $49, $3C, $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $D8, $47, $11, $D8, $47
 .db $CD, $54, $33, $F0, $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $3E, $02
