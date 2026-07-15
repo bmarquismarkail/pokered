@@ -97,21 +97,11 @@
 .INCLUDE "wla/banks/bank23_vermilion_gym_tables.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_surge_text.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_surge_records.asm"
-.db $08, $21, $F8, $4A, $CD, $CC, $31, $C3, $D7, $24, $17, $94, $41, $27, $50, $17
-.db $C8, $41, $27, $50, $17, $E0, $41, $27, $50, $08, $21, $04, $4B, $CD, $CC, $31
-.db $C3, $D7, $24, $17, $13, $42, $27, $50, $17, $44, $42, $27, $50, $17, $4C, $42
-.db $27, $50, $08, $21, $10, $4B, $CD, $CC, $31, $C3, $D7, $24, $17, $90, $42, $27
-.db $50, $17, $AC, $42, $27, $50, $17, $C0, $42, $27, $50, $08, $FA, $2A, $D7, $CB
-.db $57, $20, $08, $21, $F4, $4B, $CD, $49, $3C, $18, $06, $21, $F9, $4B, $CD, $49
-.db $3C, $C3, $D7, $24, $17, $2B, $43, $27, $50, $17, $29, $44, $27, $50, $03, $02
-.db $11, $04, $03, $FF, $11, $05, $03, $FF, $00, $05, $21, $05, $09, $FF, $D0, $41
-.db $EC, $01, $10, $0A, $0D, $FF, $D2, $42, $F1, $03, $0C, $0C, $07, $FF, $D2, $43
-.db $DC, $01, $13, $0E, $04, $FF, $D3, $44, $CC, $08, $24, $12, $08, $FF, $D0, $05
-.db $4E, $C7, $11, $04, $4E, $C7, $11, $05, $2C, $25, $25, $26, $2C, $2C, $05, $05
-.db $05, $2C, $2A, $2B, $05, $2A, $2B
-.dsb 15, $27
-.db $05, $29, $05, $28, $05, $05, $11, $05, $10, $05, $05, $05, $04, $05, $05, $04
-.db $04, $04, $10, $40, $74, $4C, $71, $4C, $00, $21, $4D, $C3, $3C, $3C, $82, $4C
+.INCLUDE "wla/banks/bank23_vermilion_gym_trainer_texts.asm"
+.INCLUDE "wla/banks/bank23_vermilion_gym_guide_text.asm"
+.INCLUDE "wla/banks/bank23_vermilion_gym_object.asm"
+.INCLUDE "wla/banks/bank23_vermilion_gym_blocks.asm"
+.db $04, $04, $04, $10, $40, $74, $4C, $71, $4C, $00, $21, $4D, $C3, $3C, $3C, $82, $4C
 .db $F4, $4C, $F9, $4C, $F9, $4C, $F9, $4C, $FE, $4C, $03, $4D, $08, $FA, $AF, $D7
 .db $CB, $47, $20, $41, $3E, $01, $EA, $3C, $CC, $21, $D4, $4C, $CD, $49, $3C, $06
 .db $33, $CD, $93, $34, $28, $35, $21, $D9, $4C, $CD, $49, $3C, $01, $01, $E7, $CD
