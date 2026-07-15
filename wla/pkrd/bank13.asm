@@ -890,10 +890,7 @@
 .db $CD, $FE, $07, $0E, $08, $30, $02, $CB, $39, $CD, $39, $37, $18, $B1
 .INCLUDE "wla/banks/bank13_put_out_lit_balls.asm"
 .INCLUDE "wla/banks/bank13_light_balls.asm"
-.db $21, $CB, $C3, $CD, $FE, $77, $21, $6B, $C4, $CD, $FE, $77, $21
-.db $F3, $C3, $CD, $FE, $77, $21, $43, $C4, $CD, $FE, $77, $21, $1B, $C4, $FA, $8A
-.db $D0, $77, $01, $0D, $00, $09, $77, $01, $07, $00, $09, $3C, $77, $01, $0D, $00
-.db $09, $77, $C9
+.INCLUDE "wla/banks/bank13_update_coin_ball_tiles.asm"
 .INCLUDE "wla/banks/bank13_slot_wheel_animation.asm"
 .INCLUDE "wla/banks/bank13_load_slot_machine_tiles.asm"
 SlotMachineMap:
