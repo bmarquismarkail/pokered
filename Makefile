@@ -428,6 +428,7 @@ wla-unit-poc:
 # Build the complete WLA-DX split. Structured bank includes are substituted
 # only after their linked boundaries and full-ROM parity have been verified.
 wla-red wla-rom: wla/banks/bank23_museum_1f_header.asm
+wla-red wla-rom: wla/banks/bank23_museum_1f_script.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm

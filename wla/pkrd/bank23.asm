@@ -5,8 +5,8 @@
 .INCLUDE "wla/banks/bank23_maps_15.asm"
 .INCLUDE "wla/banks/bank23_starter_dex.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_header.asm"
-.db $3E, $01, $EA, $0C, $CF, $AF, $EA, $3C, $CC
-.db $21, $09, $41, $FA, $19, $D6, $C3, $97, $3D, $0D, $41, $2A, $41, $FA, $61, $D3
+.INCLUDE "wla/banks/bank23_museum_1f_script.asm"
+.db $0D, $41, $2A, $41, $FA, $61, $D3
 .db $FE, $04, $C0, $FA, $62, $D3, $FE, $09, $28, $06, $FA, $62, $D3, $FE, $0A, $C0
 .db $AF, $E0, $B4, $3E, $01, $E0, $8C, $C3, $20, $29, $C9, $35, $41, $47, $42, $56
 .db $42, $A3, $42, $B2, $42, $08, $FA, $61, $D3, $FE, $04, $20, $0A, $FA, $62, $D3
