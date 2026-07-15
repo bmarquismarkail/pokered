@@ -439,6 +439,7 @@ wla-red wla-rom: wla/banks/bank13_load_slot_machine_tiles.asm
 wla-red wla-rom: wla/banks/bank13_slot_wheel_animation.asm
 wla-red wla-rom: wla/banks/bank13_print_winning_symbol.asm
 wla-red wla-rom: wla/banks/bank13_print_credit_coins.asm
+wla-red wla-rom: wla/banks/bank13_print_payout_coins.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

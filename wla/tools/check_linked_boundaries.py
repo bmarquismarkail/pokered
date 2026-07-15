@@ -39,6 +39,7 @@ EXPECTED = (
     ('Slot Wheel Animation', 0x0D, 'SlotMachine_AnimWheel1', 0x7813, 'SlotWheelAnimationEnd', 0x78A8),
     ('Print Winning Symbol', 0x0D, 'SlotMachine_PrintWinningSymbol', 0x7728, 'SlotMachinePrintWinningSymbolEnd', 0x7741),
     ('Print Credit Coins', 0x0D, 'SlotMachine_PrintCreditCoins', 0x7754, 'SlotMachinePrintCreditCoinsEnd', 0x775F),
+    ('Print Payout Coins', 0x0D, 'SlotMachine_PrintPayoutCoins', 0x775F, 'SlotMachinePrintPayoutCoinsEnd', 0x776B),
 )
 
 
