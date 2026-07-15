@@ -34,6 +34,7 @@ EXPECTED = (
     ('Always Happen Effects', 0x0F, 'AlwaysHappenSideEffects', 0x4030, 'AlwaysHappenSideEffectsEnd', 0x403B),
     ('Residual Effects 1', 0x0F, 'ResidualEffects1', 0x4000, 'ResidualEffects1End', 0x4014),
     ('Residual Effects 2', 0x0F, 'ResidualEffects2', 0x4014, 'ResidualEffects2End', 0x4030),
+    ('Special Effects', 0x0F, 'SpecialEffects', 0x403B, 'SpecialEffectsEnd', 0x404C),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),

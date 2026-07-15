@@ -4,8 +4,8 @@
 ; Data from 3C000 to 3F0CF (12496 bytes)
 .INCLUDE "wla/banks/bank15_residual_effects.asm"
 .INCLUDE "wla/banks/bank15_always_happen_effects.asm"
-.db $03, $07, $08, $10, $11
-.db $1D, $1E, $27, $28, $29, $2B, $2C, $2D, $30, $1B, $2A, $FF, $CD, $92, $6C, $3E
+.INCLUDE "wla/banks/bank15_special_effects.asm"
+.db $CD, $92, $6C, $3E
 .db $01, $EA, $25, $D1, $CD, $E8, $30, $21, $05, $C4, $01, $07, $03, $CD, $C4, $18
 .db $CD, $61, $00, $CD, $80, $36, $CD, $58, $6E, $21, $00, $98, $01, $00, $04, $3E
 .db $7F, $22, $0B, $78, $B1, $20, $F8, $21, $A0, $C3, $11, $00, $98, $06, $12, $0E
