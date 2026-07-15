@@ -650,3 +650,7 @@
 .DEFINE USING_INTERNAL_CLOCK $2
 .DEFINE VENUSAUR $9a
 .DEFINE VILEPLUME $bb
+.DEFINE wLuckySlotHiddenEventIndex $cd05
+.DEFINE wSlotMachineSevenAndBarModeChance $cc5b
+.DEFINE wSlotMachineSavedROMBank $cc5e
+.DEFINE PromptUserToPlaySlots $730e

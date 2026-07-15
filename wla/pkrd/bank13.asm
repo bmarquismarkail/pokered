@@ -1062,10 +1062,5 @@ _Divide.done:
 	RET
 
 ; Data from 37E2D to 37FFF (467 bytes)
-.db $FA, $3D, $CD, $FE, $FD, $28, $32, $FE, $FE, $28, $32, $FE, $FF, $28, $32, $06
-.db $0B, $21, $09, $7F, $CD, $D6, $35, $FA, $3D, $CD, $A7, $C8, $FA, $05, $CD, $47
-.db $FA, $3F, $CD, $3C, $B8, $28, $04, $3E, $FD, $18, $02, $3E, $FA, $EA, $5B, $CC
-.db $F0, $B8, $EA, $5E, $CC, $CD, $0E, $73, $C9, $3E, $28, $18, $06, $3E, $29, $18
-.db $02, $3E, $2A, $F5, $CD, $3C, $3C, $F1, $CD, $F5, $3E, $C9, $17, $8F, $4B, $22
-.db $50, $17, $AD, $4B, $22, $50, $17, $CD, $4B, $22, $50
+.INCLUDE "wla/banks/bank13_start_slot_machine.asm"
 .dsb 376, $00

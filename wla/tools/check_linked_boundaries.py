@@ -26,6 +26,7 @@ EXPECTED = (
     ('Itemfinder 2', 0x1D, 'PKMNLeaguePC', 0x657E, 'Itemfinder2End', 0x687B),
     ('Pewter Guys', 0x0D, '+PewterGuys', 0x7CA1, 'PewterGuysEnd', 0x7D41),
     ('Multiply', 0x0D, '+_Multiply', 0x7D41, 'MultiplyEnd', 0x7DA5),
+    ('Start Slot Machine', 0x0D, '+StartSlotMachine', 0x7E2D, 'StartSlotMachineEnd', 0x7E88),
 )
 
 
