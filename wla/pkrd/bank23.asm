@@ -105,14 +105,8 @@
 .INCLUDE "wla/banks/bank23_copycats_house_2f_copycat_text.asm"
 .INCLUDE "wla/banks/bank23_copycats_house_2f_room_texts.asm"
 .INCLUDE "wla/banks/bank23_copycats_house_2f_object.asm"
-.db $05, $06, $05, $E3, $4F
-.db $03, $4E, $5D, $4D, $00, $9B, $4F, $CD, $3C, $3C, $21, $13, $4E, $11, $7B, $4D
-.db $FA, $42, $D6, $CD, $60, $31, $EA, $42, $D6, $C9, $AF, $EA, $6B, $CD, $EA, $42
-.db $D6, $EA, $39, $DA, $C9, $83, $4D, $4C, $32, $75, $32, $C6, $4D, $FA, $B1, $D7
-.db $CB, $47, $C0, $CD, $19, $32, $FA, $55, $CC, $A7, $C0, $FA, $B1, $D7, $CB, $4F
-.db $C0, $AF, $E0, $B4, $EA, $0D, $CF, $FA, $61, $D3, $FE, $03, $C0, $FA, $62, $D3
-.db $FE, $04, $C0, $3E, $01, $EA, $0D, $CF, $3E, $01, $EA, $28, $D5, $3E, $01, $E0
-.db $8C, $3E, $08, $E0, $8D, $CD, $A6, $34, $3E, $01, $E0, $8C, $CD, $20, $29, $C9
+.INCLUDE "wla/banks/bank23_fighting_dojo_entry.asm"
+.INCLUDE "wla/banks/bank23_fighting_dojo_default.asm"
 .db $FA, $57, $D0, $FE, $FF, $CA, $70, $4D, $FA, $0D, $CF, $A7, $28, $10, $3E, $01
 .db $EA, $28, $D5, $3E, $01, $E0, $8C, $3E, $08, $E0, $8D, $CD, $A6, $34, $3E, $F0
 .db $EA, $6B, $CD, $FA, $B1, $D7, $F6, $3E, $EA, $B1, $D7, $3E, $08, $E0, $8C, $CD
