@@ -40,6 +40,7 @@ EXPECTED = (
     ('Print Winning Symbol', 0x0D, 'SlotMachine_PrintWinningSymbol', 0x7728, 'SlotMachinePrintWinningSymbolEnd', 0x7741),
     ('Print Credit Coins', 0x0D, 'SlotMachine_PrintCreditCoins', 0x7754, 'SlotMachinePrintCreditCoinsEnd', 0x775F),
     ('Print Payout Coins', 0x0D, 'SlotMachine_PrintPayoutCoins', 0x775F, 'SlotMachinePrintPayoutCoinsEnd', 0x776B),
+    ('Put Out Lit Balls', 0x0D, 'SlotMachine_PutOutLitBalls', 0x77CE, 'SlotMachinePutOutLitBallsEnd', 0x77D5),
 )
 
 
