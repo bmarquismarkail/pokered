@@ -124,12 +124,12 @@
 .INCLUDE "wla/banks/bank23_saffron_gym_trainer_records.asm"
 .INCLUDE "wla/banks/bank23_saffron_gym_object.asm"
 .INCLUDE "wla/banks/bank23_saffron_gym_blocks.asm"
-.db $02, $04, $04, $00, $40, $0C, $54, $09, $54
-.db $00, $1C, $54, $C3, $3C, $3C, $C3, $24, $12, $54, $17, $54, $17, $E3, $63, $28
-.db $50, $17, $2A, $64, $28, $50, $00, $02, $07, $03, $04, $FF, $07, $04, $04, $FF
-.db $00, $03, $26, $09, $04, $FF, $D3, $01, $0C, $06, $08, $FF, $FF, $02, $06, $09
-.db $0A, $FE, $00, $03, $12, $C7, $07, $03, $13, $C7, $07, $04, $16, $09, $0F, $A2
-.db $54, $69, $54, $4E, $54, $00, $70, $54, $CD, $3C, $3C, $FA, $38, $D8, $CB, $7F
+.INCLUDE "wla/banks/bank23_saffron_mart_header.asm"
+.INCLUDE "wla/banks/bank23_saffron_mart_script.asm"
+.INCLUDE "wla/banks/bank23_saffron_mart_text.asm"
+.INCLUDE "wla/banks/bank23_saffron_mart_object.asm"
+.db $16, $09, $0F, $A2, $54, $69, $54, $4E, $54, $00, $70, $54, $CD, $3C, $3C, $FA
+.db $38, $D8, $CB, $7F
 .db $C8, $21, $B9, $D7, $CB, $7E, $CB, $FE, $C0, $3E, $4C, $EA, $4D, $CC, $3E, $15
 .db $C3, $6D, $3E, $6B, $54, $17, $5A, $64, $28, $50, $2E, $05, $11, $0A, $05, $FF
 .db $11, $0B, $05, $FF, $00, $1A, $00, $CF, $00, $14, $00, $EC, $0A, $10, $06, $D0
