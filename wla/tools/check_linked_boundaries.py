@@ -86,6 +86,8 @@ EXPECTED = (
     ('Vermilion Mart Text Pointers', 0x17, 'VermilionMart_TextPointers', 0x49E4, 'VermilionMartTextPointersEnd', 0x49EA),
     ('Vermilion Mart Texts', 0x17, 'VermilionMartCooltrainerMText', 0x49EA, 'VermilionMartTextsEnd', 0x49F4),
     ('Vermilion Mart Object', 0x17, 'VermilionMart_Object', 0x49F4, 'VermilionMartObjectEnd', 0x4A1A),
+    ('Vermilion Gym Header', 0x17, 'VermilionGym_h', 0x4A1A, 'VermilionGymHeaderEnd', 0x4A26),
+    ('Vermilion Gym Dispatch', 0x17, 'VermilionGym_Script', 0x4A26, 'VermilionGymDispatchEnd', 0x4A95),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),
