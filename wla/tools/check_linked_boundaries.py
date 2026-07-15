@@ -36,6 +36,7 @@ EXPECTED = (
     ('Residual Effects 2', 0x0F, 'ResidualEffects2', 0x4014, 'ResidualEffects2End', 0x4030),
     ('Set Damage Effects', 0x0F, 'SetDamageEffects', 0x4011, 'SetDamageEffectsEnd', 0x4014),
     ('Special Effects', 0x0F, 'SpecialEffects', 0x403B, 'SpecialEffectsEnd', 0x404C),
+    ('Stat Modifier Ratios', 0x0F, 'StatModifierRatios', 0x76CB, 'StatModifierRatiosEnd', 0x76E5),
     ('Sound Effects 1', 0x02, 'SFX_Noise_Instrument01_1_Ch8', 0x42FD, 'AudioSectionEnd1', 0x50C6),
     ('Sound Effects 2', 0x08, 'SFX_Noise_Instrument01_2_Ch8', 0x42FD, 'AudioSectionEnd2', 0x536E),
     ('Sound Effects 3', 0x1F, 'SFX_Noise_Instrument01_3_Ch8', 0x42FD, 'AudioSectionEnd3', 0x513B),
