@@ -29,6 +29,7 @@ EXPECTED = (
     ('Start Slot Machine', 0x0D, '+StartSlotMachine', 0x7E2D, 'StartSlotMachineEnd', 0x7E88),
     ('Title 2', 0x0D, 'TitleScroll_WaitBall', 0x7244, 'Title2End', 0x72D6),
     ('Link Battle Versus Text', 0x0D, 'DisplayLinkBattleVersusTextBox', 0x72D6, 'LinkVersusEnd', 0x730E),
+    ('Slot Machine Tiles 1', 0x0D, 'SlotMachineTiles1', 0x7A51, 'SlotMachineTiles1End', 0x7CA1),
 )
 
 

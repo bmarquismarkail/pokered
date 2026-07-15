@@ -431,6 +431,7 @@ wla-red wla-rom: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_eff
 wla-red wla-rom: wla/banks/bank13_start_slot_machine.asm
 wla-red wla-rom: wla/banks/bank13_title2.asm
 wla-red wla-rom: wla/banks/bank13_link_versus.asm
+wla-red wla-rom: wla/banks/bank13_slot_machine_tiles.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
