@@ -665,6 +665,7 @@
 .DEFINE wSlotMachineWheel2Offset $cd3f
 .DEFINE wSlotMachineWheel3Offset $cd40
 .DEFINE SFX_SLOTS_STOP_WHEEL $be
+.DEFINE wSlotMachineWinningSymbol $cd41
 .DEFINE SLOTS7 $0200
 .DEFINE SLOTSBAR $0604
 .DEFINE SLOTSCHERRY $0a08
