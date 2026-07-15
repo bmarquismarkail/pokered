@@ -125,6 +125,7 @@ EXPECTED = (
     ('Saffron Gym Battle Control', 0x17, 'SaffronGymSabrinaPostBattle', 0x505B, 'SaffronGymBattleControlEnd', 0x50AB),
     ('Saffron Gym Text Pointers', 0x17, 'SaffronGym_TextPointers', 0x50AB, 'SaffronGymTextPointersEnd', 0x50C3),
     ('Saffron Gym Trainer Headers', 0x17, 'SaffronGymTrainerHeaders', 0x50C3, 'SaffronGymTrainerHeadersEnd', 0x5118),
+    ('Saffron Gym Sabrina Text', 0x17, 'SaffronGymSabrinaText', 0x5118, 'SaffronGymSabrinaTextEnd', 0x5173),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),

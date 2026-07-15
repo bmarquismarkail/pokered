@@ -117,12 +117,8 @@
 .INCLUDE "wla/banks/bank23_saffron_gym_entry.asm"
 .INCLUDE "wla/banks/bank23_saffron_gym_battle_control.asm"
 .INCLUDE "wla/banks/bank23_saffron_gym_tables.asm"
-.db $08, $FA, $B3, $D7, $CB, $4F, $28, $14, $CB, $47, $20, $08, $CC, $68
-.db $50, $CD, $B6, $30, $18, $33, $21, $6E, $51, $CD, $49, $3C, $18, $2B, $21, $62
-.db $51, $CD, $49, $3C, $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $67, $51, $11, $67
-.db $51, $CD, $54, $33, $F0, $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $3E
-.db $06, $EA, $5C, $D0, $3E, $03, $EA, $5C, $D6, $C3, $D7, $24, $17, $B4, $5B, $28
-.db $50, $17, $73, $5C, $28, $11, $06, $50, $17, $DC, $5C, $28, $50, $17, $16, $5D
+.INCLUDE "wla/banks/bank23_saffron_gym_sabrina_text.asm"
+.db $17, $16, $5D
 .db $28, $50, $17, $CD, $5D, $28, $0B, $17, $E0, $5D, $28, $50, $17, $25, $5E, $28
 .db $50, $08, $21, $C3, $50, $CD, $CC, $31, $C3, $D7, $24, $08, $21, $CF, $50, $CD
 .db $CC, $31, $C3, $D7, $24, $08, $21, $DB, $50, $CD, $CC, $31, $C3, $D7, $24, $08
