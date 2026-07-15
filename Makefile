@@ -442,6 +442,9 @@ wla-red wla-rom: wla/banks/bank23_museum_2f_object.asm
 wla-red wla-rom: wla/banks/bank23_pewter_gym_header.asm
 wla-red wla-rom: wla/banks/bank23_pewter_gym_dispatch.asm
 wla-red wla-rom: wla/banks/bank23_pewter_gym_script_pointers.asm
+wla-red wla-rom: wla/banks/bank23_pewter_gym_brock_post_battle.asm
+wla-red wla-rom: wla/banks/bank23_pewter_gym_text_pointers.asm
+wla-red wla-rom: wla/banks/bank23_pewter_gym_trainer_headers.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm

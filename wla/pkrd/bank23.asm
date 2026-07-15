@@ -43,14 +43,10 @@
 .INCLUDE "wla/banks/bank23_pewter_gym_header.asm"
 .INCLUDE "wla/banks/bank23_pewter_gym_dispatch.asm"
 .INCLUDE "wla/banks/bank23_pewter_gym_script_pointers.asm"
-.db $FA, $57, $D0, $FE, $FF, $CA, $BF, $43, $3E, $F0, $EA, $6B, $CD, $3E
-.db $04, $E0, $8C, $CD, $20, $29, $21, $55, $D7, $CB, $FE, $01, $01, $EA, $CD, $2E
-.db $3E, $30, $0E, $3E, $05, $E0, $8C, $CD, $20, $29, $21, $55, $D7, $CB, $F6, $18
-.db $07, $3E, $06, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $C6, $21, $2A, $D7
-.db $CB, $C6, $3E, $04, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $3E, $22, $EA, $4D
-.db $CC, $3E, $11, $CD, $6D, $3E, $21, $EB, $D7, $CB, $86, $CB, $BE, $21, $55, $D7
-.db $CB, $D6, $C3, $BF, $43, $4E, $44, $C6, $44, $DF, $44, $A8, $44, $AD, $44, $B7
-.db $44, $02, $50, $55, $D7, $D0, $44, $DA, $44, $D5, $44, $D5, $44, $FF, $08, $FA
+.INCLUDE "wla/banks/bank23_pewter_gym_brock_post_battle.asm"
+.INCLUDE "wla/banks/bank23_pewter_gym_text_pointers.asm"
+.INCLUDE "wla/banks/bank23_pewter_gym_trainer_headers.asm"
+.db $08, $FA
 .db $55, $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $DF, $43, $CD, $B6, $30
 .db $18, $39, $21, $A3, $44, $CD, $49, $3C, $18, $31, $21, $9E, $44, $CD, $49, $3C
 .db $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $BC, $44, $11, $BC, $44, $CD, $54, $33
