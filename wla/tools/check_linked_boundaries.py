@@ -19,6 +19,8 @@ EXPECTED = (
     ('Museum 1F Old Amber Text', 0x17, 'Museum1FOldAmberText', 0x42B2, 'Museum1FOldAmberTextEnd', 0x42C1),
     ('Museum 1F Object', 0x17, 'Museum1F_Object', 0x42C1, 'Museum1FObjectEnd', 0x430B),
     ('Museum 2F Header', 0x17, 'Museum2F_h', 0x430B, 'Museum2FHeaderEnd', 0x4317),
+    ('Museum 2F Script', 0x17, 'Museum2F_Script', 0x4317, 'Museum2FScriptEnd', 0x431A),
+    ('Museum 2F Text Pointers', 0x17, 'Museum2F_TextPointers', 0x431A, 'Museum2FTextPointersEnd', 0x4328),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),
