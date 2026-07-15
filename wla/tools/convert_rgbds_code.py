@@ -50,7 +50,7 @@ def load_charmap(path: Path = Path('constants/charmap.asm')) -> dict[str, int]:
     values: dict[str, int] = {}
     if path.is_file():
         for line in path.read_text().splitlines():
-            match = re.match(r'^\s*charmap\s+"(.)",\s*\$([0-9A-Fa-f]+)', line)
+            match = re.match(r'^\s*charmap\s+"([^"]+)",\s*\$([0-9A-Fa-f]+)', line)
             if match:
                 values[match.group(1)] = int(match.group(2), 16)
     return values
@@ -311,7 +311,19 @@ def convert(paths: list[Path], symbols: dict[str, tuple[int, int]], defines: dic
                         converted = '\t.DB $0d'
                     elif re.match(r'^ld_hli_a_string\s+".*"$', stripped, re.IGNORECASE):
                         string = re.match(r'^ld_hli_a_string\s+"(.*)"$', stripped, re.IGNORECASE).group(1)
-                        encoded = [charmap[ch] for ch in string]
+                        # RGBDS permits symbolic multi-character tokens such as
+                        # <BOLD_V> in these literals; consume the longest token
+                        # before falling back to individual characters.
+                        encoded = []
+                        cursor = 0
+                        while cursor < len(string):
+                            token = re.match(r'<[^>]+>', string[cursor:])
+                            if token and token.group(0) in charmap:
+                                encoded.append(charmap[token.group(0)])
+                                cursor += len(token.group(0))
+                            else:
+                                encoded.append(charmap[string[cursor]])
+                                cursor += 1
                         instructions = [f'\tld a, ${value:02x}\n\tld (HL+), a' for value in encoded[:-1]]
                         instructions.append(f'\t.DB $36, ${encoded[-1]:02x}')
                         converted = '\n'.join(instructions)
