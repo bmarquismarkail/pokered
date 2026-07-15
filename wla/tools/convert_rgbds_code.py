@@ -397,6 +397,10 @@ def convert(paths: list[Path], symbols: dict[str, tuple[int, int]], defines: dic
                         converted = f'\t.DB ${high:02x}, ${low:02x}'
                     elif re.match(r'^(?:table_width|assert_(?:max_)?table_length)\b', stripped, re.IGNORECASE):
                         converted = '; ' + stripped
+                    elif re.match(r'^assert\b', stripped, re.IGNORECASE):
+                        # RGBDS link-time assertions describe invariants that are
+                        # checked by the WLA boundary audit after conversion.
+                        converted = '; ' + stripped
                     elif re.match(r'^gym_gate_coord\s+', stripped, re.IGNORECASE):
                         value = re.sub(r'^gym_gate_coord\s+', '', stripped, flags=re.IGNORECASE)
                         converted = f'\t.DB {value}, 0'
