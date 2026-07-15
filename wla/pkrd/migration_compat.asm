@@ -654,3 +654,8 @@
 .DEFINE wSlotMachineSevenAndBarModeChance $cc5b
 .DEFINE wSlotMachineSavedROMBank $cc5e
 .DEFINE PromptUserToPlaySlots $730e
+.DEFINE wTitleMonSpecies $cd3d
+.DEFINE wShadowOAMSprite10YCoord $c328
+.DEFINE STARTER1 $b0
+.DEFINE STARTER2 $b1
+.DEFINE STARTER3 $99
