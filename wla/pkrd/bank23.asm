@@ -102,20 +102,10 @@
 .INCLUDE "wla/banks/bank23_vermilion_gym_object.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_blocks.asm"
 .INCLUDE "wla/banks/bank23_copycats_house_2f_entry.asm"
-.db $08, $FA, $AF, $D7
-.db $CB, $47, $20, $41, $3E, $01, $EA, $3C, $CC, $21, $D4, $4C, $CD, $49, $3C, $06
-.db $33, $CD, $93, $34, $28, $35, $21, $D9, $4C, $CD, $49, $3C, $01, $01, $E7, $CD
-.db $2E, $3E, $30, $19, $21, $DE, $4C, $CD, $49, $3C, $3E, $33, $E0, $DB, $06, $05
-.db $21, $37, $7F, $CD, $D6, $35, $21, $AF, $D7, $CB, $C6, $18, $0E, $21, $EE, $4C
-.db $CD, $49, $3C, $18, $06, $21, $E9, $4C, $CD, $49, $3C, $C3, $D7, $24, $17, $AD
-.db $55, $28, $50, $17, $36, $56, $28, $50, $17, $75, $56, $28, $0B, $17, $89, $56
-.db $28, $0D, $50, $17, $C5, $56, $28, $50, $17, $33, $57, $28, $0D, $50, $17, $49
-.db $57, $28, $50, $17, $92, $57, $28, $50, $17, $BE, $57, $28, $50, $08, $FA, $09
-.db $C1, $FE, $04, $21, $1C, $4D, $20, $03, $21, $17, $4D, $CD, $49, $3C, $C3, $D7
-.db $24, $17, $EF, $57, $28, $50, $17, $42, $58, $28, $50, $0A, $01, $01, $07, $02
-.db $AF, $02, $05, $03, $06, $01, $00, $07, $05, $1D, $07, $08, $FE, $00, $01, $09
-.db $0A, $08, $FE, $02, $02, $05, $05, $09, $FF, $D0, $03, $09, $04, $06, $FF, $D0
-.db $04, $38, $0A, $05, $FF, $D3, $05, $F6, $C6, $01, $07, $05, $06, $05, $E3, $4F
+.INCLUDE "wla/banks/bank23_copycats_house_2f_copycat_text.asm"
+.INCLUDE "wla/banks/bank23_copycats_house_2f_room_texts.asm"
+.INCLUDE "wla/banks/bank23_copycats_house_2f_object.asm"
+.db $05, $06, $05, $E3, $4F
 .db $03, $4E, $5D, $4D, $00, $9B, $4F, $CD, $3C, $3C, $21, $13, $4E, $11, $7B, $4D
 .db $FA, $42, $D6, $CD, $60, $31, $EA, $42, $D6, $C9, $AF, $EA, $6B, $CD, $EA, $42
 .db $D6, $EA, $39, $DA, $C9, $83, $4D, $4C, $32, $75, $32, $C6, $4D, $FA, $B1, $D7
