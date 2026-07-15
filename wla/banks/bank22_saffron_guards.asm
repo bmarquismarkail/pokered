@@ -1,6 +1,5 @@
 ; Native WLA-DX form of engine/events/saffron_guards.asm.
 .DEFINE IsItemInBag $3493
-.DEFINE RemoveItemByID $7f37
 
 RemoveGuardDrink:
 	LD HL, GuardDrinksList

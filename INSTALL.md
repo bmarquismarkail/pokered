@@ -1,6 +1,8 @@
 # Instructions
 
-These instructions explain how to set up the tools required to build **pokered**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
+These instructions explain how to set up the tools required to build **pokered**, including [**rgbds**](https://github.com/gbdev/rgbds) and WLA-DX. The latter is required for the structured migration checks (`make wla-check`).
+
+On Debian/Ubuntu install WLA-DX with `sudo apt-get install wla-dx`; on macOS use `brew install wla-dx`.
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 

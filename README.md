@@ -12,6 +12,10 @@ It builds the following ROMs:
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
+The incremental RGBDS-to-WLA-DX migration is verified with `make wla-check`.
+This assembles and links the structured Red split, audits section boundaries and
+reconciliation inputs, and compares the result byte-for-byte with the RGBDS ROM.
+
 
 ## See also
 

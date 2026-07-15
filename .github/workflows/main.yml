@@ -33,6 +33,14 @@ jobs:
         run: |
           rm -rf rgbds
 
+      - name: Install WLA-DX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -yq wla-dx
+
+      - name: WLA-DX migration check
+        run: make wla-check
+
       - name: Compare
         if: ${{ github.repository_owner == 'pret' }}
         run: |
@@ -88,6 +96,12 @@ jobs:
       - name: Remove rgbds
         run: |
           rm -rf rgbds
+
+      - name: Install WLA-DX
+        run: brew install wla-dx
+
+      - name: WLA-DX migration check
+        run: make wla-check
 
       - name: Compare
         if: ${{ github.repository_owner == 'pret' }}

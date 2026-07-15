@@ -226,7 +226,7 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 %.bst: ;
 %.rle: ;
 
-### WLA-DX reconciliation scaffold
+### WLA-DX structured migration and reconciliation
 
 WLA ?= wla-gb
 WLALINK ?= wlalink
@@ -250,6 +250,19 @@ wla/banks/bank02_sfx_headers_1.asm: audio/headers/sfxheaders1.asm pokered.sym wl
 
 wla/banks/bank08_sfx_headers_2.asm: audio/headers/sfxheaders2.asm pokered.sym wla/tools/convert_music_headers.py
 	$(PYTHON) wla/tools/convert_music_headers.py $< pokered.sym $@ SfxHeaders2End
+
+wla/build/bank02_sound_effects_1.asm: audio.asm pokered.sym wla/tools/convert_audio_section.py wla/tools/convert_rgbds_code.py
+	mkdir -p $(wla-build-dir)
+	$(PYTHON) wla/tools/convert_audio_section.py audio.asm "Sound Effects 1" $@
+
+wla/build/bank08_sound_effects_2.asm: audio.asm pokered.sym wla/tools/convert_audio_section.py wla/tools/convert_rgbds_code.py
+	mkdir -p $(wla-build-dir)
+	$(PYTHON) wla/tools/convert_audio_section.py audio.asm "Sound Effects 2" $@
+
+wla/build/bank31_sound_effects_3.asm: audio.asm pokered.sym wla/tools/convert_audio_section.py wla/tools/convert_rgbds_code.py
+	mkdir -p $(wla-build-dir)
+	$(PYTHON) wla/tools/convert_audio_section.py audio.asm "Sound Effects 3" $@
+
 
 bank32-text-sources := \
 	data/text/text_1.asm text/ViridianForest.asm text/MtMoon1F.asm \
@@ -414,7 +427,7 @@ wla-unit-poc:
 
 # Build the complete imported WLA-DX split. This is the migration baseline;
 # reconciled wla/data files are not substituted until their audits pass.
-wla-red wla-rom: wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
+wla-red wla-rom: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
@@ -427,7 +440,7 @@ wla-compare: rgbds-red wla-red
 	@echo "WLA-DX ROM matches the verified RGBDS Pokemon Red ROM byte-for-byte."
 
 # One gate for every invariant currently required of the Red migration.
-wla-check: wla-audit wla-check-split wla-compare
+wla-check: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla-audit wla-check-split wla-compare
 	@echo "WLA-DX Pokemon Red migration checks passed."
 
 wla-index-monolith:

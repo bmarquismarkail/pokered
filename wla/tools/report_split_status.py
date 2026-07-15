@@ -33,7 +33,12 @@ def monolith_bank_label_counts(path: Path) -> dict[int, int]:
 
 
 def split_label_count(path: Path) -> int:
-    return sum(1 for line in path.read_text(errors='replace').splitlines() if LABEL_RE.match(line.rstrip()))
+    count = sum(1 for line in path.read_text(errors='replace').splitlines() if LABEL_RE.match(line.rstrip()))
+    for include in re.findall(r'^\.INCLUDE "([^"]+)"', path.read_text(errors='replace'), re.MULTILINE):
+        included = Path(include)
+        if included.is_file():
+            count += sum(1 for line in included.read_text(errors='replace').splitlines() if LABEL_RE.match(line.rstrip()))
+    return count
 
 
 def main() -> int:
@@ -51,7 +56,11 @@ def main() -> int:
     uncovered = [i for i in sorted(monolith_counts) if monolith_counts.get(i, 0) and split_counts.get(i, 0) == 0]
 
     print('WLA-DX reconciliation status')
-    print(f'  branch_goal : master-preserving scaffold; no broad source conversion')
+    structured_includes = sum(
+        len(re.findall(r'^\.INCLUDE "wla/(?:banks|build)/', path.read_text(errors='replace'), re.MULTILINE))
+        for path in banks if path.is_file()
+    )
+    print('  branch_goal : incremental source-driven RGBDS-to-WLA-DX migration')
     print(f'  split_dir   : {args.split_dir}')
     print(f'  monolith    : {args.monolith}')
     print(f'  prelude     : {"present" if prelude.is_file() else "missing"}')
@@ -60,6 +69,7 @@ def main() -> int:
     print(f'  monolith_banks_indexed: {len(monolith_counts)}')
     print(f'  monolith_labels_indexed: {sum(monolith_counts.values())}')
     print(f'  split_labels_indexed: {sum(split_counts.values())}')
+    print(f'  structured_includes: {structured_includes}')
     if missing:
         print(f'  missing     : {len(missing)}')
         for path in missing[:20]:
@@ -70,7 +80,7 @@ def main() -> int:
     reconcile_result = audit_reconcile_tree()
     print_reconcile_audit(reconcile_result, limit=40)
     if reconcile_result.ok:
-        print('  next_phase : choose one small master-aligned bank/region and reconcile it without replacing the RGBDS tree.')
+        print('  next_phase : migrate the next audited bank/region and require full parity.')
     else:
         print('  next_phase : fix wla/data reconciliation audit failures before adding more reconcile files.')
     return 0 if reconcile_result.ok else 1

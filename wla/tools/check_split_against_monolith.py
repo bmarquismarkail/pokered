@@ -711,6 +711,16 @@ def main() -> int:
     print('OK bank21 uses structured Trainer Sight include: native positioning/engagement logic, 594-byte section')
 
     migrated_sections = (
+        (2, 'wla/build/bank02_sound_effects_1.asm', 'SFX_Noise_Instrument01_1_Ch8', 'AudioSectionEnd1', 178, 3529, 'Sound Effects 1'),
+        (8, 'wla/build/bank08_sound_effects_2.asm', 'SFX_Noise_Instrument01_2_Ch8', 'AudioSectionEnd2', 230, 4209, 'Sound Effects 2'),
+        (31, 'wla/build/bank31_sound_effects_3.asm', 'SFX_Noise_Instrument01_3_Ch8', 'AudioSectionEnd3', 187, 3646, 'Sound Effects 3'),
+        (5, 'bank05_battle_engine_2.asm', 'LoadPokedexTilePatterns', 'BattleEngine2End', 35, 1823, 'Battle Engine 2'),
+        (8, 'bank08_bills_pc.asm', 'DisplayPCMainMenu', 'BillsPCEnd', 41, 1201, 'Bills PC'),
+        (11, 'bank11_battle_engine_5.asm', 'DisplayEffectiveness', 'BattleEngine5End', 21, 961, 'Battle Engine 5'),
+        (20, 'bank20_hidden_events_2.asm', 'PrintCardKeyText', 'HiddenEvents2End', 48, 975, 'Hidden Events 2'),
+        (29, 'bank29_itemfinder_1.asm', 'HallOfFamePC', 'Itemfinder1End', 85, 2070, 'Itemfinder 1'),
+        (17, 'bank17_hidden_events_core.asm', 'IsPlayerOnDungeonWarp', 'HiddenEventsCoreEnd', 91, 1834, 'Hidden Events Core'),
+        (7, 'bank07_pokemon_names.asm', 'MonsterNames', 'PokemonNamesEnd', 6, 2043, 'Pokémon Names'),
         (29, 'bank29_itemfinder_2.asm', 'PKMNLeaguePC', 'Itemfinder2End', 15, 765, 'Itemfinder 2'),
         (22, 'bank22_battle_engine_10.asm', 'PrintBeginningBattleText', 'BattleEngine10End', 33, 791, 'Battle Engine 10'),
         (6, 'bank06_doors_and_ledges.asm', 'PlayerStepOutFromDoor', 'DoorsAndLedgesEnd', 30, 824, 'Doors and Ledges'),
@@ -718,7 +728,7 @@ def main() -> int:
         (23, 'bank23_hidden_events_3.asm', 'SetPartyMonTypes', 'HiddenEvents3End', 42, 951, 'Hidden Events 3'),
     )
     for bank, filename, first, last, count, size, description in migrated_sections:
-        section = Path('wla/banks') / filename
+        section = Path(filename) if filename.startswith('wla/') else Path('wla/banks') / filename
         include = f'.INCLUDE "{section}"'
         if include not in banks[bank].read_text(errors='replace'):
             print(f'FAIL bank{bank:02d} is not using its structured {description} include')
