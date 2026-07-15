@@ -432,6 +432,7 @@ wla-red wla-rom: wla/banks/bank13_start_slot_machine.asm
 wla-red wla-rom: wla/banks/bank13_title2.asm
 wla-red wla-rom: wla/banks/bank13_link_versus.asm
 wla-red wla-rom: wla/banks/bank13_slot_machine_tiles.asm
+wla-red wla-rom: wla/banks/bank30_slot_machine_tiles2.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
