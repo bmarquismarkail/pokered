@@ -48,6 +48,7 @@ EXPECTED = (
     ('Subtract Bet', 0x0D, 'SlotMachine_SubtractBetFromPlayerCoins', 0x7741, 'SlotMachine_SubtractBetFromPlayerCoinsEnd', 0x7754),
     ('Slot Reward 8', 0x0D, 'SlotReward8Func', 0x76D7, 'SlotReward8FuncEnd', 0x76E5),
     ('Slot Reward 15', 0x0D, 'SlotReward15Func', 0x76E5, 'SlotReward15FuncEnd', 0x76F3),
+    ('Slot Reward 100', 0x0D, 'SlotReward100Func', 0x76F3, 'SlotReward100FuncEnd', 0x7702),
 )
 
 

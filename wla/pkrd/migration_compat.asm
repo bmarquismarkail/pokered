@@ -684,4 +684,5 @@
 .DEFINE STARTER3 $99
 .DEFINE wSlotMachineFlags $CD4C
 .DEFINE wTempCoins2 $CD4A
+.DEFINE SFX_GET_KEY_ITEM $94
 .DEFINE wSlotMachineAllowMatchesCounter $D096

@@ -872,8 +872,7 @@
 .db $11, $41, $CD, $21, $E5, $79, $FA, $3E, $CD, $4F, $06, $00, $09, $0E, $03, $2A
 .db $12, $13, $23, $0D, $20, $F9, $C9
 .INCLUDE "wla/banks/bank13_slot_rewards_small.asm"
-.db $3E, $94, $CD, $B1, $23, $AF, $EA, $4C, $CD, $06, $08, $11, $64
-.db $00, $C9
+.INCLUDE "wla/banks/bank13_slot_reward_100.asm"
 .INCLUDE "wla/banks/bank13_slot_reward_300.asm"
 .INCLUDE "wla/banks/bank13_yeah_text.asm"
 .INCLUDE "wla/banks/bank13_print_winning_symbol.asm"
