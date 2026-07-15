@@ -430,6 +430,7 @@ wla-unit-poc:
 wla-red wla-rom: wla/banks/bank23_museum_1f_header.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script_pointers.asm
+wla-red wla-rom: wla/banks/bank23_museum_1f_default_script.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
