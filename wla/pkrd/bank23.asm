@@ -58,14 +58,11 @@
 .INCLUDE "wla/banks/bank23_pewter_pokecenter_jigglypuff.asm"
 .INCLUDE "wla/banks/bank23_pewter_pokecenter_receptionist.asm"
 .INCLUDE "wla/banks/bank23_pewter_pokecenter_object.asm"
-.db $06, $04, $07, $8B, $46, $4B, $46
-.db $45, $46, $00, $5F, $46, $CD, $FA, $22, $C3, $3C, $3C, $54, $46, $55, $46, $5A
-.db $46, $53, $46, $F6, $FF, $17, $E5, $48, $26, $50, $17, $2A, $49, $26, $50, $00
-.db $02, $07, $03, $02, $FF, $07, $04, $02, $FF, $00, $04, $29, $05, $07, $FF, $D0
-.db $01, $0C, $09, $0E, $FE, $00, $02, $10, $07, $08, $FF, $D0, $03, $2A, $06, $0F
-.db $FF, $D0, $04, $1E, $C7, $07, $03, $1F, $C7, $07, $04, $20, $10, $01, $02, $0C
-.db $0D, $0D, $21, $04, $05, $07, $07, $22, $23, $08, $0F, $0F, $0F, $0F, $0F, $1B
-.db $0E, $0A, $0B, $0E, $0F, $0F, $0E, $07, $07, $05, $66, $48, $4A, $47, $B3, $46
+.INCLUDE "wla/banks/bank23_cerulean_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank23_cerulean_pokecenter_dispatch.asm"
+.INCLUDE "wla/banks/bank23_cerulean_pokecenter_object.asm"
+.INCLUDE "wla/banks/bank23_cerulean_pokecenter_blocks.asm"
+.db $07, $07, $05, $66, $48, $4A, $47, $B3, $46
 .db $00, $34, $48, $21, $26, $D1, $CB, $76, $CB, $B6, $C4, $D0, $46, $CD, $3C, $3C
 .db $21, $58, $47, $11, $F8, $46, $FA, $FD, $D5, $CD, $60, $31, $EA, $FD, $D5, $C9
 .db $21, $D9, $46, $11, $E7, $46, $C3, $7F, $31, $82, $84, $91, $94, $8B, $84, $80
