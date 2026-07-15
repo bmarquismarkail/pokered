@@ -427,7 +427,7 @@ wla-unit-poc:
 
 # Build the complete WLA-DX split. Structured bank includes are substituted
 # only after their linked boundaries and full-ROM parity have been verified.
-wla-red wla-rom: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm wla/banks/bank13_pewter_guys.asm
+wla-red wla-rom: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm wla/banks/bank13_pewter_guys.asm wla/banks/bank13_multiply.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
