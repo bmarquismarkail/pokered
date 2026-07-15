@@ -49,6 +49,7 @@ EXPECTED = (
     ('Slot Reward 8', 0x0D, 'SlotReward8Func', 0x76D7, 'SlotReward8FuncEnd', 0x76E5),
     ('Slot Reward 15', 0x0D, 'SlotReward15Func', 0x76E5, 'SlotReward15FuncEnd', 0x76F3),
     ('Slot Reward 100', 0x0D, 'SlotReward100Func', 0x76F3, 'SlotReward100FuncEnd', 0x7702),
+    ('Slot Reward Text', 0x0D, 'SlotReward300Text', 0x7690, 'SlotRewardTextEnd', 0x76A2),
 )
 
 
