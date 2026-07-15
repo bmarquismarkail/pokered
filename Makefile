@@ -443,6 +443,7 @@ wla-red wla-rom: wla/banks/bank13_print_payout_coins.asm
 wla-red wla-rom: wla/banks/bank13_put_out_lit_balls.asm
 wla-red wla-rom: wla/banks/bank13_light_balls.asm
 wla-red wla-rom: wla/banks/bank13_update_coin_ball_tiles.asm
+wla-red wla-rom: wla/banks/bank13_yeah_text.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
