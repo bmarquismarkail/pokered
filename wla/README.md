@@ -26,6 +26,13 @@ RGBDS source, preserved labels, non-placeholder content, operand widths, and
 known RGBDS-only constructs. A candidate is not migration-ready while this
 target reports it.
 
+The current verified baseline has all 64 banks indexed, 92 structured includes,
+and 99/99 reconciliation candidates mapped with zero audit findings. This is
+still a reconciliation baseline: `make red` remains the RGBDS build, and Blue,
+debug, and VC variant cutovers are not yet complete. Do not remove the RGBDS
+oracle or generated bank regions until their structured replacements pass the
+same full-ROM parity gate.
+
 ## Structured-bank migration
 
 Bank 42 is the first generated bank replaced by a master-aligned structured
