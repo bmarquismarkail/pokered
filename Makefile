@@ -479,6 +479,10 @@ wla-red wla-rom: wla/banks/bank23_cerulean_mart_object.asm
 wla-red wla-rom: wla/banks/bank23_lavender_pokecenter_header.asm
 wla-red wla-rom: wla/banks/bank23_lavender_pokecenter_dispatch.asm
 wla-red wla-rom: wla/banks/bank23_lavender_pokecenter_object.asm
+wla-red wla-rom: wla/banks/bank23_lavender_mart_header.asm
+wla-red wla-rom: wla/banks/bank23_lavender_mart_dispatch.asm
+wla-red wla-rom: wla/banks/bank23_lavender_mart_cooltrainer_text.asm
+wla-red wla-rom: wla/banks/bank23_lavender_mart_object.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
