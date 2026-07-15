@@ -31,6 +31,9 @@ EXPECTED = (
     ('Link Battle Versus Text', 0x0D, 'DisplayLinkBattleVersusTextBox', 0x72D6, 'LinkVersusEnd', 0x730E),
     ('Slot Machine Tiles 1', 0x0D, 'SlotMachineTiles1', 0x7A51, 'SlotMachineTiles1End', 0x7CA1),
     ('Slot Machine Tiles 2', 0x1E, 'SlotMachineTiles2', 0x4BDE, 'SlotMachineTiles2End', 0x4D5E),
+    ('Slot Machine Wheel 1', 0x0D, 'SlotMachineWheel1', 0x79E5, 'SlotMachineWheel1End', 0x7A09),
+    ('Slot Machine Wheel 2', 0x0D, 'SlotMachineWheel2', 0x7A09, 'SlotMachineWheel2End', 0x7A2D),
+    ('Slot Machine Wheel 3', 0x0D, 'SlotMachineWheel3', 0x7A2D, 'SlotMachineWheel3End', 0x7A51),
 )
 
 
