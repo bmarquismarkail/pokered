@@ -654,6 +654,17 @@
 .DEFINE wSlotMachineSevenAndBarModeChance $cc5b
 .DEFINE wSlotMachineSavedROMBank $cc5e
 .DEFINE PromptUserToPlaySlots $730e
+.DEFINE wShadowOAMSprite00 $c300
+.DEFINE wShadowOAMSprite12 $c330
+.DEFINE wShadowOAMSprite24 $c360
+.DEFINE wBaseCoordX $d081
+.DEFINE wBaseCoordY $d082
+.DEFINE wStoppingWhichSlotMachineWheel $cd3d
+.DEFINE wSlotMachineWheel1SlipCounter $cd4d
+.DEFINE wSlotMachineWheel2SlipCounter $cd4e
+.DEFINE wSlotMachineWheel2Offset $cd3f
+.DEFINE wSlotMachineWheel3Offset $cd40
+.DEFINE SFX_SLOTS_STOP_WHEEL $be
 .DEFINE SLOTS7 $0200
 .DEFINE SLOTSBAR $0604
 .DEFINE SLOTSCHERRY $0a08
@@ -662,9 +673,6 @@
 .DEFINE SLOTSMOUSE $1614
 .DEFINE vChars0 $8000
 .DEFINE wSlotMachineWheel1Offset $cd3e
-.DEFINE SlotMachine_AnimWheel1 $7813
-.DEFINE SlotMachine_AnimWheel2 $7823
-.DEFINE SlotMachine_AnimWheel3 $7833
 .DEFINE wTitleMonSpecies $cd3d
 .DEFINE wShadowOAMSprite10YCoord $c328
 .DEFINE STARTER1 $b0
