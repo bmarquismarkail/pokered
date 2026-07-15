@@ -1,0 +1,15 @@
+SilphCo1F_Script:
+	CALL $3C3C ; EnableAutoTextBoxDrawing
+	LD A, ($D838)
+	BIT 7, A ; EVENT_BEAT_SILPH_CO_GIOVANNI
+	RET Z
+	LD HL, $D7B9
+	BIT 7, (HL) ; EVENT_SILPH_CO_RECEPTIONIST_AT_DESK
+	SET 7, (HL)
+	RET NZ
+	LD A, $4C ; TOGGLE_SILPH_CO_1F_RECEPTIONIST
+	LD ($CC4D), A
+	LD A, $15 ; ShowObject predef
+	JP $3E6D
+SilphCo1FScriptEnd:
+.ASSERT SilphCo1FScriptEnd - SilphCo1F_Script == 27

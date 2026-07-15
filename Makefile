@@ -527,6 +527,16 @@ wla-red wla-rom: wla/banks/bank23_saffron_mart_header.asm
 wla-red wla-rom: wla/banks/bank23_saffron_mart_script.asm
 wla-red wla-rom: wla/banks/bank23_saffron_mart_text.asm
 wla-red wla-rom: wla/banks/bank23_saffron_mart_object.asm
+wla-red wla-rom: wla/banks/bank23_silph_co_1f_header.asm
+wla-red wla-rom: wla/banks/bank23_silph_co_1f_script.asm
+wla-red wla-rom: wla/banks/bank23_silph_co_1f_text.asm
+wla-red wla-rom: wla/banks/bank23_silph_co_1f_object.asm
+wla-red wla-rom: wla/banks/bank23_silph_co_1f_blocks.asm maps/SilphCo1F.blk
+wla-red wla-rom: wla/banks/bank23_saffron_pokecenter_header.asm
+wla-red wla-rom: wla/banks/bank23_saffron_pokecenter_script.asm
+wla-red wla-rom: wla/banks/bank23_saffron_pokecenter_text.asm
+wla-red wla-rom: wla/banks/bank23_saffron_pokecenter_object.asm
+wla-red wla-rom: wla/banks/bank23_viridian_forest_north_gate.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm

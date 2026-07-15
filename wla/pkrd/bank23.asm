@@ -128,32 +128,17 @@
 .INCLUDE "wla/banks/bank23_saffron_mart_script.asm"
 .INCLUDE "wla/banks/bank23_saffron_mart_text.asm"
 .INCLUDE "wla/banks/bank23_saffron_mart_object.asm"
-.db $16, $09, $0F, $A2, $54, $69, $54, $4E, $54, $00, $70, $54, $CD, $3C, $3C, $FA
-.db $38, $D8, $CB, $7F
-.db $C8, $21, $B9, $D7, $CB, $7E, $CB, $FE, $C0, $3E, $4C, $EA, $4D, $CC, $3E, $15
-.db $C3, $6D, $3E, $6B, $54, $17, $5A, $64, $28, $50, $2E, $05, $11, $0A, $05, $FF
-.db $11, $0B, $05, $FF, $00, $1A, $00, $CF, $00, $14, $00, $EC, $0A, $10, $06, $D0
-.db $00, $01, $2A, $06, $08, $FF, $D0, $01, $AB, $C7, $11, $0A, $AB, $C7, $11, $0B
-.db $0B, $C7, $00, $1A, $08, $C7, $00, $14, $6F, $C7, $0A, $10, $3C, $3D, $3D, $7F
-.db $3D, $3D, $3D, $3D, $3D, $3D, $7C, $3D, $3D, $7D, $3E, $7E, $22, $22, $23, $0E
-.db $0E, $1D, $0E, $0E, $1D, $0E, $0E, $0E, $09, $46, $44, $0E, $0E, $0E, $0E, $1E
-.db $5B, $1C, $1E, $5B, $1C, $0E, $0E, $0E, $46, $44, $0D, $0E, $0E, $20, $5B, $5B
-.db $5B, $5B, $5B, $5B, $39, $0E, $09, $46, $44, $0E, $0E, $0E, $0E, $1A, $5B, $18
-.db $1A, $5B, $18, $0E, $0E, $0E, $46, $44, $0D, $0E, $0E, $0E, $0E, $19, $0E, $0E
-.db $19, $0E, $0E, $0E, $09, $46, $44
-.dsb 13, $0E
-.db $46, $44, $0B, $0B, $0B, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0B, $0B, $0B, $46
-.db $48, $49, $49, $49, $58, $2C, $57, $49, $49, $49, $49, $49, $49, $49, $4A, $06
-.db $04, $07, $64, $40, $3B, $55, $35, $55, $00, $4F, $55, $CD, $FA, $22, $C3, $3C
-.db $3C, $43, $55, $44, $55, $49, $55, $4E, $55, $FF, $17, $8E, $64, $28, $50, $17
-.db $BF, $64, $28, $50, $F6, $00, $02, $07, $03, $06, $FF, $07, $04, $06, $FF, $00
-.db $04, $29, $05, $07, $FF, $D0, $01, $0F, $09, $09, $FF, $FF, $02, $10, $07, $0C
-.db $FF, $D0, $03, $2A, $06, $0F, $FF, $D0, $04, $1E, $C7, $07, $03, $1F, $C7, $07
-.db $04, $09, $04, $05, $90, $40, $8A, $55, $87, $55, $00, $98, $55, $C3, $3C, $3C
-.db $8E, $55, $93, $55, $17, $FD, $66, $22, $50, $17, $5D, $67, $22, $50, $0A, $04
-.db $00, $04, $01, $FF, $00, $05, $01, $FF, $07, $04, $00, $33, $07, $05, $00, $33
-.db $00, $02, $0C, $06, $07, $FF, $FF, $01, $25, $09, $06, $FF, $FF, $02, $F6, $C6
-.db $00, $04, $F6, $C6, $00, $05, $17, $C7, $07, $04, $17, $C7, $07, $05, $0C, $04
+.INCLUDE "wla/banks/bank23_silph_co_1f_header.asm"
+.INCLUDE "wla/banks/bank23_silph_co_1f_script.asm"
+.INCLUDE "wla/banks/bank23_silph_co_1f_text.asm"
+.INCLUDE "wla/banks/bank23_silph_co_1f_object.asm"
+.INCLUDE "wla/banks/bank23_silph_co_1f_blocks.asm"
+.INCLUDE "wla/banks/bank23_saffron_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank23_saffron_pokecenter_script.asm"
+.INCLUDE "wla/banks/bank23_saffron_pokecenter_text.asm"
+.INCLUDE "wla/banks/bank23_saffron_pokecenter_object.asm"
+.INCLUDE "wla/banks/bank23_viridian_forest_north_gate.asm"
+.db $0C, $04
 .db $05, $90, $40, $D7, $55, $D4, $55, $00, $20, $56, $C3, $3C, $3C, $DB, $55, $1B
 .db $56, $08, $FA, $C2, $D7, $CB, $47, $20, $2A, $3E, $0A, $E0, $DB, $3E, $C8, $E0
 .db $DC, $EA, $1E, $D1, $CD, $CF, $2F, $21, $6D, $CD, $11, $5B, $CC, $01, $0D, $00
