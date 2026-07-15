@@ -40,13 +40,10 @@
 .INCLUDE "wla/banks/bank23_museum_2f_dispatch.asm"
 .INCLUDE "wla/banks/bank23_museum_2f_texts.asm"
 .INCLUDE "wla/banks/bank23_museum_2f_object.asm"
-.db $07, $07, $05, $58, $45
-.db $35, $44, $87, $43, $00, $2E, $45, $21, $26, $D1, $CB, $76, $CB, $B6, $C4, $A4
-.db $43, $CD, $3C, $3C, $21, $41, $44, $11, $CA, $43, $FA, $FC, $D5, $CD, $60, $31
-.db $EA, $FC, $D5, $C9, $21, $AD, $43, $11, $B9, $43, $C3, $7F, $31, $8F, $84, $96
-.db $93, $84, $91, $7F, $82, $88, $93, $98, $50, $81, $91, $8E, $82, $8A, $50, $AF
-.db $EA, $6B, $CD, $EA, $FC, $D5, $EA, $39, $DA, $C9, $19, $32, $4C, $32, $75, $32
-.db $D2, $43, $FA, $57, $D0, $FE, $FF, $CA, $BF, $43, $3E, $F0, $EA, $6B, $CD, $3E
+.INCLUDE "wla/banks/bank23_pewter_gym_header.asm"
+.INCLUDE "wla/banks/bank23_pewter_gym_dispatch.asm"
+.INCLUDE "wla/banks/bank23_pewter_gym_script_pointers.asm"
+.db $FA, $57, $D0, $FE, $FF, $CA, $BF, $43, $3E, $F0, $EA, $6B, $CD, $3E
 .db $04, $E0, $8C, $CD, $20, $29, $21, $55, $D7, $CB, $FE, $01, $01, $EA, $CD, $2E
 .db $3E, $30, $0E, $3E, $05, $E0, $8C, $CD, $20, $29, $21, $55, $D7, $CB, $F6, $18
 .db $07, $3E, $06, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $C6, $21, $2A, $D7
