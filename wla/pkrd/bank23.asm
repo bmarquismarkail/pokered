@@ -95,13 +95,8 @@
 .INCLUDE "wla/banks/bank23_vermilion_gym_dispatch.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_battle_control.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_tables.asm"
-.db $08, $FA, $73
-.db $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $AA, $4A, $CD, $B6, $30, $18
-.db $39, $21, $72, $4B, $CD, $49, $3C, $18, $31, $21, $6D, $4B, $CD, $49, $3C, $21
-.db $2D, $D7, $CB, $F6, $CB, $FE, $21, $8B, $4B, $11, $8B, $4B, $CD, $54, $33, $F0
-.db $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $3E, $03, $EA, $5C, $D0, $AF
-.db $E0, $B4, $3E, $03, $EA, $FE, $D5, $EA, $39, $DA, $C3, $D7, $24, $17, $A5, $6A
-.db $26, $50, $17, $00, $40, $27, $50, $17, $69, $40, $27, $50, $17, $E0, $40, $27
+.INCLUDE "wla/banks/bank23_vermilion_gym_surge_text.asm"
+.db $17, $69, $40, $27, $50, $17, $E0, $40, $27
 .db $11, $17, $F5, $40, $27, $50, $17, $30, $41, $27, $50, $17, $51, $41, $27, $50
 .db $08, $21, $F8, $4A, $CD, $CC, $31, $C3, $D7, $24, $17, $94, $41, $27, $50, $17
 .db $C8, $41, $27, $50, $17, $E0, $41, $27, $50, $08, $21, $04, $4B, $CD, $CC, $31
