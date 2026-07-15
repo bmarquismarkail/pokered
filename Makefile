@@ -425,8 +425,8 @@ wla-unit-poc:
 	$(WLA) -v -o $(wla-build-dir)/field_move_names_poc.o wla/poc/field_move_names_poc_driver.asm
 	$(WLALINK) -v -s wla/unit_poc.link $(wla-build-dir)/field_move_names_poc.gb
 
-# Build the complete imported WLA-DX split. This is the migration baseline;
-# reconciled wla/data files are not substituted until their audits pass.
+# Build the complete WLA-DX split. Structured bank includes are substituted
+# only after their linked boundaries and full-ROM parity have been verified.
 wla-red wla-rom: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla/banks/bank02_sfx_headers_1.asm wla/banks/bank02_music_headers_1.asm wla/banks/bank08_sfx_headers_2.asm wla/banks/bank31_sfx_headers_3.asm wla/banks/bank31_music_headers_3.asm wla/banks/bank32_text.asm wla/banks/bank33_text.asm wla/banks/bank34_text.asm wla/banks/bank35_text.asm wla/banks/bank36_text.asm wla/banks/bank37_text.asm wla/banks/bank38_text.asm wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
@@ -440,7 +440,7 @@ wla-compare: rgbds-red wla-red
 	@echo "WLA-DX ROM matches the verified RGBDS Pokemon Red ROM byte-for-byte."
 
 # One gate for every invariant currently required of the Red migration.
-wla-check: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla-audit wla-check-split wla-compare
+wla-check: wla/build/bank02_sound_effects_1.asm wla/build/bank08_sound_effects_2.asm wla/build/bank31_sound_effects_3.asm wla-audit wla-check-split wla-report wla-compare
 	@echo "WLA-DX Pokemon Red migration checks passed."
 
 wla-index-monolith:
