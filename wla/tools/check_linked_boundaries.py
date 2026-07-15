@@ -9,6 +9,7 @@ from pathlib import Path
 
 
 EXPECTED = (
+    ('Museum 1F Header', 0x17, 'Museum1F_h', 0x40EB, 'Museum1FHeaderEnd', 0x40F7),
     ('Vitamin Stats', 0x03, 'VitaminStats', 0x5F2E, 'VitaminStatsEnd', 0x5F51),
     ('Stat Modifier Names', 0x0F, 'StatModTextStrings', 0x769F, 'StatModTextStringsEnd', 0x76CB),
     ('Type Names', 0x09, 'TypeNames', 0x7DAE, 'TypeNamesEnd', 0x7E4A),

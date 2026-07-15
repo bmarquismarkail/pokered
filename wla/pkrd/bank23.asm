@@ -4,8 +4,8 @@
 ; Data from 5C000 to 5FFFF (16384 bytes)
 .INCLUDE "wla/banks/bank23_maps_15.asm"
 .INCLUDE "wla/banks/bank23_starter_dex.asm"
-.db $0A, $04, $0A, $20, $40
-.db $2B, $41, $F7, $40, $00, $C1, $42, $3E, $01, $EA, $0C, $CF, $AF, $EA, $3C, $CC
+.INCLUDE "wla/banks/bank23_museum_1f_header.asm"
+.db $3E, $01, $EA, $0C, $CF, $AF, $EA, $3C, $CC
 .db $21, $09, $41, $FA, $19, $D6, $C3, $97, $3D, $0D, $41, $2A, $41, $FA, $61, $D3
 .db $FE, $04, $C0, $FA, $62, $D3, $FE, $09, $28, $06, $FA, $62, $D3, $FE, $0A, $C0
 .db $AF, $E0, $B4, $3E, $01, $E0, $8C, $C3, $20, $29, $C9, $35, $41, $47, $42, $56
