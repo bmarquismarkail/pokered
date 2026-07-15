@@ -93,15 +93,9 @@
 .INCLUDE "wla/banks/bank23_vermilion_mart_object.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_header.asm"
 .INCLUDE "wla/banks/bank23_vermilion_gym_dispatch.asm"
-.db $19, $32, $4C, $32, $75, $32, $9D, $4A, $FA, $57, $D0
-.db $FE, $FF, $CA, $8A, $4A, $3E, $F0, $EA, $6B, $CD, $3E, $06, $E0, $8C, $CD, $20
-.db $29, $21, $73, $D7, $CB, $FE, $01, $01, $E0, $CD, $2E, $3E, $30, $0E, $3E, $07
-.db $E0, $8C, $CD, $20, $29, $21, $73, $D7, $CB, $F6, $18, $07, $3E, $08, $E0, $8C
-.db $CD, $20, $29, $21, $56, $D3, $CB, $D6, $21, $2A, $D7, $CB, $D6, $FA, $73, $D7
-.db $F6, $1C, $EA, $73, $D7, $C3, $8A, $4A, $1D, $4B, $90, $4B, $A9, $4B, $C2, $4B
-.db $DB, $4B, $77, $4B, $7C, $4B, $86, $4B, $02, $30, $73, $D7, $9A, $4B, $A4, $4B
-.db $9F, $4B, $9F, $4B, $03, $20, $73, $D7, $B3, $4B, $BD, $4B, $B8, $4B, $B8, $4B
-.db $04, $30, $73, $D7, $CC, $4B, $D6, $4B, $D1, $4B, $D1, $4B, $FF, $08, $FA, $73
+.INCLUDE "wla/banks/bank23_vermilion_gym_battle_control.asm"
+.INCLUDE "wla/banks/bank23_vermilion_gym_tables.asm"
+.db $08, $FA, $73
 .db $D7, $CB, $7F, $28, $14, $CB, $77, $20, $08, $CC, $AA, $4A, $CD, $B6, $30, $18
 .db $39, $21, $72, $4B, $CD, $49, $3C, $18, $31, $21, $6D, $4B, $CD, $49, $3C, $21
 .db $2D, $D7, $CB, $F6, $CB, $FE, $21, $8B, $4B, $11, $8B, $4B, $CD, $54, $33, $F0
