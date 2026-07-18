@@ -28,12 +28,7 @@
 .db $65, $25, $50, $17, $F1, $65, $25, $50, $17, $36, $66, $25, $50, $17, $57, $66
 .db $25, $50, $17, $75, $66, $25, $50
 .INCLUDE "wla/banks/bank23_museum_1f_gambler_text.asm"
-.db $08, $FA, $54, $D7, $CB, $4F, $20, $27, $21, $8E
-.db $42, $CD, $49, $3C, $01, $01, $1F, $CD, $2E, $3E, $30, $14, $21, $54, $D7, $CB
-.db $CE, $3E, $34, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $21, $93, $42, $18, $08
-.db $21, $9E, $42, $18, $03, $21, $99, $42, $CD, $49, $3C, $C3, $D7, $24, $17, $B4
-.db $66, $25, $50, $17, $90, $67, $25, $0B, $50, $17, $A8, $67, $25, $50, $17, $C9
-.db $67, $25, $50
+.INCLUDE "wla/banks/bank23_museum_1f_scientist2_text.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_small_texts.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_object.asm"
 .INCLUDE "wla/banks/bank23_museum_2f_header.asm"

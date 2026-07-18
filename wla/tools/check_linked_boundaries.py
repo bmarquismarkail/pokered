@@ -15,6 +15,7 @@ EXPECTED = (
     ('Museum 1F Default Scripts', 0x17, 'Museum1FDefaultScript', 0x410D, 'Museum1FDefaultScriptsEnd', 0x412B),
     ('Museum 1F Text Pointers', 0x17, 'Museum1F_TextPointers', 0x412B, 'Museum1FTextPointersEnd', 0x4135),
     ('Museum 1F Gambler Text', 0x17, 'Museum1FGamblerText', 0x4247, 'Museum1FGamblerTextEnd', 0x4256),
+    ('Museum 1F Scientist 2 Text', 0x17, 'Museum1FScientist2Text', 0x4256, 'Museum1FScientist2TextEnd', 0x42A3),
     ('Museum 1F Scientist 3 Text', 0x17, 'Museum1FScientist3Text', 0x42A3, 'Museum1FScientist3TextEnd', 0x42B2),
     ('Museum 1F Old Amber Text', 0x17, 'Museum1FOldAmberText', 0x42B2, 'Museum1FOldAmberTextEnd', 0x42C1),
     ('Museum 1F Object', 0x17, 'Museum1F_Object', 0x42C1, 'Museum1FObjectEnd', 0x430B),
