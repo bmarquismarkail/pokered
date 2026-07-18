@@ -432,6 +432,7 @@ wla-red wla-rom: wla/banks/bank23_museum_1f_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script_pointers.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_default_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_text_pointers.asm
+wla-red wla-rom: wla/banks/bank23_museum_1f_scientist1_text.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_gambler_text.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_scientist2_text.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_small_texts.asm

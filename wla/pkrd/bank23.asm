@@ -9,24 +9,7 @@
 .INCLUDE "wla/banks/bank23_museum_1f_script_pointers.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_default_script.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_text_pointers.asm"
-.db $08, $FA, $61, $D3, $FE, $04, $20, $0A, $FA, $62, $D3
-.db $FE, $0D, $CA, $F9, $41, $18, $1C, $FE, $03, $20, $08, $FA, $62, $D3, $FE, $0C
-.db $CA, $F9, $41, $FA, $54, $D7, $CB, $47, $20, $10, $21, $3D, $42, $CD, $49, $3C
-.db $C3, $17, $42, $FA, $54, $D7, $CB, $47, $28, $09, $21, $42, $42, $CD, $49, $3C
-.db $C3, $17, $42, $3E, $13, $EA, $25, $D1, $CD, $E8, $30, $AF, $E0, $B4, $21, $1F
-.db $42, $CD, $49, $3C, $CD, $EC, $35, $FA, $26, $CC, $A7, $20, $4D, $AF, $E0, $9F
-.db $E0, $A0, $3E, $50, $E0, $A1, $CD, $A6, $35, $30, $09, $21, $29, $42, $CD, $49
-.db $3C, $C3, $DA, $41, $21, $24, $42, $CD, $49, $3C, $21, $54, $D7, $CB, $C6, $AF
-.db $EA, $3D, $CD, $EA, $3E, $CD, $3E, $50, $EA, $3F, $CD, $21, $3F, $CD, $11, $49
-.db $D3, $0E, $03, $3E, $0C, $CD, $6D, $3E, $3E, $13, $EA, $25, $D1, $CD, $E8, $30
-.db $3E, $B2, $CD, $40, $37, $CD, $48, $37, $18, $18, $21, $1A, $42, $CD, $49, $3C
-.db $3E, $01, $EA, $38, $CD, $3E, $80, $EA, $D3, $CC, $CD, $86, $34, $CD, $29, $24
-.db $18, $25, $3E, $01, $EA, $19, $D6, $18, $1E, $21, $2E, $42, $CD, $49, $3C, $CD
-.db $EC, $35, $FA, $26, $CC, $FE, $00, $20, $08, $21, $33, $42, $CD, $49, $3C, $18
-.db $06, $21, $38, $42, $CD, $49, $3C, $C3, $D7, $24, $17, $2C, $65, $25, $50, $17
-.db $39, $65, $25, $50, $17, $72, $65, $25, $50, $17, $8A, $65, $25, $50, $17, $A7
-.db $65, $25, $50, $17, $F1, $65, $25, $50, $17, $36, $66, $25, $50, $17, $57, $66
-.db $25, $50, $17, $75, $66, $25, $50
+.INCLUDE "wla/banks/bank23_museum_1f_scientist1_text.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_gambler_text.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_scientist2_text.asm"
 .INCLUDE "wla/banks/bank23_museum_1f_small_texts.asm"
