@@ -495,6 +495,8 @@ EXPECTED = (
     ("Oak's Lab Rival Starts Exit", 0x07, 'OaksLabRivalStartsExitScript', 0x4E32, 'OaksLabRivalStartsExitEnd', 0x4E66),
     ("Oak's Lab Rival Exit Movement", 0x07, 'OaksLabRivalStartsExitScript.RivalExitMovement', 0x4E66, 'OaksLabRivalExitMovementEnd', 0x4E6D),
     ("Oak's Lab Watch Rival Exit", 0x07, 'OaksLabPlayerWatchRivalExitScript', 0x4E6D, 'OaksLabPlayerWatchRivalExitEnd', 0x4EB0),
+    ("Oak's Lab Rival Returns", 0x07, 'OaksLabRivalArrivesAtOaksRequestScript', 0x4EB0, 'OaksLabRivalArrivesAtRequestEnd', 0x4EFD),
+    ("Oak's Lab Rival and Oak Facing", 0x07, 'OaksLabRivalFaceUpOakFaceDownScript', 0x4EFD, 'OaksLabRivalFaceUpOakFaceDownEnd', 0x4F12),
     ('Doors and Ledges', 0x06, 'PlayerStepOutFromDoor', 0x63E0, 'DoorsAndLedgesEnd', 0x6718),
     ('Hidden Events 1', 0x07, 'OpenOaksPC', 0x6915, 'HiddenEvents1End', 0x6CC2),
     ('Battle Engine 10', 0x16, 'PrintBeginningBattleText', 0x4D99, 'BattleEngine10End', 0x50B0),
