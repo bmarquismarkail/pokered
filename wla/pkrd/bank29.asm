@@ -15,29 +15,15 @@
 .INCLUDE "wla/banks/bank29_viridian_gym_guide_text.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_object.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_blocks.asm"
-.db $02, $04, $04, $10, $40
-.db $B6, $4C, $AD, $4C, $00, $DA, $4C, $CD, $3C, $3C, $3E, $01, $EA, $0C, $CF, $C9
-.db $49, $24, $BC, $4C, $CB, $4C, $08, $21, $C6, $4C, $CD, $49, $3C, $C3, $D7, $24
-.db $17, $AC, $45, $26, $50, $08, $21, $D5, $4C, $CD, $49, $3C, $C3, $D7, $24, $17
-.db $0C, $46, $26, $50, $00, $02, $07, $03, $04, $FF, $07, $04, $04, $FF, $00, $03
-.db $26, $09, $04, $FF, $D3, $01, $04, $07, $07, $FE, $01, $02, $0C, $09, $09, $FF
-.db $FF, $03, $12, $C7, $07, $03, $13, $C7, $07, $04, $11, $09, $0F, $76, $4D, $0F
-.db $4D, $0C, $4D, $00, $15, $4D, $C3, $3C, $3C, $F4, $24, $F4, $24, $F4, $24, $7D
-.db $09, $11, $18, $06, $FF, $11, $19, $06, $FF, $01, $1B, $00, $E2, $07, $17, $01
-.db $E2, $09, $12, $02, $E2, $01, $07, $03, $E2, $03, $01, $04, $E2, $0B, $03, $05
-.db $E2, $06, $00, $00, $E3, $00, $03, $3D, $11, $0B, $FF, $FF, $81, $10, $3D, $07
-.db $17, $FF, $FF, $82, $53, $3D, $04, $09, $FF, $FF, $83, $31, $B2, $C7, $11, $18
-.db $B2, $C7, $11, $19, $0B, $C7, $01, $1B, $48, $C7, $07, $17, $5B, $C7, $09, $12
-.db $01, $C7, $01, $07, $13, $C7, $03, $01, $68, $C7, $0B, $03, $3D, $C7, $06, $00
-.db $20, $22, $14, $7C, $15, $15, $15, $15, $16, $02, $02, $14, $15, $7C, $16, $62
-.db $09, $1C, $1D, $1D, $1D, $1D, $2D, $1E, $08, $7D, $66, $1D, $1D, $1E, $02, $04
-.db $0C, $17, $02, $4E, $5F, $76, $76, $76, $76, $76, $76, $76, $76, $23, $10, $04
-.db $1F, $76, $76, $76, $76, $72, $7D, $14, $7C, $15, $71, $76, $14, $15, $15, $16
-.db $76, $14, $15, $15, $15, $7F, $18, $2C, $2D, $58, $76, $18, $3D, $2C, $1E, $76
-.db $18, $19, $74, $19, $1A, $66, $1E, $76, $76, $76, $66, $1D, $1E, $08, $76, $66
-.db $1D, $2B, $7D, $1A, $06, $0F, $5F, $14, $16, $01, $0F, $20, $22, $76, $76, $02
-.db $1C, $2D, $1E, $01, $01, $01, $18, $1A, $0A, $01, $01, $0F, $05, $05, $05, $0E
-.db $0D, $7D, $20, $22, $24, $1C, $1E, $0D, $04, $04, $4C, $40, $13, $4E, $09, $4E
+.INCLUDE "wla/banks/bank29_pewter_mart_header.asm"
+.INCLUDE "wla/banks/bank29_pewter_mart_dispatch.asm"
+.INCLUDE "wla/banks/bank29_pewter_mart_texts.asm"
+.INCLUDE "wla/banks/bank29_pewter_mart_object.asm"
+.INCLUDE "wla/banks/bank29_cerulean_cave_1f_header.asm"
+.INCLUDE "wla/banks/bank29_cerulean_cave_1f_dispatch.asm"
+.INCLUDE "wla/banks/bank29_cerulean_cave_1f_object.asm"
+.INCLUDE "wla/banks/bank29_cerulean_cave_1f_blocks.asm"
+.db $0D, $04, $04, $4C, $40, $13, $4E, $09, $4E
 .db $00, $BE, $4E, $3E, $01, $EA, $0C, $CF, $3D, $EA, $3C, $CC, $C9, $15, $4E, $08
 .db $21, $77, $4E, $CD, $49, $3C, $AF, $EA, $26, $CC, $EA, $36, $CC, $21, $7C, $4E
 .db $CD, $49, $3C, $21, $6D, $4E, $CD, $5A, $2A, $21, $7B, $CF, $7D, $EA, $8B, $CF

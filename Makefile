@@ -602,6 +602,14 @@ wla-red wla-rom: wla/banks/bank29_viridian_gym_trainer_texts.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_guide_text.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_object.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_blocks.asm maps/ViridianGym.blk
+wla-red wla-rom: wla/banks/bank29_pewter_mart_header.asm
+wla-red wla-rom: wla/banks/bank29_pewter_mart_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_pewter_mart_texts.asm
+wla-red wla-rom: wla/banks/bank29_pewter_mart_object.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_header.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_object.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_blocks.asm maps/CeruleanCave1F.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
