@@ -627,6 +627,10 @@ wla-red wla-rom: wla/banks/bank29_wardens_house_dispatch.asm
 wla-red wla-rom: wla/banks/bank29_wardens_house_text.asm
 wla-red wla-rom: wla/banks/bank29_wardens_house_object.asm
 wla-red wla-rom: wla/banks/bank29_wardens_house_blocks.asm maps/WardensHouse.blk
+wla-red wla-rom: wla/banks/bank29_safari_zone_gate_header.asm
+wla-red wla-rom: wla/banks/bank29_safari_zone_gate_entry.asm
+wla-red wla-rom: wla/banks/bank29_safari_zone_gate_default.asm
+wla-red wla-rom: wla/banks/bank29_safari_zone_gate_state_machine.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

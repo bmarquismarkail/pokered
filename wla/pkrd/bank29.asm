@@ -41,23 +41,11 @@
 .INCLUDE "wla/banks/bank29_wardens_house_text.asm"
 .INCLUDE "wla/banks/bank29_wardens_house_object.asm"
 .INCLUDE "wla/banks/bank29_wardens_house_blocks.asm"
-.db $0C, $03, $04, $25, $54
-.db $B9, $52, $CD, $51, $00, $F5, $53, $CD, $3C, $3C, $21, $D9, $51, $FA, $1F, $D6
-.db $C3, $97, $3D, $E7, $51, $26, $52, $2A, $52, $40, $52, $87, $52, $4E, $52, $95
-.db $52, $21, $21, $52, $CD, $BF, $34, $D0, $3E, $03, $E0, $8C, $CD, $20, $29, $3E
-.db $FF, $EA, $6B, $CD, $AF, $E0, $B4, $3E, $0C, $EA, $09, $C1, $FA, $3D, $CD, $FE
-.db $01, $28, $06, $3E, $02, $EA, $1F, $D6, $C9, $3E, $10, $0E, $01, $CD, $A3, $52
-.db $3E, $F0, $EA, $6B, $CD, $3E, $01, $EA, $1F, $D6, $C9, $02, $03, $02, $04, $FF
-.db $CD, $B4, $52, $C0, $AF, $E0, $B4, $EA, $6B, $CD, $CD, $29, $24, $3E, $04, $E0
-.db $8C, $CD, $20, $29, $3E, $FF, $EA, $6B, $CD, $C9, $CD, $B4, $52, $C0, $AF, $EA
-.db $6B, $CD, $3E, $05, $EA, $1F, $D6, $C9, $3E, $04, $EA, $28, $D5, $21, $90, $D7
-.db $CB, $76, $CB, $B6, $28, $23, $CB, $BE, $CD, $29, $24, $3E, $F0, $EA, $6B, $CD
-.db $3E, $06, $E0, $8C, $CD, $20, $29, $AF, $EA, $47, $DA, $3E, $80, $0E, $03, $CD
-.db $A3, $52, $3E, $04, $EA, $1F, $D6, $18, $07, $3E, $05, $E0, $8C, $CD, $20, $29
-.db $C9, $CD, $B4, $52, $C0, $AF, $EA, $6B, $CD, $3E, $00, $EA, $1F, $D6, $C9, $CD
-.db $B4, $52, $C0, $CD, $D7, $3D, $FA, $0D, $CF, $EA, $1F, $D6, $C9, $F5, $06, $00
-.db $79, $EA, $38, $CD, $21, $D3, $CC, $F1, $CD, $E0, $36, $C3, $86, $34, $FA, $38
-.db $CD, $A7, $C9, $C5, $52, $CA, $53, $C5, $52, $CA, $52, $6F, $53, $C5, $53, $17
+.INCLUDE "wla/banks/bank29_safari_zone_gate_header.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_entry.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_default.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_state_machine.asm"
+.db $C5, $52, $CA, $53, $C5, $52, $CA, $52, $6F, $53, $C5, $53, $17
 .db $C7, $66, $27, $50, $17, $E4, $66, $27, $08, $3E, $13, $EA, $25, $D1, $CD, $E8
 .db $30, $CD, $EC, $35, $FA, $26, $CC, $A7, $C2, $46, $53, $AF, $E0, $9F, $3E, $05
 .db $E0, $A0, $3E, $00, $E0, $A1, $CD, $A6, $35, $30, $08, $21, $6A, $53, $CD, $49
