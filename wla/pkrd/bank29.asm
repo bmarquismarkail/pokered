@@ -51,23 +51,12 @@
 .INCLUDE "wla/banks/bank29_safari_zone_gate_worker_texts.asm"
 .INCLUDE "wla/banks/bank29_safari_zone_gate_object.asm"
 .INCLUDE "wla/banks/bank29_safari_zone_gate_blocks.asm"
-.db $07, $09, $05, $AA, $56
-.db $D5, $54, $3D, $54, $00, $58, $56, $CD, $53, $54, $CD, $3C, $3C, $21, $EB, $54
-.db $11, $82, $54, $FA, $5B, $D6, $CD, $60, $31, $EA, $5B, $D6, $C9, $21, $26, $D1
-.db $CB, $76, $CB, $B6, $C8, $21, $65, $54, $11, $72, $54, $CD, $7F, $31, $C9, $85
-.db $94, $82, $87, $92, $88, $80, $7F, $82, $88, $93, $98, $50, $8A, $8E, $86, $80
-.db $50, $AF, $EA, $6B, $CD, $EA, $5B, $D6, $EA, $39, $DA, $C9, $19, $32, $4C, $32
-.db $75, $32, $8A, $54, $FA, $57, $D0, $FE, $FF, $CA, $77, $54, $3E, $F0, $EA, $6B
-.db $CD, $3E, $09, $E0, $8C, $CD, $20, $29, $21, $92, $D7, $CB, $CE, $01, $01, $CE
-.db $CD, $2E, $3E, $30, $0E, $3E, $0A, $E0, $8C, $CD, $20, $29, $21, $92, $D7, $CB
-.db $C6, $18, $07, $3E, $0B, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $E6, $21
-.db $2A, $D7, $CB, $E6, $FA, $92, $D7, $F6, $FC, $EA, $92, $D7, $C3, $77, $54, $34
-.db $55, $A4, $55, $BD, $55, $D6, $55, $EF, $55, $08, $56, $21, $56, $3A, $56, $90
-.db $55, $95, $55, $9F, $55, $02, $20, $92, $D7, $AE, $55, $B8, $55, $B3, $55, $B3
-.db $55, $03, $20, $92, $D7, $C7, $55, $D1, $55, $CC, $55, $CC, $55, $04, $40, $92
-.db $D7, $E0, $55, $EA, $55, $E5, $55, $E5, $55, $05, $20, $92, $D7, $F9, $55, $03
-.db $56, $FE, $55, $FE, $55, $06, $20, $92, $D7, $12, $56, $1C, $56, $17, $56, $17
-.db $56, $07, $20, $92, $D7, $2B, $56, $35, $56, $30, $56, $30, $56, $FF, $08, $FA
+.INCLUDE "wla/banks/bank29_fuchsia_gym_header.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_gym_entry.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_gym_reset_tables.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_gym_post_battle.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_gym_tables.asm"
+.db $08, $FA
 .db $92, $D7, $CB, $4F, $28, $14, $CB, $47, $20, $08, $CC, $97, $54, $CD, $B6, $30
 .db $18, $36, $21, $8B, $55, $CD, $49, $3C, $18, $2E, $21, $81, $55, $CD, $49, $3C
 .db $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $86, $55, $11, $86, $55, $CD, $54, $33
