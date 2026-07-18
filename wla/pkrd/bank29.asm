@@ -116,4 +116,10 @@
 .INCLUDE "wla/banks/bank29_agathas_room_texts.asm"
 .INCLUDE "wla/banks/bank29_agathas_room_map_data.asm"
 .INCLUDE "wla/banks/bank29_itemfinder_2.asm"
-.dsb 6021, $00
+
+; Itemfinder 2 ends at $7687B; preserve the bank's free space.
+Bank29Padding:
+.DSB $4000 - $287B, $00
+
+Bank29End:
+.ASSERT Bank29End - Bank29Padding == $1785
