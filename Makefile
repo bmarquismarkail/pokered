@@ -661,6 +661,22 @@ wla-red wla-rom: wla/banks/bank29_cinnabar_gym_post_battle.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_battle_tables.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_blaine_text.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_trainer_texts.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_gym_guide_text.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_gym_object.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_gym_blocks.asm maps/CinnabarGym.blk
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_header.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_script.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_object.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_blocks.asm maps/CinnabarLab.blk
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_trade_room_header.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_trade_room_script.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_trade_room_object.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_trade_room_blocks.asm maps/CinnabarLabTradeRoom.blk
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_header.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_script.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_object.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_blocks.asm maps/CinnabarLabMetronomeRoom.blk
+wla-red wla-rom: wla/banks/bank29_cinnabar_lab_fossil_room.asm maps/CinnabarLabFossilRoom.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
