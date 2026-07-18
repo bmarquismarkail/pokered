@@ -598,6 +598,10 @@ wla-red wla-rom: wla/banks/bank29_viridian_gym_spinner_runtime.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_post_battle.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_tables.asm
 wla-red wla-rom: wla/banks/bank29_viridian_gym_giovanni_text.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_trainer_texts.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_guide_text.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_object.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_blocks.asm maps/ViridianGym.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
