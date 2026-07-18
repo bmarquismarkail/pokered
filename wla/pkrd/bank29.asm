@@ -61,13 +61,12 @@
 .INCLUDE "wla/banks/bank29_fuchsia_gym_guide_text.asm"
 .INCLUDE "wla/banks/bank29_fuchsia_gym_object.asm"
 .INCLUDE "wla/banks/bank29_fuchsia_gym_blocks.asm"
-.db $14, $04, $07, $22, $57, $E7, $56, $E3, $56, $00, $FC, $56, $CD, $3C, $3C
-.db $C9, $ED, $56, $F2, $56, $F7, $56, $17, $A1, $45, $28, $50, $17, $E6, $45, $28
-.db $50, $17, $42, $46, $28, $50, $17, $02, $07, $04, $06, $FF, $07, $05, $06, $FF
-.db $00, $03, $23, $05, $08, $FF, $D0, $01, $23, $06, $04, $FF, $D1, $02, $23, $05
-.db $0E, $FF, $D0, $03, $1F, $C7, $07, $04, $1F, $C7, $07, $05, $06, $06, $01, $03
-.db $01, $35, $01, $07, $07, $38, $39, $07, $0F, $07, $34, $07, $36, $37, $37, $37
-.db $37, $0D, $07, $0C, $07, $07, $07, $0E, $16, $09, $0A, $26, $5B, $9F, $58, $4A
+.INCLUDE "wla/banks/bank29_fuchsia_meeting_room_header.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_meeting_room_dispatch.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_meeting_room_texts.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_meeting_room_object.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_meeting_room_blocks.asm"
+.db $16, $09, $0A, $26, $5B, $9F, $58, $4A
 .db $57, $00, $CC, $5A, $CD, $59, $57, $CD, $3C, $3C, $21, $A6, $57, $FA, $5E, $D6
 .db $C3, $97, $3D, $21, $26, $D1, $CB, $76, $CB, $B6, $E5, $C4, $72, $57, $E1, $CB
 .db $6E, $CB, $AE, $C4, $AD, $3E, $21, $9B, $D7, $CB, $BE, $C9, $21, $7B, $57, $11

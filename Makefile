@@ -647,6 +647,11 @@ wla-red wla-rom: wla/banks/bank29_fuchsia_gym_trainer_texts.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_gym_guide_text.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_gym_object.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_gym_blocks.asm maps/FuchsiaGym.blk
+wla-red wla-rom: wla/banks/bank29_fuchsia_meeting_room_header.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_meeting_room_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_meeting_room_texts.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_meeting_room_object.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_meeting_room_blocks.asm maps/FuchsiaMeetingRoom.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
