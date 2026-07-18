@@ -1,17 +1,17 @@
 LoreleisRoom_h:
 	.DB $07,$06,$05
-	.DW $62AC ; LoreleisRoom_Blocks
-	.DW $6251 ; LoreleisRoom_TextPointers
+	.DW LoreleisRoom_Blocks
+	.DW LoreleisRoom_TextPointers
 	.DW LoreleisRoom_Script
 	.DB $00
-	.DW $6280 ; LoreleisRoom_Object
+	.DW LoreleisRoom_Object
 LoreleisRoomHeaderEnd:
 .ASSERT LoreleisRoomHeaderEnd - LoreleisRoom_h == 12
 
 LoreleisRoom_Script:
 	CALL LoreleiShowOrHideExitBlock
 	CALL $3C3C ; EnableAutoTextBoxDrawing
-	LD HL, $6255 ; LoreleisRoomTrainerHeaders
+	LD HL, LoreleisRoomTrainerHeaders
 	LD DE, LoreleisRoom_ScriptPointers
 	LD A, ($D64D) ; wLoreleisRoomCurScript
 	CALL $3160 ; ExecuteCurMapScriptInTable
@@ -50,7 +50,8 @@ ResetLoreleiScriptEnd:
 .ASSERT ResetLoreleiScriptEnd - ResetLoreleiScript == 5
 
 LoreleisRoom_ScriptPointers:
-	.DW $61E2,$324C,$623F,$622C,LoreleisRoomNoopScript
+	.DW LoreleisRoomDefaultScript,$324C,LoreleisRoomLoreleiEndBattleScript
+	.DW LoreleisRoomPlayerIsMovingScript,LoreleisRoomNoopScript
 LoreleisRoomScriptPointersEnd:
 .ASSERT LoreleisRoomScriptPointersEnd - LoreleisRoom_ScriptPointers == 10
 

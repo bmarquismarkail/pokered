@@ -104,23 +104,9 @@
 .INCLUDE "wla/banks/bank29_champions_room_texts.asm"
 .INCLUDE "wla/banks/bank29_champions_room_map_data.asm"
 .INCLUDE "wla/banks/bank29_loreleis_room_entry.asm"
-.db $21, $D3, $CC, $3E
-.db $40, $22, $22, $22, $22, $22, $77, $3E, $06, $EA, $38, $CD, $CD, $86, $34, $3E
-.db $03, $EA, $4D, $D6, $EA, $39, $DA, $C9, $21, $23, $62, $CD, $BF, $34, $D2, $19
-.db $32, $AF, $E0, $B3, $E0, $B4, $EA, $D3, $CC, $EA, $38, $CD, $FA, $3D, $CD, $FE
-.db $03, $38, $09, $21, $63, $D8, $CB, $76, $CB, $F6, $28, $C0, $3E, $02, $E0, $8C
-.db $CD, $20, $29, $3E, $40, $EA, $D3, $CC, $3E, $01, $EA, $38, $CD, $CD, $86, $34
-.db $3E, $03, $EA, $4D, $D6, $EA, $39, $DA, $C9, $0A, $04, $0A, $05, $0B, $04, $0B
-.db $05, $FF, $FA, $38, $CD, $A7, $C0, $CD, $D7, $3D, $AF, $EA, $6B, $CD, $EA, $4D
-.db $D6, $EA, $39, $DA, $C9, $CD, $75, $32, $FA, $57, $D0, $FE, $FF, $CA, $B6, $61
-.db $3E, $01, $E0, $8C, $C3, $20, $29, $62, $62, $7B, $62, $01, $00, $63, $D8, $6C
-.db $62, $76, $62, $71, $62, $71, $62, $FF, $08, $21, $55, $62, $CD, $CC, $31, $C3
-.db $D7, $24, $17, $EF, $65, $21, $50, $17, $C4, $66, $21, $50, $17, $D3, $66, $21
-.db $50, $17, $29, $67, $21, $50, $03, $04, $0B, $04, $02, $AE, $0B, $05, $02, $AE
-.db $00, $04, $00, $F6, $00, $05, $01, $F6, $00, $01, $3B, $06, $09, $FF, $D0, $41
-.db $F4, $01, $2D, $C7, $0B, $04, $2D, $C7, $0B, $05, $F6, $C6, $00, $04, $F6, $C6
-.db $00, $05, $21, $21, $24, $21, $21, $02, $18, $18, $18, $02, $02, $18, $18, $18
-.db $02, $02, $20, $05, $20, $02, $02, $1A, $05, $02, $02, $02, $44, $05, $44, $02
+.INCLUDE "wla/banks/bank29_loreleis_room_battle_control.asm"
+.INCLUDE "wla/banks/bank29_loreleis_room_texts.asm"
+.INCLUDE "wla/banks/bank29_loreleis_room_map_data.asm"
 .db $07, $06, $05, $03, $64, $A8, $63, $D6, $62, $00, $D7, $63, $CD, $EC, $62, $CD
 .db $3C, $3C, $21, $AC, $63, $11, $12, $63, $FA, $4E, $D6, $CD, $60, $31, $EA, $4E
 .db $D6, $C9, $21, $26, $D1, $CB, $6E, $CB, $AE, $C8, $FA, $64, $D8, $CB, $4F, $28
