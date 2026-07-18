@@ -677,6 +677,12 @@ wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_script.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_object.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_lab_metronome_room_blocks.asm maps/CinnabarLabMetronomeRoom.blk
 wla-red wla-rom: wla/banks/bank29_cinnabar_lab_fossil_room.asm maps/CinnabarLabFossilRoom.blk
+wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_header.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_texts.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_object.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_mart.asm
+wla-red wla-rom: wla/banks/bank29_copycats_house_1f.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

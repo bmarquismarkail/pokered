@@ -91,22 +91,13 @@
 .INCLUDE "wla/banks/bank29_cinnabar_lab_metronome_room_object.asm"
 .INCLUDE "wla/banks/bank29_cinnabar_lab_metronome_room_blocks.asm"
 .INCLUDE "wla/banks/bank29_cinnabar_lab_fossil_room.asm"
-.db $06, $04, $07, $30, $40, $32, $5E, $2C, $5E, $00
-.db $46, $5E, $CD, $FA, $22, $C3, $3C, $3C, $3A, $5E, $3B, $5E, $40, $5E, $45, $5E
-.db $FF, $17, $DE, $52, $28, $50, $17, $3E, $53, $28, $50, $F6, $00, $02, $07, $03
-.db $03, $FF, $07, $04, $03, $FF, $00, $04, $29, $05, $07, $FF, $D0, $01, $06, $08
-.db $0D, $FE, $00, $02, $10, $0A, $06, $FF, $FF, $03, $2A, $06, $0F, $FF, $D0, $04
-.db $1E, $C7, $07, $03, $1F, $C7, $07, $04, $02, $04, $04, $10, $40, $81, $5E, $7E
-.db $5E, $00, $91, $5E, $C3, $3C, $3C, $B9, $24, $87, $5E, $8C, $5E, $17, $9B, $53
-.db $28, $50, $17, $CB, $53, $28, $50, $00, $02, $07, $03, $04, $FF, $07, $04, $04
-.db $FF, $00, $03, $26, $09, $04, $FF, $D3, $01, $1B, $06, $0A, $FF, $FF, $02, $20
-.db $08, $07, $FF, $FF, $03, $12, $C7, $07, $03, $13, $C7, $07, $04, $01, $04, $04
-.db $00, $40, $C6, $5E, $C3, $5E, $00, $E3, $5E, $C3, $3C, $3C, $CC, $5E, $D1, $5E
-.db $D6, $5E, $17, $F7, $54, $28, $50, $17, $35, $55, $28, $50, $17, $96, $55, $28
-.db $08, $3E, $28, $CD, $D0, $13, $C3, $D7, $24, $0A, $03, $07, $02, $00, $FF, $07
-.db $03, $00, $FF, $01, $07, $00, $B0, $00, $03, $1C, $06, $06, $FF, $D0, $01, $0A
-.db $08, $09, $FF, $D2, $02, $38, $08, $05, $FE, $01, $03, $12, $C7, $07, $02, $12
-.db $C7, $07, $03, $F6, $C6, $01, $07, $07, $04, $04, $5F, $61, $D6, $60, $1D, $5F
+.INCLUDE "wla/banks/bank29_cinnabar_pokecenter_header.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_pokecenter_dispatch.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_pokecenter_texts.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_pokecenter_object.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_mart.asm"
+.INCLUDE "wla/banks/bank29_copycats_house_1f.asm"
+.db $07, $04, $04, $5F, $61, $D6, $60, $1D, $5F
 .db $00, $2F, $61, $CD, $3C, $3C, $21, $31, $5F, $FA, $4C, $D6, $C3, $97, $3D, $AF
 .db $EA, $6B, $CD, $EA, $4C, $D6, $C9, $47, $5F, $48, $5F, $6A, $5F, $BB, $5F, $E4
 .db $5F, $1A, $60, $47, $60, $5F, $60, $83, $60, $99, $60, $B9, $60, $C9, $3E, $FF
