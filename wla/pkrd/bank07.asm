@@ -16,18 +16,10 @@
 .INCLUDE "wla/banks/bank07_oaks_lab_rival_gets_starter.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_rival_challenge.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_rival_battle_setup.asm"
-.db $3E, $F0, $EA, $6B, $CD, $3E, $08, $EA, $28, $D5, $CD
-.db $29, $24, $3E, $01, $EA, $13, $CF, $CD, $F9, $32, $3E, $01, $E0, $8C, $AF, $E0
-.db $8D, $CD, $A6, $34, $3E, $07, $CD, $6D, $3E, $21, $4B, $D7, $CB, $DE, $3E, $0D
-.db $EA, $F0, $D5, $C9, $0E, $14, $CD, $39, $37, $3E, $10, $E0, $8C, $CD, $20, $29
-.db $06, $02, $21, $47, $5B, $CD, $D6, $35, $3E, $01, $E0, $8C, $11, $66, $4E, $CD
-.db $3A, $36, $FA, $62, $D3, $FE, $04, $20, $04, $3E, $C0, $18, $02, $3E, $80, $EA
-.db $5B, $CC, $3E, $0E, $EA, $F0, $D5, $C9, $E0, $00, $00, $00, $00, $00, $FF, $FA
-.db $30, $D7, $CB, $47, $20, $18, $3E, $2A, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E
-.db $AF, $EA, $6B, $CD, $CD, $07, $23, $3E, $12, $EA, $F0, $D5, $18, $23, $FA, $0F
-.db $CF, $FE, $05, $20, $15, $FA, $62, $D3, $FE, $04, $20, $07, $3E, $0C, $EA, $09
-.db $C1, $18, $0E, $3E, $08, $EA, $09, $C1, $18, $07, $FE, $04, $C0, $AF, $EA, $09
-.db $C1, $C9, $AF, $E0, $B4, $CD, $3C, $3C, $3E, $FF, $EA, $EE, $C0, $CD, $B1, $23
+.INCLUDE "wla/banks/bank07_oaks_lab_rival_post_battle.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_rival_exit.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_watch_rival_exit.asm"
+.db $AF, $E0, $B4, $CD, $3C, $3C, $3E, $FF, $EA, $EE, $C0, $CD, $B1, $23
 .db $06, $02, $21, $47, $5B, $CD, $D6, $35, $3E, $15, $E0, $8C, $CD, $20, $29, $CD
 .db $2B, $50, $3E, $2A, $EA, $4D, $CC, $3E, $15, $CD, $6D, $3E, $FA, $37, $CD, $EA
 .db $57, $D1, $06, $00, $4F, $21, $97, $CC, $3E, $40, $CD, $E0, $36, $36, $FF, $3E

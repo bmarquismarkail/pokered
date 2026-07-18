@@ -437,6 +437,9 @@ wla-red wla-rom: wla/banks/bank07_oaks_lab_starter_movement.asm
 wla-red wla-rom: wla/banks/bank07_oaks_lab_rival_gets_starter.asm
 wla-red wla-rom: wla/banks/bank07_oaks_lab_rival_challenge.asm
 wla-red wla-rom: wla/banks/bank07_oaks_lab_rival_battle_setup.asm
+wla-red wla-rom: wla/banks/bank07_oaks_lab_rival_post_battle.asm
+wla-red wla-rom: wla/banks/bank07_oaks_lab_rival_exit.asm
+wla-red wla-rom: wla/banks/bank07_oaks_lab_watch_rival_exit.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_header.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script_pointers.asm
