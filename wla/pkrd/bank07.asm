@@ -13,23 +13,10 @@
 .INCLUDE "wla/banks/bank07_oaks_lab_choose_mon_intro.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_walkback.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_starter_movement.asm"
-.db $FA, $30, $D7, $CB, $47, $C0, $3E, $FC, $EA, $6B, $CD, $3E, $01, $E0
-.db $8C, $3E, $04, $E0, $8D, $CD, $A6, $34, $3E, $0D, $E0, $8C, $CD, $20, $29, $FA
-.db $3E, $CD, $FE, $02, $20, $04, $3E, $2B, $18, $0A, $FE, $03, $20, $04, $3E, $2C
-.db $18, $02, $3E, $2D, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $CD, $D7, $3D, $FA
-.db $3D, $CD, $EA, $15, $D7, $EA, $91, $CF, $EA, $1E, $D1, $CD, $9E, $2F, $3E, $01
-.db $E0, $8C, $3E, $04, $E0, $8D, $CD, $A6, $34, $3E, $0E, $E0, $8C, $CD, $20, $29
-.db $21, $4B, $D7, $CB, $D6, $AF, $EA, $6B, $CD, $3E, $0A, $EA, $F0, $D5, $C9, $FA
-.db $61, $D3, $FE, $06, $C0, $3E, $01, $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34, $3E
-.db $08, $EA, $28, $D5, $0E, $02, $3E, $DE, $CD, $A1, $23, $3E, $0F, $E0, $8C, $CD
-.db $20, $29, $3E, $01, $E0, $9B, $3E, $01, $CB, $37, $E0, $95, $3E, $22, $CD, $6D
-.db $3E, $F0, $95, $3D, $E0, $95, $3E, $20, $CD, $6D, $3E, $11, $97, $CC, $3E, $01
-.db $E0, $8C, $CD, $3A, $36, $3E, $0B, $EA, $F0, $D5, $C9, $FA, $30, $D7, $CB, $47
-.db $C0, $3E, $E1, $EA, $59, $D0, $FA, $15, $D7, $FE, $B1, $20, $04, $3E, $01, $18
-.db $0A, $FE, $99, $20, $04, $3E, $02, $18, $02, $3E, $03, $EA, $5D, $D0, $3E, $01
-.db $EA, $13, $CF, $CD, $EF, $32, $21, $BE, $53, $11, $C3, $53, $CD, $54, $33, $21
-.db $2D, $D7, $CB, $F6, $CB, $FE, $AF, $EA, $6B, $CD, $3E, $08, $EA, $28, $D5, $3E
-.db $0C, $EA, $F0, $D5, $C9, $3E, $F0, $EA, $6B, $CD, $3E, $08, $EA, $28, $D5, $CD
+.INCLUDE "wla/banks/bank07_oaks_lab_rival_gets_starter.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_rival_challenge.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_rival_battle_setup.asm"
+.db $3E, $F0, $EA, $6B, $CD, $3E, $08, $EA, $28, $D5, $CD
 .db $29, $24, $3E, $01, $EA, $13, $CF, $CD, $F9, $32, $3E, $01, $E0, $8C, $AF, $E0
 .db $8D, $CD, $A6, $34, $3E, $07, $CD, $6D, $3E, $21, $4B, $D7, $CB, $DE, $3E, $0D
 .db $EA, $F0, $D5, $C9, $0E, $14, $CD, $39, $37, $3E, $10, $E0, $8C, $CD, $20, $29
