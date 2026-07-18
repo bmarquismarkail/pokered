@@ -4,23 +4,10 @@
 ; Data from 74000 to 77FFF (16384 bytes)
 .INCLUDE "wla/banks/bank29_maps_19.asm"
 .INCLUDE "wla/banks/bank29_itemfinder_1.asm"
-.db $CD, $EF, $20, $3E
-.db $07, $EA, $4D, $CC, $3E, $15, $CD, $6D, $3E, $3E, $09, $EA, $4D, $CC, $3E, $11
-.db $CD, $6D, $3E, $3E, $06, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $CD, $D1, $20
-.db $C9, $07, $09, $0A, $47, $4C, $EC, $49, $A3, $48, $00, $DE, $4B, $21, $BF, $48
-.db $11, $CD, $48, $CD, $7F, $31, $CD, $3C, $3C, $21, $08, $4A, $11, $E1, $48, $FA
-.db $FB, $D5, $CD, $60, $31, $EA, $FB, $D5, $C9, $95, $88, $91, $88, $83, $88, $80
-.db $8D, $7F, $82, $88, $93, $98, $50, $86, $88, $8E, $95, $80, $8D, $8D, $88, $50
-.db $AF, $EA, $6B, $CD, $EA, $FB, $D5, $EA, $39, $DA, $C9, $EB, $48, $4C, $32, $75
-.db $32, $88, $49, $6B, $49, $FA, $61, $D3, $47, $FA, $62, $D3, $4F, $21, $16, $49
-.db $CD, $42, $34, $FE, $FF, $CA, $19, $32, $CD, $86, $34, $21, $36, $D7, $CB, $FE
-.db $3E, $A7, $CD, $B1, $23, $3E, $FF, $EA, $6B, $CD, $3E, $04, $EA, $39, $DA, $C9
-.db $0B, $13, $47, $49, $01, $13, $4A, $49, $02, $12, $4D, $49, $02, $0B, $50, $49
-.db $0A, $10, $53, $49, $06, $04, $56, $49, $0D, $05, $59, $49, $0E, $04, $5C, $49
-.db $0F, $00, $5F, $49, $0F, $01, $62, $49, $10, $0D, $65, $49, $11, $0D, $68, $49
-.db $FF, $40, $09, $FF, $20, $08, $FF, $80, $09, $FF, $10, $06, $FF, $80, $02, $FF
-.db $80, $07, $FF, $10, $08, $FF, $10, $09, $FF, $40, $08, $FF, $40, $06, $FF, $20
-.db $06, $FF, $20, $0C, $FF, $FA, $38, $CD, $A7, $20, $0F, $AF, $EA, $6B, $CD, $21
+.INCLUDE "wla/banks/bank29_cerulean_hide_rocket.asm"
+.INCLUDE "wla/banks/bank29_viridian_gym_entry.asm"
+.INCLUDE "wla/banks/bank29_viridian_gym_spinner_tables.asm"
+.db $FA, $38, $CD, $A7, $20, $0F, $AF, $EA, $6B, $CD, $21
 .db $36, $D7, $CB, $BE, $3E, $00, $EA, $39, $DA, $C9, $06, $11, $21, $D7, $4F, $C3
 .db $D6, $35, $FA, $57, $D0, $FE, $FF, $CA, $D6, $48, $3E, $F0, $EA, $6B, $CD, $3E
 .db $0C, $E0, $8C, $CD, $20, $29, $21, $51, $D7, $CB, $CE, $01, $01, $E3, $CD, $2E

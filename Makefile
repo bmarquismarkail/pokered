@@ -591,6 +591,9 @@ wla-red wla-rom: wla/banks/bank13_slot_rewards_small.asm
 wla-red wla-rom: wla/banks/bank13_slot_reward_100.asm
 wla-red wla-rom: wla/banks/bank13_slot_reward_text.asm
 wla-red wla-rom: wla/banks/bank13_check_for_match.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_hide_rocket.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_entry.asm
+wla-red wla-rom: wla/banks/bank29_viridian_gym_spinner_tables.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
