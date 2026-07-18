@@ -683,6 +683,9 @@ wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_texts.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_pokecenter_object.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_mart.asm
 wla-red wla-rom: wla/banks/bank29_copycats_house_1f.asm
+wla-red wla-rom: wla/banks/bank29_champions_room_entry.asm
+wla-red wla-rom: wla/banks/bank29_champions_room_rival_ready.asm
+wla-red wla-rom: wla/banks/bank29_champions_room_post_battle.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

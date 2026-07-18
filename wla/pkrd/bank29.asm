@@ -97,23 +97,9 @@
 .INCLUDE "wla/banks/bank29_cinnabar_pokecenter_object.asm"
 .INCLUDE "wla/banks/bank29_cinnabar_mart.asm"
 .INCLUDE "wla/banks/bank29_copycats_house_1f.asm"
-.db $07, $04, $04, $5F, $61, $D6, $60, $1D, $5F
-.db $00, $2F, $61, $CD, $3C, $3C, $21, $31, $5F, $FA, $4C, $D6, $C3, $97, $3D, $AF
-.db $EA, $6B, $CD, $EA, $4C, $D6, $C9, $47, $5F, $48, $5F, $6A, $5F, $BB, $5F, $E4
-.db $5F, $1A, $60, $47, $60, $5F, $60, $83, $60, $99, $60, $B9, $60, $C9, $3E, $FF
-.db $EA, $6B, $CD, $21, $D3, $CC, $11, $63, $5F, $CD, $0C, $35, $3D, $EA, $38, $CD
-.db $CD, $86, $34, $3E, $02, $EA, $4C, $D6, $C9, $40, $01, $10, $01, $40, $03, $FF
-.db $FA, $38, $CD, $A7, $C0, $CD, $D7, $3D, $AF, $EA, $6B, $CD, $21, $55, $D3, $CB
-.db $BE, $3E, $01, $E0, $8C, $CD, $20, $29, $CD, $D7, $3D, $21, $2D, $D7, $CB, $F6
-.db $CB, $FE, $21, $F9, $60, $11, $FE, $60, $CD, $54, $33, $3E, $F3, $EA, $59, $D0
-.db $FA, $15, $D7, $FE, $B1, $20, $04, $3E, $01, $18, $0A, $FE, $99, $20, $04, $3E
-.db $02, $18, $02, $3E, $03, $EA, $5D, $D0, $AF, $E0, $B4, $3E, $03, $EA, $4C, $D6
-.db $C9, $FA, $57, $D0, $FE, $FF, $CA, $29, $5F, $CD, $29, $24, $21, $67, $D8, $CB
-.db $CE, $3E, $F0, $EA, $6B, $CD, $3E, $01, $E0, $8C, $CD, $C8, $60, $3E, $01, $E0
-.db $8C, $CD, $41, $35, $3E, $04, $EA, $4C, $D6, $C9, $06, $02, $21, $81, $5B, $CD
-.db $D6, $35, $3E, $02, $E0, $8C, $CD, $C8, $60, $3E, $02, $E0, $8C, $CD, $41, $35
-.db $11, $14, $60, $3E, $02, $E0, $8C, $CD, $3A, $36, $3E, $D6, $EA, $4D, $CC, $3E
-.db $15, $CD, $6D, $3E, $3E, $05, $EA, $4C, $D6, $C9, $40, $40, $40, $40, $40, $FF
+.INCLUDE "wla/banks/bank29_champions_room_entry.asm"
+.INCLUDE "wla/banks/bank29_champions_room_rival_ready.asm"
+.INCLUDE "wla/banks/bank29_champions_room_post_battle.asm"
 .db $FA, $30, $D7, $CB, $47, $C0, $3E, $02, $EA, $28, $D5, $3E, $01, $E0, $8C, $3E
 .db $08, $E0, $8D, $CD, $A6, $34, $3E, $02, $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34
 .db $3E, $03, $E0, $8C, $CD, $C8, $60, $3E, $06, $EA, $4C, $D6, $C9, $3E, $02, $E0
