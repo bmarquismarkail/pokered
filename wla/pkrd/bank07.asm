@@ -8,17 +8,9 @@
 .INCLUDE "wla/banks/bank07_pokemon_names.asm"
 .INCLUDE "wla/banks/bank07_cinnabar_island_script.asm"
 .INCLUDE "wla/banks/bank07_route1_script.asm"
-.db $05, $06, $05, $C0, $41, $82, $50, $0E, $4B, $00, $0A, $54
-.db $FA, $4B, $D7, $CB, $77, $C4, $76, $50, $3E, $01, $EA, $0C, $CF, $AF, $EA, $3C
-.db $CC, $21, $28, $4B, $FA, $F0, $D5, $C3, $97, $3D, $4E, $4B, $6E, $4B, $82, $4B
-.db $A2, $4B, $D2, $4B, $FD, $4B, $36, $4C, $72, $4C, $80, $4C, $00, $4D, $6D, $4D
-.db $B9, $4D, $03, $4E, $32, $4E, $6D, $4E, $B0, $4E, $12, $4F, $D4, $4F, $09, $50
-.db $FA, $4B, $D7, $CB, $7F, $C8, $FA, $10, $CF, $A7, $C0, $3E, $31, $EA, $4D, $CC
-.db $3E, $15, $CD, $6D, $3E, $21, $2E, $D7, $CB, $A6, $3E, $01, $EA, $F0, $D5, $C9
-.db $3E, $08, $E0, $8C, $11, $7E, $4B, $CD, $3A, $36, $3E, $02, $EA, $F0, $D5, $C9
-.db $40, $40, $40, $FF, $FA, $30, $D7, $CB, $47, $C0, $3E, $31, $EA, $4D, $CC, $3E
-.db $11, $CD, $6D, $3E, $3E, $2E, $EA, $4D, $CC, $3E, $15, $CD, $6D, $3E, $3E, $03
-.db $EA, $F0, $D5, $C9, $CD, $D7, $3D, $21, $D3, $CC, $11, $CF, $4B, $CD, $0C, $35
+.INCLUDE "wla/banks/bank07_oaks_lab_entry.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_activation.asm"
+.db $CD, $D7, $3D, $21, $D3, $CC, $11, $CF, $4B, $CD, $0C, $35
 .db $3D, $EA, $38, $CD, $CD, $86, $34, $3E, $01, $E0, $8C, $AF, $E0, $8D, $CD, $A6
 .db $34, $3E, $05, $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34, $3E, $04, $EA, $F0, $D5
 .db $C9, $40, $08, $FF, $FA, $38, $CD, $A7, $C0, $21, $47, $D7, $CB, $C6, $21, $4B

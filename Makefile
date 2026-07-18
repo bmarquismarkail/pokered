@@ -429,6 +429,8 @@ wla-unit-poc:
 # only after their linked boundaries and full-ROM parity have been verified.
 wla-red wla-rom: wla/banks/bank07_cinnabar_island_script.asm
 wla-red wla-rom: wla/banks/bank07_route1_script.asm
+wla-red wla-rom: wla/banks/bank07_oaks_lab_entry.asm
+wla-red wla-rom: wla/banks/bank07_oaks_lab_activation.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_header.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script.asm
 wla-red wla-rom: wla/banks/bank23_museum_1f_script_pointers.asm
