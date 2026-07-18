@@ -552,6 +552,11 @@ wla-red wla-rom: wla/banks/bank23_silph_co_9f_trainer_handlers.asm
 wla-red wla-rom: wla/banks/bank23_silph_co_9f_trainer_records.asm
 wla-red wla-rom: wla/banks/bank23_silph_co_9f_object.asm
 wla-red wla-rom: wla/banks/bank23_silph_co_9f_blocks.asm maps/SilphCo9F.blk
+wla-red wla-rom: wla/banks/bank23_victory_road_1f_entry.asm
+wla-red wla-rom: wla/banks/bank23_victory_road_1f_tables.asm
+wla-red wla-rom: wla/banks/bank23_victory_road_1f_text.asm
+wla-red wla-rom: wla/banks/bank23_victory_road_1f_object.asm
+wla-red wla-rom: wla/banks/bank23_victory_road_1f_blocks.asm maps/VictoryRoad1F.blk
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm

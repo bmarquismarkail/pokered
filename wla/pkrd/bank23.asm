@@ -153,28 +153,10 @@
 .INCLUDE "wla/banks/bank23_silph_co_9f_trainer_records.asm"
 .INCLUDE "wla/banks/bank23_silph_co_9f_object.asm"
 .INCLUDE "wla/banks/bank23_silph_co_9f_blocks.asm"
-.db $11, $09, $0A, $04, $5B, $5F, $5A, $0A, $5A, $00, $B8, $5A
-.db $21, $26, $D1, $CB, $6E, $CB, $AE, $C4, $27, $5A, $CD, $3C, $3C, $21, $6D, $5A
-.db $11, $3A, $5A, $FA, $51, $D6, $CD, $60, $31, $EA, $51, $D6, $C9, $FA, $69, $D8
-.db $CB, $7F, $C8, $3E, $1D, $EA, $9F, $D0, $01, $04, $06, $3E, $17, $C3, $6D, $3E
-.db $40, $5A, $4C, $32, $75, $32, $FA, $69, $D8, $CB, $7F, $C2, $19, $32, $21, $5C
-.db $5A, $CD, $E4, $34, $D2, $19, $32, $21, $26, $D1, $CB, $EE, $21, $69, $D8, $CB
-.db $FE, $C9, $0D, $11, $FF, $86, $5A, $90, $5A, $F4, $24, $F4, $24, $E5, $24, $E5
-.db $24, $E5, $24, $01, $20, $69, $D8, $9A, $5A, $A4, $5A, $9F, $5A, $9F, $5A, $02
-.db $20, $69, $D8, $A9, $5A, $B3, $5A, $AE, $5A, $AE, $5A, $FF, $08, $21, $6D, $5A
-.db $CD, $CC, $31, $C3, $D7, $24, $08, $21, $79, $5A, $CD, $CC, $31, $C3, $D7, $24
-.db $17, $79, $5C, $21, $50, $17, $A2, $5C, $21, $50, $17, $AF, $5C, $21, $50, $17
-.db $D3, $5C, $21, $50, $17, $07, $5D, $21, $50, $17, $1A, $5D, $21, $50, $7D, $03
-.db $11, $08, $02, $FF, $11, $09, $02, $FF, $01, $01, $00, $C2, $00, $07, $06, $09
-.db $0B, $FF, $D3, $41, $E8, $05, $07, $06, $07, $FF, $D0, $42, $E7, $05, $3D, $04
-.db $0F, $FF, $FF, $83, $F3, $3D, $06, $0D, $FF, $FF, $84, $28, $3F, $13, $09, $FF
-.db $10, $05, $3F, $06, $12, $FF, $10, $06, $3F, $0E, $06, $FF, $10, $07, $7D, $C7
-.db $11, $08, $7D, $C7, $11, $09, $F9, $C6, $01, $01, $62, $05, $7D, $7D, $4E, $6D
-.db $74, $0C, $09, $7D, $4D, $01, $7A, $7D, $0A, $0C, $0D, $01, $01, $7A, $06, $01
-.db $14, $15, $15, $15, $15, $15, $16, $01, $7D, $01, $1C, $2D, $1D, $2B, $2C, $2D
-.db $1E, $01, $7D, $0E, $6A, $5B, $6F, $18, $1A, $4C, $01, $0D, $4D, $0F, $18, $19
-.db $70, $18, $1A, $4F, $05, $72, $0E, $0D, $66, $1D, $25, $1D, $1E, $0D, $6C, $74
-.db $0C, $05, $01, $08, $01, $5E, $01, $01, $07, $7D, $53, $04, $04, $01, $24, $7D
-.db $04, $51, $7D, $7D
+.INCLUDE "wla/banks/bank23_victory_road_1f_entry.asm"
+.INCLUDE "wla/banks/bank23_victory_road_1f_tables.asm"
+.INCLUDE "wla/banks/bank23_victory_road_1f_text.asm"
+.INCLUDE "wla/banks/bank23_victory_road_1f_object.asm"
+.INCLUDE "wla/banks/bank23_victory_road_1f_blocks.asm"
 .INCLUDE "wla/banks/bank23_hidden_events_3.asm"
 .dsb 8427, $00
