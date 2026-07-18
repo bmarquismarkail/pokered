@@ -143,12 +143,8 @@
 .INCLUDE "wla/banks/bank23_underground_path_route5.asm"
 .INCLUDE "wla/banks/bank23_underground_path_route6.asm"
 .INCLUDE "wla/banks/bank23_underground_path_route7.asm"
-.db $0C, $04, $04, $80, $40, $6F, $57, $69, $57, $00, $87, $57, $3E
-.db $12, $EA, $65, $D3, $C9, $73, $57, $7D, $57, $17, $32, $41, $23, $50, $17, $95
-.db $41, $23, $50, $17, $C8, $41, $23, $50, $17, $09, $42, $23, $50, $0A, $03, $07
-.db $03, $05, $FF, $07, $04, $05, $FF, $04, $04, $00, $79, $00, $02, $0D, $06, $07
-.db $FF, $FF, $01, $0A, $08, $06, $FF, $FF, $02, $12, $C7, $07, $03, $13, $C7, $07
-.db $04, $09, $C7, $04, $04, $16, $09, $0D, $89, $59, $8B, $58, $BB, $57, $00, $3F
+.INCLUDE "wla/banks/bank23_underground_path_route7_copy.asm"
+.db $16, $09, $0D, $89, $59, $8B, $58, $BB, $57, $00, $3F
 .db $59, $CD, $D1, $57, $CD, $3C, $3C, $21, $93, $58, $11, $85, $58, $FA, $4A, $D6
 .db $CD, $60, $31, $EA, $4A, $D6, $C9, $21, $26, $D1, $CB, $6E, $CB, $AE, $C8, $21
 .db $2E, $58, $CD, $37, $58, $CD, $63, $58, $FA, $34, $D8, $CB, $47, $20, $0F, $F5

@@ -542,6 +542,7 @@ wla-red wla-rom: wla/banks/bank23_viridian_forest_south_gate.asm
 wla-red wla-rom: wla/banks/bank23_underground_path_route5.asm
 wla-red wla-rom: wla/banks/bank23_underground_path_route6.asm
 wla-red wla-rom: wla/banks/bank23_underground_path_route7.asm
+wla-red wla-rom: wla/banks/bank23_underground_path_route7_copy.asm
 wla-red wla-rom: wla/banks/bank15_critical_hit_moves.asm wla/banks/bank15_high_critical_moves.asm
 wla-red wla-rom: wla/banks/bank15_always_happen_effects.asm
 wla-red wla-rom: wla/banks/bank15_residual_effects.asm
