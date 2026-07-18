@@ -14,8 +14,8 @@ ChampionsRoomRivalReadyToBattleScript:
 	LD HL, $D72D ; wStatusFlags3
 	SET 6, (HL) ; BIT_TALKED_TO_TRAINER
 	SET 7, (HL) ; BIT_PRINT_END_BATTLE_TEXT
-	LD HL, $60F9 ; RivalDefeatedText
-	LD DE, $60FE ; RivalVictoryText
+	LD HL, RivalDefeatedText
+	LD DE, RivalVictoryText
 	CALL $3354 ; SaveEndBattleTextPointers
 	LD A, $F3 ; OPP_RIVAL3
 	LD ($D059), A ; wCurOpponent

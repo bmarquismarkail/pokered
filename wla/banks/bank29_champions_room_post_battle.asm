@@ -9,7 +9,7 @@ ChampionsRoomRivalDefeatedScript:
 	LD ($CD6B), A ; wJoyIgnore
 	LD A, 1 ; TEXT_CHAMPIONSROOM_RIVAL
 	LDH ($8C), A ; hTextID
-	CALL $60C8 ; ChampionsRoom_DisplayTextID_AllowABSelectStart
+	CALL ChampionsRoom_DisplayTextID_AllowABSelectStart
 	LD A, 1 ; CHAMPIONSROOM_RIVAL
 	LDH ($8C), A ; hSpriteIndex
 	CALL $3541 ; SetSpriteMovementBytesToFF
@@ -25,7 +25,7 @@ ChampionsRoomOakArrivesScript:
 	CALL $35D6 ; Bankswitch
 	LD A, 2 ; TEXT_CHAMPIONSROOM_OAK
 	LDH ($8C), A
-	CALL $60C8 ; ChampionsRoom_DisplayTextID_AllowABSelectStart
+	CALL ChampionsRoom_DisplayTextID_AllowABSelectStart
 	LD A, 2 ; CHAMPIONSROOM_OAK
 	LDH ($8C), A
 	CALL $3541 ; SetSpriteMovementBytesToFF

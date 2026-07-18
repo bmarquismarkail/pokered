@@ -1,10 +1,10 @@
 ChampionsRoom_h:
 	.DB $07,$04,$04
-	.DW $615F ; ChampionsRoom_Blocks
-	.DW $60D6 ; ChampionsRoom_TextPointers
+	.DW ChampionsRoom_Blocks
+	.DW ChampionsRoom_TextPointers
 	.DW ChampionsRoom_Script
 	.DB $00
-	.DW $612F ; ChampionsRoom_Object
+	.DW ChampionsRoom_Object
 ChampionsRoomHeaderEnd:
 .ASSERT ChampionsRoomHeaderEnd - ChampionsRoom_h == 12
 
@@ -27,7 +27,9 @@ ResetRivalScriptEnd:
 ChampionsRoom_ScriptPointers:
 	.DW ChampionsRoomDefaultScript,ChampionsRoomPlayerEntersScript
 	.DW ChampionsRoomRivalReadyToBattleScript,ChampionsRoomRivalDefeatedScript,ChampionsRoomOakArrivesScript
-	.DW $601A,$6047,$605F,$6083,$6099,$60B9
+	.DW ChampionsRoomOakCongratulatesPlayerScript,ChampionsRoomOakDisappointedWithRivalScript
+	.DW ChampionsRoomOakComeWithMeScript,ChampionsRoomOakExitsScript
+	.DW ChampionsRoomPlayerFollowsOakScript,ChampionsRoomCleanupScript
 ChampionsRoomScriptPointersEnd:
 .ASSERT ChampionsRoomScriptPointersEnd - ChampionsRoom_ScriptPointers == 22
 
