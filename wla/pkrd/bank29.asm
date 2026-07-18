@@ -23,28 +23,16 @@
 .INCLUDE "wla/banks/bank29_cerulean_cave_1f_dispatch.asm"
 .INCLUDE "wla/banks/bank29_cerulean_cave_1f_object.asm"
 .INCLUDE "wla/banks/bank29_cerulean_cave_1f_blocks.asm"
-.db $0D, $04, $04, $4C, $40, $13, $4E, $09, $4E
-.db $00, $BE, $4E, $3E, $01, $EA, $0C, $CF, $3D, $EA, $3C, $CC, $C9, $15, $4E, $08
-.db $21, $77, $4E, $CD, $49, $3C, $AF, $EA, $26, $CC, $EA, $36, $CC, $21, $7C, $4E
-.db $CD, $49, $3C, $21, $6D, $4E, $CD, $5A, $2A, $21, $7B, $CF, $7D, $EA, $8B, $CF
-.db $7C, $EA, $8C, $CF, $AF, $EA, $93, $CF, $EA, $35, $CC, $3E, $04, $EA, $94, $CF
-.db $CD, $E6, $2B, $38, $15, $21, $86, $4E, $FA, $91, $CF, $D6, $15, $87, $16, $00
-.db $5F, $19, $2A, $66, $6F, $CD, $49, $3C, $18, $C3, $AF, $EA, $36, $CC, $21, $81
-.db $4E, $CD, $49, $3C, $C3, $D7, $24, $08, $15, $16, $17, $18, $19, $1A, $1B, $1C
-.db $FF, $17, $C9, $50, $26, $50, $17, $3A, $51, $26, $50, $17, $70, $51, $26, $50
-.db $96, $4E, $9B, $4E, $A0, $4E, $A5, $4E, $AA, $4E, $AF, $4E, $B4, $4E, $B9, $4E
-.db $17, $92, $51, $26, $50, $17, $F2, $51, $26, $50, $17, $5D, $52, $26, $50, $17
-.db $B8, $52, $26, $50, $17, $2A, $53, $26, $50, $17, $88, $53, $26, $50, $17, $C7
-.db $53, $26, $50, $17, $F5, $53, $26, $50, $0C, $03, $00, $02, $09, $FF, $07, $02
-.db $08, $FF, $07, $03, $08, $FF, $00, $01, $0A, $07, $09, $FF, $D3, $01, $F4, $C6
-.db $00, $02, $12, $C7, $07, $02, $12, $C7, $07, $03
+.INCLUDE "wla/banks/bank29_cerulean_badge_house_header.asm"
+.INCLUDE "wla/banks/bank29_cerulean_badge_house_dispatch.asm"
+.INCLUDE "wla/banks/bank29_cerulean_badge_house_text.asm"
+.INCLUDE "wla/banks/bank29_cerulean_badge_house_object.asm"
 .INCLUDE "wla/banks/bank29_vending_machine.asm"
-.db $08, $04, $04, $20, $40, $1C, $50, $18, $50, $00
-.db $31, $50, $CD, $3C, $3C, $C9, $22, $50, $27, $50, $2C, $50, $17, $A3, $62, $27
-.db $50, $17, $F3, $62, $27, $50, $17, $4D, $63, $27, $50, $0A, $02, $07, $02, $01
-.db $FF, $07, $03, $01, $FF, $00, $03, $1C, $07, $06, $FF, $D3, $01, $0B, $06, $0B
-.db $FF, $D1, $02, $04, $09, $09, $FF, $FF, $03, $12, $C7, $07, $02, $12, $C7, $07
-.db $03, $06, $04, $07, $30, $40, $69, $50, $63, $50, $00, $7D, $50, $CD, $FA, $22
+.INCLUDE "wla/banks/bank29_fuchsia_bills_grandpas_house_header.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_bills_grandpas_house_dispatch.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_bills_grandpas_house_texts.asm"
+.INCLUDE "wla/banks/bank29_fuchsia_bills_grandpas_house_object.asm"
+.db $06, $04, $07, $30, $40, $69, $50, $63, $50, $00, $7D, $50, $CD, $FA, $22
 .db $C3, $3C, $3C, $71, $50, $72, $50, $77, $50, $7C, $50, $FF, $17, $87, $63, $27
 .db $50, $17, $DE, $63, $27, $50, $F6, $00, $02, $07, $03, $02, $FF, $07, $04, $02
 .db $FF, $00, $04, $29, $05, $07, $FF, $D0, $01, $21, $07, $06, $FF, $FF, $02, $06

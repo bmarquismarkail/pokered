@@ -610,6 +610,14 @@ wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_header.asm
 wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_dispatch.asm
 wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_object.asm
 wla-red wla-rom: wla/banks/bank29_cerulean_cave_1f_blocks.asm maps/CeruleanCave1F.blk
+wla-red wla-rom: wla/banks/bank29_cerulean_badge_house_header.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_badge_house_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_badge_house_text.asm
+wla-red wla-rom: wla/banks/bank29_cerulean_badge_house_object.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_header.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_texts.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_object.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
