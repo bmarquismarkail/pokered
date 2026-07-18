@@ -697,6 +697,10 @@ wla-red wla-rom: wla/banks/bank29_brunos_room_entry.asm
 wla-red wla-rom: wla/banks/bank29_brunos_room_battle_control.asm
 wla-red wla-rom: wla/banks/bank29_brunos_room_texts.asm
 wla-red wla-rom: wla/banks/bank29_brunos_room_map_data.asm maps/BrunosRoom.blk
+wla-red wla-rom: wla/banks/bank29_agathas_room_entry.asm
+wla-red wla-rom: wla/banks/bank29_agathas_room_battle_control.asm
+wla-red wla-rom: wla/banks/bank29_agathas_room_texts.asm
+wla-red wla-rom: wla/banks/bank29_agathas_room_map_data.asm maps/AgathasRoom.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
