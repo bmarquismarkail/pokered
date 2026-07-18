@@ -689,6 +689,7 @@ wla-red wla-rom: wla/banks/bank29_champions_room_post_battle.asm
 wla-red wla-rom: wla/banks/bank29_champions_room_oak_sequence.asm
 wla-red wla-rom: wla/banks/bank29_champions_room_texts.asm
 wla-red wla-rom: wla/banks/bank29_champions_room_map_data.asm maps/ChampionsRoom.blk
+wla-red wla-rom: wla/banks/bank29_loreleis_room_entry.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb

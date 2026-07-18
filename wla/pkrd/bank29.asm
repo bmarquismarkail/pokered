@@ -103,12 +103,8 @@
 .INCLUDE "wla/banks/bank29_champions_room_oak_sequence.asm"
 .INCLUDE "wla/banks/bank29_champions_room_texts.asm"
 .INCLUDE "wla/banks/bank29_champions_room_map_data.asm"
-.db $07, $06, $05, $AC, $62, $51, $62, $7B, $61, $00, $80
-.db $62, $CD, $91, $61, $CD, $3C, $3C, $21, $55, $62, $11, $BB, $61, $FA, $4D, $D6
-.db $CD, $60, $31, $EA, $4D, $D6, $C9, $21, $26, $D1, $CB, $6E, $CB, $AE, $C8, $21
-.db $34, $D7, $CB, $CE, $FA, $63, $D8, $CB, $4F, $28, $04, $3E, $05, $18, $02, $3E
-.db $24, $EA, $9F, $D0, $01, $02, $00, $3E, $17, $C3, $6D, $3E, $AF, $EA, $4D, $D6
-.db $C9, $E2, $61, $4C, $32, $3F, $62, $2C, $62, $C5, $61, $C9, $21, $D3, $CC, $3E
+.INCLUDE "wla/banks/bank29_loreleis_room_entry.asm"
+.db $21, $D3, $CC, $3E
 .db $40, $22, $22, $22, $22, $22, $77, $3E, $06, $EA, $38, $CD, $CD, $86, $34, $3E
 .db $03, $EA, $4D, $D6, $EA, $39, $DA, $C9, $21, $23, $62, $CD, $BF, $34, $D2, $19
 .db $32, $AF, $E0, $B3, $E0, $B4, $EA, $D3, $CC, $EA, $38, $CD, $FA, $3D, $CD, $FE
