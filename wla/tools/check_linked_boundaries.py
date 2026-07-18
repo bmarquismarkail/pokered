@@ -335,6 +335,8 @@ EXPECTED = (
     ('Cinnabar Gym Post Battle', 0x1D, 'CinnabarGymBlainePostBattleScript', 0x584A, 'CinnabarGymPostBattleEnd', 0x589F),
     ('Cinnabar Gym Text Pointers', 0x1D, 'CinnabarGym_TextPointers', 0x589F, 'CinnabarGymTextPointersEnd', 0x58B7),
     ('Cinnabar Gym Start Battle', 0x1D, 'CinnabarGymStartBattleScript', 0x58B7, 'CinnabarGymStartBattleEnd', 0x58DF),
+    ('Cinnabar Gym Blaine Text', 0x1D, 'CinnabarGymBlaineText', 0x58DF, 'CinnabarGymBlaineTextEnd', 0x5939),
+    ('Cinnabar Gym Trainer Texts', 0x1D, 'CinnabarGymTrainerTexts', 0x5939, 'CinnabarGymTrainerTextsEnd', 0x5AAC),
     ('Hidden Events Core', 0x11, 'IsPlayerOnDungeonWarp', 0x6981, 'HiddenEventsCoreEnd', 0x70AB),
     ('Pokémon Names', 0x07, 'MonsterNames', 0x421E, 'PokemonNamesEnd', 0x4A19),
     ('Doors and Ledges', 0x06, 'PlayerStepOutFromDoor', 0x63E0, 'DoorsAndLedgesEnd', 0x6718),

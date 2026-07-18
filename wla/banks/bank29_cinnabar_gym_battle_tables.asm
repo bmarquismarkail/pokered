@@ -1,6 +1,6 @@
 CinnabarGym_TextPointers:
-	.DW $58DF,$5939,$596E,$59A3,$59D8,$5A0D
-	.DW $5A42,$5A77,$5AAC,$5925,$592A,$5934
+	.DW CinnabarGymBlaineText,CinnabarGymSuperNerd1,CinnabarGymSuperNerd2,CinnabarGymSuperNerd3,CinnabarGymSuperNerd4,CinnabarGymSuperNerd5
+	.DW CinnabarGymSuperNerd6,CinnabarGymSuperNerd7,$5AAC,$5925,$592A,$5934
 CinnabarGymTextPointersEnd:
 .ASSERT CinnabarGymTextPointersEnd - CinnabarGym_TextPointers == 24
 

@@ -659,6 +659,8 @@ wla-red wla-rom: wla/banks/bank29_cinnabar_gym_default.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_open_gate.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_post_battle.asm
 wla-red wla-rom: wla/banks/bank29_cinnabar_gym_battle_tables.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_gym_blaine_text.asm
+wla-red wla-rom: wla/banks/bank29_cinnabar_gym_trainer_texts.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
