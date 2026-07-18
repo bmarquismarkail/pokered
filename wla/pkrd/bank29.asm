@@ -66,24 +66,12 @@
 .INCLUDE "wla/banks/bank29_fuchsia_meeting_room_texts.asm"
 .INCLUDE "wla/banks/bank29_fuchsia_meeting_room_object.asm"
 .INCLUDE "wla/banks/bank29_fuchsia_meeting_room_blocks.asm"
-.db $16, $09, $0A, $26, $5B, $9F, $58, $4A
-.db $57, $00, $CC, $5A, $CD, $59, $57, $CD, $3C, $3C, $21, $A6, $57, $FA, $5E, $D6
-.db $C3, $97, $3D, $21, $26, $D1, $CB, $76, $CB, $B6, $E5, $C4, $72, $57, $E1, $CB
-.db $6E, $CB, $AE, $C4, $AD, $3E, $21, $9B, $D7, $CB, $BE, $C9, $21, $7B, $57, $11
-.db $8B, $57, $C3, $7F, $31, $82, $88, $8D, $8D, $80, $81, $80, $91, $7F, $88, $92
-.db $8B, $80, $8D, $83, $50, $81, $8B, $80, $88, $8D, $84, $50, $AF, $EA, $6B, $CD
-.db $EA, $5E, $D6, $EA, $39, $DA, $EA, $38, $DA, $C9, $F0, $8C, $EA, $55, $CC, $C9
-.db $AE, $57, $DC, $57, $F6, $57, $4A, $58, $FA, $38, $DA, $A7, $C8, $E0, $8C, $FE
-.db $04, $20, $0A, $3E, $04, $EA, $28, $D5, $11, $D7, $57, $18, $08, $11, $DA, $57
-.db $3E, $01, $EA, $28, $D5, $CD, $3A, $36, $3E, $01, $EA, $5E, $D6, $EA, $39, $DA
-.db $C9, $80, $40, $FF, $80, $FF, $FA, $30, $D7, $CB, $47, $C0, $AF, $EA, $6B, $CD
-.db $FA, $38, $DA, $EA, $55, $CC, $E0, $8C, $C3, $20, $29, $3E, $10, $C3, $6D, $3E
-.db $FA, $57, $D0, $FE, $FF, $CA, $92, $57, $FA, $55, $CC, $E0, $DB, $4F, $06, $02
-.db $21, $9A, $D7, $CD, $F1, $57, $79, $A7, $20, $0B, $CD, $48, $37, $3E, $AD, $CD
-.db $B1, $23, $CD, $48, $37, $FA, $55, $CC, $E0, $DB, $4F, $06, $01, $21, $9A, $D7
-.db $CD, $F1, $57, $FA, $55, $CC, $D6, $02, $4F, $06, $01, $21, $9C, $D7, $CD, $F1
-.db $57, $CD, $AD, $3E, $AF, $EA, $6B, $CD, $EA, $38, $DA, $3E, $00, $EA, $5E, $D6
-.db $EA, $39, $DA, $C9, $FA, $57, $D0, $FE, $FF, $CA, $92, $57, $3E, $F0, $EA, $6B
+.INCLUDE "wla/banks/bank29_cinnabar_gym_header.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_gym_entry.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_gym_reset_tables.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_gym_default.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_gym_open_gate.asm"
+.db $FA, $57, $D0, $FE, $FF, $CA, $92, $57, $3E, $F0, $EA, $6B
 .db $CD, $3E, $0A, $E0, $8C, $CD, $20, $29, $21, $9A, $D7, $CB, $CE, $01, $01, $EE
 .db $CD, $2E, $3E, $30, $0E, $3E, $0B, $E0, $8C, $CD, $20, $29, $21, $9A, $D7, $CB
 .db $C6, $18, $07, $3E, $0C, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $F6, $21
