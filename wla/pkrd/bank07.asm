@@ -10,16 +10,8 @@
 .INCLUDE "wla/banks/bank07_route1_script.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_entry.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_activation.asm"
-.db $CD, $D7, $3D, $21, $D3, $CC, $11, $CF, $4B, $CD, $0C, $35
-.db $3D, $EA, $38, $CD, $CD, $86, $34, $3E, $01, $E0, $8C, $AF, $E0, $8D, $CD, $A6
-.db $34, $3E, $05, $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34, $3E, $04, $EA, $F0, $D5
-.db $C9, $40, $08, $FF, $FA, $38, $CD, $A7, $C0, $21, $47, $D7, $CB, $C6, $21, $4B
-.db $D7, $CB, $C6, $3E, $01, $E0, $8C, $3E, $04, $E0, $8D, $CD, $A6, $34, $CD, $29
-.db $24, $21, $33, $D7, $CB, $8E, $CD, $07, $23, $3E, $05, $EA, $F0, $D5, $C9, $3E
-.db $FC, $EA, $6B, $CD, $3E, $11, $E0, $8C, $CD, $20, $29, $CD, $D7, $3D, $3E, $12
-.db $E0, $8C, $CD, $20, $29, $CD, $D7, $3D, $3E, $13, $E0, $8C, $CD, $20, $29, $CD
-.db $D7, $3D, $3E, $14, $E0, $8C, $CD, $20, $29, $21, $4B, $D7, $CB, $CE, $AF, $EA
-.db $6B, $CD, $3E, $06, $EA, $F0, $D5, $C9, $FA, $61, $D3, $FE, $06, $C0, $3E, $05
+.INCLUDE "wla/banks/bank07_oaks_lab_choose_mon_intro.asm"
+.db $FA, $61, $D3, $FE, $06, $C0, $3E, $05
 .db $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34, $3E, $01, $E0, $8C, $AF, $E0, $8D, $CD
 .db $A6, $34, $CD, $29, $24, $3E, $0C, $E0, $8C, $CD, $20, $29, $3E, $01, $EA, $38
 .db $CD, $3E, $40, $EA, $D3, $CC, $CD, $86, $34, $3E, $08, $EA, $28, $D5, $3E, $07
