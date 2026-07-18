@@ -45,30 +45,13 @@
 .INCLUDE "wla/banks/bank29_safari_zone_gate_entry.asm"
 .INCLUDE "wla/banks/bank29_safari_zone_gate_default.asm"
 .INCLUDE "wla/banks/bank29_safari_zone_gate_state_machine.asm"
-.db $C5, $52, $CA, $53, $C5, $52, $CA, $52, $6F, $53, $C5, $53, $17
-.db $C7, $66, $27, $50, $17, $E4, $66, $27, $08, $3E, $13, $EA, $25, $D1, $CD, $E8
-.db $30, $CD, $EC, $35, $FA, $26, $CC, $A7, $C2, $46, $53, $AF, $E0, $9F, $3E, $05
-.db $E0, $A0, $3E, $00, $E0, $A1, $CD, $A6, $35, $30, $08, $21, $6A, $53, $CD, $49
-.db $3C, $18, $53, $AF, $EA, $3D, $CD, $3E, $05, $EA, $3E, $CD, $3E, $00, $EA, $3F
-.db $CD, $21, $3F, $CD, $11, $49, $D3, $0E, $03, $3E, $0C, $CD, $6D, $3E, $3E, $13
-.db $EA, $25, $D1, $CD, $E8, $30, $21, $5B, $53, $CD, $49, $3C, $3E, $1E, $EA, $47
-.db $DA, $3E, $01, $EA, $0D, $D7, $3E, $F6, $EA, $0E, $D7, $3E, $40, $0E, $03, $CD
-.db $A3, $52, $21, $90, $D7, $CB, $FE, $CB, $B6, $3E, $03, $EA, $1F, $D6, $18, $12
-.db $21, $65, $53, $CD, $49, $3C, $3E, $80, $0E, $01, $CD, $A3, $52, $3E, $04, $EA
-.db $1F, $D6, $C3, $D7, $24, $17, $47, $67, $27, $0B, $17, $9F, $67, $27, $50, $17
-.db $E3, $67, $27, $50, $17, $FB, $67, $27, $50, $17, $14, $68, $27, $08, $CD, $EC
-.db $35, $FA, $26, $CC, $A7, $20, $1F, $21, $BB, $53, $CD, $49, $3C, $AF, $EA, $09
-.db $C1, $3E, $80, $0E, $03, $CD, $A3, $52, $21, $90, $D7, $CB, $B6, $CB, $BE, $3E
-.db $00, $EA, $0D, $CF, $18, $17, $21, $C0, $53, $CD, $49, $3C, $3E, $04, $EA, $09
-.db $C1, $3E, $40, $0E, $01, $CD, $A3, $52, $3E, $05, $EA, $0D, $CF, $3E, $06, $EA
-.db $1F, $D6, $C3, $D7, $24, $17, $25, $68, $27, $50, $17, $54, $68, $27, $50, $17
-.db $60, $68, $27, $50, $08, $21, $E6, $53, $CD, $49, $3C, $CD, $EC, $35, $FA, $26
-.db $CC, $A7, $21, $F0, $53, $20, $03, $21, $EB, $53, $CD, $49, $3C, $C3, $D7, $24
-.db $17, $86, $68, $27, $50, $17, $A7, $68, $27, $50, $17, $93, $69, $27, $50, $0A
-.db $04, $05, $03, $04, $FF, $05, $04, $04, $FF, $00, $03, $00, $DC, $00, $04, $01
-.db $DC, $00, $02, $23, $06, $0A, $FF, $D2, $01, $23, $08, $05, $FF, $D3, $02, $08
-.db $C7, $05, $03, $09, $C7, $05, $04, $F4, $C6, $00, $03, $F5, $C6, $00, $04, $16
-.db $6B, $6A, $17, $02, $09, $08, $01, $18, $6C, $69, $19, $07, $09, $05, $AA, $56
+.INCLUDE "wla/banks/bank29_safari_zone_gate_text_pointers.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_admission_text.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_leaving_text.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_worker_texts.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_object.asm"
+.INCLUDE "wla/banks/bank29_safari_zone_gate_blocks.asm"
+.db $07, $09, $05, $AA, $56
 .db $D5, $54, $3D, $54, $00, $58, $56, $CD, $53, $54, $CD, $3C, $3C, $21, $EB, $54
 .db $11, $82, $54, $FA, $5B, $D6, $CD, $60, $31, $EA, $5B, $D6, $C9, $21, $26, $D1
 .db $CB, $76, $CB, $B6, $C8, $21, $65, $54, $11, $72, $54, $CD, $7F, $31, $C9, $85
