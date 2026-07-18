@@ -1,6 +1,6 @@
 ViridianGym_TextPointers:
-	.DW $4A69,$4AF3,$4B0C,$4B25,$4B3E,$4B57,$4B70
-	.DW $4B89,$4BA2,$4BBB,$24F4,$4ADF,$4AE4,$4AEE
+	.DW ViridianGymGiovanniText,$4AF3,$4B0C,$4B25,$4B3E,$4B57,$4B70
+	.DW $4B89,$4BA2,$4BBB,$24F4,ViridianGymGiovanniEarthBadgeInfoText,ViridianGymGiovanniReceivedTM27Text,ViridianGymGiovanniTM27NoRoomText
 ViridianGymTextPointersEnd:
 .ASSERT ViridianGymTextPointersEnd - ViridianGym_TextPointers == 28
 ViridianGymTrainerHeaders:

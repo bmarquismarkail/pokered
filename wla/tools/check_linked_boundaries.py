@@ -255,6 +255,7 @@ EXPECTED = (
     ('Viridian Gym Post Battle', 0x1D, 'ViridianGymGiovanniPostBattle', 0x4988, 'ViridianGymPostBattleEnd', 0x49EC),
     ('Viridian Gym Text Pointers', 0x1D, 'ViridianGym_TextPointers', 0x49EC, 'ViridianGymTextPointersEnd', 0x4A08),
     ('Viridian Gym Trainer Headers', 0x1D, 'ViridianGymTrainerHeaders', 0x4A08, 'ViridianGymTrainerHeadersEnd', 0x4A69),
+    ('Viridian Gym Giovanni Text', 0x1D, 'ViridianGymGiovanniText', 0x4A69, 'ViridianGymGiovanniTextEnd', 0x4AF3),
     ('Hidden Events Core', 0x11, 'IsPlayerOnDungeonWarp', 0x6981, 'HiddenEventsCoreEnd', 0x70AB),
     ('Pokémon Names', 0x07, 'MonsterNames', 0x421E, 'PokemonNamesEnd', 0x4A19),
     ('Doors and Ledges', 0x06, 'PlayerStepOutFromDoor', 0x63E0, 'DoorsAndLedgesEnd', 0x6718),

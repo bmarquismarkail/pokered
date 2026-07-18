@@ -10,15 +10,8 @@
 .INCLUDE "wla/banks/bank29_viridian_gym_spinner_runtime.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_post_battle.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_tables.asm"
-.db $08, $FA, $51, $D7, $CB, $4F, $28, $2F, $CB, $47, $20, $08, $CC
-.db $95, $49, $CD, $B6, $30, $18, $4E, $3E, $01, $EA, $3C, $CC, $21, $D9, $4A, $CD
-.db $49, $3C, $CD, $EF, $20, $3E, $32, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $CD
-.db $29, $24, $CD, $D7, $3D, $CD, $D1, $20, $18, $2B, $21, $CE, $4A, $CD, $49, $3C
-.db $21, $2D, $D7, $CB, $F6, $CB, $FE, $21, $D3, $4A, $11, $D3, $4A, $CD, $54, $33
-.db $F0, $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $3E, $08, $EA, $5C, $D0
-.db $3E, $03, $EA, $FB, $D5, $C3, $D7, $24, $17, $09, $5E, $25, $50, $17, $D5, $5E
-.db $25, $0B, $50, $17, $2B, $5F, $25, $0D, $50, $17, $CC, $5F, $25, $50, $17, $82
-.db $60, $25, $0B, $17, $95, $60, $25, $50, $17, $04, $61, $25, $50, $08, $21, $08
+.INCLUDE "wla/banks/bank29_viridian_gym_giovanni_text.asm"
+.db $08, $21, $08
 .db $4A, $CD, $CC, $31, $C3, $D7, $24, $17, $25, $61, $25, $50, $17, $54, $61, $25
 .db $50, $17, $67, $61, $25, $50, $08, $21, $14, $4A, $CD, $CC, $31, $C3, $D7, $24
 .db $17, $97, $61, $25, $50, $17, $C0, $61, $25, $50, $17, $C8, $61, $25, $50, $08
