@@ -137,4 +137,10 @@
 .INCLUDE "wla/banks/bank23_victory_road_1f_object.asm"
 .INCLUDE "wla/banks/bank23_victory_road_1f_blocks.asm"
 .INCLUDE "wla/banks/bank23_hidden_events_3.asm"
-.dsb 8427, $00
+
+; Hidden Events 3 ends at $5F15; preserve the bank's free space.
+Bank23Padding:
+.DSB $4000 - $1F15, $00
+
+Bank23End:
+.ASSERT Bank23End - Bank23Padding == $20EB
