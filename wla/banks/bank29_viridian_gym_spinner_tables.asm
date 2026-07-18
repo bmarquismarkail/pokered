@@ -1,6 +1,6 @@
 ViridianGym_ScriptPointers:
 	.DW ViridianGymDefaultScript
-	.DW $324C,$3275,$4988,$496B
+	.DW $324C,$3275,ViridianGymGiovanniPostBattle,ViridianGymPlayerSpinningScript
 ViridianGymScriptPointersEnd:
 .ASSERT ViridianGymScriptPointersEnd - ViridianGym_ScriptPointers == 10
 ViridianGymDefaultScript:

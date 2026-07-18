@@ -7,23 +7,10 @@
 .INCLUDE "wla/banks/bank29_cerulean_hide_rocket.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_entry.asm"
 .INCLUDE "wla/banks/bank29_viridian_gym_spinner_tables.asm"
-.db $FA, $38, $CD, $A7, $20, $0F, $AF, $EA, $6B, $CD, $21
-.db $36, $D7, $CB, $BE, $3E, $00, $EA, $39, $DA, $C9, $06, $11, $21, $D7, $4F, $C3
-.db $D6, $35, $FA, $57, $D0, $FE, $FF, $CA, $D6, $48, $3E, $F0, $EA, $6B, $CD, $3E
-.db $0C, $E0, $8C, $CD, $20, $29, $21, $51, $D7, $CB, $CE, $01, $01, $E3, $CD, $2E
-.db $3E, $30, $0E, $3E, $0D, $E0, $8C, $CD, $20, $29, $21, $51, $D7, $CB, $C6, $18
-.db $07, $3E, $0E, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $FE, $21, $2A, $D7
-.db $CB, $FE, $FA, $51, $D7, $F6, $FC, $EA, $51, $D7, $FA, $52, $D7, $F6, $03, $EA
-.db $52, $D7, $3E, $23, $EA, $4D, $CC, $3E, $15, $CD, $6D, $3E, $21, $EB, $D7, $CB
-.db $CE, $CB, $FE, $C3, $D6, $48, $69, $4A, $F3, $4A, $0C, $4B, $25, $4B, $3E, $4B
-.db $57, $4B, $70, $4B, $89, $4B, $A2, $4B, $BB, $4B, $F4, $24, $DF, $4A, $E4, $4A
-.db $EE, $4A, $02, $40, $51, $D7, $FD, $4A, $07, $4B, $02, $4B, $02, $4B, $03, $40
-.db $51, $D7, $16, $4B, $20, $4B, $1B, $4B, $1B, $4B, $04, $40, $51, $D7, $2F, $4B
-.db $39, $4B, $34, $4B, $34, $4B, $05, $20, $51, $D7, $48, $4B, $52, $4B, $4D, $4B
-.db $4D, $4B, $06, $30, $51, $D7, $61, $4B, $6B, $4B, $66, $4B, $66, $4B, $07, $40
-.db $51, $D7, $7A, $4B, $84, $4B, $7F, $4B, $7F, $4B, $08, $30, $51, $D7, $93, $4B
-.db $9D, $4B, $98, $4B, $98, $4B, $09, $40, $51, $D7, $AC, $4B, $B6, $4B, $B1, $4B
-.db $B1, $4B, $FF, $08, $FA, $51, $D7, $CB, $4F, $28, $2F, $CB, $47, $20, $08, $CC
+.INCLUDE "wla/banks/bank29_viridian_gym_spinner_runtime.asm"
+.INCLUDE "wla/banks/bank29_viridian_gym_post_battle.asm"
+.INCLUDE "wla/banks/bank29_viridian_gym_tables.asm"
+.db $08, $FA, $51, $D7, $CB, $4F, $28, $2F, $CB, $47, $20, $08, $CC
 .db $95, $49, $CD, $B6, $30, $18, $4E, $3E, $01, $EA, $3C, $CC, $21, $D9, $4A, $CD
 .db $49, $3C, $CD, $EF, $20, $3E, $32, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $CD
 .db $29, $24, $CD, $D7, $3D, $CD, $D1, $20, $18, $2B, $21, $CE, $4A, $CD, $49, $3C

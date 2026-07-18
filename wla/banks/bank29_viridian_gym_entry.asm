@@ -3,7 +3,7 @@
 ViridianGym_h:
 	.DB $07,$09,$0A
 	.DW $4C47 ; ViridianGym_Blocks
-	.DW $49EC ; ViridianGym_TextPointers
+	.DW ViridianGym_TextPointers
 	.DW ViridianGym_Script
 	.DB $00
 	.DW $4BDE ; ViridianGym_Object
@@ -14,7 +14,7 @@ ViridianGym_Script:
 	LD DE, ViridianGym_Script.LeaderName
 	CALL $317F ; LoadGymLeaderAndCityName
 	CALL $3C3C ; EnableAutoTextBoxDrawing
-	LD HL, $4A08 ; ViridianGymTrainerHeaders
+	LD HL, ViridianGymTrainerHeaders
 	LD DE, ViridianGym_ScriptPointers
 	LD A, ($D5FB) ; wViridianGymCurScript
 	CALL $3160
