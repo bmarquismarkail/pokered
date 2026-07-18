@@ -618,6 +618,15 @@ wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_header.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_dispatch.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_texts.asm
 wla-red wla-rom: wla/banks/bank29_fuchsia_bills_grandpas_house_object.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_pokecenter_header.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_pokecenter_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_pokecenter_texts.asm
+wla-red wla-rom: wla/banks/bank29_fuchsia_pokecenter_object.asm
+wla-red wla-rom: wla/banks/bank29_wardens_house_header.asm
+wla-red wla-rom: wla/banks/bank29_wardens_house_dispatch.asm
+wla-red wla-rom: wla/banks/bank29_wardens_house_text.asm
+wla-red wla-rom: wla/banks/bank29_wardens_house_object.asm
+wla-red wla-rom: wla/banks/bank29_wardens_house_blocks.asm maps/WardensHouse.blk
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
