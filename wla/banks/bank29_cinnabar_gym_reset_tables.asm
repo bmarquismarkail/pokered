@@ -19,6 +19,6 @@ CinnabarGym_ScriptPointers:
 	.DW CinnabarGymDefaultScript
 	.DW CinnabarGymGetOpponentTextScript
 	.DW CinnabarGymOpenGateScript
-	.DW $584A ; CinnabarGymBlainePostBattleScript
+	.DW CinnabarGymBlainePostBattleScript
 CinnabarGymScriptPointersEnd:
 .ASSERT CinnabarGymScriptPointersEnd - CinnabarGym_ScriptPointers == 8

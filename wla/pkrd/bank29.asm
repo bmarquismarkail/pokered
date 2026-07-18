@@ -71,16 +71,9 @@
 .INCLUDE "wla/banks/bank29_cinnabar_gym_reset_tables.asm"
 .INCLUDE "wla/banks/bank29_cinnabar_gym_default.asm"
 .INCLUDE "wla/banks/bank29_cinnabar_gym_open_gate.asm"
-.db $FA, $57, $D0, $FE, $FF, $CA, $92, $57, $3E, $F0, $EA, $6B
-.db $CD, $3E, $0A, $E0, $8C, $CD, $20, $29, $21, $9A, $D7, $CB, $CE, $01, $01, $EE
-.db $CD, $2E, $3E, $30, $0E, $3E, $0B, $E0, $8C, $CD, $20, $29, $21, $9A, $D7, $CB
-.db $C6, $18, $07, $3E, $0C, $E0, $8C, $CD, $20, $29, $21, $56, $D3, $CB, $F6, $21
-.db $2A, $D7, $CB, $F6, $FA, $9A, $D7, $F6, $FC, $EA, $9A, $D7, $21, $9B, $D7, $CB
-.db $C6, $21, $26, $D1, $CB, $EE, $C3, $92, $57, $DF, $58, $39, $59, $6E, $59, $A3
-.db $59, $D8, $59, $0D, $5A, $42, $5A, $77, $5A, $AC, $5A, $25, $59, $2A, $59, $34
-.db $59, $F0, $8C, $EA, $13, $CF, $CD, $6A, $33, $CD, $D7, $32, $21, $2D, $D7, $CB
-.db $F6, $CB, $FE, $FA, $13, $CF, $FE, $01, $28, $04, $3E, $02, $18, $02, $3E, $03
-.db $EA, $5E, $D6, $EA, $39, $DA, $C3, $D7, $24, $08, $FA, $9A, $D7, $CB, $4F, $28
+.INCLUDE "wla/banks/bank29_cinnabar_gym_post_battle.asm"
+.INCLUDE "wla/banks/bank29_cinnabar_gym_battle_tables.asm"
+.db $08, $FA, $9A, $D7, $CB, $4F, $28
 .db $16, $CB, $47, $20, $09, $CC, $57, $58, $CD, $B6, $30, $C3, $D7, $24, $21, $20
 .db $59, $CD, $49, $3C, $C3, $D7, $24, $21, $14, $59, $CD, $49, $3C, $21, $19, $59
 .db $11, $19, $59, $CD, $54, $33, $3E, $07, $EA, $5C, $D0, $C3, $B7, $58, $17, $44
