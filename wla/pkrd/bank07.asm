@@ -11,20 +11,9 @@
 .INCLUDE "wla/banks/bank07_oaks_lab_entry.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_activation.asm"
 .INCLUDE "wla/banks/bank07_oaks_lab_choose_mon_intro.asm"
-.db $FA, $61, $D3, $FE, $06, $C0, $3E, $05
-.db $E0, $8C, $AF, $E0, $8D, $CD, $A6, $34, $3E, $01, $E0, $8C, $AF, $E0, $8D, $CD
-.db $A6, $34, $CD, $29, $24, $3E, $0C, $E0, $8C, $CD, $20, $29, $3E, $01, $EA, $38
-.db $CD, $3E, $40, $EA, $D3, $CC, $CD, $86, $34, $3E, $08, $EA, $28, $D5, $3E, $07
-.db $EA, $F0, $D5, $C9, $FA, $38, $CD, $A7, $C0, $CD, $D7, $3D, $3E, $06, $EA, $F0
-.db $D5, $C9, $FA, $17, $D7, $FE, $B0, $28, $06, $FE, $B1, $28, $1D, $18, $38, $11
-.db $9C, $4C, $FA, $61, $D3, $FE, $04, $28, $5C, $11, $A3, $4C, $18, $57, $00, $00
-.db $C0, $C0, $C0, $40, $FF, $00, $C0, $C0, $C0, $FF, $11, $B7, $4C, $FA, $61, $D3
-.db $FE, $04, $28, $41, $11, $BF, $4C, $18, $3C, $00, $00, $C0, $C0, $C0, $C0, $40
-.db $FF, $00, $C0, $C0, $C0, $C0, $FF, $11, $EF, $4C, $FA, $62, $D3, $FE, $09, $20
-.db $24, $E5, $3E, $01, $E0, $8C, $3E, $04, $E0, $8B, $CD, $FC, $34, $E5, $36, $4C
-.db $23, $23, $36, $00, $E1, $24, $36, $08, $23, $36, $09, $11, $F1, $4C, $E1, $18
-.db $04, $00, $C0, $C0, $FF, $3E, $01, $E0, $8C, $CD, $3A, $36, $3E, $09, $EA, $F0
-.db $D5, $C9, $FA, $30, $D7, $CB, $47, $C0, $3E, $FC, $EA, $6B, $CD, $3E, $01, $E0
+.INCLUDE "wla/banks/bank07_oaks_lab_walkback.asm"
+.INCLUDE "wla/banks/bank07_oaks_lab_starter_movement.asm"
+.db $FA, $30, $D7, $CB, $47, $C0, $3E, $FC, $EA, $6B, $CD, $3E, $01, $E0
 .db $8C, $3E, $04, $E0, $8D, $CD, $A6, $34, $3E, $0D, $E0, $8C, $CD, $20, $29, $FA
 .db $3E, $CD, $FE, $02, $20, $04, $3E, $2B, $18, $0A, $FE, $03, $20, $04, $3E, $2C
 .db $18, $02, $3E, $2D, $EA, $4D, $CC, $3E, $11, $CD, $6D, $3E, $CD, $D7, $3D, $FA
