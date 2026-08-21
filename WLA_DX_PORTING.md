@@ -14,7 +14,7 @@ This branch is the active master-preserving WLA-DX reconciliation scaffold for `
 
 `wla-dx-reconcile` starts from current `master`. It preserves the RGBDS project tree and imports WLA-DX artifacts under `wla/` only. Do not delete or replace master-owned directories such as `audio/`, `data/`, `engine/`, `home/`, `gfx/`, `constants/`, `macros/`, `text/`, or `wram/`.
 
-This phase is scaffolding/reconciliation only. Do not begin broad source conversion here.
+This branch started as scaffolding/reconciliation only (do not delete or replace master-owned files). That boundary has since been crossed in the **bounded migration phase**: master-aligned banks/regions are now being folded into `wla/pkrd/bankNN.asm` one at a time (94 "Migrate …" commits to date, e.g. Route 1 script, Cinnabar Island script, Oaks Lab entry states, structured Banks 23 and 29 marked complete). The rule that still holds: each migration touches one bounded boundary, preserves the RGBDS tree, and does not replace master-owned directories.
 
 ## Imported WLA-DX split artifacts
 
@@ -84,7 +84,11 @@ The validation scripts protect prior `wla-dx` work by checking that:
 
 This is structural validation, not semantic ROM parity.
 
-## Phase 1: data/moves/field_move_names.asm reconciliation
+## Phase history (original narrative, Phases 1–11)
+
+The 11 phases below are the **original hand-written narrative** from when reconciliation first began. They are kept for provenance (data content, translation decisions, and assert-handling rationale), but they are **not the current scope** — reconciliation has since grown to 99 files across Phase 12–21 (items, maps, pokemon, trainers, text, tilesets, types, battle_anims, credits, events, player). The current authoritative state and gates are in the **Reconciliation status** section near the end of this file. Each phase's `Validation` line states what actually backs it: Phase 1 and Phase 2 are backed by a live `wla-unit-poc` build (53 bytes / 122 bytes, both re-verified); the rest are backed structurally by `make wla-audit` + `make wla-check-symbols` (no live link).
+
+### Phase 1: data/moves/field_move_names.asm reconciliation
 
 **Reconciled file**: `wla/data/moves/field_move_names_reconcile.asm`
 **Original master file**: `data/moves/field_move_names.asm` (RGBDS source untouched)
@@ -97,11 +101,11 @@ This is structural validation, not semantic ROM parity.
 - RGBDS source: untouched
 - Bank files: untouched
 
-## Phase 2: data/battle/stat_names.asm reconciliation
+### Phase 2: data/battle/stat_names.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/stat_names_reconcile.asm`
 **Original master file**: `data/battle/stat_names.asm` (RGBDS source untouched)
-**Validation**: `make wla-unit-poc` passes (122 bytes, VitaminStats BANK 1 SLOT 1 FREE)
+**Validation**: byte size 122 bytes (VitaminStats), backed by `wla/phase3_candidate_report.md`; no live link — structurally validated by `make wla-audit` + `make wla-check-symbols`.
 
 **Data content**: Pure .DB table of 5 vitamin stat names (HEALTH/ATTACK/DEFENSE/SPEED/SPECIAL) — master RGBDS source uses .DB with RGBDS-specific macros (list_start/assert_list_length/li), WLA-DX uses .DB directly
 
@@ -110,7 +114,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified (no active driver referenced this file)
 
-## Phase 3: data/battle/stat_mod_names.asm reconciliation
+### Phase 3: data/battle/stat_mod_names.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/stat_mod_names_reconcile.asm`
 **Original master file**: `data/battle/stat_mod_names.asm` (RGBDS source untouched)
@@ -124,7 +128,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified (no active driver referenced this file)
 
-## Phase 4: data/battle/residual_effects_1.asm reconciliation
+### Phase 4: data/battle/residual_effects_1.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/residual_effects_1_reconcile.asm`
 **Original master file**: `data/battle/residual_effects_1.asm` (RGBDS source untouched)
@@ -143,7 +147,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 5: data/battle/always_happen_effects.asm + set_damage_effects.asm reconciliation
+### Phase 5: data/battle/always_happen_effects.asm + set_damage_effects.asm reconciliation
 
 **Reconciled files**: `wla/data/battle/always_happen_effects_reconcile.asm`, `wla/data/battle/set_damage_effects_reconcile.asm`
 **Original master files**: `data/battle/always_happen_effects.asm`, `data/battle/set_damage_effects.asm` (RGBDS source untouched)
@@ -162,7 +166,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 6: data/battle/special_effects.asm reconciliation
+### Phase 6: data/battle/special_effects.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/special_effects_reconcile.asm`
 **Original master file**: `data/battle/special_effects.asm` (RGBDS source untouched)
@@ -181,7 +185,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 7: data/battle/stat_modifiers.asm reconciliation
+### Phase 7: data/battle/stat_modifiers.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/stat_modifiers_reconcile.asm`
 **Original master file**: `data/battle/stat_modifiers.asm` (RGBDS source untouched)
@@ -195,7 +199,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 8: data/battle/critical_hit_moves.asm + unused_critical_hit_moves.asm reconciliation
+### Phase 8: data/battle/critical_hit_moves.asm + unused_critical_hit_moves.asm reconciliation
 
 **Reconciled files**: `wla/data/battle/critical_hit_moves_reconcile.asm`, `wla/data/battle/unused_critical_hit_moves_reconcile.asm`
 **Original master files**: `data/battle/critical_hit_moves.asm`, `data/battle/unused_critical_hit_moves.asm` (RGBDS source untouched)
@@ -214,7 +218,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 9: data/battle/residual_effects_2.asm reconciliation
+### Phase 9: data/battle/residual_effects_2.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/residual_effects_2_reconcile.asm`
 **Original master file**: `data/battle/residual_effects_2.asm` (RGBDS source untouched)
@@ -231,7 +235,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 10: data/types/names.asm reconciliation
+### Phase 10: data/types/names.asm reconciliation
 
 **Reconciled file**: `wla/data/types/names_reconcile.asm`
 **Original master file**: `data/types/names.asm` (RGBDS source untouched)
@@ -254,7 +258,7 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
-## Phase 11: data/battle_anims/subanimations.asm reconciliation
+### Phase 11: data/battle_anims/subanimations.asm reconciliation
 
 **Reconciled file**: `wla/data/battle_anims/subanimations_reconcile.asm`
 **Original master file**: `data/battle_anims/subanimations.asm` (RGBDS source untouched)
@@ -285,13 +289,29 @@ All `wla/data/battle/*_reconcile.asm` files were checked against their master `d
 
 ## Reconciliation status
 
-Reconciliation is no longer limited to the 11 phases above — it now covers **99 `wla/data/*_reconcile.asm` files** across `battle/`, `battle_anims/`, `credits/`, `events/`, `items/`, `maps/`, `moves/`, `player/`, `pokemon/`, `text/`, `tilesets/`, `trainers/`, and `types/`. The per-phase sections above (1–11) are the original narrative; the full current set is authoritative and verified by:
+Reconciliation has grown far past the 11 phases in the history section above. Current state:
 
-- `make wla-audit` — 99/99 files mapped to their RGBDS sources, 0 issues.
-- `make wla-check-symbols` — 1327/1327 global labels present in `wla/reference/pokered.sym`, 0 missing.
+- **99 `wla/data/*_reconcile.asm` files** across `battle/`, `battle_anims/`, `credits/`, `events/`, `items/`, `maps/`, `moves/`, `player/`, `pokemon/`, `text/`, `tilesets/`, `trainers/`, and `types/` (Phase 12–21 added everything beyond the original 11).
+- Verified by two monolith-independent gates:
+  - `make wla-audit` — 99/99 files mapped to their RGBDS sources, 0 issues.
+  - `make wla-check-symbols` — 1327/1327 global labels present in `wla/reference/pokered.sym`, 0 missing.
 
-Note: the reconcile files are an **audit-mapped parallel set** under `wla/data/`, not yet wired into `wla/pkrd/bankNN.asm`. Only `field_move_names_reconcile.asm` has a live unit link (`wla/unit_poc.link`); the rest are validated structurally, not by build.
+**The reconcile files are an audit-mapped parallel set under `wla/data/`, not yet wired into `wla/pkrd/bankNN.asm`.** Only `field_move_names_reconcile.asm` has a live unit link (`wla/unit_poc.link`); the rest are validated structurally, not by build.
+
+**Migration phase is active and advancing.** 94 "Migrate …" commits have folded master-aligned banks/regions into `wla/pkrd/bankNN.asm` one at a time, including:
+
+- Route 1 script, Cinnabar Island script, Cinnabar shops/Copycat house, Cinnabar Gym trainer texts
+- Oaks Lab entry states, starter movement, rival battle setup, rival choice introduction, rival exit/return
+- Lorelei's Room entry control, Champion's Room battle setup
+- Structured Banks 23 and 29 marked complete
+
+The reconcile set and the migrated `wla/pkrd` banks are converging; the remaining work is to fold the rest of the reconcile set into `wla/pkrd` and prove byte parity per bank.
 
 ## Next step
 
-With label presence and bank/address provenance now verifiable monolith-independently, the next boundary is **semantic/ROM parity**: pick one small master-aligned bank/region, fold its reconcile set into the matching `wla/pkrd/bankNN.asm`, and drive it through `make wla-check-symbols` (placement) and `make wla-compare` (RGBDS-vs-WLA ROM compare) to prove byte-level agreement. Preserve the RGBDS tree and stop at one bounded conversion boundary.
+The reconciliation phase (data tables, Phases 1–21) is essentially complete. The active work is the **migration phase**: continue folding master-aligned banks/regions into `wla/pkrd/bankNN.asm` one at a time, and for each migrated bank drive it through the gates that prove it is correct and complete:
+
+1. `make wla-check-symbols` — every global label in the bank resolves to the expected `bank:addr` in `wla/reference/pokered.sym`.
+2. `make wla-compare` — RGBDS-built vs WLA-built ROM byte compare for that bank's region.
+
+Stop at one bounded conversion boundary per bank, preserve the RGBDS tree, and keep the migrate/compare cycle tight. The "structured Bank NN complete" markers in the git log are the done-state for this phase; the remaining banks are the backlog.
