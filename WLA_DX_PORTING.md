@@ -298,20 +298,21 @@ Reconciliation has grown far past the 11 phases in the history section above. Cu
 
 **The reconcile files are an audit-mapped parallel set under `wla/data/`, not yet wired into `wla/pkrd/bankNN.asm`.** Only `field_move_names_reconcile.asm` has a live unit link (`wla/unit_poc.link`); the rest are validated structurally, not by build.
 
-**Migration phase is active and advancing.** 94 "Migrate …" commits have folded master-aligned banks/regions into `wla/pkrd/bankNN.asm` one at a time, including:
+**Migration phase complete — full-ROM parity achieved.** 94 "Migrate …" commits folded master-aligned banks/regions into `wla/pkrd/bankNN.asm` one at a time, including:
 
 - Route 1 script, Cinnabar Island script, Cinnabar shops/Copycat house, Cinnabar Gym trainer texts
 - Oaks Lab entry states, starter movement, rival battle setup, rival choice introduction, rival exit/return
 - Lorelei's Room entry control, Champion's Room battle setup
 - Structured Banks 23 and 29 marked complete
 
-The reconcile set and the migrated `wla/pkrd` banks are converging; the remaining work is to fold the rest of the reconcile set into `wla/pkrd` and prove byte parity per bank.
+**Full-ROM parity achieved.** `make wla-compare` passes: the WLA-DX-built `wla/build/pkrd.gb` matches the RGBDS-built `pokered.gbc` **byte-for-byte** (SHA-1 `ea9bcae6…` for both), with every linked boundary verified by `wla/tools/check_linked_boundaries.py`. The reconcile set and the migrated `wla/pkrd` banks have converged — the migration phase is complete.
 
-## Next step
+**Reproduction.** Requires RGBDS (build or install: `rgbasm`/`rgblink`/`rgbgfx`/`rgbfix` from gbdev/rgbds, put on `PATH`) plus the WLA-DX tools (`wla-gb`, `wlalink`). Then:
 
-The reconciliation phase (data tables, Phases 1–21) is essentially complete. The active work is the **migration phase**: continue folding master-aligned banks/regions into `wla/pkrd/bankNN.asm` one at a time, and for each migrated bank drive it through the gates that prove it is correct and complete:
+```sh
+make rgbds-red     # builds pokered.gbc + pokered.sym (RGBDS reference ROM)
+make wla-red       # generates audio/text banks from pokered.sym, links wla/build/pkrd.gb
+make wla-compare   # byte-compares the two ROMs + verifies linked boundaries
+```
 
-1. `make wla-check-symbols` — every global label in the bank resolves to the expected `bank:addr` in `wla/reference/pokered.sym`.
-2. `make wla-compare` — RGBDS-built vs WLA-built ROM byte compare for that bank's region.
-
-Stop at one bounded conversion boundary per bank, preserve the RGBDS tree, and keep the migrate/compare cycle tight. The "structured Bank NN complete" markers in the git log are the done-state for this phase; the remaining banks are the backlog.
+`make wla-check-split` additionally requires the ~3 MB monolith (`PKRD_MONOLITH`, default `/data/pkrd/pkrd-noanon-hram-fixed.asm`); it is a structural provenance cross-check and is **not** needed to prove ROM parity.
