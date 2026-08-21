@@ -7,6 +7,7 @@ This branch is the active master-preserving WLA-DX reconciliation scaffold for `
 - `master` owns the final repository shape: file layout, docs, CI, asset locations, and the normal RGBDS build.
 - `wla-dx` owns the first-pass split work from the fixed WLA-DX monolith.
 - `/data/pkrd/pkrd-noanon-hram-fixed.asm` owns fixed WLA-DX label/symbol provenance: synced labels, anonymous-label cleanup, HRAM/WRAM/SRAM names, syntax decisions, and bank/address provenance.
+- `wla/reference/pokered.sym` is the **rgblink symbol table for the finished Red ROM** (bank:address for every global label). It is committed under `wla/reference/`, is the *name+bank+address ground truth* for the final ROM, and is the monolith-independent symbol authority used by `make wla-check-symbols`. It complements the monolith (which owns WLA-syntax decisions) rather than replacing it.
 - `wla-dx-structured-port` is a scaffold reference only; it is not this branch's baseline.
 
 ## Branch boundary
@@ -41,12 +42,17 @@ make wla-reference
 
 `wla/reference/pkrd-noanon-hram-fixed.asm` is ignored by git. A small generated index is tracked at `wla/reference/MONOLITH_INDEX.md`.
 
+> **Monolith-independent symbol authority.** `make wla-check-symbols` does **not** need the monolith. It cross-checks every global label in the 99 `wla/data/*_reconcile.asm` files against `wla/reference/pokered.sym` (committed), so label presence and bank/address provenance are verifiable even when `PKRD_MONOLITH` is absent. Use it as the always-available gate; reach for the monolith only for WLA-syntax decisions.
+
 ## Optional WLA-DX targets
 
 The normal RGBDS `make` remains the default build. WLA-DX targets are opt-in:
 
 - `make wla-poc` — minimal standalone WLA-DX smoke ROM.
 - `make wla-unit-poc` — small `FieldMoveNames` unit proof of concept.
+- `make wla-audit` — structural audit of all `wla/data/*_reconcile.asm` against their RGBDS `data/` sources (label-sequence match, no RGBDS-only directives, no out-of-range `.DB`, no `.DW` string pointers).
+- `make wla-check-symbols` — cross-check every global label in the reconcile files against the committed `wla/reference/pokered.sym` rgblink symbol table. Monolith-independent. Fails if any reconcile label is absent from the final ROM's symbol table.
+- `make wla-check-symbols-banks` — same as `wla-check-symbols` but also prints the `bank:addr` each reconcile label resolves to, for placement review.
 - `make wla-index-monolith` — generate `wla/reference/MONOLITH_INDEX.md` from the fixed monolith.
 - `make wla-check-split` — structurally compare `wla/pkrd` against the monolith.
 - `make wla-report` — print current reconciliation status and next-step guidance.
@@ -58,6 +64,7 @@ WLA ?= wla-gb
 WLALINK ?= wlalink
 PYTHON ?= python3
 PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
+PKRD_SYMBOLS ?= wla/reference/pokered.sym
 ```
 
 ## Validation intent
@@ -69,6 +76,11 @@ The validation scripts protect prior `wla-dx` work by checking that:
 - bank files contain expected `.BANK` placement markers;
 - `main.asm` references the WLA paths for prelude and all 64 banks;
 - representative labels from the fixed monolith are present in the imported split files.
+
+**Per-file reconciliation gates (run without the monolith):**
+
+- `make wla-audit` maps every `wla/data/*_reconcile.asm` file to its RGBDS `data/` source and checks label-sequence parity, absence of RGBDS-only directives, and data-shape rules (no out-of-range `.DB`, no `.DW` string pointers, `dname`/`bcd`/`list` handling). Current state: 99 files, 99 mapped, 0 issues.
+- `make wla-check-symbols` verifies every global label in the reconcile files is present in `wla/reference/pokered.sym`. Current state: 1327 global labels, 1327 present, 0 missing. This is the authoritative name/bank/address gate and does not depend on `PKRD_MONOLITH`.
 
 This is structural validation, not semantic ROM parity.
 
@@ -271,6 +283,15 @@ This is structural validation, not semantic ROM parity.
 
 All `wla/data/battle/*_reconcile.asm` files were checked against their master `data/battle/*.asm` sources. Master global labels are preserved exactly; no global labels are intentionally converted to WLA local labels.
 
+## Reconciliation status
+
+Reconciliation is no longer limited to the 11 phases above — it now covers **99 `wla/data/*_reconcile.asm` files** across `battle/`, `battle_anims/`, `credits/`, `events/`, `items/`, `maps/`, `moves/`, `player/`, `pokemon/`, `text/`, `tilesets/`, `trainers/`, and `types/`. The per-phase sections above (1–11) are the original narrative; the full current set is authoritative and verified by:
+
+- `make wla-audit` — 99/99 files mapped to their RGBDS sources, 0 issues.
+- `make wla-check-symbols` — 1327/1327 global labels present in `wla/reference/pokered.sym`, 0 missing.
+
+Note: the reconcile files are an **audit-mapped parallel set** under `wla/data/`, not yet wired into `wla/pkrd/bankNN.asm`. Only `field_move_names_reconcile.asm` has a live unit link (`wla/unit_poc.link`); the rest are validated structurally, not by build.
+
 ## Next step
 
-Choose one small master-aligned bank/region and reconcile it against `wla/pkrd` using `/data/pkrd/pkrd-noanon-hram-fixed.asm` for WLA label/symbol authority. Preserve the RGBDS tree and stop at one bounded conversion boundary.
+With label presence and bank/address provenance now verifiable monolith-independently, the next boundary is **semantic/ROM parity**: pick one small master-aligned bank/region, fold its reconcile set into the matching `wla/pkrd/bankNN.asm`, and drive it through `make wla-check-symbols` (placement) and `make wla-compare` (RGBDS-vs-WLA ROM compare) to prove byte-level agreement. Preserve the RGBDS tree and stop at one bounded conversion boundary.

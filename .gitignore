@@ -14,9 +14,11 @@ wla/build/
 wla/reference/pkrd-noanon-hram-fixed.asm
 .hermes/
 
-# rgbds extras
+# rgbds extras (rgblink output). The tracked Red symbol authority is an
+# explicit exception; generated .map/.sym per-rom artifacts stay ignored.
 *.map
 *.sym
+!wla/reference/pokered.sym
 
 # tool binaries
 *.exe

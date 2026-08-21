@@ -65,6 +65,8 @@ RGBGFXFLAGS  ?= -Weverything
 	wla-rom \
 	wla-compare \
 	wla-audit \
+	wla-check-symbols \
+	wla-check-symbols-banks \
 	wla-index-monolith \
 	wla-check-split \
 	wla-report \
@@ -232,6 +234,9 @@ WLA ?= wla-gb
 WLALINK ?= wlalink
 PYTHON ?= python3
 PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
+# rgblink symbol table: the Red ROM's bank/address ground truth. Tracked under
+# wla/reference/ (committed), so wla-check-symbols runs without the monolith.
+PKRD_SYMBOLS ?= wla/reference/pokered.sym
 
 wla-build-dir := wla/build
 wla-reference-dir := wla/reference
@@ -739,6 +744,12 @@ wla-check-split:
 
 wla-audit:
 	$(PYTHON) wla/tools/reconcile_audit.py
+
+wla-check-symbols:
+	$(PYTHON) wla/tools/check_reconcile_symbols.py $(PKRD_SYMBOLS)
+
+wla-check-symbols-banks:
+	$(PYTHON) wla/tools/check_reconcile_symbols.py $(PKRD_SYMBOLS) --banks
 
 wla-report:
 	$(PYTHON) wla/tools/report_split_status.py --monolith $(PKRD_MONOLITH)
