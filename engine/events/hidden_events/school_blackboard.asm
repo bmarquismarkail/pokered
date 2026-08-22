@@ -6,7 +6,7 @@ PrintBlackboardLinkCableText:
 	call PrintPredefTextID
 	ret
 
-LinkCableHelp::
+LinkCableHelp:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
@@ -23,7 +23,7 @@ LinkCableHelp::
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
-.linkHelpLoop
+LinkCableHelp.linkHelpLoop
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
@@ -37,10 +37,10 @@ LinkCableHelp::
 	call PrintText
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .exit
+	jr nz, LinkCableHelp.exit
 	ld a, [wCurrentMenuItem]
 	cp 3 ; pressed a on "STOP READING"
-	jr z, .exit
+	jr z, LinkCableHelp.exit
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld hl, LinkCableInfoTexts
@@ -52,45 +52,45 @@ LinkCableHelp::
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jp .linkHelpLoop
-.exit
+	jp LinkCableHelp.linkHelpLoop
+LinkCableHelp.exit
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
 LinkCableHelpText1:
-	text_far _LinkCableHelpText1
+	text_far WLA_GLOBAL_LinkCableHelpText1
 	text_end
 
 LinkCableHelpText2:
-	text_far _LinkCableHelpText2
+	text_far WLA_GLOBAL_LinkCableHelpText2
 	text_end
 
 HowToLinkText:
-	db   "HOW TO LINK"
+		.STRINGMAP pokemon, "HOW TO LINK"
 	next "COLOSSEUM"
 	next "TRADE CENTER"
 	next "STOP READING@"
 
 LinkCableInfoTexts:
-	dw LinkCableInfoText1
-	dw LinkCableInfoText2
-	dw LinkCableInfoText3
+	.DW LinkCableInfoText1
+	.DW LinkCableInfoText2
+	.DW LinkCableInfoText3
 
 LinkCableInfoText1:
-	text_far _LinkCableInfoText1
+	text_far WLA_GLOBAL_LinkCableInfoText1
 	text_end
 
 LinkCableInfoText2:
-	text_far _LinkCableInfoText2
+	text_far WLA_GLOBAL_LinkCableInfoText2
 	text_end
 
 LinkCableInfoText3:
-	text_far _LinkCableInfoText3
+	text_far WLA_GLOBAL_LinkCableInfoText3
 	text_end
 
-ViridianSchoolBlackboard::
+ViridianSchoolBlackboard:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
@@ -107,11 +107,11 @@ ViridianSchoolBlackboard::
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
-.blackboardLoop
+ViridianSchoolBlackboard.blackboardLoop
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
-	lb bc, 6, 10
+	lb "bc", 6, 10
 	call TextBoxBorder
 	hlcoord 1, 2
 	ld de, StatusAilmentText1
@@ -123,9 +123,9 @@ ViridianSchoolBlackboard::
 	call PrintText
 	call HandleMenuInput ; pressing up and down is handled in here
 	bit B_PAD_B, a ; pressed b
-	jr nz, .exitBlackboard
+	jr nz, ViridianSchoolBlackboard.exitBlackboard
 	bit B_PAD_RIGHT, a
-	jr z, .didNotPressRight
+	jr z, ViridianSchoolBlackboard.didNotPressRight
 	; move cursor to right column
 	ld a, 2
 	ld [wMaxMenuItem], a
@@ -135,10 +135,10 @@ ViridianSchoolBlackboard::
 	ld [wTopMenuItemX], a
 	ld a, 3 ; in the the right column, use an offset to prevent overlap
 	ld [wMenuItemOffset], a
-	jr .blackboardLoop
-.didNotPressRight
+	jr ViridianSchoolBlackboard.blackboardLoop
+ViridianSchoolBlackboard.didNotPressRight
 	bit B_PAD_LEFT, a
-	jr z, .didNotPressLeftOrRight
+	jr z, ViridianSchoolBlackboard.didNotPressLeftOrRight
 	; move cursor to left column
 	ld a, 2
 	ld [wMaxMenuItem], a
@@ -148,14 +148,14 @@ ViridianSchoolBlackboard::
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wMenuItemOffset], a
-	jr .blackboardLoop
-.didNotPressLeftOrRight
+	jr ViridianSchoolBlackboard.blackboardLoop
+ViridianSchoolBlackboard.didNotPressLeftOrRight
 	ld a, [wCurrentMenuItem]
 	ld b, a
 	ld a, [wMenuItemOffset]
 	add b
 	cp 5 ; cursor is pointing to "QUIT"
-	jr z, .exitBlackboard
+	jr z, ViridianSchoolBlackboard.exitBlackboard
 	; we must have pressed a on a status condition
 	; so print the text
 	ld hl, wStatusFlags5
@@ -169,56 +169,56 @@ ViridianSchoolBlackboard::
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jp .blackboardLoop
-.exitBlackboard
+	jp ViridianSchoolBlackboard.blackboardLoop
+ViridianSchoolBlackboard.exitBlackboard
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
 
 ViridianSchoolBlackboardText1:
-	text_far _ViridianSchoolBlackboardText1
+	text_far WLA_GLOBAL_ViridianSchoolBlackboardText1
 	text_end
 
 ViridianSchoolBlackboardText2:
-	text_far _ViridianSchoolBlackboardText2
+	text_far WLA_GLOBAL_ViridianSchoolBlackboardText2
 	text_end
 
 StatusAilmentText1:
-	db   " SLP"
+		.STRINGMAP pokemon, " SLP"
 	next " PSN"
 	next " PAR@"
 
 StatusAilmentText2:
-	db   " BRN"
+		.STRINGMAP pokemon, " BRN"
 	next " FRZ"
 	next " QUIT@"
 
-	db "@" ; unused
+		.STRINGMAP pokemon, "@" ; unused
 
 ViridianBlackboardStatusPointers:
-	dw ViridianBlackboardSleepText
-	dw ViridianBlackboardPoisonText
-	dw ViridianBlackboardPrlzText
-	dw ViridianBlackboardBurnText
-	dw ViridianBlackboardFrozenText
+	.DW ViridianBlackboardSleepText
+	.DW ViridianBlackboardPoisonText
+	.DW ViridianBlackboardPrlzText
+	.DW ViridianBlackboardBurnText
+	.DW ViridianBlackboardFrozenText
 
 ViridianBlackboardSleepText:
-	text_far _ViridianBlackboardSleepText
+	text_far WLA_GLOBAL_ViridianBlackboardSleepText
 	text_end
 
 ViridianBlackboardPoisonText:
-	text_far _ViridianBlackboardPoisonText
+	text_far WLA_GLOBAL_ViridianBlackboardPoisonText
 	text_end
 
 ViridianBlackboardPrlzText:
-	text_far _ViridianBlackboardPrlzText
+	text_far WLA_GLOBAL_ViridianBlackboardPrlzText
 	text_end
 
 ViridianBlackboardBurnText:
-	text_far _ViridianBlackboardBurnText
+	text_far WLA_GLOBAL_ViridianBlackboardBurnText
 	text_end
 
 ViridianBlackboardFrozenText:
-	text_far _ViridianBlackboardFrozenText
+	text_far WLA_GLOBAL_ViridianBlackboardFrozenText
 	text_end

@@ -1,9 +1,12 @@
-DEF OPP_ID_OFFSET EQU 200
+.DEFINE OPP_ID_OFFSET 200
 
-MACRO trainer_const
+.MACRO trainer_const
 	const \1
-	DEF OPP_\1 EQU OPP_ID_OFFSET + \1
-ENDM
+	; Use the enumeration value directly. Referencing the definition just
+	; created above leaves a deferred stack item in every object, which becomes
+	; ambiguous when the shared constants are linked from multiple roots.
+	.DEFINE OPP_\1 OPP_ID_OFFSET + const_value - const_inc
+.ENDM
 
 ; trainer class ids
 ; indexes for:
@@ -62,4 +65,4 @@ ENDM
 	trainer_const CHANNELER      ; $2D
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
-DEF NUM_TRAINERS EQU const_value - 1
+.DEFINE NUM_TRAINERS const_value - 1

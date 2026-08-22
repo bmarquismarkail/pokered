@@ -46,7 +46,7 @@ Route8TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_7, 2, Route8Gambler2BattleText, Route8Gambler2EndBattleText, Route8Gambler2AfterBattleText
 Route8TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_8_TRAINER_8, 4, Route8CooltrainerF4BattleText, Route8CooltrainerF4EndBattleText, Route8CooltrainerF4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route8SuperNerd1Text:
 	text_asm
@@ -55,15 +55,15 @@ Route8SuperNerd1Text:
 	jp TextScriptEnd
 
 Route8SuperNerd1BattleText:
-	text_far _Route8SuperNerd1BattleText
+	text_far WLA_GLOBAL_Route8SuperNerd1BattleText
 	text_end
 
 Route8SuperNerd1EndBattleText:
-	text_far _Route8SuperNerd1EndBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd1EndBattleText
 	text_end
 
 Route8SuperNerd1AfterBattleText:
-	text_far _Route8SuperNerd1AfterBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd1AfterBattleText
 	text_end
 
 Route8Gambler1Text:
@@ -73,15 +73,15 @@ Route8Gambler1Text:
 	jp TextScriptEnd
 
 Route8Gambler1BattleText:
-	text_far _Route8Gambler1BattleText
+	text_far WLA_GLOBAL_Route8Gambler1BattleText
 	text_end
 
 Route8Gambler1EndBattleText:
-	text_far _Route8Gambler1EndBattleText
+	text_far WLA_GLOBAL_Route8Gambler1EndBattleText
 	text_end
 
 Route8Gambler1AfterBattleText:
-	text_far _Route8Gambler1AfterBattleText
+	text_far WLA_GLOBAL_Route8Gambler1AfterBattleText
 	text_end
 
 Route8SuperNerd2Text:
@@ -91,15 +91,15 @@ Route8SuperNerd2Text:
 	jp TextScriptEnd
 
 Route8SuperNerd2BattleText:
-	text_far _Route8SuperNerd2BattleText
+	text_far WLA_GLOBAL_Route8SuperNerd2BattleText
 	text_end
 
 Route8SuperNerd2EndBattleText:
-	text_far _Route8SuperNerd2EndBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd2EndBattleText
 	text_end
 
 Route8SuperNerd2AfterBattleText:
-	text_far _Route8SuperNerd2AfterBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd2AfterBattleText
 	text_end
 
 Route8CooltrainerF1Text:
@@ -109,15 +109,15 @@ Route8CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route8CooltrainerF1BattleText:
-	text_far _Route8CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF1BattleText
 	text_end
 
 Route8CooltrainerF1EndBattleText:
-	text_far _Route8CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF1EndBattleText
 	text_end
 
 Route8CooltrainerF1AfterBattleText:
-	text_far _Route8CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF1AfterBattleText
 	text_end
 
 Route8SuperNerd3Text:
@@ -127,15 +127,15 @@ Route8SuperNerd3Text:
 	jp TextScriptEnd
 
 Route8SuperNerd3BattleText:
-	text_far _Route8SuperNerd3BattleText
+	text_far WLA_GLOBAL_Route8SuperNerd3BattleText
 	text_end
 
 Route8SuperNerd3EndBattleText:
-	text_far _Route8SuperNerd3EndBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd3EndBattleText
 	text_end
 
 Route8SuperNerd3AfterBattleText:
-	text_far _Route8SuperNerd3AfterBattleText
+	text_far WLA_GLOBAL_Route8SuperNerd3AfterBattleText
 	text_end
 
 Route8CooltrainerF2Text:
@@ -145,15 +145,15 @@ Route8CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route8CooltrainerF2BattleText:
-	text_far _Route8CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF2BattleText
 	text_end
 
 Route8CooltrainerF2EndBattleText:
-	text_far _Route8CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF2EndBattleText
 	text_end
 
 Route8CooltrainerF2AfterBattleText:
-	text_far _Route8CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF2AfterBattleText
 	text_end
 
 Route8CooltrainerF3Text:
@@ -163,15 +163,15 @@ Route8CooltrainerF3Text:
 	jp TextScriptEnd
 
 Route8CooltrainerF3BattleText:
-	text_far _Route8CooltrainerF3BattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF3BattleText
 	text_end
 
 Route8CooltrainerF3EndBattleText:
-	text_far _Route8CooltrainerF3EndBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF3EndBattleText
 	text_end
 
 Route8CooltrainerF3AfterBattleText:
-	text_far _Route8CooltrainerF3AfterBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF3AfterBattleText
 	text_end
 
 Route8Gambler2Text:
@@ -181,15 +181,15 @@ Route8Gambler2Text:
 	jp TextScriptEnd
 
 Route8Gambler2BattleText:
-	text_far _Route8Gambler2BattleText
+	text_far WLA_GLOBAL_Route8Gambler2BattleText
 	text_end
 
 Route8Gambler2EndBattleText:
-	text_far _Route8Gambler2EndBattleText
+	text_far WLA_GLOBAL_Route8Gambler2EndBattleText
 	text_end
 
 Route8Gambler2AfterBattleText:
-	text_far _Route8Gambler2AfterBattleText
+	text_far WLA_GLOBAL_Route8Gambler2AfterBattleText
 	text_end
 
 Route8CooltrainerF4Text:
@@ -199,17 +199,17 @@ Route8CooltrainerF4Text:
 	jp TextScriptEnd
 
 Route8CooltrainerF4BattleText:
-	text_far _Route8CooltrainerF4BattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF4BattleText
 	text_end
 
 Route8CooltrainerF4EndBattleText:
-	text_far _Route8CooltrainerF4EndBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF4EndBattleText
 	text_end
 
 Route8CooltrainerF4AfterBattleText:
-	text_far _Route8CooltrainerF4AfterBattleText
+	text_far WLA_GLOBAL_Route8CooltrainerF4AfterBattleText
 	text_end
 
 Route8UndergroundSignText:
-	text_far _Route8UndergroundSignText
+	text_far WLA_GLOBAL_Route8UndergroundSignText
 	text_end

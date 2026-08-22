@@ -1,4 +1,5 @@
-_SilphCo11FSilphPresidentText::
+_SilphCo11FSilphPresidentText:
+WLA_GLOBAL_SilphCo11FSilphPresidentText:
 	text "PRESIDENT: Thank"
 	line "you for saving"
 	cont "SILPH!"
@@ -19,14 +20,16 @@ _SilphCo11FSilphPresidentText::
 	line "will do!"
 	prompt
 
-_SilphCo11FSilphPresidentReceivedMasterBallText::
+_SilphCo11FSilphPresidentReceivedMasterBallText:
+WLA_GLOBAL_SilphCo11FSilphPresidentReceivedMasterBallText:
 	text "<PLAYER> got a"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_SilphCo11FSilphPresidentMasterBallDescriptionText::
+_SilphCo11FSilphPresidentMasterBallDescriptionText:
+WLA_GLOBAL_SilphCo11FSilphPresidentMasterBallDescriptionText:
 	text "PRESIDENT: You"
 	line "can't buy that"
 	cont "anywhere!"
@@ -44,12 +47,14 @@ _SilphCo11FSilphPresidentMasterBallDescriptionText::
 	cont "it, though."
 	done
 
-_SilphCo11FSilphPresidentNoRoomText::
+_SilphCo11FSilphPresidentNoRoomText:
+WLA_GLOBAL_SilphCo11FSilphPresidentNoRoomText:
 	text "You have no"
 	line "room for this."
 	done
 
-_SilphCo11FBeautyText::
+_SilphCo11FBeautyText:
+WLA_GLOBAL_SilphCo11FBeautyText:
 	text "SECRETARY: Thank"
 	line "you for rescuing"
 	cont "all of us!"
@@ -58,7 +63,8 @@ _SilphCo11FBeautyText::
 	line "courage."
 	done
 
-_SilphCo11FGiovanniText::
+_SilphCo11FGiovanniText:
+WLA_GLOBAL_SilphCo11FGiovanniText:
 	text "Ah <PLAYER>!"
 	line "So we meet again!"
 
@@ -75,12 +81,15 @@ _SilphCo11FGiovanniText::
 	line "world of pain!"
 	done
 
-_SilphCo10FGiovanniILostAgainText::
+_SilphCo11FGiovanniILostAgainText:
+_SilphCo10FGiovanniILostAgainText:
+WLA_GLOBAL_SilphCo10FGiovanniILostAgainText:
 	text "Arrgh!!"
 	line "I lost again!?"
 	prompt
 
-_SilphCo11FGiovanniYouRuinedOurPlansText::
+_SilphCo11FGiovanniYouRuinedOurPlansText:
+WLA_GLOBAL_SilphCo11FGiovanniYouRuinedOurPlansText:
 	text "Blast it all!"
 	line "You ruined our"
 	cont "plans for SILPH!"
@@ -97,39 +106,47 @@ _SilphCo11FGiovanniYouRuinedOurPlansText::
 	line "shall return!"
 	done
 
-_SilphCo11FRocket1BattleText::
+_SilphCo11FRocket1BattleText:
+WLA_GLOBAL_SilphCo11FRocket1BattleText:
 	text "Stop right there!"
 	line "Don't you move!"
 	done
 
-_SilphCo11FRocket1EndBattleText::
+_SilphCo11FRocket1EndBattleText:
+WLA_GLOBAL_SilphCo11FRocket1EndBattleText:
 	text "Don't..."
 	line "Please!"
 	prompt
 
-_SilphCo11FRocket1AfterBattleText::
+_SilphCo11FRocket1AfterBattleText:
+WLA_GLOBAL_SilphCo11FRocket1AfterBattleText:
 	text "So, you want to"
 	line "see my BOSS?"
 	done
 
-_SilphCo11FRocket2BattleText::
+_SilphCo11FRocket2BattleText:
+WLA_GLOBAL_SilphCo11FRocket2BattleText:
 	text "Halt! Do you have"
 	line "an appointment"
 	cont "with my BOSS?"
 	done
 
-_SilphCo11FRocket2EndBattleText::
+_SilphCo11FRocket2EndBattleText:
+WLA_GLOBAL_SilphCo11FRocket2EndBattleText:
 	text "Gaah!"
 	line "Demolished!"
 	prompt
 
-_SilphCo11FRocket2AfterBattleText::
+_SilphCo11FRocket2AfterBattleText:
+WLA_GLOBAL_SilphCo11FRocket2AfterBattleText:
 	text "Watch your step,"
 	line "my BOSS likes his"
 	cont "#MON tough!"
 	done
 
-_SilphCo10FPorygonText::
+_SilphCo11FPorygonText:
+_SilphCo10FPorygonText:
+WLA_GLOBAL_SilphCo10FPorygonText:
 	text "The monitor has"
 	line "#MON on it!"
 	done

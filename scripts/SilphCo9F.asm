@@ -13,49 +13,49 @@ SilphCo9FGateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo9FGateCallbackScript.GateCoordinates
 	call SilphCo9F_SetCardKeyDoorYScript
 	call SilphCo9F_SetUnlockedSilphCoDoorsScript
 	CheckEvent EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	jr nz, .unlock_door1
+	jr nz, SilphCo9FGateCallbackScript.unlock_door1
 	push af
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 4, 1
+	lb "bc", 4, 1
 	predef ReplaceTileBlock
 	pop af
-.unlock_door1
+SilphCo9FGateCallbackScript.unlock_door1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	jr nz, .unlock_door2
+	jr nz, SilphCo9FGateCallbackScript.unlock_door2
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 2, 9
+	lb "bc", 2, 9
 	predef ReplaceTileBlock
 	pop af
-.unlock_door2
+SilphCo9FGateCallbackScript.unlock_door2
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR2
-	jr nz, .unlock_door3
+	jr nz, SilphCo9FGateCallbackScript.unlock_door3
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 5, 9
+	lb "bc", 5, 9
 	predef ReplaceTileBlock
 	pop af
-.unlock_door3
+SilphCo9FGateCallbackScript.unlock_door3
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR3
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 6, 5
+	lb "bc", 6, 5
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo9FGateCallbackScript.GateCoordinates:
 	dbmapcoord  1,  4
 	dbmapcoord  9,  2
 	dbmapcoord  9,  5
 	dbmapcoord  5,  6
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo9F_SetCardKeyDoorYScript:
 	push hl
@@ -65,54 +65,54 @@ SilphCo9F_SetCardKeyDoorYScript:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	pop hl
-.loop_card_key_doors
+SilphCo9F_SetCardKeyDoorYScript.loop_card_key_doors
 	ld a, [hli]
 	cp $ff
-	jr z, .exit_loop
+	jr z, SilphCo9F_SetCardKeyDoorYScript.exit_loop
 	push hl
 	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .check_door
+	jr z, SilphCo9F_SetCardKeyDoorYScript.check_door
 	inc hl
-	jr .loop_card_key_doors
-.check_door
+	jr SilphCo9F_SetCardKeyDoorYScript.loop_card_key_doors
+SilphCo9F_SetCardKeyDoorYScript.check_door
 	ld a, [hli]
 	cp c
-	jr nz, .loop_card_key_doors
+	jr nz, SilphCo9F_SetCardKeyDoorYScript.loop_card_key_doors
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ret
-.exit_loop
+SilphCo9F_SetCardKeyDoorYScript.exit_loop
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	ret
 
 SilphCo9F_SetUnlockedSilphCoDoorsScript:
-	EventFlagAddress hl, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
-	ldh a, [hUnlockedSilphCoDoors]
+	EventFlagAddress "hl", EVENT_SILPH_CO_9_UNLOCKED_DOOR1
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	cp $1
-	jr nz, .unlock_door1
+	jr nz, SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.unlock_door1
+SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door1
 	cp $2
-	jr nz, .unlock_door2
+	jr nz, SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.unlock_door2
+SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door2
 	cp $3
-	jr nz, .unlock_door3
+	jr nz, SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door3
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.unlock_door3
+SilphCo9F_SetUnlockedSilphCoDoorsScript.unlock_door3
 	cp $4
 	ret nz
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
@@ -139,36 +139,36 @@ SilphCo9TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_1, 2, SilphCo9FScientistBattleText, SilphCo9FScientistEndBattleText, SilphCo9FScientistAfterBattleText
 SilphCo9TrainerHeader2:
 	trainer EVENT_BEAT_SILPH_CO_9F_TRAINER_2, 4, SilphCo9FRocket2BattleText, SilphCo9FRocket2EndBattleText, SilphCo9FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo9FNurseText:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .beat_giovanni
-	ld hl, .YouLookTiredText
+	jr nz, SilphCo9FNurseText.beat_giovanni
+	ld hl, SilphCo9FNurseText.YouLookTiredText
 	call PrintText
 	predef HealParty
 	call GBFadeOutToWhite
 	call Delay3
 	call GBFadeInFromWhite
-	ld hl, .DontGiveUpText
+	ld hl, SilphCo9FNurseText.DontGiveUpText
 	call PrintText
-	jr .text_script_end
-.beat_giovanni
-	ld hl, .ThankYouText
+	jr SilphCo9FNurseText.text_script_end
+SilphCo9FNurseText.beat_giovanni
+	ld hl, SilphCo9FNurseText.ThankYouText
 	call PrintText
-.text_script_end
+SilphCo9FNurseText.text_script_end
 	jp TextScriptEnd
 
-.YouLookTiredText:
+SilphCo9FNurseText.YouLookTiredText:
 	text_far SilphCo9FNurseYouLookTiredText
 	text_end
 
-.DontGiveUpText:
+SilphCo9FNurseText.DontGiveUpText:
 	text_far SilphCo9FNurseDontGiveUpText
 	text_end
 
-.ThankYouText:
+SilphCo9FNurseText.ThankYouText:
 	text_far SilphCo9FNurseThankYouText
 	text_end
 
@@ -191,37 +191,37 @@ SilphCo9FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo9FRocket1BattleText:
-	text_far _SilphCo9FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket1BattleText
 	text_end
 
 SilphCo9FRocket1EndBattleText:
-	text_far _SilphCo9FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket1EndBattleText
 	text_end
 
 SilphCo9FRocket1AfterBattleText:
-	text_far _SilphCo9FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket1AfterBattleText
 	text_end
 
 SilphCo9FScientistBattleText:
-	text_far _SilphCo9FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo9FScientistBattleText
 	text_end
 
 SilphCo9FScientistEndBattleText:
-	text_far _SilphCo9FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo9FScientistEndBattleText
 	text_end
 
 SilphCo9FScientistAfterBattleText:
-	text_far _SilphCo9FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo9FScientistAfterBattleText
 	text_end
 
 SilphCo9FRocket2BattleText:
-	text_far _SilphCo9FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket2BattleText
 	text_end
 
 SilphCo9FRocket2EndBattleText:
-	text_far _SilphCo9FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket2EndBattleText
 	text_end
 
 SilphCo9FRocket2AfterBattleText:
-	text_far _SilphCo9FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo9FRocket2AfterBattleText
 	text_end

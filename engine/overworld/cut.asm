@@ -3,29 +3,29 @@ UsedCut:
 	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
 	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
-	jr z, .overworld
+	jr z, UsedCut.overworld
 	cp GYM
-	jr nz, .nothingToCut
+	jr nz, UsedCut.nothingToCut
 	ld a, [wTileInFrontOfPlayer]
 	cp $50 ; gym cut tree
-	jr nz, .nothingToCut
-	jr .canCut
-.overworld
+	jr nz, UsedCut.nothingToCut
+	jr UsedCut.canCut
+UsedCut.overworld
 	dec a
 	ld a, [wTileInFrontOfPlayer]
 	cp $3d ; cut tree
-	jr z, .canCut
+	jr z, UsedCut.canCut
 	cp $52 ; grass
-	jr z, .canCut
-.nothingToCut
-	ld hl, .NothingToCutText
+	jr z, UsedCut.canCut
+UsedCut.nothingToCut
+	ld hl, UsedCut.NothingToCutText
 	jp PrintText
 
-.NothingToCutText
-	text_far _NothingToCutText
+UsedCut.NothingToCutText
+	text_far WLA_GLOBAL_NothingToCutText
 	text_end
 
-.canCut
+UsedCut.canCut
 	ld [wCutTile], a
 	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a ; used cut
@@ -38,14 +38,14 @@ UsedCut:
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
 	ld a, SCREEN_HEIGHT_PX
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
@@ -63,71 +63,71 @@ UsedCut:
 	ld a, SFX_CUT
 	call PlaySound
 	ld a, $90
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	call UpdateSprites
 	jp RedrawMapView
 
 UsedCutText:
-	text_far _UsedCutText
+	text_far WLA_GLOBAL_UsedCutText
 	text_end
 
 InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a
 	ld a, %11100100
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	ld a, [wCutTile]
 	cp $52
-	jr z, .grass
+	jr z, InitCutAnimOAM.grass
 ; tree
-	ld de, Overworld_GFX tile $2d ; cuttable tree sprite top row
-	ld hl, vChars1 tile $7c
-	lb bc, BANK(Overworld_GFX), 2
+	ld de, Overworld_GFX + TILE_SIZE * $2d ; cuttable tree sprite top row
+	ld hl, vChars1 + TILE_SIZE * $7c
+	lb "bc", bank(Overworld_GFX), 2
 	call CopyVideoData
-	ld de, Overworld_GFX tile $3d ; cuttable tree sprite bottom row
-	ld hl, vChars1 tile $7e
-	lb bc, BANK(Overworld_GFX), 2
+	ld de, Overworld_GFX + TILE_SIZE * $3d ; cuttable tree sprite bottom row
+	ld hl, vChars1 + TILE_SIZE * $7e
+	lb "bc", bank(Overworld_GFX), 2
 	call CopyVideoData
 	jr WriteCutOrBoulderDustAnimationOAMBlock
-.grass
-	ld hl, vChars1 tile $7c
+InitCutAnimOAM.grass
+	ld hl, vChars1 + TILE_SIZE * $7c
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 tile $7d
+	ld hl, vChars1 + TILE_SIZE * $7d
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 tile $7e
+	ld hl, vChars1 + TILE_SIZE * $7e
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 tile $7f
+	ld hl, vChars1 + TILE_SIZE * $7f
 	call LoadCutGrassAnimationTilePattern
 	call WriteCutOrBoulderDustAnimationOAMBlock
 	ld hl, wShadowOAMSprite36Attributes
 	ld de, OBJ_SIZE
 	ld a, OAM_XFLIP | OAM_PAL1
 	ld c, e
-.loop
+InitCutAnimOAM.loop
 	ld [hl], a
 	add hl, de
 	xor OAM_YFLIP | OAM_XFLIP
 	dec c
-	jr nz, .loop
+	jr nz, InitCutAnimOAM.loop
 	ret
 
 LoadCutGrassAnimationTilePattern:
-	ld de, MoveAnimationTiles1 tile 6 ; tile depicting a leaf
-	lb bc, BANK(MoveAnimationTiles1), 1
+	ld de, MoveAnimationTiles1 + TILE_SIZE * 6 ; + TILE_SIZE * depicting a leaf
+	lb "bc", bank(MoveAnimationTiles1), 1
 	jp CopyVideoData
 
 WriteCutOrBoulderDustAnimationOAMBlock:
 	call GetCutOrBoulderDustAnimationOffsets
 	ld a, $9
-	ld de, .OAMBlock
+	ld de, WriteCutOrBoulderDustAnimationOAMBlock.OAMBlock
 	jp WriteOAMBlock
 
-.OAMBlock:
-; tile ID, attributes
-	db $fc, OAM_PAL1
-	db $fd, OAM_PAL1
-	db $fe, OAM_PAL1
-	db $ff, OAM_PAL1
+WriteCutOrBoulderDustAnimationOAMBlock.OAMBlock:
+; + TILE_SIZE * ID, attributes
+	.DB $fc, OAM_PAL1
+	.DB $fd, OAM_PAL1
+	.DB $fe, OAM_PAL1
+	.DB $ff, OAM_PAL1
 
 GetCutOrBoulderDustAnimationOffsets:
 	ld hl, wSpritePlayerStateData1YPixels
@@ -145,9 +145,9 @@ GetCutOrBoulderDustAnimationOffsets:
 	ld a, [wWhichAnimationOffsets]
 	and a
 	ld hl, CutAnimationOffsets
-	jr z, .next
+	jr z, GetCutOrBoulderDustAnimationOffsets.next
 	ld hl, BoulderDustAnimationOffsets
-.next
+GetCutOrBoulderDustAnimationOffsets.next
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -162,23 +162,22 @@ GetCutOrBoulderDustAnimationOffsets:
 
 CutAnimationOffsets:
 ; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
-	db  8, 36 ; player is facing down
-	db  8,  4 ; player is facing up
-	db -8, 20 ; player is facing left
-	db 24, 20 ; player is facing right
+	.DB  8, 36 ; player is facing down
+	.DB  8,  4 ; player is facing up
+	.DB -8, 20 ; player is facing left
+	.DB 24, 20 ; player is facing right
 
 BoulderDustAnimationOffsets:
 ; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
 ; These offsets represent 2 blocks away from the player
-	db  8,  52 ; player is facing down
-	db  8, -12 ; player is facing up
-	db -24, 20 ; player is facing left
-	db 40,  20 ; player is facing right
+	.DB  8,  52 ; player is facing down
+	.DB  8, -12 ; player is facing up
+	.DB -24, 20 ; player is facing left
+	.DB 40,  20 ; player is facing right
 
 ReplaceTreeTileBlock:
-; Determine the address of the tile block that contains the tile in front of the
-; player (i.e. where the tree is) and replace it with the corresponding tile
-; block that doesn't have the tree.
+; Determine the address of the + TILE_SIZE * block that contains the + TILE_SIZE * in front of the
+; player (i.e. where the tree is) and replace it with the corresponding + TILE_SIZE * ; block that doesn't have the tree.
 	push de
 	ld a, [wCurMapWidth]
 	add 6
@@ -192,63 +191,63 @@ ReplaceTreeTileBlock:
 	add hl, bc
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a
-	jr z, .down
+	jr z, ReplaceTreeTileBlock.down
 	cp SPRITE_FACING_UP
-	jr z, .up
+	jr z, ReplaceTreeTileBlock.up
 	cp SPRITE_FACING_LEFT
-	jr z, .left
+	jr z, ReplaceTreeTileBlock.left
 ; right
 	ld a, [wXBlockCoord]
 	and a
-	jr z, .centerTileBlock
-	jr .rightOfCenter
-.down
+	jr z, ReplaceTreeTileBlock.centerTileBlock
+	jr ReplaceTreeTileBlock.rightOfCenter
+ReplaceTreeTileBlock.down
 	ld a, [wYBlockCoord]
 	and a
-	jr z, .centerTileBlock
-	jr .belowCenter
-.up
+	jr z, ReplaceTreeTileBlock.centerTileBlock
+	jr ReplaceTreeTileBlock.belowCenter
+ReplaceTreeTileBlock.up
 	ld a, [wYBlockCoord]
 	and a
-	jr z, .aboveCenter
-	jr .centerTileBlock
-.left
+	jr z, ReplaceTreeTileBlock.aboveCenter
+	jr ReplaceTreeTileBlock.centerTileBlock
+ReplaceTreeTileBlock.left
 	ld a, [wXBlockCoord]
 	and a
-	jr z, .leftOfCenter
-	jr .centerTileBlock
-.belowCenter
+	jr z, ReplaceTreeTileBlock.leftOfCenter
+	jr ReplaceTreeTileBlock.centerTileBlock
+ReplaceTreeTileBlock.belowCenter
 	add hl, bc
-.centerTileBlock
+ReplaceTreeTileBlock.centerTileBlock
 	add hl, bc
-.aboveCenter
+ReplaceTreeTileBlock.aboveCenter
 	ld e, $2
 	add hl, de
-	jr .next
-.leftOfCenter
+	jr ReplaceTreeTileBlock.next
+ReplaceTreeTileBlock.leftOfCenter
 	ld e, $1
 	add hl, bc
 	add hl, de
-	jr .next
-.rightOfCenter
+	jr ReplaceTreeTileBlock.next
+ReplaceTreeTileBlock.rightOfCenter
 	ld e, $3
 	add hl, bc
 	add hl, de
-.next
+ReplaceTreeTileBlock.next
 	pop de
 	ld a, [hl]
 	ld c, a
-.loop ; find the matching tile block in the array
+ReplaceTreeTileBlock.loop ; find the matching + TILE_SIZE * block in the array
 	ld a, [de]
 	inc de
 	inc de
 	cp $ff
 	ret z
 	cp c
-	jr nz, .loop
+	jr nz, ReplaceTreeTileBlock.loop
 	dec de
-	ld a, [de] ; replacement tile block from matching array entry
+	ld a, [de] ; replacement + TILE_SIZE * block from matching array entry
 	ld [hl], a
 	ret
 
-INCLUDE "data/tilesets/cut_tree_blocks.asm"
+.INCLUDE "data/tilesets/cut_tree_blocks.asm"

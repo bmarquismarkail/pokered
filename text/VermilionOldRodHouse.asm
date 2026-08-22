@@ -1,4 +1,5 @@
-_VermilionOldRodHouseFishingGuruDoYouLikeToFishText::
+_VermilionOldRodHouseFishingGuruDoYouLikeToFishText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruDoYouLikeToFishText:
 	text "I'm the FISHING"
 	line "GURU!"
 
@@ -9,7 +10,8 @@ _VermilionOldRodHouseFishingGuruDoYouLikeToFishText::
 	line "fish?"
 	done
 
-_VermilionOldRodHouseFishingGuruTakeThisText::
+_VermilionOldRodHouseFishingGuruTakeThisText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruTakeThisText:
 	text "Grand! I like"
 	line "your style!"
 
@@ -22,7 +24,8 @@ _VermilionOldRodHouseFishingGuruTakeThisText::
 	text "!@"
 	text_end
 
-_VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText::
+_VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText:
 	text_start
 
 	para "Fishing is a way"
@@ -34,12 +37,14 @@ _VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText::
 	cont "one, young one!"
 	done
 
-_VermilionOldRodHouseFishingGuruThatsSoDisappointingText::
+_VermilionOldRodHouseFishingGuruThatsSoDisappointingText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruThatsSoDisappointingText:
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_VermilionOldRodHouseFishingGuruHowAreTheFishBitingText::
+_VermilionOldRodHouseFishingGuruHowAreTheFishBitingText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruHowAreTheFishBitingText:
 	text "Hello there,"
 	line "<PLAYER>!"
 
@@ -47,7 +52,8 @@ _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText::
 	line "biting?"
 	done
 
-_VermilionOldRodHouseFishingGuruNoRoomText::
+_VermilionOldRodHouseFishingGuruNoRoomText:
+WLA_GLOBAL_VermilionOldRodHouseFishingGuruNoRoomText:
 	text "Oh no!"
 
 	para "You have no room"

@@ -13,11 +13,11 @@ VermilionPokecenterNurseText:
 	script_pokecenter_nurse
 
 VermilionPokecenterFishingGuruText:
-	text_far _VermilionPokecenterFishingGuruText
+	text_far WLA_GLOBAL_VermilionPokecenterFishingGuruText
 	text_end
 
 VermilionPokecenterSailorText:
-	text_far _VermilionPokecenterSailorText
+	text_far WLA_GLOBAL_VermilionPokecenterSailorText
 	text_end
 
 VermilionPokecenterLinkReceptionistText:

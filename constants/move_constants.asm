@@ -171,9 +171,9 @@
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
 	const STRUGGLE     ; a5
-DEF NUM_ATTACKS EQU const_value - 1
+.DEFINE NUM_ATTACKS const_value - 1
 
-DEF CANNOT_MOVE EQU $ff
+.DEFINE CANNOT_MOVE $ff
 
 	; Moves do double duty as animation identifiers.
 
@@ -215,4 +215,4 @@ DEF CANNOT_MOVE EQU $ff
 	const ROCK_ANIM ; throw rock
 	const BAIT_ANIM ; throw bait
 
-DEF NUM_ATTACK_ANIMS EQU const_value - 1
+.DEFINE NUM_ATTACK_ANIMS const_value - 1

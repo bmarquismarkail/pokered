@@ -16,9 +16,9 @@ CeruleanPokecenterNurseText:
 	script_pokecenter_nurse
 
 CeruleanPokecenterSuperNerdText:
-	text_far _CeruleanPokecenterSuperNerdText
+	text_far WLA_GLOBAL_CeruleanPokecenterSuperNerdText
 	text_end
 
 CeruleanPokecenterGentlemanText:
-	text_far _CeruleanPokecenterGentlemanText
+	text_far WLA_GLOBAL_CeruleanPokecenterGentlemanText
 	text_end

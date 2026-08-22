@@ -1,15 +1,15 @@
-GetItemPrice::
+GetItemPrice:
 ; Stores item's price as BCD at hItemPrice (3 bytes)
 ; Input: [wCurItem] = item id
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	ld a, [wListMenuID]
 	cp MOVESLISTMENU
-	ld a, BANK(ItemPrices)
-	jr nz, .ok
+	ld a, bank(ItemPrices)
+	jr nz, GetItemPrice.ok
 	ld a, $f ; hardcoded Bank
-.ok
-	ldh [hLoadedROMBank], a
+GetItemPrice.ok
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ld hl, wItemPrices
 	ld a, [hli]
@@ -17,28 +17,28 @@ GetItemPrice::
 	ld l, a
 	ld a, [wCurItem]
 	cp HM01
-	jr nc, .getTMPrice
+	jr nc, GetItemPrice.getTMPrice
 	ld bc, $3
-.loop
+GetItemPrice.loop
 	add hl, bc
 	dec a
-	jr nz, .loop
+	jr nz, GetItemPrice.loop
 	dec hl
 	ld a, [hld]
-	ldh [hItemPrice + 2], a
+	ldh [lobyte(hItemPrice + 2)], a
 	ld a, [hld]
-	ldh [hItemPrice + 1], a
+	ldh [lobyte(hItemPrice + 1)], a
 	ld a, [hl]
-	ldh [hItemPrice], a
-	jr .done
-.getTMPrice
-	ld a, BANK(GetMachinePrice)
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hItemPrice)], a
+	jr GetItemPrice.done
+GetItemPrice.getTMPrice
+	ld a, bank(GetMachinePrice)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call GetMachinePrice
-.done
+GetItemPrice.done
 	ld de, hItemPrice
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret

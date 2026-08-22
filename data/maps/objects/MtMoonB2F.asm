@@ -10,17 +10,16 @@
 	const_export MTMOONB2F_TM_MEGA_PUNCH
 
 MtMoonB2F_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event 25,  9, MT_MOON_B1F, 2
 	warp_event 21, 17, MT_MOON_B1F, 5
 	warp_event 15, 27, MT_MOON_B1F, 6
 	warp_event  5,  7, MT_MOON_B1F, 7
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 9
 	object_event 12,  8, SPRITE_SUPER_NERD, STAY, RIGHT, TEXT_MTMOONB2F_SUPER_NERD, OPP_SUPER_NERD, 2
 	object_event 11, 16, SPRITE_ROCKET, STAY, DOWN, TEXT_MTMOONB2F_ROCKET1, OPP_ROCKET, 1
 	object_event 15, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_MTMOONB2F_ROCKET2, OPP_ROCKET, 2
@@ -31,4 +30,10 @@ MtMoonB2F_Object:
 	object_event 25, 21, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOONB2F_HP_UP, HP_UP
 	object_event 29,  5, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOONB2F_TM_MEGA_PUNCH, TM_MEGA_PUNCH
 
-	def_warps_to MT_MOON_B2F
+	event_displacement MT_MOON_B2F_WIDTH, 25, 9
+
+	event_displacement MT_MOON_B2F_WIDTH, 21, 17
+
+	event_displacement MT_MOON_B2F_WIDTH, 15, 27
+
+	event_displacement MT_MOON_B2F_WIDTH, 5, 7

@@ -1,47 +1,47 @@
 ParalyzeEffect_:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveType
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jp z, .next
+	jp z, ParalyzeEffect_.next
 	ld hl, wBattleMonStatus
 	ld de, wEnemyMoveType
-.next
+ParalyzeEffect_.next
 	ld a, [hl]
 	and a ; does the target already have a status ailment?
-	jr nz, .didntAffect
+	jr nz, ParalyzeEffect_.didntAffect
 ; check if the target is immune due to types
 	ld a, [de]
 	cp ELECTRIC
-	jr nz, .hitTest
+	jr nz, ParalyzeEffect_.hitTest
 	ld b, h
 	ld c, l
 	inc bc
 	ld a, [bc]
 	cp GROUND
-	jr z, .doesntAffect
+	jr z, ParalyzeEffect_.doesntAffect
 	inc bc
 	ld a, [bc]
 	cp GROUND
-	jr z, .doesntAffect
-.hitTest
+	jr z, ParalyzeEffect_.doesntAffect
+ParalyzeEffect_.hitTest
 	push hl
 	callfar MoveHitTest
 	pop hl
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .didntAffect
+	jr nz, ParalyzeEffect_.didntAffect
 	set PAR, [hl]
 	callfar QuarterSpeedDueToParalysis
 	ld c, 30
 	call DelayFrames
 	callfar PlayCurrentMoveAnimation
 	jpfar PrintMayNotAttackText
-.didntAffect
+ParalyzeEffect_.didntAffect
 	ld c, 50
 	call DelayFrames
 	jpfar PrintDidntAffectText
-.doesntAffect
+ParalyzeEffect_.doesntAffect
 	ld c, 50
 	call DelayFrames
 	jpfar PrintDoesntAffectText

@@ -1,4 +1,4 @@
-PlayBattleMusic::
+PlayBattleMusic:
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
@@ -6,29 +6,29 @@ PlayBattleMusic::
 	ld [wNewSoundID], a
 	call PlaySound
 	call DelayFrame
-	ld c, BANK(Music_GymLeaderBattle)
+	ld c, bank(Music_GymLeaderBattle)
 	ld a, [wGymLeaderNo]
 	and a
-	jr z, .notGymLeaderBattle
+	jr z, PlayBattleMusic.notGymLeaderBattle
 	ld a, MUSIC_GYM_LEADER_BATTLE
-	jr .playSong
-.notGymLeaderBattle
+	jr PlayBattleMusic.playSong
+PlayBattleMusic.notGymLeaderBattle
 	ld a, [wCurOpponent]
 	cp OPP_ID_OFFSET
-	jr c, .wildBattle
+	jr c, PlayBattleMusic.wildBattle
 	cp OPP_RIVAL3
-	jr z, .finalBattle
+	jr z, PlayBattleMusic.finalBattle
 	cp OPP_LANCE
-	jr nz, .normalTrainerBattle
+	jr nz, PlayBattleMusic.normalTrainerBattle
 	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
-	jr .playSong
-.normalTrainerBattle
+	jr PlayBattleMusic.playSong
+PlayBattleMusic.normalTrainerBattle
 	ld a, MUSIC_TRAINER_BATTLE
-	jr .playSong
-.finalBattle
+	jr PlayBattleMusic.playSong
+PlayBattleMusic.finalBattle
 	ld a, MUSIC_FINAL_BATTLE
-	jr .playSong
-.wildBattle
+	jr PlayBattleMusic.playSong
+PlayBattleMusic.wildBattle
 	ld a, MUSIC_WILD_BATTLE
-.playSong
+PlayBattleMusic.playSong
 	jp PlayMusic

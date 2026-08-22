@@ -1,12 +1,12 @@
-DEF wild_chance_slot = 0
-DEF wild_chance_total = 0
+.DEFINE wild_chance_slot 0
+.DEFINE wild_chance_total 0
 
-MACRO wild_chance
-	DEF wild_chance_total += \1
-	db wild_chance_total - 1
-	db wild_chance_slot * 2
-	DEF wild_chance_slot += 1
-ENDM
+.MACRO wild_chance
+	.REDEFINE wild_chance_total wild_chance_total + (\1)
+	.DB wild_chance_total - 1
+	.DB wild_chance_slot * 2
+	.REDEFINE wild_chance_slot wild_chance_slot + (1)
+.ENDM
 
 WildMonEncounterSlotChances:
 ; There are 10 slots for wild pokemon, and this is the list that defines how common each of
@@ -25,4 +25,4 @@ WildMonEncounterSlotChances:
 	wild_chance 11 ; 11/256 =  4.3% chance of slot 8
 	wild_chance  3 ;  3/256 =  1.2% chance of slot 9
 	assert_table_length NUM_WILDMONS
-	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances sum to {d:wild_chance_total}, not 256!"
+	.ASSERT ((wild_chance_total)-(256)) < 1 && ((wild_chance_total)-(256)) > -1

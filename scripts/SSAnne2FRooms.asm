@@ -42,7 +42,7 @@ SSAnne9TrainerHeader2:
 	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_2, 3, SSAnne2FRoomsGentleman2BattleText, SSAnne2FRoomsGentleman2EndBattleText, SSAnne2FRoomsGentleman2AfterBattleText
 SSAnne9TrainerHeader3:
 	trainer EVENT_BEAT_SS_ANNE_9_TRAINER_3, 2, SSAnne2FRoomsCooltrainerFBattleText, SSAnne2FRoomsCooltrainerFEndBattleText, SSAnne2FRoomsCooltrainerFAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SSAnne2FRoomsGentleman1Text:
 	text_asm
@@ -71,121 +71,121 @@ SSAnne2FRoomsCooltrainerFText:
 SSAnne2FRoomsGentleman3Text:
 	text_asm
 	call SaveScreenTilesToBuffer1
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsGentleman3Text.Text
 	call PrintText
 	call LoadScreenTilesFromBuffer1
 	ld a, SNORLAX
 	call DisplayPokedex
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsGentleman3Text
+SSAnne2FRoomsGentleman3Text.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman3Text
 	text_end
 
 SSAnne2FRoomsGentleman4Text:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsGentleman4Text.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsGentleman4Text
+SSAnne2FRoomsGentleman4Text.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman4Text
 	text_end
 
 SSAnne2FRoomsGrampsText:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsGrampsText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsGrampsText
+SSAnne2FRoomsGrampsText.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsGrampsText
 	text_end
 
 SSAnne2FRoomsGentleman5Text:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsGentleman5Text.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsGentleman5Text
+SSAnne2FRoomsGentleman5Text.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman5Text
 	text_end
 
 SSAnne2FRoomsLittleBoyText:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsLittleBoyText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsLittleBoyText
+SSAnne2FRoomsLittleBoyText.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsLittleBoyText
 	text_end
 
 SSAnne2FRoomsBrunetteGirlText:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsBrunetteGirlText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsBrunetteGirlText
+SSAnne2FRoomsBrunetteGirlText.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsBrunetteGirlText
 	text_end
 
 SSAnne2FRoomsBeautyText:
 	text_asm
-	ld hl, .Text
+	ld hl, SSAnne2FRoomsBeautyText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SSAnne2FRoomsBeautyText
+SSAnne2FRoomsBeautyText.Text:
+	text_far WLA_GLOBAL_SSAnne2FRoomsBeautyText
 	text_end
 
 SSAnne2FRoomsGentleman1BattleText:
-	text_far _SSAnne2FRoomsGentleman1BattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman1BattleText
 	text_end
 
 SSAnne2FRoomsGentleman1EndBattleText:
-	text_far _SSAnne2FRoomsGentleman1EndBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman1EndBattleText
 	text_end
 
 SSAnne2FRoomsGentleman1AfterBattleText:
-	text_far _SSAnne2FRoomsGentleman1AfterBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman1AfterBattleText
 	text_end
 
 SSAnne2FRoomsFisherBattleText:
-	text_far _SSAnne2FRoomsFisherBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsFisherBattleText
 	text_end
 
 SSAnne2FRoomsFisherEndBattleText:
-	text_far _SSAnne2FRoomsFisherEndBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsFisherEndBattleText
 	text_end
 
 SSAnne2FRoomsFisherAfterBattleText:
-	text_far _SSAnne2FRoomsFisherAfterBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsFisherAfterBattleText
 	text_end
 
 SSAnne2FRoomsGentleman2BattleText:
-	text_far _SSAnne2FRoomsGentleman2BattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman2BattleText
 	text_end
 
 SSAnne2FRoomsGentleman2EndBattleText:
-	text_far _SSAnne2FRoomsGentleman2EndBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman2EndBattleText
 	text_end
 
 SSAnne2FRoomsGentleman2AfterBattleText:
-	text_far _SSAnne2FRoomsGentleman2AfterBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsGentleman2AfterBattleText
 	text_end
 
 SSAnne2FRoomsCooltrainerFBattleText:
-	text_far _SSAnne2FRoomsCooltrainerFBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsCooltrainerFBattleText
 	text_end
 
 SSAnne2FRoomsCooltrainerFEndBattleText:
-	text_far _SSAnne2FRoomsCooltrainerFEndBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsCooltrainerFEndBattleText
 	text_end
 
 SSAnne2FRoomsCooltrainerFAfterBattleText:
-	text_far _SSAnne2FRoomsCooltrainerFAfterBattleText
+	text_far WLA_GLOBAL_SSAnne2FRoomsCooltrainerFAfterBattleText
 	text_end

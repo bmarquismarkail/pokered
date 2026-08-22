@@ -1,37 +1,37 @@
 ; The third of three duplicated sound engines.
 
-Audio3_UpdateMusic::
+Audio3_UpdateMusic:
 	ld c, CHAN1
-.loop
+Audio3_UpdateMusic.loop
 	ld b, 0
 	ld hl, wChannelSoundIDs
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .nextChannel
+	jr z, Audio3_UpdateMusic.nextChannel
 	ld a, c
 	cp CHAN5
-	jr nc, .applyAffects ; if sfx channel
+	jr nc, Audio3_UpdateMusic.applyAffects ; if sfx channel
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
-	jr z, .applyAffects
+	jr z, Audio3_UpdateMusic.applyAffects
 	bit BIT_MUTE_AUDIO, a
-	jr nz, .nextChannel
+	jr nz, Audio3_UpdateMusic.nextChannel
 	set BIT_MUTE_AUDIO, a
 	ld [wMuteAudioAndPauseMusic], a
 	xor a ; disable all channels' output
-	ldh [rAUDTERM], a
-	ldh [rAUD3ENA], a
+	ldh [lobyte(rAUDTERM)], a
+	ldh [lobyte(rAUD3ENA)], a
 	ld a, AUD3ENA_ON
-	ldh [rAUD3ENA], a
-	jr .nextChannel
-.applyAffects
+	ldh [lobyte(rAUD3ENA)], a
+	jr Audio3_UpdateMusic.nextChannel
+Audio3_UpdateMusic.applyAffects
 	call Audio3_ApplyMusicAffects
-.nextChannel
+Audio3_UpdateMusic.nextChannel
 	ld a, c
 	inc c ; inc channel number
 	cp CHAN8
-	jr nz, .loop
+	jr nz, Audio3_UpdateMusic.loop
 	ret
 
 ; this routine checks flags for music effects currently applied
@@ -47,62 +47,62 @@ Audio3_ApplyMusicAffects:
 	ld [hl], a
 	ld a, c
 	cp CHAN5
-	jr nc, .startChecks ; if a sfx channel
+	jr nc, Audio3_ApplyMusicAffects.startChecks ; if a sfx channel
 	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .startChecks
+	jr z, Audio3_ApplyMusicAffects.startChecks
 	ret
-.startChecks
+Audio3_ApplyMusicAffects.startChecks
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_ROTATE_DUTY_CYCLE, [hl]
-	jr z, .checkForExecuteMusic
+	jr z, Audio3_ApplyMusicAffects.checkForExecuteMusic
 	call Audio3_ApplyDutyCyclePattern
-.checkForExecuteMusic
+Audio3_ApplyMusicAffects.checkForExecuteMusic
 	ld b, 0
 	ld hl, wChannelFlags2
 	add hl, bc
 	bit BIT_EXECUTE_MUSIC, [hl]
-	jr nz, .checkForPitchSlide
+	jr nz, Audio3_ApplyMusicAffects.checkForPitchSlide
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_NOISE_OR_SFX, [hl]
-	jr nz, .skipPitchSlideVibrato
-.checkForPitchSlide
+	jr nz, Audio3_ApplyMusicAffects.skipPitchSlideVibrato
+Audio3_ApplyMusicAffects.checkForPitchSlide
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_SLIDE_ON, [hl]
-	jr z, .checkVibratoDelay
+	jr z, Audio3_ApplyMusicAffects.checkVibratoDelay
 	jp Audio3_ApplyPitchSlide
-.checkVibratoDelay
+Audio3_ApplyMusicAffects.checkVibratoDelay
 	ld hl, wChannelVibratoDelayCounters
 	add hl, bc
 	ld a, [hl]
 	and a ; check if delay is over
-	jr z, .checkForVibrato
+	jr z, Audio3_ApplyMusicAffects.checkForVibrato
 	dec [hl] ; otherwise, dec delay
-.skipPitchSlideVibrato
+Audio3_ApplyMusicAffects.skipPitchSlideVibrato
 	ret
-.checkForVibrato
+Audio3_ApplyMusicAffects.checkForVibrato
 	ld hl, wChannelVibratoExtents
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .vibrato
+	jr nz, Audio3_ApplyMusicAffects.vibrato
 	ret ; no vibrato
-.vibrato
+Audio3_ApplyMusicAffects.vibrato
 	ld d, a
 	ld hl, wChannelVibratoRates
 	add hl, bc
 	ld a, [hl]
 	and $f
 	and a
-	jr z, .applyVibrato
+	jr z, Audio3_ApplyMusicAffects.applyVibrato
 	dec [hl] ; decrement counter
 	ret
-.applyVibrato
+Audio3_ApplyMusicAffects.applyVibrato
 	ld a, [hl]
 	swap [hl]
 	or [hl]
@@ -115,26 +115,26 @@ Audio3_ApplyMusicAffects:
 ; This is the only code that sets/resets the vibrato direction bit, so it
 ; continuously alternates which path it takes.
 	bit BIT_VIBRATO_DIRECTION, [hl]
-	jr z, .unset
+	jr z, Audio3_ApplyMusicAffects.unset
 	res BIT_VIBRATO_DIRECTION, [hl]
 	ld a, d
 	and $f
 	ld d, a
 	ld a, e
 	sub d
-	jr nc, .noCarry
+	jr nc, Audio3_ApplyMusicAffects.noCarry
 	ld a, 0
-.noCarry
-	jr .done
-.unset
+Audio3_ApplyMusicAffects.noCarry
+	jr Audio3_ApplyMusicAffects.done
+Audio3_ApplyMusicAffects.unset
 	set BIT_VIBRATO_DIRECTION, [hl]
 	ld a, d
 	and $f0
 	swap a
 	add e
-	jr nc, .done
+	jr nc, Audio3_ApplyMusicAffects.done
 	ld a, $ff
-.done
+Audio3_ApplyMusicAffects.done
 	ld d, a
 	ld b, REG_FREQUENCY_LO
 	call Audio3_GetRegisterPointer
@@ -169,34 +169,34 @@ Audio3_sound_ret:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_SOUND_CALL, [hl]
-	jr nz, .returnFromCall
+	jr nz, Audio3_sound_ret.returnFromCall
 	ld a, c
 	cp CHAN4
-	jr nc, .noiseOrSfxChannel
-	jr .disableChannelOutput
-.noiseOrSfxChannel
+	jr nc, Audio3_sound_ret.noiseOrSfxChannel
+	jr Audio3_sound_ret.disableChannelOutput
+Audio3_sound_ret.noiseOrSfxChannel
 	res BIT_NOISE_OR_SFX, [hl]
 	ld hl, wChannelFlags2
 	add hl, bc
 	res BIT_EXECUTE_MUSIC, [hl]
 	cp CHAN7
-	jr nz, .skipSfxChannel3
+	jr nz, Audio3_sound_ret.skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
 	ld a, AUD3ENA_OFF
-	ldh [rAUD3ENA], a
+	ldh [lobyte(rAUD3ENA)], a
 	ld a, AUD3ENA_ON
-	ldh [rAUD3ENA], a
-.skipSfxChannel3
-	jr nz, .dontDisable
+	ldh [lobyte(rAUD3ENA)], a
+Audio3_sound_ret.skipSfxChannel3
+	jr nz, Audio3_sound_ret.dontDisable
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
-	jr z, .dontDisable
+	jr z, Audio3_sound_ret.dontDisable
 	xor a
 	ld [wDisableChannelOutputWhenSfxEnds], a
-	jr .disableChannelOutput
-.dontDisable
-	jr .afterDisable
-.returnFromCall
+	jr Audio3_sound_ret.disableChannelOutput
+Audio3_sound_ret.dontDisable
+	jr Audio3_sound_ret.afterDisable
+Audio3_sound_ret.returnFromCall
 	res BIT_SOUND_CALL, [hl]
 	ld d, $0
 	ld a, c
@@ -216,35 +216,35 @@ Audio3_sound_ret:
 	ld a, [de]
 	ld [hl], a ; loads channel address to return to
 	jp Audio3_sound_ret
-.disableChannelOutput
+Audio3_sound_ret.disableChannelOutput
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
-	ldh a, [rAUDTERM]
+	ldh a, [lobyte(rAUDTERM)]
 	and [hl]
-	ldh [rAUDTERM], a
-.afterDisable
+	ldh [lobyte(rAUDTERM)], a
+Audio3_sound_ret.afterDisable
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
-	jr nc, .maybeCry
-	jr .skipCry
-.maybeCry
+	jr nc, Audio3_sound_ret.maybeCry
+	jr Audio3_sound_ret.skipCry
+Audio3_sound_ret.maybeCry
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_END
-	jr z, .skipCry
-	jr c, .cry
-	jr .skipCry
-.cry
+	jr z, Audio3_sound_ret.skipCry
+	jr c, Audio3_sound_ret.cry
+	jr Audio3_sound_ret.skipCry
+Audio3_sound_ret.cry
 	ld a, c
 	cp CHAN5
-	jr z, .skipRewind
+	jr z, Audio3_sound_ret.skipRewind
 	call Audio3_GoBackOneCommandIfCry
 	ret c
-.skipRewind
+Audio3_sound_ret.skipRewind
 	ld a, [wSavedVolume]
-	ldh [rAUDVOL], a
+	ldh [lobyte(rAUDVOL)], a
 	xor a
 	ld [wSavedVolume], a
-.skipCry
+Audio3_sound_ret.skipCry
 	ld hl, wChannelSoundIDs
 	add hl, bc
 	ld [hl], b
@@ -293,23 +293,23 @@ Audio3_sound_loop:
 	call Audio3_GetNextMusicByte
 	ld e, a
 	and a
-	jr z, .infiniteLoop
+	jr z, Audio3_sound_loop.infiniteLoop
 	ld b, 0
 	ld hl, wChannelLoopCounters
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .loopAgain
+	jr nz, Audio3_sound_loop.loopAgain
 	ld a, $1 ; if no more loops to make,
 	ld [hl], a
 	call Audio3_GetNextMusicByte ; skip pointer
 	call Audio3_GetNextMusicByte
 	jp Audio3_sound_ret
-.loopAgain ; inc loop count
+Audio3_sound_loop.loopAgain ; inc loop count
 	inc a
 	ld [hl], a
 	; fall through
-.infiniteLoop ; overwrite current address with pointer
+Audio3_sound_loop.infiniteLoop ; overwrite current address with pointer
 	call Audio3_GetNextMusicByte
 	push af
 	call Audio3_GetNextMusicByte
@@ -337,19 +337,19 @@ Audio3_note_type:
 	ld [hl], a ; store low nibble as speed
 	ld a, c
 	cp CHAN4
-	jr z, .noiseChannel ; noise channel has 0 params
+	jr z, Audio3_note_type.noiseChannel ; noise channel has 0 params
 	call Audio3_GetNextMusicByte
 	ld d, a
 	ld a, c
 	cp CHAN3
-	jr z, .musicChannel3
+	jr z, Audio3_note_type.musicChannel3
 	cp CHAN7
-	jr nz, .skipChannel3
+	jr nz, Audio3_note_type.skipChannel3
 	ld hl, wSfxWaveInstrument
-	jr .channel3
-.musicChannel3
+	jr Audio3_note_type.channel3
+Audio3_note_type.musicChannel3
 	ld hl, wMusicWaveInstrument
-.channel3
+Audio3_note_type.channel3
 	ld a, d
 	and $f
 	ld [hl], a ; store low nibble of param as wave instrument
@@ -361,12 +361,12 @@ Audio3_note_type:
 
 	; if channel 3, store high nibble as volume
 	; else, store volume (high nibble) and fade (low nibble)
-.skipChannel3
+Audio3_note_type.skipChannel3
 	ld b, 0
 	ld hl, wChannelVolumes
 	add hl, bc
 	ld [hl], d
-.noiseChannel
+Audio3_note_type.noiseChannel
 	jp Audio3_sound_ret
 
 Audio3_toggle_perfect_pitch:
@@ -478,7 +478,7 @@ Audio3_tempo:
 	jr nz, Audio3_stereo_panning
 	ld a, c
 	cp CHAN5
-	jr nc, .sfxChannel
+	jr nc, Audio3_tempo.sfxChannel
 	call Audio3_GetNextMusicByte
 	ld [wMusicTempo], a ; store first param
 	call Audio3_GetNextMusicByte
@@ -488,8 +488,8 @@ Audio3_tempo:
 	ld [wChannelNoteDelayCountersFractionalPart + 1], a
 	ld [wChannelNoteDelayCountersFractionalPart + 2], a
 	ld [wChannelNoteDelayCountersFractionalPart + 3], a
-	jr .musicChannelDone
-.sfxChannel
+	jr Audio3_tempo.musicChannelDone
+Audio3_tempo.sfxChannel
 	call Audio3_GetNextMusicByte
 	ld [wSfxTempo], a ; store first param
 	call Audio3_GetNextMusicByte
@@ -499,7 +499,7 @@ Audio3_tempo:
 	ld [wChannelNoteDelayCountersFractionalPart + 5], a
 	ld [wChannelNoteDelayCountersFractionalPart + 6], a
 	ld [wChannelNoteDelayCountersFractionalPart + 7], a
-.musicChannelDone
+Audio3_tempo.musicChannelDone
 	jp Audio3_sound_ret
 
 Audio3_stereo_panning:
@@ -519,12 +519,12 @@ Audio3_unknownmusic0xef:
 	pop bc
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
-	jr nz, .skip
+	jr nz, Audio3_unknownmusic0xef.skip
 	ld a, [wChannelSoundIDs + CHAN8]
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	xor a
 	ld [wChannelSoundIDs + CHAN8], a
-.skip
+Audio3_unknownmusic0xef.skip
 	jp Audio3_sound_ret
 
 Audio3_duty_cycle_pattern:
@@ -548,7 +548,7 @@ Audio3_volume:
 	cp volume_cmd
 	jr nz, Audio3_execute_music
 	call Audio3_GetNextMusicByte
-	ldh [rAUDVOL], a ; store volume
+	ldh [lobyte(rAUDVOL)], a ; store volume
 	jp Audio3_sound_ret
 
 Audio3_execute_music:
@@ -609,14 +609,14 @@ Audio3_sfx_note:
 	ld a, c
 	cp CHAN8
 	ld a, 0
-	jr z, .skip
+	jr z, Audio3_sfx_note.skip
 ; Channels 1 through 3 have 2 registers that control frequency, but the noise
 ; channel a single register (the polynomial counter) that controls frequency,
 ; so this command has one less byte on the noise channel.
 	push de
 	call Audio3_GetNextMusicByte
 	pop de
-.skip
+Audio3_sfx_note.skip
 	ld d, a
 	push de
 	call Audio3_ApplyDutyCycleAndSoundLength
@@ -638,7 +638,7 @@ Audio3_pitch_sweep:
 	bit BIT_EXECUTE_MUSIC, [hl]
 	jr nz, Audio3_note ; no
 	call Audio3_GetNextMusicByte
-	ldh [rAUD1SWEEP], a
+	ldh [lobyte(rAUD1SWEEP)], a
 	jp Audio3_sound_ret
 
 Audio3_note:
@@ -648,7 +648,7 @@ Audio3_note:
 	ld a, d
 	and $f0
 	cp drum_note_cmd
-	jr z, .drum_note
+	jr z, Audio3_note.drum_note
 	jr nc, Audio3_note_length
 
 	; this executes when on the noise channel and
@@ -668,22 +668,22 @@ Audio3_note:
 	ld a, b
 	push de
 	push bc
-	jr .playDnote
+	jr Audio3_note.playDnote
 
-.drum_note
+Audio3_note.drum_note
 	ld a, d
 	and $f
 	push af
 	push bc
 	call Audio3_GetNextMusicByte ; get drum_note instrument
-.playDnote
+Audio3_note.playDnote
 	ld d, a
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
-	jr nz, .skipDnote
+	jr nz, Audio3_note.skipDnote
 	ld a, d
 	call Audio3_PlaySound
-.skipDnote
+Audio3_note.skipDnote
 	pop bc
 	pop de
 
@@ -702,23 +702,23 @@ Audio3_note_length:
 	call Audio3_MultiplyAdd
 	ld a, c
 	cp CHAN5
-	jr nc, .sfxChannel
+	jr nc, Audio3_note_length.sfxChannel
 	ld a, [wMusicTempo]
 	ld d, a
 	ld a, [wMusicTempo + 1]
 	ld e, a
-	jr .skip
-.sfxChannel
+	jr Audio3_note_length.skip
+Audio3_note_length.sfxChannel
 	ld d, $1
 	ld e, $0
 	cp CHAN8
-	jr z, .skip ; if noise channel
+	jr z, Audio3_note_length.skip ; if noise channel
 	call Audio3_SetSfxTempo
 	ld a, [wSfxTempo]
 	ld d, a
 	ld a, [wSfxTempo + 1]
 	ld e, a
-.skip
+Audio3_note_length.skip
 	ld a, l ; a = note_length * note_speed
 	ld b, 0
 	ld hl, wChannelNoteDelayCountersFractionalPart
@@ -749,32 +749,32 @@ Audio3_note_pitch:
 	pop af
 	and $f0
 	cp rest_cmd
-	jr nz, .notRest
+	jr nz, Audio3_note_pitch.notRest
 	ld a, c
 	cp CHAN5
-	jr nc, .next
+	jr nc, Audio3_note_pitch.next
 ; If this isn't an SFX channel, try the corresponding SFX channel.
 	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .done
+	jr nz, Audio3_note_pitch.done
 	; fall through
-.next
+Audio3_note_pitch.next
 	ld a, c
 	cp CHAN3
-	jr z, .channel3
+	jr z, Audio3_note_pitch.channel3
 	cp CHAN7
-	jr nz, .notChannel3
-.channel3
+	jr nz, Audio3_note_pitch.notChannel3
+Audio3_note_pitch.channel3
 	ld b, 0
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
-	ldh a, [rAUDTERM]
+	ldh a, [lobyte(rAUDTERM)]
 	and [hl]
-	ldh [rAUDTERM], a ; disable hardware channel 3's output
-	jr .done
-.notChannel3
+	ldh [lobyte(rAUDTERM)], a ; disable hardware channel 3's output
+	jr Audio3_note_pitch.done
+Audio3_note_pitch.notChannel3
 	ld b, REG_VOLUME_ENVELOPE
 	call Audio3_GetRegisterPointer
 	ld a, $8 ; fade in sound
@@ -782,9 +782,9 @@ Audio3_note_pitch:
 	inc hl
 	ld a, $80 ; restart sound
 	ld [hl], a
-.done
+Audio3_note_pitch.done
 	ret
-.notRest
+Audio3_note_pitch.notRest
 	swap a
 	ld b, 0
 	ld hl, wChannelOctaves
@@ -795,13 +795,13 @@ Audio3_note_pitch:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_SLIDE_ON, [hl]
-	jr z, .skipPitchSlide
+	jr z, Audio3_note_pitch.skipPitchSlide
 	call Audio3_InitPitchSlideVars
-.skipPitchSlide
+Audio3_note_pitch.skipPitchSlide
 	push de
 	ld a, c
 	cp CHAN5
-	jr nc, .sfxChannel ; if sfx channel
+	jr nc, Audio3_note_pitch.sfxChannel ; if sfx channel
 ; If this isn't an SFX channel, try the corresponding SFX channel.
 	ld hl, wChannelSoundIDs + CHAN5
 	ld d, 0
@@ -809,12 +809,12 @@ Audio3_note_pitch:
 	add hl, de
 	ld a, [hl]
 	and a
-	jr nz, .noSfx
-	jr .sfxChannel
-.noSfx
+	jr nz, Audio3_note_pitch.noSfx
+	jr Audio3_note_pitch.sfxChannel
+Audio3_note_pitch.noSfx
 	pop de
 	ret
-.sfxChannel
+Audio3_note_pitch.sfxChannel
 	ld b, 0
 	ld hl, wChannelVolumes
 	add hl, bc
@@ -829,12 +829,12 @@ Audio3_note_pitch:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PERFECT_PITCH, [hl] ; has toggle_perfect_pitch been used?
-	jr z, .skipFrequencyInc
+	jr z, Audio3_note_pitch.skipFrequencyInc
 	inc e                       ; if yes, increment the frequency by 1
-	jr nc, .skipFrequencyInc    ; Likely a mistake, because `inc` does not set flag C.
+	jr nc, Audio3_note_pitch.skipFrequencyInc    ; Likely a mistake, because `inc` does not set flag C.
 	                            ; Fortunately this does not seem to affect any notes that actually occur.
 	inc d
-.skipFrequencyInc
+Audio3_note_pitch.skipFrequencyInc
 	ld hl, wChannelFrequencyLowBytes
 	add hl, bc
 	ld [hl], e
@@ -845,21 +845,21 @@ Audio3_EnableChannelOutput:
 	ld b, 0
 	ld hl, Audio3_HWChannelEnableMasks
 	add hl, bc
-	ldh a, [rAUDTERM]
+	ldh a, [lobyte(rAUDTERM)]
 	or [hl] ; set this channel's bits
 	ld d, a
 	ld a, c
 	cp CHAN8
-	jr z, .noiseChannelOrNoSfx
+	jr z, Audio3_EnableChannelOutput.noiseChannelOrNoSfx
 	cp CHAN5
-	jr nc, .skip ; if sfx channel
+	jr nc, Audio3_EnableChannelOutput.skip ; if sfx channel
 ; If this isn't an SFX channel, try the corresponding SFX channel.
 	ld hl, wChannelSoundIDs + CHAN5
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .skip
-.noiseChannelOrNoSfx
+	jr nz, Audio3_EnableChannelOutput.skip
+Audio3_EnableChannelOutput.noiseChannelOrNoSfx
 ; If this is the SFX noise channel or a music channel whose corresponding
 ; SFX channel is off, apply stereo panning.
 	ld a, [wStereoPanning]
@@ -867,15 +867,15 @@ Audio3_EnableChannelOutput:
 	add hl, bc
 	and [hl]
 	ld d, a
-	ldh a, [rAUDTERM]
+	ldh a, [lobyte(rAUDTERM)]
 	ld hl, Audio3_HWChannelDisableMasks
 	add hl, bc
 	and [hl] ; reset this channel's output bits
 	or d ; set this channel's output bits that enabled in [wStereoPanning]
 	ld d, a
-.skip
+Audio3_EnableChannelOutput.skip
 	ld a, d
-	ldh [rAUDTERM], a
+	ldh [lobyte(rAUDTERM)], a
 	ret
 
 Audio3_ApplyDutyCycleAndSoundLength:
@@ -885,9 +885,9 @@ Audio3_ApplyDutyCycleAndSoundLength:
 	ld d, [hl]
 	ld a, c
 	cp CHAN3
-	jr z, .skipDuty ; if music channel 3
+	jr z, Audio3_ApplyDutyCycleAndSoundLength.skipDuty ; if music channel 3
 	cp CHAN7
-	jr z, .skipDuty ; if sfx channel 3
+	jr z, Audio3_ApplyDutyCycleAndSoundLength.skipDuty ; if sfx channel 3
 ; include duty cycle (except on channel 3 which doesn't have it)
 	ld a, d
 	and $3f
@@ -897,7 +897,7 @@ Audio3_ApplyDutyCycleAndSoundLength:
 	ld a, [hl]
 	or d
 	ld d, a
-.skipDuty
+Audio3_ApplyDutyCycleAndSoundLength.skipDuty
 	ld b, REG_DUTY_SOUND_LEN
 	call Audio3_GetRegisterPointer
 	ld [hl], d
@@ -906,17 +906,17 @@ Audio3_ApplyDutyCycleAndSoundLength:
 Audio3_ApplyWavePatternAndFrequency:
 	ld a, c
 	cp CHAN3
-	jr z, .channel3
+	jr z, Audio3_ApplyWavePatternAndFrequency.channel3
 	cp CHAN7
-	jr nz, .notChannel3
+	jr nz, Audio3_ApplyWavePatternAndFrequency.notChannel3
 	; fall through
-.channel3
+Audio3_ApplyWavePatternAndFrequency.channel3
 	push de
 	ld de, wMusicWaveInstrument
 	cp CHAN3
-	jr z, .next
+	jr z, Audio3_ApplyWavePatternAndFrequency.next
 	ld de, wSfxWaveInstrument
-.next
+Audio3_ApplyWavePatternAndFrequency.next
 	ld a, [de]
 	add a
 	ld d, 0
@@ -929,19 +929,19 @@ Audio3_ApplyWavePatternAndFrequency:
 	ld hl, _AUD3WAVERAM
 	ld b, AUD3WAVE_SIZE - 1
 	ld a, $0 ; stop hardware channel 3
-	ldh [rAUD3ENA], a
-.loop
+	ldh [lobyte(rAUD3ENA)], a
+Audio3_ApplyWavePatternAndFrequency.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	ld a, b
 	dec b
 	and a
-	jr nz, .loop
+	jr nz, Audio3_ApplyWavePatternAndFrequency.loop
 	ld a, AUD3ENA_ON ; start hardware channel 3
-	ldh [rAUD3ENA], a
+	ldh [lobyte(rAUD3ENA)], a
 	pop de
-.notChannel3
+Audio3_ApplyWavePatternAndFrequency.notChannel3
 	ld a, d
 	or $80 ; use counter mode (i.e. disable output when the counter reaches 0)
 	and $c7 ; zero the unused bits in the register
@@ -956,45 +956,45 @@ Audio3_ApplyWavePatternAndFrequency:
 
 Audio3_SetSfxTempo:
 	call Audio3_IsCry
-	jr nc, .notCry
+	jr nc, Audio3_SetSfxTempo.notCry
 	ld d, 0
 	ld a, [wTempoModifier]
 	add $80
-	jr nc, .next
+	jr nc, Audio3_SetSfxTempo.next
 	inc d
-.next
+Audio3_SetSfxTempo.next
 	ld [wSfxTempo + 1], a
 	ld a, d
 	ld [wSfxTempo], a
-	jr .done
-.notCry
+	jr Audio3_SetSfxTempo.done
+Audio3_SetSfxTempo.notCry
 	xor a
 	ld [wSfxTempo + 1], a
 	ld a, $1
 	ld [wSfxTempo], a
-.done
+Audio3_SetSfxTempo.done
 	ret
 
 Audio3_ApplyFrequencyModifier:
 	call Audio3_IsCry
-	jr nc, .done
+	jr nc, Audio3_ApplyFrequencyModifier.done
 ; if playing a cry, add the cry's frequency modifier
 	ld a, [wFrequencyModifier]
 	add e
-	jr nc, .noCarry
+	jr nc, Audio3_ApplyFrequencyModifier.noCarry
 	inc d
-.noCarry
+Audio3_ApplyFrequencyModifier.noCarry
 	dec hl
 	ld e, a
 	ld [hl], e
 	inc hl
 	ld [hl], d
-.done
+Audio3_ApplyFrequencyModifier.done
 	ret
 
 Audio3_GoBackOneCommandIfCry:
 	call Audio3_IsCry
-	jr nc, .done
+	jr nc, Audio3_GoBackOneCommandIfCry.done
 	ld hl, wChannelCommandPointers
 	ld e, c
 	ld d, 0
@@ -1010,7 +1010,7 @@ Audio3_GoBackOneCommandIfCry:
 	ld [hl], a
 	scf
 	ret
-.done
+Audio3_GoBackOneCommandIfCry.done
 	scf
 	ccf
 	ret
@@ -1019,17 +1019,17 @@ Audio3_IsCry:
 ; Returns whether the currently playing audio is a cry in carry.
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp CRY_SFX_START
-	jr nc, .next
-	jr .no
-.next
+	jr nc, Audio3_IsCry.next
+	jr Audio3_IsCry.no
+Audio3_IsCry.next
 	cp CRY_SFX_END
-	jr z, .no
-	jr c, .yes
-.no
+	jr z, Audio3_IsCry.no
+	jr c, Audio3_IsCry.yes
+Audio3_IsCry.no
 	scf
 	ccf
 	ret
-.yes
+Audio3_IsCry.yes
 	scf
 	ret
 
@@ -1037,7 +1037,7 @@ Audio3_ApplyPitchSlide:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_SLIDE_DECREASING, [hl]
-	jp nz, .frequencyDecreasing
+	jp nz, Audio3_ApplyPitchSlide.frequencyDecreasing
 ; frequency increasing
 	ld hl, wChannelPitchSlideCurrentFrequencyLowBytes
 	add hl, bc
@@ -1071,15 +1071,15 @@ Audio3_ApplyPitchSlide:
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jp c, .reachedTargetFrequency
-	jr nz, .applyUpdatedFrequency
+	jp c, Audio3_ApplyPitchSlide.reachedTargetFrequency
+	jr nz, Audio3_ApplyPitchSlide.applyUpdatedFrequency
 	ld hl, wChannelPitchSlideTargetFrequencyLowBytes
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jp c, .reachedTargetFrequency
-	jr .applyUpdatedFrequency
-.frequencyDecreasing
+	jp c, Audio3_ApplyPitchSlide.reachedTargetFrequency
+	jr Audio3_ApplyPitchSlide.applyUpdatedFrequency
+Audio3_ApplyPitchSlide.frequencyDecreasing
 	ld hl, wChannelPitchSlideCurrentFrequencyLowBytes
 	add hl, bc
 	ld a, [hl]
@@ -1109,14 +1109,14 @@ Audio3_ApplyPitchSlide:
 	add hl, bc
 	ld a, d
 	cp [hl]
-	jr c, .reachedTargetFrequency
-	jr nz, .applyUpdatedFrequency
+	jr c, Audio3_ApplyPitchSlide.reachedTargetFrequency
+	jr nz, Audio3_ApplyPitchSlide.applyUpdatedFrequency
 	ld hl, wChannelPitchSlideTargetFrequencyLowBytes
 	add hl, bc
 	ld a, e
 	cp [hl]
-	jr c, .reachedTargetFrequency
-.applyUpdatedFrequency
+	jr c, Audio3_ApplyPitchSlide.reachedTargetFrequency
+Audio3_ApplyPitchSlide.applyUpdatedFrequency
 	ld hl, wChannelPitchSlideCurrentFrequencyLowBytes
 	add hl, bc
 	ld [hl], e
@@ -1129,7 +1129,7 @@ Audio3_ApplyPitchSlide:
 	ld [hli], a
 	ld [hl], d
 	ret
-.reachedTargetFrequency
+Audio3_ApplyPitchSlide.reachedTargetFrequency
 ; Turn off pitch slide when the target frequency has been reached.
 	ld hl, wChannelFlags1
 	add hl, bc
@@ -1150,9 +1150,9 @@ Audio3_InitPitchSlideVars:
 	ld hl, wChannelPitchSlideLengthModifiers
 	add hl, bc
 	sub [hl]
-	jr nc, .next
+	jr nc, Audio3_InitPitchSlideVars.next
 	ld a, 1
-.next
+Audio3_InitPitchSlideVars.next
 	ld [hl], a
 	ld hl, wChannelPitchSlideTargetFrequencyLowBytes
 	add hl, bc
@@ -1164,14 +1164,14 @@ Audio3_InitPitchSlideVars:
 	ld hl, wChannelPitchSlideTargetFrequencyHighBytes
 	add hl, bc
 	sub [hl]
-	jr c, .targetFrequencyGreater
+	jr c, Audio3_InitPitchSlideVars.targetFrequencyGreater
 	ld d, a
 	ld b, 0
 	ld hl, wChannelFlags1
 	add hl, bc
 	set BIT_PITCH_SLIDE_DECREASING, [hl]
-	jr .next2
-.targetFrequencyGreater
+	jr Audio3_InitPitchSlideVars.next2
+Audio3_InitPitchSlideVars.targetFrequencyGreater
 ; If the target frequency is greater, subtract the current frequency from
 ; the target frequency to get the absolute difference.
 	ld hl, wChannelPitchSlideCurrentFrequencyHighBytes
@@ -1205,22 +1205,22 @@ Audio3_InitPitchSlideVars:
 	add hl, bc
 	res BIT_PITCH_SLIDE_DECREASING, [hl]
 
-.next2
+Audio3_InitPitchSlideVars.next2
 	ld hl, wChannelPitchSlideLengthModifiers
 	add hl, bc
-.divideLoop
+Audio3_InitPitchSlideVars.divideLoop
 	inc b
 	ld a, e
 	sub [hl]
 	ld e, a
-	jr nc, .divideLoop
+	jr nc, Audio3_InitPitchSlideVars.divideLoop
 	ld a, d
 	and a
-	jr z, .doneDividing
+	jr z, Audio3_InitPitchSlideVars.doneDividing
 	dec a
 	ld d, a
-	jr .divideLoop
-.doneDividing
+	jr Audio3_InitPitchSlideVars.divideLoop
+Audio3_InitPitchSlideVars.doneDividing
 	ld a, e ; a = remainder - dividend
 	add [hl]
 	ld d, b ; d = quotient + 1
@@ -1277,9 +1277,9 @@ Audio3_GetRegisterPointer:
 	ld a, c
 	ld hl, Audio3_HWChannelBaseAddresses
 	add l
-	jr nc, .noCarry
+	jr nc, Audio3_GetRegisterPointer.noCarry
 	inc h
-.noCarry
+Audio3_GetRegisterPointer.noCarry
 	ld l, a
 	ld a, [hl]
 	add b
@@ -1290,17 +1290,17 @@ Audio3_GetRegisterPointer:
 Audio3_MultiplyAdd:
 ; hl = l + (a * de)
 	ld h, 0
-.loop
+Audio3_MultiplyAdd.loop
 	srl a
-	jr nc, .skipAdd
+	jr nc, Audio3_MultiplyAdd.skipAdd
 	add hl, de
-.skipAdd
+Audio3_MultiplyAdd.skipAdd
 	sla e
 	rl d
 	and a
-	jr z, .done
-	jr .loop
-.done
+	jr z, Audio3_MultiplyAdd.done
+	jr Audio3_MultiplyAdd.loop
+Audio3_MultiplyAdd.done
 	ret
 
 Audio3_CalculateFrequency:
@@ -1316,31 +1316,31 @@ Audio3_CalculateFrequency:
 	inc hl
 	ld d, [hl]
 	ld a, b
-.loop
+Audio3_CalculateFrequency.loop
 	cp 7
-	jr z, .done
+	jr z, Audio3_CalculateFrequency.done
 	sra d
 	rr e
 	inc a
-	jr .loop
-.done
+	jr Audio3_CalculateFrequency.loop
+Audio3_CalculateFrequency.done
 	ld a, 8
 	add d
 	ld d, a
 	ret
 
-Audio3_PlaySound::
+Audio3_PlaySound:
 	ld [wSoundID], a
 	cp SFX_STOP_ALL_MUSIC
-	jp z, .stopAllAudio
+	jp z, Audio3_PlaySound.stopAllAudio
 	cp MAX_SFX_ID_3
-	jp z, .playSfx
-	jp c, .playSfx
+	jp z, Audio3_PlaySound.playSfx
+	jp c, Audio3_PlaySound.playSfx
 	cp $fe
-	jr z, .playMusic
-	jp nc, .playSfx
+	jr z, Audio3_PlaySound.playMusic
+	jp nc, Audio3_PlaySound.playSfx
 
-.playMusic
+Audio3_PlaySound.playMusic
 	xor a
 	ld [wUnusedMusicByte], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
@@ -1349,71 +1349,71 @@ Audio3_PlaySound::
 	ld [wSfxWaveInstrument], a
 	ld d, NUM_CHANNELS
 	ld hl, wChannelReturnAddresses
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelCommandPointers
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld d, NUM_MUSIC_CHANS
 	ld hl, wChannelSoundIDs
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelFlags1
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelDutyCycles
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelDutyCyclePatterns
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelVibratoDelayCounters
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelVibratoExtents
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelVibratoRates
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelFrequencyLowBytes
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelVibratoDelayCounterReloadValues
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelFlags2
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideLengthModifiers
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideFrequencySteps
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideFrequencyStepsFractionalPart
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideCurrentFrequencyFractionalPart
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideCurrentFrequencyHighBytes
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideCurrentFrequencyLowBytes
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideTargetFrequencyHighBytes
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelPitchSlideTargetFrequencyLowBytes
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld a, $1
 	ld hl, wChannelLoopCounters
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelNoteDelayCounters
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld hl, wChannelNoteSpeeds
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld [wMusicTempo], a
 	ld a, $ff
 	ld [wStereoPanning], a
 	xor a
-	ldh [rAUDVOL], a
+	ldh [lobyte(rAUDVOL)], a
 	ld a, AUD1SWEEP_DOWN
-	ldh [rAUD1SWEEP], a
+	ldh [lobyte(rAUD1SWEEP)], a
 	ld a, 0
-	ldh [rAUDTERM], a
+	ldh [lobyte(rAUDTERM)], a
 	xor a
-	ldh [rAUD3ENA], a
+	ldh [lobyte(rAUD3ENA)], a
 	ld a, AUD3ENA_ON
-	ldh [rAUD3ENA], a
+	ldh [lobyte(rAUD3ENA)], a
 	ld a, $77
-	ldh [rAUDVOL], a
-	jp .playSoundCommon
+	ldh [lobyte(rAUDVOL)], a
+	jp Audio3_PlaySound.playSoundCommon
 
-.playSfx
+Audio3_PlaySound.playSfx
 	ld l, a
 	ld e, a
 	ld h, 0
@@ -1431,7 +1431,7 @@ Audio3_PlaySound::
 	rlca
 	rlca
 	ld c, a
-.sfxChannelLoop
+Audio3_PlaySound.sfxChannelLoop
 	ld d, c
 	ld a, c
 	add a
@@ -1452,26 +1452,26 @@ Audio3_PlaySound::
 	add hl, de
 	ld a, [hl]
 	and a
-	jr z, .playChannel
+	jr z, Audio3_PlaySound.playChannel
 	ld a, e
 	cp CHAN8
-	jr nz, .notNoiseChannel
+	jr nz, Audio3_PlaySound.notNoiseChannel
 	ld a, [wSoundID]
 	cp NOISE_INSTRUMENTS_END
-	jr nc, .notNoiseInstrument
+	jr nc, Audio3_PlaySound.notNoiseInstrument
 	ret
-.notNoiseInstrument
+Audio3_PlaySound.notNoiseInstrument
 	ld a, [hl]
 	cp NOISE_INSTRUMENTS_END
-	jr z, .playChannel
-	jr c, .playChannel
-.notNoiseChannel
+	jr z, Audio3_PlaySound.playChannel
+	jr c, Audio3_PlaySound.playChannel
+Audio3_PlaySound.notNoiseChannel
 	ld a, [wSoundID]
 	cp [hl]
-	jr z, .playChannel
-	jr c, .playChannel
+	jr z, Audio3_PlaySound.playChannel
+	jr c, Audio3_PlaySound.playChannel
 	ret
-.playChannel
+Audio3_PlaySound.playChannel
 	xor a
 	push de
 	ld h, d
@@ -1554,34 +1554,34 @@ Audio3_PlaySound::
 	ld [hl], a
 	ld a, e
 	cp CHAN5
-	jr nz, .skipSweepDisable
+	jr nz, Audio3_PlaySound.skipSweepDisable
 	ld a, AUD1SWEEP_DOWN
-	ldh [rAUD1SWEEP], a ; sweep off
-.skipSweepDisable
+	ldh [lobyte(rAUD1SWEEP)], a ; sweep off
+Audio3_PlaySound.skipSweepDisable
 	ld a, c
 	and a
-	jp z, .playSoundCommon
+	jp z, Audio3_PlaySound.playSoundCommon
 	dec c
-	jp .sfxChannelLoop
+	jp Audio3_PlaySound.sfxChannelLoop
 
-.stopAllAudio
+Audio3_PlaySound.stopAllAudio
 	ld a, AUDENA_ON
-	ldh [rAUDENA], a ; sound hardware on
-	ldh [rAUD3ENA], a ; wave playback on
+	ldh [lobyte(rAUDENA)], a ; sound hardware on
+	ldh [lobyte(rAUD3ENA)], a ; wave playback on
 	xor a
-	ldh [rAUDTERM], a ; no sound output
-	ldh [rAUD3LEVEL], a ; mute channel 3 (wave channel)
+	ldh [lobyte(rAUDTERM)], a ; no sound output
+	ldh [lobyte(rAUD3LEVEL)], a ; mute channel 3 (wave channel)
 	ld a, AUD1SWEEP_DOWN
-	ldh [rAUD1SWEEP], a ; sweep off
-	ldh [rAUD1ENV], a ; mute channel 1 (pulse channel 1)
-	ldh [rAUD2ENV], a ; mute channel 2 (pulse channel 2)
-	ldh [rAUD4ENV], a ; mute channel 4 (noise channel)
+	ldh [lobyte(rAUD1SWEEP)], a ; sweep off
+	ldh [lobyte(rAUD1ENV)], a ; mute channel 1 (pulse channel 1)
+	ldh [lobyte(rAUD2ENV)], a ; mute channel 2 (pulse channel 2)
+	ldh [lobyte(rAUD4ENV)], a ; mute channel 4 (noise channel)
 	ld a, AUD1HIGH_LENGTH_ON
-	ldh [rAUD1HIGH], a ; counter mode
-	ldh [rAUD2HIGH], a
-	ldh [rAUD4GO], a
+	ldh [lobyte(rAUD1HIGH)], a ; counter mode
+	ldh [lobyte(rAUD2HIGH)], a
+	ldh [lobyte(rAUD4GO)], a
 	ld a, $77
-	ldh [rAUDVOL], a ; full volume
+	ldh [lobyte(rAUDVOL)], a ; full volume
 	xor a
 	ld [wUnusedMusicByte], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
@@ -1592,11 +1592,11 @@ Audio3_PlaySound::
 	ld [wSfxWaveInstrument], a
 	ld d, $a0
 	ld hl, wChannelCommandPointers
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld a, $1
 	ld d, $18
 	ld hl, wChannelNoteDelayCounters
-	call .FillMem
+	call Audio3_PlaySound.FillMem
 	ld [wMusicTempo], a
 	ld [wSfxTempo], a
 	ld a, $ff
@@ -1604,15 +1604,15 @@ Audio3_PlaySound::
 	ret
 
 ; fills d bytes at hl with a
-.FillMem
+Audio3_PlaySound.FillMem
 	ld b, d
-.loop
+Audio3_PlaySound.loop
 	ld [hli], a
 	dec b
-	jr nz, .loop
+	jr nz, Audio3_PlaySound.loop
 	ret
 
-.playSoundCommon
+Audio3_PlaySound.playSoundCommon
 	ld a, [wSoundID]
 	ld l, a
 	ld e, a
@@ -1637,14 +1637,14 @@ Audio3_PlaySound::
 	inc b
 	inc de
 	ld c, 0
-.commandPointerLoop
+Audio3_PlaySound.commandPointerLoop
 	cp c
-	jr z, .next
+	jr z, Audio3_PlaySound.next
 	inc c
 	inc hl
 	inc hl
-	jr .commandPointerLoop
-.next
+	jr Audio3_PlaySound.commandPointerLoop
+Audio3_PlaySound.next
 	push hl
 	push bc
 	push af
@@ -1656,11 +1656,11 @@ Audio3_PlaySound::
 	ld [hl], a
 	pop af
 	cp CHAN4
-	jr c, .skipSettingFlag
+	jr c, Audio3_PlaySound.skipSettingFlag
 	ld hl, wChannelFlags1
 	add hl, bc
 	set BIT_NOISE_OR_SFX, [hl]
-.skipSettingFlag
+Audio3_PlaySound.skipSettingFlag
 	pop bc
 	pop hl
 	ld a, [de] ; get channel pointer
@@ -1675,18 +1675,18 @@ Audio3_PlaySound::
 	and a
 	ld a, [de]
 	inc de
-	jr nz, .commandPointerLoop
+	jr nz, Audio3_PlaySound.commandPointerLoop
 	ld a, [wSoundID]
 	cp CRY_SFX_START
-	jr nc, .maybeCry
-	jr .done
-.maybeCry
+	jr nc, Audio3_PlaySound.maybeCry
+	jr Audio3_PlaySound.done
+Audio3_PlaySound.maybeCry
 	ld a, [wSoundID]
 	cp CRY_SFX_END
-	jr z, .done
-	jr c, .cry
-	jr .done
-.cry
+	jr z, Audio3_PlaySound.done
+	jr c, Audio3_PlaySound.cry
+	jr Audio3_PlaySound.done
+Audio3_PlaySound.cry
 	ld hl, wChannelSoundIDs + CHAN5
 	ld [hli], a
 	ld [hli], a
@@ -1699,12 +1699,12 @@ Audio3_PlaySound::
 	ld [hl], d ; overwrite pointer to point to sound_ret
 	ld a, [wSavedVolume]
 	and a
-	jr nz, .done
-	ldh a, [rAUDVOL]
+	jr nz, Audio3_PlaySound.done
+	ldh a, [lobyte(rAUDVOL)]
 	ld [wSavedVolume], a
 	ld a, $77
-	ldh [rAUDVOL], a ; full volume
-.done
+	ldh [lobyte(rAUDVOL)], a ; full volume
+Audio3_PlaySound.done
 	ret
 
 Audio3_CryRet:
@@ -1712,16 +1712,16 @@ Audio3_CryRet:
 
 Audio3_HWChannelBaseAddresses:
 ; the low bytes of each HW channel's base address
-	db HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 0-3
-	db HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 4-7
+	.DB HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 0-3
+	.DB HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 4-7
 
 Audio3_HWChannelDisableMasks:
-	db HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 0-3
-	db HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 4-7
+	.DB HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 0-3
+	.DB HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 4-7
 
 Audio3_HWChannelEnableMasks:
-	db HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 0-3
-	db HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 4-7
+	.DB HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 0-3
+	.DB HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 4-7
 
 Audio3_Pitches:
-INCLUDE "audio/notes.asm"
+.INCLUDE "audio/notes.asm"

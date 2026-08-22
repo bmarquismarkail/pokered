@@ -17,13 +17,13 @@ ReplaceTileBlock:
 	ld e, a
 	ld a, b
 	and a
-	jr z, .addX
+	jr z, ReplaceTileBlock.addX
 ; add width * Y
-.addWidthYTimesLoop
+ReplaceTileBlock.addWidthYTimesLoop
 	add hl, de
 	dec b
-	jr nz, .addWidthYTimesLoop
-.addX
+	jr nz, ReplaceTileBlock.addWidthYTimesLoop
+ReplaceTileBlock.addX
 	add hl, bc ; add X
 	ld a, [wNewTileBlockID]
 	ld [hl], a
@@ -50,13 +50,13 @@ RedrawMapView:
 	ld a, [wIsInBattle]
 	inc a
 	ret z
-	ldh a, [hAutoBGTransferEnabled]
+	ldh a, [lobyte(hAutoBGTransferEnabled)]
 	push af
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	push af
 	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
+	ldh [lobyte(hTileAnimations)], a
 	call LoadCurrentMapView
 	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
@@ -73,36 +73,36 @@ RedrawMapView:
 	ld a, h
 	ld [wBuffer + 1], a ; this copy of the address is not used
 	ld a, 2
-	ldh [hRedrawMapViewRowOffset], a
+	ldh [lobyte(hRedrawMapViewRowOffset)], a
 	ld c, SCREEN_HEIGHT / 2 ; number of rows of 2x2 tiles (this covers the whole screen)
-.redrawRowLoop
+RedrawMapView.redrawRowLoop
 	push bc
 	push hl
 	push hl
 	ld hl, wTileMap - 2 * SCREEN_WIDTH
 	ld de, SCREEN_WIDTH
-	ldh a, [hRedrawMapViewRowOffset]
-.calcWRAMAddrLoop
+	ldh a, [lobyte(hRedrawMapViewRowOffset)]
+RedrawMapView.calcWRAMAddrLoop
 	add hl, de
 	dec a
-	jr nz, .calcWRAMAddrLoop
+	jr nz, RedrawMapView.calcWRAMAddrLoop
 	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld de, TILEMAP_WIDTH
-	ldh a, [hRedrawMapViewRowOffset]
+	ldh a, [lobyte(hRedrawMapViewRowOffset)]
 	ld c, a
-.calcVRAMAddrLoop
+RedrawMapView.calcVRAMAddrLoop
 	add hl, de
 	ld a, h
 	and $3
 	or $98
 	dec c
-	jr nz, .calcVRAMAddrLoop
-	ldh [hRedrawRowOrColumnDest + 1], a
+	jr nz, RedrawMapView.calcVRAMAddrLoop
+	ldh [lobyte(hRedrawRowOrColumnDest + 1)], a
 	ld a, l
-	ldh [hRedrawRowOrColumnDest], a
+	ldh [lobyte(hRedrawRowOrColumnDest)], a
 	ld a, REDRAW_ROW
-	ldh [hRedrawRowOrColumnMode], a
+	ldh [lobyte(hRedrawRowOrColumnMode)], a
 	call DelayFrame
 	ld hl, hRedrawMapViewRowOffset
 	inc [hl]
@@ -110,11 +110,11 @@ RedrawMapView:
 	pop hl
 	pop bc
 	dec c
-	jr nz, .redrawRowLoop
+	jr nz, RedrawMapView.redrawRowLoop
 	pop af
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	pop af
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ret
 
 CompareHLWithBC:

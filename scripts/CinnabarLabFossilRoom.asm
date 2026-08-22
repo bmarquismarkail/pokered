@@ -12,10 +12,10 @@ Lab4Script_GetFossilsInBag:
 	ld [wFilteredBagItemsCount], a
 	ld de, wFilteredBagItems
 	ld hl, FossilsList
-.loop
+Lab4Script_GetFossilsInBag.loop
 	ld a, [hli]
 	and a
-	jr z, .done
+	jr z, Lab4Script_GetFossilsInBag.done
 	push hl
 	push de
 	ld [wTempByteValue], a
@@ -25,7 +25,7 @@ Lab4Script_GetFossilsInBag:
 	pop hl
 	ld a, b
 	and a
-	jr z, .loop
+	jr z, Lab4Script_GetFossilsInBag.loop
 	; A fossil is in the bag
 	ld a, [wTempByteValue]
 	ld [de], a
@@ -34,68 +34,68 @@ Lab4Script_GetFossilsInBag:
 	ld hl, wFilteredBagItemsCount
 	inc [hl]
 	pop hl
-	jr .loop
-.done
+	jr Lab4Script_GetFossilsInBag.loop
+Lab4Script_GetFossilsInBag.done
 	ld a, $ff
 	ld [de], a
 	ret
 
 FossilsList:
-	db DOME_FOSSIL
-	db HELIX_FOSSIL
-	db OLD_AMBER
-	db 0 ; end
+	.DB DOME_FOSSIL
+	.DB HELIX_FOSSIL
+	.DB OLD_AMBER
+	.DB 0 ; end
 
 CinnabarLabFossilRoomScientist1Text:
 	text_asm
 	CheckEvent EVENT_GAVE_FOSSIL_TO_LAB
-	jr nz, .check_done_reviving
-	ld hl, .Text
+	jr nz, CinnabarLabFossilRoomScientist1Text.check_done_reviving
+	ld hl, CinnabarLabFossilRoomScientist1Text.Text
 	call PrintText
 	call Lab4Script_GetFossilsInBag
 	ld a, [wFilteredBagItemsCount]
 	and a
-	jr z, .no_fossils
+	jr z, CinnabarLabFossilRoomScientist1Text.no_fossils
 	farcall GiveFossilToCinnabarLab
-	jr .done
-.no_fossils
-	ld hl, .NoFossilsText
+	jr CinnabarLabFossilRoomScientist1Text.done
+CinnabarLabFossilRoomScientist1Text.no_fossils
+	ld hl, CinnabarLabFossilRoomScientist1Text.NoFossilsText
 	call PrintText
-.done
+CinnabarLabFossilRoomScientist1Text.done
 	jp TextScriptEnd
-.check_done_reviving
+CinnabarLabFossilRoomScientist1Text.check_done_reviving
 	CheckEventAfterBranchReuseA EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_GAVE_FOSSIL_TO_LAB
-	jr z, .done_reviving
-	ld hl, .GoForAWalkText
+	jr z, CinnabarLabFossilRoomScientist1Text.done_reviving
+	ld hl, CinnabarLabFossilRoomScientist1Text.GoForAWalkText
 	call PrintText
-	jr .done
-.done_reviving
+	jr CinnabarLabFossilRoomScientist1Text.done
+CinnabarLabFossilRoomScientist1Text.done_reviving
 	call LoadFossilItemAndMonNameBank1D
-	ld hl, .FossilIsBackToLifeText
+	ld hl, CinnabarLabFossilRoomScientist1Text.FossilIsBackToLifeText
 	call PrintText
 	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	ld a, [wFossilMon]
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .done
+	jr nc, CinnabarLabFossilRoomScientist1Text.done
 	ResetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_LAB_HANDING_OVER_FOSSIL_MON
-	jr .done
+	jr CinnabarLabFossilRoomScientist1Text.done
 
-.Text:
-	text_far _CinnabarLabFossilRoomScientist1Text
+CinnabarLabFossilRoomScientist1Text.Text:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1Text
 	text_end
 
-.NoFossilsText:
-	text_far _CinnabarLabFossilRoomScientist1NoFossilsText
+CinnabarLabFossilRoomScientist1Text.NoFossilsText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1NoFossilsText
 	text_end
 
-.GoForAWalkText:
-	text_far _CinnabarLabFossilRoomScientist1GoForAWalkText
+CinnabarLabFossilRoomScientist1Text.GoForAWalkText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1GoForAWalkText
 	text_end
 
-.FossilIsBackToLifeText:
-	text_far _CinnabarLabFossilRoomScientist1FossilIsBackToLifeText
+CinnabarLabFossilRoomScientist1Text.FossilIsBackToLifeText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1FossilIsBackToLifeText
 	text_end
 
 CinnabarLabFossilRoomScientist2Text:

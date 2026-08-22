@@ -1,4 +1,5 @@
-_PewterMartYoungsterText::
+_PewterMartYoungsterText:
+WLA_GLOBAL_PewterMartYoungsterText:
 	text "A shady, old man"
 	line "got me to buy"
 	cont "this really weird"
@@ -8,7 +9,8 @@ _PewterMartYoungsterText::
 	line "and it cost ¥500!"
 	done
 
-_PewterMartSuperNerdText::
+_PewterMartSuperNerdText:
+WLA_GLOBAL_PewterMartSuperNerdText:
 	text "Good things can"
 	line "happen if you"
 	cont "raise #MON"

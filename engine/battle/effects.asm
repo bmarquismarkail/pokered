@@ -1,15 +1,17 @@
 JumpMoveEffect:
-	call _JumpMoveEffect
+	call WLA_GLOBAL_JumpMoveEffect
 	ld b, $1
 	ret
 
 _JumpMoveEffect:
-	ldh a, [hWhoseTurn]
+WLA_GLOBAL_JumpMoveEffect:
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveEffect]
-	jr z, .next
+	jr z, WLA_GLOBAL_JumpMoveEffect__next
 	ld a, [wEnemyMoveEffect]
-.next
+_JumpMoveEffect.next:
+WLA_GLOBAL_JumpMoveEffect__next:
 	dec a ; subtract 1, there is no special effect for 00
 	add a ; x2, 16bit pointers
 	ld hl, MoveEffectPointerTable
@@ -21,88 +23,88 @@ _JumpMoveEffect:
 	ld l, a
 	jp hl ; jump to special effect handler
 
-INCLUDE "data/moves/effects_pointers.asm"
+.INCLUDE "data/moves/effects_pointers.asm"
 
 SleepEffect:
 	ld de, wEnemyMonStatus
 	ld bc, wEnemyBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jp z, .sleepEffect
+	jp z, SleepEffect.sleepEffect
 	ld de, wBattleMonStatus
 	ld bc, wPlayerBattleStatus2
 
-.sleepEffect
+SleepEffect.sleepEffect
 	ld a, [bc]
 	bit NEEDS_TO_RECHARGE, a ; does the target need to recharge? (hyper beam)
 	res NEEDS_TO_RECHARGE, a ; target no longer needs to recharge
 	ld [bc], a
-	jr nz, .setSleepCounter ; if the target had to recharge, all hit tests will be skipped
+	jr nz, SleepEffect.setSleepCounter ; if the target had to recharge, all hit tests will be skipped
 	                        ; including the event where the target already has another status
 	ld a, [de]
 	ld b, a
 	and SLP_MASK
-	jr z, .notAlreadySleeping ; can't affect a mon that is already asleep
+	jr z, SleepEffect.notAlreadySleeping ; can't affect a mon that is already asleep
 	ld hl, AlreadyAsleepText
 	jp PrintText
-.notAlreadySleeping
+SleepEffect.notAlreadySleeping
 	ld a, b
 	and a
-	jr nz, .didntAffect ; can't affect a mon that is already statused
+	jr nz, SleepEffect.didntAffect ; can't affect a mon that is already statused
 	push de
 	call MoveHitTest ; apply accuracy tests
 	pop de
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .didntAffect
-.setSleepCounter
+	jr nz, SleepEffect.didntAffect
+SleepEffect.setSleepCounter
 ; set target's sleep counter to a random number between 1 and 7
 	call BattleRandom
 	and SLP_MASK
-	jr z, .setSleepCounter
+	jr z, SleepEffect.setSleepCounter
 	ld [de], a
 	call PlayCurrentMoveAnimation2
 	ld hl, FellAsleepText
 	jp PrintText
-.didntAffect
+SleepEffect.didntAffect
 	jp PrintDidntAffectText
 
 FellAsleepText:
-	text_far _FellAsleepText
+	text_far WLA_GLOBAL_FellAsleepText
 	text_end
 
 AlreadyAsleepText:
-	text_far _AlreadyAsleepText
+	text_far WLA_GLOBAL_AlreadyAsleepText
 	text_end
 
 PoisonEffect:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .poisonEffect
+	jr z, PoisonEffect.poisonEffect
 	ld hl, wBattleMonStatus
 	ld de, wEnemyMoveEffect
-.poisonEffect
+PoisonEffect.poisonEffect
 	call CheckTargetSubstitute
-	jr nz, .noEffect ; can't poison a substitute target
+	jr nz, PoisonEffect.noEffect ; can't poison a substitute target
 	ld a, [hli]
 	ld b, a
 	and a
-	jr nz, .noEffect ; miss if target is already statused
+	jr nz, PoisonEffect.noEffect ; miss if target is already statused
 	ld a, [hli]
 	cp POISON ; can't poison a poison-type target
-	jr z, .noEffect
+	jr z, PoisonEffect.noEffect
 	ld a, [hld]
 	cp POISON ; can't poison a poison-type target
-	jr z, .noEffect
+	jr z, PoisonEffect.noEffect
 	ld a, [de]
 	cp POISON_SIDE_EFFECT1
-	ld b, 20 percent + 1 ; chance of poisoning
-	jr z, .sideEffectTest
+	ld b, (20 * $ff / 100) + 1 ; chance of poisoning
+	jr z, PoisonEffect.sideEffectTest
 	cp POISON_SIDE_EFFECT2
-	ld b, 40 percent + 1 ; chance of poisoning
-	jr z, .sideEffectTest
+	ld b, (40 * $ff / 100) + 1 ; chance of poisoning
+	jr z, PoisonEffect.sideEffectTest
 	push hl
 	push de
 	call MoveHitTest ; apply accuracy tests
@@ -110,63 +112,63 @@ PoisonEffect:
 	pop hl
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .didntAffect
-	jr .inflictPoison
-.sideEffectTest
+	jr nz, PoisonEffect.didntAffect
+	jr PoisonEffect.inflictPoison
+PoisonEffect.sideEffectTest
 	call BattleRandom
 	cp b ; was side effect successful?
 	ret nc
-.inflictPoison
+PoisonEffect.inflictPoison
 	dec hl
 	set PSN, [hl]
 	push de
 	dec de
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld b, SHAKE_SCREEN_ANIM
 	ld hl, wPlayerBattleStatus3
 	ld a, [de]
 	ld de, wPlayerToxicCounter
-	jr nz, .ok
+	jr nz, PoisonEffect.ok
 	ld b, ENEMY_HUD_SHAKE_ANIM
 	ld hl, wEnemyBattleStatus3
 	ld de, wEnemyToxicCounter
-.ok
+PoisonEffect.ok
 	cp TOXIC
-	jr nz, .normalPoison ; done if move is not Toxic
+	jr nz, PoisonEffect.normalPoison ; done if move is not Toxic
 	set BADLY_POISONED, [hl] ; else set Toxic battstatus
 	xor a
 	ld [de], a
 	ld hl, BadlyPoisonedText
-	jr .continue
-.normalPoison
+	jr PoisonEffect.continue
+PoisonEffect.normalPoison
 	ld hl, PoisonedText
-.continue
+PoisonEffect.continue
 	pop de
 	ld a, [de]
 	cp POISON_EFFECT
-	jr z, .regularPoisonEffect
+	jr z, PoisonEffect.regularPoisonEffect
 	ld a, b
 	call PlayBattleAnimation2
 	jp PrintText
-.regularPoisonEffect
+PoisonEffect.regularPoisonEffect
 	call PlayCurrentMoveAnimation2
 	jp PrintText
-.noEffect
+PoisonEffect.noEffect
 	ld a, [de]
 	cp POISON_EFFECT
 	ret nz
-.didntAffect
+PoisonEffect.didntAffect
 	ld c, 50
 	call DelayFrames
 	jp PrintDidntAffectText
 
 PoisonedText:
-	text_far _PoisonedText
+	text_far WLA_GLOBAL_PoisonedText
 	text_end
 
 BadlyPoisonedText:
-	text_far _BadlyPoisonedText
+	text_far WLA_GLOBAL_BadlyPoisonedText
 	text_end
 
 DrainHPEffect:
@@ -175,12 +177,12 @@ DrainHPEffect:
 ExplodeEffect:
 	ld hl, wBattleMonHP
 	ld de, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .faintUser
+	jr z, ExplodeEffect.faintUser
 	ld hl, wEnemyMonHP
 	ld de, wEnemyBattleStatus2
-.faintUser
+ExplodeEffect.faintUser
 	xor a
 	ld [hli], a ; set the mon's HP to 0
 	ld [hli], a
@@ -196,9 +198,9 @@ FreezeBurnParalyzeEffect:
 	ld [wAnimationType], a
 	call CheckTargetSubstitute
 	ret nz ; return if they have a substitute, can't effect them
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jp nz, .opponentAttacker
+	jp nz, FreezeBurnParalyzeEffect.opponentAttacker
 	ld a, [wEnemyMonStatus]
 	and a
 	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
@@ -212,14 +214,14 @@ FreezeBurnParalyzeEffect:
 	ret z  ; return if they match
 	ld a, [wPlayerMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
-	ld b, 10 percent + 1
-	jr c, .regular_effectiveness
+	ld b, (10 * $ff / 100) + 1
+	jr c, FreezeBurnParalyzeEffect.regular_effectiveness
 ; extra effectiveness
-	ld b, 30 percent + 1
-	ASSERT PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 == BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1
-	ASSERT PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 == FREEZE_SIDE_EFFECT2 - FREEZE_SIDE_EFFECT1
+	ld b, (30 * $ff / 100) + 1
+	.ASSERT ((PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1)-(BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1)) < 1 && ((PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1)-(BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1)) > -1
+	.ASSERT ((PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1)-(FREEZE_SIDE_EFFECT2 - FREEZE_SIDE_EFFECT1)) < 1 && ((PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1)-(FREEZE_SIDE_EFFECT2 - FREEZE_SIDE_EFFECT1)) > -1
 	sub PARALYZE_SIDE_EFFECT2 - PARALYZE_SIDE_EFFECT1 ; treat extra effective as regular from now on
-.regular_effectiveness
+FreezeBurnParalyzeEffect.regular_effectiveness
 	push af
 	call BattleRandom ; get random 8bit value for probability test
 	cp b
@@ -227,9 +229,9 @@ FreezeBurnParalyzeEffect:
 	ret nc ; do nothing if random value is >= 1A or 4D [no status applied]
 	ld a, b ; what type of effect is this?
 	cp BURN_SIDE_EFFECT1
-	jr z, .burn1
+	jr z, FreezeBurnParalyzeEffect.burn1
 	cp FREEZE_SIDE_EFFECT1
-	jr z, .freeze1
+	jr z, FreezeBurnParalyzeEffect.freeze1
 ; paralyze1
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
@@ -237,7 +239,7 @@ FreezeBurnParalyzeEffect:
 	ld a, ENEMY_HUD_SHAKE_ANIM
 	call PlayBattleAnimation
 	jp PrintMayNotAttackText ; print paralysis text
-.burn1
+FreezeBurnParalyzeEffect.burn1
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call HalveAttackDueToBurn ; halve attack of affected mon
@@ -245,7 +247,7 @@ FreezeBurnParalyzeEffect:
 	call PlayBattleAnimation
 	ld hl, BurnedText
 	jp PrintText
-.freeze1
+FreezeBurnParalyzeEffect.freeze1
 	call ClearHyperBeam ; resets hyper beam (recharge) condition from target
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
@@ -253,7 +255,7 @@ FreezeBurnParalyzeEffect:
 	call PlayBattleAnimation
 	ld hl, FrozenText
 	jp PrintText
-.opponentAttacker
+FreezeBurnParalyzeEffect.opponentAttacker
 	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
@@ -267,12 +269,12 @@ FreezeBurnParalyzeEffect:
 	ret z
 	ld a, [wEnemyMoveEffect]
 	cp PARALYZE_SIDE_EFFECT1 + 1
-	ld b, 10 percent + 1
-	jr c, .regular_effectiveness2
+	ld b, (10 * $ff / 100) + 1
+	jr c, FreezeBurnParalyzeEffect.regular_effectiveness2
 ; extra effectiveness
-	ld b, 30 percent + 1
+	ld b, (30 * $ff / 100) + 1
 	sub BURN_SIDE_EFFECT2 - BURN_SIDE_EFFECT1 ; treat extra effective as regular from now on
-.regular_effectiveness2
+FreezeBurnParalyzeEffect.regular_effectiveness2
 	push af
 	call BattleRandom
 	cp b
@@ -280,21 +282,21 @@ FreezeBurnParalyzeEffect:
 	ret nc
 	ld a, b
 	cp BURN_SIDE_EFFECT1
-	jr z, .burn2
+	jr z, FreezeBurnParalyzeEffect.burn2
 	cp FREEZE_SIDE_EFFECT1
-	jr z, .freeze2
+	jr z, FreezeBurnParalyzeEffect.freeze2
 ; paralyze2
 	ld a, 1 << PAR
 	ld [wBattleMonStatus], a
 	call QuarterSpeedDueToParalysis
 	jp PrintMayNotAttackText
-.burn2
+FreezeBurnParalyzeEffect.burn2
 	ld a, 1 << BRN
 	ld [wBattleMonStatus], a
 	call HalveAttackDueToBurn
 	ld hl, BurnedText
 	jp PrintText
-.freeze2
+FreezeBurnParalyzeEffect.freeze2
 ; hyper beam bits aren't reset for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
@@ -302,20 +304,20 @@ FreezeBurnParalyzeEffect:
 	jp PrintText
 
 BurnedText:
-	text_far _BurnedText
+	text_far WLA_GLOBAL_BurnedText
 	text_end
 
 FrozenText:
-	text_far _FrozenText
+	text_far WLA_GLOBAL_FrozenText
 	text_end
 
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
 	and 1 << FRZ ; are they frozen?
 	ret z ; return if so
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr nz, .opponent
+	jr nz, CheckDefrost.opponent
 	;player [attacker]
 	ld a, [wPlayerMoveType]
 	sub FIRE
@@ -328,8 +330,8 @@ CheckDefrost:
 	xor a
 	ld [hl], a ; clear status in roster
 	ld hl, FireDefrostedText
-	jr .common
-.opponent
+	jr CheckDefrost.common
+CheckDefrost.opponent
 	ld a, [wEnemyMoveType] ; same as above with addresses swapped
 	sub FIRE
 	ret nz
@@ -341,28 +343,28 @@ CheckDefrost:
 	xor a
 	ld [hl], a
 	ld hl, FireDefrostedText
-.common
+CheckDefrost.common
 	jp PrintText
 
 FireDefrostedText:
-	text_far _FireDefrostedText
+	text_far WLA_GLOBAL_FireDefrostedText
 	text_end
 
 StatModifierUpEffect:
 	ld hl, wPlayerMonStatMods
 	ld de, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .statModifierUpEffect
+	jr z, StatModifierUpEffect.statModifierUpEffect
 	ld hl, wEnemyMonStatMods
 	ld de, wEnemyMoveEffect
-.statModifierUpEffect
+StatModifierUpEffect.statModifierUpEffect
 	ld a, [de]
 	sub ATTACK_UP1_EFFECT
 	cp EVASION_UP1_EFFECT + $3 - ATTACK_UP1_EFFECT ; covers all +1 effects
-	jr c, .incrementStatMod
+	jr c, StatModifierUpEffect.incrementStatMod
 	sub ATTACK_UP2_EFFECT - ATTACK_UP1_EFFECT ; map +2 effects to equivalent +1 effect
-.incrementStatMod
+StatModifierUpEffect.incrementStatMod
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -373,13 +375,13 @@ StatModifierUpEffect:
 	jp c, PrintNothingHappenedText
 	ld a, [de]
 	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
-	jr c, .ok
+	jr c, StatModifierUpEffect.ok
 	inc b ; if so, increment stat mod again
 	ld a, $d
 	cp b ; unless it's already +6
-	jr nc, .ok
+	jr nc, StatModifierUpEffect.ok
 	ld b, a
-.ok
+StatModifierUpEffect.ok
 	ld [hl], b
 	ld a, c
 	cp $4
@@ -387,12 +389,12 @@ StatModifierUpEffect:
 	push hl
 	ld hl, wBattleMonAttack + 1
 	ld de, wPlayerMonUnmodifiedAttack
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .pointToStats
+	jr z, StatModifierUpEffect.pointToStats
 	ld hl, wEnemyMonAttack + 1
 	ld de, wEnemyMonUnmodifiedAttack
-.pointToStats
+StatModifierUpEffect.pointToStats
 	push bc
 	sla c
 	ld b, $0
@@ -400,18 +402,18 @@ StatModifierUpEffect:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .checkIf999
+	jr nc, StatModifierUpEffect.checkIf999
 	inc d ; de = unmodified (original) stat
-.checkIf999
+StatModifierUpEffect.checkIf999
 	pop bc
 	; check if stat is already 999
 	ld a, [hld]
-	sub LOW(MAX_STAT_VALUE)
-	jr nz, .recalculateStat
+	sub lobyte(MAX_STAT_VALUE)
+	jr nz, StatModifierUpEffect.recalculateStat
 	ld a, [hl]
-	sbc HIGH(MAX_STAT_VALUE)
+	sbc hibyte(MAX_STAT_VALUE)
 	jp z, RestoreOriginalStatModifier
-.recalculateStat ; recalculate affected stat
+StatModifierUpEffect.recalculateStat ; recalculate affected stat
                  ; paralysis and burn penalties, as well as badge boosts are ignored
 	push hl
 	push bc
@@ -423,35 +425,35 @@ StatModifierUpEffect:
 	add hl, bc
 	pop bc
 	xor a
-	ldh [hMultiplicand], a
+	ldh [lobyte(hMultiplicand)], a
 	ld a, [de]
-	ldh [hMultiplicand + 1], a
+	ldh [lobyte(hMultiplicand + 1)], a
 	inc de
 	ld a, [de]
-	ldh [hMultiplicand + 2], a
+	ldh [lobyte(hMultiplicand + 2)], a
 	ld a, [hli]
-	ldh [hMultiplier], a
+	ldh [lobyte(hMultiplier)], a
 	call Multiply
 	ld a, [hl]
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld b, $4
 	call Divide
 	pop hl
 ; cap at MAX_STAT_VALUE (999)
-	ldh a, [hProduct + 3]
-	sub LOW(MAX_STAT_VALUE)
-	ldh a, [hProduct + 2]
-	sbc HIGH(MAX_STAT_VALUE)
+	ldh a, [lobyte(hProduct + 3)]
+	sub lobyte(MAX_STAT_VALUE)
+	ldh a, [lobyte(hProduct + 2)]
+	sbc hibyte(MAX_STAT_VALUE)
 	jp c, UpdateStat
-	ld a, HIGH(MAX_STAT_VALUE)
-	ldh [hMultiplicand + 1], a
-	ld a, LOW(MAX_STAT_VALUE)
-	ldh [hMultiplicand + 2], a
+	ld a, hibyte(MAX_STAT_VALUE)
+	ldh [lobyte(hMultiplicand + 1)], a
+	ld a, lobyte(MAX_STAT_VALUE)
+	ldh [lobyte(hMultiplicand + 2)], a
 
 UpdateStat:
-	ldh a, [hProduct + 2]
+	ldh a, [lobyte(hProduct + 2)]
 	ld [hli], a
-	ldh a, [hProduct + 3]
+	ldh a, [lobyte(hProduct + 3)]
 	ld [hl], a
 	pop hl
 UpdateStatDone:
@@ -461,40 +463,40 @@ UpdateStatDone:
 	ld hl, wPlayerBattleStatus2
 	ld de, wPlayerMoveNum
 	ld bc, wPlayerMonMinimized
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .playerTurn
+	jr z, UpdateStatDone.playerTurn
 	ld hl, wEnemyBattleStatus2
 	ld de, wEnemyMoveNum
 	ld bc, wEnemyMonMinimized
-.playerTurn
+UpdateStatDone.playerTurn
 	ld a, [de]
 	cp MINIMIZE
-	jr nz, .notMinimize
+	jr nz, UpdateStatDone.notMinimize
  ; if a substitute is up, slide off the substitute and show the mon pic before
  ; playing the minimize animation
 	bit HAS_SUBSTITUTE_UP, [hl]
 	push af
 	push bc
 	ld hl, HideSubstituteShowMonAnim
-	ld b, BANK(HideSubstituteShowMonAnim)
+	ld b, bank(HideSubstituteShowMonAnim)
 	push de
 	call nz, Bankswitch
 	pop de
-.notMinimize
+UpdateStatDone.notMinimize
 	call PlayCurrentMoveAnimation
 	ld a, [de]
 	cp MINIMIZE
-	jr nz, .applyBadgeBoostsAndStatusPenalties
+	jr nz, UpdateStatDone.applyBadgeBoostsAndStatusPenalties
 	pop bc
 	ld a, $1
 	ld [bc], a
 	ld hl, ReshowSubstituteAnim
-	ld b, BANK(ReshowSubstituteAnim)
+	ld b, bank(ReshowSubstituteAnim)
 	pop af
 	call nz, Bankswitch
-.applyBadgeBoostsAndStatusPenalties
-	ldh a, [hWhoseTurn]
+UpdateStatDone.applyBadgeBoostsAndStatusPenalties
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
@@ -514,15 +516,15 @@ PrintNothingHappenedText:
 	jp PrintText
 
 MonsStatsRoseText:
-	text_far _MonsStatsRoseText
+	text_far WLA_GLOBAL_MonsStatsRoseText
 	text_asm
 	ld hl, GreatlyRoseText
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveEffect]
-	jr z, .playerTurn
+	jr z, MonsStatsRoseText.playerTurn
 	ld a, [wEnemyMoveEffect]
-.playerTurn
+MonsStatsRoseText.playerTurn
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
 	ld hl, RoseText
@@ -530,41 +532,41 @@ MonsStatsRoseText:
 
 GreatlyRoseText:
 	text_pause
-	text_far _GreatlyRoseText
+	text_far WLA_GLOBAL_GreatlyRoseText
 ; fallthrough
 RoseText:
-	text_far _RoseText
+	text_far WLA_GLOBAL_RoseText
 	text_end
 
 StatModifierDownEffect:
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMoveEffect
 	ld bc, wEnemyBattleStatus1
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .statModifierDownEffect
+	jr z, StatModifierDownEffect.statModifierDownEffect
 	ld hl, wPlayerMonStatMods
 	ld de, wEnemyMoveEffect
 	ld bc, wPlayerBattleStatus1
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jr z, .statModifierDownEffect
+	jr z, StatModifierDownEffect.statModifierDownEffect
 	call BattleRandom
-	cp 25 percent + 1 ; chance to miss by in regular battle
+	cp (25 * $ff / 100) + 1 ; chance to miss by in regular battle
 	jp c, MoveMissed
-.statModifierDownEffect
+StatModifierDownEffect.statModifierDownEffect
 	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, MoveMissed
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
-	jr c, .nonSideEffect
+	jr c, StatModifierDownEffect.nonSideEffect
 	call BattleRandom
-	cp 33 percent + 1 ; chance for side effects
+	cp (33 * $ff / 100) + 1 ; chance for side effects
 	jp nc, CantLowerAnymore
 	ld a, [de]
 	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
-	jr .decrementStatMod
-.nonSideEffect ; non-side effects only
+	jr StatModifierDownEffect.decrementStatMod
+StatModifierDownEffect.nonSideEffect ; non-side effects only
 	push hl
 	push de
 	push bc
@@ -581,9 +583,9 @@ StatModifierDownEffect:
 	ld a, [de]
 	sub ATTACK_DOWN1_EFFECT
 	cp EVASION_DOWN1_EFFECT + $3 - ATTACK_DOWN1_EFFECT ; covers all -1 effects
-	jr c, .decrementStatMod
+	jr c, StatModifierDownEffect.decrementStatMod
 	sub ATTACK_DOWN2_EFFECT - ATTACK_DOWN1_EFFECT ; map -2 effects to corresponding -1 effect
-.decrementStatMod
+StatModifierDownEffect.decrementStatMod
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -592,13 +594,13 @@ StatModifierDownEffect:
 	jp z, CantLowerAnymore ; if stat mod is 1 (-6), can't lower anymore
 	ld a, [de]
 	cp ATTACK_DOWN2_EFFECT - $16 ; $24
-	jr c, .ok
+	jr c, StatModifierDownEffect.ok
 	cp ATTACK_DOWN_SIDE_EFFECT ; move side effects, stat mod decrease is always 1
-	jr nc, .ok
+	jr nc, StatModifierDownEffect.ok
 	dec b ; stat down 2 effects only (dec mod again)
-	jr nz, .ok
+	jr nz, StatModifierDownEffect.ok
 	inc b ; increment mod to 1 (-6) if it would become 0 (-7)
-.ok
+StatModifierDownEffect.ok
 	ld [hl], b ; save modified mod
 	ld a, c
 	cp $4
@@ -607,12 +609,12 @@ StatModifierDownEffect:
 	push de
 	ld hl, wEnemyMonAttack + 1
 	ld de, wEnemyMonUnmodifiedAttack
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .pointToStat
+	jr z, StatModifierDownEffect.pointToStat
 	ld hl, wBattleMonAttack + 1
 	ld de, wPlayerMonUnmodifiedAttack
-.pointToStat
+StatModifierDownEffect.pointToStat
 	push bc
 	sla c
 	ld b, $0
@@ -620,17 +622,17 @@ StatModifierDownEffect:
 	ld a, c
 	add e
 	ld e, a
-	jr nc, .noCarry
+	jr nc, StatModifierDownEffect.noCarry
 	inc d ; de = unmodified stat
-.noCarry
+StatModifierDownEffect.noCarry
 	pop bc
 	ld a, [hld]
 	sub $1 ; can't lower stat below 1 (-6)
-	jr nz, .recalculateStat
+	jr nz, StatModifierDownEffect.recalculateStat
 	ld a, [hl]
 	and a
 	jp z, CantLowerAnymore_Pop
-.recalculateStat
+StatModifierDownEffect.recalculateStat
 ; recalculate affected stat
 ; paralysis and burn penalties, as well as badge boosts are ignored
 	push hl
@@ -643,33 +645,33 @@ StatModifierDownEffect:
 	add hl, bc
 	pop bc
 	xor a
-	ldh [hMultiplicand], a
+	ldh [lobyte(hMultiplicand)], a
 	ld a, [de]
-	ldh [hMultiplicand + 1], a
+	ldh [lobyte(hMultiplicand + 1)], a
 	inc de
 	ld a, [de]
-	ldh [hMultiplicand + 2], a
+	ldh [lobyte(hMultiplicand + 2)], a
 	ld a, [hli]
-	ldh [hMultiplier], a
+	ldh [lobyte(hMultiplier)], a
 	call Multiply
 	ld a, [hl]
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld b, $4
 	call Divide
 	pop hl
-	ldh a, [hProduct + 3]
+	ldh a, [lobyte(hProduct + 3)]
 	ld b, a
-	ldh a, [hProduct + 2]
+	ldh a, [lobyte(hProduct + 2)]
 	or b
 	jp nz, UpdateLoweredStat
-	ldh [hMultiplicand + 1], a
+	ldh [lobyte(hMultiplicand + 1)], a
 	ld a, $1
-	ldh [hMultiplicand + 2], a
+	ldh [lobyte(hMultiplicand + 2)], a
 
 UpdateLoweredStat:
-	ldh a, [hProduct + 2]
+	ldh a, [lobyte(hProduct + 2)]
 	ld [hli], a
-	ldh a, [hProduct + 3]
+	ldh a, [lobyte(hProduct + 3)]
 	ld [hl], a
 	pop de
 	pop hl
@@ -681,10 +683,10 @@ UpdateLoweredStatDone:
 	pop de
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT ; for all side effects, move animation has already played, skip it
-	jr nc, .ApplyBadgeBoostsAndStatusPenalties
+	jr nc, UpdateLoweredStatDone.ApplyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation2
-.ApplyBadgeBoostsAndStatusPenalties
-	ldh a, [hWhoseTurn]
+UpdateLoweredStatDone.ApplyBadgeBoostsAndStatusPenalties
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	call nz, ApplyBadgeStatBoosts ; whenever the opponent uses a stat-down move, badge boosts get reapplied again to every stat,
 	                              ; even to those not affected by the stat-down move (will be boosted further)
@@ -716,15 +718,15 @@ MoveMissed:
 	jp ConditionalPrintButItFailed
 
 MonsStatsFellText:
-	text_far _MonsStatsFellText
+	text_far WLA_GLOBAL_MonsStatsFellText
 	text_asm
 	ld hl, FellText
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveEffect]
-	jr z, .playerTurn
+	jr z, MonsStatsFellText.playerTurn
 	ld a, [wEnemyMoveEffect]
-.playerTurn
+MonsStatsFellText.playerTurn
 ; check if the move's effect decreases a stat by 2
 	cp BIDE_EFFECT
 	ret c
@@ -735,43 +737,43 @@ MonsStatsFellText:
 
 GreatlyFellText:
 	text_pause
-	text_far _GreatlyFellText
+	text_far WLA_GLOBAL_GreatlyFellText
 ; fallthrough
 FellText:
-	text_far _FellText
+	text_far WLA_GLOBAL_FellText
 	text_end
 
 PrintStatText:
 	ld hl, StatModTextStrings
-	ld c, '@'
-.findStatName_outer
+	ld c, $50
+PrintStatText.findStatName_outer
 	dec b
-	jr z, .foundStatName
-.findStatName_inner
+	jr z, PrintStatText.foundStatName
+PrintStatText.findStatName_inner
 	ld a, [hli]
 	cp c
-	jr z, .findStatName_outer
-	jr .findStatName_inner
-.foundStatName
+	jr z, PrintStatText.findStatName_outer
+	jr PrintStatText.findStatName_inner
+PrintStatText.foundStatName
 	ld de, wStringBuffer
 	ld bc, STAT_NAME_LENGTH
 	jp CopyData
 
-INCLUDE "data/battle/stat_mod_names.asm"
+.INCLUDE "data/battle/stat_mod_names.asm"
 
-INCLUDE "data/battle/stat_modifiers.asm"
+.INCLUDE "data/battle/stat_modifiers.asm"
 
 BideEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerBideAccumulatedDamage
 	ld bc, wPlayerNumAttacksLeft
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .bideEffect
+	jr z, BideEffect.bideEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyBideAccumulatedDamage
 	ld bc, wEnemyNumAttacksLeft
-.bideEffect
+BideEffect.bideEffect
 	set STORING_ENERGY, [hl] ; mon is now using bide
 	xor a
 	ld [de], a
@@ -784,67 +786,67 @@ BideEffect:
 	inc a
 	inc a
 	ld [bc], a ; set Bide counter to 2 or 3 at random
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	add XSTATITEM_ANIM
 	jp PlayBattleAnimation2
 
 ThrashPetalDanceEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .thrashPetalDanceEffect
+	jr z, ThrashPetalDanceEffect.thrashPetalDanceEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyNumAttacksLeft
-.thrashPetalDanceEffect
+ThrashPetalDanceEffect.thrashPetalDanceEffect
 	set THRASHING_ABOUT, [hl] ; mon is now using thrash/petal dance
 	call BattleRandom
 	and $1
 	inc a
 	inc a
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	add SHRINKING_SQUARE_ANIM
 	jp PlayBattleAnimation2
 
 SwitchAndTeleportEffect:
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr nz, .handleEnemy
+	jr nz, SwitchAndTeleportEffect.handleEnemy
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .notWildBattle1
+	jr nz, SwitchAndTeleportEffect.notWildBattle1
 	ld a, [wCurEnemyLevel]
 	ld b, a
 	ld a, [wBattleMonLevel]
 	cp b ; is the player's level greater than the enemy's level?
-	jr nc, .playerMoveWasSuccessful ; if so, teleport will always succeed
+	jr nc, SwitchAndTeleportEffect.playerMoveWasSuccessful ; if so, teleport will always succeed
 	add b
 	ld c, a
 	inc c ; c = playerLevel + enemyLevel + 1
-.rejectionSampleLoop1
+SwitchAndTeleportEffect.rejectionSampleLoop1
 	call BattleRandom
 	cp c ; get a random number between 0 and c
-	jr nc, .rejectionSampleLoop1
+	jr nc, SwitchAndTeleportEffect.rejectionSampleLoop1
 	srl b
 	srl b  ; b = enemyLevel / 4
 	cp b ; is rand[0, playerLevel + enemyLevel] >= (enemyLevel / 4)?
-	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
+	jr nc, SwitchAndTeleportEffect.playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
 	call DelayFrames
 	ld a, [wPlayerMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintButItFailedText_
-.playerMoveWasSuccessful
+SwitchAndTeleportEffect.playerMoveWasSuccessful
 	call ReadPlayerMonCurHPAndStatus
 	xor a
 	ld [wAnimationType], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld a, [wPlayerMoveNum]
-	jr .playAnimAndPrintText
-.notWildBattle1
+	jr SwitchAndTeleportEffect.playAnimAndPrintText
+SwitchAndTeleportEffect.notWildBattle1
 	ld c, 50
 	call DelayFrames
 	ld hl, IsUnaffectedText
@@ -852,41 +854,41 @@ SwitchAndTeleportEffect:
 	cp TELEPORT
 	jp nz, PrintText
 	jp PrintButItFailedText_
-.handleEnemy
+SwitchAndTeleportEffect.handleEnemy
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .notWildBattle2
+	jr nz, SwitchAndTeleportEffect.notWildBattle2
 	ld a, [wBattleMonLevel]
 	ld b, a
 	ld a, [wCurEnemyLevel]
 	cp b
-	jr nc, .enemyMoveWasSuccessful
+	jr nc, SwitchAndTeleportEffect.enemyMoveWasSuccessful
 	add b
 	ld c, a
 	inc c
-.rejectionSampleLoop2
+SwitchAndTeleportEffect.rejectionSampleLoop2
 	call BattleRandom
 	cp c
-	jr nc, .rejectionSampleLoop2
+	jr nc, SwitchAndTeleportEffect.rejectionSampleLoop2
 	srl b
 	srl b
 	cp b
-	jr nc, .enemyMoveWasSuccessful
+	jr nc, SwitchAndTeleportEffect.enemyMoveWasSuccessful
 	ld c, 50
 	call DelayFrames
 	ld a, [wEnemyMoveNum]
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintButItFailedText_
-.enemyMoveWasSuccessful
+SwitchAndTeleportEffect.enemyMoveWasSuccessful
 	call ReadPlayerMonCurHPAndStatus
 	xor a
 	ld [wAnimationType], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld a, [wEnemyMoveNum]
-	jr .playAnimAndPrintText
-.notWildBattle2
+	jr SwitchAndTeleportEffect.playAnimAndPrintText
+SwitchAndTeleportEffect.notWildBattle2
 	ld c, 50
 	call DelayFrames
 	ld hl, IsUnaffectedText
@@ -894,7 +896,7 @@ SwitchAndTeleportEffect:
 	cp TELEPORT
 	jp nz, PrintText
 	jp ConditionalPrintButItFailed
-.playAnimAndPrintText
+SwitchAndTeleportEffect.playAnimAndPrintText
 	push af
 	call PlayBattleAnimation
 	ld c, 20
@@ -902,89 +904,89 @@ SwitchAndTeleportEffect:
 	pop af
 	ld hl, RanFromBattleText
 	cp TELEPORT
-	jr z, .printText
+	jr z, SwitchAndTeleportEffect.printText
 	ld hl, RanAwayScaredText
 	cp ROAR
-	jr z, .printText
+	jr z, SwitchAndTeleportEffect.printText
 	ld hl, WasBlownAwayText
-.printText
+SwitchAndTeleportEffect.printText
 	jp PrintText
 
 RanFromBattleText:
-	text_far _RanFromBattleText
+	text_far WLA_GLOBAL_RanFromBattleText
 	text_end
 
 RanAwayScaredText:
-	text_far _RanAwayScaredText
+	text_far WLA_GLOBAL_RanAwayScaredText
 	text_end
 
 WasBlownAwayText:
-	text_far _WasBlownAwayText
+	text_far WLA_GLOBAL_WasBlownAwayText
 	text_end
 
 TwoToFiveAttacksEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
 	ld bc, wPlayerNumHits
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .twoToFiveAttacksEffect
+	jr z, TwoToFiveAttacksEffect.twoToFiveAttacksEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyNumAttacksLeft
 	ld bc, wEnemyNumHits
-.twoToFiveAttacksEffect
+TwoToFiveAttacksEffect.twoToFiveAttacksEffect
 	bit ATTACKING_MULTIPLE_TIMES, [hl] ; is mon attacking multiple times?
 	ret nz
 	set ATTACKING_MULTIPLE_TIMES, [hl] ; mon is now attacking multiple times
 	ld hl, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .setNumberOfHits
+	jr z, TwoToFiveAttacksEffect.setNumberOfHits
 	ld hl, wEnemyMoveEffect
-.setNumberOfHits
+TwoToFiveAttacksEffect.setNumberOfHits
 	ld a, [hl]
 	cp TWINEEDLE_EFFECT
-	jr z, .twineedle
+	jr z, TwoToFiveAttacksEffect.twineedle
 	cp ATTACK_TWICE_EFFECT
 	ld a, $2 ; number of hits it's always 2 for ATTACK_TWICE_EFFECT
-	jr z, .saveNumberOfHits
+	jr z, TwoToFiveAttacksEffect.saveNumberOfHits
 ; for TWO_TO_FIVE_ATTACKS_EFFECT 3/8 chance for 2 and 3 hits, and 1/8 chance for 4 and 5 hits
 	call BattleRandom
 	and $3
 	cp $2
-	jr c, .gotNumHits
+	jr c, TwoToFiveAttacksEffect.gotNumHits
 ; if the number of hits was greater than 2, re-roll again for a lower chance
 	call BattleRandom
 	and $3
-.gotNumHits
+TwoToFiveAttacksEffect.gotNumHits
 	inc a
 	inc a
-.saveNumberOfHits
+TwoToFiveAttacksEffect.saveNumberOfHits
 	ld [de], a
 	ld [bc], a
 	ret
-.twineedle
+TwoToFiveAttacksEffect.twineedle
 	ld a, POISON_SIDE_EFFECT1
 	ld [hl], a ; set Twineedle's effect to poison effect
-	jr .saveNumberOfHits
+	jr TwoToFiveAttacksEffect.saveNumberOfHits
 
 FlinchSideEffect:
 	call CheckTargetSubstitute
 	ret nz
 	ld hl, wEnemyBattleStatus1
 	ld de, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .flinchSideEffect
+	jr z, FlinchSideEffect.flinchSideEffect
 	ld hl, wPlayerBattleStatus1
 	ld de, wEnemyMoveEffect
-.flinchSideEffect
+FlinchSideEffect.flinchSideEffect
 	ld a, [de]
 	cp FLINCH_SIDE_EFFECT1
-	ld b, 10 percent + 1 ; chance of flinch (FLINCH_SIDE_EFFECT1)
-	jr z, .gotEffectChance
-	ld b, 30 percent + 1 ; chance of flinch otherwise
-.gotEffectChance
+	ld b, (10 * $ff / 100) + 1 ; chance of flinch (FLINCH_SIDE_EFFECT1)
+	jr z, FlinchSideEffect.gotEffectChance
+	ld b, (30 * $ff / 100) + 1 ; chance of flinch otherwise
+FlinchSideEffect.gotEffectChance
 	call BattleRandom
 	cp b
 	ret nc
@@ -998,28 +1000,28 @@ OneHitKOEffect:
 ChargeEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerMoveEffect
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld b, XSTATITEM_ANIM
-	jr z, .chargeEffect
+	jr z, ChargeEffect.chargeEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyMoveEffect
 	ld b, XSTATITEM_DUPLICATE_ANIM
-.chargeEffect
+ChargeEffect.chargeEffect
 	set CHARGING_UP, [hl]
 	ld a, [de]
 	dec de ; de contains enemy or player MOVENUM
 	cp FLY_EFFECT
-	jr nz, .notFly
+	jr nz, ChargeEffect.notFly
 	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld b, TELEPORT ; load Teleport's animation
-.notFly
+ChargeEffect.notFly
 	ld a, [de]
 	cp DIG
-	jr nz, .notDigOrFly
+	jr nz, ChargeEffect.notDigOrFly
 	set INVULNERABLE, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld b, SLIDE_DOWN_ANIM
-.notDigOrFly
+ChargeEffect.notDigOrFly
 	xor a
 	ld [wAnimationType], a
 	ld a, b
@@ -1030,62 +1032,62 @@ ChargeEffect:
 	jp PrintText
 
 ChargeMoveEffectText:
-	text_far _ChargeMoveEffectText
+	text_far WLA_GLOBAL_ChargeMoveEffectText
 	text_asm
 	ld a, [wChargeMoveNum]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText
-	jr z, .gotText
+	jr z, ChargeMoveEffectText.gotText
 	cp SOLARBEAM
 	ld hl, TookInSunlightText
-	jr z, .gotText
+	jr z, ChargeMoveEffectText.gotText
 	cp SKULL_BASH
 	ld hl, LoweredItsHeadText
-	jr z, .gotText
+	jr z, ChargeMoveEffectText.gotText
 	cp SKY_ATTACK
 	ld hl, SkyAttackGlowingText
-	jr z, .gotText
+	jr z, ChargeMoveEffectText.gotText
 	cp FLY
 	ld hl, FlewUpHighText
-	jr z, .gotText
+	jr z, ChargeMoveEffectText.gotText
 	cp DIG
 	ld hl, DugAHoleText
-.gotText
+ChargeMoveEffectText.gotText
 	ret
 
 MadeWhirlwindText:
-	text_far _MadeWhirlwindText
+	text_far WLA_GLOBAL_MadeWhirlwindText
 	text_end
 
 TookInSunlightText:
-	text_far _TookInSunlightText
+	text_far WLA_GLOBAL_TookInSunlightText
 	text_end
 
 LoweredItsHeadText:
-	text_far _LoweredItsHeadText
+	text_far WLA_GLOBAL_LoweredItsHeadText
 	text_end
 
 SkyAttackGlowingText:
-	text_far _SkyAttackGlowingText
+	text_far WLA_GLOBAL_SkyAttackGlowingText
 	text_end
 
 FlewUpHighText:
-	text_far _FlewUpHighText
+	text_far WLA_GLOBAL_FlewUpHighText
 	text_end
 
 DugAHoleText:
-	text_far _DugAHoleText
+	text_far WLA_GLOBAL_DugAHoleText
 	text_end
 
 TrappingEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .trappingEffect
+	jr z, TrappingEffect.trappingEffect
 	ld hl, wEnemyBattleStatus1
 	ld de, wEnemyNumAttacksLeft
-.trappingEffect
+TrappingEffect.trappingEffect
 	bit USING_TRAPPING_MOVE, [hl]
 	ret nz
 	call ClearHyperBeam ; since this effect is called before testing whether the move will hit,
@@ -1094,10 +1096,10 @@ TrappingEffect:
 	call BattleRandom ; 3/8 chance for 2 and 3 attacks, and 1/8 chance for 4 and 5 attacks
 	and $3
 	cp $2
-	jr c, .setTrappingCounter
+	jr c, TrappingEffect.setTrappingCounter
 	call BattleRandom
 	and $3
-.setTrappingCounter
+TrappingEffect.setTrappingCounter
 	inc a
 	ld [de], a
 	ret
@@ -1113,7 +1115,7 @@ RecoilEffect:
 
 ConfusionSideEffect:
 	call BattleRandom
-	cp 10 percent ; chance of confusion
+	cp (10 * $ff / 100) ; chance of confusion
 	ret nc
 	jr ConfusionSideEffectSuccess
 
@@ -1126,16 +1128,16 @@ ConfusionEffect:
 	jr nz, ConfusionEffectFailed
 
 ConfusionSideEffectSuccess:
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld hl, wEnemyBattleStatus1
 	ld bc, wEnemyConfusedCounter
 	ld a, [wPlayerMoveEffect]
-	jr z, .confuseTarget
+	jr z, ConfusionSideEffectSuccess.confuseTarget
 	ld hl, wPlayerBattleStatus1
 	ld bc, wPlayerConfusedCounter
 	ld a, [wEnemyMoveEffect]
-.confuseTarget
+ConfusionSideEffectSuccess.confuseTarget
 	bit CONFUSED, [hl] ; is mon confused?
 	jr nz, ConfusionEffectFailed
 	set CONFUSED, [hl] ; mon is now confused
@@ -1152,7 +1154,7 @@ ConfusionSideEffectSuccess:
 	jp PrintText
 
 BecameConfusedText:
-	text_far _BecameConfusedText
+	text_far WLA_GLOBAL_BecameConfusedText
 	text_end
 
 ConfusionEffectFailed:
@@ -1170,33 +1172,33 @@ SubstituteEffect:
 
 HyperBeamEffect:
 	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .hyperBeamEffect
+	jr z, HyperBeamEffect.hyperBeamEffect
 	ld hl, wEnemyBattleStatus2
-.hyperBeamEffect
+HyperBeamEffect.hyperBeamEffect
 	set NEEDS_TO_RECHARGE, [hl] ; mon now needs to recharge
 	ret
 
 ClearHyperBeam:
 	push hl
 	ld hl, wEnemyBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .playerTurn
+	jr z, ClearHyperBeam.playerTurn
 	ld hl, wPlayerBattleStatus2
-.playerTurn
+ClearHyperBeam.playerTurn
 	res NEEDS_TO_RECHARGE, [hl] ; mon no longer needs to recharge
 	pop hl
 	ret
 
 RageEffect:
 	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .player
+	jr z, RageEffect.player
 	ld hl, wEnemyBattleStatus2
-.player
+RageEffect.player
 	set USING_RAGE, [hl] ; mon is now in "rage" mode
 	ret
 
@@ -1206,21 +1208,21 @@ MimicEffect:
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .mimicMissed
-	ldh a, [hWhoseTurn]
+	jr nz, MimicEffect.mimicMissed
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerBattleStatus1]
-	jr nz, .enemyTurn
+	jr nz, MimicEffect.enemyTurn
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jr nz, .letPlayerChooseMove
+	jr nz, MimicEffect.letPlayerChooseMove
 	ld hl, wEnemyMonMoves
 	ld a, [wEnemyBattleStatus1]
-.enemyTurn
+MimicEffect.enemyTurn
 	bit INVULNERABLE, a
-	jr nz, .mimicMissed
-.getRandomMove
+	jr nz, MimicEffect.mimicMissed
+MimicEffect.getRandomMove
 	push hl
 	call BattleRandom
 	and $3
@@ -1230,20 +1232,20 @@ MimicEffect:
 	ld a, [hl]
 	pop hl
 	and a
-	jr z, .getRandomMove
+	jr z, MimicEffect.getRandomMove
 	ld d, a
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerMoveListIndex]
-	jr z, .playerTurn
+	jr z, MimicEffect.playerTurn
 	ld hl, wEnemyMonMoves
 	ld a, [wEnemyMoveListIndex]
-	jr .playerTurn
-.letPlayerChooseMove
+	jr MimicEffect.playerTurn
+MimicEffect.letPlayerChooseMove
 	ld a, [wEnemyBattleStatus1]
 	bit INVULNERABLE, a
-	jr nz, .mimicMissed
+	jr nz, MimicEffect.mimicMissed
 	ld a, [wCurrentMenuItem]
 	push af
 	ld a, $1
@@ -1258,7 +1260,7 @@ MimicEffect:
 	ld d, [hl]
 	pop af
 	ld hl, wBattleMonMoves
-.playerTurn
+MimicEffect.playerTurn
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -1269,11 +1271,11 @@ MimicEffect:
 	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
 	jp PrintText
-.mimicMissed
+MimicEffect.mimicMissed
 	jp PrintButItFailedText_
 
 MimicLearnedMoveText:
-	text_far _MimicLearnedMoveText
+	text_far WLA_GLOBAL_MimicLearnedMoveText
 	text_end
 
 LeechSeedEffect:
@@ -1287,20 +1289,20 @@ DisableEffect:
 	call MoveHitTest
 	ld a, [wMoveMissed]
 	and a
-	jr nz, .moveMissed
+	jr nz, DisableEffect.moveMissed
 	ld de, wEnemyDisabledMove
 	ld hl, wEnemyMonMoves
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .disableEffect
+	jr z, DisableEffect.disableEffect
 	ld de, wPlayerDisabledMove
 	ld hl, wBattleMonMoves
-.disableEffect
+DisableEffect.disableEffect
 ; no effect if target already has a move disabled
 	ld a, [de]
 	and a
-	jr nz, .moveMissed
-.pickMoveToDisable
+	jr nz, DisableEffect.moveMissed
+DisableEffect.pickMoveToDisable
 	push hl
 	call BattleRandom
 	and $3
@@ -1310,21 +1312,21 @@ DisableEffect:
 	ld a, [hl]
 	pop hl
 	and a
-	jr z, .pickMoveToDisable ; loop until a non-00 move slot is found
+	jr z, DisableEffect.pickMoveToDisable ; loop until a non-00 move slot is found
 	ld [wNamedObjectIndex], a ; store move number
 	push hl
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld hl, wBattleMonPP
-	jr nz, .enemyTurn
+	jr nz, DisableEffect.enemyTurn
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	pop hl ; wEnemyMonMoves
-	jr nz, .playerTurnNotLinkBattle
+	jr nz, DisableEffect.playerTurnNotLinkBattle
 ; player's turn, Link Battle
 	push hl
 	ld hl, wEnemyMonPP
-.enemyTurn
+DisableEffect.enemyTurn
 	push hl
 	ld a, [hli]
 	or [hl]
@@ -1334,13 +1336,13 @@ DisableEffect:
 	or [hl]
 	and PP_MASK
 	pop hl ; wBattleMonPP or wEnemyMonPP
-	jr z, .moveMissedPopHL ; nothing to do if all moves have no PP left
+	jr z, DisableEffect.moveMissedPopHL ; nothing to do if all moves have no PP left
 	add hl, bc
 	ld a, [hl]
 	pop hl
 	and a
-	jr z, .pickMoveToDisable ; pick another move if this one had 0 PP
-.playerTurnNotLinkBattle
+	jr z, DisableEffect.pickMoveToDisable ; pick another move if this one had 0 PP
+DisableEffect.playerTurnNotLinkBattle
 ; non-link battle enemies have unlimited PP so the previous checks aren't needed
 	call BattleRandom
 	and $7
@@ -1351,23 +1353,23 @@ DisableEffect:
 	ld [de], a
 	call PlayCurrentMoveAnimation2
 	ld hl, wPlayerDisabledMoveNumber
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr nz, .printDisableText
+	jr nz, DisableEffect.printDisableText
 	inc hl ; wEnemyDisabledMoveNumber
-.printDisableText
+DisableEffect.printDisableText
 	ld a, [wNamedObjectIndex] ; move number
 	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText
 	jp PrintText
-.moveMissedPopHL
+DisableEffect.moveMissedPopHL
 	pop hl
-.moveMissed
+DisableEffect.moveMissed
 	jp PrintButItFailedText_
 
 MoveWasDisabledText:
-	text_far _MoveWasDisabledText
+	text_far WLA_GLOBAL_MoveWasDisabledText
 	text_end
 
 PayDayEffect:
@@ -1389,7 +1391,7 @@ ReflectLightScreenEffect:
 	jpfar ReflectLightScreenEffect_
 
 NothingHappenedText:
-	text_far _NothingHappenedText
+	text_far WLA_GLOBAL_NothingHappenedText
 	text_end
 
 PrintNoEffectText:
@@ -1397,7 +1399,7 @@ PrintNoEffectText:
 	jp PrintText
 
 NoEffectText:
-	text_far _NoEffectText
+	text_far WLA_GLOBAL_NoEffectText
 	text_end
 
 ConditionalPrintButItFailed:
@@ -1410,7 +1412,7 @@ PrintButItFailedText_:
 	jp PrintText
 
 ButItFailedText:
-	text_far _ButItFailedText
+	text_far WLA_GLOBAL_ButItFailedText
 	text_end
 
 PrintDidntAffectText:
@@ -1418,11 +1420,11 @@ PrintDidntAffectText:
 	jp PrintText
 
 DidntAffectText:
-	text_far _DidntAffectText
+	text_far WLA_GLOBAL_DidntAffectText
 	text_end
 
 IsUnaffectedText:
-	text_far _IsUnaffectedText
+	text_far WLA_GLOBAL_IsUnaffectedText
 	text_end
 
 PrintMayNotAttackText:
@@ -1430,17 +1432,17 @@ PrintMayNotAttackText:
 	jp PrintText
 
 ParalyzedMayNotAttackText:
-	text_far _ParalyzedMayNotAttackText
+	text_far WLA_GLOBAL_ParalyzedMayNotAttackText
 	text_end
 
 CheckTargetSubstitute:
 	push hl
 	ld hl, wEnemyBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .next
+	jr z, CheckTargetSubstitute.next
 	ld hl, wPlayerBattleStatus2
-.next
+CheckTargetSubstitute.next
 	bit HAS_SUBSTITUTE_UP, [hl]
 	pop hl
 	ret
@@ -1448,12 +1450,12 @@ CheckTargetSubstitute:
 PlayCurrentMoveAnimation2:
 ; animation at MOVENUM will be played unless MOVENUM is 0
 ; plays wAnimationType 3 or 6
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveNum]
-	jr z, .notEnemyTurn
+	jr z, PlayCurrentMoveAnimation2.notEnemyTurn
 	ld a, [wEnemyMoveNum]
-.notEnemyTurn
+PlayCurrentMoveAnimation2.notEnemyTurn
 	and a
 	ret z
 ; fallthrough
@@ -1461,12 +1463,12 @@ PlayCurrentMoveAnimation2:
 PlayBattleAnimation2:
 ; play animation ID at a and animation type 6 or 3
 	ld [wAnimationID], a
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_SLOW_2
-	jr z, .storeAnimationType
+	jr z, PlayBattleAnimation2.storeAnimationType
 	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_SLOW
-.storeAnimationType
+PlayBattleAnimation2.storeAnimationType
 	ld [wAnimationType], a
 	jp PlayBattleAnimationGotID
 
@@ -1475,12 +1477,12 @@ PlayCurrentMoveAnimation:
 ; resets wAnimationType
 	xor a
 	ld [wAnimationType], a
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveNum]
-	jr z, .notEnemyTurn
+	jr z, PlayCurrentMoveAnimation.notEnemyTurn
 	ld a, [wEnemyMoveNum]
-.notEnemyTurn
+PlayCurrentMoveAnimation.notEnemyTurn
 	and a
 	ret z
 ; fallthrough

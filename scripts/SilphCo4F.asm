@@ -13,29 +13,29 @@ SilphCo4FGateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo4FGateCallbackScript.GateCoordinates
 	call SilphCo4F_SetCardKeyDoorYScript
 	call SilphCo4FUnlockedDoorEventScript
 	CheckEvent EVENT_SILPH_CO_4_UNLOCKED_DOOR1
-	jr nz, .unlock_door1
+	jr nz, SilphCo4FGateCallbackScript.unlock_door1
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 6, 2
+	lb "bc", 6, 2
 	predef ReplaceTileBlock
 	pop af
-.unlock_door1
+SilphCo4FGateCallbackScript.unlock_door1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 4, 6
+	lb "bc", 4, 6
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo4FGateCallbackScript.GateCoordinates:
 	dbmapcoord  2,  6
 	dbmapcoord  6,  4
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo4F_SetCardKeyDoorYScript:
 	push hl
@@ -45,44 +45,44 @@ SilphCo4F_SetCardKeyDoorYScript:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	pop hl
-.loop_check_doors
+SilphCo4F_SetCardKeyDoorYScript.loop_check_doors
 	ld a, [hli]
 	cp $ff
-	jr z, .exit_loop
+	jr z, SilphCo4F_SetCardKeyDoorYScript.exit_loop
 	push hl
 	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .check_y_coord
+	jr z, SilphCo4F_SetCardKeyDoorYScript.check_y_coord
 	inc hl
-	jr .loop_check_doors
-.check_y_coord
+	jr SilphCo4F_SetCardKeyDoorYScript.loop_check_doors
+SilphCo4F_SetCardKeyDoorYScript.check_y_coord
 	ld a, [hli]
 	cp c
-	jr nz, .loop_check_doors
+	jr nz, SilphCo4F_SetCardKeyDoorYScript.loop_check_doors
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ret
-.exit_loop
+SilphCo4F_SetCardKeyDoorYScript.exit_loop
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	ret
 
 SilphCo4FUnlockedDoorEventScript:
-	EventFlagAddress hl, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
-	ldh a, [hUnlockedSilphCoDoors]
+	EventFlagAddress "hl", EVENT_SILPH_CO_4_UNLOCKED_DOOR1
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	cp $1
-	jr nz, .unlock_door1
+	jr nz, SilphCo4FUnlockedDoorEventScript.unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
-.unlock_door1
+SilphCo4FUnlockedDoorEventScript.unlock_door1
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
 
@@ -110,21 +110,21 @@ SilphCo4TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_4F_TRAINER_1, 3, SilphCo4FScientistBattleText, SilphCo4FScientistEndBattleText, SilphCo4FScientistAfterBattleText
 SilphCo4TrainerHeader2:
 	trainer EVENT_BEAT_SILPH_CO_4F_TRAINER_2, 4, SilphCo4FRocket2BattleText, SilphCo4FRocket2EndBattleText, SilphCo4FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo4FSilphWorkerMText:
 	text_asm
-	ld hl, .ImHidingText
-	ld de, .TeamRocketIsGoneText
+	ld hl, SilphCo4FSilphWorkerMText.ImHidingText
+	ld de, SilphCo4FSilphWorkerMText.TeamRocketIsGoneText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.ImHidingText:
-	text_far _SilphCo4FSilphWorkerMImHidingText
+SilphCo4FSilphWorkerMText.ImHidingText:
+	text_far WLA_GLOBAL_SilphCo4FSilphWorkerMImHidingText
 	text_end
 
-.TeamRocketIsGoneText:
-	text_far _SilphCo4FSilphWorkerMTeamRocketIsGoneText
+SilphCo4FSilphWorkerMText.TeamRocketIsGoneText:
+	text_far WLA_GLOBAL_SilphCo4FSilphWorkerMTeamRocketIsGoneText
 	text_end
 
 SilphCo4FRocket1Text:
@@ -134,15 +134,15 @@ SilphCo4FRocket1Text:
 	jp TextScriptEnd
 
 SilphCo4FRocket1BattleText:
-	text_far _SilphCo4FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket1BattleText
 	text_end
 
 SilphCo4FRocket1EndBattleText:
-	text_far _SilphCo4FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket1EndBattleText
 	text_end
 
 SilphCo4FRocket1AfterBattleText:
-	text_far _SilphCo4FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket1AfterBattleText
 	text_end
 
 SilphCo4FScientistText:
@@ -152,15 +152,15 @@ SilphCo4FScientistText:
 	jp TextScriptEnd
 
 SilphCo4FScientistBattleText:
-	text_far _SilphCo4FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo4FScientistBattleText
 	text_end
 
 SilphCo4FScientistEndBattleText:
-	text_far _SilphCo4FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo4FScientistEndBattleText
 	text_end
 
 SilphCo4FScientistAfterBattleText:
-	text_far _SilphCo4FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo4FScientistAfterBattleText
 	text_end
 
 SilphCo4FRocket2Text:
@@ -170,13 +170,13 @@ SilphCo4FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo4FRocket2BattleText:
-	text_far _SilphCo4FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket2BattleText
 	text_end
 
 SilphCo4FRocket2EndBattleText:
-	text_far _SilphCo4FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket2EndBattleText
 	text_end
 
 SilphCo4FRocket2AfterBattleText:
-	text_far _SilphCo4FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo4FRocket2AfterBattleText
 	text_end

@@ -8,15 +8,14 @@
 	const_export FIGHTINGDOJO_HITMONCHAN_POKE_BALL
 
 FightingDojo_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  4, 11, LAST_MAP, 2
 	warp_event  5, 11, LAST_MAP, 2
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 7
 	object_event  5,  3, SPRITE_HIKER, STAY, DOWN, TEXT_FIGHTINGDOJO_KARATE_MASTER, OPP_BLACKBELT, 1
 	object_event  3,  4, SPRITE_HIKER, STAY, RIGHT, TEXT_FIGHTINGDOJO_BLACKBELT1, OPP_BLACKBELT, 2
 	object_event  3,  6, SPRITE_HIKER, STAY, RIGHT, TEXT_FIGHTINGDOJO_BLACKBELT2, OPP_BLACKBELT, 3
@@ -25,4 +24,6 @@ FightingDojo_Object:
 	object_event  4,  1, SPRITE_POKE_BALL, STAY, NONE, TEXT_FIGHTINGDOJO_HITMONLEE_POKE_BALL
 	object_event  5,  1, SPRITE_POKE_BALL, STAY, NONE, TEXT_FIGHTINGDOJO_HITMONCHAN_POKE_BALL
 
-	def_warps_to FIGHTING_DOJO
+	event_displacement FIGHTING_DOJO_WIDTH, 4, 11
+
+	event_displacement FIGHTING_DOJO_WIDTH, 5, 11

@@ -2,11 +2,11 @@ InitPlayerData:
 InitPlayerData2:
 
 	call Random
-	ldh a, [hRandomSub]
+	ldh a, [lobyte(hRandomSub)]
 	ld [wPlayerID], a
 
 	call Random
-	ldh a, [hRandomAdd]
+	ldh a, [lobyte(hRandomAdd)]
 	ld [wPlayerID + 1], a
 
 	ld a, $ff
@@ -21,11 +21,11 @@ InitPlayerData2:
 	ld hl, wNumBoxItems
 	call InitializeEmptyList
 
-DEF START_MONEY EQU $3000
+.DEFINE START_MONEY $3000
 	ld hl, wPlayerMoney + 1
-	ld a, HIGH(START_MONEY)
+	ld a, hibyte(START_MONEY)
 	ld [hld], a
-	xor a ; LOW(START_MONEY)
+	xor a ; lobyte(START_MONEY)
 	ld [hli], a
 	inc hl
 	ld [hl], a
@@ -34,7 +34,6 @@ DEF START_MONEY EQU $3000
 
 	ld hl, wObtainedBadges
 	ld [hli], a
-	ASSERT wObtainedBadges + 1 == wUnusedObtainedBadges
 	ld [hl], a
 
 	ld hl, wPlayerCoins

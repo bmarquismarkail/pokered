@@ -1,12 +1,12 @@
-MACRO spinner
+.MACRO spinner
 ; \1: source
-; \2: offset (BANK() chokes on literals)
+; \2: offset (bank() chokes on literals)
 ; \3: dest
-	dw \1 tile \2
-	db 1
-	db BANK(\1)
-	dw vTileset tile \3
-ENDM
+	.DW \1 + TILE_SIZE * \2
+	.DB 1
+	.DB bank(\1)
+	.DW vTileset + TILE_SIZE * \3
+.ENDM
 
 FacilitySpinnerArrows:
 	spinner SpinnerArrowAnimTiles, 0,   $20

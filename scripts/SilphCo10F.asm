@@ -13,22 +13,22 @@ SilphCo10FGateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo10FGateCallbackScript.GateCoordinates
 	call SilphCo2F_SetCardKeyDoorYScript
 	call SilphCo10F_SetUnlockedSilphCoDoorsScript
 	CheckEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret nz
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 4, 5
+	lb "bc", 4, 5
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo10FGateCallbackScript.GateCoordinates:
 	dbmapcoord  5,  4
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo10F_SetUnlockedSilphCoDoorsScript:
-	ldh a, [hUnlockedSilphCoDoors]
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
@@ -55,7 +55,7 @@ SilphCo10TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_10F_TRAINER_0, 3, SilphCo10FRocketBattleText, SilphCo10FRocketEndBattleText, SilphCo10FRocketAfterBattleText
 SilphCo10TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_10F_TRAINER_1, 4, SilphCo10FScientistBattleText, SilphCo10FScientistEndBattleText, SilphCo10FScientistAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo10FRocketText:
 	text_asm
@@ -72,41 +72,41 @@ SilphCo10FScientistText:
 SilphCo10FSilphWorkerFText:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	ld hl, .QuietAboutMyCryingText
-	jr nz, .beat_giovanni
-	ld hl, .ImScaredText
-.beat_giovanni
+	ld hl, SilphCo10FSilphWorkerFText.QuietAboutMyCryingText
+	jr nz, SilphCo10FSilphWorkerFText.beat_giovanni
+	ld hl, SilphCo10FSilphWorkerFText.ImScaredText
+SilphCo10FSilphWorkerFText.beat_giovanni
 	call PrintText
 	jp TextScriptEnd
 
-.ImScaredText:
-	text_far _SilphCo10FSilphWorkerFImScaredText
+SilphCo10FSilphWorkerFText.ImScaredText:
+	text_far WLA_GLOBAL_SilphCo10FSilphWorkerFImScaredText
 	text_end
 
-.QuietAboutMyCryingText:
-	text_far _SilphCo10FSilphWorkerFQuietAboutMyCryingText
+SilphCo10FSilphWorkerFText.QuietAboutMyCryingText:
+	text_far WLA_GLOBAL_SilphCo10FSilphWorkerFQuietAboutMyCryingText
 	text_end
 
 SilphCo10FRocketBattleText:
-	text_far _SilphCo10FRocketBattleText
+	text_far WLA_GLOBAL_SilphCo10FRocketBattleText
 	text_end
 
 SilphCo10FRocketEndBattleText:
-	text_far _SilphCo10FRocketEndBattleText
+	text_far WLA_GLOBAL_SilphCo10FRocketEndBattleText
 	text_end
 
 SilphCo10FRocketAfterBattleText:
-	text_far _SilphCo10FRocketAfterBattleText
+	text_far WLA_GLOBAL_SilphCo10FRocketAfterBattleText
 	text_end
 
 SilphCo10FScientistBattleText:
-	text_far _SilphCo10FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo10FScientistBattleText
 	text_end
 
 SilphCo10FScientistEndBattleText:
-	text_far _SilphCo10FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo10FScientistEndBattleText
 	text_end
 
 SilphCo10FScientistAfterBattleText:
-	text_far _SilphCo10FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo10FScientistAfterBattleText
 	text_end

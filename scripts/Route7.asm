@@ -6,5 +6,5 @@ Route7_TextPointers:
 	dw_const Route7UndergroundPathSignText, TEXT_ROUTE7_UNDERGROUND_PATH_SIGN
 
 Route7UndergroundPathSignText:
-	text_far _Route7UndergroundPathSignText
+	text_far WLA_GLOBAL_Route7UndergroundPathSignText
 	text_end

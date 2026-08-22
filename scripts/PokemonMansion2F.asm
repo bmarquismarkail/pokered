@@ -14,26 +14,26 @@ Mansion2CheckReplaceSwitchDoorBlocks:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .switchTurnedOn
+	jr nz, Mansion2CheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $e
-	lb bc, 2, 4
+	lb "bc", 2, 4
 	call Mansion2ReplaceBlock
 	ld a, $54
-	lb bc, 4, 9
+	lb "bc", 4, 9
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	lb bc, 11, 3
+	lb "bc", 11, 3
 	call Mansion2ReplaceBlock
 	ret
-.switchTurnedOn
+Mansion2CheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $5f
-	lb bc, 2, 4
+	lb "bc", 2, 4
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 4, 9
+	lb "bc", 4, 9
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 11, 3
+	lb "bc", 11, 3
 	call Mansion2ReplaceBlock
 	ret
 
@@ -41,14 +41,14 @@ Mansion2ReplaceBlock:
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
 
-Mansion2Script_Switches::
+Mansion2Script_Switches:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_POKEMONMANSION2F_SWITCH
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 PokemonMansion2F_ScriptPointers:
@@ -69,7 +69,7 @@ Mansion2TrainerHeaders:
 	def_trainers
 Mansion2TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_2_TRAINER_0, 0, PokemonMansion2FSuperNerdBattleText, PokemonMansion2FSuperNerdEndBattleText, PokemonMansion2FSuperNerdAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonMansion2FSuperNerdText:
 	text_asm
@@ -78,59 +78,59 @@ PokemonMansion2FSuperNerdText:
 	jp TextScriptEnd
 
 PokemonMansion2FSuperNerdBattleText:
-	text_far _PokemonMansion2FSuperNerdBattleText
+	text_far WLA_GLOBAL_PokemonMansion2FSuperNerdBattleText
 	text_end
 
 PokemonMansion2FSuperNerdEndBattleText:
-	text_far _PokemonMansion2FSuperNerdEndBattleText
+	text_far WLA_GLOBAL_PokemonMansion2FSuperNerdEndBattleText
 	text_end
 
 PokemonMansion2FSuperNerdAfterBattleText:
-	text_far _PokemonMansion2FSuperNerdAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansion2FSuperNerdAfterBattleText
 	text_end
 
 PokemonMansion2FDiary1Text:
-	text_far _PokemonMansion2FDiary1Text
+	text_far WLA_GLOBAL_PokemonMansion2FDiary1Text
 	text_end
 
 PokemonMansion2FDiary2Text:
-	text_far _PokemonMansion2FDiary2Text
+	text_far WLA_GLOBAL_PokemonMansion2FDiary2Text
 	text_end
 
 PokemonMansion2FSwitchText:
 	text_asm
-	ld hl, .Text
+	ld hl, PokemonMansion2FSwitchText.Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .not_pressed
+	jr nz, PokemonMansion2FSwitchText.not_pressed
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
-	ld hl, .PressedText
+	ld hl, PokemonMansion2FSwitchText.PressedText
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
-	jr z, .done
+	jr z, PokemonMansion2FSwitchText.done
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
-	jr .done
-.not_pressed
-	ld hl, .NotPressed
+	jr PokemonMansion2FSwitchText.done
+PokemonMansion2FSwitchText.not_pressed
+	ld hl, PokemonMansion2FSwitchText.NotPressed
 	call PrintText
-.done
+PokemonMansion2FSwitchText.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _PokemonMansion2FSwitchText
+PokemonMansion2FSwitchText.Text:
+	text_far WLA_GLOBAL_PokemonMansion2FSwitchText
 	text_end
 
-.PressedText:
-	text_far _PokemonMansion2FSwitchPressedText
+PokemonMansion2FSwitchText.PressedText:
+	text_far WLA_GLOBAL_PokemonMansion2FSwitchPressedText
 	text_end
 
-.NotPressed:
-	text_far _PokemonMansion2FSwitchNotPressedText
+PokemonMansion2FSwitchText.NotPressed:
+	text_far WLA_GLOBAL_PokemonMansion2FSwitchNotPressedText
 	text_end

@@ -1,17 +1,17 @@
-	db DEX_VENOMOTH ; pokedex id
+	.DB DEX_VENOMOTH ; pokedex id
 
-	db  70,  65,  60,  90,  90
+	.DB  70,  65,  60,  90,  90
 	;   hp  atk  def  spd  spc
 
-	db BUG, POISON ; type
-	db 75 ; catch rate
-	db 138 ; base exp
+	.DB BUG, POISON ; type
+	.DB 75 ; catch rate
+	.DB 138 ; base exp
 
-	INCBIN "gfx/pokemon/front/venomoth.pic", 0, 1 ; sprite dimensions
-	dw VenomothPicFront, VenomothPicBack
+	.INCBIN "gfx/pokemon/front/venomoth.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW VenomothPicFront, VenomothPicBack
 
-	db TACKLE, DISABLE, POISONPOWDER, LEECH_LIFE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, DISABLE, POISONPOWDER, LEECH_LIFE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     SWIFT,        REST,         PSYWAVE,      SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

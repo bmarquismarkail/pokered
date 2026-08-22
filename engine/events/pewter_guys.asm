@@ -21,17 +21,17 @@ PewterGuys:
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
-.findMatchingCoordsLoop
+PewterGuys.findMatchingCoordsLoop
 	ld a, [hli]
 	cp b
-	jr nz, .nextEntry1
+	jr nz, PewterGuys.nextEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .nextEntry2
+	jr nz, PewterGuys.nextEntry2
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.copyMovementDataLoop
+PewterGuys.copyMovementDataLoop
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -40,63 +40,63 @@ PewterGuys:
 	ld a, [wSimulatedJoypadStatesIndex]
 	inc a
 	ld [wSimulatedJoypadStatesIndex], a
-	jr .copyMovementDataLoop
-.nextEntry1
+	jr PewterGuys.copyMovementDataLoop
+PewterGuys.nextEntry1
 	inc hl
-.nextEntry2
+PewterGuys.nextEntry2
 	inc hl
 	inc hl
-	jr .findMatchingCoordsLoop
+	jr PewterGuys.findMatchingCoordsLoop
 
 PewterGuysCoordsTable:
-	dw PewterMuseumGuyCoords
-	dw PewterGymGuyCoords
+	.DW PewterMuseumGuyCoords
+	.DW PewterGymGuyCoords
 
 ; these are the four coordinates of the spaces below, above, to the left and
 ; to the right of the museum guy, and pointers to different movements for
 ; the player to make to get positioned before the main movement.
 PewterMuseumGuyCoords:
-	db 18, 27
-	dw .down
-	db 16, 27
-	dw .up
-	db 17, 26
-	dw .left
-	db 17, 28
-	dw .right
+	.DB 18, 27
+	.DW PewterMuseumGuyCoords.down
+	.DB 16, 27
+	.DW PewterMuseumGuyCoords.up
+	.DB 17, 26
+	.DW PewterMuseumGuyCoords.left
+	.DB 17, 28
+	.DW PewterMuseumGuyCoords.right
 
-.down
-	db PAD_UP, PAD_UP, $ff
-.up
-	db PAD_RIGHT, PAD_LEFT, $ff
-.left
-	db PAD_UP, PAD_RIGHT, $ff
-.right
-	db PAD_UP, PAD_LEFT, $ff
+PewterMuseumGuyCoords.down
+	.DB PAD_UP, PAD_UP, $ff
+PewterMuseumGuyCoords.up
+	.DB PAD_RIGHT, PAD_LEFT, $ff
+PewterMuseumGuyCoords.left
+	.DB PAD_UP, PAD_RIGHT, $ff
+PewterMuseumGuyCoords.right
+	.DB PAD_UP, PAD_LEFT, $ff
 
 ; these are the five coordinates which trigger the gym guy and pointers to
 ; different movements for the player to make to get positioned before the
 ; main movement
 ; $00 is a pause
 PewterGymGuyCoords:
-	db 16, 34
-	dw .one
-	db 17, 35
-	dw .two
-	db 18, 37
-	dw .three
-	db 19, 37
-	dw .four
-	db 17, 36
-	dw .five
+	.DB 16, 34
+	.DW PewterGymGuyCoords.one
+	.DB 17, 35
+	.DW PewterGymGuyCoords.two
+	.DB 18, 37
+	.DW PewterGymGuyCoords.three
+	.DB 19, 37
+	.DW PewterGymGuyCoords.four
+	.DB 17, 36
+	.DW PewterGymGuyCoords.five
 
-.one
-	db PAD_LEFT, PAD_DOWN, PAD_DOWN, PAD_RIGHT, $ff
-.two
-	db PAD_LEFT, PAD_DOWN, PAD_RIGHT, PAD_LEFT, $ff
-.three
-	db PAD_LEFT, PAD_LEFT, PAD_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff
-.four
-	db PAD_LEFT, PAD_LEFT, PAD_UP, PAD_LEFT, $ff
-.five
-	db PAD_LEFT, PAD_DOWN, PAD_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+PewterGymGuyCoords.one
+	.DB PAD_LEFT, PAD_DOWN, PAD_DOWN, PAD_RIGHT, $ff
+PewterGymGuyCoords.two
+	.DB PAD_LEFT, PAD_DOWN, PAD_RIGHT, PAD_LEFT, $ff
+PewterGymGuyCoords.three
+	.DB PAD_LEFT, PAD_LEFT, PAD_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+PewterGymGuyCoords.four
+	.DB PAD_LEFT, PAD_LEFT, PAD_UP, PAD_LEFT, $ff
+PewterGymGuyCoords.five
+	.DB PAD_LEFT, PAD_DOWN, PAD_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff

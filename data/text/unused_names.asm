@@ -1,22 +1,22 @@
-UnusedBadgeNames::
-	db "かみなりバッヂ@" ; THUNDER BADGE
-	db "かいがらバッヂ@" ; SHELL BADGE
-	db "おじぞうバッヂ@" ; JIZOU BADGE
-	db "はやぶさバッヂ@" ; FALCON BADGE
-	db "ひんやりバッヂ@" ; CHILL BADGE
-	db "なかよしバッヂ@" ; FRIENDSHIP BADGE
-	db "バラバッヂ@" ; ROSE BADGE
-	db "ひのたまバッヂ@" ; FIREBALL BADGE
-	db "ゴールドバッヂ@" ; GOLD BADGE
+UnusedBadgeNames:
+		.STRINGMAP pokemon, "かみなりバッヂ@" ; THUNDER BADGE
+		.STRINGMAP pokemon, "かいがらバッヂ@" ; SHELL BADGE
+		.STRINGMAP pokemon, "おじぞうバッヂ@" ; JIZOU BADGE
+		.STRINGMAP pokemon, "はやぶさバッヂ@" ; FALCON BADGE
+		.STRINGMAP pokemon, "ひんやりバッヂ@" ; CHILL BADGE
+		.STRINGMAP pokemon, "なかよしバッヂ@" ; FRIENDSHIP BADGE
+		.STRINGMAP pokemon, "バラバッヂ@" ; ROSE BADGE
+		.STRINGMAP pokemon, "ひのたまバッヂ@" ; FIREBALL BADGE
+		.STRINGMAP pokemon, "ゴールドバッヂ@" ; GOLD BADGE
 
 UnusedRankingNames:
-	db "たまご@" ; EGG
-	db "ひよこ@" ; CHICK
-	db "ブロンズ@" ; BRONZE
-	db "シルバー@" ; SILVER
-	db "ゴールド@" ; GOLD
-	db "プチキャプテン@" ; PETIT CAPTAIN
-	db "キャプテン@" ; CAPTAIN
-	db "プチマスター@" ; PETIT MASTER
-	db "マスター@" ; MASTER
-	db "エクセレント" ; EXCELLENT
+		.STRINGMAP pokemon, "たまご@" ; EGG
+		.STRINGMAP pokemon, "ひよこ@" ; CHICK
+		.STRINGMAP pokemon, "ブロンズ@" ; BRONZE
+		.STRINGMAP pokemon, "シルバー@" ; SILVER
+		.STRINGMAP pokemon, "ゴールド@" ; GOLD
+		.STRINGMAP pokemon, "プチキャプテン@" ; PETIT CAPTAIN
+		.STRINGMAP pokemon, "キャプテン@" ; CAPTAIN
+		.STRINGMAP pokemon, "プチマスター@" ; PETIT MASTER
+		.STRINGMAP pokemon, "マスター@" ; MASTER
+		.STRINGMAP pokemon, "エクセレント" ; EXCELLENT

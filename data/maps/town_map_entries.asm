@@ -1,7 +1,7 @@
-MACRO outdoor_map
+.MACRO outdoor_map
 	dn \2, \1
-	dw \3
-ENDM
+	.DW \3
+.ENDM
 
 ; the appearance of towns and routes in the town map
 ExternalMapEntries:
@@ -47,11 +47,11 @@ ExternalMapEntries:
 	assert_table_length FIRST_INDOOR_MAP
 
 
-MACRO indoor_map
-	db INDOORGROUP_\1
+.MACRO indoor_map
+	.DB INDOORGROUP_\1
 	dn \3, \2
-	dw \4
-ENDM
+	.DW \4
+.ENDM
 
 ; the appearance of buildings and dungeons in the town map
 InternalMapEntries:
@@ -118,4 +118,4 @@ InternalMapEntries:
 	indoor_map SILPH_CO_2,         10,  5, SilphCoName
 	indoor_map POKEMON_LEAGUE_3,    0,  2, PokemonLeagueName
 	assert_table_length NUM_INDOOR_MAP_GROUPS
-	db -1 ; end
+	.DB -1 ; end

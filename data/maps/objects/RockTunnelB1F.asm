@@ -9,17 +9,16 @@
 	const_export ROCKTUNNELB1F_SUPER_NERD3
 
 RockTunnelB1F_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event 33, 25, ROCK_TUNNEL_1F, 5
 	warp_event 27,  3, ROCK_TUNNEL_1F, 6
 	warp_event 23, 11, ROCK_TUNNEL_1F, 7
 	warp_event  3,  3, ROCK_TUNNEL_1F, 8
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 8
 	object_event 11, 13, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_ROCKTUNNELB1F_COOLTRAINER_F1, OPP_JR_TRAINER_F, 9
 	object_event  6, 10, SPRITE_HIKER, STAY, DOWN, TEXT_ROCKTUNNELB1F_HIKER1, OPP_HIKER, 9
 	object_event  3,  5, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_ROCKTUNNELB1F_SUPER_NERD1, OPP_POKEMANIAC, 3
@@ -29,4 +28,10 @@ RockTunnelB1F_Object:
 	object_event 33,  5, SPRITE_HIKER, STAY, RIGHT, TEXT_ROCKTUNNELB1F_HIKER3, OPP_HIKER, 11
 	object_event 26, 30, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_ROCKTUNNELB1F_SUPER_NERD3, OPP_POKEMANIAC, 5
 
-	def_warps_to ROCK_TUNNEL_B1F
+	event_displacement ROCK_TUNNEL_B1F_WIDTH, 33, 25
+
+	event_displacement ROCK_TUNNEL_B1F_WIDTH, 27, 3
+
+	event_displacement ROCK_TUNNEL_B1F_WIDTH, 23, 11
+
+	event_displacement ROCK_TUNNEL_B1F_WIDTH, 3, 3

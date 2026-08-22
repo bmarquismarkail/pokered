@@ -14,88 +14,88 @@ CopycatsHouse2F_TextPointers:
 CopycatsHouse2FCopycatText:
 	text_asm
 	CheckEvent EVENT_GOT_TM31
-	jr nz, .got_item
+	jr nz, CopycatsHouse2FCopycatText.got_item
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .DoYouLikePokemonText
+	ld hl, CopycatsHouse2FCopycatText.DoYouLikePokemonText
 	call PrintText
 	ld b, POKE_DOLL
 	call IsItemInBag
-	jr z, .done
-	ld hl, .TM31PreReceiveText
+	jr z, CopycatsHouse2FCopycatText.done
+	ld hl, CopycatsHouse2FCopycatText.TM31PreReceiveText
 	call PrintText
-	lb bc, TM_MIMIC, 1
+	lb "bc", TM_MIMIC, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedTM31Text
+	jr nc, CopycatsHouse2FCopycatText.bag_full
+	ld hl, CopycatsHouse2FCopycatText.ReceivedTM31Text
 	call PrintText
 	ld a, POKE_DOLL
-	ldh [hItemToRemoveID], a
+	ldh [lobyte(hItemToRemoveID)], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_TM31
-	jr .done
-.bag_full
-	ld hl, .TM31NoRoomText
+	jr CopycatsHouse2FCopycatText.done
+CopycatsHouse2FCopycatText.bag_full
+	ld hl, CopycatsHouse2FCopycatText.TM31NoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .TM31Explanation2Text
+	jr CopycatsHouse2FCopycatText.done
+CopycatsHouse2FCopycatText.got_item
+	ld hl, CopycatsHouse2FCopycatText.TM31Explanation2Text
 	call PrintText
-.done
+CopycatsHouse2FCopycatText.done
 	jp TextScriptEnd
 
-.DoYouLikePokemonText:
-	text_far _CopycatsHouse2FCopycatDoYouLikePokemonText
+CopycatsHouse2FCopycatText.DoYouLikePokemonText:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatDoYouLikePokemonText
 	text_end
 
-.TM31PreReceiveText:
-	text_far _CopycatsHouse2FCopycatTM31PreReceiveText
+CopycatsHouse2FCopycatText.TM31PreReceiveText:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatTM31PreReceiveText
 	text_end
 
-.ReceivedTM31Text:
-	text_far _CopycatsHouse2FCopycatReceivedTM31Text
+CopycatsHouse2FCopycatText.ReceivedTM31Text:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatReceivedTM31Text
 	sound_get_item_1
-.TM31Explanation1Text:
-	text_far _CopycatsHouse2FCopycatTM31Explanation1Text
+CopycatsHouse2FCopycatText.TM31Explanation1Text:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatTM31Explanation1Text
 	text_waitbutton
 	text_end
 
-.TM31Explanation2Text:
-	text_far _CopycatsHouse2FCopycatTM31Explanation2Text
+CopycatsHouse2FCopycatText.TM31Explanation2Text:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatTM31Explanation2Text
 	text_end
 
-.TM31NoRoomText:
-	text_far _CopycatsHouse2FCopycatTM31NoRoomText
+CopycatsHouse2FCopycatText.TM31NoRoomText:
+	text_far WLA_GLOBAL_CopycatsHouse2FCopycatTM31NoRoomText
 	text_waitbutton
 	text_end
 
 CopycatsHouse2FDoduoText:
-	text_far _CopycatsHouse2FDoduoText
+	text_far WLA_GLOBAL_CopycatsHouse2FDoduoText
 	text_end
 
 CopycatsHouse2FRareDollText:
-	text_far _CopycatsHouse2FRareDollText
+	text_far WLA_GLOBAL_CopycatsHouse2FRareDollText
 	text_end
 
 CopycatsHouse2FSNESText:
-	text_far _CopycatsHouse2FSNESText
+	text_far WLA_GLOBAL_CopycatsHouse2FSNESText
 	text_end
 
 CopycatsHouse2FPCText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	ld hl, .CantSeeText
-	jr nz, .notUp
-	ld hl, .MySecretsText
-.notUp
+	ld hl, CopycatsHouse2FPCText.CantSeeText
+	jr nz, CopycatsHouse2FPCText.notUp
+	ld hl, CopycatsHouse2FPCText.MySecretsText
+CopycatsHouse2FPCText.notUp
 	call PrintText
 	jp TextScriptEnd
 
-.MySecretsText:
-	text_far _CopycatsHouse2FPCMySecretsText
+CopycatsHouse2FPCText.MySecretsText:
+	text_far WLA_GLOBAL_CopycatsHouse2FPCMySecretsText
 	text_end
 
-.CantSeeText:
-	text_far _CopycatsHouse2FPCCantSeeText
+CopycatsHouse2FPCText.CantSeeText:
+	text_far WLA_GLOBAL_CopycatsHouse2FPCCantSeeText
 	text_end

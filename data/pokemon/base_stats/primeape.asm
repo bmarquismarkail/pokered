@@ -1,17 +1,17 @@
-	db DEX_PRIMEAPE ; pokedex id
+	.DB DEX_PRIMEAPE ; pokedex id
 
-	db  65, 105,  60,  95,  60
+	.DB  65, 105,  60,  95,  60
 	;   hp  atk  def  spd  spc
 
-	db FIGHTING, FIGHTING ; type
-	db 75 ; catch rate
-	db 149 ; base exp
+	.DB FIGHTING, FIGHTING ; type
+	.DB 75 ; catch rate
+	.DB 149 ; base exp
 
-	INCBIN "gfx/pokemon/front/primeape.pic", 0, 1 ; sprite dimensions
-	dw PrimeapePicFront, PrimeapePicBack
+	.INCBIN "gfx/pokemon/front/primeape.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PrimeapePicFront, PrimeapePicBack
 
-	db SCRATCH, LEER, KARATE_CHOP, FURY_SWIPES ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, LEER, KARATE_CHOP, FURY_SWIPES ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     SKULL_BASH,   REST,         ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

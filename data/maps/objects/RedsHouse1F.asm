@@ -2,17 +2,21 @@
 	const_export REDSHOUSE1F_MOM
 
 RedsHouse1F_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 3
 	warp_event  2,  7, LAST_MAP, 1
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event  7,  1, REDS_HOUSE_2F, 1
 
-	def_bg_events
+	.DB 1
 	bg_event  3,  1, TEXT_REDSHOUSE1F_TV
 
-	def_object_events
+	.DB 1
 	object_event  5,  4, SPRITE_MOM, STAY, LEFT, TEXT_REDSHOUSE1F_MOM
 
-	def_warps_to REDS_HOUSE_1F
+	event_displacement REDS_HOUSE_1F_WIDTH, 2, 7
+
+	event_displacement REDS_HOUSE_1F_WIDTH, 3, 7
+
+	event_displacement REDS_HOUSE_1F_WIDTH, 7, 1

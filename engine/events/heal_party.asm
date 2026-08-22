@@ -3,10 +3,10 @@ HealParty:
 
 	ld hl, wPartySpecies
 	ld de, wPartyMon1HP
-.healmon
+HealParty.healmon
 	ld a, [hli]
 	cp $ff
-	jr z, .done
+	jr z, HealParty.done
 
 	push hl
 	push de
@@ -18,13 +18,13 @@ HealParty:
 
 	push de
 	ld b, NUM_MOVES ; A Pokémon has 4 moves
-.pp
+HealParty.pp
 	ld hl, MON_MOVES - MON_HP
 	add hl, de
 
 	ld a, [hl]
 	and a
-	jr z, .nextmove
+	jr z, HealParty.nextmove
 
 	dec a
 	ld hl, MON_PP - MON_HP
@@ -38,7 +38,7 @@ HealParty:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wMoveData
-	ld a, BANK(Moves)
+	ld a, bank(Moves)
 	call FarCopyData
 	ld a, [wMoveData + MOVE_PP]
 
@@ -55,9 +55,9 @@ HealParty:
 	ld [hl], a
 	pop bc
 
-.nextmove
+HealParty.nextmove
 	dec b
-	jr nz, .pp
+	jr nz, HealParty.pp
 	pop de
 
 	ld hl, MON_MAXHP - MON_HP
@@ -79,21 +79,21 @@ HealParty:
 	ld d, h
 	ld e, l
 	pop hl
-	jr .healmon
+	jr HealParty.healmon
 
-.done
+HealParty.done
 	xor a
 	ld [wWhichPokemon], a
 	ld [wUsingPPUp], a
 
 	ld a, [wPartyCount]
 	ld b, a
-.ppup
+HealParty.ppup
 	push bc
 	call RestoreBonusPP
 	pop bc
 	ld hl, wWhichPokemon
 	inc [hl]
 	dec b
-	jr nz, .ppup
+	jr nz, HealParty.ppup
 	ret

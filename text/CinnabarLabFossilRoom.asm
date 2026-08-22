@@ -1,4 +1,5 @@
-_CinnabarLabFossilRoomScientist1Text::
+_CinnabarLabFossilRoomScientist1Text:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1Text:
 	text "Hiya!"
 
 	para "I am important"
@@ -11,11 +12,13 @@ _CinnabarLabFossilRoomScientist1Text::
 	line "fossil for me?"
 	prompt
 
-_CinnabarLabFossilRoomScientist1NoFossilsText::
+_CinnabarLabFossilRoomScientist1NoFossilsText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1NoFossilsText:
 	text "No! Is too bad!"
 	done
 
-_CinnabarLabFossilRoomScientist1GoForAWalkText::
+_CinnabarLabFossilRoomScientist1GoForAWalkText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1GoForAWalkText:
 	text "I take a little"
 	line "time!"
 
@@ -23,7 +26,8 @@ _CinnabarLabFossilRoomScientist1GoForAWalkText::
 	line "little while!"
 	done
 
-_CinnabarLabFossilRoomScientist1FossilIsBackToLifeText::
+_CinnabarLabFossilRoomScientist1FossilIsBackToLifeText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1FossilIsBackToLifeText:
 	text "Where were you?"
 
 	para "Your fossil is"
@@ -35,7 +39,8 @@ _CinnabarLabFossilRoomScientist1FossilIsBackToLifeText::
 	line "like I think!"
 	prompt
 
-_CinnabarLabFossilRoomScientist1SeesFossilText::
+_CinnabarLabFossilRoomScientist1SeesFossilText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1SeesFossilText:
 	text "Oh! That is"
 	line "@"
 	text_ram wNameBuffer
@@ -54,7 +59,8 @@ _CinnabarLabFossilRoomScientist1SeesFossilText::
 	cont "again!"
 	done
 
-_CinnabarLabFossilRoomScientist1TakesFossilText::
+_CinnabarLabFossilRoomScientist1TakesFossilText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1TakesFossilText:
 	text "So! You hurry and"
 	line "give me that!"
 
@@ -64,7 +70,8 @@ _CinnabarLabFossilRoomScientist1TakesFossilText::
 	text "!"
 	prompt
 
-_CinnabarLabFossilRoomScientist1GoForAWalkText2::
+_CinnabarLabFossilRoomScientist1GoForAWalkText2:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1GoForAWalkText2:
 	text "I take a little"
 	line "time!"
 
@@ -72,7 +79,8 @@ _CinnabarLabFossilRoomScientist1GoForAWalkText2::
 	line "little while!"
 	done
 
-_CinnabarLabFossilRoomScientist1ComeAgainText::
+_CinnabarLabFossilRoomScientist1ComeAgainText:
+WLA_GLOBAL_CinnabarLabFossilRoomScientist1ComeAgainText:
 	text "Aiyah! You come"
 	line "again!"
 	done

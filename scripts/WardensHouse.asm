@@ -12,102 +12,102 @@ WardensHouse_TextPointers:
 WardensHouseWardenText:
 	text_asm
 	CheckEvent EVENT_GOT_HM04
-	jr nz, .got_item
+	jr nz, WardensHouseWardenText.got_item
 	ld b, GOLD_TEETH
 	call IsItemInBag
-	jr nz, .have_gold_teeth
+	jr nz, WardensHouseWardenText.have_gold_teeth
 	CheckEvent EVENT_GAVE_GOLD_TEETH
-	jr nz, .gave_gold_teeth
-	ld hl, .Gibberish1Text
+	jr nz, WardensHouseWardenText.gave_gold_teeth
+	ld hl, WardensHouseWardenText.Gibberish1Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	ld hl, .Gibberish3Text
-	jr nz, .refused
-	ld hl, .Gibberish2Text
-.refused
+	ld hl, WardensHouseWardenText.Gibberish3Text
+	jr nz, WardensHouseWardenText.refused
+	ld hl, WardensHouseWardenText.Gibberish2Text
+WardensHouseWardenText.refused
 	call PrintText
-	jr .done
-.have_gold_teeth
-	ld hl, .GaveTheGoldTeethText
+	jr WardensHouseWardenText.done
+WardensHouseWardenText.have_gold_teeth
+	ld hl, WardensHouseWardenText.GaveTheGoldTeethText
 	call PrintText
 	ld a, GOLD_TEETH
-	ldh [hItemToRemoveID], a
+	ldh [lobyte(hItemToRemoveID)], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
-.gave_gold_teeth
-	ld hl, .ThanksText
+WardensHouseWardenText.gave_gold_teeth
+	ld hl, WardensHouseWardenText.ThanksText
 	call PrintText
-	lb bc, HM_STRENGTH, 1
+	lb "bc", HM_STRENGTH, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedHM04Text
+	jr nc, WardensHouseWardenText.bag_full
+	ld hl, WardensHouseWardenText.ReceivedHM04Text
 	call PrintText
 	SetEvent EVENT_GOT_HM04
-	jr .done
-.got_item
-	ld hl, .HM04ExplanationText
+	jr WardensHouseWardenText.done
+WardensHouseWardenText.got_item
+	ld hl, WardensHouseWardenText.HM04ExplanationText
 	call PrintText
-	jr .done
-.bag_full
-	ld hl, .HM04NoRoomText
+	jr WardensHouseWardenText.done
+WardensHouseWardenText.bag_full
+	ld hl, WardensHouseWardenText.HM04NoRoomText
 	call PrintText
-.done
+WardensHouseWardenText.done
 	jp TextScriptEnd
 
-.Gibberish1Text:
-	text_far _WardensHouseWardenGibberish1Text
+WardensHouseWardenText.Gibberish1Text:
+	text_far WLA_GLOBAL_WardensHouseWardenGibberish1Text
 	text_end
 
-.Gibberish2Text:
-	text_far _WardensHouseWardenGibberish2Text
+WardensHouseWardenText.Gibberish2Text:
+	text_far WLA_GLOBAL_WardensHouseWardenGibberish2Text
 	text_end
 
-.Gibberish3Text:
-	text_far _WardensHouseWardenGibberish3Text
+WardensHouseWardenText.Gibberish3Text:
+	text_far WLA_GLOBAL_WardensHouseWardenGibberish3Text
 	text_end
 
-.GaveTheGoldTeethText:
-	text_far _WardensHouseWardenGaveTheGoldTeethText
+WardensHouseWardenText.GaveTheGoldTeethText:
+	text_far WLA_GLOBAL_WardensHouseWardenGaveTheGoldTeethText
 	sound_get_item_1
 
-.PoppedInHisTeethText: ; unreferenced
-	text_far _WardensHouseWardenTeethPoppedInHisTeethText
+WardensHouseWardenText.PoppedInHisTeethText: ; unreferenced
+	text_far WLA_GLOBAL_WardensHouseWardenTeethPoppedInHisTeethText
 	text_end
 
-.ThanksText:
-	text_far _WardensHouseWardenThanksText
+WardensHouseWardenText.ThanksText:
+	text_far WLA_GLOBAL_WardensHouseWardenThanksText
 	text_end
 
-.ReceivedHM04Text:
-	text_far _WardensHouseWardenReceivedHM04Text
+WardensHouseWardenText.ReceivedHM04Text:
+	text_far WLA_GLOBAL_WardensHouseWardenReceivedHM04Text
 	sound_get_item_1
 	text_end
 
-.HM04ExplanationText:
-	text_far _WardensHouseWardenHM04ExplanationText
+WardensHouseWardenText.HM04ExplanationText:
+	text_far WLA_GLOBAL_WardensHouseWardenHM04ExplanationText
 	text_end
 
-.HM04NoRoomText:
-	text_far _WardensHouseWardenHM04NoRoomText
+WardensHouseWardenText.HM04NoRoomText:
+	text_far WLA_GLOBAL_WardensHouseWardenHM04NoRoomText
 	text_end
 
 WardensHouseDisplayText:
 	text_asm
-	ldh a, [hTextID]
+	ldh a, [lobyte(hTextID)]
 	cp TEXT_WARDENSHOUSE_DISPLAY_LEFT
-	ld hl, .MerchandiseText
-	jr nz, .print_text
-	ld hl, .PhotosAndFossilsText
-.print_text
+	ld hl, WardensHouseDisplayText.MerchandiseText
+	jr nz, WardensHouseDisplayText.print_text
+	ld hl, WardensHouseDisplayText.PhotosAndFossilsText
+WardensHouseDisplayText.print_text
 	call PrintText
 	jp TextScriptEnd
 
-.PhotosAndFossilsText:
-	text_far _WardensHouseDisplayPhotosAndFossilsText
+WardensHouseDisplayText.PhotosAndFossilsText:
+	text_far WLA_GLOBAL_WardensHouseDisplayPhotosAndFossilsText
 	text_end
 
-.MerchandiseText:
-	text_far _WardensHouseDisplayMerchandiseText
+WardensHouseDisplayText.MerchandiseText:
+	text_far WLA_GLOBAL_WardensHouseDisplayMerchandiseText
 	text_end

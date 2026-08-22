@@ -1,17 +1,17 @@
-	db DEX_GYARADOS ; pokedex id
+	.DB DEX_GYARADOS ; pokedex id
 
-	db  95, 125,  79,  81, 100
+	.DB  95, 125,  79,  81, 100
 	;   hp  atk  def  spd  spc
 
-	db WATER, FLYING ; type
-	db 45 ; catch rate
-	db 214 ; base exp
+	.DB WATER, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 214 ; base exp
 
-	INCBIN "gfx/pokemon/front/gyarados.pic", 0, 1 ; sprite dimensions
-	dw GyaradosPicFront, GyaradosPicBack
+	.INCBIN "gfx/pokemon/front/gyarados.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GyaradosPicFront, GyaradosPicBack
 
-	db BITE, DRAGON_RAGE, LEER, HYDRO_PUMP ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB BITE, DRAGON_RAGE, LEER, HYDRO_PUMP ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -21,4 +21,4 @@
 	     SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -8,9 +8,9 @@ CinnabarMart_TextPointers:
 	dw_const CinnabarMartScientistText,    TEXT_CINNABARMART_SCIENTIST
 
 CinnabarMartSilphWorkerFText:
-	text_far _CinnabarMartSilphWorkerFText
+	text_far WLA_GLOBAL_CinnabarMartSilphWorkerFText
 	text_end
 
 CinnabarMartScientistText:
-	text_far _CinnabarMartScientistText
+	text_far WLA_GLOBAL_CinnabarMartScientistText
 	text_end

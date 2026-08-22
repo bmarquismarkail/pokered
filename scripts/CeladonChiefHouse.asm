@@ -9,13 +9,13 @@ CeladonChiefHouse_TextPointers:
 	dw_const CeladonChiefHouseSailorText, TEXT_CELADONCHIEFHOUSE_SAILOR
 
 CeladonChiefHouseChiefText:
-	text_far _CeladonChiefHouseChiefText
+	text_far WLA_GLOBAL_CeladonChiefHouseChiefText
 	text_end
 
 CeladonChiefHouseRocketText:
-	text_far _CeladonChiefHouseRocketText
+	text_far WLA_GLOBAL_CeladonChiefHouseRocketText
 	text_end
 
 CeladonChiefHouseSailorText:
-	text_far _CeladonChiefHouseSailorText
+	text_far WLA_GLOBAL_CeladonChiefHouseSailorText
 	text_end

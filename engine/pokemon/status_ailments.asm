@@ -1,26 +1,26 @@
-PrintStatusAilment::
+PrintStatusAilment:
 	ld a, [de]
 	bit PSN, a
-	jr nz, .psn
+	jr nz, PrintStatusAilment.psn
 	bit BRN, a
-	jr nz, .brn
+	jr nz, PrintStatusAilment.brn
 	bit FRZ, a
-	jr nz, .frz
+	jr nz, PrintStatusAilment.frz
 	bit PAR, a
-	jr nz, .par
+	jr nz, PrintStatusAilment.par
 	and SLP_MASK
 	ret z
 	ld_hli_a_string "SLP"
 	ret
-.psn
+PrintStatusAilment.psn
 	ld_hli_a_string "PSN"
 	ret
-.brn
+PrintStatusAilment.brn
 	ld_hli_a_string "BRN"
 	ret
-.frz
+PrintStatusAilment.frz
 	ld_hli_a_string "FRZ"
 	ret
-.par
+PrintStatusAilment.par
 	ld_hli_a_string "PAR"
 	ret

@@ -1,4 +1,5 @@
-_CeruleanGymMistyPreBattleText::
+_CeruleanGymMistyPreBattleText:
+WLA_GLOBAL_CeruleanGymMistyPreBattleText:
 	text "Hi, you're a new"
 	line "face!"
 
@@ -17,7 +18,8 @@ _CeruleanGymMistyPreBattleText::
 	cont "#MON!"
 	done
 
-_CeruleanGymMistyTM11ExplanationText::
+_CeruleanGymMistyTM11ExplanationText:
+WLA_GLOBAL_CeruleanGymMistyTM11ExplanationText:
 	text "TM11 teaches"
 	line "BUBBLEBEAM!"
 
@@ -25,7 +27,8 @@ _CeruleanGymMistyTM11ExplanationText::
 	line "aquatic #MON!"
 	done
 
-_CeruleanGymMistyCascadeBadgeInfoText::
+_CeruleanGymMistyCascadeBadgeInfoText:
+WLA_GLOBAL_CeruleanGymMistyCascadeBadgeInfoText:
 	text "The CASCADEBADGE"
 	line "makes all #MON"
 	cont "up to L30 obey!"
@@ -45,17 +48,20 @@ _CeruleanGymMistyCascadeBadgeInfoText::
 	line "my favorite TM!"
 	done
 
-_CeruleanGymMistyReceivedTM11Text::
+_CeruleanGymMistyReceivedTM11Text:
+WLA_GLOBAL_CeruleanGymMistyReceivedTM11Text:
 	text "<PLAYER> received"
 	line "TM11!@"
 	text_end
 
-_CeruleanGymMistyTM11NoRoomText::
+_CeruleanGymMistyTM11NoRoomText:
+WLA_GLOBAL_CeruleanGymMistyTM11NoRoomText:
 	text "You better make"
 	line "room for this!"
 	done
 
-_CeruleanGymMistyReceivedCascadeBadgeText::
+_CeruleanGymMistyReceivedCascadeBadgeText:
+WLA_GLOBAL_CeruleanGymMistyReceivedCascadeBadgeText:
 	text "Wow!"
 	line "You're too much!"
 
@@ -66,38 +72,44 @@ _CeruleanGymMistyReceivedCascadeBadgeText::
 	cont "show you beat me!@"
 	text_end
 
-_CeruleanGymBattleText1::
+_CeruleanGymBattleText1:
+WLA_GLOBAL_CeruleanGymBattleText1:
 	text "I'm more than good"
 	line "enough for you!"
 
 	para "MISTY can wait!"
 	done
 
-_CeruleanGymEndBattleText1::
+_CeruleanGymEndBattleText1:
+WLA_GLOBAL_CeruleanGymEndBattleText1:
 	text "You"
 	line "overwhelmed me!"
 	prompt
 
-_CeruleanGymAfterBattleText1::
+_CeruleanGymAfterBattleText1:
+WLA_GLOBAL_CeruleanGymAfterBattleText1:
 	text "You have to face"
 	line "other trainers to"
 	cont "find out how good"
 	cont "you really are."
 	done
 
-_CeruleanGymBattleText2::
+_CeruleanGymBattleText2:
+WLA_GLOBAL_CeruleanGymBattleText2:
 	text "Splash!"
 
 	para "I'm first up!"
 	line "Let's do it!"
 	done
 
-_CeruleanGymEndBattleText2::
+_CeruleanGymEndBattleText2:
+WLA_GLOBAL_CeruleanGymEndBattleText2:
 	text "That"
 	line "can't be!"
 	prompt
 
-_CeruleanGymAfterBattleText2::
+_CeruleanGymAfterBattleText2:
+WLA_GLOBAL_CeruleanGymAfterBattleText2:
 	text "MISTY is going to"
 	line "keep improving!"
 
@@ -105,7 +117,8 @@ _CeruleanGymAfterBattleText2::
 	line "someone like you!"
 	done
 
-_CeruleanGymGymGuideChampInMakingText::
+_CeruleanGymGymGuideChampInMakingText:
+WLA_GLOBAL_CeruleanGymGymGuideChampInMakingText:
 	text "Yo! Champ in"
 	line "making!"
 
@@ -123,7 +136,8 @@ _CeruleanGymGymGuideChampInMakingText::
 	line "electricity!"
 	done
 
-_CeruleanGymGymGuideBeatMistyText::
+_CeruleanGymGymGuideBeatMistyText:
+WLA_GLOBAL_CeruleanGymGymGuideBeatMistyText:
 	text "You beat MISTY!"
 	line "What'd I tell ya?"
 

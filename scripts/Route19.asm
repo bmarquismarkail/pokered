@@ -49,7 +49,7 @@ Route19TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 4, Route19Swimmer7BattleText, Route19Swimmer7EndBattleText, Route19Swimmer7AfterBattleText
 Route19TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 4, Route19Swimmer8BattleText, Route19Swimmer8EndBattleText, Route19Swimmer8AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route19CooltrainerM1Text:
 	text_asm
@@ -112,125 +112,125 @@ Route19Swimmer8Text:
 	jp TextScriptEnd
 
 Route19CooltrainerM1BattleText:
-	text_far _Route19CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM1BattleText
 	text_end
 
 Route19CooltrainerM1EndBattleText:
-	text_far _Route19CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM1EndBattleText
 	text_end
 
 Route19CooltrainerM1AfterBattleText:
-	text_far _Route19CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM1AfterBattleText
 	text_end
 
 Route19CooltrainerM2BattleText:
-	text_far _Route19CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM2BattleText
 	text_end
 
 Route19CooltrainerM2EndBattleText:
-	text_far _Route19CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM2EndBattleText
 	text_end
 
 Route19CooltrainerM2AfterBattleText:
-	text_far _Route19CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route19CooltrainerM2AfterBattleText
 	text_end
 
 Route19Swimmer1BattleText:
-	text_far _Route19Swimmer1BattleText
+	text_far WLA_GLOBAL_Route19Swimmer1BattleText
 	text_end
 
 Route19Swimmer1EndBattleText:
-	text_far _Route19Swimmer1EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer1EndBattleText
 	text_end
 
 Route19Swimmer1AfterBattleText:
-	text_far _Route19Swimmer1AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer1AfterBattleText
 	text_end
 
 Route19Swimmer2BattleText:
-	text_far _Route19Swimmer2BattleText
+	text_far WLA_GLOBAL_Route19Swimmer2BattleText
 	text_end
 
 Route19Swimmer2EndBattleText:
-	text_far _Route19Swimmer2EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer2EndBattleText
 	text_end
 
 Route19Swimmer2AfterBattleText:
-	text_far _Route19Swimmer2AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer2AfterBattleText
 	text_end
 
 Route19Swimmer3BattleText:
-	text_far _Route19Swimmer3BattleText
+	text_far WLA_GLOBAL_Route19Swimmer3BattleText
 	text_end
 
 Route19Swimmer3EndBattleText:
-	text_far _Route19Swimmer3EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer3EndBattleText
 	text_end
 
 Route19Swimmer3AfterBattleText:
-	text_far _Route19Swimmer3AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer3AfterBattleText
 	text_end
 
 Route19Swimmer4BattleText:
-	text_far _Route19Swimmer4BattleText
+	text_far WLA_GLOBAL_Route19Swimmer4BattleText
 	text_end
 
 Route19Swimmer4EndBattleText:
-	text_far _Route19Swimmer4EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer4EndBattleText
 	text_end
 
 Route19Swimmer4AfterBattleText:
-	text_far _Route19Swimmer4AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer4AfterBattleText
 	text_end
 
 Route19Swimmer5BattleText:
-	text_far _Route19Swimmer5BattleText
+	text_far WLA_GLOBAL_Route19Swimmer5BattleText
 	text_end
 
 Route19Swimmer5EndBattleText:
-	text_far _Route19Swimmer5EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer5EndBattleText
 	text_end
 
 Route19Swimmer5AfterBattleText:
-	text_far _Route19Swimmer5AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer5AfterBattleText
 	text_end
 
 Route19Swimmer6BattleText:
-	text_far _Route19Swimmer6BattleText
+	text_far WLA_GLOBAL_Route19Swimmer6BattleText
 	text_end
 
 Route19Swimmer6EndBattleText:
-	text_far _Route19Swimmer6EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer6EndBattleText
 	text_end
 
 Route19Swimmer6AfterBattleText:
-	text_far _Route19Swimmer6AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer6AfterBattleText
 	text_end
 
 Route19Swimmer7BattleText:
-	text_far _Route19Swimmer7BattleText
+	text_far WLA_GLOBAL_Route19Swimmer7BattleText
 	text_end
 
 Route19Swimmer7EndBattleText:
-	text_far _Route19Swimmer7EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer7EndBattleText
 	text_end
 
 Route19Swimmer7AfterBattleText:
-	text_far _Route19Swimmer7AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer7AfterBattleText
 	text_end
 
 Route19Swimmer8BattleText:
-	text_far _Route19Swimmer8BattleText
+	text_far WLA_GLOBAL_Route19Swimmer8BattleText
 	text_end
 
 Route19Swimmer8EndBattleText:
-	text_far _Route19Swimmer8EndBattleText
+	text_far WLA_GLOBAL_Route19Swimmer8EndBattleText
 	text_end
 
 Route19Swimmer8AfterBattleText:
-	text_far _Route19Swimmer8AfterBattleText
+	text_far WLA_GLOBAL_Route19Swimmer8AfterBattleText
 	text_end
 
 Route19SignText:
-	text_far _Route19SignText
+	text_far WLA_GLOBAL_Route19SignText
 	text_end

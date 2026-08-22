@@ -50,7 +50,7 @@ Route15TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_15_TRAINER_8, 3, Route15CooltrainerF3BattleText, Route15CooltrainerF3EndBattleText, Route15CooltrainerF3AfterBattleText
 Route15TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_15_TRAINER_9, 3, Route15CooltrainerF4BattleText, Route15CooltrainerF4EndBattleText, Route15CooltrainerF4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route15CooltrainerF1Text:
 	text_asm
@@ -105,125 +105,125 @@ Route15TalkToTrainer:
 	jp TextScriptEnd
 
 Route15CooltrainerF1BattleText:
-	text_far _Route15CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF1BattleText
 	text_end
 
 Route15CooltrainerF1EndBattleText:
-	text_far _Route15CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF1EndBattleText
 	text_end
 
 Route15CooltrainerF1AfterBattleText:
-	text_far _Route15CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF1AfterBattleText
 	text_end
 
 Route15CooltrainerF2BattleText:
-	text_far _Route15CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF2BattleText
 	text_end
 
 Route15CooltrainerF2EndBattleText:
-	text_far _Route15CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF2EndBattleText
 	text_end
 
 Route15CooltrainerF2AfterBattleText:
-	text_far _Route15CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF2AfterBattleText
 	text_end
 
 Route15CooltrainerM1BattleText:
-	text_far _Route15CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM1BattleText
 	text_end
 
 Route15CooltrainerM1EndBattleText:
-	text_far _Route15CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM1EndBattleText
 	text_end
 
 Route15CooltrainerM1AfterBattleText:
-	text_far _Route15CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM1AfterBattleText
 	text_end
 
 Route15CooltrainerM2BattleText:
-	text_far _Route15CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM2BattleText
 	text_end
 
 Route15CooltrainerM2EndBattleText:
-	text_far _Route15CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM2EndBattleText
 	text_end
 
 Route15CooltrainerM2AfterBattleText:
-	text_far _Route15CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerM2AfterBattleText
 	text_end
 
 Route15Beauty1BattleText:
-	text_far _Route15Beauty1BattleText
+	text_far WLA_GLOBAL_Route15Beauty1BattleText
 	text_end
 
 Route15Beauty1EndBattleText:
-	text_far _Route15Beauty1EndBattleText
+	text_far WLA_GLOBAL_Route15Beauty1EndBattleText
 	text_end
 
 Route15Beauty1AfterBattleText:
-	text_far _Route15Beauty1AfterBattleText
+	text_far WLA_GLOBAL_Route15Beauty1AfterBattleText
 	text_end
 
 Route15Beauty2BattleText:
-	text_far _Route15Beauty2BattleText
+	text_far WLA_GLOBAL_Route15Beauty2BattleText
 	text_end
 
 Route15Beauty2EndBattleText:
-	text_far _Route15Beauty2EndBattleText
+	text_far WLA_GLOBAL_Route15Beauty2EndBattleText
 	text_end
 
 Route15Beauty2AfterBattleText:
-	text_far _Route15Beauty2AfterBattleText
+	text_far WLA_GLOBAL_Route15Beauty2AfterBattleText
 	text_end
 
 Route15Biker1BattleText:
-	text_far _Route15Biker1BattleText
+	text_far WLA_GLOBAL_Route15Biker1BattleText
 	text_end
 
 Route15Biker1EndBattleText:
-	text_far _Route15Biker1EndBattleText
+	text_far WLA_GLOBAL_Route15Biker1EndBattleText
 	text_end
 
 Route15Biker1AfterBattleText:
-	text_far _Route15Biker1AfterBattleText
+	text_far WLA_GLOBAL_Route15Biker1AfterBattleText
 	text_end
 
 Route15Biker2BattleText:
-	text_far _Route15Biker2BattleText
+	text_far WLA_GLOBAL_Route15Biker2BattleText
 	text_end
 
 Route15Biker2EndBattleText:
-	text_far _Route15Biker2EndBattleText
+	text_far WLA_GLOBAL_Route15Biker2EndBattleText
 	text_end
 
 Route15Biker2AfterBattleText:
-	text_far _Route15Biker2AfterBattleText
+	text_far WLA_GLOBAL_Route15Biker2AfterBattleText
 	text_end
 
 Route15CooltrainerF3BattleText:
-	text_far _Route15CooltrainerF3BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF3BattleText
 	text_end
 
 Route15CooltrainerF3EndBattleText:
-	text_far _Route15CooltrainerF3EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF3EndBattleText
 	text_end
 
 Route15CooltrainerF3AfterBattleText:
-	text_far _Route15CooltrainerF3AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF3AfterBattleText
 	text_end
 
 Route15CooltrainerF4BattleText:
-	text_far _Route15CooltrainerF4BattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF4BattleText
 	text_end
 
 Route15CooltrainerF4EndBattleText:
-	text_far _Route15CooltrainerF4EndBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF4EndBattleText
 	text_end
 
 Route15CooltrainerF4AfterBattleText:
-	text_far _Route15CooltrainerF4AfterBattleText
+	text_far WLA_GLOBAL_Route15CooltrainerF4AfterBattleText
 	text_end
 
 Route15SignText:
-	text_far _Route15SignText
+	text_far WLA_GLOBAL_Route15SignText
 	text_end

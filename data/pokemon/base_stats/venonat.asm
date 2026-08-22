@@ -1,17 +1,17 @@
-	db DEX_VENONAT ; pokedex id
+	.DB DEX_VENONAT ; pokedex id
 
-	db  60,  55,  50,  45,  40
+	.DB  60,  55,  50,  45,  40
 	;   hp  atk  def  spd  spc
 
-	db BUG, POISON ; type
-	db 190 ; catch rate
-	db 75 ; base exp
+	.DB BUG, POISON ; type
+	.DB 190 ; catch rate
+	.DB 75 ; base exp
 
-	INCBIN "gfx/pokemon/front/venonat.pic", 0, 1 ; sprite dimensions
-	dw VenonatPicFront, VenonatPicBack
+	.INCBIN "gfx/pokemon/front/venonat.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW VenonatPicFront, VenonatPicBack
 
-	db TACKLE, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         MEGA_DRAIN,   \
@@ -19,4 +19,4 @@
 	     BIDE,         REST,         PSYWAVE,      SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

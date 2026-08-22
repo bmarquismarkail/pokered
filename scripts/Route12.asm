@@ -28,7 +28,7 @@ Route12DefaultScript:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, TEXT_ROUTE12_SNORLAX_WOKE_UP
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -49,11 +49,11 @@ Route12SnorlaxPostBattleScript:
 	call UpdateSprites
 	ld a, [wBattleResult]
 	cp $2
-	jr z, .caught_snorlax
+	jr z, Route12SnorlaxPostBattleScript.caught_snorlax
 	ld a, TEXT_ROUTE12_SNORLAX_CALMED_DOWN
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-.caught_snorlax
+Route12SnorlaxPostBattleScript.caught_snorlax
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
 	call Delay3
 	ld a, SCRIPT_ROUTE12_DEFAULT
@@ -94,18 +94,18 @@ Route12TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_5, 4, Route12Fisher4BattleText, Route12Fisher4EndBattleText, Route12Fisher4AfterBattleText
 Route12TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_12_TRAINER_6, 1, Route12Fisher5BattleText, Route12Fisher5EndBattleText, Route12Fisher5AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route12SnorlaxText:
-	text_far _Route12SnorlaxText
+	text_far WLA_GLOBAL_Route12SnorlaxText
 	text_end
 
 Route12SnorlaxWokeUpText:
-	text_far _Route12SnorlaxWokeUpText
+	text_far WLA_GLOBAL_Route12SnorlaxWokeUpText
 	text_end
 
 Route12SnorlaxCalmedDownText:
-	text_far _Route12SnorlaxCalmedDownText
+	text_far WLA_GLOBAL_Route12SnorlaxCalmedDownText
 	text_end
 
 Route12Fisher1Text:
@@ -115,15 +115,15 @@ Route12Fisher1Text:
 	jp TextScriptEnd
 
 Route12Fisher1BattleText:
-	text_far _Route12Fisher1BattleText
+	text_far WLA_GLOBAL_Route12Fisher1BattleText
 	text_end
 
 Route12Fisher1EndBattleText:
-	text_far _Route12Fisher1EndBattleText
+	text_far WLA_GLOBAL_Route12Fisher1EndBattleText
 	text_end
 
 Route12Fisher1AfterBattleText:
-	text_far _Route12Fisher1AfterBattleText
+	text_far WLA_GLOBAL_Route12Fisher1AfterBattleText
 	text_end
 
 Route12Fisher2Text:
@@ -133,15 +133,15 @@ Route12Fisher2Text:
 	jp TextScriptEnd
 
 Route12Fisher2BattleText:
-	text_far _Route12Fisher2BattleText
+	text_far WLA_GLOBAL_Route12Fisher2BattleText
 	text_end
 
 Route12Fisher2EndBattleText:
-	text_far _Route12Fisher2EndBattleText
+	text_far WLA_GLOBAL_Route12Fisher2EndBattleText
 	text_end
 
 Route12Fisher2AfterBattleText:
-	text_far _Route12Fisher2AfterBattleText
+	text_far WLA_GLOBAL_Route12Fisher2AfterBattleText
 	text_end
 
 Route12CooltrainerMText:
@@ -151,15 +151,15 @@ Route12CooltrainerMText:
 	jp TextScriptEnd
 
 Route12CooltrainerMBattleText:
-	text_far _Route12CooltrainerMBattleText
+	text_far WLA_GLOBAL_Route12CooltrainerMBattleText
 	text_end
 
 Route12CooltrainerMEndBattleText:
-	text_far _Route12CooltrainerMEndBattleText
+	text_far WLA_GLOBAL_Route12CooltrainerMEndBattleText
 	text_end
 
 Route12CooltrainerMAfterBattleText:
-	text_far _Route12CooltrainerMAfterBattleText
+	text_far WLA_GLOBAL_Route12CooltrainerMAfterBattleText
 	text_end
 
 Route12SuperNerdText:
@@ -169,15 +169,15 @@ Route12SuperNerdText:
 	jp TextScriptEnd
 
 Route12SuperNerdBattleText:
-	text_far _Route12SuperNerdBattleText
+	text_far WLA_GLOBAL_Route12SuperNerdBattleText
 	text_end
 
 Route12SuperNerdEndBattleText:
-	text_far _Route12SuperNerdEndBattleText
+	text_far WLA_GLOBAL_Route12SuperNerdEndBattleText
 	text_end
 
 Route12SuperNerdAfterBattleText:
-	text_far _Route12SuperNerdAfterBattleText
+	text_far WLA_GLOBAL_Route12SuperNerdAfterBattleText
 	text_end
 
 Route12Fisher3Text:
@@ -187,15 +187,15 @@ Route12Fisher3Text:
 	jp TextScriptEnd
 
 Route12Fisher3BattleText:
-	text_far _Route12Fisher3BattleText
+	text_far WLA_GLOBAL_Route12Fisher3BattleText
 	text_end
 
 Route12Fisher3EndBattleText:
-	text_far _Route12Fisher3EndBattleText
+	text_far WLA_GLOBAL_Route12Fisher3EndBattleText
 	text_end
 
 Route12Fisher3AfterBattleText:
-	text_far _Route12Fisher3AfterBattleText
+	text_far WLA_GLOBAL_Route12Fisher3AfterBattleText
 	text_end
 
 Route12Fisher4Text:
@@ -205,15 +205,15 @@ Route12Fisher4Text:
 	jp TextScriptEnd
 
 Route12Fisher4BattleText:
-	text_far _Route12Fisher4BattleText
+	text_far WLA_GLOBAL_Route12Fisher4BattleText
 	text_end
 
 Route12Fisher4EndBattleText:
-	text_far _Route12Fisher4EndBattleText
+	text_far WLA_GLOBAL_Route12Fisher4EndBattleText
 	text_end
 
 Route12Fisher4AfterBattleText:
-	text_far _Route12Fisher4AfterBattleText
+	text_far WLA_GLOBAL_Route12Fisher4AfterBattleText
 	text_end
 
 Route12Fisher5Text:
@@ -223,21 +223,21 @@ Route12Fisher5Text:
 	jp TextScriptEnd
 
 Route12Fisher5BattleText:
-	text_far _Route12Fisher5BattleText
+	text_far WLA_GLOBAL_Route12Fisher5BattleText
 	text_end
 
 Route12Fisher5EndBattleText:
-	text_far _Route12Fisher5EndBattleText
+	text_far WLA_GLOBAL_Route12Fisher5EndBattleText
 	text_end
 
 Route12Fisher5AfterBattleText:
-	text_far _Route12Fisher5AfterBattleText
+	text_far WLA_GLOBAL_Route12Fisher5AfterBattleText
 	text_end
 
 Route12SignText:
-	text_far _Route12SignText
+	text_far WLA_GLOBAL_Route12SignText
 	text_end
 
 Route12SportFishingSignText:
-	text_far _Route12SportFishingSignText
+	text_far WLA_GLOBAL_Route12SportFishingSignText
 	text_end

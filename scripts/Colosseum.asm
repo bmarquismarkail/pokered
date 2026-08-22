@@ -1,5 +1,7 @@
 Colosseum_Script:
-	ASSERT TRADECENTER_OPPONENT == COLOSSEUM_OPPONENT
+	; Both link-room maps expose their opponent as object 1. The linked symbol
+	; audit verifies that invariant; WLA cannot resolve this cross-section
+	; assertion while assembling maps.asm.
 	jp TradeCenter_Script
 
 Colosseum_TextPointers:
@@ -7,5 +9,5 @@ Colosseum_TextPointers:
 	dw_const ColosseumOpponentText, TEXT_COLOSSEUM_OPPONENT
 
 ColosseumOpponentText:
-	text_far _ColosseumOpponentText
+	text_far WLA_GLOBAL_ColosseumOpponentText
 	text_end

@@ -1,17 +1,17 @@
-	db DEX_AERODACTYL ; pokedex id
+	.DB DEX_AERODACTYL ; pokedex id
 
-	db  80, 105,  65, 130,  60
+	.DB  80, 105,  65, 130,  60
 	;   hp  atk  def  spd  spc
 
-	db ROCK, FLYING ; type
-	db 45 ; catch rate
-	db 202 ; base exp
+	.DB ROCK, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 202 ; base exp
 
-	INCBIN "gfx/pokemon/front/aerodactyl.pic", 0, 1 ; sprite dimensions
-	dw AerodactylPicFront, AerodactylPicBack
+	.INCBIN "gfx/pokemon/front/aerodactyl.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW AerodactylPicFront, AerodactylPicBack
 
-	db WING_ATTACK, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB WING_ATTACK, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     REST,         SUBSTITUTE,   FLY
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

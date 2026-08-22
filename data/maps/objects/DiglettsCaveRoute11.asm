@@ -2,16 +2,19 @@
 	const_export DIGLETTSCAVEROUTE11_GAMBLER
 
 DiglettsCaveRoute11_Object:
-	db $7d ; border block
+	.DB $7d ; border block
 
-	def_warp_events
+	.DB 3
 	warp_event  2,  7, LAST_MAP, 5
 	warp_event  3,  7, LAST_MAP, 5
 	warp_event  4,  4, DIGLETTS_CAVE, 2
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 1
 	object_event  2,  3, SPRITE_GAMBLER, STAY, NONE, TEXT_DIGLETTSCAVEROUTE11_GAMBLER
 
-	def_warps_to DIGLETTS_CAVE_ROUTE_11
+	event_displacement DIGLETTS_CAVE_ROUTE_11_WIDTH, 2, 7
+
+	event_displacement DIGLETTS_CAVE_ROUTE_11_WIDTH, 3, 7
+
+	event_displacement DIGLETTS_CAVE_ROUTE_11_WIDTH, 4, 4

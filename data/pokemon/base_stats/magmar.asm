@@ -1,17 +1,17 @@
-	db DEX_MAGMAR ; pokedex id
+	.DB DEX_MAGMAR ; pokedex id
 
-	db  65,  95,  57,  93,  85
+	.DB  65,  95,  57,  93,  85
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 45 ; catch rate
-	db 167 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 45 ; catch rate
+	.DB 167 ; base exp
 
-	INCBIN "gfx/pokemon/front/magmar.pic", 0, 1 ; sprite dimensions
-	dw MagmarPicFront, MagmarPicBack
+	.INCBIN "gfx/pokemon/front/magmar.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MagmarPicFront, MagmarPicBack
 
-	db EMBER, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB EMBER, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     PSYWAVE,      SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

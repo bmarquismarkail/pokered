@@ -1,26 +1,26 @@
 Route4WildMons:
 	def_grass_wildmons 20 ; encounter rate
-	db 10, RATTATA
-	db 10, SPEAROW
-	db  8, RATTATA
-IF DEF(_RED)
-	db  6, EKANS
-	db  8, SPEAROW
-	db 10, EKANS
-	db 12, RATTATA
-	db 12, SPEAROW
-	db  8, EKANS
-	db 12, EKANS
-ENDC
-IF DEF(_BLUE)
-	db  6, SANDSHREW
-	db  8, SPEAROW
-	db 10, SANDSHREW
-	db 12, RATTATA
-	db 12, SPEAROW
-	db  8, SANDSHREW
-	db 12, SANDSHREW
-ENDC
+	.DB 10, RATTATA
+	.DB 10, SPEAROW
+	.DB  8, RATTATA
+.IF defined(_RED)
+	.DB  6, EKANS
+	.DB  8, SPEAROW
+	.DB 10, EKANS
+	.DB 12, RATTATA
+	.DB 12, SPEAROW
+	.DB  8, EKANS
+	.DB 12, EKANS
+.ENDIF
+.IF defined(_BLUE)
+	.DB  6, SANDSHREW
+	.DB  8, SPEAROW
+	.DB 10, SANDSHREW
+	.DB 12, RATTATA
+	.DB 12, SPEAROW
+	.DB  8, SANDSHREW
+	.DB 12, SANDSHREW
+.ENDIF
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

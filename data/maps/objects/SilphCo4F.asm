@@ -8,9 +8,9 @@
 	const_export SILPHCO4F_ESCAPE_ROPE
 
 SilphCo4F_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 7
 	warp_event 24,  0, SILPH_CO_3F, 2
 	warp_event 26,  0, SILPH_CO_5F, 2
 	warp_event 20,  0, SILPH_CO_ELEVATOR, 1
@@ -19,9 +19,8 @@ SilphCo4F_Object:
 	warp_event  3, 15, SILPH_CO_10F, 5
 	warp_event 17, 11, SILPH_CO_10F, 6
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 7
 	object_event  6,  2, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO4F_SILPH_WORKER_M
 	object_event  9, 14, SPRITE_ROCKET, STAY, RIGHT, TEXT_SILPHCO4F_ROCKET1, OPP_ROCKET, 26
 	object_event 14,  6, SPRITE_SCIENTIST, STAY, LEFT, TEXT_SILPHCO4F_SCIENTIST, OPP_SCIENTIST, 5
@@ -30,4 +29,16 @@ SilphCo4F_Object:
 	object_event  4,  7, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO4F_MAX_REVIVE, MAX_REVIVE
 	object_event  5,  8, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO4F_ESCAPE_ROPE, ESCAPE_ROPE
 
-	def_warps_to SILPH_CO_4F
+	event_displacement SILPH_CO_4F_WIDTH, 24, 0
+
+	event_displacement SILPH_CO_4F_WIDTH, 26, 0
+
+	event_displacement SILPH_CO_4F_WIDTH, 20, 0
+
+	event_displacement SILPH_CO_4F_WIDTH, 11, 7
+
+	event_displacement SILPH_CO_4F_WIDTH, 17, 3
+
+	event_displacement SILPH_CO_4F_WIDTH, 3, 15
+
+	event_displacement SILPH_CO_4F_WIDTH, 17, 11

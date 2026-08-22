@@ -1,10 +1,12 @@
-_CeladonChiefHouseChiefText::
+_CeladonChiefHouseChiefText:
+WLA_GLOBAL_CeladonChiefHouseChiefText:
 	text "Hehehe! The slots"
 	line "just reel in the"
 	cont "dough, big time!"
 	done
 
-_CeladonChiefHouseRocketText::
+_CeladonChiefHouseRocketText:
+WLA_GLOBAL_CeladonChiefHouseRocketText:
 	text "CHIEF!"
 
 	para "We just shipped"
@@ -12,7 +14,8 @@ _CeladonChiefHouseRocketText::
 	cont "slot prizes!"
 	done
 
-_CeladonChiefHouseSailorText::
+_CeladonChiefHouseSailorText:
+WLA_GLOBAL_CeladonChiefHouseSailorText:
 	text "Don't touch the"
 	line "poster at the"
 	cont "GAME CORNER!"

@@ -1,17 +1,17 @@
-	db DEX_ARCANINE ; pokedex id
+	.DB DEX_ARCANINE ; pokedex id
 
-	db  90, 110,  80,  95,  80
+	.DB  90, 110,  80,  95,  80
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 75 ; catch rate
-	db 213 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 75 ; catch rate
+	.DB 213 ; base exp
 
-	INCBIN "gfx/pokemon/front/arcanine.pic", 0, 1 ; sprite dimensions
-	dw ArcaninePicFront, ArcaninePicBack
+	.INCBIN "gfx/pokemon/front/arcanine.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ArcaninePicFront, ArcaninePicBack
 
-	db ROAR, EMBER, LEER, TAKE_DOWN ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB ROAR, EMBER, LEER, TAKE_DOWN ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
@@ -20,4 +20,4 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

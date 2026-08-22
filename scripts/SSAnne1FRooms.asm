@@ -37,7 +37,7 @@ SSAnne8TrainerHeader2:
 	trainer EVENT_BEAT_SS_ANNE_8_TRAINER_2, 2, SSAnne1FRoomsYoungsterBattleText, SSAnne1FRoomsYoungsterEndBattleText, SSAnne1FRoomsYoungsterAfterBattleText
 SSAnne8TrainerHeader3:
 	trainer EVENT_BEAT_SS_ANNE_8_TRAINER_3, 2, SSAnne1FRoomsCooltrainerFBattleText, SSAnne1FRoomsCooltrainerFEndBattleText, SSAnne1FRoomsCooltrainerFAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SSAnne1FRoomsGentleman1Text:
 	text_asm
@@ -64,76 +64,76 @@ SSAnne1FRoomsCooltrainerFText:
 	jp TextScriptEnd
 
 SSAnne1FRoomsWigglytuffText:
-	text_far _SSAnne1FRoomsWigglytuffText
+	text_far WLA_GLOBAL_SSAnne1FRoomsWigglytuffText
 	text_asm
 	ld a, WIGGLYTUFF
 	call PlayCry
 	jp TextScriptEnd
 
 SSAnne1FRoomsGentleman1BattleText:
-	text_far _SSAnne1FRoomsGentleman1BattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman1BattleText
 	text_end
 
 SSAnne1FRoomsGentleman1EndBattleText:
-	text_far _SSAnne1FRoomsGentleman1EndBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman1EndBattleText
 	text_end
 
 SSAnne1FRoomsGentleman1AfterBattleText:
-	text_far _SSAnne1FRoomsGentleman1AfterBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman1AfterBattleText
 	text_end
 
 SSAnne1FRoomsGentleman2BattleText:
-	text_far _SSAnne1FRoomsGentleman2BattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman2BattleText
 	text_end
 
 SSAnne1FRoomsGentleman2EndBattleText:
-	text_far _SSAnne1FRoomsGentleman2EndBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman2EndBattleText
 	text_end
 
 SSAnne1FRoomsGentleman2AfterBattleText:
-	text_far _SSAnne1FRoomsGentleman2AfterBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman2AfterBattleText
 	text_end
 
 SSAnne1FRoomsYoungsterBattleText:
-	text_far _SSAnne1FRoomsYoungsterBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsYoungsterBattleText
 	text_end
 
 SSAnne1FRoomsYoungsterEndBattleText:
-	text_far _SSAnne1FRoomsYoungsterEndBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsYoungsterEndBattleText
 	text_end
 
 SSAnne1FRoomsYoungsterAfterBattleText:
-	text_far _SSAnne1FRoomsYoungsterAfterBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsYoungsterAfterBattleText
 	text_end
 
 SSAnne1FRoomsCooltrainerFBattleText:
-	text_far _SSAnne1FRoomsCooltrainerFBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsCooltrainerFBattleText
 	text_end
 
 SSAnne1FRoomsCooltrainerFEndBattleText:
-	text_far _SSAnne1FRoomsCooltrainerFEndBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsCooltrainerFEndBattleText
 	text_end
 
 SSAnne1FRoomsCooltrainerFAfterBattleText:
-	text_far _SSAnne1FRoomsCooltrainerFAfterBattleText
+	text_far WLA_GLOBAL_SSAnne1FRoomsCooltrainerFAfterBattleText
 	text_end
 
 SSAnne1FRoomsGirl1Text:
-	text_far _SSAnne1FRoomsGirl1Text
+	text_far WLA_GLOBAL_SSAnne1FRoomsGirl1Text
 	text_end
 
 SSAnne1FRoomsMiddleAgedManText:
-	text_far _SSAnne1FRoomsMiddleAgedManText
+	text_far WLA_GLOBAL_SSAnne1FRoomsMiddleAgedManText
 	text_end
 
 SSAnne1FRoomsLittleGirlText:
-	text_far _SSAnne1FRoomsLittleGirlText
+	text_far WLA_GLOBAL_SSAnne1FRoomsLittleGirlText
 	text_end
 
 SSAnne1FRoomsGirl2Text:
-	text_far _SSAnne1FRoomsGirl2Text
+	text_far WLA_GLOBAL_SSAnne1FRoomsGirl2Text
 	text_end
 
 SSAnne1FRoomsGentleman3Text:
-	text_far _SSAnne1FRoomsGentleman3Text
+	text_far WLA_GLOBAL_SSAnne1FRoomsGentleman3Text
 	text_end

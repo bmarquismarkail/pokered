@@ -1,5 +1,0 @@
-GuardDrinksList:
-.DB FRESH_WATER
-.DB SODA_POP
-.DB LEMONADE
-.DB 0

@@ -1,9 +1,9 @@
 AnimCut:
 	ld a, [wCutTile]
 	cp $52
-	jr z, .grass
+	jr z, AnimCut.grass
 	ld c, $8
-.cutTreeLoop
+AnimCut.cutTreeLoop
 	push bc
 	ld hl, wShadowOAMSprite36XCoord
 	ld a, 1
@@ -15,17 +15,17 @@ AnimCut:
 	ld [wCoordAdjustmentAmount], a
 	ld c, 2
 	call AdjustOAMBlockXPos2
-	ldh a, [rOBP1]
+	ldh a, [lobyte(rOBP1)]
 	xor $64
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	call DelayFrame
 	pop bc
 	dec c
-	jr nz, .cutTreeLoop
+	jr nz, AnimCut.cutTreeLoop
 	ret
-.grass
+AnimCut.grass
 	ld c, 2
-.cutGrassLoop
+AnimCut.cutGrassLoop
 	push bc
 	ld c, $8
 	call AnimCutGrass_UpdateOAMEntries
@@ -40,7 +40,7 @@ AnimCut:
 	call AdjustOAMBlockYPos2
 	pop bc
 	dec c
-	jr nz, .cutGrassLoop
+	jr nz, AnimCut.cutGrassLoop
 	ret
 
 AnimCutGrass_UpdateOAMEntries:
@@ -65,9 +65,9 @@ AnimCutGrass_UpdateOAMEntries:
 	ld [wCoordAdjustmentAmount], a
 	ld c, 1
 	call AdjustOAMBlockXPos2
-	ldh a, [rOBP1]
+	ldh a, [lobyte(rOBP1)]
 	xor $64
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	call DelayFrame
 	pop bc
 	dec c

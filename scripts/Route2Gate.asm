@@ -9,11 +9,11 @@ Route2Gate_TextPointers:
 Route2GateOaksAideText:
 	text_asm
 	CheckEvent EVENT_GOT_HM05
-	jr nz, .got_item
+	jr nz, Route2GateOaksAideText.got_item
 	ld a, 10
-	ldh [hOaksAideRequirement], a
+	ldh [lobyte(hOaksAideRequirement)], a
 	ld a, HM_FLASH
-	ldh [hOaksAideRewardItem], a
+	ldh [lobyte(hOaksAideRewardItem)], a
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, wNameBuffer
@@ -21,20 +21,20 @@ Route2GateOaksAideText:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ldh a, [hOaksAideResult]
+	ldh a, [lobyte(hOaksAideResult)]
 	cp OAKS_AIDE_GOT_ITEM
-	jr nz, .no_item
+	jr nz, Route2GateOaksAideText.no_item
 	SetEvent EVENT_GOT_HM05
-.got_item
-	ld hl, .FlashExplanationText
+Route2GateOaksAideText.got_item
+	ld hl, Route2GateOaksAideText.FlashExplanationText
 	call PrintText
-.no_item
+Route2GateOaksAideText.no_item
 	jp TextScriptEnd
 
-.FlashExplanationText:
-	text_far _Route2GateOaksAideFlashExplanationText
+Route2GateOaksAideText.FlashExplanationText:
+	text_far WLA_GLOBAL_Route2GateOaksAideFlashExplanationText
 	text_end
 
 Route2GateYoungsterText:
-	text_far _Route2GateYoungsterText
+	text_far WLA_GLOBAL_Route2GateYoungsterText
 	text_end

@@ -1,17 +1,17 @@
-	db DEX_TENTACOOL ; pokedex id
+	.DB DEX_TENTACOOL ; pokedex id
 
-	db  40,  40,  35,  70, 100
+	.DB  40,  40,  35,  70, 100
 	;   hp  atk  def  spd  spc
 
-	db WATER, POISON ; type
-	db 190 ; catch rate
-	db 105 ; base exp
+	.DB WATER, POISON ; type
+	.DB 190 ; catch rate
+	.DB 105 ; base exp
 
-	INCBIN "gfx/pokemon/front/tentacool.pic", 0, 1 ; sprite dimensions
-	dw TentacoolPicFront, TentacoolPicBack
+	.INCBIN "gfx/pokemon/front/tentacool.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW TentacoolPicFront, TentacoolPicBack
 
-	db ACID, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB ACID, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     REST,         SUBSTITUTE,   CUT,          SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

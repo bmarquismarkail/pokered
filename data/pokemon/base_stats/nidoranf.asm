@@ -1,17 +1,17 @@
-	db DEX_NIDORAN_F ; pokedex id
+	.DB DEX_NIDORAN_F ; pokedex id
 
-	db  55,  47,  52,  41,  40
+	.DB  55,  47,  52,  41,  40
 	;   hp  atk  def  spd  spc
 
-	db POISON, POISON ; type
-	db 235 ; catch rate
-	db 59 ; base exp
+	.DB POISON, POISON ; type
+	.DB 235 ; catch rate
+	.DB 59 ; base exp
 
-	INCBIN "gfx/pokemon/front/nidoranf.pic", 0, 1 ; sprite dimensions
-	dw NidoranFPicFront, NidoranFPicBack
+	.INCBIN "gfx/pokemon/front/nidoranf.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW NidoranFPicFront, NidoranFPicBack
 
-	db GROWL, TACKLE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB GROWL, TACKLE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BLIZZARD,     \
@@ -19,4 +19,4 @@
 	     REFLECT,      BIDE,         SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

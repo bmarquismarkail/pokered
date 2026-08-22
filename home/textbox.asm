@@ -2,6 +2,6 @@
 ; INPUT:
 ; [wTextBoxID] = text box ID
 ; b, c = y, x cursor position (TWO_OPTION_MENU only)
-DisplayTextBoxID::
+DisplayTextBoxID:
 	homecall_sf DisplayTextBoxID_
 	ret

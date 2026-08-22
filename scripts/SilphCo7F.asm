@@ -13,39 +13,39 @@ SilphCo7F_GateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo7F_GateCallbackScript.GateCoordinates
 	call SilphCo7F_SetCardKeyDoorYScript
 	call SilphCo7F_UnlockedDoorEventScript
 	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	jr nz, .unlock_door1
+	jr nz, SilphCo7F_GateCallbackScript.unlock_door1
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 3, 5
+	lb "bc", 3, 5
 	predef ReplaceTileBlock
 	pop af
-.unlock_door1
+SilphCo7F_GateCallbackScript.unlock_door1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	jr nz, .unlock_door2
+	jr nz, SilphCo7F_GateCallbackScript.unlock_door2
 	push af
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 2, 10
+	lb "bc", 2, 10
 	predef ReplaceTileBlock
 	pop af
-.unlock_door2
+SilphCo7F_GateCallbackScript.unlock_door2
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR2
 	ret nz
 	ld a, $54
 	ld [wNewTileBlockID], a
-	lb bc, 6, 10
+	lb "bc", 6, 10
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo7F_GateCallbackScript.GateCoordinates:
 	dbmapcoord  5,  3
 	dbmapcoord 10,  2
 	dbmapcoord 10,  6
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo7F_SetCardKeyDoorYScript:
 	push hl
@@ -55,49 +55,49 @@ SilphCo7F_SetCardKeyDoorYScript:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	pop hl
-.loop_check_doors
+SilphCo7F_SetCardKeyDoorYScript.loop_check_doors
 	ld a, [hli]
 	cp $ff
-	jr z, .exit_loop
+	jr z, SilphCo7F_SetCardKeyDoorYScript.exit_loop
 	push hl
 	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .check_y_coord
+	jr z, SilphCo7F_SetCardKeyDoorYScript.check_y_coord
 	inc hl
-	jr .loop_check_doors
-.check_y_coord
+	jr SilphCo7F_SetCardKeyDoorYScript.loop_check_doors
+SilphCo7F_SetCardKeyDoorYScript.check_y_coord
 	ld a, [hli]
 	cp c
-	jr nz, .loop_check_doors
+	jr nz, SilphCo7F_SetCardKeyDoorYScript.loop_check_doors
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ret
-.exit_loop
+SilphCo7F_SetCardKeyDoorYScript.exit_loop
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	ret
 
 SilphCo7F_UnlockedDoorEventScript:
-	EventFlagAddress hl, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	ldh a, [hUnlockedSilphCoDoors]
+	EventFlagAddress "hl", EVENT_SILPH_CO_7_UNLOCKED_DOOR1
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	cp $1
-	jr nz, .unlock_door1
+	jr nz, SilphCo7F_UnlockedDoorEventScript.unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
-.unlock_door1
+SilphCo7F_UnlockedDoorEventScript.unlock_door1
 	cp $2
-	jr nz, .unlock_door2
+	jr nz, SilphCo7F_UnlockedDoorEventScript.unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
-.unlock_door2
+SilphCo7F_UnlockedDoorEventScript.unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 
@@ -122,11 +122,11 @@ SilphCo7F_ScriptPointers:
 SilphCo7FDefaultScript:
 	CheckEvent EVENT_BEAT_SILPH_CO_RIVAL
 	jp nz, CheckFightingMapTrainers
-	ld hl, .RivalEncounterCoordinates
+	ld hl, SilphCo7FDefaultScript.RivalEncounterCoordinates
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_DOWN
@@ -134,39 +134,39 @@ SilphCo7FDefaultScript:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	ld c, BANK(Music_MeetRival)
+	ld c, bank(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, TEXT_SILPHCO7F_RIVAL
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SILPHCO7F_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call SetSpriteMovementBytesToFF
-	ld de, .RivalMovementUp
+	ld de, SilphCo7FDefaultScript.RivalMovementUp
 	ld a, [wCoordIndex]
 	ld [wSavedCoordIndex], a
 	cp 1 ; index of second, lower entry in .RivalEncounterCoordinates
-	jr z, .full_rival_movement
+	jr z, SilphCo7FDefaultScript.full_rival_movement
 	inc de
-.full_rival_movement
+SilphCo7FDefaultScript.full_rival_movement
 	ld a, SILPHCO7F_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call MoveSprite
 	ld a, SCRIPT_SILPHCO7F_RIVAL_START_BATTLE
 	jp SilphCo7FSetCurScript
 
-.RivalEncounterCoordinates:
+SilphCo7FDefaultScript.RivalEncounterCoordinates:
 	dbmapcoord  3,  2
 	dbmapcoord  3,  3
-	db -1 ; end
+	.DB -1 ; end
 
-.RivalMovementUp:
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db -1 ; end
+SilphCo7FDefaultScript.RivalMovementUp:
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB -1 ; end
 
 SilphCo7FRivalStartBattleScript:
 	ld a, [wStatusFlags5]
@@ -175,7 +175,7 @@ SilphCo7FRivalStartBattleScript:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, TEXT_SILPHCO7F_RIVAL_WAITED_HERE
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wStatusFlags3
@@ -188,17 +188,17 @@ SilphCo7FRivalStartBattleScript:
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .not_starter_2
+	jr nz, SilphCo7FRivalStartBattleScript.not_starter_2
 	ld a, $7
-	jr .set_trainer_no
-.not_starter_2
+	jr SilphCo7FRivalStartBattleScript.set_trainer_no
+SilphCo7FRivalStartBattleScript.not_starter_2
 	cp STARTER3
-	jr nz, .no_starter_3
+	jr nz, SilphCo7FRivalStartBattleScript.no_starter_3
 	ld a, $8
-	jr .set_trainer_no
-.no_starter_3
+	jr SilphCo7FRivalStartBattleScript.set_trainer_no
+SilphCo7FRivalStartBattleScript.no_starter_3
 	ld a, $9
-.set_trainer_no
+SilphCo7FRivalStartBattleScript.set_trainer_no
 	ld [wTrainerNo], a
 	ld a, SCRIPT_SILPHCO7F_RIVAL_AFTER_BATTLE
 	jp SilphCo7FSetCurScript
@@ -213,43 +213,43 @@ SilphCo7FRivalAfterBattleScript:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, SILPHCO7F_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_SILPHCO7F_RIVAL_GOOD_LUCK_TO_YOU
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	farcall Music_RivalAlternateStart
-	ld de, .RivalWalkAroundPlayerMovement
+	ld de, SilphCo7FRivalAfterBattleScript.RivalWalkAroundPlayerMovement
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in SilphCo7FDefaultScript.RivalEncounterCoordinates
-	jr nz, .walk_around_player
-	ld de, .RivalExitRightMovement
-.walk_around_player
+	jr nz, SilphCo7FRivalAfterBattleScript.walk_around_player
+	ld de, SilphCo7FRivalAfterBattleScript.RivalExitRightMovement
+SilphCo7FRivalAfterBattleScript.walk_around_player
 	ld a, SILPHCO7F_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call MoveSprite
 	ld a, SCRIPT_SILPHCO7F_RIVAL_EXIT
 	jp SilphCo7FSetCurScript
 
-.RivalExitRightMovement:
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db -1 ; end
+SilphCo7FRivalAfterBattleScript.RivalExitRightMovement:
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB -1 ; end
 
-.RivalWalkAroundPlayerMovement:
-	db NPC_MOVEMENT_LEFT
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+SilphCo7FRivalAfterBattleScript.RivalWalkAroundPlayerMovement:
+	.DB NPC_MOVEMENT_LEFT
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 SilphCo7FRivalExitScript:
 	ld a, [wStatusFlags5]
@@ -291,117 +291,117 @@ SilphCo7TrainerHeader2:
 	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_2, 3, SilphCo7FRocket2BattleText, SilphCo7FRocket2EndBattleText, SilphCo7FRocket2AfterBattleText
 SilphCo7TrainerHeader3:
 	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 4, SilphCo7FRocket3BattleText, SilphCo7FRocket3EndBattleText, SilphCo7FRocket3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo7FSilphWorkerM1Text:
 ; lapras guy
 	text_asm
 	ld a, [wStatusFlags4]
 	bit BIT_GOT_LAPRAS, a
-	jr z, .give_lapras
+	jr z, SilphCo7FSilphWorkerM1Text.give_lapras
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .saved_silph
-	ld hl, .IsOurPresidentOkText
+	jr nz, SilphCo7FSilphWorkerM1Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM1Text.IsOurPresidentOkText
 	call PrintText
-	jr .done
-.give_lapras
-	ld hl, .HaveThisPokemonText
+	jr SilphCo7FSilphWorkerM1Text.done
+SilphCo7FSilphWorkerM1Text.give_lapras
+	ld hl, SilphCo7FSilphWorkerM1Text.HaveThisPokemonText
 	call PrintText
-	lb bc, LAPRAS, 15
+	lb "bc", LAPRAS, 15
 	call GivePokemon
-	jr nc, .done
+	jr nc, SilphCo7FSilphWorkerM1Text.done
 	ld a, [wAddedToParty]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
-	ld hl, .LaprasDescriptionText
+	ld hl, SilphCo7FSilphWorkerM1Text.LaprasDescriptionText
 	call PrintText
 	ld hl, wStatusFlags4
 	set BIT_GOT_LAPRAS, [hl]
-	jr .done
-.saved_silph
-	ld hl, .SavedText
+	jr SilphCo7FSilphWorkerM1Text.done
+SilphCo7FSilphWorkerM1Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM1Text.SavedText
 	call PrintText
-.done
+SilphCo7FSilphWorkerM1Text.done
 	jp TextScriptEnd
 
-.HaveThisPokemonText
-	text_far _SilphCo7FSilphWorkerM1HaveThisPokemonText
+SilphCo7FSilphWorkerM1Text.HaveThisPokemonText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM1HaveThisPokemonText
 	text_end
 
-.LaprasDescriptionText
-	text_far _SilphCo7FSilphWorkerM1LaprasDescriptionText
+SilphCo7FSilphWorkerM1Text.LaprasDescriptionText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM1LaprasDescriptionText
 	text_end
 
-.IsOurPresidentOkText
-	text_far _SilphCo7FSilphWorkerM1IsOurPresidentOkText
+SilphCo7FSilphWorkerM1Text.IsOurPresidentOkText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM1IsOurPresidentOkText
 	text_end
 
-.SavedText
-	text_far _SilphCo7FSilphWorkerM1SavedText
+SilphCo7FSilphWorkerM1Text.SavedText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM1SavedText
 	text_end
 
 SilphCo7FSilphWorkerM2Text:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .saved_silph
-	ld hl, .AfterTheMasterBallText
+	jr nz, SilphCo7FSilphWorkerM2Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM2Text.AfterTheMasterBallText
 	call PrintText
-	jr .done
-.saved_silph
-	ld hl, .CancelledTheMasterBallText
+	jr SilphCo7FSilphWorkerM2Text.done
+SilphCo7FSilphWorkerM2Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM2Text.CancelledTheMasterBallText
 	call PrintText
-.done
+SilphCo7FSilphWorkerM2Text.done
 	jp TextScriptEnd
 
-.AfterTheMasterBallText
-	text_far _SilphCo7FSilphWorkerM2AfterTheMasterBallText
+SilphCo7FSilphWorkerM2Text.AfterTheMasterBallText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM2AfterTheMasterBallText
 	text_end
 
-.CancelledTheMasterBallText
-	text_far _SilphCo7FSilphWorkerM2CancelledMasterBallText
+SilphCo7FSilphWorkerM2Text.CancelledTheMasterBallText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM2CancelledMasterBallText
 	text_end
 
 SilphCo7FSilphWorkerM3Text:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .saved_silph
-	ld hl, .ItWouldBeBadText
+	jr nz, SilphCo7FSilphWorkerM3Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM3Text.ItWouldBeBadText
 	call PrintText
-	jr .done
-.saved_silph
-	ld hl, .YouChasedOffTeamRocketText
+	jr SilphCo7FSilphWorkerM3Text.done
+SilphCo7FSilphWorkerM3Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM3Text.YouChasedOffTeamRocketText
 	call PrintText
-.done
+SilphCo7FSilphWorkerM3Text.done
 	jp TextScriptEnd
 
-.ItWouldBeBadText
-	text_far _SilphCo7FSilphWorkerM3ItWouldBeBadText
+SilphCo7FSilphWorkerM3Text.ItWouldBeBadText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM3ItWouldBeBadText
 	text_end
 
-.YouChasedOffTeamRocketText
-	text_far _SilphCo7FSilphWorkerM3YouChasedOffTeamRocketText
+SilphCo7FSilphWorkerM3Text.YouChasedOffTeamRocketText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM3YouChasedOffTeamRocketText
 	text_end
 
 SilphCo7FSilphWorkerM4Text:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .saved_silph
-	ld hl, .ItsReallyDangerousHereText
+	jr nz, SilphCo7FSilphWorkerM4Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM4Text.ItsReallyDangerousHereText
 	call PrintText
-	jr .done
-.saved_silph
-	ld hl, .SafeAtLastText
+	jr SilphCo7FSilphWorkerM4Text.done
+SilphCo7FSilphWorkerM4Text.saved_silph
+	ld hl, SilphCo7FSilphWorkerM4Text.SafeAtLastText
 	call PrintText
-.done
+SilphCo7FSilphWorkerM4Text.done
 	jp TextScriptEnd
 
-.ItsReallyDangerousHereText
-	text_far _SilphCo7FSilphWorkerM4ItsReallyDangerousHereText
+SilphCo7FSilphWorkerM4Text.ItsReallyDangerousHereText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM4ItsReallyDangerousHereText
 	text_end
 
-.SafeAtLastText
-	text_far _SilphCo7FSilphWorkerM4SafeAtLastText
+SilphCo7FSilphWorkerM4Text.SafeAtLastText
+	text_far WLA_GLOBAL_SilphCo7FSilphWorkerM4SafeAtLastText
 	text_end
 
 SilphCo7FRocket1Text:
@@ -411,15 +411,15 @@ SilphCo7FRocket1Text:
 	jp TextScriptEnd
 
 SilphCo7FRocket1BattleText:
-	text_far _SilphCo7FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket1BattleText
 	text_end
 
 SilphCo7FRocket1EndBattleText:
-	text_far _SilphCo7FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket1EndBattleText
 	text_end
 
 SilphCo7FRocket1AfterBattleText:
-	text_far _SilphCo7FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket1AfterBattleText
 	text_end
 
 SilphCo7FScientistText:
@@ -429,15 +429,15 @@ SilphCo7FScientistText:
 	jp TextScriptEnd
 
 SilphCo7FScientistBattleText:
-	text_far _SilphCo7FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo7FScientistBattleText
 	text_end
 
 SilphCo7FScientistEndBattleText:
-	text_far _SilphCo7FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo7FScientistEndBattleText
 	text_end
 
 SilphCo7FScientistAfterBattleText:
-	text_far _SilphCo7FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo7FScientistAfterBattleText
 	text_end
 
 SilphCo7FRocket2Text:
@@ -447,15 +447,15 @@ SilphCo7FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo7FRocket2BattleText:
-	text_far _SilphCo7FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket2BattleText
 	text_end
 
 SilphCo7FRocket2EndBattleText:
-	text_far _SilphCo7FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket2EndBattleText
 	text_end
 
 SilphCo7FRocket2AfterBattleText:
-	text_far _SilphCo7FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket2AfterBattleText
 	text_end
 
 SilphCo7FRocket3Text:
@@ -465,39 +465,39 @@ SilphCo7FRocket3Text:
 	jp TextScriptEnd
 
 SilphCo7FRocket3BattleText:
-	text_far _SilphCo7FRocket3BattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket3BattleText
 	text_end
 
 SilphCo7FRocket3EndBattleText:
-	text_far _SilphCo7FRocket3EndBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket3EndBattleText
 	text_end
 
 SilphCo7FRocket3AfterBattleText:
-	text_far _SilphCo7FRocket3AfterBattleText
+	text_far WLA_GLOBAL_SilphCo7FRocket3AfterBattleText
 	text_end
 
 SilphCo7FRivalText:
 	text_asm
-	ld hl, .Text
+	ld hl, SilphCo7FRivalText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _SilphCo7FRivalText
+SilphCo7FRivalText.Text:
+	text_far WLA_GLOBAL_SilphCo7FRivalText
 	text_end
 
 SilphCo7FRivalWaitedHereText:
-	text_far _SilphCo7FRivalWaitedHereText
+	text_far WLA_GLOBAL_SilphCo7FRivalWaitedHereText
 	text_end
 
 SilphCo7FRivalDefeatedText:
-	text_far _SilphCo7FRivalDefeatedText
+	text_far WLA_GLOBAL_SilphCo7FRivalDefeatedText
 	text_end
 
 SilphCo7FRivalVictoryText:
-	text_far _SilphCo7FRivalVictoryText
+	text_far WLA_GLOBAL_SilphCo7FRivalVictoryText
 	text_end
 
 SilphCo7FRivalGoodLuckToYouText:
-	text_far _SilphCo7FRivalGoodLuckToYouText
+	text_far WLA_GLOBAL_SilphCo7FRivalGoodLuckToYouText
 	text_end

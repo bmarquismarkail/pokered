@@ -9,13 +9,13 @@ CanLearnTM:
 	ld b, a
 	ld c, $0
 	ld hl, TechnicalMachines
-.findTMloop
+CanLearnTM.findTMloop
 	ld a, [hli]
 	cp b
-	jr z, .TMfoundLoop
+	jr z, CanLearnTM.TMfoundLoop
 	inc c
-	jr .findTMloop
-.TMfoundLoop
+	jr CanLearnTM.findTMloop
+CanLearnTM.TMfoundLoop
 	pop hl
 	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
@@ -33,4 +33,4 @@ TMToMove:
 	ld [wTempTMHM], a
 	ret
 
-INCLUDE "data/moves/tmhm_moves.asm"
+.INCLUDE "data/moves/tmhm_moves.asm"

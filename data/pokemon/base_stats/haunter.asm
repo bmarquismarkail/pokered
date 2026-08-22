@@ -1,17 +1,17 @@
-	db DEX_HAUNTER ; pokedex id
+	.DB DEX_HAUNTER ; pokedex id
 
-	db  45,  50,  45,  95, 115
+	.DB  45,  50,  45,  95, 115
 	;   hp  atk  def  spd  spc
 
-	db GHOST, POISON ; type
-	db 90 ; catch rate
-	db 126 ; base exp
+	.DB GHOST, POISON ; type
+	.DB 90 ; catch rate
+	.DB 126 ; base exp
 
-	INCBIN "gfx/pokemon/front/haunter.pic", 0, 1 ; sprite dimensions
-	dw HaunterPicFront, HaunterPicBack
+	.INCBIN "gfx/pokemon/front/haunter.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW HaunterPicFront, HaunterPicBack
 
-	db LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        RAGE,         MEGA_DRAIN,   THUNDERBOLT,  THUNDER,      \
@@ -19,4 +19,4 @@
 	     DREAM_EATER,  REST,         PSYWAVE,      EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

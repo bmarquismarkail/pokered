@@ -5,10 +5,10 @@
 ; FF99 = multiplier
 ; OUTPUT
 ; FF95-FF98 = product
-Multiply::
+Multiply:
 	push hl
 	push bc
-	callfar _Multiply
+	callfar WLA_GLOBAL_Multiply
 	pop bc
 	pop hl
 	ret
@@ -22,11 +22,11 @@ Multiply::
 ; OUTPUT
 ; FF95-FF98 = quotient
 ; FF99 = remainder
-Divide::
+Divide:
 	push hl
 	push de
 	push bc
-	homecall _Divide
+	homecall WLA_GLOBAL_Divide
 	pop bc
 	pop de
 	pop hl

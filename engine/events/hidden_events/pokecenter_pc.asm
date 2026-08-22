@@ -7,5 +7,5 @@ OpenPokemonCenterPC:
 	ld [wAutoTextBoxDrawingControl], a
 	tx_pre_jump PokemonCenterPCText
 
-PokemonCenterPCText::
+PokemonCenterPCText:
 	script_pokecenter_pc

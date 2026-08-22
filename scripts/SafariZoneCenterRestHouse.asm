@@ -7,9 +7,9 @@ SafariZoneCenterRestHouse_TextPointers:
 	dw_const SafariZoneCenterRestHouseScientistText, TEXT_SAFARIZONECENTERRESTHOUSE_SCIENTIST
 
 SafariZoneCenterRestHouseGirlText:
-	text_far _SafariZoneCenterRestHouseGirlText
+	text_far WLA_GLOBAL_SafariZoneCenterRestHouseGirlText
 	text_end
 
 SafariZoneCenterRestHouseScientistText:
-	text_far _SafariZoneCenterRestHouseScientistText
+	text_far WLA_GLOBAL_SafariZoneCenterRestHouseScientistText
 	text_end

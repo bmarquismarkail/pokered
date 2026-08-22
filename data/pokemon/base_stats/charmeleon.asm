@@ -1,17 +1,17 @@
-	db DEX_CHARMELEON ; pokedex id
+	.DB DEX_CHARMELEON ; pokedex id
 
-	db  58,  64,  58,  80,  65
+	.DB  58,  64,  58,  80,  65
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 45 ; catch rate
-	db 142 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 45 ; catch rate
+	.DB 142 ; base exp
 
-	INCBIN "gfx/pokemon/front/charmeleon.pic", 0, 1 ; sprite dimensions
-	dw CharmeleonPicFront, CharmeleonPicBack
+	.INCBIN "gfx/pokemon/front/charmeleon.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW CharmeleonPicFront, CharmeleonPicBack
 
-	db SCRATCH, GROWL, EMBER, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB SCRATCH, GROWL, EMBER, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \
@@ -21,4 +21,4 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

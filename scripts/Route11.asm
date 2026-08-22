@@ -49,7 +49,7 @@ Route11TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_11_TRAINER_8, 3, Route11SuperNerd2BattleText, Route11SuperNerd2EndBattleText, Route11SuperNerd2AfterBattleText
 Route11TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_11_TRAINER_9, 4, Route11Youngster4BattleText, Route11Youngster4EndBattleText, Route11Youngster4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route11Gambler1Text:
 	text_asm
@@ -58,15 +58,15 @@ Route11Gambler1Text:
 	jp TextScriptEnd
 
 Route11Gambler1BattleText:
-	text_far _Route11Gambler1BattleText
+	text_far WLA_GLOBAL_Route11Gambler1BattleText
 	text_end
 
 Route11Gambler1EndBattleText:
-	text_far _Route11Gambler1EndBattleText
+	text_far WLA_GLOBAL_Route11Gambler1EndBattleText
 	text_end
 
 Route11Gambler1AfterBattleText:
-	text_far _Route11Gambler1AfterBattleText
+	text_far WLA_GLOBAL_Route11Gambler1AfterBattleText
 	text_end
 
 Route11Gambler2Text:
@@ -76,15 +76,15 @@ Route11Gambler2Text:
 	jp TextScriptEnd
 
 Route11Gambler2BattleText:
-	text_far _Route11Gambler2BattleText
+	text_far WLA_GLOBAL_Route11Gambler2BattleText
 	text_end
 
 Route11Gambler2EndBattleText:
-	text_far _Route11Gambler2EndBattleText
+	text_far WLA_GLOBAL_Route11Gambler2EndBattleText
 	text_end
 
 Route11Gambler2AfterBattleText:
-	text_far _Route11Gambler2AfterBattleText
+	text_far WLA_GLOBAL_Route11Gambler2AfterBattleText
 	text_end
 
 Route11Youngster1Text:
@@ -94,15 +94,15 @@ Route11Youngster1Text:
 	jp TextScriptEnd
 
 Route11Youngster1BattleText:
-	text_far _Route11Youngster1BattleText
+	text_far WLA_GLOBAL_Route11Youngster1BattleText
 	text_end
 
 Route11Youngster1EndBattleText:
-	text_far _Route11Youngster1EndBattleText
+	text_far WLA_GLOBAL_Route11Youngster1EndBattleText
 	text_end
 
 Route11Youngster1AfterBattleText:
-	text_far _Route11Youngster1AfterBattleText
+	text_far WLA_GLOBAL_Route11Youngster1AfterBattleText
 	text_end
 
 Route11SuperNerd1Text:
@@ -112,15 +112,15 @@ Route11SuperNerd1Text:
 	jp TextScriptEnd
 
 Route11SuperNerd1BattleText:
-	text_far _Route11SuperNerd1BattleText
+	text_far WLA_GLOBAL_Route11SuperNerd1BattleText
 	text_end
 
 Route11SuperNerd1EndBattleText:
-	text_far _Route11SuperNerd1EndBattleText
+	text_far WLA_GLOBAL_Route11SuperNerd1EndBattleText
 	text_end
 
 Route11SuperNerd1AfterBattleText:
-	text_far _Route11SuperNerd1AfterBattleText
+	text_far WLA_GLOBAL_Route11SuperNerd1AfterBattleText
 	text_end
 
 Route11Youngster2Text:
@@ -130,15 +130,15 @@ Route11Youngster2Text:
 	jp TextScriptEnd
 
 Route11Youngster2BattleText:
-	text_far _Route11Youngster2BattleText
+	text_far WLA_GLOBAL_Route11Youngster2BattleText
 	text_end
 
 Route11Youngster2EndBattleText:
-	text_far _Route11Youngster2EndBattleText
+	text_far WLA_GLOBAL_Route11Youngster2EndBattleText
 	text_end
 
 Route11Youngster2AfterBattleText:
-	text_far _Route11Youngster2AfterBattleText5
+	text_far WLA_GLOBAL_Route11Youngster2AfterBattleText5
 	text_end
 
 Route11Gambler3Text:
@@ -148,15 +148,15 @@ Route11Gambler3Text:
 	jp TextScriptEnd
 
 Route11Gambler3BattleText:
-	text_far _Route11Gambler3BattleText
+	text_far WLA_GLOBAL_Route11Gambler3BattleText
 	text_end
 
 Route11Gambler3EndBattleText:
-	text_far _Route11Gambler3EndBattleText
+	text_far WLA_GLOBAL_Route11Gambler3EndBattleText
 	text_end
 
 Route11Gambler3AfterBattleText:
-	text_far _Route11Gambler3AfterBattleText
+	text_far WLA_GLOBAL_Route11Gambler3AfterBattleText
 	text_end
 
 Route11Gambler4Text:
@@ -166,15 +166,15 @@ Route11Gambler4Text:
 	jp TextScriptEnd
 
 Route11Gambler4BattleText:
-	text_far _Route11Gambler4BattleText
+	text_far WLA_GLOBAL_Route11Gambler4BattleText
 	text_end
 
 Route11Gambler4EndBattleText:
-	text_far _Route11Gambler4EndBattleText
+	text_far WLA_GLOBAL_Route11Gambler4EndBattleText
 	text_end
 
 Route11Gambler4AfterBattleText:
-	text_far _Route11Gambler4AfterBattleText
+	text_far WLA_GLOBAL_Route11Gambler4AfterBattleText
 	text_end
 
 Route11Youngster3Text:
@@ -184,15 +184,15 @@ Route11Youngster3Text:
 	jp TextScriptEnd
 
 Route11Youngster3BattleText:
-	text_far _Route11Youngster3BattleText
+	text_far WLA_GLOBAL_Route11Youngster3BattleText
 	text_end
 
 Route11Youngster3EndBattleText:
-	text_far _Route11Youngster3EndBattleText
+	text_far WLA_GLOBAL_Route11Youngster3EndBattleText
 	text_end
 
 Route11Youngster3AfterBattleText:
-	text_far _Route11Youngster3AfterBattleText
+	text_far WLA_GLOBAL_Route11Youngster3AfterBattleText
 	text_end
 
 Route11SuperNerd2Text:
@@ -202,15 +202,15 @@ Route11SuperNerd2Text:
 	jp TextScriptEnd
 
 Route11SuperNerd2BattleText:
-	text_far _Route11SuperNerd2BattleText
+	text_far WLA_GLOBAL_Route11SuperNerd2BattleText
 	text_end
 
 Route11SuperNerd2EndBattleText:
-	text_far _Route11SuperNerd2EndBattleText
+	text_far WLA_GLOBAL_Route11SuperNerd2EndBattleText
 	text_end
 
 Route11SuperNerd2AfterBattleText:
-	text_far _Route11SuperNerd2AfterBattleText
+	text_far WLA_GLOBAL_Route11SuperNerd2AfterBattleText
 	text_end
 
 Route11Youngster4Text:
@@ -220,17 +220,17 @@ Route11Youngster4Text:
 	jp TextScriptEnd
 
 Route11Youngster4BattleText:
-	text_far _Route11Youngster4BattleText
+	text_far WLA_GLOBAL_Route11Youngster4BattleText
 	text_end
 
 Route11Youngster4EndBattleText:
-	text_far _Route11Youngster4EndBattleText
+	text_far WLA_GLOBAL_Route11Youngster4EndBattleText
 	text_end
 
 Route11Youngster4AfterBattleText:
-	text_far _Route11Youngster4AfterBattleText
+	text_far WLA_GLOBAL_Route11Youngster4AfterBattleText
 	text_end
 
 Route11DiglettsCaveSignText:
-	text_far _Route11DiglettsCaveSignText
+	text_far WLA_GLOBAL_Route11DiglettsCaveSignText
 	text_end

@@ -1,123 +1,147 @@
-_Route11Gambler1BattleText::
+_Route11Gambler1BattleText:
+WLA_GLOBAL_Route11Gambler1BattleText:
 	text "Win, lose or draw!"
 	done
 
-_Route11Gambler1EndBattleText::
+_Route11Gambler1EndBattleText:
+WLA_GLOBAL_Route11Gambler1EndBattleText:
 	text "Atcha!"
 	line "Didn't go my way!"
 	prompt
 
-_Route11Gambler1AfterBattleText::
+_Route11Gambler1AfterBattleText:
+WLA_GLOBAL_Route11Gambler1AfterBattleText:
 	text "#MON is life!"
 	line "And to live is to"
 	cont "gamble!"
 	done
 
-_Route11Gambler2BattleText::
+_Route11Gambler2BattleText:
+WLA_GLOBAL_Route11Gambler2BattleText:
 	text "Competition! I"
 	line "can't get enough!"
 	done
 
-_Route11Gambler2EndBattleText::
+_Route11Gambler2EndBattleText:
+WLA_GLOBAL_Route11Gambler2EndBattleText:
 	text "I had"
 	line "a chance!"
 	prompt
 
-_Route11Gambler2AfterBattleText::
+_Route11Gambler2AfterBattleText:
+WLA_GLOBAL_Route11Gambler2AfterBattleText:
 	text "You can't be a"
 	line "coward in the"
 	cont "world of #MON!"
 	done
 
-_Route11Youngster1BattleText::
+_Route11Youngster1BattleText:
+WLA_GLOBAL_Route11Youngster1BattleText:
 	text "Let's go, but"
 	line "don't cheat!"
 	done
 
-_Route11Youngster1EndBattleText::
+_Route11Youngster1EndBattleText:
+WLA_GLOBAL_Route11Youngster1EndBattleText:
 	text "Huh?"
 	line "That's not right!"
 	prompt
 
-_Route11Youngster1AfterBattleText::
+_Route11Youngster1AfterBattleText:
+WLA_GLOBAL_Route11Youngster1AfterBattleText:
 	text "I did my best! I"
 	line "have no regrets!"
 	done
 
-_Route11SuperNerd1BattleText::
+_Route11SuperNerd1BattleText:
+WLA_GLOBAL_Route11SuperNerd1BattleText:
 	text "Careful!"
 	line "I'm laying down"
 	cont "some cables!"
 	done
 
-_Route11SuperNerd1EndBattleText::
+_Route11SuperNerd1EndBattleText:
+WLA_GLOBAL_Route11SuperNerd1EndBattleText:
 	text "That"
 	line "was electric!"
 	prompt
 
-_Route11SuperNerd1AfterBattleText::
+_Route11SuperNerd1AfterBattleText:
+WLA_GLOBAL_Route11SuperNerd1AfterBattleText:
 	text "Spread the word"
 	line "to save energy!"
 	done
 
-_Route11Youngster2BattleText::
+_Route11Youngster2BattleText:
+WLA_GLOBAL_Route11Youngster2BattleText:
 	text "I just became a"
 	line "trainer! But, I"
 	cont "think I can win!"
 	done
 
-_Route11Youngster2EndBattleText::
+_Route11Youngster2EndBattleText:
+WLA_GLOBAL_Route11Youngster2EndBattleText:
 	text "My"
 	line "#MON couldn't!"
 	prompt
 
-_Route11Youngster2AfterBattleText5::
+_Route11Youngster2AfterBattleText5:
+WLA_GLOBAL_Route11Youngster2AfterBattleText5:
 	text "What do you want?"
 	line "Leave me alone!"
 	done
 
-_Route11Gambler3BattleText::
+_Route11Gambler3BattleText:
+WLA_GLOBAL_Route11Gambler3BattleText:
 	text "Fwahaha! I have"
 	line "never lost!"
 	done
 
-_Route11Gambler3EndBattleText::
+_Route11Gambler3EndBattleText:
+WLA_GLOBAL_Route11Gambler3EndBattleText:
 	text "My"
 	line "first loss!"
 	prompt
 
-_Route11Gambler3AfterBattleText::
+_Route11Gambler3AfterBattleText:
+WLA_GLOBAL_Route11Gambler3AfterBattleText:
 	text "Luck of the draw!"
 	line "Just luck!"
 	done
 
-_Route11Gambler4BattleText::
+_Route11Gambler4BattleText:
+WLA_GLOBAL_Route11Gambler4BattleText:
 	text "I have never won"
 	line "before..."
 	done
 
-_Route11Gambler4EndBattleText::
+_Route11Gambler4EndBattleText:
+WLA_GLOBAL_Route11Gambler4EndBattleText:
 	text "I saw"
 	line "this coming..."
 	prompt
 
-_Route11Gambler4AfterBattleText::
+_Route11Gambler4AfterBattleText:
+WLA_GLOBAL_Route11Gambler4AfterBattleText:
 	text "It's just luck."
 	line "Luck of the draw."
 	done
 
-_Route11Youngster3BattleText::
+_Route11Youngster3BattleText:
+WLA_GLOBAL_Route11Youngster3BattleText:
 	text "I'm the best in"
 	line "my class!"
 	done
 
-_Route11Youngster3EndBattleText::
+_Route11Youngster3EndBattleText:
+WLA_GLOBAL_Route11Youngster3EndBattleText:
 	text "Darn!"
 	line "I need to make my"
 	cont "#MON stronger!"
 	prompt
 
-_Route11Youngster3AfterBattleText::
+_Route11Youngster3AfterBattleText:
+WLA_GLOBAL_Route11Youngster3AfterBattleText:
 	text "There's a fat"
 	line "#MON that"
 	cont "comes down from"
@@ -127,7 +151,8 @@ _Route11Youngster3AfterBattleText::
 	line "you can get it."
 	done
 
-_Route11SuperNerd2BattleText::
+_Route11SuperNerd2BattleText:
+WLA_GLOBAL_Route11SuperNerd2BattleText:
 	text "Watch out for"
 	line "live wires!"
 	done

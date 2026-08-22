@@ -14,19 +14,19 @@
 	const_export MTMOON1F_TM_WATER_GUN
 
 MtMoon1F_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 5
 	warp_event 14, 35, LAST_MAP, 2
 	warp_event 15, 35, LAST_MAP, 2
 	warp_event  5,  5, MT_MOON_B1F, 1
 	warp_event 17, 11, MT_MOON_B1F, 3
 	warp_event 25, 15, MT_MOON_B1F, 4
 
-	def_bg_events
+	.DB 1
 	bg_event 15, 23, TEXT_MTMOON1F_BEWARE_ZUBAT_SIGN
 
-	def_object_events
+	.DB 13
 	object_event  5,  6, SPRITE_HIKER, STAY, DOWN, TEXT_MTMOON1F_HIKER, OPP_HIKER, 1
 	object_event 12, 16, SPRITE_YOUNGSTER, STAY, RIGHT, TEXT_MTMOON1F_YOUNGSTER1, OPP_YOUNGSTER, 3
 	object_event 30,  4, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_MTMOON1F_COOLTRAINER_F1, OPP_LASS, 5
@@ -41,4 +41,12 @@ MtMoon1F_Object:
 	object_event 20, 33, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_POTION2, POTION
 	object_event  5, 32, SPRITE_POKE_BALL, STAY, NONE, TEXT_MTMOON1F_TM_WATER_GUN, TM_WATER_GUN
 
-	def_warps_to MT_MOON_1F
+	event_displacement MT_MOON_1F_WIDTH, 14, 35
+
+	event_displacement MT_MOON_1F_WIDTH, 15, 35
+
+	event_displacement MT_MOON_1F_WIDTH, 5, 5
+
+	event_displacement MT_MOON_1F_WIDTH, 17, 11
+
+	event_displacement MT_MOON_1F_WIDTH, 25, 15

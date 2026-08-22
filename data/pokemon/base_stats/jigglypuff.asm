@@ -1,17 +1,17 @@
-	db DEX_JIGGLYPUFF ; pokedex id
+	.DB DEX_JIGGLYPUFF ; pokedex id
 
-	db 115,  45,  20,  20,  25
+	.DB 115,  45,  20,  20,  25
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 170 ; catch rate
-	db 76 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 170 ; catch rate
+	.DB 76 ; base exp
 
-	INCBIN "gfx/pokemon/front/jigglypuff.pic", 0, 1 ; sprite dimensions
-	dw JigglypuffPicFront, JigglypuffPicBack
+	.INCBIN "gfx/pokemon/front/jigglypuff.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW JigglypuffPicFront, JigglypuffPicBack
 
-	db SING, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_FAST ; growth rate
+	.DB SING, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -23,4 +23,4 @@
 	     STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

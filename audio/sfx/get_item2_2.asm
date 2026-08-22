@@ -12,13 +12,13 @@ SFX_Get_Item2_2_Ch5:
 	note A_, 8
 	note_type 5, 11, 2
 	octave 4
-	note D#, 2
-	note D#, 2
+	note D_SHARP, 2
+	note D_SHARP, 2
 	note D_, 2
 	note C_, 2
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note_type 5, 11, 4
 	octave 4
 	note C_, 8
@@ -34,12 +34,12 @@ SFX_Get_Item2_2_Ch6:
 	note F_, 4
 	note C_, 8
 	note_type 5, 12, 2
-	note A#, 2
-	note A#, 2
-	note A#, 2
+	note A_SHARP, 2
+	note A_SHARP, 2
+	note A_SHARP, 2
 	note G_, 2
 	note G_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note_type 5, 12, 4
 	note A_, 8
 	sound_ret
@@ -49,11 +49,11 @@ SFX_Get_Item2_2_Ch7:
 	note_type 5, 1, 0
 	octave 5
 	note F_, 4
-	note D#, 4
+	note D_SHARP, 4
 	note C_, 8
-	note D#, 1
+	note D_SHARP, 1
 	rest 1
-	note D#, 1
+	note D_SHARP, 1
 	rest 1
 	note E_, 1
 	rest 1

@@ -16,18 +16,18 @@ Route18Gate2FYoungsterText:
 
 Route18Gate2FLeftBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route18Gate2FLeftBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route18Gate2FLeftBinocularsText
+Route18Gate2FLeftBinocularsText.Text:
+	text_far WLA_GLOBAL_Route18Gate2FLeftBinocularsText
 	text_end
 
 Route18Gate2FRightBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route18Gate2FRightBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route18Gate2FRightBinocularsText
+Route18Gate2FRightBinocularsText.Text:
+	text_far WLA_GLOBAL_Route18Gate2FRightBinocularsText
 	text_end

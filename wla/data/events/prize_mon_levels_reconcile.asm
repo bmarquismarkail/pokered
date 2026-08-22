@@ -1,7 +1,0 @@
-PrizeMonLevelDictionary::
-.DB ABRA,      9
-.DB CLEFAIRY,  8
-.DB NIDORINA, 17
-.DB DRATINI,  18
-.DB SCYTHER,  25
-.DB PORYGON,  26

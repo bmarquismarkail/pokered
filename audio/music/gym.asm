@@ -1,4 +1,4 @@
-Music_Gym_Ch1::
+Music_Gym_Ch1:
 	tempo 138
 	volume 7, 7
 	duty_cycle 3
@@ -11,7 +11,7 @@ Music_Gym_Ch1::
 	note G_, 1
 	note F_, 6
 	octave 2
-	note A#, 1
+	note A_SHARP, 1
 	octave 3
 	note F_, 1
 	note E_, 6
@@ -21,7 +21,7 @@ Music_Gym_Ch1::
 	note E_, 1
 	note F_, 4
 	note G_, 4
-.mainloop:
+Music_Gym_Ch1.mainloop:
 	note E_, 4
 	note F_, 2
 	note G_, 2
@@ -56,16 +56,16 @@ Music_Gym_Ch1::
 	octave 4
 	note C_, 4
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	octave 4
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 2
 	note G_, 2
 	note F_, 2
 	note_type 12, 11, 1
-	note A#, 3
+	note A_SHARP, 3
 	note_type 12, 11, 5
 	note F_, 1
 	note F_, 4
@@ -76,11 +76,11 @@ Music_Gym_Ch1::
 	octave 4
 	note C_, 4
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	octave 4
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 2
 	note G_, 2
 	note F_, 2
@@ -88,9 +88,9 @@ Music_Gym_Ch1::
 	note D_, 1
 	note E_, 1
 	note F_, 4
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 1
-	note A#, 1
+	note A_SHARP, 1
 	octave 4
 	note D_, 4
 	octave 3
@@ -153,17 +153,17 @@ Music_Gym_Ch1::
 	note G_, 2
 	note E_, 1
 	note G_, 1
-	note A#, 2
+	note A_SHARP, 2
 	octave 4
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 2
 	note G_, 2
 	note A_, 2
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_Gym_Ch1.mainloop
 
-Music_Gym_Ch2::
+Music_Gym_Ch2:
 	duty_cycle 3
 	vibrato 10, 2, 5
 	note_type 12, 12, 7
@@ -174,14 +174,14 @@ Music_Gym_Ch2::
 	octave 4
 	note C_, 1
 	octave 3
-	note A#, 6
+	note A_SHARP, 6
 	note F_, 1
-	note A#, 1
+	note A_SHARP, 1
 	note_type 12, 10, 0
 	note A_, 12
 	note_type 12, 12, 7
 	note B_, 4
-.mainloop:
+Music_Gym_Ch2.mainloop:
 	octave 4
 	note C_, 12
 	octave 3
@@ -191,9 +191,9 @@ Music_Gym_Ch2::
 	note_type 12, 12, 2
 	note D_, 3
 	octave 3
-	note A#, 1
+	note A_SHARP, 1
 	note_type 12, 12, 7
-	note A#, 12
+	note A_SHARP, 12
 	octave 4
 	note C_, 12
 	octave 3
@@ -202,9 +202,9 @@ Music_Gym_Ch2::
 	note C_, 2
 	note_type 12, 12, 4
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note_type 12, 12, 7
-	note A#, 1
+	note A_SHARP, 1
 	octave 4
 	note C_, 1
 	note D_, 12
@@ -217,7 +217,7 @@ Music_Gym_Ch2::
 	note_type 12, 12, 7
 	note D_, 4
 	note_type 12, 12, 2
-	note A#, 3
+	note A_SHARP, 3
 	note F_, 1
 	note_type 12, 12, 7
 	note F_, 4
@@ -227,14 +227,14 @@ Music_Gym_Ch2::
 	note F_, 2
 	note D_, 1
 	note F_, 1
-	note A#, 12
+	note A_SHARP, 12
 	octave 3
 	note G_, 6
 	octave 4
 	note C_, 6
 	octave 3
 	note G_, 4
-	note A#, 4
+	note A_SHARP, 4
 	note A_, 4
 	note G_, 4
 	note F_, 4
@@ -249,7 +249,7 @@ Music_Gym_Ch2::
 	note C_, 2
 	octave 3
 	note G_, 2
-	note A#, 4
+	note A_SHARP, 4
 	note A_, 4
 	note G_, 4
 	note C_, 2
@@ -259,7 +259,7 @@ Music_Gym_Ch2::
 	note C_, 6
 	octave 3
 	note G_, 4
-	note A#, 4
+	note A_SHARP, 4
 	note A_, 4
 	note G_, 4
 	note F_, 4
@@ -274,7 +274,7 @@ Music_Gym_Ch2::
 	note_type 12, 12, 7
 	note G_, 1
 	note A_, 1
-	note A#, 4
+	note A_SHARP, 4
 	note_type 12, 12, 4
 	octave 4
 	note C_, 2
@@ -282,9 +282,9 @@ Music_Gym_Ch2::
 	note C_, 1
 	note D_, 1
 	note E_, 12
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_Gym_Ch2.mainloop
 
-Music_Gym_Ch3::
+Music_Gym_Ch3:
 	note_type 12, 1, 1
 	rest 16
 	rest 10
@@ -292,33 +292,33 @@ Music_Gym_Ch3::
 	note G_, 2
 	note F_, 2
 	note D_, 2
-.mainloop:
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub3
-	sound_call .sub1
-	sound_call .sub3
-	sound_call .sub1
-	sound_call .sub3
-	sound_call .sub1
+Music_Gym_Ch3.mainloop:
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub2
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub2
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub2
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub2
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub3
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub3
+	sound_call Music_Gym_Ch3.sub1
+	sound_call Music_Gym_Ch3.sub3
+	sound_call Music_Gym_Ch3.sub1
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 2
 	note F_, 2
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_Gym_Ch3.mainloop
 
-.sub1:
+Music_Gym_Ch3.sub1:
 	note E_, 2
 	note G_, 2
 	note E_, 2
@@ -329,7 +329,7 @@ Music_Gym_Ch3::
 	note G_, 2
 	sound_ret
 
-.sub2:
+Music_Gym_Ch3.sub2:
 	note D_, 2
 	note F_, 2
 	note D_, 2
@@ -340,13 +340,13 @@ Music_Gym_Ch3::
 	note F_, 2
 	sound_ret
 
-.sub3:
+Music_Gym_Ch3.sub3:
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note F_, 2
-	note A#, 2
+	note A_SHARP, 2
 	sound_ret

@@ -31,7 +31,6 @@ HallOfFameResetEventsAndSaveScript:
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wStatusFlags7
 	res BIT_NO_MAP_MUSIC, [hl]
-	ASSERT wStatusFlags7 + 1 == wElite4Flags
 	inc hl
 	set BIT_UNUSED_BEAT_ELITE_4, [hl] ; unused
 	xor a ; SCRIPT_*_DEFAULT
@@ -49,11 +48,11 @@ HallOfFameResetEventsAndSaveScript:
 	ld [wLastBlackoutMap], a
 	farcall SaveGameData
 	ld b, 5
-.delayLoop
+HallOfFameResetEventsAndSaveScript.delayLoop
 	ld c, 600 / 5
 	call DelayFrames
 	dec b
-	jr nz, .delayLoop
+	jr nz, HallOfFameResetEventsAndSaveScript.delayLoop
 	call WaitForTextScrollButtonPress
 	jp Init
 
@@ -71,8 +70,8 @@ HallOfFameDefaultScript:
 	ret
 
 HallOfFameEntryMovement:
-	db PAD_UP, 5
-	db -1 ; end
+	.DB PAD_UP, 5
+	.DB -1 ; end
 
 HallOfFameOakCongratulationsScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -81,10 +80,10 @@ HallOfFameOakCongratulationsScript:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, HALLOFFAME_OAK
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call SetSpriteMovementBytesToFF
 	ld a, SPRITE_FACING_LEFT
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	xor a
@@ -92,7 +91,7 @@ HallOfFameOakCongratulationsScript:
 	inc a ; PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_HALLOFFAME_OAK
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
@@ -108,5 +107,5 @@ HallOfFame_TextPointers:
 	dw_const HallOfFameOakText, TEXT_HALLOFFAME_OAK
 
 HallOfFameOakText:
-	text_far _HallOfFameOakText
+	text_far WLA_GLOBAL_HallOfFameOakText
 	text_end

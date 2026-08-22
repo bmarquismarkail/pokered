@@ -1,4 +1,5 @@
-_SSAnne3FSailorText::
+_SSAnne3FSailorText:
+WLA_GLOBAL_SSAnne3FSailorText:
 	text "Our CAPTAIN is a"
 	line "sword master!"
 

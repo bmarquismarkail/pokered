@@ -1,9 +1,9 @@
-GetTrainerInformation::
+GetTrainerInformation:
 	call GetTrainerName
 	ld a, [wLinkState]
 	and a
-	jr nz, .linkBattle
-	ld a, BANK(TrainerPicAndMoneyPointers)
+	jr nz, GetTrainerInformation.linkBattle
+	ld a, bank(TrainerPicAndMoneyPointers)
 	call BankswitchHome
 	ld a, [wTrainerClass]
 	dec a
@@ -23,7 +23,7 @@ GetTrainerInformation::
 	ld a, [hli]
 	ld [de], a
 	jp BankswitchBack
-.linkBattle
+GetTrainerInformation.linkBattle
 	ld hl, wTrainerPicPointer
 	ld de, RedPicFront
 	ld [hl], e
@@ -31,5 +31,5 @@ GetTrainerInformation::
 	ld [hl], d
 	ret
 
-GetTrainerName::
+GetTrainerName:
 	farjp GetTrainerName_

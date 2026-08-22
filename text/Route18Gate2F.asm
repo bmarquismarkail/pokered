@@ -1,4 +1,5 @@
-_Route18Gate2FLeftBinocularsText::
+_Route18Gate2FLeftBinocularsText:
+WLA_GLOBAL_Route18Gate2FLeftBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 
@@ -6,7 +7,8 @@ _Route18Gate2FLeftBinocularsText::
 	line "the west!"
 	done
 
-_Route18Gate2FRightBinocularsText::
+_Route18Gate2FRightBinocularsText:
+WLA_GLOBAL_Route18Gate2FRightBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 

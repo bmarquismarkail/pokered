@@ -1,4 +1,5 @@
-_Route16FlyHouseBrunetteGirlText::
+_Route16FlyHouseBrunetteGirlText:
+WLA_GLOBAL_Route16FlyHouseBrunetteGirlText:
 	text "Oh, you found my"
 	line "secret retreat!"
 
@@ -8,12 +9,14 @@ _Route16FlyHouseBrunetteGirlText::
 	cont "to you with this!"
 	prompt
 
-_Route16FlyHouseBrunetteGirlReceivedHM02Text::
+_Route16FlyHouseBrunetteGirlReceivedHM02Text:
+WLA_GLOBAL_Route16FlyHouseBrunetteGirlReceivedHM02Text:
 	text "<PLAYER> received"
 	line "HM02!@"
 	text_end
 
-_Route16FlyHouseBrunetteGirlHM02ExplanationText::
+_Route16FlyHouseBrunetteGirlHM02ExplanationText:
+WLA_GLOBAL_Route16FlyHouseBrunetteGirlHM02ExplanationText:
 	text "HM02 is FLY."
 	line "It will take you"
 	cont "back to any town."
@@ -22,11 +25,13 @@ _Route16FlyHouseBrunetteGirlHM02ExplanationText::
 	line "use!"
 	done
 
-_Route16FlyHouseBrunetteGirlHM02NoRoomText::
+_Route16FlyHouseBrunetteGirlHM02NoRoomText:
+WLA_GLOBAL_Route16FlyHouseBrunetteGirlHM02NoRoomText:
 	text "You don't have any"
 	line "room for this."
 	done
 
-_Route16FlyHouseFearowText::
+_Route16FlyHouseFearowText:
+WLA_GLOBAL_Route16FlyHouseFearowText:
 	text "FEAROW: Kyueen!"
 	done

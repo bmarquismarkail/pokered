@@ -4,15 +4,15 @@ DisplayEffectiveness:
 	cp EFFECTIVE
 	ret z
 	ld hl, SuperEffectiveText
-	jr nc, .done
+	jr nc, DisplayEffectiveness.done
 	ld hl, NotVeryEffectiveText
-.done
+DisplayEffectiveness.done
 	jp PrintText
 
 SuperEffectiveText:
-	text_far _SuperEffectiveText
+	text_far WLA_GLOBAL_SuperEffectiveText
 	text_end
 
 NotVeryEffectiveText:
-	text_far _NotVeryEffectiveText
+	text_far WLA_GLOBAL_NotVeryEffectiveText
 	text_end

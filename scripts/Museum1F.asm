@@ -18,15 +18,15 @@ Museum1FDefaultScript:
 	ret nz
 	ld a, [wXCoord]
 	cp 9
-	jr z, .continue
+	jr z, Museum1FDefaultScript.continue
 	ld a, [wXCoord]
 	cp 10
 	ret nz
-.continue
+Museum1FDefaultScript.continue
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_MUSEUM1F_SCIENTIST1
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 Museum1FNoopScript:
@@ -44,54 +44,54 @@ Museum1FScientist1Text:
 	text_asm
 	ld a, [wYCoord]
 	cp 4
-	jr nz, .not_right_of_scientist
+	jr nz, Museum1FScientist1Text.not_right_of_scientist
 	ld a, [wXCoord]
 	cp 13
-	jp z, .behind_counter
-	jr .check_ticket
-.not_right_of_scientist
+	jp z, Museum1FScientist1Text.behind_counter
+	jr Museum1FScientist1Text.check_ticket
+Museum1FScientist1Text.not_right_of_scientist
 	cp 3
-	jr nz, .not_behind_counter
+	jr nz, Museum1FScientist1Text.not_behind_counter
 	ld a, [wXCoord]
 	cp 12
-	jp z, .behind_counter
-.not_behind_counter
+	jp z, Museum1FScientist1Text.behind_counter
+Museum1FScientist1Text.not_behind_counter
 	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
-	jr nz, .already_bought_ticket
-	ld hl, .GoToOtherSideText
+	jr nz, Museum1FScientist1Text.already_bought_ticket
+	ld hl, Museum1FScientist1Text.GoToOtherSideText
 	call PrintText
-	jp .done
-.check_ticket
+	jp Museum1FScientist1Text.done
+Museum1FScientist1Text.check_ticket
 	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
-	jr z, .no_ticket
-.already_bought_ticket
-	ld hl, .TakePlentyOfTimeText
+	jr z, Museum1FScientist1Text.no_ticket
+Museum1FScientist1Text.already_bought_ticket
+	ld hl, Museum1FScientist1Text.TakePlentyOfTimeText
 	call PrintText
-	jp .done
-.no_ticket
+	jp Museum1FScientist1Text.done
+Museum1FScientist1Text.no_ticket
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
-	ldh [hJoyHeld], a
-	ld hl, .WouldYouLikeToComeInText
+	ldh [lobyte(hJoyHeld)], a
+	ld hl, Museum1FScientist1Text.WouldYouLikeToComeInText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .deny_entry
+	jr nz, Museum1FScientist1Text.deny_entry
 	xor a
-	ldh [hMoney], a
-	ldh [hMoney + 1], a
+	ldh [lobyte(hMoney)], a
+	ldh [lobyte(hMoney + 1)], a
 	ld a, $50
-	ldh [hMoney + 2], a
+	ldh [lobyte(hMoney + 2)], a
 	call HasEnoughMoney
-	jr nc, .buy_ticket
-	ld hl, .DontHaveEnoughMoneyText
+	jr nc, Museum1FScientist1Text.buy_ticket
+	ld hl, Museum1FScientist1Text.DontHaveEnoughMoneyText
 	call PrintText
-	jp .deny_entry
-.buy_ticket
-	ld hl, .ThankYouText
+	jp Museum1FScientist1Text.deny_entry
+Museum1FScientist1Text.buy_ticket
+	ld hl, Museum1FScientist1Text.ThankYouText
 	call PrintText
 	SetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	xor a
@@ -109,9 +109,9 @@ Museum1FScientist1Text:
 	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	jr .allow_entry
-.deny_entry
-	ld hl, .ComeAgainText
+	jr Museum1FScientist1Text.allow_entry
+Museum1FScientist1Text.deny_entry
+	ld hl, Museum1FScientist1Text.ComeAgainText
 	call PrintText
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -119,131 +119,131 @@ Museum1FScientist1Text:
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	call UpdateSprites
-	jr .done
-.allow_entry
+	jr Museum1FScientist1Text.done
+Museum1FScientist1Text.allow_entry
 	ld a, SCRIPT_MUSEUM1F_NOOP
 	ld [wMuseum1FCurScript], a
-	jr .done
+	jr Museum1FScientist1Text.done
 
-.behind_counter
-	ld hl, .DoYouKnowWhatAmberIsText
+Museum1FScientist1Text.behind_counter
+	ld hl, Museum1FScientist1Text.DoYouKnowWhatAmberIsText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
-	jr nz, .explain_amber
-	ld hl, .TheresALabSomewhereText
+	jr nz, Museum1FScientist1Text.explain_amber
+	ld hl, Museum1FScientist1Text.TheresALabSomewhereText
 	call PrintText
-	jr .done
-.explain_amber
-	ld hl, .AmberIsFossilizedTreeSapText
+	jr Museum1FScientist1Text.done
+Museum1FScientist1Text.explain_amber
+	ld hl, Museum1FScientist1Text.AmberIsFossilizedTreeSapText
 	call PrintText
-.done
+Museum1FScientist1Text.done
 	jp TextScriptEnd
 
-.ComeAgainText:
-	text_far _Museum1FScientist1ComeAgainText
+Museum1FScientist1Text.ComeAgainText:
+	text_far WLA_GLOBAL_Museum1FScientist1ComeAgainText
 	text_end
 
-.WouldYouLikeToComeInText:
-	text_far _Museum1FScientist1WouldYouLikeToComeInText
+Museum1FScientist1Text.WouldYouLikeToComeInText:
+	text_far WLA_GLOBAL_Museum1FScientist1WouldYouLikeToComeInText
 	text_end
 
-.ThankYouText:
-	text_far _Museum1FScientist1ThankYouText
+Museum1FScientist1Text.ThankYouText:
+	text_far WLA_GLOBAL_Museum1FScientist1ThankYouText
 	text_end
 
-.DontHaveEnoughMoneyText:
-	text_far _Museum1FScientist1DontHaveEnoughMoneyText
+Museum1FScientist1Text.DontHaveEnoughMoneyText:
+	text_far WLA_GLOBAL_Museum1FScientist1DontHaveEnoughMoneyText
 	text_end
 
-.DoYouKnowWhatAmberIsText:
-	text_far _Museum1FScientist1DoYouKnowWhatAmberIsText
+Museum1FScientist1Text.DoYouKnowWhatAmberIsText:
+	text_far WLA_GLOBAL_Museum1FScientist1DoYouKnowWhatAmberIsText
 	text_end
 
-.TheresALabSomewhereText:
-	text_far _Museum1FScientist1TheresALabSomewhereText
+Museum1FScientist1Text.TheresALabSomewhereText:
+	text_far WLA_GLOBAL_Museum1FScientist1TheresALabSomewhereText
 	text_end
 
-.AmberIsFossilizedTreeSapText:
-	text_far _Museum1FScientist1AmberIsFossilizedTreeSapText
+Museum1FScientist1Text.AmberIsFossilizedTreeSapText:
+	text_far WLA_GLOBAL_Museum1FScientist1AmberIsFossilizedTreeSapText
 	text_end
 
-.GoToOtherSideText:
-	text_far _Museum1FScientist1GoToOtherSideText
+Museum1FScientist1Text.GoToOtherSideText:
+	text_far WLA_GLOBAL_Museum1FScientist1GoToOtherSideText
 	text_end
 
-.TakePlentyOfTimeText:
-	text_far _Museum1FScientist1TakePlentyOfTimeText
+Museum1FScientist1Text.TakePlentyOfTimeText:
+	text_far WLA_GLOBAL_Museum1FScientist1TakePlentyOfTimeText
 	text_end
 
 Museum1FGamblerText:
 	text_asm
-	ld hl, .Text
+	ld hl, Museum1FGamblerText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _Museum1FGamblerText
+Museum1FGamblerText.Text:
+	text_far WLA_GLOBAL_Museum1FGamblerText
 	text_end
 
 Museum1FScientist2Text:
 	text_asm
 	CheckEvent EVENT_GOT_OLD_AMBER
-	jr nz, .got_item
-	ld hl, .TakeThisToAPokemonLabText
+	jr nz, Museum1FScientist2Text.got_item
+	ld hl, Museum1FScientist2Text.TakeThisToAPokemonLabText
 	call PrintText
-	lb bc, OLD_AMBER, 1
+	lb "bc", OLD_AMBER, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, Museum1FScientist2Text.bag_full
 	SetEvent EVENT_GOT_OLD_AMBER
 	ld a, TOGGLE_OLD_AMBER
 	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld hl, .ReceivedOldAmberText
-	jr .done
-.bag_full
-	ld hl, .YouDontHaveSpaceText
-	jr .done
-.got_item
-	ld hl, .GetTheOldAmberCheckText
-.done
+	ld hl, Museum1FScientist2Text.ReceivedOldAmberText
+	jr Museum1FScientist2Text.done
+Museum1FScientist2Text.bag_full
+	ld hl, Museum1FScientist2Text.YouDontHaveSpaceText
+	jr Museum1FScientist2Text.done
+Museum1FScientist2Text.got_item
+	ld hl, Museum1FScientist2Text.GetTheOldAmberCheckText
+Museum1FScientist2Text.done
 	call PrintText
 	jp TextScriptEnd
 
-.TakeThisToAPokemonLabText:
-	text_far _Museum1FScientist2TakeThisToAPokemonLabText
+Museum1FScientist2Text.TakeThisToAPokemonLabText:
+	text_far WLA_GLOBAL_Museum1FScientist2TakeThisToAPokemonLabText
 	text_end
 
-.ReceivedOldAmberText:
-	text_far _Museum1FScientist2ReceivedOldAmberText
+Museum1FScientist2Text.ReceivedOldAmberText:
+	text_far WLA_GLOBAL_Museum1FScientist2ReceivedOldAmberText
 	sound_get_item_1
 	text_end
 
-.GetTheOldAmberCheckText:
-	text_far _Museum1FScientist2GetTheOldAmberCheckText
+Museum1FScientist2Text.GetTheOldAmberCheckText:
+	text_far WLA_GLOBAL_Museum1FScientist2GetTheOldAmberCheckText
 	text_end
 
-.YouDontHaveSpaceText:
-	text_far _Museum1FScientist2YouDontHaveSpaceText
+Museum1FScientist2Text.YouDontHaveSpaceText:
+	text_far WLA_GLOBAL_Museum1FScientist2YouDontHaveSpaceText
 	text_end
 
 Museum1FScientist3Text:
 	text_asm
-	ld hl, .Text
+	ld hl, Museum1FScientist3Text.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _Museum1FScientist3Text
+Museum1FScientist3Text.Text:
+	text_far WLA_GLOBAL_Museum1FScientist3Text
 	text_end
 
 Museum1FOldAmberText:
 	text_asm
-	ld hl, .Text
+	ld hl, Museum1FOldAmberText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _Museum1FOldAmberText
+Museum1FOldAmberText.Text:
+	text_far WLA_GLOBAL_Museum1FOldAmberText
 	text_end

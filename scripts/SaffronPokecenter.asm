@@ -13,11 +13,11 @@ SaffronPokecenterNurseText:
 	script_pokecenter_nurse
 
 SaffronPokecenterBeautyText:
-	text_far _SaffronPokecenterBeautyText
+	text_far WLA_GLOBAL_SaffronPokecenterBeautyText
 	text_end
 
 SaffronPokecenterGentlemanText:
-	text_far _SaffronPokecenterGentlemanText
+	text_far WLA_GLOBAL_SaffronPokecenterGentlemanText
 	text_end
 
 SaffronPokecenterLinkReceptionistText:

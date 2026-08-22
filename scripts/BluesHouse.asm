@@ -27,63 +27,63 @@ BluesHouse_TextPointers:
 BluesHouseDaisySittingText:
 	text_asm
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr nz, .got_town_map
+	jr nz, BluesHouseDaisySittingText.got_town_map
 	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .give_town_map
+	jr nz, BluesHouseDaisySittingText.give_town_map
 	ld hl, BluesHouseDaisyRivalAtLabText
 	call PrintText
-	jr .done
+	jr BluesHouseDaisySittingText.done
 
-.give_town_map
+BluesHouseDaisySittingText.give_town_map
 	ld hl, BluesHouseDaisyOfferMapText
 	call PrintText
-	lb bc, TOWN_MAP, 1
+	lb "bc", TOWN_MAP, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, BluesHouseDaisySittingText.bag_full
 	ld a, TOGGLE_TOWN_MAP
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld hl, GotMapText
 	call PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
-	jr .done
+	jr BluesHouseDaisySittingText.done
 
-.got_town_map
+BluesHouseDaisySittingText.got_town_map
 	ld hl, BluesHouseDaisyUseMapText
 	call PrintText
-	jr .done
+	jr BluesHouseDaisySittingText.done
 
-.bag_full
+BluesHouseDaisySittingText.bag_full
 	ld hl, BluesHouseDaisyBagFullText
 	call PrintText
-.done
+BluesHouseDaisySittingText.done
 	jp TextScriptEnd
 
 BluesHouseDaisyRivalAtLabText:
-	text_far _BluesHouseDaisyRivalAtLabText
+	text_far WLA_GLOBAL_BluesHouseDaisyRivalAtLabText
 	text_end
 
 BluesHouseDaisyOfferMapText:
-	text_far _BluesHouseDaisyOfferMapText
+	text_far WLA_GLOBAL_BluesHouseDaisyOfferMapText
 	text_end
 
 GotMapText:
-	text_far _GotMapText
+	text_far WLA_GLOBAL_GotMapText
 	sound_get_key_item
 	text_end
 
 BluesHouseDaisyBagFullText:
-	text_far _BluesHouseDaisyBagFullText
+	text_far WLA_GLOBAL_BluesHouseDaisyBagFullText
 	text_end
 
 BluesHouseDaisyUseMapText:
-	text_far _BluesHouseDaisyUseMapText
+	text_far WLA_GLOBAL_BluesHouseDaisyUseMapText
 	text_end
 
 BluesHouseDaisyWalkingText:
-	text_far _BluesHouseDaisyWalkingText
+	text_far WLA_GLOBAL_BluesHouseDaisyWalkingText
 	text_end
 
 BluesHouseTownMapText:
-	text_far _BluesHouseTownMapText
+	text_far WLA_GLOBAL_BluesHouseTownMapText
 	text_end

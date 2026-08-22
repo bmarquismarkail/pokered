@@ -18,16 +18,16 @@ HiddenItems:
 	call GetItemName
 	tx_pre_jump FoundHiddenItemText
 
-INCLUDE "data/events/hidden_item_coords.asm"
+.INCLUDE "data/events/hidden_item_coords.asm"
 
-FoundHiddenItemText::
-	text_far _FoundHiddenItemText
+FoundHiddenItemText:
+	text_far WLA_GLOBAL_FoundHiddenItemText
 	text_asm
 	ld a, [wHiddenEventFunctionArgument] ; item ID
 	ld b, a
 	ld c, 1
 	call GiveItem
-	jr nc, .bagFull
+	jr nc, FoundHiddenItemText.bagFull
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
@@ -37,7 +37,7 @@ FoundHiddenItemText::
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-.bagFull
+FoundHiddenItemText.bagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -45,8 +45,8 @@ FoundHiddenItemText::
 	call PrintText
 	jp TextScriptEnd
 
-HiddenItemBagFullText::
-	text_far _HiddenItemBagFullText
+HiddenItemBagFullText:
+	text_far WLA_GLOBAL_HiddenItemBagFullText
 	text_end
 
 HiddenCoins:
@@ -67,34 +67,34 @@ HiddenCoins:
 	and a
 	ret nz
 	xor a
-	ldh [hUnusedCoinsByte], a
-	ldh [hCoins], a
-	ldh [hCoins + 1], a
+	ldh [lobyte(hUnusedCoinsByte)], a
+	ldh [lobyte(hCoins)], a
+	ldh [lobyte(hCoins + 1)], a
 	ld a, [wHiddenEventFunctionArgument]
 	sub COIN
 	cp 10
-	jr z, .bcd10
+	jr z, HiddenCoins.bcd10
 	cp 20
-	jr z, .bcd20
+	jr z, HiddenCoins.bcd20
 	cp 40
-	jr z, .bcd20 ; should be bcd40
-	jr .bcd100
-.bcd10
+	jr z, HiddenCoins.bcd20 ; should be bcd40
+	jr HiddenCoins.bcd100
+HiddenCoins.bcd10
 	ld a, $10
-	ldh [hCoins + 1], a
-	jr .bcdDone
-.bcd20
+	ldh [lobyte(hCoins + 1)], a
+	jr HiddenCoins.bcdDone
+HiddenCoins.bcd20
 	ld a, $20
-	ldh [hCoins + 1], a
-	jr .bcdDone
-.bcd40 ; due to a typo, this is never used
+	ldh [lobyte(hCoins + 1)], a
+	jr HiddenCoins.bcdDone
+HiddenCoins.bcd40 ; due to a typo, this is never used
 	ld a, $40
-	ldh [hCoins + 1], a
-	jr .bcdDone
-.bcd100
+	ldh [lobyte(hCoins + 1)], a
+	jr HiddenCoins.bcdDone
+HiddenCoins.bcd100
 	ld a, $1
-	ldh [hCoins], a
-.bcdDone
+	ldh [lobyte(hCoins)], a
+HiddenCoins.bcdDone
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -107,28 +107,28 @@ HiddenCoins:
 	call EnableAutoTextBoxDrawing
 	ld a, [wPlayerCoins]
 	cp $99
-	jr nz, .roomInCoinCase
+	jr nz, HiddenCoins.roomInCoinCase
 	ld a, [wPlayerCoins + 1]
 	cp $99
-	jr nz, .roomInCoinCase
+	jr nz, HiddenCoins.roomInCoinCase
 	tx_pre_id DroppedHiddenCoinsText
-	jr .done
-.roomInCoinCase
+	jr HiddenCoins.done
+HiddenCoins.roomInCoinCase
 	tx_pre_id FoundHiddenCoinsText
-.done
+HiddenCoins.done
 	jp PrintPredefTextID
 
-INCLUDE "data/events/hidden_coins.asm"
+.INCLUDE "data/events/hidden_coins.asm"
 
-FoundHiddenCoinsText::
-	text_far _FoundHiddenCoinsText
+FoundHiddenCoinsText:
+	text_far WLA_GLOBAL_FoundHiddenCoinsText
 	sound_get_item_2
 	text_end
 
-DroppedHiddenCoinsText::
-	text_far _FoundHiddenCoins2Text
+DroppedHiddenCoinsText:
+	text_far WLA_GLOBAL_FoundHiddenCoins2Text
 	sound_get_item_2
-	text_far _DroppedHiddenCoinsText
+	text_far WLA_GLOBAL_DroppedHiddenCoinsText
 	text_end
 
 FindHiddenItemOrCoinsIndex:
@@ -139,23 +139,23 @@ FindHiddenItemOrCoinsIndex:
 	ld a, [wCurMap]
 	ld b, a
 	ld c, -1
-.loop
+FindHiddenItemOrCoinsIndex.loop
 	inc c
 	ld a, [hli]
 	cp -1 ; end of the list?
 	ret z  ; if so, we're done here
 	cp b
-	jr nz, .next1
+	jr nz, FindHiddenItemOrCoinsIndex.next1
 	ld a, [hli]
 	cp d
-	jr nz, .next2
+	jr nz, FindHiddenItemOrCoinsIndex.next2
 	ld a, [hli]
 	cp e
-	jr nz, .loop
+	jr nz, FindHiddenItemOrCoinsIndex.loop
 	ld a, c
 	ret
-.next1
+FindHiddenItemOrCoinsIndex.next1
 	inc hl
-.next2
+FindHiddenItemOrCoinsIndex.next2
 	inc hl
-	jr .loop
+	jr FindHiddenItemOrCoinsIndex.loop

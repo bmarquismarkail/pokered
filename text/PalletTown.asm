@@ -1,9 +1,11 @@
-_PalletTownOakHeyWaitDontGoOutText::
+_PalletTownOakHeyWaitDontGoOutText:
+WLA_GLOBAL_PalletTownOakHeyWaitDontGoOutText:
 	text "OAK: Hey! Wait!"
 	line "Don't go out!@"
 	text_end
 
-_PalletTownOakItsUnsafeText::
+_PalletTownOakItsUnsafeText:
+WLA_GLOBAL_PalletTownOakItsUnsafeText:
 	text "OAK: It's unsafe!"
 	line "Wild #MON live"
 	cont "in tall grass!"
@@ -17,7 +19,8 @@ _PalletTownOakItsUnsafeText::
 	line "me!"
 	done
 
-_PalletTownGirlText::
+_PalletTownGirlText:
+WLA_GLOBAL_PalletTownGirlText:
 	text "I'm raising"
 	line "#MON too!"
 
@@ -26,7 +29,8 @@ _PalletTownGirlText::
 	cont "protect me!"
 	done
 
-_PalletTownFisherText::
+_PalletTownFisherText:
+WLA_GLOBAL_PalletTownFisherText:
 	text "Technology is"
 	line "incredible!"
 
@@ -36,21 +40,25 @@ _PalletTownFisherText::
 	cont "data via PC!"
 	done
 
-_PalletTownOaksLabSignText::
+_PalletTownOaksLabSignText:
+WLA_GLOBAL_PalletTownOaksLabSignText:
 	text "OAK #MON"
 	line "RESEARCH LAB"
 	done
 
-_PalletTownSignText::
+_PalletTownSignText:
+WLA_GLOBAL_PalletTownSignText:
 	text "PALLET TOWN"
 	line "Shades of your"
 	cont "journey await!"
 	done
 
-_PalletTownPlayersHouseSignText::
+_PalletTownPlayersHouseSignText:
+WLA_GLOBAL_PalletTownPlayersHouseSignText:
 	text "<PLAYER>'s house "
 	done
 
-_PalletTownRivalsHouseSignText::
+_PalletTownRivalsHouseSignText:
+WLA_GLOBAL_PalletTownRivalsHouseSignText:
 	text "<RIVAL>'s house "
 	done

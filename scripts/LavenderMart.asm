@@ -8,26 +8,26 @@ LavenderMart_TextPointers:
 	dw_const LavenderMartCooltrainerMText, TEXT_LAVENDERMART_COOLTRAINER_M
 
 LavenderMartBaldingGuyText:
-	text_far _LavenderMartBaldingGuyText
+	text_far WLA_GLOBAL_LavenderMartBaldingGuyText
 	text_end
 
 LavenderMartCooltrainerMText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .Nugget
-	ld hl, .ReviveText
+	jr nz, LavenderMartCooltrainerMText.Nugget
+	ld hl, LavenderMartCooltrainerMText.ReviveText
 	call PrintText
-	jr .done
-.Nugget
-	ld hl, .NuggetText
+	jr LavenderMartCooltrainerMText.done
+LavenderMartCooltrainerMText.Nugget
+	ld hl, LavenderMartCooltrainerMText.NuggetText
 	call PrintText
-.done
+LavenderMartCooltrainerMText.done
 	jp TextScriptEnd
 
-.ReviveText
-	text_far _LavenderMartCooltrainerMReviveText
+LavenderMartCooltrainerMText.ReviveText
+	text_far WLA_GLOBAL_LavenderMartCooltrainerMReviveText
 	text_end
 
-.NuggetText
-	text_far _LavenderMartCooltrainerMNuggetText
+LavenderMartCooltrainerMText.NuggetText
+	text_far WLA_GLOBAL_LavenderMartCooltrainerMNuggetText
 	text_end

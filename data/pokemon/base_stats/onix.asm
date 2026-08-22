@@ -1,17 +1,17 @@
-	db DEX_ONIX ; pokedex id
+	.DB DEX_ONIX ; pokedex id
 
-	db  35,  45, 160,  70,  30
+	.DB  35,  45, 160,  70,  30
 	;   hp  atk  def  spd  spc
 
-	db ROCK, GROUND ; type
-	db 45 ; catch rate
-	db 108 ; base exp
+	.DB ROCK, GROUND ; type
+	.DB 45 ; catch rate
+	.DB 108 ; base exp
 
-	INCBIN "gfx/pokemon/front/onix.pic", 0, 1 ; sprite dimensions
-	dw OnixPicFront, OnixPicBack
+	.INCBIN "gfx/pokemon/front/onix.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW OnixPicFront, OnixPicBack
 
-	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
@@ -20,4 +20,4 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

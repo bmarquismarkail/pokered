@@ -1,17 +1,17 @@
-	db DEX_ARTICUNO ; pokedex id
+	.DB DEX_ARTICUNO ; pokedex id
 
-	db  90,  85, 100,  85, 125
+	.DB  90,  85, 100,  85, 125
 	;   hp  atk  def  spd  spc
 
-	db ICE, FLYING ; type
-	db 3 ; catch rate
-	db 215 ; base exp
+	.DB ICE, FLYING ; type
+	.DB 3 ; catch rate
+	.DB 215 ; base exp
 
-	INCBIN "gfx/pokemon/front/articuno.pic", 0, 1 ; sprite dimensions
-	dw ArticunoPicFront, ArticunoPicBack
+	.INCBIN "gfx/pokemon/front/articuno.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ArticunoPicFront, ArticunoPicBack
 
-	db PECK, ICE_BEAM, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB PECK, ICE_BEAM, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     SWIFT,        SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

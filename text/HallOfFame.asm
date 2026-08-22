@@ -1,4 +1,5 @@
-_HallOfFameOakText::
+_HallOfFameOakText:
+WLA_GLOBAL_HallOfFameOakText:
 	text "OAK: Er-hem!"
 	line "Congratulations"
 	cont "<PLAYER>!"

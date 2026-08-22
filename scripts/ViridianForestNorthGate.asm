@@ -7,9 +7,9 @@ ViridianForestNorthGate_TextPointers:
 	dw_const ViridianForestNorthGateGrampsText,    TEXT_VIRIDIANFORESTNORTHGATE_GRAMPS
 
 ViridianForestNorthGateSuperNerdText:
-	text_far _ViridianForestNorthGateSuperNerdText
+	text_far WLA_GLOBAL_ViridianForestNorthGateSuperNerdText
 	text_end
 
 ViridianForestNorthGateGrampsText:
-	text_far _ViridianForestNorthGateGrampsText
+	text_far WLA_GLOBAL_ViridianForestNorthGateGrampsText
 	text_end

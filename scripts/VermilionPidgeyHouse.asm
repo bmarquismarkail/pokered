@@ -9,11 +9,11 @@ VermilionPidgeyHouse_TextPointers:
 	dw_const VermilionPidgeyHouseLetterText,    TEXT_VERMILIONPIDGEYHOUSE_LETTER
 
 VermilionPidgeyHouseYoungsterText:
-	text_far _VermilionPidgeyHouseYoungsterText
+	text_far WLA_GLOBAL_VermilionPidgeyHouseYoungsterText
 	text_end
 
 VermilionPidgeyHousePidgeyText:
-	text_far _VermilionPidgeyHousePidgeyText
+	text_far WLA_GLOBAL_VermilionPidgeyHousePidgeyText
 	text_asm
 	ld a, PIDGEY
 	call PlayCry
@@ -21,5 +21,5 @@ VermilionPidgeyHousePidgeyText:
 	jp TextScriptEnd
 
 VermilionPidgeyHouseLetterText:
-	text_far _VermilionPidgeyHouseLetterText
+	text_far WLA_GLOBAL_VermilionPidgeyHouseLetterText
 	text_end

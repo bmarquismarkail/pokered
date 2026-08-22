@@ -1,16 +1,19 @@
-_PokemonFanClubPikachuFanNormalText::
+_PokemonFanClubPikachuFanNormalText:
+WLA_GLOBAL_PokemonFanClubPikachuFanNormalText:
 	text "Won't you admire"
 	line "my PIKACHU's"
 	cont "adorable tail?"
 	done
 
-_PokemonFanClubPikachuFanBetterText::
+_PokemonFanClubPikachuFanBetterText:
+WLA_GLOBAL_PokemonFanClubPikachuFanBetterText:
 	text "Humph! My PIKACHU"
 	line "is twice as cute"
 	cont "as that one!"
 	done
 
-_PokemonFanClubSeelFanNormalText::
+_PokemonFanClubSeelFanNormalText:
+WLA_GLOBAL_PokemonFanClubSeelFanNormalText:
 	text "I just love my"
 	line "SEEL!"
 
@@ -18,23 +21,27 @@ _PokemonFanClubSeelFanNormalText::
 	line "hug it!"
 	done
 
-_PokemonFanClubSeelFanBetterText::
+_PokemonFanClubSeelFanBetterText:
+WLA_GLOBAL_PokemonFanClubSeelFanBetterText:
 	text "Oh dear!"
 
 	para "My SEEL is far"
 	line "more attractive!"
 	done
 
-_PokemonFanClubPikachuText::
+_PokemonFanClubPikachuText:
+WLA_GLOBAL_PokemonFanClubPikachuText:
 	text "PIKACHU: Chu!"
 	line "Pikachu!"
 	done
 
-_PokemonFanClubSeelText::
+_PokemonFanClubSeelText:
+WLA_GLOBAL_PokemonFanClubSeelText:
 	text "SEEL: Kyuoo!"
 	done
 
-_PokemonFanClubChairmanIntroText::
+_PokemonFanClubChairmanIntroText:
+WLA_GLOBAL_PokemonFanClubChairmanIntroText:
 	text "I chair the"
 	line "#MON Fan Club!"
 
@@ -52,7 +59,8 @@ _PokemonFanClubChairmanIntroText::
 	cont "about my #MON?"
 	done
 
-_PokemonFanClubChairmanStoryText::
+_PokemonFanClubChairmanStoryText:
+WLA_GLOBAL_PokemonFanClubChairmanStoryText:
 	text "Good!"
 	line "Then listen up!"
 
@@ -82,14 +90,16 @@ _PokemonFanClubChairmanStoryText::
 	cont "you to have this!"
 	prompt
 
-_PokemonFanClubReceivedBikeVoucherText::
+_PokemonFanClubReceivedBikeVoucherText:
+WLA_GLOBAL_PokemonFanClubReceivedBikeVoucherText:
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_PokemonFanClubExplainBikeVoucherText::
+_PokemonFanClubExplainBikeVoucherText:
+WLA_GLOBAL_PokemonFanClubExplainBikeVoucherText:
 	text_start
 
 	para "Exchange that for"
@@ -106,13 +116,15 @@ _PokemonFanClubExplainBikeVoucherText::
 	line "cycling!"
 	done
 
-_PokemonFanClubNoStoryText::
+_PokemonFanClubNoStoryText:
+WLA_GLOBAL_PokemonFanClubNoStoryText:
 	text "Oh. Come back"
 	line "when you want to"
 	cont "hear my story!"
 	done
 
-_PokemonFanClubChairFinalText::
+_PokemonFanClubChairFinalText:
+WLA_GLOBAL_PokemonFanClubChairFinalText:
 	text "Hello, <PLAYER>!"
 
 	para "Did you come see"
@@ -122,24 +134,28 @@ _PokemonFanClubChairFinalText::
 	para "No? Too bad!"
 	done
 
-_PokemonFanClubBagFullText::
+_PokemonFanClubBagFullText:
+WLA_GLOBAL_PokemonFanClubBagFullText:
 	text "Make room for"
 	line "this!"
 	done
 
-_PokemonFanClubReceptionistText::
+_PokemonFanClubReceptionistText:
+WLA_GLOBAL_PokemonFanClubReceptionistText:
 	text "Our Chairman is"
 	line "very vocal about"
 	cont "#MON."
 	done
 
-_PokemonFanClubSign1Text::
+_PokemonFanClubSign1Text:
+WLA_GLOBAL_PokemonFanClubSign1Text:
 	text "Let's all listen"
 	line "politely to other"
 	cont "trainers!"
 	done
 
-_PokemonFanClubSign2Text::
+_PokemonFanClubSign2Text:
+WLA_GLOBAL_PokemonFanClubSign2Text:
 	text "If someone brags,"
 	line "brag right back!"
 	done

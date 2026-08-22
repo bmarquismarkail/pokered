@@ -1,10 +1,10 @@
-CeladonPrizeMenu::
+CeladonPrizeMenu:
 	ld b, COIN_CASE
 	call IsItemInBag
-	jr nz, .havingCoinCase
+	jr nz, CeladonPrizeMenu.havingCoinCase
 	ld hl, RequireCoinCaseText
 	jp PrintText
-.havingCoinCase
+CeladonPrizeMenu.havingCoinCase
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, ExchangeCoinsForPrizesText
@@ -32,27 +32,27 @@ CeladonPrizeMenu::
 	call PrintText
 	call HandleMenuInput ; menu choice handler
 	bit B_PAD_B, a
-	jr nz, .noChoice
+	jr nz, CeladonPrizeMenu.noChoice
 	ld a, [wCurrentMenuItem]
 	cp 3 ; "NO,THANKS" choice
-	jr z, .noChoice
+	jr z, CeladonPrizeMenu.noChoice
 	call HandlePrizeChoice
-.noChoice
+CeladonPrizeMenu.noChoice
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ret
 
 RequireCoinCaseText:
-	text_far _RequireCoinCaseText
+	text_far WLA_GLOBAL_RequireCoinCaseText
 	text_waitbutton
 	text_end
 
 ExchangeCoinsForPrizesText:
-	text_far _ExchangeCoinsForPrizesText
+	text_far WLA_GLOBAL_ExchangeCoinsForPrizesText
 	text_end
 
 WhichPrizeText:
-	text_far _WhichPrizeText
+	text_far WLA_GLOBAL_WhichPrizeText
 	text_end
 
 GetPrizeMenuId:
@@ -61,7 +61,7 @@ GetPrizeMenuId:
 ; load the three prizes at wPrize1-wPrice3
 ; load the three prices at wPrize1Price-wPrize3Price
 ; display the three prizes' names, distinguishing between Pokemon names and item names (specifically TMs)
-	ldh a, [hTextID]
+	ldh a, [lobyte(hTextID)]
 	sub TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1
 	ld [wWhichPrizeWindow], a ; prize texts' relative ID (i.e. 0-2)
 	add a
@@ -86,7 +86,7 @@ GetPrizeMenuId:
 	call CopyData
 	ld a, [wWhichPrizeWindow]
 	cp 2 ; is TM_menu?
-	jr nz, .putMonName
+	jr nz, GetPrizeMenuId.putMonName
 	ld a, [wPrize1]
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -102,8 +102,8 @@ GetPrizeMenuId:
 	call GetItemName
 	hlcoord 2, 8
 	call PlaceString
-	jr .putNoThanksText
-.putMonName
+	jr GetPrizeMenuId.putNoThanksText
+GetPrizeMenuId.putMonName
 	ld a, [wPrize1]
 	ld [wNamedObjectIndex], a
 	call GetMonName
@@ -119,7 +119,7 @@ GetPrizeMenuId:
 	call GetMonName
 	hlcoord 2, 8
 	call PlaceString
-.putNoThanksText
+GetPrizeMenuId.putNoThanksText
 	hlcoord 2, 10
 	ld de, NoThanksText
 	call PlaceString
@@ -137,7 +137,7 @@ GetPrizeMenuId:
 	ld c, 2 | LEADING_ZEROES
 	jp PrintBCDNumber
 
-INCLUDE "data/events/prizes.asm"
+.INCLUDE "data/events/prizes.asm"
 
 PrintPrizePrice:
 	hlcoord 11, 0
@@ -146,10 +146,10 @@ PrintPrizePrice:
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 12, 0
-	ld de, .CoinString
+	ld de, PrintPrizePrice.CoinString
 	call PlaceString
 	hlcoord 13, 1
-	ld de, .SixSpacesString
+	ld de, PrintPrizePrice.SixSpacesString
 	call PlaceString
 	hlcoord 13, 1
 	ld de, wPlayerCoins
@@ -157,11 +157,11 @@ PrintPrizePrice:
 	call PrintBCDNumber
 	ret
 
-.CoinString:
-	db "COIN@"
+PrintPrizePrice.CoinString:
+		.STRINGMAP pokemon, "COIN@"
 
-.SixSpacesString:
-	db "      @"
+PrintPrizePrice.SixSpacesString:
+		.STRINGMAP pokemon, "      @"
 
 LoadCoinsToSubtract:
 	ld a, [wWhichPrize]
@@ -171,11 +171,11 @@ LoadCoinsToSubtract:
 	ld hl, wPrize1Price
 	add hl, de ; get selected prize's price
 	xor a
-	ldh [hUnusedCoinsByte], a
+	ldh [lobyte(hUnusedCoinsByte)], a
 	ld a, [hli]
-	ldh [hCoins], a
+	ldh [lobyte(hCoins)], a
 	ld a, [hl]
-	ldh [hCoins + 1], a
+	ldh [lobyte(hCoins + 1)], a
 	ret
 
 HandlePrizeChoice:
@@ -189,32 +189,32 @@ HandlePrizeChoice:
 	ld [wNamedObjectIndex], a
 	ld a, [wWhichPrizeWindow]
 	cp 2 ; is prize a TM?
-	jr nz, .getMonName
+	jr nz, HandlePrizeChoice.getMonName
 	call GetItemName
-	jr .givePrize
-.getMonName
+	jr HandlePrizeChoice.givePrize
+HandlePrizeChoice.getMonName
 	call GetMonName
-.givePrize
+HandlePrizeChoice.givePrize
 	ld hl, SoYouWantPrizeText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a
-	jr nz, .printOhFineThen
+	jr nz, HandlePrizeChoice.printOhFineThen
 	call LoadCoinsToSubtract
 	call HasEnoughCoins
-	jr c, .notEnoughCoins
+	jr c, HandlePrizeChoice.notEnoughCoins
 	ld a, [wWhichPrizeWindow]
 	cp 2 ; is prize a TM?
-	jr nz, .giveMon
+	jr nz, HandlePrizeChoice.giveMon
 	ld a, [wNamedObjectIndex]
 	ld b, a
 	ld a, 1
 	ld c, a
 	call GiveItem
-	jr nc, .bagFull
-	jr .subtractCoins
-.giveMon
+	jr nc, HandlePrizeChoice.bagFull
+	jr HandlePrizeChoice.subtractCoins
+HandlePrizeChoice.giveMon
 	ld a, [wNamedObjectIndex]
 	ld [wCurPartySpecies], a
 	push af
@@ -235,48 +235,48 @@ HandlePrizeChoice:
 ; were full), return without subtracting coins.
 	ret nc
 
-.subtractCoins
+HandlePrizeChoice.subtractCoins
 	call LoadCoinsToSubtract
 	ld hl, hCoins + 1
 	ld de, wPlayerCoins + 1
 	ld c, $02 ; how many bytes
 	predef SubBCDPredef
 	jp PrintPrizePrice
-.bagFull
+HandlePrizeChoice.bagFull
 	ld hl, PrizeRoomBagIsFullText
 	jp PrintText
-.notEnoughCoins
+HandlePrizeChoice.notEnoughCoins
 	ld hl, SorryNeedMoreCoinsText
 	jp PrintText
-.printOhFineThen
+HandlePrizeChoice.printOhFineThen
 	ld hl, OhFineThenText
 	jp PrintText
 
 UnknownPrizeData:
 ; XXX what's this?
-	db $00,$01,$00,$01,$00,$01,$00,$00,$01
+	.DB $00,$01,$00,$01,$00,$01,$00,$00,$01
 
 HereYouGoText: ; unreferenced
-	text_far _HereYouGoText
+	text_far WLA_GLOBAL_HereYouGoText
 	text_waitbutton
 	text_end
 
 SoYouWantPrizeText:
-	text_far _SoYouWantPrizeText
+	text_far WLA_GLOBAL_SoYouWantPrizeText
 	text_end
 
 SorryNeedMoreCoinsText:
-	text_far _SorryNeedMoreCoinsText
+	text_far WLA_GLOBAL_SorryNeedMoreCoinsText
 	text_waitbutton
 	text_end
 
 PrizeRoomBagIsFullText:
-	text_far _OopsYouDontHaveEnoughRoomText
+	text_far WLA_GLOBAL_OopsYouDontHaveEnoughRoomText
 	text_waitbutton
 	text_end
 
 OhFineThenText:
-	text_far _OhFineThenText
+	text_far WLA_GLOBAL_OhFineThenText
 	text_waitbutton
 	text_end
 
@@ -284,15 +284,15 @@ GetPrizeMonLevel:
 	ld a, [wCurPartySpecies]
 	ld b, a
 	ld hl, PrizeMonLevelDictionary
-.loop
+GetPrizeMonLevel.loop
 	ld a, [hli]
 	cp b
-	jr z, .matchFound
+	jr z, GetPrizeMonLevel.matchFound
 	inc hl
-	jr .loop
-.matchFound
+	jr GetPrizeMonLevel.loop
+GetPrizeMonLevel.matchFound
 	ld a, [hl]
 	ld [wCurEnemyLevel], a
 	ret
 
-INCLUDE "data/events/prize_mon_levels.asm"
+.INCLUDE "data/events/prize_mon_levels.asm"

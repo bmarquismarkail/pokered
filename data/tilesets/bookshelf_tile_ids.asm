@@ -1,7 +1,7 @@
-MACRO bookshelf_tile
-	db \1, \2
+.MACRO bookshelf_tile
+	.DB \1, \2
 	db_tx_pre \3
-ENDM
+.ENDM
 
 BookshelfTileIDs:
 	; tileset id, bookshelf tile id, text id
@@ -22,4 +22,4 @@ BookshelfTileIDs:
 	bookshelf_tile LOBBY,        $50, PokemonStuffText
 	bookshelf_tile LOBBY,        $52, PokemonStuffText
 	bookshelf_tile SHIP,         $36, BookOrSculptureText
-	db -1 ; end
+	.DB -1 ; end

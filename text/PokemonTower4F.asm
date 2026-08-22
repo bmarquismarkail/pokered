@@ -1,44 +1,53 @@
-_PokemonTower4FChanneler1BattleText::
+_PokemonTower4FChanneler1BattleText:
+WLA_GLOBAL_PokemonTower4FChanneler1BattleText:
 	text "GHOST! No!"
 	line "Kwaaah!"
 	done
 
-_PokemonTower4FChanneler1EndBattleText::
+_PokemonTower4FChanneler1EndBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler1EndBattleText:
 	text "Where"
 	line "is the GHOST?"
 	prompt
 
-_PokemonTower4FChanneler1AfterBattleText::
+_PokemonTower4FChanneler1AfterBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler1AfterBattleText:
 	text "I must have been"
 	line "dreaming..."
 	done
 
-_PokemonTower4FChanneler2BattleText::
+_PokemonTower4FChanneler2BattleText:
+WLA_GLOBAL_PokemonTower4FChanneler2BattleText:
 	text "Be cursed with"
 	line "me! Kwaaah!"
 	done
 
-_PokemonTower4FChanneler2EndBattleText::
+_PokemonTower4FChanneler2EndBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler2EndBattleText:
 	text "What!"
 	prompt
 
-_PokemonTower4FChanneler2AfterBattleText::
+_PokemonTower4FChanneler2AfterBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler2AfterBattleText:
 	text "We can't crack"
 	line "the identity of"
 	cont "the GHOSTs."
 	done
 
-_PokemonTower4FChanneler3BattleText::
+_PokemonTower4FChanneler3BattleText:
+WLA_GLOBAL_PokemonTower4FChanneler3BattleText:
 	text "Huhuhu..."
 	line "Beat me not!"
 	done
 
-_PokemonTower4FChanneler3EndBattleText::
+_PokemonTower4FChanneler3EndBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler3EndBattleText:
 	text "Huh?"
 	line "Who? What?"
 	prompt
 
-_PokemonTower4FChanneler3AfterBattleText::
+_PokemonTower4FChanneler3AfterBattleText:
+WLA_GLOBAL_PokemonTower4FChanneler3AfterBattleText:
 	text "May the departed"
 	line "souls of #MON"
 	cont "rest in peace..."

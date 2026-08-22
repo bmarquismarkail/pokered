@@ -1,21 +1,21 @@
 ; skips a text entries, each of size NAME_LENGTH (like trainer name, OT name, rival name, ...)
 ; hl: base pointer, will be incremented by NAME_LENGTH * a
-SkipFixedLengthTextEntries::
+SkipFixedLengthTextEntries:
 	and a
 	ret z
 	ld bc, NAME_LENGTH
-.skipLoop
+SkipFixedLengthTextEntries.skipLoop
 	add hl, bc
 	dec a
-	jr nz, .skipLoop
+	jr nz, SkipFixedLengthTextEntries.skipLoop
 	ret
 
-AddNTimes::
+AddNTimes:
 ; add bc to hl a times
 	and a
 	ret z
-.loop
+AddNTimes.loop
 	add hl, bc
 	dec a
-	jr nz, .loop
+	jr nz, AddNTimes.loop
 	ret

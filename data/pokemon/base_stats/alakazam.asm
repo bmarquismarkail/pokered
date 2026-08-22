@@ -1,17 +1,17 @@
-	db DEX_ALAKAZAM ; pokedex id
+	.DB DEX_ALAKAZAM ; pokedex id
 
-	db  55,  50,  45, 120, 135
+	.DB  55,  50,  45, 120, 135
 	;   hp  atk  def  spd  spc
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
-	db 50 ; catch rate
-	db 186 ; base exp
+	.DB PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	.DB 50 ; catch rate
+	.DB 186 ; base exp
 
-	INCBIN "gfx/pokemon/front/alakazam.pic", 0, 1 ; sprite dimensions
-	dw AlakazamPicFront, AlakazamPicBack
+	.INCBIN "gfx/pokemon/front/alakazam.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW AlakazamPicFront, AlakazamPicBack
 
-	db TELEPORT, CONFUSION, DISABLE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB TELEPORT, CONFUSION, DISABLE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

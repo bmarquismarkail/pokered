@@ -14,54 +14,54 @@ MrFujisHouse_TextPointers:
 MrFujisHouseSuperNerdText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
-	ld hl, .MrFujiIsntHereText
+	jr nz, MrFujisHouseSuperNerdText.rescued_mr_fuji
+	ld hl, MrFujisHouseSuperNerdText.MrFujiIsntHereText
 	call PrintText
-	jr .done
-.rescued_mr_fuji
-	ld hl, .MrFujiHadBeenPrayingText
+	jr MrFujisHouseSuperNerdText.done
+MrFujisHouseSuperNerdText.rescued_mr_fuji
+	ld hl, MrFujisHouseSuperNerdText.MrFujiHadBeenPrayingText
 	call PrintText
-.done
+MrFujisHouseSuperNerdText.done
 	jp TextScriptEnd
 
-.MrFujiIsntHereText:
-	text_far _MrFujisHouseSuperNerdMrFujiIsntHereText
+MrFujisHouseSuperNerdText.MrFujiIsntHereText:
+	text_far WLA_GLOBAL_MrFujisHouseSuperNerdMrFujiIsntHereText
 	text_end
 
-.MrFujiHadBeenPrayingText:
-	text_far _MrFujisHouseSuperNerdMrFujiHadBeenPrayingText
+MrFujisHouseSuperNerdText.MrFujiHadBeenPrayingText:
+	text_far WLA_GLOBAL_MrFujisHouseSuperNerdMrFujiHadBeenPrayingText
 	text_end
 
 MrFujisHouseLittleGirlText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
-	ld hl, .ThisIsMrFujisHouseText
+	jr nz, MrFujisHouseLittleGirlText.rescued_mr_fuji
+	ld hl, MrFujisHouseLittleGirlText.ThisIsMrFujisHouseText
 	call PrintText
-	jr .done
-.rescued_mr_fuji
-	ld hl, .PokemonAreNiceToHugText
+	jr MrFujisHouseLittleGirlText.done
+MrFujisHouseLittleGirlText.rescued_mr_fuji
+	ld hl, MrFujisHouseLittleGirlText.PokemonAreNiceToHugText
 	call PrintText
-.done
+MrFujisHouseLittleGirlText.done
 	jp TextScriptEnd
 
-.ThisIsMrFujisHouseText:
-	text_far _MrFujisHouseLittleGirlThisIsMrFujisHouseText
+MrFujisHouseLittleGirlText.ThisIsMrFujisHouseText:
+	text_far WLA_GLOBAL_MrFujisHouseLittleGirlThisIsMrFujisHouseText
 	text_end
 
-.PokemonAreNiceToHugText:
-	text_far _MrFujisHouseLittleGirlPokemonAreNiceToHugText
+MrFujisHouseLittleGirlText.PokemonAreNiceToHugText:
+	text_far WLA_GLOBAL_MrFujisHouseLittleGirlPokemonAreNiceToHugText
 	text_end
 
 MrFujisHousePsyduckText:
-	text_far _MrFujisHousePsyduckText
+	text_far WLA_GLOBAL_MrFujisHousePsyduckText
 	text_asm
 	ld a, PSYDUCK
 	call PlayCry
 	jp TextScriptEnd
 
 MrFujisHouseNidorinoText:
-	text_far _MrFujisHouseNidorinoText
+	text_far WLA_GLOBAL_MrFujisHouseNidorinoText
 	text_asm
 	ld a, NIDORINO
 	call PlayCry
@@ -70,44 +70,44 @@ MrFujisHouseNidorinoText:
 MrFujisHouseMrFujiText:
 	text_asm
 	CheckEvent EVENT_GOT_POKE_FLUTE
-	jr nz, .got_item
-	ld hl, .IThinkThisMayHelpYourQuestText
+	jr nz, MrFujisHouseMrFujiText.got_item
+	ld hl, MrFujisHouseMrFujiText.IThinkThisMayHelpYourQuestText
 	call PrintText
-	lb bc, POKE_FLUTE, 1
+	lb "bc", POKE_FLUTE, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedPokeFluteText
+	jr nc, MrFujisHouseMrFujiText.bag_full
+	ld hl, MrFujisHouseMrFujiText.ReceivedPokeFluteText
 	call PrintText
 	SetEvent EVENT_GOT_POKE_FLUTE
-	jr .done
-.bag_full
-	ld hl, .PokeFluteNoRoomText
+	jr MrFujisHouseMrFujiText.done
+MrFujisHouseMrFujiText.bag_full
+	ld hl, MrFujisHouseMrFujiText.PokeFluteNoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .HasMyFluteHelpedYouText
+	jr MrFujisHouseMrFujiText.done
+MrFujisHouseMrFujiText.got_item
+	ld hl, MrFujisHouseMrFujiText.HasMyFluteHelpedYouText
 	call PrintText
-.done
+MrFujisHouseMrFujiText.done
 	jp TextScriptEnd
 
-.IThinkThisMayHelpYourQuestText:
-	text_far _MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText
+MrFujisHouseMrFujiText.IThinkThisMayHelpYourQuestText:
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText
 	text_end
 
-.ReceivedPokeFluteText:
-	text_far _MrFujisHouseMrFujiReceivedPokeFluteText
+MrFujisHouseMrFujiText.ReceivedPokeFluteText:
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiReceivedPokeFluteText
 	sound_get_key_item
-	text_far _MrFujisHouseMrFujiPokeFluteExplanationText
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiPokeFluteExplanationText
 	text_end
 
-.PokeFluteNoRoomText:
-	text_far _MrFujisHouseMrFujiPokeFluteNoRoomText
+MrFujisHouseMrFujiText.PokeFluteNoRoomText:
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiPokeFluteNoRoomText
 	text_end
 
-.HasMyFluteHelpedYouText:
-	text_far _MrFujisHouseMrFujiHasMyFluteHelpedYouText
+MrFujisHouseMrFujiText.HasMyFluteHelpedYouText:
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiHasMyFluteHelpedYouText
 	text_end
 
 MrFujisHouseMrFujiPokedexText:
-	text_far _MrFujisHouseMrFujiPokedexText
+	text_far WLA_GLOBAL_MrFujisHouseMrFujiPokedexText
 	text_end

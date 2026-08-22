@@ -1,17 +1,17 @@
-	db DEX_RAICHU ; pokedex id
+	.DB DEX_RAICHU ; pokedex id
 
-	db  60,  90,  55, 100,  90
+	.DB  60,  90,  55, 100,  90
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 75 ; catch rate
-	db 122 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 75 ; catch rate
+	.DB 122 ; base exp
 
-	INCBIN "gfx/pokemon/front/raichu.pic", 0, 1 ; sprite dimensions
-	dw RaichuPicFront, RaichuPicBack
+	.INCBIN "gfx/pokemon/front/raichu.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW RaichuPicFront, RaichuPicBack
 
-	db THUNDERSHOCK, GROWL, THUNDER_WAVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB THUNDERSHOCK, GROWL, THUNDER_WAVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     THUNDER_WAVE, SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,4 +1,5 @@
-_ViridianGymGiovanniPreBattleText::
+_ViridianGymGiovanniPreBattleText:
+WLA_GLOBAL_ViridianGymGiovanniPreBattleText:
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
@@ -18,7 +19,8 @@ _ViridianGymGiovanniPreBattleText::
 	cont "greatest trainer!"
 	done
 
-_ViridianGymGiovanniReceivedEarthBadgeText::
+_ViridianGymGiovanniReceivedEarthBadgeText:
+WLA_GLOBAL_ViridianGymGiovanniReceivedEarthBadgeText:
 	text "Ha!"
 	line "That was a truly"
 	cont "intense fight!"
@@ -27,7 +29,8 @@ _ViridianGymGiovanniReceivedEarthBadgeText::
 	cont "the EARTHBADGE!@"
 	text_end
 
-_ViridianGymGiovanniPostBattleAdviceText::
+_ViridianGymGiovanniPostBattleAdviceText:
+WLA_GLOBAL_ViridianGymGiovanniPostBattleAdviceText:
 	text "Having lost, I"
 	line "cannot face my"
 	cont "underlings!"
@@ -43,7 +46,8 @@ _ViridianGymGiovanniPostBattleAdviceText::
 	cont "Farewell!@"
 	text_end
 
-_ViridianGymGiovanniEarthBadgeInfoText::
+_ViridianGymGiovanniEarthBadgeInfoText:
+WLA_GLOBAL_ViridianGymGiovanniEarthBadgeInfoText:
 	text "The EARTHBADGE"
 	line "makes #MON of"
 	cont "any level obey!"
@@ -61,12 +65,14 @@ _ViridianGymGiovanniEarthBadgeInfoText::
 	cont "LEAGUE challenge!"
 	done
 
-_ViridianGymGiovanniReceivedTM27Text::
+_ViridianGymGiovanniReceivedTM27Text:
+WLA_GLOBAL_ViridianGymGiovanniReceivedTM27Text:
 	text "<PLAYER> received"
 	line "TM27!@"
 	text_end
 
-_ViridianGymGiovanniTM27ExplanationText::
+_ViridianGymGiovanniTM27ExplanationText:
+WLA_GLOBAL_ViridianGymGiovanniTM27ExplanationText:
 	text_start
 
 	para "TM27 is FISSURE!"
@@ -79,143 +85,169 @@ _ViridianGymGiovanniTM27ExplanationText::
 	cont "too long ago..."
 	done
 
-_ViridianGymGiovanniTM27NoRoomText::
+_ViridianGymGiovanniTM27NoRoomText:
+WLA_GLOBAL_ViridianGymGiovanniTM27NoRoomText:
 	text "You do not have"
 	line "space for this!"
 	done
 
-_ViridianGymCooltrainerM1BattleText::
+_ViridianGymCooltrainerM1BattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM1BattleText:
 	text "Heh! You must be"
 	line "running out of"
 	cont "steam by now!"
 	done
 
-_ViridianGymCooltrainerM1EndBattleText::
+_ViridianGymCooltrainerM1EndBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM1EndBattleText:
 	text "I"
 	line "ran out of gas!"
 	prompt
 
-_ViridianGymCooltrainerM1AfterBattleText::
+_ViridianGymCooltrainerM1AfterBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM1AfterBattleText:
 	text "You need power to"
 	line "keep up with our"
 	cont "GYM LEADER!"
 	done
 
-_ViridianGymHiker1BattleText::
+_ViridianGymHiker1BattleText:
+WLA_GLOBAL_ViridianGymHiker1BattleText:
 	text "Rrrroar! I'm"
 	line "working myself"
 	cont "into a rage!"
 	done
 
-_ViridianGymHiker1EndBattleText::
+_ViridianGymHiker1EndBattleText:
+WLA_GLOBAL_ViridianGymHiker1EndBattleText:
 	text "Wargh!"
 	prompt
 
-_ViridianGymHiker1AfterBattleText::
+_ViridianGymHiker1AfterBattleText:
+WLA_GLOBAL_ViridianGymHiker1AfterBattleText:
 	text "I'm still not"
 	line "worthy!"
 	done
 
-_ViridianGymRocker1BattleText::
+_ViridianGymRocker1BattleText:
+WLA_GLOBAL_ViridianGymRocker1BattleText:
 	text "#MON and I, we"
 	line "make wonderful"
 	cont "music together!"
 	done
 
-_ViridianGymRocker1EndBattleText::
+_ViridianGymRocker1EndBattleText:
+WLA_GLOBAL_ViridianGymRocker1EndBattleText:
 	text "You are in"
 	line "perfect harmony!"
 	prompt
 
-_ViridianGymRocker1AfterBattleText::
+_ViridianGymRocker1AfterBattleText:
+WLA_GLOBAL_ViridianGymRocker1AfterBattleText:
 	text "Do you know the"
 	line "identity of our"
 	cont "GYM LEADER?"
 	done
 
-_ViridianGymHiker2BattleText::
+_ViridianGymHiker2BattleText:
+WLA_GLOBAL_ViridianGymHiker2BattleText:
 	text "Karate is the"
 	line "ultimate form of"
 	cont "martial arts!"
 	done
 
-_ViridianGymHiker2EndBattleText::
+_ViridianGymHiker2EndBattleText:
+WLA_GLOBAL_ViridianGymHiker2EndBattleText:
 	text "Atcho!"
 	prompt
 
-_ViridianGymHiker2AfterBattleText::
+_ViridianGymHiker2AfterBattleText:
+WLA_GLOBAL_ViridianGymHiker2AfterBattleText:
 	text "If my #MON"
 	line "were as good at"
 	cont "Karate as I..."
 	done
 
-_ViridianGymCooltrainerM2BattleText::
+_ViridianGymCooltrainerM2BattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM2BattleText:
 	text "The truly talented"
 	line "win with style!"
 	done
 
-_ViridianGymCooltrainerM2EndBattleText::
+_ViridianGymCooltrainerM2EndBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM2EndBattleText:
 	text "I"
 	line "lost my grip!"
 	prompt
 
-_ViridianGymCooltrainerM2AfterBattleText::
+_ViridianGymCooltrainerM2AfterBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM2AfterBattleText:
 	text "The LEADER will"
 	line "scold me!"
 	done
 
-_ViridianGymHiker3BattleText::
+_ViridianGymHiker3BattleText:
+WLA_GLOBAL_ViridianGymHiker3BattleText:
 	text "I'm the KARATE"
 	line "KING! Your fate"
 	cont "rests with me!"
 	done
 
-_ViridianGymHiker3EndBattleText::
+_ViridianGymHiker3EndBattleText:
+WLA_GLOBAL_ViridianGymHiker3EndBattleText:
 	text "Ayah!"
 	prompt
 
-_ViridianGymHiker3AfterBattleText::
+_ViridianGymHiker3AfterBattleText:
+WLA_GLOBAL_ViridianGymHiker3AfterBattleText:
 	text "#MON LEAGUE?"
 	line "You? Don't get"
 	cont "cocky!"
 	done
 
-_ViridianGymRocker2BattleText::
+_ViridianGymRocker2BattleText:
+WLA_GLOBAL_ViridianGymRocker2BattleText:
 	text "Your #MON will"
 	line "cower at the"
 	cont "crack of my whip!"
 	done
 
-_ViridianGymRocker2EndBattleText::
+_ViridianGymRocker2EndBattleText:
+WLA_GLOBAL_ViridianGymRocker2EndBattleText:
 	text "Yowch!"
 	line "Whiplash!"
 	prompt
 
-_ViridianGymRocker2AfterBattleText::
+_ViridianGymRocker2AfterBattleText:
+WLA_GLOBAL_ViridianGymRocker2AfterBattleText:
 	text "Wait! I was just"
 	line "careless!"
 	done
 
-_ViridianGymCooltrainerM3BattleText::
+_ViridianGymCooltrainerM3BattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM3BattleText:
 	text "VIRIDIAN GYM was"
 	line "closed for a long"
 	cont "time, but now our"
 	cont "LEADER is back!"
 	done
 
-_ViridianGymCooltrainerM3EndBattleText::
+_ViridianGymCooltrainerM3EndBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM3EndBattleText:
 	text "I"
 	line "was beaten?"
 	prompt
 
-_ViridianGymCooltrainerM3AfterBattleText::
+_ViridianGymCooltrainerM3AfterBattleText:
+WLA_GLOBAL_ViridianGymCooltrainerM3AfterBattleText:
 	text "You can go onto"
 	line "#MON LEAGUE"
 	cont "only by defeating"
 	cont "our GYM LEADER!"
 	done
 
-_ViridianGymGuidePreBattleText::
+_ViridianGymGuidePreBattleText:
+WLA_GLOBAL_ViridianGymGuidePreBattleText:
 	text "Yo! Champ in"
 	line "making!"
 
@@ -233,7 +265,8 @@ _ViridianGymGuidePreBattleText::
 	cont "#MON!"
 	done
 
-_ViridianGymGuidePostBattleText::
+_ViridianGymGuidePostBattleText:
+WLA_GLOBAL_ViridianGymGuidePostBattleText:
 	text "Blow me away!"
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"

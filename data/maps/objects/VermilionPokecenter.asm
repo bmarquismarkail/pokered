@@ -5,18 +5,19 @@
 	const_export VERMILIONPOKECENTER_LINK_RECEPTIONIST
 
 VermilionPokecenter_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event  4,  7, LAST_MAP, 1
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 4
 	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_VERMILIONPOKECENTER_NURSE
 	object_event 10,  5, SPRITE_FISHING_GURU, STAY, NONE, TEXT_VERMILIONPOKECENTER_FISHING_GURU
 	object_event  5,  4, SPRITE_SAILOR, STAY, NONE, TEXT_VERMILIONPOKECENTER_SAILOR
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_VERMILIONPOKECENTER_LINK_RECEPTIONIST
 
-	def_warps_to VERMILION_POKECENTER
+	event_displacement VERMILION_POKECENTER_WIDTH, 3, 7
+
+	event_displacement VERMILION_POKECENTER_WIDTH, 4, 7

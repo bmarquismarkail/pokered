@@ -11,7 +11,7 @@ RedsHouse2F_ScriptPointers:
 
 RedsHouse2FDefaultScript:
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, SCRIPT_REDSHOUSE2F_NOOP

@@ -1,17 +1,17 @@
-	db DEX_PIKACHU ; pokedex id
+	.DB DEX_PIKACHU ; pokedex id
 
-	db  35,  55,  30,  90,  50
+	.DB  35,  55,  30,  90,  50
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 190 ; catch rate
-	db 82 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 190 ; catch rate
+	.DB 82 ; base exp
 
-	INCBIN "gfx/pokemon/front/pikachu.pic", 0, 1 ; sprite dimensions
-	dw PikachuPicFront, PikachuPicBack
+	.INCBIN "gfx/pokemon/front/pikachu.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PikachuPicFront, PikachuPicBack
 
-	db THUNDERSHOCK, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB THUNDERSHOCK, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

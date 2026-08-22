@@ -1,4 +1,5 @@
-_CeruleanBadgeHouseMiddleAgedManText::
+_CeruleanBadgeHouseMiddleAgedManText:
+WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManText:
 	text "#MON BADGEs"
 	line "are owned only by"
 	cont "skilled trainers."
@@ -10,7 +11,8 @@ _CeruleanBadgeHouseMiddleAgedManText::
 	line "amazing secrets!"
 	prompt
 
-_CeruleanBadgeHouseMiddleAgedManWhichBadgeText::
+_CeruleanBadgeHouseMiddleAgedManWhichBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManWhichBadgeText:
 	text "Now then..."
 
 	para "Which of the 8"
@@ -18,12 +20,14 @@ _CeruleanBadgeHouseMiddleAgedManWhichBadgeText::
 	cont "describe?"
 	done
 
-_CeruleanBadgeHouseMiddleAgedManVisitAnyTimeText::
+_CeruleanBadgeHouseMiddleAgedManVisitAnyTimeText:
+WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManVisitAnyTimeText:
 	text "Come visit me any"
 	line "time you wish."
 	done
 
-_CeruleanBadgeHouseBoulderBadgeText::
+_CeruleanBadgeHouseBoulderBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseBoulderBadgeText:
 	text "The ATTACK of all"
 	line "#MON increases"
 	cont "a little bit."
@@ -33,7 +37,8 @@ _CeruleanBadgeHouseBoulderBadgeText::
 	cont "time you desire."
 	prompt
 
-_CeruleanBadgeHouseCascadeBadgeText::
+_CeruleanBadgeHouseCascadeBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseCascadeBadgeText:
 	text "#MON up to L30"
 	line "will obey you."
 
@@ -45,7 +50,8 @@ _CeruleanBadgeHouseCascadeBadgeText::
 	cont "of battle."
 	prompt
 
-_CeruleanBadgeHouseThunderBadgeText::
+_CeruleanBadgeHouseThunderBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseThunderBadgeText:
 	text "The SPEED of all"
 	line "#MON increases"
 	cont "a little bit."
@@ -55,7 +61,8 @@ _CeruleanBadgeHouseThunderBadgeText::
 	cont "of battle."
 	prompt
 
-_CeruleanBadgeHouseRainbowBadgeText::
+_CeruleanBadgeHouseRainbowBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseRainbowBadgeText:
 	text "#MON up to L50"
 	line "will obey you."
 
@@ -67,7 +74,8 @@ _CeruleanBadgeHouseRainbowBadgeText::
 	cont "side of battle."
 	prompt
 
-_CeruleanBadgeHouseSoulBadgeText::
+_CeruleanBadgeHouseSoulBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseSoulBadgeText:
 	text "The DEFENSE of all"
 	line "#MON increases"
 	cont "a little bit."
@@ -77,7 +85,8 @@ _CeruleanBadgeHouseSoulBadgeText::
 	cont "of battle."
 	prompt
 
-_CeruleanBadgeHouseMarshBadgeText::
+_CeruleanBadgeHouseMarshBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseMarshBadgeText:
 	text "#MON up to L70"
 	line "will obey you."
 
@@ -85,13 +94,15 @@ _CeruleanBadgeHouseMarshBadgeText::
 	line "become unruly!"
 	prompt
 
-_CeruleanBadgeHouseVolcanoBadgeText::
+_CeruleanBadgeHouseVolcanoBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseVolcanoBadgeText:
 	text "Your #MON's"
 	line "SPECIAL abilities"
 	cont "increase a bit."
 	prompt
 
-_CeruleanBadgeHouseEarthBadgeText::
+_CeruleanBadgeHouseEarthBadgeText:
+WLA_GLOBAL_CeruleanBadgeHouseEarthBadgeText:
 	text "All #MON will"
 	line "obey you!"
 	prompt

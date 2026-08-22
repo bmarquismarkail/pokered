@@ -1,4 +1,5 @@
-_Route5UndergroundPathSignText::
+_Route5UndergroundPathSignText:
+WLA_GLOBAL_Route5UndergroundPathSignText:
 	text "UNDERGROUND PATH"
 	line "CERULEAN CITY -"
 	cont "VERMILION CITY"

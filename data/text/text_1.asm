@@ -1,75 +1,90 @@
-_CardKeySuccessText1::
+_CardKeySuccessText1:
+WLA_GLOBAL_CardKeySuccessText1:
 	text "Bingo!@"
 	text_end
 
-_CardKeySuccessText2::
+_CardKeySuccessText2:
+WLA_GLOBAL_CardKeySuccessText2:
 	text_start
 	line "The CARD KEY"
 	cont "opened the door!"
 	done
 
-_CardKeyFailText::
+_CardKeyFailText:
+WLA_GLOBAL_CardKeyFailText:
 	text "Darn! It needs a"
 	line "CARD KEY!"
 	done
 
-_TrainerNameText::
+_TrainerNameText:
+WLA_GLOBAL_TrainerNameText:
 	text_ram wNameBuffer
 	text ": @"
 	text_end
 
-_NoNibbleText::
+_NoNibbleText:
+WLA_GLOBAL_NoNibbleText:
 	text "Not even a nibble!"
 	prompt
 
-_NothingHereText::
+_NothingHereText:
+WLA_GLOBAL_NothingHereText:
 	text "Looks like there's"
 	line "nothing here."
 	prompt
 
-_ItsABiteText::
+_ItsABiteText:
+WLA_GLOBAL_ItsABiteText:
 	text "Oh!"
 	line "It's a bite!"
 	prompt
 
-_ExclamationText::
+_ExclamationText:
+WLA_GLOBAL_ExclamationText:
 	text "!"
 	done
 
-_GroundRoseText::
+_GroundRoseText:
+WLA_GLOBAL_GroundRoseText:
 	text "Ground rose up"
 	line "somewhere!"
 	done
 
-_BoulderText::
+_BoulderText:
+WLA_GLOBAL_BoulderText:
 	text "This requires"
 	line "STRENGTH to move!"
 	done
 
-_MartSignText::
+_MartSignText:
+WLA_GLOBAL_MartSignText:
 	text "All your item"
 	line "needs fulfilled!"
 	cont "#MON MART"
 	done
 
-_PokeCenterSignText::
+_PokeCenterSignText:
+WLA_GLOBAL_PokeCenterSignText:
 	text "Heal Your #MON!"
 	line "#MON CENTER"
 	done
 
-_FoundItemText::
+_FoundItemText:
+WLA_GLOBAL_FoundItemText:
 	text "<PLAYER> found"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_NoMoreRoomForItemText::
+_NoMoreRoomForItemText:
+WLA_GLOBAL_NoMoreRoomForItemText:
 	text "No more room for"
 	line "items!"
 	done
 
-_OaksAideHiText::
+_OaksAideHiText:
+WLA_GLOBAL_OaksAideHiText:
 	text "Hi! Remember me?"
 	line "I'm PROF.OAK's"
 	cont "AIDE!"
@@ -92,7 +107,8 @@ _OaksAideHiText::
 	cont "#MON?"
 	done
 
-_OaksAideUhOhText::
+_OaksAideUhOhText:
+WLA_GLOBAL_OaksAideUhOhText:
 	text "Let's see..."
 	line "Uh-oh! You have"
 	cont "caught only @"
@@ -109,7 +125,8 @@ _OaksAideUhOhText::
 	text "."
 	done
 
-_OaksAideComeBackText::
+_OaksAideComeBackText:
+WLA_GLOBAL_OaksAideComeBackText:
 	text "Oh. I see."
 
 	para "When you get @"
@@ -121,7 +138,8 @@ _OaksAideComeBackText::
 	text "."
 	done
 
-_OaksAideHereYouGoText::
+_OaksAideHereYouGoText:
+WLA_GLOBAL_OaksAideHereYouGoText:
 	text "Great! You have"
 	line "caught @"
 	text_decimal hOaksAideNumMonsOwned, 1, 3
@@ -132,14 +150,16 @@ _OaksAideHereYouGoText::
 	para "Here you go!"
 	prompt
 
-_OaksAideGotItemText::
+_OaksAideGotItemText:
+WLA_GLOBAL_OaksAideGotItemText:
 	text "<PLAYER> got the"
 	line "@"
 	text_ram wOaksAideRewardItemName
 	text "!@"
 	text_end
 
-_OaksAideNoRoomText::
+_OaksAideNoRoomText:
+WLA_GLOBAL_OaksAideNoRoomText:
 	text "Oh! I see you"
 	line "don't have any"
 	cont "room for the"

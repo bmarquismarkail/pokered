@@ -1,25 +1,25 @@
-FarCopyData2::
+FarCopyData2:
 ; Identical to FarCopyData, but uses hROMBankTemp
 ; as temp space instead of wBuffer.
-	ldh [hROMBankTemp], a
-	ldh a, [hLoadedROMBank]
+	ldh [lobyte(hROMBankTemp)], a
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
+	ldh a, [lobyte(hROMBankTemp)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call CopyData
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-FarCopyData3::
+FarCopyData3:
 ; Copy bc bytes from a:de to hl.
-	ldh [hROMBankTemp], a
-	ldh a, [hLoadedROMBank]
+	ldh [lobyte(hROMBankTemp)], a
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
+	ldh a, [lobyte(hROMBankTemp)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	push hl
 	push de
@@ -31,20 +31,20 @@ FarCopyData3::
 	pop de
 	pop hl
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-FarCopyDataDouble::
+FarCopyDataDouble:
 ; Expand bc bytes of 1bpp image data
 ; from a:hl to 2bpp data at de.
-	ldh [hROMBankTemp], a
-	ldh a, [hLoadedROMBank]
+	ldh [lobyte(hROMBankTemp)], a
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
+	ldh a, [lobyte(hROMBankTemp)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-.loop
+FarCopyDataDouble.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -53,176 +53,176 @@ FarCopyDataDouble::
 	dec bc
 	ld a, c
 	or b
-	jr nz, .loop
+	jr nz, FarCopyDataDouble.loop
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-CopyVideoData::
+CopyVideoData:
 ; Wait for the next VBlank, then copy c 2bpp
-; tiles from b:de to hl, 8 tiles at a time.
+; tiles from b:de to hl, 8 * TILE_SIZE at a time.
 ; This takes c/8 frames.
 
-	ldh a, [hAutoBGTransferEnabled]
+	ldh a, [lobyte(hAutoBGTransferEnabled)]
 	push af
 	xor a ; disable auto-transfer while copying
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 
-	ldh a, [hLoadedROMBank]
-	ldh [hROMBankTemp], a
+	ldh a, [lobyte(hLoadedROMBank)]
+	ldh [lobyte(hROMBankTemp)], a
 
 	ld a, b
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
 	ld a, e
-	ldh [hVBlankCopySource], a
+	ldh [lobyte(hVBlankCopySource)], a
 	ld a, d
-	ldh [hVBlankCopySource + 1], a
+	ldh [lobyte(hVBlankCopySource + 1)], a
 
 	ld a, l
-	ldh [hVBlankCopyDest], a
+	ldh [lobyte(hVBlankCopyDest)], a
 	ld a, h
-	ldh [hVBlankCopyDest + 1], a
+	ldh [lobyte(hVBlankCopyDest + 1)], a
 
-.loop
+CopyVideoData.loop
 	ld a, c
 	cp 8
-	jr nc, .keepgoing
+	jr nc, CopyVideoData.keepgoing
 
-.done
-	ldh [hVBlankCopySize], a
+CopyVideoData.done
+	ldh [lobyte(hVBlankCopySize)], a
 	call DelayFrame
-	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
+	ldh a, [lobyte(hROMBankTemp)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	pop af
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ret
 
-.keepgoing
+CopyVideoData.keepgoing
 	ld a, 8
-	ldh [hVBlankCopySize], a
+	ldh [lobyte(hVBlankCopySize)], a
 	call DelayFrame
 	ld a, c
 	sub 8
 	ld c, a
-	jr .loop
+	jr CopyVideoData.loop
 
-CopyVideoDataDouble::
+CopyVideoDataDouble:
 ; Wait for the next VBlank, then copy c 1bpp
-; tiles from b:de to hl, 8 tiles at a time.
+; tiles from b:de to hl, 8 * TILE_SIZE at a time.
 ; This takes c/8 frames.
-	ldh a, [hAutoBGTransferEnabled]
+	ldh a, [lobyte(hAutoBGTransferEnabled)]
 	push af
 	xor a ; disable auto-transfer while copying
-	ldh [hAutoBGTransferEnabled], a
-	ldh a, [hLoadedROMBank]
-	ldh [hROMBankTemp], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
+	ldh a, [lobyte(hLoadedROMBank)]
+	ldh [lobyte(hROMBankTemp)], a
 
 	ld a, b
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
 	ld a, e
-	ldh [hVBlankCopyDoubleSource], a
+	ldh [lobyte(hVBlankCopyDoubleSource)], a
 	ld a, d
-	ldh [hVBlankCopyDoubleSource + 1], a
+	ldh [lobyte(hVBlankCopyDoubleSource + 1)], a
 
 	ld a, l
-	ldh [hVBlankCopyDoubleDest], a
+	ldh [lobyte(hVBlankCopyDoubleDest)], a
 	ld a, h
-	ldh [hVBlankCopyDoubleDest + 1], a
+	ldh [lobyte(hVBlankCopyDoubleDest + 1)], a
 
-.loop
+CopyVideoDataDouble.loop
 	ld a, c
 	cp 8
-	jr nc, .keepgoing
+	jr nc, CopyVideoDataDouble.keepgoing
 
-.done
-	ldh [hVBlankCopyDoubleSize], a
+CopyVideoDataDouble.done
+	ldh [lobyte(hVBlankCopyDoubleSize)], a
 	call DelayFrame
-	ldh a, [hROMBankTemp]
-	ldh [hLoadedROMBank], a
+	ldh a, [lobyte(hROMBankTemp)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	pop af
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ret
 
-.keepgoing
+CopyVideoDataDouble.keepgoing
 	ld a, 8
-	ldh [hVBlankCopyDoubleSize], a
+	ldh [lobyte(hVBlankCopyDoubleSize)], a
 	call DelayFrame
 	ld a, c
 	sub 8
 	ld c, a
-	jr .loop
+	jr CopyVideoDataDouble.loop
 
-ClearScreenArea::
+ClearScreenArea:
 ; Clear tilemap area cxb at hl.
-	ld a, ' '
+	ld a, $7f
 	ld de, SCREEN_WIDTH
-.loopRows
+ClearScreenArea.loopRows
 	push hl
 	push bc
-.loopTiles
+ClearScreenArea.loopTiles
 	ld [hli], a
 	dec c
-	jr nz, .loopTiles
+	jr nz, ClearScreenArea.loopTiles
 	pop bc
 	pop hl
 	add hl, de
 	dec b
-	jr nz, .loopRows
+	jr nz, ClearScreenArea.loopRows
 	ret
 
-CopyScreenTileBufferToVRAM::
+CopyScreenTileBufferToVRAM:
 ; Copy wTileMap to the BG Map starting at b * $100.
 ; This is done in thirds of 6 rows, so it takes 3 frames.
 
 	ld c, SCREEN_HEIGHT / 3
 
-	lb hl, 0, 0
+	lb "hl", 0, 0
 	decoord 0, 6 * 0
-	call .setup
+	call CopyScreenTileBufferToVRAM.setup
 	call DelayFrame
 
-	lb hl, SCREEN_HEIGHT / 3, 0
+	lb "hl", SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 1
-	call .setup
+	call CopyScreenTileBufferToVRAM.setup
 	call DelayFrame
 
-	lb hl, 2 * SCREEN_HEIGHT / 3, 0
+	lb "hl", 2 * SCREEN_HEIGHT / 3, 0
 	decoord 0, 6 * 2
-	call .setup
+	call CopyScreenTileBufferToVRAM.setup
 	jp DelayFrame
 
-.setup
+CopyScreenTileBufferToVRAM.setup
 	ld a, d
-	ldh [hVBlankCopyBGSource+1], a
+	ldh [lobyte(hVBlankCopyBGSource+1)], a
 	call GetRowColAddressBgMap
 	ld a, l
-	ldh [hVBlankCopyBGDest], a
+	ldh [lobyte(hVBlankCopyBGDest)], a
 	ld a, h
-	ldh [hVBlankCopyBGDest+1], a
+	ldh [lobyte(hVBlankCopyBGDest+1)], a
 	ld a, c
-	ldh [hVBlankCopyBGNumRows], a
+	ldh [lobyte(hVBlankCopyBGNumRows)], a
 	ld a, e
-	ldh [hVBlankCopyBGSource], a
+	ldh [lobyte(hVBlankCopyBGSource)], a
 	ret
 
-ClearScreen::
+ClearScreen:
 ; Clear wTileMap, then wait
 ; for the bg map to update.
 	ld bc, SCREEN_AREA
 	inc b
 	hlcoord 0, 0
-	ld a, ' '
-.loop
+	ld a, $7f
+ClearScreen.loop
 	ld [hli], a
 	dec c
-	jr nz, .loop
+	jr nz, ClearScreen.loop
 	dec b
-	jr nz, .loop
+	jr nz, ClearScreen.loop
 	jp Delay3

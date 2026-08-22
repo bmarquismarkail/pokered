@@ -1,22 +1,22 @@
 FocusEnergyEffect_:
 	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .notEnemy
+	jr z, FocusEnergyEffect_.notEnemy
 	ld hl, wEnemyBattleStatus2
-.notEnemy
+FocusEnergyEffect_.notEnemy
 	bit GETTING_PUMPED, [hl] ; is mon already using focus energy?
-	jr nz, .alreadyUsing
+	jr nz, FocusEnergyEffect_.alreadyUsing
 	set GETTING_PUMPED, [hl] ; mon is now using focus energy
 	callfar PlayCurrentMoveAnimation
 	ld hl, GettingPumpedText
 	jp PrintText
-.alreadyUsing
+FocusEnergyEffect_.alreadyUsing
 	ld c, 50
 	call DelayFrames
 	jpfar PrintButItFailedText_
 
 GettingPumpedText:
 	text_pause
-	text_far _GettingPumpedText
+	text_far WLA_GLOBAL_GettingPumpedText
 	text_end

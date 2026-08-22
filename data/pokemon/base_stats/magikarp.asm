@@ -1,20 +1,20 @@
-	db DEX_MAGIKARP ; pokedex id
+	.DB DEX_MAGIKARP ; pokedex id
 
-	db  20,  10,  55,  80,  20
+	.DB  20,  10,  55,  80,  20
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 255 ; catch rate
-	db 20 ; base exp
+	.DB WATER, WATER ; type
+	.DB 255 ; catch rate
+	.DB 20 ; base exp
 
-	INCBIN "gfx/pokemon/front/magikarp.pic", 0, 1 ; sprite dimensions
-	dw MagikarpPicFront, MagikarpPicBack
+	.INCBIN "gfx/pokemon/front/magikarp.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MagikarpPicFront, MagikarpPicBack
 
-	db SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

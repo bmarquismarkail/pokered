@@ -1,4 +1,4 @@
-SaveTrainerName::
+SaveTrainerName:
 	ld hl, TrainerNamePointers
 	ld a, [wTrainerClass]
 	dec a
@@ -10,12 +10,12 @@ SaveTrainerName::
 	ld h, [hl]
 	ld l, a
 	ld de, wNameBuffer
-.CopyCharacter
+SaveTrainerName.CopyCharacter
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp '@'
-	jr nz, .CopyCharacter
+	cp $50
+	jr nz, SaveTrainerName.CopyCharacter
 	ret
 
-INCLUDE "data/trainers/name_pointers.asm"
+.INCLUDE "data/trainers/name_pointers.asm"

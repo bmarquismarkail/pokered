@@ -6,25 +6,25 @@ AnimateBoulderDust:
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld a, %11100100
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	call LoadSmokeTileFourTimes
 	farcall WriteCutOrBoulderDustAnimationOAMBlock
 	ld c, 8 ; number of steps in animation
-.loop
+AnimateBoulderDust.loop
 	push bc
 	call GetMoveBoulderDustFunctionPointer
-	ld bc, .returnAddress
+	ld bc, AnimateBoulderDust.returnAddress
 	push bc
 	ld c, 4
 	jp hl
-.returnAddress
-	ldh a, [rOBP1]
+AnimateBoulderDust.returnAddress
+	ldh a, [lobyte(rOBP1)]
 	xor %01100100
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	call Delay3
 	pop bc
 	dec c
-	jr nz, .loop
+	jr nz, AnimateBoulderDust.loop
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	jp LoadPlayerSpriteGraphics
@@ -51,10 +51,10 @@ GetMoveBoulderDustFunctionPointer:
 	pop hl
 	ret
 
-MACRO boulder_dust_adjust
-	db \1, \2 ; coords
-	dw \3 ; function
-ENDM
+.MACRO boulder_dust_adjust
+	.DB \1, \2 ; coords
+	.DW \3 ; function
+.ENDM
 
 MoveBoulderDustFunctionPointerTable:
 	boulder_dust_adjust -1, 0, AdjustOAMBlockYPos ; down
@@ -62,10 +62,10 @@ MoveBoulderDustFunctionPointerTable:
 	boulder_dust_adjust  1, 1, AdjustOAMBlockXPos ; left
 	boulder_dust_adjust -1, 1, AdjustOAMBlockXPos ; right
 
-LoadSmokeTileFourTimes::
-	ld hl, vChars1 tile $7c
+LoadSmokeTileFourTimes:
+	ld hl, vChars1 + TILE_SIZE * $7c
 	ld c, 4
-.loop
+LoadSmokeTileFourTimes.loop
 	push bc
 	push hl
 	call LoadSmokeTile
@@ -74,14 +74,14 @@ LoadSmokeTileFourTimes::
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .loop
+	jr nz, LoadSmokeTileFourTimes.loop
 	ret
 
 LoadSmokeTile:
 	ld de, SSAnneSmokePuffTile
-	lb bc, BANK(SSAnneSmokePuffTile), (SSAnneSmokePuffTileEnd - SSAnneSmokePuffTile) / TILE_SIZE
+	lb "bc", bank(SSAnneSmokePuffTile), (SSAnneSmokePuffTileEnd - SSAnneSmokePuffTile) / TILE_SIZE
 	jp CopyVideoData
 
 SSAnneSmokePuffTile:
-	INCBIN "gfx/overworld/smoke.2bpp"
+	.INCBIN "gfx/overworld/smoke.2bpp"
 SSAnneSmokePuffTileEnd:

@@ -1,17 +1,17 @@
-	db DEX_VOLTORB ; pokedex id
+	.DB DEX_VOLTORB ; pokedex id
 
-	db  40,  30,  50, 100,  55
+	.DB  40,  30,  50, 100,  55
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 190 ; catch rate
-	db 103 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 190 ; catch rate
+	.DB 103 ; base exp
 
-	INCBIN "gfx/pokemon/front/voltorb.pic", 0, 1 ; sprite dimensions
-	dw VoltorbPicFront, VoltorbPicBack
+	.INCBIN "gfx/pokemon/front/voltorb.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW VoltorbPicFront, VoltorbPicBack
 
-	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    RAGE,         THUNDERBOLT,  THUNDER,      \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

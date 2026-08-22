@@ -2,13 +2,13 @@ PrintRedSNESText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomSNESText
 
-RedBedroomSNESText::
-	text_far _RedBedroomSNESText
+RedBedroomSNESText:
+	text_far WLA_GLOBAL_RedBedroomSNESText
 	text_end
 
 OpenRedsPC:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomPCText
 
-RedBedroomPCText::
+RedBedroomPCText:
 	script_players_pc

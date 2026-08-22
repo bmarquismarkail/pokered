@@ -7,7 +7,7 @@
 ; 00: unsuccessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
-UseItem::
+UseItem:
 	farjp UseItem_
 
 ; confirms the item toss and then tosses the item
@@ -18,16 +18,16 @@ UseItem::
 ; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
-TossItem::
-	ldh a, [hLoadedROMBank]
+TossItem:
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ld a, BANK(TossItem_)
-	ldh [hLoadedROMBank], a
+	ld a, bank(TossItem_)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call TossItem_
 	pop de
 	ld a, d
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
@@ -38,7 +38,7 @@ TossItem::
 ; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
-IsKeyItem::
+IsKeyItem:
 	push hl
 	push de
 	push bc

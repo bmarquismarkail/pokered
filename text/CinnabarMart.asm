@@ -1,10 +1,12 @@
-_CinnabarMartSilphWorkerFText::
+_CinnabarMartSilphWorkerFText:
+WLA_GLOBAL_CinnabarMartSilphWorkerFText:
 	text "Don't they have X"
 	line "ATTACK? It's good"
 	cont "for battles!"
 	done
 
-_CinnabarMartScientistText::
+_CinnabarMartScientistText:
+WLA_GLOBAL_CinnabarMartScientistText:
 	text "It never hurts to"
 	line "have extra items!"
 	done

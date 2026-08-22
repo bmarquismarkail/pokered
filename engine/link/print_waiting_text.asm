@@ -1,16 +1,16 @@
-PrintWaitingText::
+PrintWaitingText:
 	hlcoord 3, 10
 	ld b, 1
 	ld c, 11
 	ld a, [wIsInBattle]
 	and a
-	jr z, .trade
+	jr z, PrintWaitingText.trade
 ; battle
 	call TextBoxBorder
-	jr .border_done
-.trade
+	jr PrintWaitingText.border_done
+PrintWaitingText.trade
 	call CableClub_TextBoxBorder
-.border_done
+PrintWaitingText.border_done
 	hlcoord 4, 11
 	ld de, WaitingText
 	call PlaceString
@@ -18,4 +18,4 @@ PrintWaitingText::
 	jp DelayFrames
 
 WaitingText:
-	db "Waiting...!@"
+		.STRINGMAP pokemon, "Waiting...!@"

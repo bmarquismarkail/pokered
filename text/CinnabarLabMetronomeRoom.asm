@@ -1,4 +1,5 @@
-_CinnabarLabMetronomeRoomScientist1Text::
+_CinnabarLabMetronomeRoomScientist1Text:
+WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1Text:
 	text "Tch-tch-tch!"
 	line "I made a cool TM!"
 
@@ -6,14 +7,16 @@ _CinnabarLabMetronomeRoomScientist1Text::
 	line "kinds of fun!"
 	prompt
 
-_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text::
+_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text:
+WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text:
 	text "<PLAYER> received "
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
+_CinnabarLabMetronomeRoomScientist1TM35ExplanationText:
+WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1TM35ExplanationText:
 	text "Tch-tch-tch!"
 	line "That's the sound"
 	cont "of a METRONOME!"
@@ -24,18 +27,21 @@ _CinnabarLabMetronomeRoomScientist1TM35ExplanationText::
 	cont "it doesn't know!"
 	done
 
-_CinnabarLabMetronomeRoomScientist1TM35NoRoomText::
+_CinnabarLabMetronomeRoomScientist1TM35NoRoomText:
+WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1TM35NoRoomText:
 	text "Your pack is"
 	line "crammed full!"
 	done
 
-_CinnabarLabMetronomeRoomScientist2Text::
+_CinnabarLabMetronomeRoomScientist2Text:
+WLA_GLOBAL_CinnabarLabMetronomeRoomScientist2Text:
 	text "EEVEE can evolve"
 	line "into 1 of 3 kinds"
 	cont "of #MON."
 	done
 
-_CinnabarLabMetronomeRoomPCText::
+_CinnabarLabMetronomeRoomPCText:
+WLA_GLOBAL_CinnabarLabMetronomeRoomPCText:
 	text "There's an e-mail"
 	line "message!"
 
@@ -59,6 +65,7 @@ _CinnabarLabMetronomeRoomPCText::
 	para "..."
 	done
 
-_CinnabarLabMetronomeRoomAmberPipeText::
+_CinnabarLabMetronomeRoomAmberPipeText:
+WLA_GLOBAL_CinnabarLabMetronomeRoomAmberPipeText:
 	text "An amber pipe!"
 	done

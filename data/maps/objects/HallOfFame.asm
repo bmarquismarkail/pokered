@@ -2,15 +2,16 @@
 	const_export HALLOFFAME_OAK
 
 HallOfFame_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  4,  7, CHAMPIONS_ROOM, 3
 	warp_event  5,  7, CHAMPIONS_ROOM, 4
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 1
 	object_event  5,  2, SPRITE_OAK, STAY, DOWN, TEXT_HALLOFFAME_OAK
 
-	def_warps_to HALL_OF_FAME
+	event_displacement HALL_OF_FAME_WIDTH, 4, 7
+
+	event_displacement HALL_OF_FAME_WIDTH, 5, 7

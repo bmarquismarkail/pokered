@@ -49,7 +49,7 @@ OaksLabDefaultScript:
 
 OaksLabOakEntersLabScript:
 	ld a, OAKSLAB_OAK2
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld de, OakEntryMovement
 	call MoveSprite
 
@@ -58,10 +58,10 @@ OaksLabOakEntersLabScript:
 	ret
 
 OakEntryMovement:
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db NPC_MOVEMENT_UP
-	db -1 ; end
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB NPC_MOVEMENT_UP
+	.DB -1 ; end
 
 OaksLabToggleOaksScript:
 	ld a, [wStatusFlags5]
@@ -87,14 +87,14 @@ OaksLabPlayerEntersLabScript:
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, OAKSLAB_OAK1
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 
 	ld a, SCRIPT_OAKSLAB_FOLLOWED_OAK
@@ -102,8 +102,8 @@ OaksLabPlayerEntersLabScript:
 	ret
 
 PlayerEntryMovementRLE:
-	db PAD_UP, 8
-	db -1 ; end
+	.DB PAD_UP, 8
+	.DB -1 ; end
 
 OaksLabFollowedOakScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -112,9 +112,9 @@ OaksLabFollowedOakScript:
 	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
 	ld hl, wStatusFlags7
@@ -129,19 +129,19 @@ OaksLabOakChooseMonSpeechScript:
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_OAKSLAB_RIVAL_FED_UP_WITH_WAITING
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Delay3
 	ld a, TEXT_OAKSLAB_OAK_CHOOSE_MON
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Delay3
 	ld a, TEXT_OAKSLAB_RIVAL_WHAT_ABOUT_ME
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Delay3
 	ld a, TEXT_OAKSLAB_OAK_BE_PATIENT
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_OAK_ASKED_TO_CHOOSE_MON
 	xor a
@@ -156,18 +156,18 @@ OaksLabPlayerDontGoAwayScript:
 	cp 6
 	ret nz
 	ld a, OAKSLAB_OAK1
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a ; SPRITE_FACING_DOWN
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a ; SPRITE_FACING_DOWN
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
 	ld a, TEXT_OAKSLAB_OAK_DONT_GO_AWAY_YET
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -194,70 +194,70 @@ OaksLabPlayerForcedToWalkBackScript:
 OaksLabChoseStarterScript:
 	ld a, [wPlayerStarter]
 	cp STARTER1
-	jr z, .Charmander
+	jr z, OaksLabChoseStarterScript.Charmander
 	cp STARTER2
-	jr z, .Squirtle
-	jr .Bulbasaur
-.Charmander
-	ld de, .MiddleBallMovement1
+	jr z, OaksLabChoseStarterScript.Squirtle
+	jr OaksLabChoseStarterScript.Bulbasaur
+OaksLabChoseStarterScript.Charmander
+	ld de, OaksLabChoseStarterScript.MiddleBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
-	jr z, .moveBlue
-	ld de, .MiddleBallMovement2
-	jr .moveBlue
+	jr z, OaksLabChoseStarterScript.moveBlue
+	ld de, OaksLabChoseStarterScript.MiddleBallMovement2
+	jr OaksLabChoseStarterScript.moveBlue
 
-.MiddleBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_UP
-	db -1 ; end
+OaksLabChoseStarterScript.MiddleBallMovement1
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_UP
+	.DB -1 ; end
 
-.MiddleBallMovement2
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db -1 ; end
+OaksLabChoseStarterScript.MiddleBallMovement2
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB -1 ; end
 
-.Squirtle
-	ld de, .RightBallMovement1
+OaksLabChoseStarterScript.Squirtle
+	ld de, OaksLabChoseStarterScript.RightBallMovement1
 	ld a, [wYCoord]
 	cp 4 ; is the player standing below the table?
-	jr z, .moveBlue
-	ld de, .RightBallMovement2
-	jr .moveBlue
+	jr z, OaksLabChoseStarterScript.moveBlue
+	ld de, OaksLabChoseStarterScript.RightBallMovement2
+	jr OaksLabChoseStarterScript.moveBlue
 
-.RightBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_UP
-	db -1 ; end
+OaksLabChoseStarterScript.RightBallMovement1
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_UP
+	.DB -1 ; end
 
-.RightBallMovement2
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_RIGHT
-	db -1 ; end
+OaksLabChoseStarterScript.RightBallMovement2
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_RIGHT
+	.DB -1 ; end
 
-.Bulbasaur
-	ld de, .LeftBallMovement1
+OaksLabChoseStarterScript.Bulbasaur
+	ld de, OaksLabChoseStarterScript.LeftBallMovement1
 	ld a, [wXCoord]
 	cp 9 ; is the player standing to the right of the table?
-	jr nz, .moveBlue
+	jr nz, OaksLabChoseStarterScript.moveBlue
 	push hl
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITESTATEDATA1_YPIXELS
-	ldh [hSpriteDataOffset], a
+	ldh [lobyte(hSpriteDataOffset)], a
 	call GetPointerWithinSpriteStateData1
 	push hl
 	ld [hl], $4c ; SPRITESTATEDATA1_YPIXELS
@@ -269,20 +269,20 @@ OaksLabChoseStarterScript:
 	ld [hl], 8 ; SPRITESTATEDATA2_MAPY
 	inc hl
 	ld [hl], 9 ; SPRITESTATEDATA2_MAPX
-	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
+	ld de, OaksLabChoseStarterScript.LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
-	jr .moveBlue
+	jr OaksLabChoseStarterScript.moveBlue
 
-.LeftBallMovement1
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-.LeftBallMovement2
-	db NPC_MOVEMENT_RIGHT
-	db -1 ; end
+OaksLabChoseStarterScript.LeftBallMovement1
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+OaksLabChoseStarterScript.LeftBallMovement2
+	.DB NPC_MOVEMENT_RIGHT
+	.DB -1 ; end
 
-.moveBlue
+OaksLabChoseStarterScript.moveBlue
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call MoveSprite
 
 	ld a, SCRIPT_OAKSLAB_RIVAL_CHOOSES_STARTER
@@ -296,26 +296,26 @@ OaksLabRivalChoosesStarterScript:
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_OAKSLAB_RIVAL_ILL_TAKE_THIS_ONE
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, [wRivalStarterBallSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
+	jr nz, OaksLabRivalChoosesStarterScript.not_charmander
 	ld a, TOGGLE_STARTER_BALL_1
-	jr .hideBallAndContinue
-.not_charmander
+	jr OaksLabRivalChoosesStarterScript.hideBallAndContinue
+OaksLabRivalChoosesStarterScript.not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
+	jr nz, OaksLabRivalChoosesStarterScript.not_squirtle
 	ld a, TOGGLE_STARTER_BALL_2
-	jr .hideBallAndContinue
-.not_squirtle
+	jr OaksLabRivalChoosesStarterScript.hideBallAndContinue
+OaksLabRivalChoosesStarterScript.not_squirtle
 	ld a, TOGGLE_STARTER_BALL_3
-.hideBallAndContinue
+OaksLabRivalChoosesStarterScript.hideBallAndContinue
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	call Delay3
@@ -325,12 +325,12 @@ OaksLabRivalChoosesStarterScript:
 	ld [wNamedObjectIndex], a
 	call GetMonName
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_OAKSLAB_RIVAL_RECEIVED_MON
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_STARTER
 	xor a
@@ -345,31 +345,31 @@ OaksLabRivalChallengesPlayerScript:
 	cp 6
 	ret nz
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a ; SPRITE_FACING_DOWN
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
-	ld c, BANK(Music_MeetRival)
+	ld c, bank(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, TEXT_OAKSLAB_RIVAL_ILL_TAKE_YOU_ON
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, $1
-	ldh [hNPCPlayerRelativePosPerspective], a
+	ldh [lobyte(hNPCPlayerRelativePosPerspective)], a
 	ld a, $1
 	swap a
-	ldh [hNPCSpriteOffset], a
+	ldh [lobyte(hNPCSpriteOffset)], a
 	predef CalcPositionOfPlayerRelativeToNPC
-	ldh a, [hNPCPlayerYDistance]
+	ldh a, [lobyte(hNPCPlayerYDistance)]
 	dec a
-	ldh [hNPCPlayerYDistance], a
+	ldh [lobyte(hNPCPlayerYDistance)], a
 	predef FindPathToPlayer
 	ld de, wNPCMovementDirections2
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call MoveSprite
 
 	ld a, SCRIPT_OAKSLAB_RIVAL_START_BATTLE
@@ -386,17 +386,17 @@ OaksLabRivalStartBattleScript:
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .not_squirtle
+	jr nz, OaksLabRivalStartBattleScript.not_squirtle
 	ld a, $1
-	jr .done
-.not_squirtle
+	jr OaksLabRivalStartBattleScript.done
+OaksLabRivalStartBattleScript.not_squirtle
 	cp STARTER3
-	jr nz, .not_bulbasaur
+	jr nz, OaksLabRivalStartBattleScript.not_bulbasaur
 	ld a, $2
-	jr .done
-.not_bulbasaur
+	jr OaksLabRivalStartBattleScript.done
+OaksLabRivalStartBattleScript.not_bulbasaur
 	ld a, $3
-.done
+OaksLabRivalStartBattleScript.done
 	ld [wTrainerNo], a
 	ld a, OAKSLAB_RIVAL
 	ld [wSpriteIndex], a
@@ -425,9 +425,9 @@ OaksLabRivalEndBattleScript:
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a ; SPRITE_FACING_DOWN
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
 	SetEvent EVENT_BATTLED_RIVAL_IN_OAKS_LAB
@@ -440,41 +440,41 @@ OaksLabRivalStartsExitScript:
 	ld c, 20
 	call DelayFrames
 	ld a, TEXT_OAKSLAB_RIVAL_SMELL_YOU_LATER
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	farcall Music_RivalAlternateStart
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
-	ld de, .RivalExitMovement
+	ldh [lobyte(hSpriteIndex)], a
+	ld de, OaksLabRivalStartsExitScript.RivalExitMovement
 	call MoveSprite
 	ld a, [wXCoord]
 	cp 4
 	; move left or right depending on where the player is standing
-	jr nz, .moveLeft
+	jr nz, OaksLabRivalStartsExitScript.moveLeft
 	ld a, NPC_MOVEMENT_RIGHT
-	jr .next
-.moveLeft
+	jr OaksLabRivalStartsExitScript.next
+OaksLabRivalStartsExitScript.moveLeft
 	ld a, NPC_MOVEMENT_LEFT
-.next
+OaksLabRivalStartsExitScript.next
 	ld [wNPCMovementDirections], a
 
 	ld a, SCRIPT_OAKSLAB_PLAYER_WATCH_RIVAL_EXIT
 	ld [wOaksLabCurScript], a
 	ret
 
-.RivalExitMovement
-	db NPC_CHANGE_FACING
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+OaksLabRivalStartsExitScript.RivalExitMovement
+	.DB NPC_CHANGE_FACING
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 OaksLabPlayerWatchRivalExitScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
-	jr nz, .checkRivalPosition
+	jr nz, OaksLabPlayerWatchRivalExitScript.checkRivalPosition
 	ld a, TOGGLE_OAKS_LAB_RIVAL
 	ld [wToggleableObjectIndex], a
 	predef HideObject
@@ -483,40 +483,40 @@ OaksLabPlayerWatchRivalExitScript:
 	call PlayDefaultMusic ; reset to map music
 	ld a, SCRIPT_OAKSLAB_NOOP
 	ld [wOaksLabCurScript], a
-	jr .done
+	jr OaksLabPlayerWatchRivalExitScript.done
 ; make the player keep facing the rival as he walks away
-.checkRivalPosition
+OaksLabPlayerWatchRivalExitScript.checkRivalPosition
 	ld a, [wNPCNumScriptedSteps]
 	cp $5
-	jr nz, .turnPlayerDown
+	jr nz, OaksLabPlayerWatchRivalExitScript.turnPlayerDown
 	ld a, [wXCoord]
 	cp 4
-	jr nz, .turnPlayerLeft
+	jr nz, OaksLabPlayerWatchRivalExitScript.turnPlayerLeft
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
-	jr .done
-.turnPlayerLeft
+	jr OaksLabPlayerWatchRivalExitScript.done
+OaksLabPlayerWatchRivalExitScript.turnPlayerLeft
 	ld a, SPRITE_FACING_LEFT
 	ld [wSpritePlayerStateData1FacingDirection], a
-	jr .done
-.turnPlayerDown
+	jr OaksLabPlayerWatchRivalExitScript.done
+OaksLabPlayerWatchRivalExitScript.turnPlayerDown
 	cp $4
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpritePlayerStateData1FacingDirection], a
-.done
+OaksLabPlayerWatchRivalExitScript.done
 	ret
 
 OaksLabRivalArrivesAtOaksRequestScript:
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	call EnableAutoTextBoxDrawing
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, TEXT_OAKSLAB_RIVAL_GRAMPS
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call OaksLabCalcRivalMovementScript
 	ld a, TOGGLE_OAKS_LAB_RIVAL
@@ -531,7 +531,7 @@ OaksLabRivalArrivesAtOaksRequestScript:
 	call FillMemory
 	ld [hl], $ff
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 
@@ -541,14 +541,14 @@ OaksLabRivalArrivesAtOaksRequestScript:
 
 OaksLabRivalFaceUpOakFaceDownScript:
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, OAKSLAB_OAK2
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	xor a ; SPRITE_FACING_DOWN
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	jp SetSpriteFacingDirectionAndDelay
 
 OaksLabOakGivesPokedexScript:
@@ -561,21 +561,21 @@ OaksLabOakGivesPokedexScript:
 	ld [wJoyIgnore], a
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_RIVAL_WHAT_DID_YOU_CALL_ME_FOR
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call DelayFrame
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_OAK_I_HAVE_A_REQUEST
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call DelayFrame
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_OAK_MY_INVENTION_POKEDEX
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call DelayFrame
 	ld a, TEXT_OAKSLAB_OAK_GOT_POKEDEX
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Delay3
 	ld a, TOGGLE_POKEDEX_1
@@ -586,16 +586,16 @@ OaksLabOakGivesPokedexScript:
 	predef HideObject
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_OAK_THAT_WAS_MY_DREAM
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_RIGHT
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a, TEXT_OAKSLAB_RIVAL_LEAVE_IT_ALL_TO_ME
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_OAK_GOT_PARCEL
@@ -617,7 +617,7 @@ OaksLabOakGivesPokedexScript:
 	call PlaySound
 	farcall Music_RivalAlternateStart
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 
@@ -654,16 +654,16 @@ OaksLabNoopScript:
 OaksLabScript_RemoveParcel:
 	ld hl, wBagItems
 	ld bc, 0
-.loop
+OaksLabScript_RemoveParcel.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp OAKS_PARCEL
-	jr z, .foundParcel
+	jr z, OaksLabScript_RemoveParcel.foundParcel
 	inc hl
 	inc c
-	jr .loop
-.foundParcel
+	jr OaksLabScript_RemoveParcel.loop
+OaksLabScript_RemoveParcel.foundParcel
 	ld hl, wNumBagItems
 	ld a, c
 	ld [wWhichPokemon], a
@@ -673,40 +673,40 @@ OaksLabScript_RemoveParcel:
 
 OaksLabCalcRivalMovementScript:
 	ld a, $7c
-	ldh [hSpriteScreenYCoord], a
+	ldh [lobyte(hSpriteScreenYCoord)], a
 	ld a, 8
-	ldh [hSpriteMapXCoord], a
+	ldh [lobyte(hSpriteMapXCoord)], a
 	ld a, [wYCoord]
 	cp 3
-	jr nz, .not_below_oak
+	jr nz, OaksLabCalcRivalMovementScript.not_below_oak
 	ld a, $4
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, 11
-	jr .done
-.not_below_oak
+	jr OaksLabCalcRivalMovementScript.done
+OaksLabCalcRivalMovementScript.not_below_oak
 	cp 1
-	jr nz, .not_above_oak
+	jr nz, OaksLabCalcRivalMovementScript.not_above_oak
 	ld a, $2
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, 9
-	jr .done
-.not_above_oak
+	jr OaksLabCalcRivalMovementScript.done
+OaksLabCalcRivalMovementScript.not_above_oak
 	ld a, $3
 	ld [wNPCMovementDirections2Index], a
 	ld b, 10
 	ld a, [wXCoord]
 	cp 4
-	jr nz, .not_left_of_oak
+	jr nz, OaksLabCalcRivalMovementScript.not_left_of_oak
 	ld a, $40
-	jr .done
-.not_left_of_oak
+	jr OaksLabCalcRivalMovementScript.done
+OaksLabCalcRivalMovementScript.not_left_of_oak
 	ld a, $20
-.done
-	ldh [hSpriteScreenXCoord], a
+OaksLabCalcRivalMovementScript.done
+	ldh [lobyte(hSpriteScreenXCoord)], a
 	ld a, b
-	ldh [hSpriteMapYCoord], a
+	ldh [lobyte(hSpriteMapYCoord)], a
 	ld a, OAKSLAB_RIVAL
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
@@ -751,47 +751,47 @@ OaksLab_TextPointers:
 	dw_const OaksLabRivalLeaveItAllToMeText,      TEXT_OAKSLAB_RIVAL_LEAVE_IT_ALL_TO_ME
 
 OaksLab_TextPointers2:
-	dw OaksLabRivalText
-	dw OaksLabCharmanderPokeBallText
-	dw OaksLabSquirtlePokeBallText
-	dw OaksLabBulbasaurPokeBallText
-	dw OaksLabOak1Text
-	dw OaksLabPokedexText
-	dw OaksLabPokedexText
-	dw OaksLabOak2Text
-	dw OaksLabGirlText
-	dw OaksLabScientistText
-	dw OaksLabScientistText
+	.DW OaksLabRivalText
+	.DW OaksLabCharmanderPokeBallText
+	.DW OaksLabSquirtlePokeBallText
+	.DW OaksLabBulbasaurPokeBallText
+	.DW OaksLabOak1Text
+	.DW OaksLabPokedexText
+	.DW OaksLabPokedexText
+	.DW OaksLabOak2Text
+	.DW OaksLabGirlText
+	.DW OaksLabScientistText
+	.DW OaksLabScientistText
 
 OaksLabRivalText:
 	text_asm
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
-	jr nz, .beforeChooseMon
-	ld hl, .GrampsIsntAroundText
+	jr nz, OaksLabRivalText.beforeChooseMon
+	ld hl, OaksLabRivalText.GrampsIsntAroundText
 	call PrintText
-	jr .done
-.beforeChooseMon
+	jr OaksLabRivalText.done
+OaksLabRivalText.beforeChooseMon
 	CheckEventReuseA EVENT_GOT_STARTER
-	jr nz, .afterChooseMon
-	ld hl, .GoAheadAndChooseText
+	jr nz, OaksLabRivalText.afterChooseMon
+	ld hl, OaksLabRivalText.GoAheadAndChooseText
 	call PrintText
-	jr .done
-.afterChooseMon
-	ld hl, .MyPokemonLooksStrongerText
+	jr OaksLabRivalText.done
+OaksLabRivalText.afterChooseMon
+	ld hl, OaksLabRivalText.MyPokemonLooksStrongerText
 	call PrintText
-.done
+OaksLabRivalText.done
 	jp TextScriptEnd
 
-.GrampsIsntAroundText:
-	text_far _OaksLabRivalGrampsIsntAroundText
+OaksLabRivalText.GrampsIsntAroundText:
+	text_far WLA_GLOBAL_OaksLabRivalGrampsIsntAroundText
 	text_end
 
-.GoAheadAndChooseText:
-	text_far _OaksLabRivalGoAheadAndChooseText
+OaksLabRivalText.GoAheadAndChooseText:
+	text_far WLA_GLOBAL_OaksLabRivalGoAheadAndChooseText
 	text_end
 
-.MyPokemonLooksStrongerText:
-	text_far _OaksLabRivalMyPokemonLooksStrongerText
+OaksLabRivalText.MyPokemonLooksStrongerText:
+	text_far WLA_GLOBAL_OaksLabRivalMyPokemonLooksStrongerText
 	text_end
 
 OaksLabCharmanderPokeBallText:
@@ -837,20 +837,20 @@ OaksLabSelectedPokeBallScript:
 	jp TextScriptEnd
 
 OaksLabThoseArePokeBallsText:
-	text_far _OaksLabThoseArePokeBallsText
+	text_far WLA_GLOBAL_OaksLabThoseArePokeBallsText
 	text_end
 
 OaksLabShowPokeBallPokemonScript:
 	ld a, OAKSLAB_OAK1
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITESTATEDATA1_FACINGDIRECTION
-	ldh [hSpriteDataOffset], a
+	ldh [lobyte(hSpriteDataOffset)], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_DOWN
 	ld a, OAKSLAB_RIVAL
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITESTATEDATA1_FACINGDIRECTION
-	ldh [hSpriteDataOffset], a
+	ldh [lobyte(hSpriteDataOffset)], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_RIGHT
 	ld hl, wStatusFlags5
@@ -869,24 +869,24 @@ OaksLabShowPokeBallPokemonScript:
 	jr OaksLabYouWantBulbasaurText
 
 OaksLabYouWantCharmanderText:
-	ld hl, .Text
+	ld hl, OaksLabYouWantCharmanderText.Text
 	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantCharmanderText
+OaksLabYouWantCharmanderText.Text:
+	text_far WLA_GLOBAL_OaksLabYouWantCharmanderText
 	text_end
 
 OaksLabYouWantSquirtleText:
-	ld hl, .Text
+	ld hl, OaksLabYouWantSquirtleText.Text
 	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantSquirtleText
+OaksLabYouWantSquirtleText.Text:
+	text_far WLA_GLOBAL_OaksLabYouWantSquirtleText
 	text_end
 
 OaksLabYouWantBulbasaurText:
-	ld hl, .Text
+	ld hl, OaksLabYouWantBulbasaurText.Text
 	jr OaksLabMonChoiceMenu
-.Text:
-	text_far _OaksLabYouWantBulbasaurText
+OaksLabYouWantBulbasaurText.Text:
+	text_far WLA_GLOBAL_OaksLabYouWantBulbasaurText
 	text_end
 
 OaksLabMonChoiceMenu:
@@ -903,17 +903,17 @@ OaksLabMonChoiceMenu:
 	call GetMonName
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
-	jr nz, .not_charmander
+	jr nz, OaksLabMonChoiceMenu.not_charmander
 	ld a, TOGGLE_STARTER_BALL_1
-	jr .continue
-.not_charmander
+	jr OaksLabMonChoiceMenu.continue
+OaksLabMonChoiceMenu.not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
-	jr nz, .not_squirtle
+	jr nz, OaksLabMonChoiceMenu.not_squirtle
 	ld a, TOGGLE_STARTER_BALL_2
-	jr .continue
-.not_squirtle
+	jr OaksLabMonChoiceMenu.continue
+OaksLabMonChoiceMenu.not_squirtle
 	ld a, TOGGLE_STARTER_BALL_3
-.continue
+OaksLabMonChoiceMenu.continue
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, $1
@@ -939,19 +939,19 @@ OaksLabMonChoiceEnd:
 	jp TextScriptEnd
 
 OaksLabMonEnergeticText:
-	text_far _OaksLabMonEnergeticText
+	text_far WLA_GLOBAL_OaksLabMonEnergeticText
 	text_end
 
 OaksLabReceivedMonText:
-	text_far _OaksLabReceivedMonText
+	text_far WLA_GLOBAL_OaksLabReceivedMonText
 	sound_get_key_item
 	text_end
 
 OaksLabLastMonScript:
 	ld a, OAKSLAB_OAK1
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITESTATEDATA1_FACINGDIRECTION
-	ldh [hSpriteDataOffset], a
+	ldh [lobyte(hSpriteDataOffset)], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], SPRITE_FACING_DOWN
 	ld hl, OaksLabLastMonText
@@ -959,274 +959,274 @@ OaksLabLastMonScript:
 	jp TextScriptEnd
 
 OaksLabLastMonText:
-	text_far _OaksLabLastMonText
+	text_far WLA_GLOBAL_OaksLabLastMonText
 	text_end
 
 OaksLabOak1Text:
 	text_asm
 	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
-	jr nz, .already_got_poke_balls
+	jr nz, OaksLabOak1Text.already_got_poke_balls
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
 	cp 2
-	jr c, .check_for_poke_balls
+	jr c, OaksLabOak1Text.check_for_poke_balls
 	CheckEvent EVENT_GOT_POKEDEX
-	jr z, .check_for_poke_balls
-.already_got_poke_balls
-	ld hl, .HowIsYourPokedexComingText
+	jr z, OaksLabOak1Text.check_for_poke_balls
+OaksLabOak1Text.already_got_poke_balls
+	ld hl, OaksLabOak1Text.HowIsYourPokedexComingText
 	call PrintText
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
-	jp .done
-.check_for_poke_balls
+	jp OaksLabOak1Text.done
+OaksLabOak1Text.check_for_poke_balls
 	ld b, POKE_BALL
 	call IsItemInBag
-	jr nz, .come_see_me_sometimes
+	jr nz, OaksLabOak1Text.come_see_me_sometimes
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
-	jr nz, .give_poke_balls
+	jr nz, OaksLabOak1Text.give_poke_balls
 	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .mon_around_the_world
+	jr nz, OaksLabOak1Text.mon_around_the_world
 	CheckEventReuseA EVENT_BATTLED_RIVAL_IN_OAKS_LAB
-	jr nz, .check_got_parcel
+	jr nz, OaksLabOak1Text.check_got_parcel
 	ld a, [wStatusFlags4]
 	bit BIT_GOT_STARTER, a
-	jr nz, .already_got_pokemon
-	ld hl, .WhichPokemonDoYouWantText
+	jr nz, OaksLabOak1Text.already_got_pokemon
+	ld hl, OaksLabOak1Text.WhichPokemonDoYouWantText
 	call PrintText
-	jr .done
-.already_got_pokemon
-	ld hl, .YourPokemonCanFightText
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.already_got_pokemon
+	ld hl, OaksLabOak1Text.YourPokemonCanFightText
 	call PrintText
-	jr .done
-.check_got_parcel
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.check_got_parcel
 	ld b, OAKS_PARCEL
 	call IsItemInBag
-	jr nz, .got_parcel
-	ld hl, .RaiseYourYoungPokemonText
+	jr nz, OaksLabOak1Text.got_parcel
+	ld hl, OaksLabOak1Text.RaiseYourYoungPokemonText
 	call PrintText
-	jr .done
-.got_parcel
-	ld hl, .DeliverParcelText
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.got_parcel
+	ld hl, OaksLabOak1Text.DeliverParcelText
 	call PrintText
 	call OaksLabScript_RemoveParcel
 	ld a, SCRIPT_OAKSLAB_RIVAL_ARRIVES_AT_OAKS_REQUEST
 	ld [wOaksLabCurScript], a
-	jr .done
-.mon_around_the_world
-	ld hl, .PokemonAroundTheWorldText
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.mon_around_the_world
+	ld hl, OaksLabOak1Text.PokemonAroundTheWorldText
 	call PrintText
-	jr .done
-.give_poke_balls
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.give_poke_balls
 	CheckAndSetEvent EVENT_GOT_POKEBALLS_FROM_OAK
-	jr nz, .come_see_me_sometimes
-	lb bc, POKE_BALL, 5
+	jr nz, OaksLabOak1Text.come_see_me_sometimes
+	lb "bc", POKE_BALL, 5
 	call GiveItem
-	ld hl, .GivePokeballsText
+	ld hl, OaksLabOak1Text.GivePokeballsText
 	call PrintText
-	jr .done
-.come_see_me_sometimes
-	ld hl, .ComeSeeMeSometimesText
+	jr OaksLabOak1Text.done
+OaksLabOak1Text.come_see_me_sometimes
+	ld hl, OaksLabOak1Text.ComeSeeMeSometimesText
 	call PrintText
-.done
+OaksLabOak1Text.done
 	jp TextScriptEnd
 
-.WhichPokemonDoYouWantText:
-	text_far _OaksLabOak1WhichPokemonDoYouWantText
+OaksLabOak1Text.WhichPokemonDoYouWantText:
+	text_far WLA_GLOBAL_OaksLabOak1WhichPokemonDoYouWantText
 	text_end
 
-.YourPokemonCanFightText:
-	text_far _OaksLabOak1YourPokemonCanFightText
+OaksLabOak1Text.YourPokemonCanFightText:
+	text_far WLA_GLOBAL_OaksLabOak1YourPokemonCanFightText
 	text_end
 
-.RaiseYourYoungPokemonText:
-	text_far _OaksLabOak1RaiseYourYoungPokemonText
+OaksLabOak1Text.RaiseYourYoungPokemonText:
+	text_far WLA_GLOBAL_OaksLabOak1RaiseYourYoungPokemonText
 	text_end
 
-.DeliverParcelText:
-	text_far _OaksLabOak1DeliverParcelText
+OaksLabOak1Text.DeliverParcelText:
+	text_far WLA_GLOBAL_OaksLabOak1DeliverParcelText
 	sound_get_key_item
-	text_far _OaksLabOak1ParcelThanksText
+	text_far WLA_GLOBAL_OaksLabOak1ParcelThanksText
 	text_end
 
-.PokemonAroundTheWorldText:
-	text_far _OaksLabOak1PokemonAroundTheWorldText
+OaksLabOak1Text.PokemonAroundTheWorldText:
+	text_far WLA_GLOBAL_OaksLabOak1PokemonAroundTheWorldText
 	text_end
 
-.GivePokeballsText:
-	text_far _OaksLabOak1ReceivedPokeballsText
+OaksLabOak1Text.GivePokeballsText:
+	text_far WLA_GLOBAL_OaksLabOak1ReceivedPokeballsText
 	sound_get_key_item
-	text_far _OaksLabGivePokeballsExplanationText
+	text_far WLA_GLOBAL_OaksLabGivePokeballsExplanationText
 	text_end
 
-.ComeSeeMeSometimesText:
-	text_far _OaksLabOak1ComeSeeMeSometimesText
+OaksLabOak1Text.ComeSeeMeSometimesText:
+	text_far WLA_GLOBAL_OaksLabOak1ComeSeeMeSometimesText
 	text_end
 
-.HowIsYourPokedexComingText:
-	text_far _OaksLabOak1HowIsYourPokedexComingText
+OaksLabOak1Text.HowIsYourPokedexComingText:
+	text_far WLA_GLOBAL_OaksLabOak1HowIsYourPokedexComingText
 	text_end
 
 OaksLabPokedexText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabPokedexText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabPokedexText
+OaksLabPokedexText.Text:
+	text_far WLA_GLOBAL_OaksLabPokedexText
 	text_end
 
 OaksLabOak2Text:
-	text_far _OaksLabOak2Text
+	text_far WLA_GLOBAL_OaksLabOak2Text
 	text_end
 
 OaksLabGirlText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabGirlText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabGirlText
+OaksLabGirlText.Text:
+	text_far WLA_GLOBAL_OaksLabGirlText
 	text_end
 
 OaksLabRivalFedUpWithWaitingText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalFedUpWithWaitingText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalFedUpWithWaitingText
+OaksLabRivalFedUpWithWaitingText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalFedUpWithWaitingText
 	text_end
 
 OaksLabOakChooseMonText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabOakChooseMonText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabOakChooseMonText
+OaksLabOakChooseMonText.Text:
+	text_far WLA_GLOBAL_OaksLabOakChooseMonText
 	text_end
 
 OaksLabRivalWhatAboutMeText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalWhatAboutMeText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalWhatAboutMeText
+OaksLabRivalWhatAboutMeText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalWhatAboutMeText
 	text_end
 
 OaksLabOakBePatientText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabOakBePatientText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabOakBePatientText
+OaksLabOakBePatientText.Text:
+	text_far WLA_GLOBAL_OaksLabOakBePatientText
 	text_end
 
 OaksLabOakDontGoAwayYetText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabOakDontGoAwayYetText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabOakDontGoAwayYetText
+OaksLabOakDontGoAwayYetText.Text:
+	text_far WLA_GLOBAL_OaksLabOakDontGoAwayYetText
 	text_end
 
 OaksLabRivalIllTakeThisOneText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalIllTakeThisOneText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalIllTakeThisOneText
+OaksLabRivalIllTakeThisOneText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalIllTakeThisOneText
 	text_end
 
 OaksLabRivalReceivedMonText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalReceivedMonText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalReceivedMonText
+OaksLabRivalReceivedMonText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalReceivedMonText
 	sound_get_key_item
 	text_end
 
 OaksLabRivalIllTakeYouOnText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalIllTakeYouOnText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalIllTakeYouOnText
+OaksLabRivalIllTakeYouOnText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalIllTakeYouOnText
 	text_end
 
 OaksLabRivalIPickedTheWrongPokemonText:
-	text_far _OaksLabRivalIPickedTheWrongPokemonText
+	text_far WLA_GLOBAL_OaksLabRivalIPickedTheWrongPokemonText
 	text_end
 
 OaksLabRivalAmIGreatOrWhatText:
-	text_far _OaksLabRivalAmIGreatOrWhatText
+	text_far WLA_GLOBAL_OaksLabRivalAmIGreatOrWhatText
 	text_end
 
 OaksLabRivalSmellYouLaterText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabRivalSmellYouLaterText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabRivalSmellYouLaterText
+OaksLabRivalSmellYouLaterText.Text:
+	text_far WLA_GLOBAL_OaksLabRivalSmellYouLaterText
 	text_end
 
 OaksLabRivalGrampsText:
-	text_far _OaksLabRivalGrampsText
+	text_far WLA_GLOBAL_OaksLabRivalGrampsText
 	text_end
 
 OaksLabRivalWhatDidYouCallMeForText:
-	text_far _OaksLabRivalWhatDidYouCallMeForText
+	text_far WLA_GLOBAL_OaksLabRivalWhatDidYouCallMeForText
 	text_end
 
 OaksLabOakIHaveARequestText:
-	text_far _OaksLabOakIHaveARequestText
+	text_far WLA_GLOBAL_OaksLabOakIHaveARequestText
 	text_end
 
 OaksLabOakMyInventionPokedexText:
-	text_far _OaksLabOakMyInventionPokedexText
+	text_far WLA_GLOBAL_OaksLabOakMyInventionPokedexText
 	text_end
 
 OaksLabOakGotPokedexText:
-	text_far _OaksLabOakGotPokedexText
+	text_far WLA_GLOBAL_OaksLabOakGotPokedexText
 	sound_get_key_item
 	text_end
 
 OaksLabOakThatWasMyDreamText:
-	text_far _OaksLabOakThatWasMyDreamText
+	text_far WLA_GLOBAL_OaksLabOakThatWasMyDreamText
 	text_end
 
 OaksLabRivalLeaveItAllToMeText:
-	text_far _OaksLabRivalLeaveItAllToMeText
+	text_far WLA_GLOBAL_OaksLabRivalLeaveItAllToMeText
 	text_end
 
 OaksLabScientistText:
 	text_asm
-	ld hl, .Text
+	ld hl, OaksLabScientistText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _OaksLabScientistText
+OaksLabScientistText.Text:
+	text_far WLA_GLOBAL_OaksLabScientistText
 	text_end

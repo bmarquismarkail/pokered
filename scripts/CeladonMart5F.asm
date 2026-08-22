@@ -10,13 +10,13 @@ CeladonMart5F_TextPointers:
 	dw_const CeladonMart5FCurrentFloorSignText, TEXT_CELADONMART5F_CURRENT_FLOOR_SIGN
 
 CeladonMart5FGentlemanText:
-	text_far _CeladonMart5FGentlemanText
+	text_far WLA_GLOBAL_CeladonMart5FGentlemanText
 	text_end
 
 CeladonMart5FSailorText:
-	text_far _CeladonMart5FSailorText
+	text_far WLA_GLOBAL_CeladonMart5FSailorText
 	text_end
 
 CeladonMart5FCurrentFloorSignText:
-	text_far _CeladonMart5FCurrentFloorSignText
+	text_far WLA_GLOBAL_CeladonMart5FCurrentFloorSignText
 	text_end

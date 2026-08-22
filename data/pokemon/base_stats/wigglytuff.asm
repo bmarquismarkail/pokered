@@ -1,17 +1,17 @@
-	db DEX_WIGGLYTUFF ; pokedex id
+	.DB DEX_WIGGLYTUFF ; pokedex id
 
-	db 140,  70,  45,  45,  50
+	.DB 140,  70,  45,  45,  50
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 50 ; catch rate
-	db 109 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 50 ; catch rate
+	.DB 109 ; base exp
 
-	INCBIN "gfx/pokemon/front/wigglytuff.pic", 0, 1 ; sprite dimensions
-	dw WigglytuffPicFront, WigglytuffPicBack
+	.INCBIN "gfx/pokemon/front/wigglytuff.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW WigglytuffPicFront, WigglytuffPicBack
 
-	db SING, DISABLE, DEFENSE_CURL, DOUBLESLAP ; level 1 learnset
-	db GROWTH_FAST ; growth rate
+	.DB SING, DISABLE, DEFENSE_CURL, DOUBLESLAP ; level 1 learnset
+	.DB GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -23,4 +23,4 @@
 	     SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

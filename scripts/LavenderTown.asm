@@ -15,50 +15,50 @@ LavenderTown_TextPointers:
 
 LavenderTownLittleGirlText:
 	text_asm
-	ld hl, .DoYouBelieveInGhostsText
+	ld hl, LavenderTownLittleGirlText.DoYouBelieveInGhostsText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	ld hl, .HaHaGuessNotText
-	jr nz, .got_text
-	ld hl, .SoThereAreBelieversText
-.got_text
+	ld hl, LavenderTownLittleGirlText.HaHaGuessNotText
+	jr nz, LavenderTownLittleGirlText.got_text
+	ld hl, LavenderTownLittleGirlText.SoThereAreBelieversText
+LavenderTownLittleGirlText.got_text
 	call PrintText
 	jp TextScriptEnd
 
-.DoYouBelieveInGhostsText:
-	text_far _LavenderTownLittleGirlDoYouBelieveInGhostsText
+LavenderTownLittleGirlText.DoYouBelieveInGhostsText:
+	text_far WLA_GLOBAL_LavenderTownLittleGirlDoYouBelieveInGhostsText
 	text_end
 
-.SoThereAreBelieversText:
-	text_far _LavenderTownLittleGirlSoThereAreBelieversText
+LavenderTownLittleGirlText.SoThereAreBelieversText:
+	text_far WLA_GLOBAL_LavenderTownLittleGirlSoThereAreBelieversText
 	text_end
 
-.HaHaGuessNotText:
-	text_far _LavenderTownLittleGirlHaHaGuessNotText
+LavenderTownLittleGirlText.HaHaGuessNotText:
+	text_far WLA_GLOBAL_LavenderTownLittleGirlHaHaGuessNotText
 	text_end
 
 LavenderTownCooltrainerMText:
-	text_far _LavenderTownCooltrainerMText
+	text_far WLA_GLOBAL_LavenderTownCooltrainerMText
 	text_end
 
 LavenderTownSuperNerdText:
-	text_far _LavenderTownSuperNerdText
+	text_far WLA_GLOBAL_LavenderTownSuperNerdText
 	text_end
 
 LavenderTownSignText:
-	text_far _LavenderTownSignText
+	text_far WLA_GLOBAL_LavenderTownSignText
 	text_end
 
 LavenderTownSilphScopeSignText:
-	text_far _LavenderTownSilphScopeSignText
+	text_far WLA_GLOBAL_LavenderTownSilphScopeSignText
 	text_end
 
 LavenderTownPokemonHouseSignText:
-	text_far _LavenderTownPokemonHouseSignText
+	text_far WLA_GLOBAL_LavenderTownPokemonHouseSignText
 	text_end
 
 LavenderTownPokemonTowerSignText:
-	text_far _LavenderTownPokemonTowerSignText
+	text_far WLA_GLOBAL_LavenderTownPokemonTowerSignText
 	text_end

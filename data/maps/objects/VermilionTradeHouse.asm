@@ -2,15 +2,16 @@
 	const_export VERMILIONTRADEHOUSE_LITTLE_GIRL
 
 VermilionTradeHouse_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  2,  7, LAST_MAP, 8
 	warp_event  3,  7, LAST_MAP, 8
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 1
 	object_event  3,  5, SPRITE_LITTLE_GIRL, STAY, UP, TEXT_VERMILIONTRADEHOUSE_LITTLE_GIRL
 
-	def_warps_to VERMILION_TRADE_HOUSE
+	event_displacement VERMILION_TRADE_HOUSE_WIDTH, 2, 7
+
+	event_displacement VERMILION_TRADE_HOUSE_WIDTH, 3, 7

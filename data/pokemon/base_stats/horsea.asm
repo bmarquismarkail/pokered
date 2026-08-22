@@ -1,17 +1,17 @@
-	db DEX_HORSEA ; pokedex id
+	.DB DEX_HORSEA ; pokedex id
 
-	db  30,  40,  70,  60,  70
+	.DB  30,  40,  70,  60,  70
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 225 ; catch rate
-	db 83 ; base exp
+	.DB WATER, WATER ; type
+	.DB 225 ; catch rate
+	.DB 83 ; base exp
 
-	INCBIN "gfx/pokemon/front/horsea.pic", 0, 1 ; sprite dimensions
-	dw HorseaPicFront, HorseaPicBack
+	.INCBIN "gfx/pokemon/front/horsea.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW HorseaPicFront, HorseaPicBack
 
-	db BUBBLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB BUBBLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    \
@@ -20,4 +20,4 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

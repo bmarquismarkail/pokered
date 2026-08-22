@@ -9,42 +9,42 @@ FuchsiaGoodRodHouseFishingGuruText:
 	text_asm
 	ld a, [wStatusFlags1]
 	bit BIT_GOT_GOOD_ROD, a
-	jr nz, .got_item
-	ld hl, .Text
+	jr nz, FuchsiaGoodRodHouseFishingGuruText.got_item
+	ld hl, FuchsiaGoodRodHouseFishingGuruText.Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .refused
-	lb bc, GOOD_ROD, 1
+	jr nz, FuchsiaGoodRodHouseFishingGuruText.refused
+	lb "bc", GOOD_ROD, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, FuchsiaGoodRodHouseFishingGuruText.bag_full
 	ld hl, wStatusFlags1
 	set BIT_GOT_GOOD_ROD, [hl]
-	ld hl, .ReceivedGoodRodText
-	jr .done
-.bag_full
-	ld hl, .NoRoomText
-	jr .done
-.refused
-	ld hl, .ThatsSoDisappointingText
-	jr .done
-.got_item
-	ld hl, .HowAreTheFishText
-.done
+	ld hl, FuchsiaGoodRodHouseFishingGuruText.ReceivedGoodRodText
+	jr FuchsiaGoodRodHouseFishingGuruText.done
+FuchsiaGoodRodHouseFishingGuruText.bag_full
+	ld hl, FuchsiaGoodRodHouseFishingGuruText.NoRoomText
+	jr FuchsiaGoodRodHouseFishingGuruText.done
+FuchsiaGoodRodHouseFishingGuruText.refused
+	ld hl, FuchsiaGoodRodHouseFishingGuruText.ThatsSoDisappointingText
+	jr FuchsiaGoodRodHouseFishingGuruText.done
+FuchsiaGoodRodHouseFishingGuruText.got_item
+	ld hl, FuchsiaGoodRodHouseFishingGuruText.HowAreTheFishText
+FuchsiaGoodRodHouseFishingGuruText.done
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _FuchsiaGoodRodHouseFishingGuruText
+FuchsiaGoodRodHouseFishingGuruText.Text:
+	text_far WLA_GLOBAL_FuchsiaGoodRodHouseFishingGuruText
 	text_end
 
-.ReceivedGoodRodText:
-	text_far _FuchsiaGoodRodHouseFishingGuruReceivedGoodRodText
+FuchsiaGoodRodHouseFishingGuruText.ReceivedGoodRodText:
+	text_far WLA_GLOBAL_FuchsiaGoodRodHouseFishingGuruReceivedGoodRodText
 	sound_get_item_1
 	text_end
 
-.UnusedText:
+FuchsiaGoodRodHouseFishingGuruText.UnusedText:
 	para "つり　こそ"
 	line "おとこの　ロマン　だ！"
 
@@ -54,14 +54,14 @@ FuchsiaGoodRodHouseFishingGuruText:
 	line "もっと　いいもんが　つれるんじゃ！"
 	done
 
-.ThatsSoDisappointingText:
-	text_far _FuchsiaGoodRodHouseFishingGuruThatsSoDisappointingText
+FuchsiaGoodRodHouseFishingGuruText.ThatsSoDisappointingText:
+	text_far WLA_GLOBAL_FuchsiaGoodRodHouseFishingGuruThatsSoDisappointingText
 	text_end
 
-.HowAreTheFishText:
-	text_far _FuchsiaGoodRodHouseFishingGuruHowAreTheFishText
+FuchsiaGoodRodHouseFishingGuruText.HowAreTheFishText:
+	text_far WLA_GLOBAL_FuchsiaGoodRodHouseFishingGuruHowAreTheFishText
 	text_end
 
-.NoRoomText:
-	text_far _FuchsiaGoodRodHouseFishingGuruNoRoomText
+FuchsiaGoodRodHouseFishingGuruText.NoRoomText:
+	text_far WLA_GLOBAL_FuchsiaGoodRodHouseFishingGuruNoRoomText
 	text_end

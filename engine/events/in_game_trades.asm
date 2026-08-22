@@ -5,7 +5,7 @@
 	const TRADETEXT_WRONG_MON   ; 2
 	const TRADETEXT_THANKS      ; 3
 	const TRADETEXT_AFTER_TRADE ; 4
-DEF NUM_TRADE_TEXTS EQU const_value
+.DEFINE NUM_TRADE_TEXTS const_value
 
 DoInGameTradeDialogue:
 ; trigger the trade offer/action specified by wWhichTrade
@@ -53,23 +53,23 @@ DoInGameTradeDialogue:
 	and a
 	ld a, TRADETEXT_AFTER_TRADE
 	ld [wInGameTradeTextPointerTableIndex], a
-	jr nz, .printText
+	jr nz, DoInGameTradeDialogue.printText
 ; if the trade hasn't been done yet
-	ASSERT TRADETEXT_WANNA_TRADE == 0
+	.ASSERT ((TRADETEXT_WANNA_TRADE)-(0)) < 1 && ((TRADETEXT_WANNA_TRADE)-(0)) > -1
 	xor a
 	ld [wInGameTradeTextPointerTableIndex], a
-	call .printText
+	call DoInGameTradeDialogue.printText
 	ld a, TRADETEXT_NO_TRADE
 	ld [wInGameTradeTextPointerTableIndex], a
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .printText
+	jr nz, DoInGameTradeDialogue.printText
 	call InGameTrade_DoTrade
-	jr c, .printText
+	jr c, DoInGameTradeDialogue.printText
 	ld hl, TradedForText
 	call PrintText
-.printText
+DoInGameTradeDialogue.printText
 	ld hl, wInGameTradeTextPointerTableIndex
 	ld a, [hld] ; wInGameTradeTextPointerTableIndex
 	ld e, a
@@ -94,7 +94,7 @@ InGameTrade_GetMonName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-INCLUDE "data/events/trades.asm"
+.INCLUDE "data/events/trades.asm"
 
 InGameTrade_DoTrade:
 	xor a ; NORMAL_PARTY_MENU
@@ -106,13 +106,13 @@ InGameTrade_DoTrade:
 	call InGameTrade_RestoreScreen
 	pop af
 	ld a, TRADETEXT_NO_TRADE
-	jp c, .tradeFailed ; jump if the player didn't select a pokemon
+	jp c, InGameTrade_DoTrade.tradeFailed ; jump if the player didn't select a pokemon
 	ld a, [wInGameTradeGiveMonSpecies]
 	ld b, a
 	ld a, [wCurPartySpecies]
 	cp b
 	ld a, TRADETEXT_WRONG_MON
-	jr nz, .tradeFailed ; jump if the selected mon's species is not the required one
+	jr nz, InGameTrade_DoTrade.tradeFailed ; jump if the selected mon's species is not the required one
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Level
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -153,10 +153,10 @@ InGameTrade_DoTrade:
 	farcall RedrawMapView
 	and a
 	ld a, TRADETEXT_THANKS
-	jr .tradeSucceeded
-.tradeFailed
+	jr InGameTrade_DoTrade.tradeSucceeded
+InGameTrade_DoTrade.tradeFailed
 	scf
-.tradeSucceeded
+InGameTrade_DoTrade.tradeSucceeded
 	ld [wInGameTradeTextPointerTableIndex], a
 	ret
 
@@ -245,104 +245,104 @@ InGameTrade_TrainerString:
 InGameTradeTextPointers:
 ; entries correspond to TRADE_DIALOGSET_* constants
 	table_width 2
-	dw TradeTextPointers1
-	dw TradeTextPointers2
-	dw TradeTextPointers3
+	.DW TradeTextPointers1
+	.DW TradeTextPointers2
+	.DW TradeTextPointers3
 	assert_table_length NUM_TRADE_DIALOGSETS
 
 TradeTextPointers1:
 	table_width 2
-	dw WannaTrade1Text
-	dw NoTrade1Text
-	dw WrongMon1Text
-	dw Thanks1Text
-	dw AfterTrade1Text
+	.DW WannaTrade1Text
+	.DW NoTrade1Text
+	.DW WrongMon1Text
+	.DW Thanks1Text
+	.DW AfterTrade1Text
 	assert_table_length NUM_TRADE_TEXTS
 
 TradeTextPointers2:
 	table_width 2
-	dw WannaTrade2Text
-	dw NoTrade2Text
-	dw WrongMon2Text
-	dw Thanks2Text
-	dw AfterTrade2Text
+	.DW WannaTrade2Text
+	.DW NoTrade2Text
+	.DW WrongMon2Text
+	.DW Thanks2Text
+	.DW AfterTrade2Text
 	assert_table_length NUM_TRADE_TEXTS
 
 TradeTextPointers3:
 	table_width 2
-	dw WannaTrade3Text
-	dw NoTrade3Text
-	dw WrongMon3Text
-	dw Thanks3Text
-	dw AfterTrade3Text
+	.DW WannaTrade3Text
+	.DW NoTrade3Text
+	.DW WrongMon3Text
+	.DW Thanks3Text
+	.DW AfterTrade3Text
 	assert_table_length NUM_TRADE_TEXTS
 
 ConnectCableText:
-	text_far _ConnectCableText
+	text_far WLA_GLOBAL_ConnectCableText
 	text_end
 
 TradedForText:
-	text_far _TradedForText
+	text_far WLA_GLOBAL_TradedForText
 	sound_get_key_item
 	text_pause
 	text_end
 
 WannaTrade1Text:
-	text_far _WannaTrade1Text
+	text_far WLA_GLOBAL_WannaTrade1Text
 	text_end
 
 NoTrade1Text:
-	text_far _NoTrade1Text
+	text_far WLA_GLOBAL_NoTrade1Text
 	text_end
 
 WrongMon1Text:
-	text_far _WrongMon1Text
+	text_far WLA_GLOBAL_WrongMon1Text
 	text_end
 
 Thanks1Text:
-	text_far _Thanks1Text
+	text_far WLA_GLOBAL_Thanks1Text
 	text_end
 
 AfterTrade1Text:
-	text_far _AfterTrade1Text
+	text_far WLA_GLOBAL_AfterTrade1Text
 	text_end
 
 WannaTrade2Text:
-	text_far _WannaTrade2Text
+	text_far WLA_GLOBAL_WannaTrade2Text
 	text_end
 
 NoTrade2Text:
-	text_far _NoTrade2Text
+	text_far WLA_GLOBAL_NoTrade2Text
 	text_end
 
 WrongMon2Text:
-	text_far _WrongMon2Text
+	text_far WLA_GLOBAL_WrongMon2Text
 	text_end
 
 Thanks2Text:
-	text_far _Thanks2Text
+	text_far WLA_GLOBAL_Thanks2Text
 	text_end
 
 AfterTrade2Text:
-	text_far _AfterTrade2Text
+	text_far WLA_GLOBAL_AfterTrade2Text
 	text_end
 
 WannaTrade3Text:
-	text_far _WannaTrade3Text
+	text_far WLA_GLOBAL_WannaTrade3Text
 	text_end
 
 NoTrade3Text:
-	text_far _NoTrade3Text
+	text_far WLA_GLOBAL_NoTrade3Text
 	text_end
 
 WrongMon3Text:
-	text_far _WrongMon3Text
+	text_far WLA_GLOBAL_WrongMon3Text
 	text_end
 
 Thanks3Text:
-	text_far _Thanks3Text
+	text_far WLA_GLOBAL_Thanks3Text
 	text_end
 
 AfterTrade3Text:
-	text_far _AfterTrade3Text
+	text_far WLA_GLOBAL_AfterTrade3Text
 	text_end

@@ -1,4 +1,4 @@
-PlayerPC::
+PlayerPC:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	ld a, ITEM_NAME
@@ -65,12 +65,12 @@ PlayerPCMenu:
 ExitPlayerPC:
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
-	jr nz, .next
+	jr nz, ExitPlayerPC.next
 ; accessing it directly
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
-.next
+ExitPlayerPC.next
 	ld hl, wMiscFlags
 	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
@@ -89,11 +89,11 @@ PlayerPCDeposit:
 	ld [wListScrollOffset], a
 	ld a, [wNumBagItems]
 	and a
-	jr nz, .loop
+	jr nz, PlayerPCDeposit.loop
 	ld hl, NothingToDepositText
 	call PrintText
 	jp PlayerPCMenu
-.loop
+PlayerPCDeposit.loop
 	ld hl, WhatToDepositText
 	call PrintText
 	ld hl, wNumBagItems
@@ -112,21 +112,21 @@ PlayerPCDeposit:
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .next
+	jr nz, PlayerPCDeposit.next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, .loop
-.next
+	jp z, PlayerPCDeposit.loop
+PlayerPCDeposit.next
 	ld hl, wNumBoxItems
 	call AddItemToInventory
-	jr c, .roomAvailable
+	jr c, PlayerPCDeposit.roomAvailable
 	ld hl, NoRoomToStoreText
 	call PrintText
-	jp .loop
-.roomAvailable
+	jp PlayerPCDeposit.loop
+PlayerPCDeposit.roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
@@ -135,7 +135,7 @@ PlayerPCDeposit:
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	call PrintText
-	jp .loop
+	jp PlayerPCDeposit.loop
 
 PlayerPCWithdraw:
 	xor a
@@ -143,11 +143,11 @@ PlayerPCWithdraw:
 	ld [wListScrollOffset], a
 	ld a, [wNumBoxItems]
 	and a
-	jr nz, .loop
+	jr nz, PlayerPCWithdraw.loop
 	ld hl, NothingStoredText
 	call PrintText
 	jp PlayerPCMenu
-.loop
+PlayerPCWithdraw.loop
 	ld hl, WhatToWithdrawText
 	call PrintText
 	ld hl, wNumBoxItems
@@ -166,21 +166,21 @@ PlayerPCWithdraw:
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .next
+	jr nz, PlayerPCWithdraw.next
 ; if it's not a key item, there can be more than one of the item
 	ld hl, WithdrawHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, .loop
-.next
+	jp z, PlayerPCWithdraw.loop
+PlayerPCWithdraw.next
 	ld hl, wNumBagItems
 	call AddItemToInventory
-	jr c, .roomAvailable
+	jr c, PlayerPCWithdraw.roomAvailable
 	ld hl, CantCarryMoreText
 	call PrintText
-	jp .loop
-.roomAvailable
+	jp PlayerPCWithdraw.loop
+PlayerPCWithdraw.roomAvailable
 	ld hl, wNumBoxItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
@@ -189,7 +189,7 @@ PlayerPCWithdraw:
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
 	call PrintText
-	jp .loop
+	jp PlayerPCWithdraw.loop
 
 PlayerPCToss:
 	xor a
@@ -197,11 +197,11 @@ PlayerPCToss:
 	ld [wListScrollOffset], a
 	ld a, [wNumBoxItems]
 	and a
-	jr nz, .loop
+	jr nz, PlayerPCToss.loop
 	ld hl, NothingStoredText
 	call PrintText
 	jp PlayerPCMenu
-.loop
+PlayerPCToss.loop
 	ld hl, WhatToTossText
 	call PrintText
 	ld hl, wNumBoxItems
@@ -224,10 +224,10 @@ PlayerPCToss:
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .next
+	jr nz, PlayerPCToss.next
 	ld a, [wCurItem]
 	call IsItemHM
-	jr c, .next
+	jr c, PlayerPCToss.next
 ; if it's not a key item, there can be more than one of the item
 	push hl
 	ld hl, TossHowManyText
@@ -235,69 +235,69 @@ PlayerPCToss:
 	call DisplayChooseQuantityMenu
 	pop hl
 	cp $ff
-	jp z, .loop
-.next
+	jp z, PlayerPCToss.loop
+PlayerPCToss.next
 	call TossItem ; disallows tossing key items
-	jp .loop
+	jp PlayerPCToss.loop
 
 PlayersPCMenuEntries:
-	db   "WITHDRAW ITEM"
+		.STRINGMAP pokemon, "WITHDRAW ITEM"
 	next "DEPOSIT ITEM"
 	next "TOSS ITEM"
 	next "LOG OFF@"
 
 TurnedOnPC2Text:
-	text_far _TurnedOnPC2Text
+	text_far WLA_GLOBAL_TurnedOnPC2Text
 	text_end
 
 WhatDoYouWantText:
-	text_far _WhatDoYouWantText
+	text_far WLA_GLOBAL_WhatDoYouWantText
 	text_end
 
 WhatToDepositText:
-	text_far _WhatToDepositText
+	text_far WLA_GLOBAL_WhatToDepositText
 	text_end
 
 DepositHowManyText:
-	text_far _DepositHowManyText
+	text_far WLA_GLOBAL_DepositHowManyText
 	text_end
 
 ItemWasStoredText:
-	text_far _ItemWasStoredText
+	text_far WLA_GLOBAL_ItemWasStoredText
 	text_end
 
 NothingToDepositText:
-	text_far _NothingToDepositText
+	text_far WLA_GLOBAL_NothingToDepositText
 	text_end
 
 NoRoomToStoreText:
-	text_far _NoRoomToStoreText
+	text_far WLA_GLOBAL_NoRoomToStoreText
 	text_end
 
 WhatToWithdrawText:
-	text_far _WhatToWithdrawText
+	text_far WLA_GLOBAL_WhatToWithdrawText
 	text_end
 
 WithdrawHowManyText:
-	text_far _WithdrawHowManyText
+	text_far WLA_GLOBAL_WithdrawHowManyText
 	text_end
 
 WithdrewItemText:
-	text_far _WithdrewItemText
+	text_far WLA_GLOBAL_WithdrewItemText
 	text_end
 
 NothingStoredText:
-	text_far _NothingStoredText
+	text_far WLA_GLOBAL_NothingStoredText
 	text_end
 
 CantCarryMoreText:
-	text_far _CantCarryMoreText
+	text_far WLA_GLOBAL_CantCarryMoreText
 	text_end
 
 WhatToTossText:
-	text_far _WhatToTossText
+	text_far WLA_GLOBAL_WhatToTossText
 	text_end
 
 TossHowManyText:
-	text_far _TossHowManyText
+	text_far WLA_GLOBAL_TossHowManyText
 	text_end

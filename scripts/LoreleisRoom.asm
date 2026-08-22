@@ -17,14 +17,14 @@ LoreleiShowOrHideExitBlock:
 	ld hl, wElite4Flags
 	set BIT_STARTED_ELITE_4, [hl]
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
+	jr z, LoreleiShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $5
-	jr .setExitBlock
-.blockExitToNextRoom
+	jr LoreleiShowOrHideExitBlock.setExitBlock
+LoreleiShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $24
-.setExitBlock
+LoreleiShowOrHideExitBlock.setExitBlock
 	ld [wNewTileBlockID], a
-	lb bc, 0, 2
+	lb "bc", 0, 2
 	predef_jump ReplaceTileBlock
 
 ResetLoreleiScript:
@@ -66,18 +66,18 @@ LoreleisRoomDefaultScript:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyHeld)], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing one tile above the exit?
-	jr c, .stopPlayerFromLeaving
+	jr c, LoreleisRoomDefaultScript.stopPlayerFromLeaving
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
 	jr z, LoreleiScriptWalkIntoRoom
-.stopPlayerFromLeaving
+LoreleisRoomDefaultScript.stopPlayerFromLeaving
 	ld a, TEXT_LORELEISROOM_DONT_RUN_AWAY
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -94,7 +94,7 @@ LoreleiEntranceCoords:
 	dbmapcoord  5, 10
 	dbmapcoord  4, 11
 	dbmapcoord  5, 11
-	db -1 ; end
+	.DB -1 ; end
 
 LoreleisRoomPlayerIsMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -113,7 +113,7 @@ LoreleisRoomLoreleiEndBattleScript:
 	cp $ff
 	jp z, ResetLoreleiScript
 	ld a, TEXT_LORELEISROOM_LORELEI
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 LoreleisRoom_TextPointers:
@@ -125,7 +125,7 @@ LoreleisRoomTrainerHeaders:
 	def_trainers
 LoreleisRoomTrainerHeader0:
 	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleisRoomLoreleiBeforeBattleText, LoreleisRoomLoreleiEndBattleText, LoreleisRoomLoreleiAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 LoreleisRoomLoreleiText:
 	text_asm
@@ -134,17 +134,17 @@ LoreleisRoomLoreleiText:
 	jp TextScriptEnd
 
 LoreleisRoomLoreleiBeforeBattleText:
-	text_far _LoreleisRoomLoreleiBeforeBattleText
+	text_far WLA_GLOBAL_LoreleisRoomLoreleiBeforeBattleText
 	text_end
 
 LoreleisRoomLoreleiEndBattleText:
-	text_far _LoreleisRoomLoreleiEndBattleText
+	text_far WLA_GLOBAL_LoreleisRoomLoreleiEndBattleText
 	text_end
 
 LoreleisRoomLoreleiAfterBattleText:
-	text_far _LoreleisRoomLoreleiAfterBattleText
+	text_far WLA_GLOBAL_LoreleisRoomLoreleiAfterBattleText
 	text_end
 
 LoreleisRoomLoreleiDontRunAwayText:
-	text_far _LoreleisRoomLoreleiDontRunAwayText
+	text_far WLA_GLOBAL_LoreleisRoomLoreleiDontRunAwayText
 	text_end

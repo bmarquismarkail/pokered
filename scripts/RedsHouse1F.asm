@@ -10,17 +10,17 @@ RedsHouse1FMomText:
 	text_asm
 	ld a, [wStatusFlags4]
 	bit BIT_GOT_STARTER, a
-	jr nz, .heal
-	ld hl, .WakeUpText
+	jr nz, RedsHouse1FMomText.heal
+	ld hl, RedsHouse1FMomText.WakeUpText
 	call PrintText
-	jr .done
-.heal
+	jr RedsHouse1FMomText.done
+RedsHouse1FMomText.heal
 	call RedsHouse1FMomHealScript
-.done
+RedsHouse1FMomText.done
 	jp TextScriptEnd
 
-.WakeUpText:
-	text_far _RedsHouse1FMomWakeUpText
+RedsHouse1FMomText.WakeUpText:
+	text_far WLA_GLOBAL_RedsHouse1FMomWakeUpText
 	text_end
 
 RedsHouse1FMomHealScript:
@@ -32,10 +32,10 @@ RedsHouse1FMomHealScript:
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
 	call PlaySound
-.next
+RedsHouse1FMomHealScript.next
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED
-	jr z, .next
+	jr z, RedsHouse1FMomHealScript.next
 	ld a, [wMapMusicSoundID]
 	ld [wNewSoundID], a
 	call PlaySound
@@ -44,27 +44,27 @@ RedsHouse1FMomHealScript:
 	jp PrintText
 
 RedsHouse1FMomYouShouldRestText:
-	text_far _RedsHouse1FMomYouShouldRestText
+	text_far WLA_GLOBAL_RedsHouse1FMomYouShouldRestText
 	text_end
 RedsHouse1FMomLookingGreatText:
-	text_far _RedsHouse1FMomLookingGreatText
+	text_far WLA_GLOBAL_RedsHouse1FMomLookingGreatText
 	text_end
 
 RedsHouse1FTVText:
 	text_asm
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	ld hl, .WrongSideText
-	jr nz, .got_text
-	ld hl, .StandByMeMovieText
-.got_text
+	ld hl, RedsHouse1FTVText.WrongSideText
+	jr nz, RedsHouse1FTVText.got_text
+	ld hl, RedsHouse1FTVText.StandByMeMovieText
+RedsHouse1FTVText.got_text
 	call PrintText
 	jp TextScriptEnd
 
-.StandByMeMovieText:
-	text_far _RedsHouse1FTVStandByMeMovieText
+RedsHouse1FTVText.StandByMeMovieText:
+	text_far WLA_GLOBAL_RedsHouse1FTVStandByMeMovieText
 	text_end
 
-.WrongSideText:
-	text_far _RedsHouse1FTVWrongSideText
+RedsHouse1FTVText.WrongSideText:
+	text_far WLA_GLOBAL_RedsHouse1FTVWrongSideText
 	text_end

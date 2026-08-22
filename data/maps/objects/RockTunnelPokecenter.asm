@@ -5,18 +5,19 @@
 	const_export ROCKTUNNELPOKECENTER_LINK_RECEPTIONIST
 
 RockTunnelPokecenter_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event  4,  7, LAST_MAP, 1
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 4
 	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_ROCKTUNNELPOKECENTER_NURSE
 	object_event  7,  3, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, TEXT_ROCKTUNNELPOKECENTER_GENTLEMAN
 	object_event  2,  5, SPRITE_FISHER, STAY, NONE, TEXT_ROCKTUNNELPOKECENTER_FISHER
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_ROCKTUNNELPOKECENTER_LINK_RECEPTIONIST
 
-	def_warps_to ROCK_TUNNEL_POKECENTER
+	event_displacement ROCK_TUNNEL_POKECENTER_WIDTH, 3, 7
+
+	event_displacement ROCK_TUNNEL_POKECENTER_WIDTH, 4, 7

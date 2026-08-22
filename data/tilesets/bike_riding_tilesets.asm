@@ -1,7 +1,7 @@
-BikeRidingTilesets::
-	db OVERWORLD
-	db FOREST
-	db UNDERGROUND
-	db SHIP_PORT
-	db CAVERN
-	db -1 ; end
+BikeRidingTilesets:
+	.DB OVERWORLD
+	.DB FOREST
+	.DB UNDERGROUND
+	.DB SHIP_PORT
+	.DB CAVERN
+	.DB -1 ; end
