@@ -20,9 +20,9 @@ RocketHideoutElevatorStoreWarpEntriesScript:
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
-	call .StoreWarpEntry
+	call RocketHideoutElevatorStoreWarpEntriesScript.StoreWarpEntry
 	; fallthrough
-.StoreWarpEntry:
+RocketHideoutElevatorStoreWarpEntriesScript.StoreWarpEntry:
 	inc hl
 	inc hl
 	ld a, b
@@ -41,19 +41,19 @@ RocketHideoutElevatorScript:
 	ret
 
 RocketHideoutElevatorFloors:
-	db 3 ; #
-	db FLOOR_B1F
-	db FLOOR_B2F
-	db FLOOR_B4F
-	db -1 ; end
+	.DB 3 ; #
+	.DB FLOOR_B1F
+	.DB FLOOR_B2F
+	.DB FLOOR_B4F
+	.DB -1 ; end
 
 ; These specify where the player goes after getting out of the elevator.
 RocketHideoutElevatorWarpMaps:
 	; warp number, map id
-	db 4, ROCKET_HIDEOUT_B1F
-	db 4, ROCKET_HIDEOUT_B2F
-	db 2, ROCKET_HIDEOUT_B4F
-.End:
+	.DB 4, ROCKET_HIDEOUT_B1F
+	.DB 4, ROCKET_HIDEOUT_B2F
+	.DB 2, ROCKET_HIDEOUT_B4F
+RocketHideoutElevatorWarpMaps.End:
 
 RocketHideoutElevatorShakeScript:
 	call Delay3
@@ -68,18 +68,18 @@ RocketHideoutElevatorText:
 	text_asm
 	ld b, LIFT_KEY
 	call IsItemInBag
-	jr z, .no_key
+	jr z, RocketHideoutElevatorText.no_key
 	call RocketHideoutElevatorScript
 	ld hl, RocketHideoutElevatorWarpMaps
 	predef DisplayElevatorFloorMenu
-	jr .text_script_end
-.no_key
-	ld hl, .AppearsToNeedKeyText
+	jr RocketHideoutElevatorText.text_script_end
+RocketHideoutElevatorText.no_key
+	ld hl, RocketHideoutElevatorText.AppearsToNeedKeyText
 	call PrintText
-.text_script_end
+RocketHideoutElevatorText.text_script_end
 	jp TextScriptEnd
 
-.AppearsToNeedKeyText:
-	text_far _RocketHideoutElevatorAppearsToNeedKeyText
+RocketHideoutElevatorText.AppearsToNeedKeyText:
+	text_far WLA_GLOBAL_RocketHideoutElevatorAppearsToNeedKeyText
 	text_waitbutton
 	text_end

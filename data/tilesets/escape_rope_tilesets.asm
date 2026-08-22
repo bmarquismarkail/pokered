@@ -1,7 +1,7 @@
 EscapeRopeTilesets:
-	db FOREST
-	db CEMETERY
-	db CAVERN
-	db FACILITY
-	db INTERIOR
-	db -1 ; end
+	.DB FOREST
+	.DB CEMETERY
+	.DB CAVERN
+	.DB FACILITY
+	.DB INTERIOR
+	.DB -1 ; end

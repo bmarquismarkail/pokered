@@ -12,13 +12,13 @@
 	const SPRITESET_SILENCE_BRIDGE  ; 08
 	const SPRITESET_CYCLING_ROAD    ; 09
 	const SPRITESET_FUCHSIA         ; 0a
-DEF NUM_SPRITE_SETS EQU const_value - 1
+.DEFINE NUM_SPRITE_SETS const_value - 1
 
 ; split sprite set ids
 ; indexes for SplitMapSpriteSets (see data/maps/sprite_sets.asm)
 ; values for MapSpriteSets (see data/maps/sprite_sets.asm)
 	const_next $f1
-DEF FIRST_SPLIT_SET EQU const_value
+.DEFINE FIRST_SPLIT_SET const_value
 	const SPLITSET_ROUTE_2  ; f1
 	const SPLITSET_ROUTE_10 ; f2
 	const SPLITSET_ROUTE_11 ; f3
@@ -31,11 +31,11 @@ DEF FIRST_SPLIT_SET EQU const_value
 	const SPLITSET_ROUTE_6  ; fa
 	const SPLITSET_ROUTE_7  ; fb
 	const SPLITSET_ROUTE_8  ; fc
-DEF NUM_SPLIT_SETS EQU const_value - FIRST_SPLIT_SET
+.DEFINE NUM_SPLIT_SETS const_value - FIRST_SPLIT_SET
 
 ; split directions
-DEF EAST_WEST   EQU 1
-DEF NORTH_SOUTH EQU 2
+.DEFINE EAST_WEST 1
+.DEFINE NORTH_SOUTH 2
 
 ; each sprite set has 9 walking sprites and 2 still sprites
-DEF SPRITE_SET_LENGTH EQU 9 + 2
+.DEFINE SPRITE_SET_LENGTH 9 + 2

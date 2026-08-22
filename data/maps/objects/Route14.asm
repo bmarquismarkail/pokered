@@ -11,14 +11,13 @@
 	const_export ROUTE14_BIKER4
 
 Route14_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
-
-	def_bg_events
+	.DB 0
+	.DB 1
 	bg_event 17, 13, TEXT_ROUTE14_SIGN
 
-	def_object_events
+	.DB 10
 	object_event  4,  4, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_ROUTE14_COOLTRAINER_M1, OPP_BIRD_KEEPER, 14
 	object_event 15,  6, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_ROUTE14_COOLTRAINER_M2, OPP_BIRD_KEEPER, 15
 	object_event 12, 11, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_ROUTE14_COOLTRAINER_M3, OPP_BIRD_KEEPER, 16
@@ -29,5 +28,3 @@ Route14_Object:
 	object_event  4, 30, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE14_BIKER2, OPP_BIKER, 14
 	object_event 15, 30, SPRITE_BIKER, STAY, LEFT, TEXT_ROUTE14_BIKER3, OPP_BIKER, 15
 	object_event  4, 31, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE14_BIKER4, OPP_BIKER, 2
-
-	def_warps_to ROUTE_14

@@ -1,17 +1,17 @@
-	db DEX_MAGNETON ; pokedex id
+	.DB DEX_MAGNETON ; pokedex id
 
-	db  50,  60,  95,  70, 120
+	.DB  50,  60,  95,  70, 120
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 60 ; catch rate
-	db 161 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 60 ; catch rate
+	.DB 161 ; base exp
 
-	INCBIN "gfx/pokemon/front/magneton.pic", 0, 1 ; sprite dimensions
-	dw MagnetonPicFront, MagnetonPicBack
+	.INCBIN "gfx/pokemon/front/magneton.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MagnetonPicFront, MagnetonPicBack
 
-	db TACKLE, SONICBOOM, THUNDERSHOCK, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SONICBOOM, THUNDERSHOCK, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   RAGE,         \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

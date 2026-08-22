@@ -1,4 +1,5 @@
-_RhydonDexEntry::
+_RhydonDexEntry:
+WLA_GLOBAL_RhydonDexEntry:
 	text "Protected by an"
 	next "armor-like hide,"
 	next "it is capable of"
@@ -8,7 +9,8 @@ _RhydonDexEntry::
 	next "degrees"
 	dex
 
-_KangaskhanDexEntry::
+_KangaskhanDexEntry:
+WLA_GLOBAL_KangaskhanDexEntry:
 	text "The infant rarely"
 	next "ventures out of"
 	next "its mother's"
@@ -18,7 +20,8 @@ _KangaskhanDexEntry::
 	next "years old"
 	dex
 
-_NidoranMDexEntry::
+_NidoranMDexEntry:
+WLA_GLOBAL_NidoranMDexEntry:
 	text "Stiffens its ears"
 	next "to sense danger."
 	next "The larger its"
@@ -28,7 +31,8 @@ _NidoranMDexEntry::
 	next "secreted venom"
 	dex
 
-_ClefairyDexEntry::
+_ClefairyDexEntry:
+WLA_GLOBAL_ClefairyDexEntry:
 	text "Its magical and"
 	next "cute appeal has"
 	next "many admirers."
@@ -38,7 +42,8 @@ _ClefairyDexEntry::
 	next "certain areas"
 	dex
 
-_SpearowDexEntry::
+_SpearowDexEntry:
+WLA_GLOBAL_SpearowDexEntry:
 	text "Eats bugs in"
 	next "grassy areas. It"
 	next "has to flap its"
@@ -48,7 +53,8 @@ _SpearowDexEntry::
 	next "stay airborne"
 	dex
 
-_VoltorbDexEntry::
+_VoltorbDexEntry:
+WLA_GLOBAL_VoltorbDexEntry:
 	text "Usually found in"
 	next "power plants."
 	next "Easily mistaken"
@@ -58,7 +64,8 @@ _VoltorbDexEntry::
 	next "many people"
 	dex
 
-_NidokingDexEntry::
+_NidokingDexEntry:
+WLA_GLOBAL_NidokingDexEntry:
 	text "It uses its"
 	next "powerful tail in"
 	next "battle to smash,"
@@ -68,7 +75,8 @@ _NidokingDexEntry::
 	next "bones"
 	dex
 
-_SlowbroDexEntry::
+_SlowbroDexEntry:
+WLA_GLOBAL_SlowbroDexEntry:
 	text "The SHELLDER that"
 	next "is latched onto"
 	next "SLOWPOKE's tail"
@@ -78,7 +86,8 @@ _SlowbroDexEntry::
 	next "over scraps"
 	dex
 
-_IvysaurDexEntry::
+_IvysaurDexEntry:
+WLA_GLOBAL_IvysaurDexEntry:
 	text "When the bulb on"
 	next "its back grows"
 	next "large, it appears"
@@ -88,7 +97,8 @@ _IvysaurDexEntry::
 	next "on its hind legs"
 	dex
 
-_ExeggutorDexEntry::
+_ExeggutorDexEntry:
+WLA_GLOBAL_ExeggutorDexEntry:
 	text "Legend has it that"
 	next "on rare occasions,"
 	next "one of its heads"
@@ -98,7 +108,8 @@ _ExeggutorDexEntry::
 	next "EXEGGCUTE"
 	dex
 
-_LickitungDexEntry::
+_LickitungDexEntry:
+WLA_GLOBAL_LickitungDexEntry:
 	text "Its tongue can be"
 	next "extended like a"
 	next "chameleon's. It"
@@ -108,7 +119,8 @@ _LickitungDexEntry::
 	next "licks enemies"
 	dex
 
-_ExeggcuteDexEntry::
+_ExeggcuteDexEntry:
+WLA_GLOBAL_ExeggcuteDexEntry:
 	text "Often mistaken"
 	next "for eggs."
 	next "When disturbed,"
@@ -118,7 +130,8 @@ _ExeggcuteDexEntry::
 	next "in swarms"
 	dex
 
-_GrimerDexEntry::
+_GrimerDexEntry:
+WLA_GLOBAL_GrimerDexEntry:
 	text "Appears in filthy"
 	next "areas. Thrives by"
 	next "sucking up"
@@ -128,7 +141,8 @@ _GrimerDexEntry::
 	next "out of factories"
 	dex
 
-_GengarDexEntry::
+_GengarDexEntry:
+WLA_GLOBAL_GengarDexEntry:
 	text "Under a full moon,"
 	next "this #MON"
 	next "likes to mimic"
@@ -138,7 +152,8 @@ _GengarDexEntry::
 	next "at their fright"
 	dex
 
-_NidoranFDexEntry::
+_NidoranFDexEntry:
+WLA_GLOBAL_NidoranFDexEntry:
 	text "Although small,"
 	next "its venomous"
 	next "barbs render this"
@@ -148,7 +163,8 @@ _NidoranFDexEntry::
 	next "smaller horns"
 	dex
 
-_NidoqueenDexEntry::
+_NidoqueenDexEntry:
+WLA_GLOBAL_NidoqueenDexEntry:
 	text "Its hard scales"
 	next "provide strong"
 	next "protection. It"
@@ -158,7 +174,8 @@ _NidoqueenDexEntry::
 	next "powerful moves"
 	dex
 
-_CuboneDexEntry::
+_CuboneDexEntry:
+WLA_GLOBAL_CuboneDexEntry:
 	text "Because it never"
 	next "removes its skull"
 	next "helmet, no one"
@@ -168,7 +185,8 @@ _CuboneDexEntry::
 	next "real face"
 	dex
 
-_RhyhornDexEntry::
+_RhyhornDexEntry:
+WLA_GLOBAL_RhyhornDexEntry:
 	text "Its massive bones"
 	next "are 1000 times"
 	next "harder than human"
@@ -178,7 +196,8 @@ _RhyhornDexEntry::
 	next "trailer flying"
 	dex
 
-_LaprasDexEntry::
+_LaprasDexEntry:
+WLA_GLOBAL_LaprasDexEntry:
 	text "A #MON that"
 	next "has been over-"
 	next "hunted almost to"
@@ -188,7 +207,8 @@ _LaprasDexEntry::
 	next "across the water"
 	dex
 
-_ArcanineDexEntry::
+_ArcanineDexEntry:
+WLA_GLOBAL_ArcanineDexEntry:
 	text "A #MON that"
 	next "has been admired"
 	next "since the past"
@@ -198,7 +218,8 @@ _ArcanineDexEntry::
 	next "as if on wings"
 	dex
 
-_MewDexEntry::
+_MewDexEntry:
+WLA_GLOBAL_MewDexEntry:
 	text "So rare that it"
 	next "is still said to"
 	next "be a mirage by"
@@ -208,7 +229,8 @@ _MewDexEntry::
 	next "seen it worldwide"
 	dex
 
-_GyaradosDexEntry::
+_GyaradosDexEntry:
+WLA_GLOBAL_GyaradosDexEntry:
 	text "Rarely seen in"
 	next "the wild. Huge"
 	next "and vicious, it"
@@ -218,7 +240,8 @@ _GyaradosDexEntry::
 	next "cities in a rage"
 	dex
 
-_ShellderDexEntry::
+_ShellderDexEntry:
+WLA_GLOBAL_ShellderDexEntry:
 	text "Its hard shell"
 	next "repels any kind"
 	next "of attack."
@@ -228,7 +251,8 @@ _ShellderDexEntry::
 	next "shell is open"
 	dex
 
-_TentacoolDexEntry::
+_TentacoolDexEntry:
+WLA_GLOBAL_TentacoolDexEntry:
 	text "Drifts in shallow"
 	next "seas. Anglers who"
 	next "hook them by"
@@ -238,7 +262,8 @@ _TentacoolDexEntry::
 	next "its stinging acid"
 	dex
 
-_GastlyDexEntry::
+_GastlyDexEntry:
+WLA_GLOBAL_GastlyDexEntry:
 	text "Almost invisible,"
 	next "this gaseous"
 	next "#MON cloaks"
@@ -248,7 +273,8 @@ _GastlyDexEntry::
 	next "without notice"
 	dex
 
-_ScytherDexEntry::
+_ScytherDexEntry:
+WLA_GLOBAL_ScytherDexEntry:
 	text "With ninja-like"
 	next "agility and speed,"
 	next "it can create the"
@@ -258,7 +284,8 @@ _ScytherDexEntry::
 	next "than one"
 	dex
 
-_StaryuDexEntry::
+_StaryuDexEntry:
+WLA_GLOBAL_StaryuDexEntry:
 	text "An enigmatic"
 	next "#MON that can"
 	next "effortlessly"
@@ -268,7 +295,8 @@ _StaryuDexEntry::
 	next "loses in battle"
 	dex
 
-_BlastoiseDexEntry::
+_BlastoiseDexEntry:
+WLA_GLOBAL_BlastoiseDexEntry:
 	text "A brutal #MON"
 	next "with pressurized"
 	next "water jets on its"
@@ -278,7 +306,8 @@ _BlastoiseDexEntry::
 	next "speed tackles"
 	dex
 
-_PinsirDexEntry::
+_PinsirDexEntry:
+WLA_GLOBAL_PinsirDexEntry:
 	text "If it fails to"
 	next "crush the victim"
 	next "in its pincers,"
@@ -288,7 +317,8 @@ _PinsirDexEntry::
 	next "it hard"
 	dex
 
-_TangelaDexEntry::
+_TangelaDexEntry:
+WLA_GLOBAL_TangelaDexEntry:
 	text "The whole body is"
 	next "swathed with wide"
 	next "vines that are"
@@ -298,7 +328,8 @@ _TangelaDexEntry::
 	next "shake as it walks"
 	dex
 
-_GrowlitheDexEntry::
+_GrowlitheDexEntry:
+WLA_GLOBAL_GrowlitheDexEntry:
 	text "Very protective"
 	next "of its territory."
 	next "It will bark and"
@@ -308,7 +339,8 @@ _GrowlitheDexEntry::
 	next "its space"
 	dex
 
-_OnixDexEntry::
+_OnixDexEntry:
+WLA_GLOBAL_OnixDexEntry:
 	text "As it grows, the"
 	next "stone portions of"
 	next "its body harden"
@@ -318,7 +350,8 @@ _OnixDexEntry::
 	next "colored black"
 	dex
 
-_FearowDexEntry::
+_FearowDexEntry:
+WLA_GLOBAL_FearowDexEntry:
 	text "With its huge and"
 	next "magnificent wings,"
 	next "it can keep aloft"
@@ -328,7 +361,8 @@ _FearowDexEntry::
 	next "for rest"
 	dex
 
-_PidgeyDexEntry::
+_PidgeyDexEntry:
+WLA_GLOBAL_PidgeyDexEntry:
 	text "A common sight in"
 	next "forests and woods."
 	next "It flaps its"
@@ -338,7 +372,8 @@ _PidgeyDexEntry::
 	next "blinding sand"
 	dex
 
-_SlowpokeDexEntry::
+_SlowpokeDexEntry:
+WLA_GLOBAL_SlowpokeDexEntry:
 	text "Incredibly slow"
 	next "and dopey. It"
 	next "takes 5 seconds"
@@ -348,7 +383,8 @@ _SlowpokeDexEntry::
 	next "attack"
 	dex
 
-_KadabraDexEntry::
+_KadabraDexEntry:
+WLA_GLOBAL_KadabraDexEntry:
 	text "It emits special"
 	next "alpha waves from"
 	next "its body that"
@@ -358,7 +394,8 @@ _KadabraDexEntry::
 	next "close by"
 	dex
 
-_GravelerDexEntry::
+_GravelerDexEntry:
+WLA_GLOBAL_GravelerDexEntry:
 	text "Rolls down slopes"
 	next "to move. It rolls"
 	next "over any obstacle"
@@ -368,7 +405,8 @@ _GravelerDexEntry::
 	next "direction"
 	dex
 
-_ChanseyDexEntry::
+_ChanseyDexEntry:
+WLA_GLOBAL_ChanseyDexEntry:
 	text "A rare and elusive"
 	next "#MON that is"
 	next "said to bring"
@@ -378,7 +416,8 @@ _ChanseyDexEntry::
 	next "it"
 	dex
 
-_MachokeDexEntry::
+_MachokeDexEntry:
+WLA_GLOBAL_MachokeDexEntry:
 	text "Its muscular body"
 	next "is so powerful, it"
 	next "must wear a power"
@@ -388,7 +427,8 @@ _MachokeDexEntry::
 	next "its motions"
 	dex
 
-_MrMimeDexEntry::
+_MrMimeDexEntry:
+WLA_GLOBAL_MrMimeDexEntry:
 	text "If interrupted"
 	next "while it is"
 	next "miming, it will"
@@ -398,7 +438,8 @@ _MrMimeDexEntry::
 	next "broad hands"
 	dex
 
-_HitmonleeDexEntry::
+_HitmonleeDexEntry:
+WLA_GLOBAL_HitmonleeDexEntry:
 	text "When in a hurry,"
 	next "its legs lengthen"
 	next "progressively."
@@ -408,7 +449,8 @@ _HitmonleeDexEntry::
 	next "loping strides"
 	dex
 
-_HitmonchanDexEntry::
+_HitmonchanDexEntry:
+WLA_GLOBAL_HitmonchanDexEntry:
 	text "While apparently"
 	next "doing nothing, it"
 	next "fires punches in"
@@ -418,7 +460,8 @@ _HitmonchanDexEntry::
 	next "impossible to see"
 	dex
 
-_ArbokDexEntry::
+_ArbokDexEntry:
+WLA_GLOBAL_ArbokDexEntry:
 	text "It is rumored that"
 	next "the ferocious"
 	next "warning markings"
@@ -428,7 +471,8 @@ _ArbokDexEntry::
 	next "to area"
 	dex
 
-_ParasectDexEntry::
+_ParasectDexEntry:
+WLA_GLOBAL_ParasectDexEntry:
 	text "A host-parasite"
 	next "pair in which the"
 	next "parasite mushroom"
@@ -438,7 +482,8 @@ _ParasectDexEntry::
 	next "damp places"
 	dex
 
-_PsyduckDexEntry::
+_PsyduckDexEntry:
+WLA_GLOBAL_PsyduckDexEntry:
 	text "While lulling its"
 	next "enemies with its"
 	next "vacant look, this"
@@ -448,7 +493,8 @@ _PsyduckDexEntry::
 	next "powers"
 	dex
 
-_DrowzeeDexEntry::
+_DrowzeeDexEntry:
+WLA_GLOBAL_DrowzeeDexEntry:
 	text "Puts enemies to"
 	next "sleep then eats"
 	next "their dreams."
@@ -458,7 +504,8 @@ _DrowzeeDexEntry::
 	next "bad dreams"
 	dex
 
-_GolemDexEntry::
+_GolemDexEntry:
+WLA_GLOBAL_GolemDexEntry:
 	text "Its boulder-like"
 	next "body is extremely"
 	next "hard. It can"
@@ -468,7 +515,8 @@ _GolemDexEntry::
 	next "without damage"
 	dex
 
-_MagmarDexEntry::
+_MagmarDexEntry:
+WLA_GLOBAL_MagmarDexEntry:
 	text "Its body always"
 	next "burns with an"
 	next "orange glow that"
@@ -478,7 +526,8 @@ _MagmarDexEntry::
 	next "among flames"
 	dex
 
-_ElectabuzzDexEntry::
+_ElectabuzzDexEntry:
+WLA_GLOBAL_ElectabuzzDexEntry:
 	text "Normally found"
 	next "near power plants,"
 	next "they can wander"
@@ -488,7 +537,8 @@ _ElectabuzzDexEntry::
 	next "in cities"
 	dex
 
-_MagnetonDexEntry::
+_MagnetonDexEntry:
+WLA_GLOBAL_MagnetonDexEntry:
 	text "Formed by several"
 	next "MAGNEMITEs linked"
 	next "together. They"
@@ -498,7 +548,8 @@ _MagnetonDexEntry::
 	next "flare up"
 	dex
 
-_KoffingDexEntry::
+_KoffingDexEntry:
+WLA_GLOBAL_KoffingDexEntry:
 	text "Because it stores"
 	next "several kinds of"
 	next "toxic gases in"
@@ -508,7 +559,8 @@ _KoffingDexEntry::
 	next "without warning"
 	dex
 
-_MankeyDexEntry::
+_MankeyDexEntry:
+WLA_GLOBAL_MankeyDexEntry:
 	text "Extremely quick to"
 	next "anger. It could"
 	next "be docile one"
@@ -518,7 +570,8 @@ _MankeyDexEntry::
 	next "the next instant"
 	dex
 
-_SeelDexEntry::
+_SeelDexEntry:
+WLA_GLOBAL_SeelDexEntry:
 	text "The protruding"
 	next "horn on its head"
 	next "is very hard."
@@ -528,7 +581,8 @@ _SeelDexEntry::
 	next "thick ice"
 	dex
 
-_DiglettDexEntry::
+_DiglettDexEntry:
+WLA_GLOBAL_DiglettDexEntry:
 	text "Lives about one"
 	next "yard underground"
 	next "where it feeds on"
@@ -538,7 +592,8 @@ _DiglettDexEntry::
 	next "above ground"
 	dex
 
-_TaurosDexEntry::
+_TaurosDexEntry:
+WLA_GLOBAL_TaurosDexEntry:
 	text "When it targets"
 	next "an enemy, it"
 	next "charges furiously"
@@ -548,7 +603,8 @@ _TaurosDexEntry::
 	next "long tails"
 	dex
 
-_FarfetchdDexEntry::
+_FarfetchdDexEntry:
+WLA_GLOBAL_FarfetchdDexEntry:
 	text "The sprig of"
 	next "green onions it"
 	next "holds is its"
@@ -558,7 +614,8 @@ _FarfetchdDexEntry::
 	next "metal sword"
 	dex
 
-_VenonatDexEntry::
+_VenonatDexEntry:
+WLA_GLOBAL_VenonatDexEntry:
 	text "Lives in the"
 	next "shadows of tall"
 	next "trees where it"
@@ -568,7 +625,8 @@ _VenonatDexEntry::
 	next "light at night"
 	dex
 
-_DragoniteDexEntry::
+_DragoniteDexEntry:
+WLA_GLOBAL_DragoniteDexEntry:
 	text "An extremely"
 	next "rarely seen"
 	next "marine #MON."
@@ -578,7 +636,8 @@ _DragoniteDexEntry::
 	next "that of humans"
 	dex
 
-_DoduoDexEntry::
+_DoduoDexEntry:
+WLA_GLOBAL_DoduoDexEntry:
 	text "A bird that makes"
 	next "up for its poor"
 	next "flying with its"
@@ -588,7 +647,8 @@ _DoduoDexEntry::
 	next "footprints"
 	dex
 
-_PoliwagDexEntry::
+_PoliwagDexEntry:
+WLA_GLOBAL_PoliwagDexEntry:
 	text "Its newly grown"
 	next "legs prevent it"
 	next "from running. It"
@@ -598,7 +658,8 @@ _PoliwagDexEntry::
 	next "trying to stand"
 	dex
 
-_JynxDexEntry::
+_JynxDexEntry:
+WLA_GLOBAL_JynxDexEntry:
 	text "It seductively"
 	next "wiggles its hips"
 	next "as it walks. It"
@@ -608,7 +669,8 @@ _JynxDexEntry::
 	next "unison with it"
 	dex
 
-_MoltresDexEntry::
+_MoltresDexEntry:
+WLA_GLOBAL_MoltresDexEntry:
 	text "Known as the"
 	next "legendary bird of"
 	next "fire. Every flap"
@@ -618,7 +680,8 @@ _MoltresDexEntry::
 	next "flash of flames"
 	dex
 
-_ArticunoDexEntry::
+_ArticunoDexEntry:
+WLA_GLOBAL_ArticunoDexEntry:
 	text "A legendary bird"
 	next "#MON that is"
 	next "said to appear to"
@@ -628,7 +691,8 @@ _ArticunoDexEntry::
 	next "mountains"
 	dex
 
-_ZapdosDexEntry::
+_ZapdosDexEntry:
+WLA_GLOBAL_ZapdosDexEntry:
 	text "A legendary bird"
 	next "#MON that is"
 	next "said to appear"
@@ -638,7 +702,8 @@ _ZapdosDexEntry::
 	next "lightning bolts"
 	dex
 
-_DittoDexEntry::
+_DittoDexEntry:
+WLA_GLOBAL_DittoDexEntry:
 	text "Capable of copying"
 	next "an enemy's genetic"
 	next "code to instantly"
@@ -648,7 +713,8 @@ _DittoDexEntry::
 	next "of the enemy"
 	dex
 
-_MeowthDexEntry::
+_MeowthDexEntry:
+WLA_GLOBAL_MeowthDexEntry:
 	text "Adores circular"
 	next "objects. Wanders"
 	next "the streets on a"
@@ -658,7 +724,8 @@ _MeowthDexEntry::
 	next "loose change"
 	dex
 
-_KrabbyDexEntry::
+_KrabbyDexEntry:
+WLA_GLOBAL_KrabbyDexEntry:
 	text "Its pincers are"
 	next "not only powerful"
 	next "weapons, they are"
@@ -668,7 +735,8 @@ _KrabbyDexEntry::
 	next "sideways"
 	dex
 
-_VulpixDexEntry::
+_VulpixDexEntry:
+WLA_GLOBAL_VulpixDexEntry:
 	text "At the time of"
 	next "birth, it has"
 	next "just one tail."
@@ -678,7 +746,8 @@ _VulpixDexEntry::
 	next "it grows older"
 	dex
 
-_NinetalesDexEntry::
+_NinetalesDexEntry:
+WLA_GLOBAL_NinetalesDexEntry:
 	text "Very smart and"
 	next "very vengeful."
 	next "Grabbing one of"
@@ -688,7 +757,8 @@ _NinetalesDexEntry::
 	next "1000-year curse"
 	dex
 
-_PikachuDexEntry::
+_PikachuDexEntry:
+WLA_GLOBAL_PikachuDexEntry:
 	text "When several of"
 	next "these #MON"
 	next "gather, their"
@@ -698,7 +768,8 @@ _PikachuDexEntry::
 	next "lightning storms"
 	dex
 
-_RaichuDexEntry::
+_RaichuDexEntry:
+WLA_GLOBAL_RaichuDexEntry:
 	text "Its long tail"
 	next "serves as a"
 	next "ground to protect"
@@ -708,7 +779,8 @@ _RaichuDexEntry::
 	next "power"
 	dex
 
-_DratiniDexEntry::
+_DratiniDexEntry:
+WLA_GLOBAL_DratiniDexEntry:
 	text "Long considered a"
 	next "mythical #MON"
 	next "until recently"
@@ -718,7 +790,8 @@ _DratiniDexEntry::
 	next "living underwater"
 	dex
 
-_DragonairDexEntry::
+_DragonairDexEntry:
+WLA_GLOBAL_DragonairDexEntry:
 	text "A mystical #MON"
 	next "that exudes a"
 	next "gentle aura."
@@ -728,7 +801,8 @@ _DragonairDexEntry::
 	next "conditions"
 	dex
 
-_KabutoDexEntry::
+_KabutoDexEntry:
+WLA_GLOBAL_KabutoDexEntry:
 	text "A #MON that"
 	next "was resurrected"
 	next "from a fossil"
@@ -738,7 +812,8 @@ _KabutoDexEntry::
 	next "floor eons ago"
 	dex
 
-_KabutopsDexEntry::
+_KabutopsDexEntry:
+WLA_GLOBAL_KabutopsDexEntry:
 	text "Its sleek shape is"
 	next "perfect for swim-"
 	next "ming. It slashes"
@@ -748,7 +823,8 @@ _KabutopsDexEntry::
 	next "the body fluids"
 	dex
 
-_HorseaDexEntry::
+_HorseaDexEntry:
+WLA_GLOBAL_HorseaDexEntry:
 	text "Known to shoot"
 	next "down flying bugs"
 	next "with precision"
@@ -758,7 +834,8 @@ _HorseaDexEntry::
 	next "of the water"
 	dex
 
-_SeadraDexEntry::
+_SeadraDexEntry:
+WLA_GLOBAL_SeadraDexEntry:
 	text "Capable of swim-"
 	next "ming backwards by"
 	next "rapidly flapping"
@@ -768,7 +845,8 @@ _SeadraDexEntry::
 	next "stout tail"
 	dex
 
-_SandshrewDexEntry::
+_SandshrewDexEntry:
+WLA_GLOBAL_SandshrewDexEntry:
 	text "Burrows deep"
 	next "underground in"
 	next "arid locations"
@@ -778,7 +856,8 @@ _SandshrewDexEntry::
 	next "to hunt for food"
 	dex
 
-_SandslashDexEntry::
+_SandslashDexEntry:
+WLA_GLOBAL_SandslashDexEntry:
 	text "Curls up into a"
 	next "spiny ball when"
 	next "threatened. It"
@@ -788,7 +867,8 @@ _SandslashDexEntry::
 	next "attack or escape"
 	dex
 
-_OmanyteDexEntry::
+_OmanyteDexEntry:
+WLA_GLOBAL_OmanyteDexEntry:
 	text "Although long"
 	next "extinct, in rare"
 	next "cases, it can be"
@@ -798,7 +878,8 @@ _OmanyteDexEntry::
 	next "fossils"
 	dex
 
-_OmastarDexEntry::
+_OmastarDexEntry:
+WLA_GLOBAL_OmastarDexEntry:
 	text "A prehistoric"
 	next "#MON that died"
 	next "out when its"
@@ -808,7 +889,8 @@ _OmastarDexEntry::
 	next "catch prey"
 	dex
 
-_JigglypuffDexEntry::
+_JigglypuffDexEntry:
+WLA_GLOBAL_JigglypuffDexEntry:
 	text "When its huge eyes"
 	next "light up, it sings"
 	next "a mysteriously"
@@ -818,7 +900,8 @@ _JigglypuffDexEntry::
 	next "enemies to sleep"
 	dex
 
-_WigglytuffDexEntry::
+_WigglytuffDexEntry:
+WLA_GLOBAL_WigglytuffDexEntry:
 	text "The body is soft"
 	next "and rubbery. When"
 	next "angered, it will"
@@ -828,7 +911,8 @@ _WigglytuffDexEntry::
 	next "an enormous size"
 	dex
 
-_EeveeDexEntry::
+_EeveeDexEntry:
+WLA_GLOBAL_EeveeDexEntry:
 	text "Its genetic code"
 	next "is irregular."
 	next "It may mutate if"
@@ -838,7 +922,8 @@ _EeveeDexEntry::
 	next "element STONEs"
 	dex
 
-_FlareonDexEntry::
+_FlareonDexEntry:
+WLA_GLOBAL_FlareonDexEntry:
 	text "When storing"
 	next "thermal energy in"
 	next "its body, its"
@@ -848,7 +933,8 @@ _FlareonDexEntry::
 	next "degrees"
 	dex
 
-_JolteonDexEntry::
+_JolteonDexEntry:
+WLA_GLOBAL_JolteonDexEntry:
 	text "It accumulates"
 	next "negative ions in"
 	next "the atmosphere to"
@@ -858,7 +944,8 @@ _JolteonDexEntry::
 	next "bolts"
 	dex
 
-_VaporeonDexEntry::
+_VaporeonDexEntry:
+WLA_GLOBAL_VaporeonDexEntry:
 	text "Lives close to"
 	next "water. Its long"
 	next "tail is ridged"
@@ -868,7 +955,8 @@ _VaporeonDexEntry::
 	next "for a mermaid's"
 	dex
 
-_MachopDexEntry::
+_MachopDexEntry:
+WLA_GLOBAL_MachopDexEntry:
 	text "Loves to build"
 	next "its muscles."
 	next "It trains in all"
@@ -878,7 +966,8 @@ _MachopDexEntry::
 	next "even stronger"
 	dex
 
-_ZubatDexEntry::
+_ZubatDexEntry:
+WLA_GLOBAL_ZubatDexEntry:
 	text "Forms colonies in"
 	next "perpetually dark"
 	next "places. Uses"
@@ -888,7 +977,8 @@ _ZubatDexEntry::
 	next "approach targets"
 	dex
 
-_EkansDexEntry::
+_EkansDexEntry:
+WLA_GLOBAL_EkansDexEntry:
 	text "Moves silently"
 	next "and stealthily."
 	next "Eats the eggs of"
@@ -898,7 +988,8 @@ _EkansDexEntry::
 	next "SPEAROW, whole"
 	dex
 
-_ParasDexEntry::
+_ParasDexEntry:
+WLA_GLOBAL_ParasDexEntry:
 	text "Burrows to suck"
 	next "tree roots. The"
 	next "mushrooms on its"
@@ -908,7 +999,8 @@ _ParasDexEntry::
 	next "the bug host"
 	dex
 
-_PoliwhirlDexEntry::
+_PoliwhirlDexEntry:
+WLA_GLOBAL_PoliwhirlDexEntry:
 	text "Capable of living"
 	next "in or out of"
 	next "water. When out"
@@ -918,7 +1010,8 @@ _PoliwhirlDexEntry::
 	next "its body slimy"
 	dex
 
-_PoliwrathDexEntry::
+_PoliwrathDexEntry:
+WLA_GLOBAL_PoliwrathDexEntry:
 	text "An adept swimmer"
 	next "at both the front"
 	next "crawl and breast"
@@ -928,7 +1021,8 @@ _PoliwrathDexEntry::
 	next "human swimmers"
 	dex
 
-_WeedleDexEntry::
+_WeedleDexEntry:
+WLA_GLOBAL_WeedleDexEntry:
 	text "Often found in"
 	next "forests, eating"
 	next "leaves."
@@ -938,7 +1032,8 @@ _WeedleDexEntry::
 	next "on its head"
 	dex
 
-_KakunaDexEntry::
+_KakunaDexEntry:
+WLA_GLOBAL_KakunaDexEntry:
 	text "Almost incapable"
 	next "of moving, this"
 	next "#MON can only"
@@ -948,7 +1043,8 @@ _KakunaDexEntry::
 	next "from predators"
 	dex
 
-_BeedrillDexEntry::
+_BeedrillDexEntry:
+WLA_GLOBAL_BeedrillDexEntry:
 	text "Flies at high"
 	next "speed and attacks"
 	next "using its large"
@@ -958,7 +1054,8 @@ _BeedrillDexEntry::
 	next "and tail"
 	dex
 
-_DodrioDexEntry::
+_DodrioDexEntry:
+WLA_GLOBAL_DodrioDexEntry:
 	text "Uses its three"
 	next "brains to execute"
 	next "complex plans."
@@ -968,7 +1065,8 @@ _DodrioDexEntry::
 	next "stays awake"
 	dex
 
-_PrimeapeDexEntry::
+_PrimeapeDexEntry:
+WLA_GLOBAL_PrimeapeDexEntry:
 	text "Always furious"
 	next "and tenacious to"
 	next "boot. It will not"
@@ -978,7 +1076,8 @@ _PrimeapeDexEntry::
 	next "it is caught"
 	dex
 
-_DugtrioDexEntry::
+_DugtrioDexEntry:
+WLA_GLOBAL_DugtrioDexEntry:
 	text "A team of DIGLETT"
 	next "triplets."
 	next "It triggers huge"
@@ -988,7 +1087,8 @@ _DugtrioDexEntry::
 	next "underground"
 	dex
 
-_VenomothDexEntry::
+_VenomothDexEntry:
+WLA_GLOBAL_VenomothDexEntry:
 	text "The dust-like"
 	next "scales covering"
 	next "its wings are"
@@ -998,7 +1098,8 @@ _VenomothDexEntry::
 	next "of poison it has"
 	dex
 
-_DewgongDexEntry::
+_DewgongDexEntry:
+WLA_GLOBAL_DewgongDexEntry:
 	text "Stores thermal"
 	next "energy in its"
 	next "body. Swims at a"
@@ -1008,7 +1109,8 @@ _DewgongDexEntry::
 	next "cold waters"
 	dex
 
-_CaterpieDexEntry::
+_CaterpieDexEntry:
+WLA_GLOBAL_CaterpieDexEntry:
 	text "Its short feet"
 	next "are tipped with"
 	next "suction pads that"
@@ -1018,7 +1120,8 @@ _CaterpieDexEntry::
 	next "slopes and walls"
 	dex
 
-_MetapodDexEntry::
+_MetapodDexEntry:
+WLA_GLOBAL_MetapodDexEntry:
 	text "This #MON is"
 	next "vulnerable to"
 	next "attack while its"
@@ -1028,7 +1131,8 @@ _MetapodDexEntry::
 	next "and tender body"
 	dex
 
-_ButterfreeDexEntry::
+_ButterfreeDexEntry:
+WLA_GLOBAL_ButterfreeDexEntry:
 	text "In battle, it"
 	next "flaps its wings"
 	next "at high speed to"
@@ -1038,7 +1142,8 @@ _ButterfreeDexEntry::
 	next "the air"
 	dex
 
-_MachampDexEntry::
+_MachampDexEntry:
+WLA_GLOBAL_MachampDexEntry:
 	text "Using its heavy"
 	next "muscles, it throws"
 	next "powerful punches"
@@ -1048,7 +1153,8 @@ _MachampDexEntry::
 	next "the horizon"
 	dex
 
-_GolduckDexEntry::
+_GolduckDexEntry:
+WLA_GLOBAL_GolduckDexEntry:
 	text "Often seen swim-"
 	next "ming elegantly by"
 	next "lake shores. It"
@@ -1058,7 +1164,8 @@ _GolduckDexEntry::
 	next "monster, Kappa"
 	dex
 
-_HypnoDexEntry::
+_HypnoDexEntry:
+WLA_GLOBAL_HypnoDexEntry:
 	text "When it locks eyes"
 	next "with an enemy, it"
 	next "will use a mix of"
@@ -1068,7 +1175,8 @@ _HypnoDexEntry::
 	next "CONFUSION"
 	dex
 
-_GolbatDexEntry::
+_GolbatDexEntry:
+WLA_GLOBAL_GolbatDexEntry:
 	text "Once it strikes,"
 	next "it will not stop"
 	next "draining energy"
@@ -1078,7 +1186,8 @@ _GolbatDexEntry::
 	next "too heavy to fly"
 	dex
 
-_MewtwoDexEntry::
+_MewtwoDexEntry:
+WLA_GLOBAL_MewtwoDexEntry:
 	text "It was created by"
 	next "a scientist after"
 	next "years of horrific"
@@ -1088,7 +1197,8 @@ _MewtwoDexEntry::
 	next "experiments"
 	dex
 
-_SnorlaxDexEntry::
+_SnorlaxDexEntry:
+WLA_GLOBAL_SnorlaxDexEntry:
 	text "Very lazy. Just"
 	next "eats and sleeps."
 	next "As its rotund"
@@ -1098,7 +1208,8 @@ _SnorlaxDexEntry::
 	next "more slothful"
 	dex
 
-_MagikarpDexEntry::
+_MagikarpDexEntry:
+WLA_GLOBAL_MagikarpDexEntry:
 	text "In the distant"
 	next "past, it was"
 	next "somewhat stronger"
@@ -1108,7 +1219,8 @@ _MagikarpDexEntry::
 	next "that exist today"
 	dex
 
-_MukDexEntry::
+_MukDexEntry:
+WLA_GLOBAL_MukDexEntry:
 	text "Thickly covered"
 	next "with a filthy,"
 	next "vile sludge. It"
@@ -1118,7 +1230,8 @@ _MukDexEntry::
 	next "contain poison"
 	dex
 
-_KinglerDexEntry::
+_KinglerDexEntry:
+WLA_GLOBAL_KinglerDexEntry:
 	text "The large pincer"
 	next "has 10000 hp of"
 	next "crushing power."
@@ -1128,7 +1241,8 @@ _KinglerDexEntry::
 	next "unwieldy to use"
 	dex
 
-_CloysterDexEntry::
+_CloysterDexEntry:
+WLA_GLOBAL_CloysterDexEntry:
 	text "When attacked, it"
 	next "launches its"
 	next "horns in quick"
@@ -1138,7 +1252,8 @@ _CloysterDexEntry::
 	next "never been seen"
 	dex
 
-_ElectrodeDexEntry::
+_ElectrodeDexEntry:
+WLA_GLOBAL_ElectrodeDexEntry:
 	text "It stores electric"
 	next "energy under very"
 	next "high pressure."
@@ -1148,7 +1263,8 @@ _ElectrodeDexEntry::
 	next "provocation"
 	dex
 
-_ClefableDexEntry::
+_ClefableDexEntry:
+WLA_GLOBAL_ClefableDexEntry:
 	text "A timid fairy"
 	next "#MON that is"
 	next "rarely seen. It"
@@ -1158,7 +1274,8 @@ _ClefableDexEntry::
 	next "senses people"
 	dex
 
-_WeezingDexEntry::
+_WeezingDexEntry:
+WLA_GLOBAL_WeezingDexEntry:
 	text "Where two kinds"
 	next "of poison gases"
 	next "meet, 2 KOFFINGs"
@@ -1168,7 +1285,8 @@ _WeezingDexEntry::
 	next "years"
 	dex
 
-_PersianDexEntry::
+_PersianDexEntry:
+WLA_GLOBAL_PersianDexEntry:
 	text "Although its fur"
 	next "has many admirers,"
 	next "it is tough to"
@@ -1178,7 +1296,8 @@ _PersianDexEntry::
 	next "fickle meanness"
 	dex
 
-_MarowakDexEntry::
+_MarowakDexEntry:
+WLA_GLOBAL_MarowakDexEntry:
 	text "The bone it holds"
 	next "is its key weapon."
 	next "It throws the"
@@ -1188,7 +1307,8 @@ _MarowakDexEntry::
 	next "to KO targets"
 	dex
 
-_HaunterDexEntry::
+_HaunterDexEntry:
+WLA_GLOBAL_HaunterDexEntry:
 	text "Because of its"
 	next "ability to slip"
 	next "through block"
@@ -1198,7 +1318,8 @@ _HaunterDexEntry::
 	next "other dimension"
 	dex
 
-_AbraDexEntry::
+_AbraDexEntry:
+WLA_GLOBAL_AbraDexEntry:
 	text "Using its ability"
 	next "to read minds, it"
 	next "will identify"
@@ -1208,7 +1329,8 @@ _AbraDexEntry::
 	next "safety"
 	dex
 
-_AlakazamDexEntry::
+_AlakazamDexEntry:
+WLA_GLOBAL_AlakazamDexEntry:
 	text "Its brain can out-"
 	next "perform a super-"
 	next "computer."
@@ -1218,7 +1340,8 @@ _AlakazamDexEntry::
 	next "to be 5,000"
 	dex
 
-_PidgeottoDexEntry::
+_PidgeottoDexEntry:
+WLA_GLOBAL_PidgeottoDexEntry:
 	text "Very protective"
 	next "of its sprawling"
 	next "territorial area,"
@@ -1228,7 +1351,8 @@ _PidgeottoDexEntry::
 	next "any intruder"
 	dex
 
-_PidgeotDexEntry::
+_PidgeotDexEntry:
+WLA_GLOBAL_PidgeotDexEntry:
 	text "When hunting, it"
 	next "skims the surface"
 	next "of water at high"
@@ -1238,7 +1362,8 @@ _PidgeotDexEntry::
 	next "as MAGIKARP"
 	dex
 
-_StarmieDexEntry::
+_StarmieDexEntry:
+WLA_GLOBAL_StarmieDexEntry:
 	text "Its central core"
 	next "glows with the"
 	next "seven colors of"
@@ -1248,7 +1373,8 @@ _StarmieDexEntry::
 	next "core as a gem"
 	dex
 
-_BulbasaurDexEntry::
+_BulbasaurDexEntry:
+WLA_GLOBAL_BulbasaurDexEntry:
 	text "A strange seed was"
 	next "planted on its"
 	next "back at birth."
@@ -1258,7 +1384,8 @@ _BulbasaurDexEntry::
 	next "this #MON"
 	dex
 
-_VenusaurDexEntry::
+_VenusaurDexEntry:
+WLA_GLOBAL_VenusaurDexEntry:
 	text "The plant blooms"
 	next "when it is"
 	next "absorbing solar"
@@ -1268,7 +1395,8 @@ _VenusaurDexEntry::
 	next "seek sunlight"
 	dex
 
-_TentacruelDexEntry::
+_TentacruelDexEntry:
+WLA_GLOBAL_TentacruelDexEntry:
 	text "The tentacles are"
 	next "normally kept"
 	next "short. On hunts,"
@@ -1278,7 +1406,8 @@ _TentacruelDexEntry::
 	next "immobilize prey"
 	dex
 
-_GoldeenDexEntry::
+_GoldeenDexEntry:
+WLA_GLOBAL_GoldeenDexEntry:
 	text "Its tail fin"
 	next "billows like an"
 	next "elegant ballroom"
@@ -1288,7 +1417,8 @@ _GoldeenDexEntry::
 	next "the Water Queen"
 	dex
 
-_SeakingDexEntry::
+_SeakingDexEntry:
+WLA_GLOBAL_SeakingDexEntry:
 	text "In the autumn"
 	next "spawning season,"
 	next "they can be seen"
@@ -1298,7 +1428,8 @@ _SeakingDexEntry::
 	next "and creeks"
 	dex
 
-_PonytaDexEntry::
+_PonytaDexEntry:
+WLA_GLOBAL_PonytaDexEntry:
 	text "Its hooves are 10"
 	next "times harder than"
 	next "diamonds. It can"
@@ -1308,7 +1439,8 @@ _PonytaDexEntry::
 	next "in little time"
 	dex
 
-_RapidashDexEntry::
+_RapidashDexEntry:
+WLA_GLOBAL_RapidashDexEntry:
 	text "Very competitive,"
 	next "this #MON will"
 	next "chase anything"
@@ -1318,7 +1450,8 @@ _RapidashDexEntry::
 	next "racing it"
 	dex
 
-_RattataDexEntry::
+_RattataDexEntry:
+WLA_GLOBAL_RattataDexEntry:
 	text "Bites anything"
 	next "when it attacks."
 	next "Small and very"
@@ -1328,7 +1461,8 @@ _RattataDexEntry::
 	next "many places"
 	dex
 
-_RaticateDexEntry::
+_RaticateDexEntry:
+WLA_GLOBAL_RaticateDexEntry:
 	text "It uses its whis-"
 	next "kers to maintain"
 	next "its balance."
@@ -1338,7 +1472,8 @@ _RaticateDexEntry::
 	next "they are cut off"
 	dex
 
-_NidorinoDexEntry::
+_NidorinoDexEntry:
+WLA_GLOBAL_NidorinoDexEntry:
 	text "An aggressive"
 	next "#MON that is"
 	next "quick to attack."
@@ -1348,7 +1483,8 @@ _NidorinoDexEntry::
 	next "powerful venom"
 	dex
 
-_NidorinaDexEntry::
+_NidorinaDexEntry:
+WLA_GLOBAL_NidorinaDexEntry:
 	text "The female's horn"
 	next "develops slowly."
 	next "Prefers physical"
@@ -1358,7 +1494,8 @@ _NidorinaDexEntry::
 	next "biting"
 	dex
 
-_GeodudeDexEntry::
+_GeodudeDexEntry:
+WLA_GLOBAL_GeodudeDexEntry:
 	text "Found in fields"
 	next "and mountains."
 	next "Mistaking them"
@@ -1368,7 +1505,8 @@ _GeodudeDexEntry::
 	next "or trip on them"
 	dex
 
-_PorygonDexEntry::
+_PorygonDexEntry:
+WLA_GLOBAL_PorygonDexEntry:
 	text "A #MON that"
 	next "consists entirely"
 	next "of programming"
@@ -1378,7 +1516,8 @@ _PorygonDexEntry::
 	next "cyberspace"
 	dex
 
-_AerodactylDexEntry::
+_AerodactylDexEntry:
+WLA_GLOBAL_AerodactylDexEntry:
 	text "A ferocious, pre-"
 	next "historic #MON"
 	next "that goes for the"
@@ -1388,7 +1527,8 @@ _AerodactylDexEntry::
 	next "saw-like fangs"
 	dex
 
-_MagnemiteDexEntry::
+_MagnemiteDexEntry:
+WLA_GLOBAL_MagnemiteDexEntry:
 	text "Uses anti-gravity"
 	next "to stay suspended."
 	next "Appears without"
@@ -1398,7 +1538,8 @@ _MagnemiteDexEntry::
 	next "similar moves"
 	dex
 
-_CharmanderDexEntry::
+_CharmanderDexEntry:
+WLA_GLOBAL_CharmanderDexEntry:
 	text "Obviously prefers"
 	next "hot places. When"
 	next "it rains, steam"
@@ -1408,7 +1549,8 @@ _CharmanderDexEntry::
 	next "its tail"
 	dex
 
-_SquirtleDexEntry::
+_SquirtleDexEntry:
+WLA_GLOBAL_SquirtleDexEntry:
 	text "After birth, its"
 	next "back swells and"
 	next "hardens into a"
@@ -1418,7 +1560,8 @@ _SquirtleDexEntry::
 	next "its mouth"
 	dex
 
-_CharmeleonDexEntry::
+_CharmeleonDexEntry:
+WLA_GLOBAL_CharmeleonDexEntry:
 	text "When it swings"
 	next "its burning tail,"
 	next "it elevates the"
@@ -1428,7 +1571,8 @@ _CharmeleonDexEntry::
 	next "levels"
 	dex
 
-_WartortleDexEntry::
+_WartortleDexEntry:
+WLA_GLOBAL_WartortleDexEntry:
 	text "Often hides in"
 	next "water to stalk"
 	next "unwary prey. For"
@@ -1438,7 +1582,8 @@ _WartortleDexEntry::
 	next "maintain balance"
 	dex
 
-_CharizardDexEntry::
+_CharizardDexEntry:
+WLA_GLOBAL_CharizardDexEntry:
 	text "Spits fire that"
 	next "is hot enough to"
 	next "melt boulders."
@@ -1448,7 +1593,8 @@ _CharizardDexEntry::
 	next "unintentionally"
 	dex
 
-_OddishDexEntry::
+_OddishDexEntry:
+WLA_GLOBAL_OddishDexEntry:
 	text "During the day,"
 	next "it keeps its face"
 	next "buried in the"
@@ -1458,7 +1604,8 @@ _OddishDexEntry::
 	next "sowing its seeds"
 	dex
 
-_GloomDexEntry::
+_GloomDexEntry:
+WLA_GLOBAL_GloomDexEntry:
 	text "The fluid that"
 	next "oozes from its"
 	next "mouth isn't drool."
@@ -1468,7 +1615,8 @@ _GloomDexEntry::
 	next "attract prey"
 	dex
 
-_VileplumeDexEntry::
+_VileplumeDexEntry:
+WLA_GLOBAL_VileplumeDexEntry:
 	text "The larger its"
 	next "petals, the more"
 	next "toxic pollen it"
@@ -1478,7 +1626,8 @@ _VileplumeDexEntry::
 	next "hard to hold up"
 	dex
 
-_BellsproutDexEntry::
+_BellsproutDexEntry:
+WLA_GLOBAL_BellsproutDexEntry:
 	text "A carnivorous"
 	next "#MON that traps"
 	next "and eats bugs."
@@ -1488,7 +1637,8 @@ _BellsproutDexEntry::
 	next "needed moisture"
 	dex
 
-_WeepinbellDexEntry::
+_WeepinbellDexEntry:
+WLA_GLOBAL_WeepinbellDexEntry:
 	text "It spits out"
 	next "POISONPOWDER to"
 	next "immobilize the"
@@ -1498,7 +1648,8 @@ _WeepinbellDexEntry::
 	next "a spray of ACID"
 	dex
 
-_VictreebelDexEntry::
+_VictreebelDexEntry:
+WLA_GLOBAL_VictreebelDexEntry:
 	text "Said to live in"
 	next "huge colonies"
 	next "deep in jungles,"

@@ -1,17 +1,17 @@
-	db DEX_KABUTO ; pokedex id
+	.DB DEX_KABUTO ; pokedex id
 
-	db  30,  80,  90,  55,  45
+	.DB  30,  80,  90,  55,  45
 	;   hp  atk  def  spd  spc
 
-	db ROCK, WATER ; type
-	db 45 ; catch rate
-	db 119 ; base exp
+	.DB ROCK, WATER ; type
+	.DB 45 ; catch rate
+	.DB 119 ; base exp
 
-	INCBIN "gfx/pokemon/front/kabuto.pic", 0, 1 ; sprite dimensions
-	dw KabutoPicFront, KabutoPicBack
+	.INCBIN "gfx/pokemon/front/kabuto.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW KabutoPicFront, KabutoPicBack
 
-	db SCRATCH, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

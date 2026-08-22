@@ -5,9 +5,9 @@ TransformEffect_:
 	; bug: on enemy's turn, a is overloaded with hWhoseTurn,
 	; before the check for INVULNERABLE
 	ld a, [wEnemyBattleStatus1]
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr nz, .hitTest
+	jr nz, TransformEffect_.hitTest
 ; player's turn
 	ld hl, wEnemyMonSpecies
 	ld de, wBattleMonSpecies
@@ -15,36 +15,36 @@ TransformEffect_:
 	ld [wPlayerMoveListIndex], a
 	; bug: this should be target's BattleStatus1 (i.e. wEnemyBattleStatus1)
 	ld a, [wPlayerBattleStatus1]
-.hitTest
+TransformEffect_.hitTest
 	bit INVULNERABLE, a ; is mon invulnerable to typical attacks? (fly/dig)
 	                    ; this check doesn't work due to above bugs
-	jp nz, .failed
+	jp nz, TransformEffect_.failed
 	push hl
 	push de
 	push bc
 	ld hl, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .transformEffect
+	jr z, TransformEffect_.transformEffect
 	ld hl, wEnemyBattleStatus2
-.transformEffect
+TransformEffect_.transformEffect
 ; animation(s) played are different if target has Substitute up
 	bit HAS_SUBSTITUTE_UP, [hl]
 	push af
 	ld hl, HideSubstituteShowMonAnim
-	ld b, BANK(HideSubstituteShowMonAnim)
+	ld b, bank(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	ld a, [wOptions]
 	add a
 	ld hl, PlayCurrentMoveAnimation
-	ld b, BANK(PlayCurrentMoveAnimation)
-	jr nc, .gotAnimToPlay
+	ld b, bank(PlayCurrentMoveAnimation)
+	jr nc, TransformEffect_.gotAnimToPlay
 	ld hl, AnimationTransformMon
-	ld b, BANK(AnimationTransformMon)
-.gotAnimToPlay
+	ld b, bank(AnimationTransformMon)
+TransformEffect_.gotAnimToPlay
 	call Bankswitch
 	ld hl, ReshowSubstituteAnim
-	ld b, BANK(ReshowSubstituteAnim)
+	ld b, bank(ReshowSubstituteAnim)
 	pop af
 	call nz, Bankswitch
 	pop bc
@@ -69,9 +69,9 @@ TransformEffect_:
 	inc bc
 	inc bc
 	call CopyData
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .next
+	jr z, TransformEffect_.next
 ; save enemy mon DVs at wTransformedEnemyMonOriginalDVs
 	ld a, [de]
 	ld [wTransformedEnemyMonOriginalDVs], a
@@ -79,7 +79,7 @@ TransformEffect_:
 	ld a, [de]
 	ld [wTransformedEnemyMonOriginalDVs + 1], a
 	dec de
-.next
+TransformEffect_.next
 ; DVs
 	ld a, [hli]
 	ld [de], a
@@ -100,25 +100,25 @@ TransformEffect_:
 	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES
-.copyPPLoop
+TransformEffect_.copyPPLoop
 ; 5 PP for all moves
 	ld a, [hli]
 	and a
-	jr z, .lessThanFourMoves
+	jr z, TransformEffect_.lessThanFourMoves
 	ld a, 5
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .copyPPLoop
-	jr .copyStats
-.lessThanFourMoves
+	jr nz, TransformEffect_.copyPPLoop
+	jr TransformEffect_.copyStats
+TransformEffect_.lessThanFourMoves
 ; 0 PP for blank moves
 	xor a
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .lessThanFourMoves
-.copyStats
+	jr nz, TransformEffect_.lessThanFourMoves
+TransformEffect_.copyStats
 ; original (unmodified) stats and stat mods
 	pop hl
 	ld a, [hl]
@@ -126,29 +126,29 @@ TransformEffect_:
 	call GetMonName
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	call .copyBasedOnTurn ; original (unmodified) stats
+	call TransformEffect_.copyBasedOnTurn ; original (unmodified) stats
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMonStatMods
-	call .copyBasedOnTurn ; stat mods
+	call TransformEffect_.copyBasedOnTurn ; stat mods
 	ld hl, TransformedText
 	jp PrintText
 
-.copyBasedOnTurn
-	ldh a, [hWhoseTurn]
+TransformEffect_.copyBasedOnTurn
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .gotStatsOrModsToCopy
+	jr z, TransformEffect_.gotStatsOrModsToCopy
 	push hl
 	ld h, d
 	ld l, e
 	pop de
-.gotStatsOrModsToCopy
+TransformEffect_.gotStatsOrModsToCopy
 	ld bc, (NUM_STATS - 1) * 2
 	jp CopyData
 
-.failed
+TransformEffect_.failed
 	ld hl, PrintButItFailedText_
 	jp EffectCallBattleCore
 
 TransformedText:
-	text_far _TransformedText
+	text_far WLA_GLOBAL_TransformedText
 	text_end

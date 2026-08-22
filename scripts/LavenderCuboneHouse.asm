@@ -8,7 +8,7 @@ LavenderCuboneHouse_TextPointers:
 	dw_const LavenderCuboneHouseBrunetteGirlText, TEXT_LAVENDERCUBONEHOUSE_BRUNETTE_GIRL
 
 LavenderCuboneHouseCuboneText:
-	text_far _LavenderCuboneHouseCuboneText
+	text_far WLA_GLOBAL_LavenderCuboneHouseCuboneText
 	text_asm
 	ld a, CUBONE
 	call PlayCry
@@ -17,20 +17,20 @@ LavenderCuboneHouseCuboneText:
 LavenderCuboneHouseBrunetteGirlText:
 	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
-	jr nz, .rescued_mr_fuji
-	ld hl, .PoorCubonesMotherText
+	jr nz, LavenderCuboneHouseBrunetteGirlText.rescued_mr_fuji
+	ld hl, LavenderCuboneHouseBrunetteGirlText.PoorCubonesMotherText
 	call PrintText
-	jr .done
-.rescued_mr_fuji
-	ld hl, .TheGhostIsGoneText
+	jr LavenderCuboneHouseBrunetteGirlText.done
+LavenderCuboneHouseBrunetteGirlText.rescued_mr_fuji
+	ld hl, LavenderCuboneHouseBrunetteGirlText.TheGhostIsGoneText
 	call PrintText
-.done
+LavenderCuboneHouseBrunetteGirlText.done
 	jp TextScriptEnd
 
-.PoorCubonesMotherText:
-	text_far _LavenderCuboneHouseBrunetteGirlPoorCubonesMotherText
+LavenderCuboneHouseBrunetteGirlText.PoorCubonesMotherText:
+	text_far WLA_GLOBAL_LavenderCuboneHouseBrunetteGirlPoorCubonesMotherText
 	text_end
 
-.TheGhostIsGoneText:
-	text_far _LavenderCuboneHouseBrunetteGirlGhostIsGoneText
+LavenderCuboneHouseBrunetteGirlText.TheGhostIsGoneText:
+	text_far WLA_GLOBAL_LavenderCuboneHouseBrunetteGirlGhostIsGoneText
 	text_end

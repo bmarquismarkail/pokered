@@ -29,9 +29,9 @@ PokemonTower6FDefaultScript:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_POKEMONTOWER6F_BEGONE
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, RESTLESS_SOUL
 	ld [wCurOpponent], a
@@ -44,7 +44,7 @@ PokemonTower6FDefaultScript:
 
 PokemonTower6FMarowakCoords:
 	dbmapcoord 10, 16
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower6FMarowakBattleScript:
 	ld a, [wIsInBattle]
@@ -60,10 +60,10 @@ PokemonTower6FMarowakBattleScript:
 	ld [wJoyIgnore], a
 	ld a, [wBattleResult]
 	and a
-	jr nz, .did_not_defeat
+	jr nz, PokemonTower6FMarowakBattleScript.did_not_defeat
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, TEXT_POKEMONTOWER6F_MAROWAK_DEPARTED
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -71,7 +71,7 @@ PokemonTower6FMarowakBattleScript:
 	ld [wPokemonTower6FCurScript], a
 	ld [wCurMapScript], a
 	ret
-.did_not_defeat
+PokemonTower6FMarowakBattleScript.did_not_defeat
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, PAD_RIGHT
@@ -114,7 +114,7 @@ PokemonTower6TrainerHeader1:
 	trainer EVENT_BEAT_POKEMONTOWER_6_TRAINER_1, 3, PokemonTower6FChanneler2BattleText, PokemonTower6FChanneler2EndBattleText, PokemonTower6FChanneler2AfterBattleText
 PokemonTower6TrainerHeader2:
 	trainer EVENT_BEAT_POKEMONTOWER_6_TRAINER_2, 2, PokemonTower6FChanneler3BattleText, PokemonTower6FChanneler3EndBattleText, PokemonTower6FChanneler3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower6FChanneler1Text:
 	text_asm
@@ -148,49 +148,49 @@ PokemonTower6FMarowakDepartedText:
 	jp TextScriptEnd
 
 PokemonTower6FGhostWasCubonesMotherText:
-	text_far _PokemonTower6FGhostWasCubonesMotherText
+	text_far WLA_GLOBAL_PokemonTower6FGhostWasCubonesMotherText
 	text_end
 
 PokemonTower6FSoulWasCalmedText:
-	text_far _PokemonTower6FSoulWasCalmedText
+	text_far WLA_GLOBAL_PokemonTower6FSoulWasCalmedText
 	text_end
 
 PokemonTower6FChanneler1BattleText:
-	text_far _PokemonTower6FChanneler1BattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler1BattleText
 	text_end
 
 PokemonTower6FChanneler1EndBattleText:
-	text_far _PokemonTower6FChanneler1EndBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler1EndBattleText
 	text_end
 
 PokemonTower6FChanneler1AfterBattleText:
-	text_far _PokemonTower6FChanneler1AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler1AfterBattleText
 	text_end
 
 PokemonTower6FChanneler2BattleText:
-	text_far _PokemonTower6FChanneler2BattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler2BattleText
 	text_end
 
 PokemonTower6FChanneler2EndBattleText:
-	text_far _PokemonTower6FChanneler2EndBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler2EndBattleText
 	text_end
 
 PokemonTower6FChanneler2AfterBattleText:
-	text_far _PokemonTower6FChanneler2AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler2AfterBattleText
 	text_end
 
 PokemonTower6FChanneler3BattleText:
-	text_far _PokemonTower6FChanneler3BattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler3BattleText
 	text_end
 
 PokemonTower6FChanneler3EndBattleText:
-	text_far _PokemonTower6FChanneler3EndBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler3EndBattleText
 	text_end
 
 PokemonTower6FChanneler3AfterBattleText:
-	text_far _PokemonTower6FChanneler3AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower6FChanneler3AfterBattleText
 	text_end
 
 PokemonTower6FBeGoneText:
-	text_far _PokemonTower6FBeGoneText
+	text_far WLA_GLOBAL_PokemonTower6FBeGoneText
 	text_end

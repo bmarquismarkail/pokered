@@ -5,18 +5,19 @@
 	const_export SAFFRONPOKECENTER_LINK_RECEPTIONIST
 
 SaffronPokecenter_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  7, LAST_MAP, 7
 	warp_event  4,  7, LAST_MAP, 7
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 4
 	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_SAFFRONPOKECENTER_NURSE
 	object_event  5,  5, SPRITE_BEAUTY, STAY, NONE, TEXT_SAFFRONPOKECENTER_BEAUTY
 	object_event  8,  3, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_SAFFRONPOKECENTER_GENTLEMAN
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_SAFFRONPOKECENTER_LINK_RECEPTIONIST
 
-	def_warps_to SAFFRON_POKECENTER
+	event_displacement SAFFRON_POKECENTER_WIDTH, 3, 7
+
+	event_displacement SAFFRON_POKECENTER_WIDTH, 4, 7

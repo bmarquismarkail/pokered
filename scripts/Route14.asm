@@ -49,7 +49,7 @@ Route14TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_8, 3, Route14Biker3BattleText, Route14Biker3EndBattleText, Route14Biker3AfterBattleText
 Route14TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_14_TRAINER_9, 4, Route14Biker4BattleText, Route14Biker4EndBattleText, Route14Biker4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route14CooltrainerM1Text:
 	text_asm
@@ -58,15 +58,15 @@ Route14CooltrainerM1Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM1BattleText:
-	text_far _Route14CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM1BattleText
 	text_end
 
 Route14CooltrainerM1EndBattleText:
-	text_far _Route14CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM1EndBattleText
 	text_end
 
 Route14CooltrainerM1AfterBattleText:
-	text_far _Route14CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM1AfterBattleText
 	text_end
 
 Route14CooltrainerM2Text:
@@ -76,15 +76,15 @@ Route14CooltrainerM2Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM2BattleText:
-	text_far _Route14CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM2BattleText
 	text_end
 
 Route14CooltrainerM2EndBattleText:
-	text_far _Route14CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM2EndBattleText
 	text_end
 
 Route14CooltrainerM2AfterBattleText:
-	text_far _Route14CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM2AfterBattleText
 	text_end
 
 Route14CooltrainerM3Text:
@@ -94,15 +94,15 @@ Route14CooltrainerM3Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM3BattleText:
-	text_far _Route14CooltrainerM3BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM3BattleText
 	text_end
 
 Route14CooltrainerM3EndBattleText:
-	text_far _Route14CooltrainerM3EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM3EndBattleText
 	text_end
 
 Route14CooltrainerM3AfterBattleText:
-	text_far _Route14CooltrainerM3AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM3AfterBattleText
 	text_end
 
 Route14CooltrainerM4Text:
@@ -112,15 +112,15 @@ Route14CooltrainerM4Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM4BattleText:
-	text_far _Route14CooltrainerM4BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM4BattleText
 	text_end
 
 Route14CooltrainerM4EndBattleText:
-	text_far _Route14CooltrainerM4EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM4EndBattleText
 	text_end
 
 Route14CooltrainerM4AfterBattleText:
-	text_far _Route14CooltrainerM4AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM4AfterBattleText
 	text_end
 
 Route14CooltrainerM5Text:
@@ -130,15 +130,15 @@ Route14CooltrainerM5Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM5BattleText:
-	text_far _Route14CooltrainerM5BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM5BattleText
 	text_end
 
 Route14CooltrainerM5EndBattleText:
-	text_far _Route14CooltrainerM5EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM5EndBattleText
 	text_end
 
 Route14CooltrainerM5AfterBattleText:
-	text_far _Route14CooltrainerM5AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM5AfterBattleText
 	text_end
 
 Route14CooltrainerM6Text:
@@ -148,15 +148,15 @@ Route14CooltrainerM6Text:
 	jp TextScriptEnd
 
 Route14CooltrainerM6BattleText:
-	text_far _Route14CooltrainerM6BattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM6BattleText
 	text_end
 
 Route14CooltrainerM6EndBattleText:
-	text_far _Route14CooltrainerM6EndBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM6EndBattleText
 	text_end
 
 Route14CooltrainerM6AfterBattleText:
-	text_far _Route14CooltrainerM6AfterBattleText
+	text_far WLA_GLOBAL_Route14CooltrainerM6AfterBattleText
 	text_end
 
 Route14Biker1Text:
@@ -166,15 +166,15 @@ Route14Biker1Text:
 	jp TextScriptEnd
 
 Route14Biker1BattleText:
-	text_far _Route14Biker1BattleText
+	text_far WLA_GLOBAL_Route14Biker1BattleText
 	text_end
 
 Route14Biker1EndBattleText:
-	text_far _Route14Biker1EndBattleText
+	text_far WLA_GLOBAL_Route14Biker1EndBattleText
 	text_end
 
 Route14Biker1AfterBattleText:
-	text_far _Route14Biker1AfterBattleText
+	text_far WLA_GLOBAL_Route14Biker1AfterBattleText
 	text_end
 
 Route14Biker2Text:
@@ -184,15 +184,15 @@ Route14Biker2Text:
 	jp TextScriptEnd
 
 Route14Biker2BattleText:
-	text_far _Route14Biker2BattleText
+	text_far WLA_GLOBAL_Route14Biker2BattleText
 	text_end
 
 Route14Biker2EndBattleText:
-	text_far _Route14Biker2EndBattleText
+	text_far WLA_GLOBAL_Route14Biker2EndBattleText
 	text_end
 
 Route14Biker2AfterBattleText:
-	text_far _Route14Biker2AfterBattleText
+	text_far WLA_GLOBAL_Route14Biker2AfterBattleText
 	text_end
 
 Route14Biker3Text:
@@ -202,15 +202,15 @@ Route14Biker3Text:
 	jp TextScriptEnd
 
 Route14Biker3BattleText:
-	text_far _Route14Biker3BattleText
+	text_far WLA_GLOBAL_Route14Biker3BattleText
 	text_end
 
 Route14Biker3EndBattleText:
-	text_far _Route14Biker3EndBattleText
+	text_far WLA_GLOBAL_Route14Biker3EndBattleText
 	text_end
 
 Route14Biker3AfterBattleText:
-	text_far _Route14Biker3AfterBattleText
+	text_far WLA_GLOBAL_Route14Biker3AfterBattleText
 	text_end
 
 Route14Biker4Text:
@@ -220,17 +220,17 @@ Route14Biker4Text:
 	jp TextScriptEnd
 
 Route14Biker4BattleText:
-	text_far _Route14Biker4BattleText
+	text_far WLA_GLOBAL_Route14Biker4BattleText
 	text_end
 
 Route14Biker4EndBattleText:
-	text_far _Route14Biker4EndBattleText
+	text_far WLA_GLOBAL_Route14Biker4EndBattleText
 	text_end
 
 Route14Biker4AfterBattleText:
-	text_far _Route14Biker4AfterBattleText
+	text_far WLA_GLOBAL_Route14Biker4AfterBattleText
 	text_end
 
 Route14SignText:
-	text_far _Route14SignText
+	text_far WLA_GLOBAL_Route14SignText
 	text_end

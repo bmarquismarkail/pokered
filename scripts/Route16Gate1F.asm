@@ -16,17 +16,17 @@ Route16Gate1F_ScriptPointers:
 Route16Gate1FDefaultScript:
 	call Route16Gate1FIsBicycleInBagScript
 	ret nz
-	ld hl, .StopsPlayerCoords
+	ld hl, Route16Gate1FDefaultScript.StopsPlayerCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, TEXT_ROUTE16GATE1F_GUARD_WAIT_UP
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, [wCoordIndex]
 	cp $1
-	jr z, .next_to_counter
+	jr z, Route16Gate1FDefaultScript.next_to_counter
 	ld a, [wCoordIndex]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -39,17 +39,17 @@ Route16Gate1FDefaultScript:
 	ld a, SCRIPT_ROUTE16GATE1F_PLAYER_MOVING_UP
 	ld [wRoute16Gate1FCurScript], a
 	ret
-.next_to_counter
+Route16Gate1FDefaultScript.next_to_counter
 	ld a, SCRIPT_ROUTE16GATE1F_GUARD
 	ld [wRoute16Gate1FCurScript], a
 	ret
 
-.StopsPlayerCoords:
+Route16Gate1FDefaultScript.StopsPlayerCoords:
 	dbmapcoord  4,  7
 	dbmapcoord  4,  8
 	dbmapcoord  4,  9
 	dbmapcoord  4, 10
-	db -1 ; end
+	.DB -1 ; end
 
 Route16Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -60,7 +60,7 @@ Route16Gate1FPlayerMovingUpScript:
 
 Route16Gate1FGuardScript:
 	ld a, TEXT_ROUTE16GATE1F_GUARD
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -96,28 +96,28 @@ Route16Gate1F_TextPointers:
 Route16Gate1FGuardText:
 	text_asm
 	call Route16Gate1FIsBicycleInBagScript
-	jr z, .no_bike
-	ld hl, .CyclingRoadExplanationText
+	jr z, Route16Gate1FGuardText.no_bike
+	ld hl, Route16Gate1FGuardText.CyclingRoadExplanationText
 	call PrintText
-	jr .text_script_end
-.no_bike
-	ld hl, .NoPedestriansAllowedText
+	jr Route16Gate1FGuardText.text_script_end
+Route16Gate1FGuardText.no_bike
+	ld hl, Route16Gate1FGuardText.NoPedestriansAllowedText
 	call PrintText
-.text_script_end
+Route16Gate1FGuardText.text_script_end
 	jp TextScriptEnd
 
-.NoPedestriansAllowedText:
-	text_far _Route16Gate1FGuardNoPedestriansAllowedText
+Route16Gate1FGuardText.NoPedestriansAllowedText:
+	text_far WLA_GLOBAL_Route16Gate1FGuardNoPedestriansAllowedText
 	text_end
 
-.CyclingRoadExplanationText:
-	text_far _Route16Gate1FGuardCyclingRoadExplanationText
+Route16Gate1FGuardText.CyclingRoadExplanationText:
+	text_far WLA_GLOBAL_Route16Gate1FGuardCyclingRoadExplanationText
 	text_end
 
 Route16Gate1FGuardWaitUpText:
-	text_far _Route16Gate1FGuardWaitUpText
+	text_far WLA_GLOBAL_Route16Gate1FGuardWaitUpText
 	text_end
 
 Route16Gate1FGamblerText:
-	text_far _Route16Gate1FGamblerText
+	text_far WLA_GLOBAL_Route16Gate1FGamblerText
 	text_end

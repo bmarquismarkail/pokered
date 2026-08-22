@@ -1,6 +1,6 @@
 ; width of east/west connections
 ; height of north/south connections
-DEF MAP_BORDER EQU 3
+.DEFINE MAP_BORDER 3
 
 ; connection directions
 	const_def
@@ -17,13 +17,13 @@ DEF MAP_BORDER EQU 3
 	shift_const NORTH  ; 8
 
 ; wWarpEntries
-DEF MAX_WARP_EVENTS EQU 32
+.DEFINE MAX_WARP_EVENTS 32
 
 ; wNumSigns
-DEF MAX_BG_EVENTS EQU 16
+.DEFINE MAX_BG_EVENTS 16
 
 ; wMapSpriteData
-DEF MAX_OBJECT_EVENTS EQU 16
+.DEFINE MAX_OBJECT_EVENTS 16
 
 ; flower and water tile animations
 	const_def

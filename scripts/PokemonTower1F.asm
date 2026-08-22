@@ -10,21 +10,21 @@ PokemonTower1F_TextPointers:
 	dw_const PokemonTower1FChannelerText,       TEXT_POKEMONTOWER1F_CHANNELER
 
 PokemonTower1FReceptionistText:
-	text_far _PokemonTower1FReceptionistText
+	text_far WLA_GLOBAL_PokemonTower1FReceptionistText
 	text_end
 
 PokemonTower1FMiddleAgedWomanText:
-	text_far _PokemonTower1FMiddleAgedWomanText
+	text_far WLA_GLOBAL_PokemonTower1FMiddleAgedWomanText
 	text_end
 
 PokemonTower1FBaldingGuyText:
-	text_far _PokemonTower1FBaldingGuyText
+	text_far WLA_GLOBAL_PokemonTower1FBaldingGuyText
 	text_end
 
 PokemonTower1FGirlText:
-	text_far _PokemonTower1FGirlText
+	text_far WLA_GLOBAL_PokemonTower1FGirlText
 	text_end
 
 PokemonTower1FChannelerText:
-	text_far _PokemonTower1FChannelerText
+	text_far WLA_GLOBAL_PokemonTower1FChannelerText
 	text_end

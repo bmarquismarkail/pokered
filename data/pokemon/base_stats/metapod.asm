@@ -1,20 +1,20 @@
-	db DEX_METAPOD ; pokedex id
+	.DB DEX_METAPOD ; pokedex id
 
-	db  50,  20,  55,  30,  25
+	.DB  50,  20,  55,  30,  25
 	;   hp  atk  def  spd  spc
 
-	db BUG, BUG ; type
-	db 120 ; catch rate
-	db 72 ; base exp
+	.DB BUG, BUG ; type
+	.DB 120 ; catch rate
+	.DB 72 ; base exp
 
-	INCBIN "gfx/pokemon/front/metapod.pic", 0, 1 ; sprite dimensions
-	dw MetapodPicFront, MetapodPicBack
+	.INCBIN "gfx/pokemon/front/metapod.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MetapodPicFront, MetapodPicBack
 
-	db HARDEN, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB HARDEN, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -7,12 +7,12 @@ OneHitKOEffect_:
 	ld [wCriticalHitOrOHKO], a
 	ld hl, wBattleMonSpeed + 1
 	ld de, wEnemyMonSpeed + 1
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .compareSpeed
+	jr z, OneHitKOEffect_.compareSpeed
 	ld hl, wEnemyMonSpeed + 1
 	ld de, wBattleMonSpeed + 1
-.compareSpeed
+OneHitKOEffect_.compareSpeed
 ; set damage to 65535 and OHKO flag if the user's current speed is higher than the target's
 	ld a, [de]
 	dec de
@@ -23,7 +23,7 @@ OneHitKOEffect_:
 	ld b, a
 	ld a, [hl]
 	sbc b
-	jr c, .userIsSlower
+	jr c, OneHitKOEffect_.userIsSlower
 	ld hl, wDamage
 	ld a, $ff
 	ld [hli], a
@@ -31,7 +31,7 @@ OneHitKOEffect_:
 	ld a, $2
 	ld [wCriticalHitOrOHKO], a
 	ret
-.userIsSlower
+OneHitKOEffect_.userIsSlower
 ; keep damage at 0 and set move missed flag if target's current speed is higher instead
 	ld a, $1
 	ld [wMoveMissed], a

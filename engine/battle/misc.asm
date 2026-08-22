@@ -3,51 +3,51 @@ FormatMovesString:
 	ld hl, wMoves
 	ld de, wMovesString
 	ld b, $0
-.printMoveNameLoop
+FormatMovesString.printMoveNameLoop
 	ld a, [hli]
 	and a ; end of move list?
-	jr z, .printDashLoop ; print dashes when no moves are left
+	jr z, FormatMovesString.printDashLoop ; print dashes when no moves are left
 	push hl
 	ld [wNameListIndex], a
-	ld a, BANK(MoveNames)
+	ld a, bank(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [wNameListType], a
 	call GetName
 	ld hl, wNameBuffer
-.copyNameLoop
+FormatMovesString.copyNameLoop
 	ld a, [hli]
-	cp '@'
-	jr z, .doneCopyingName
+	cp $50
+	jr z, FormatMovesString.doneCopyingName
 	ld [de], a
 	inc de
-	jr .copyNameLoop
-.doneCopyingName
+	jr FormatMovesString.copyNameLoop
+FormatMovesString.doneCopyingName
 	ld a, b
 	ld [wNumMovesMinusOne], a
 	inc b
-	ld a, '<NEXT>'
+	ld a, $4e
 	ld [de], a
 	inc de
 	pop hl
 	ld a, b
 	cp NUM_MOVES
-	jr z, .done
-	jr .printMoveNameLoop
-.printDashLoop
-	ld a, '-'
+	jr z, FormatMovesString.done
+	jr FormatMovesString.printMoveNameLoop
+FormatMovesString.printDashLoop
+	ld a, $e3
 	ld [de], a
 	inc de
 	inc b
 	ld a, b
 	cp NUM_MOVES
-	jr z, .done
-	ld a, '<NEXT>'
+	jr z, FormatMovesString.done
+	ld a, $4e
 	ld [de], a
 	inc de
-	jr .printDashLoop
-.done
-	ld a, '@'
+	jr FormatMovesString.printDashLoop
+FormatMovesString.done
+	ld a, $50
 	ld [de], a
 	ret
 
@@ -55,37 +55,37 @@ FormatMovesString:
 InitList:
 	ld a, [wInitListType]
 	cp INIT_ENEMYOT_LIST
-	jr nz, .notEnemy
+	jr nz, InitList.notEnemy
 	ld hl, wEnemyPartyCount
 	ld de, wEnemyMonOT
 	ld a, ENEMYOT_NAME
-	jr .done
-.notEnemy
+	jr InitList.done
+InitList.notEnemy
 	cp INIT_PLAYEROT_LIST
-	jr nz, .notPlayer
+	jr nz, InitList.notPlayer
 	ld hl, wPartyCount
 	ld de, wPartyMonOT
 	ld a, PLAYEROT_NAME
-	jr .done
-.notPlayer
+	jr InitList.done
+InitList.notPlayer
 	cp INIT_MON_LIST
-	jr nz, .notMonster
+	jr nz, InitList.notMonster
 	ld hl, wItemList
 	ld de, MonsterNames
 	ld a, MONSTER_NAME
-	jr .done
-.notMonster
+	jr InitList.done
+InitList.notMonster
 	cp INIT_BAG_ITEM_LIST
-	jr nz, .notBag
+	jr nz, InitList.notBag
 	ld hl, wNumBagItems
 	ld de, ItemNames
 	ld a, ITEM_NAME
-	jr .done
-.notBag
+	jr InitList.done
+InitList.notBag
 	ld hl, wItemList
 	ld de, ItemNames
 	ld a, ITEM_NAME
-.done
+InitList.done
 	ld [wNameListType], a
 	ld a, l
 	ld [wListPointer], a
@@ -107,14 +107,14 @@ GetMonSpecies:
 	ld hl, wPartySpecies
 	ld a, [wMonDataLocation]
 	and a
-	jr z, .getSpecies
+	jr z, GetMonSpecies.getSpecies
 	dec a
-	jr z, .enemyParty
+	jr z, GetMonSpecies.enemyParty
 	ld hl, wBoxSpecies
-	jr .getSpecies
-.enemyParty
+	jr GetMonSpecies.getSpecies
+GetMonSpecies.enemyParty
 	ld hl, wEnemyPartySpecies
-.getSpecies
+GetMonSpecies.getSpecies
 	ld d, 0
 	add hl, de
 	ld a, [hl]

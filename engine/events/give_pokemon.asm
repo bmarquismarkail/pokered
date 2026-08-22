@@ -1,4 +1,5 @@
-_GivePokemon::
+_GivePokemon:
+WLA_GLOBAL_GivePokemon:
 ; returns success in carry
 ; and whether the mon was added to the party in [wAddedToParty]
 	call EnableAutoTextBoxDrawing
@@ -6,10 +7,10 @@ _GivePokemon::
 	ld [wAddedToParty], a
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	jr c, .addToParty
+	jr c, WLA_GLOBAL_GivePokemon__addToParty
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
-	jr nc, .boxFull
+	jr nc, WLA_GLOBAL_GivePokemon__boxFull
 ; add to box
 	xor a
 	ld [wEnemyBattleStatus3], a
@@ -22,27 +23,31 @@ _GivePokemon::
 	ld a, [wCurrentBoxNum]
 	and BOX_NUM_MASK
 	cp 9
-	jr c, .singleDigitBoxNum
+	jr c, WLA_GLOBAL_GivePokemon__singleDigitBoxNum
 	sub 9
-	ld [hl], '1'
+	ld [hl], $f7
 	inc hl
-	add '0'
-	jr .next
-.singleDigitBoxNum
-	add '1'
-.next
+	add $f6
+	jr WLA_GLOBAL_GivePokemon__next
+_GivePokemon.singleDigitBoxNum:
+WLA_GLOBAL_GivePokemon__singleDigitBoxNum:
+	add $f7
+_GivePokemon.next:
+WLA_GLOBAL_GivePokemon__next:
 	ld [hli], a
-	ld [hl], '@'
+	ld [hl], $50
 	ld hl, SentToBoxText
 	call PrintText
 	scf
 	ret
-.boxFull
+_GivePokemon.boxFull:
+WLA_GLOBAL_GivePokemon__boxFull:
 	ld hl, BoxIsFullText
 	call PrintText
 	and a
 	ret
-.addToParty
+_GivePokemon.addToParty:
+WLA_GLOBAL_GivePokemon__addToParty:
 	call SetPokedexOwnedFlag
 	call AddPartyMon
 	ld a, 1
@@ -69,14 +74,14 @@ SetPokedexOwnedFlag:
 	jp PrintText
 
 GotMonText:
-	text_far _GotMonText
+	text_far WLA_GLOBAL_GotMonText
 	sound_get_item_1
 	text_end
 
 SentToBoxText:
-	text_far _SentToBoxText
+	text_far WLA_GLOBAL_SentToBoxText
 	text_end
 
 BoxIsFullText:
-	text_far _BoxIsFullText
+	text_far WLA_GLOBAL_BoxIsFullText
 	text_end

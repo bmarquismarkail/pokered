@@ -8,10 +8,10 @@ SFX_UnusedFanfare_Ch5: ; unreferenced
 	toggle_perfect_pitch
 	note_type 6, 11, 1
 	octave 3
-	note G#, 2
-	note G#, 2
+	note G_SHARP, 2
+	note G_SHARP, 2
 	note_type 6, 11, 3
-	note G#, 2
+	note G_SHARP, 2
 	note B_, 2
 	octave 4
 	note E_, 8
@@ -28,7 +28,7 @@ SFX_UnusedFanfare_Ch6: ; unreferenced
 	note E_, 1
 	note_type 6, 12, 3
 	note E_, 2
-	note G#, 2
+	note G_SHARP, 2
 	note B_, 8
 	sound_ret
 

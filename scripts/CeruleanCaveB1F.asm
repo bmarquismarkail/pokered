@@ -23,7 +23,7 @@ CeruleanCaveB1FTrainerHeaders:
 	def_trainers
 MewtwoTrainerHeader:
 	trainer EVENT_BEAT_MEWTWO, 0, MewtwoBattleText, MewtwoBattleText, MewtwoBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 CeruleanCaveB1FMewtwoText:
 	text_asm
@@ -32,7 +32,7 @@ CeruleanCaveB1FMewtwoText:
 	jp TextScriptEnd
 
 MewtwoBattleText:
-	text_far _MewtwoBattleText
+	text_far WLA_GLOBAL_MewtwoBattleText
 	text_asm
 	ld a, MEWTWO
 	call PlayCry

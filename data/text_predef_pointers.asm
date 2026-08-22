@@ -1,9 +1,9 @@
-MACRO add_tx_pre
-\1_id::
-	dw \1
-ENDM
+.MACRO add_tx_pre
+\1_id:
+	.DW \1
+.ENDM
 
-TextPredefs::
+TextPredefs:
 	add_tx_pre CardKeySuccessText                   ; 01
 	add_tx_pre CardKeyFailText                      ; 02
 	add_tx_pre RedBedroomPCText                     ; 03

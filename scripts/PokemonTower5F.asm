@@ -16,16 +16,16 @@ PokemonTower5F_ScriptPointers:
 PokemonTower5FDefaultScript:
 	ld hl, PokemonTower5FPurifiedZoneCoords
 	call ArePlayerCoordsInArray
-	jr c, .in_purified_zone
+	jr c, PokemonTower5FDefaultScript.in_purified_zone
 	ld hl, wStatusFlags4
 	res BIT_NO_BATTLES, [hl]
 	ResetEvent EVENT_IN_PURIFIED_ZONE
 	jp CheckFightingMapTrainers
-.in_purified_zone
+PokemonTower5FDefaultScript.in_purified_zone
 	CheckAndSetEvent EVENT_IN_PURIFIED_ZONE
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wStatusFlags4
@@ -36,7 +36,7 @@ PokemonTower5FDefaultScript:
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, TEXT_POKEMONTOWER5F_PURIFIEDZONE
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -47,7 +47,7 @@ PokemonTower5FPurifiedZoneCoords:
 	dbmapcoord 11,  8
 	dbmapcoord 10,  9
 	dbmapcoord 11,  9
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower5F_TextPointers:
 	def_text_pointers
@@ -69,10 +69,10 @@ PokemonTower5TrainerHeader2:
 	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_2, 2, PokemonTower5FChanneler4BattleText, PokemonTower5FChanneler4EndBattleText, PokemonTower5FChanneler4AfterBattleText
 PokemonTower5TrainerHeader3:
 	trainer EVENT_BEAT_POKEMONTOWER_5_TRAINER_3, 2, PokemonTower5FChanneler5BattleText, PokemonTower5FChanneler5EndBattleText, PokemonTower5FChanneler5AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower5FChanneler1Text:
-	text_far _PokemonTower5FChanneler1Text
+	text_far WLA_GLOBAL_PokemonTower5FChanneler1Text
 	text_end
 
 PokemonTower5FChanneler2Text:
@@ -82,15 +82,15 @@ PokemonTower5FChanneler2Text:
 	jp TextScriptEnd
 
 PokemonTower5FChanneler2BattleText:
-	text_far _PokemonTower5FChanneler2BattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler2BattleText
 	text_end
 
 PokemonTower5FChanneler2EndBattleText:
-	text_far _PokemonTower5FChanneler2EndBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler2EndBattleText
 	text_end
 
 PokemonTower5FChanneler2AfterBattleText:
-	text_far _PokemonTower5FChanneler2AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler2AfterBattleText
 	text_end
 
 PokemonTower5FChanneler3Text:
@@ -100,15 +100,15 @@ PokemonTower5FChanneler3Text:
 	jp TextScriptEnd
 
 PokemonTower5FChanneler3BattleText:
-	text_far _PokemonTower5FChanneler3BattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler3BattleText
 	text_end
 
 PokemonTower5FChanneler3EndBattleText:
-	text_far _PokemonTower5FChanneler3EndBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler3EndBattleText
 	text_end
 
 PokemonTower5FChanneler3AfterBattleText:
-	text_far _PokemonTower5FChanneler3AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler3AfterBattleText
 	text_end
 
 PokemonTower5FChanneler4Text:
@@ -118,15 +118,15 @@ PokemonTower5FChanneler4Text:
 	jp TextScriptEnd
 
 PokemonTower5FChanneler4BattleText:
-	text_far _PokemonTower5FChanneler4BattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler4BattleText
 	text_end
 
 PokemonTower5FChanneler4EndBattleText:
-	text_far _PokemonTower5FChanneler4EndBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler4EndBattleText
 	text_end
 
 PokemonTower5FChanneler4AfterBattleText:
-	text_far _PokemonTower5FChanneler4AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler4AfterBattleText
 	text_end
 
 PokemonTower5FChanneler5Text:
@@ -136,17 +136,17 @@ PokemonTower5FChanneler5Text:
 	jp TextScriptEnd
 
 PokemonTower5FChanneler5BattleText:
-	text_far _PokemonTower5FChanneler5BattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler5BattleText
 	text_end
 
 PokemonTower5FChanneler5EndBattleText:
-	text_far _PokemonTower5FChanneler5EndBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler5EndBattleText
 	text_end
 
 PokemonTower5FChanneler5AfterBattleText:
-	text_far _PokemonTower5FChanneler5AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower5FChanneler5AfterBattleText
 	text_end
 
 PokemonTower5FPurifiedZoneText:
-	text_far _PokemonTower5FPurifiedZoneText
+	text_far WLA_GLOBAL_PokemonTower5FPurifiedZoneText
 	text_end

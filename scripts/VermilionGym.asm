@@ -3,7 +3,7 @@ VermilionGym_Script:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	push hl
-	call nz, .LoadNames
+	call nz, VermilionGym_Script.LoadNames
 	pop hl
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
@@ -16,29 +16,29 @@ VermilionGym_Script:
 	ld [wVermilionGymCurScript], a
 	ret
 
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
+VermilionGym_Script.LoadNames:
+	ld hl, VermilionGym_Script.CityName
+	ld de, VermilionGym_Script.LeaderName
 	jp LoadGymLeaderAndCityName
 
-.CityName:
-	db "VERMILION CITY@"
+VermilionGym_Script.CityName:
+		.STRINGMAP pokemon, "VERMILION CITY@"
 
-.LeaderName:
-	db "LT.SURGE@"
+VermilionGym_Script.LeaderName:
+		.STRINGMAP pokemon, "LT.SURGE@"
 
 VermilionGymSetDoorTile:
 	CheckEvent EVENT_2ND_LOCK_OPENED
-	jr nz, .doorsOpen
+	jr nz, VermilionGymSetDoorTile.doorsOpen
 	ld a, $24 ; double door tile ID
-	jr .replaceTile
-.doorsOpen
+	jr VermilionGymSetDoorTile.replaceTile
+VermilionGymSetDoorTile.doorsOpen
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld a, $5 ; clear floor tile ID
-.replaceTile
+VermilionGymSetDoorTile.replaceTile
 	ld [wNewTileBlockID], a
-	lb bc, 2, 2
+	lb "bc", 2, 2
 	predef_jump ReplaceTileBlock
 
 VermilionGymResetScripts:
@@ -64,22 +64,22 @@ VermilionGymLTSurgeAfterBattleScript:
 
 VermilionGymLTSurgeReceiveTM24Script:
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_THUNDER_BADGE_INFO
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_LT_SURGE
-	lb bc, TM_THUNDERBOLT, 1
+	lb "bc", TM_THUNDERBOLT, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, VermilionGymLTSurgeReceiveTM24Script.bag_full
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_RECEIVED_TM24
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM24
-	jr .gym_victory
-.bag_full
+	jr VermilionGymLTSurgeReceiveTM24Script.gym_victory
+VermilionGymLTSurgeReceiveTM24Script.bag_full
 	ld a, TEXT_VERMILIONGYM_LT_SURGE_TM24_NO_ROOM
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-.gym_victory
+VermilionGymLTSurgeReceiveTM24Script.gym_victory
 	ld hl, wObtainedBadges
 	set BIT_THUNDERBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -109,23 +109,23 @@ VermilionGymTrainerHeader1:
 	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_1, 2, VermilionGymSuperNerdBattleText, VermilionGymSuperNerdEndBattleText, VermilionGymSuperNerdAfterBattleText
 VermilionGymTrainerHeader2:
 	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_2, 3, VermilionGymSailorBattleText, VermilionGymSailorEndBattleText, VermilionGymSailorAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 VermilionGymLTSurgeText:
 	text_asm
 	CheckEvent EVENT_BEAT_LT_SURGE
-	jr z, .before_beat
+	jr z, VermilionGymLTSurgeText.before_beat
 	CheckEventReuseA EVENT_GOT_TM24
-	jr nz, .got_tm24_already
+	jr nz, VermilionGymLTSurgeText.got_tm24_already
 	call z, VermilionGymLTSurgeReceiveTM24Script
 	call DisableWaitingAfterTextDisplay
-	jr .text_script_end
-.got_tm24_already
-	ld hl, .PostBattleAdviceText
+	jr VermilionGymLTSurgeText.text_script_end
+VermilionGymLTSurgeText.got_tm24_already
+	ld hl, VermilionGymLTSurgeText.PostBattleAdviceText
 	call PrintText
-	jr .text_script_end
-.before_beat
-	ld hl, .PreBattleText
+	jr VermilionGymLTSurgeText.text_script_end
+VermilionGymLTSurgeText.before_beat
+	ld hl, VermilionGymLTSurgeText.PreBattleText
 	call PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -133,44 +133,44 @@ VermilionGymLTSurgeText:
 	ld hl, VermilionGymLTSurgeReceivedThunderBadgeText
 	ld de, VermilionGymLTSurgeReceivedThunderBadgeText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
 	ld [wGymLeaderNo], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, SCRIPT_VERMILIONGYM_LT_SURGE_AFTER_BATTLE
 	ld [wVermilionGymCurScript], a
 	ld [wCurMapScript], a
-.text_script_end
+VermilionGymLTSurgeText.text_script_end
 	jp TextScriptEnd
 
-.PreBattleText:
-	text_far _VermilionGymLTSurgePreBattleText
+VermilionGymLTSurgeText.PreBattleText:
+	text_far WLA_GLOBAL_VermilionGymLTSurgePreBattleText
 	text_end
 
-.PostBattleAdviceText:
-	text_far _VermilionGymLTSurgePostBattleAdviceText
+VermilionGymLTSurgeText.PostBattleAdviceText:
+	text_far WLA_GLOBAL_VermilionGymLTSurgePostBattleAdviceText
 	text_end
 
 VermilionGymLTSurgeThunderBadgeInfoText:
-	text_far _VermilionGymLTSurgeThunderBadgeInfoText
+	text_far WLA_GLOBAL_VermilionGymLTSurgeThunderBadgeInfoText
 	text_end
 
 VermilionGymLTSurgeReceivedTM24Text:
-	text_far _VermilionGymLTSurgeReceivedTM24Text
+	text_far WLA_GLOBAL_VermilionGymLTSurgeReceivedTM24Text
 	sound_get_key_item
-	text_far _TM24ExplanationText
+	text_far WLA_GLOBAL_TM24ExplanationText
 	text_end
 
 VermilionGymLTSurgeTM24NoRoomText:
-	text_far _VermilionGymLTSurgeTM24NoRoomText
+	text_far WLA_GLOBAL_VermilionGymLTSurgeTM24NoRoomText
 	text_end
 
 VermilionGymLTSurgeReceivedThunderBadgeText:
-	text_far _VermilionGymLTSurgeReceivedThunderBadgeText
+	text_far WLA_GLOBAL_VermilionGymLTSurgeReceivedThunderBadgeText
 	text_end
 
 VermilionGymGentlemanText:
@@ -180,15 +180,15 @@ VermilionGymGentlemanText:
 	jp TextScriptEnd
 
 VermilionGymGentlemanBattleText:
-	text_far _VermilionGymGentlemanBattleText
+	text_far WLA_GLOBAL_VermilionGymGentlemanBattleText
 	text_end
 
 VermilionGymGentlemanEndBattleText:
-	text_far _VermilionGymGentlemanEndBattleText
+	text_far WLA_GLOBAL_VermilionGymGentlemanEndBattleText
 	text_end
 
 VermilionGymGentlemanAfterBattleText:
-	text_far _VermilionGymGentlemanAfterBattleText
+	text_far WLA_GLOBAL_VermilionGymGentlemanAfterBattleText
 	text_end
 
 VermilionGymSuperNerdText:
@@ -198,15 +198,15 @@ VermilionGymSuperNerdText:
 	jp TextScriptEnd
 
 VermilionGymSuperNerdBattleText:
-	text_far _VermilionGymSuperNerdBattleText
+	text_far WLA_GLOBAL_VermilionGymSuperNerdBattleText
 	text_end
 
 VermilionGymSuperNerdEndBattleText:
-	text_far _VermilionGymSuperNerdEndBattleText
+	text_far WLA_GLOBAL_VermilionGymSuperNerdEndBattleText
 	text_end
 
 VermilionGymSuperNerdAfterBattleText:
-	text_far _VermilionGymSuperNerdAfterBattleText
+	text_far WLA_GLOBAL_VermilionGymSuperNerdAfterBattleText
 	text_end
 
 VermilionGymSailorText:
@@ -216,35 +216,35 @@ VermilionGymSailorText:
 	jp TextScriptEnd
 
 VermilionGymSailorBattleText:
-	text_far _VermilionGymSailorBattleText
+	text_far WLA_GLOBAL_VermilionGymSailorBattleText
 	text_end
 
 VermilionGymSailorEndBattleText:
-	text_far _VermilionGymSailorEndBattleText
+	text_far WLA_GLOBAL_VermilionGymSailorEndBattleText
 	text_end
 
 VermilionGymSailorAfterBattleText:
-	text_far _VermilionGymSailorAfterBattleText
+	text_far WLA_GLOBAL_VermilionGymSailorAfterBattleText
 	text_end
 
 VermilionGymGymGuideText:
 	text_asm
 	ld a, [wBeatGymFlags]
 	bit BIT_THUNDERBADGE, a
-	jr nz, .got_thunderbadge
-	ld hl, .ChampInMakingText
+	jr nz, VermilionGymGymGuideText.got_thunderbadge
+	ld hl, VermilionGymGymGuideText.ChampInMakingText
 	call PrintText
-	jr .text_script_end
-.got_thunderbadge
-	ld hl, .BeatLTSurgeText
+	jr VermilionGymGymGuideText.text_script_end
+VermilionGymGymGuideText.got_thunderbadge
+	ld hl, VermilionGymGymGuideText.BeatLTSurgeText
 	call PrintText
-.text_script_end
+VermilionGymGymGuideText.text_script_end
 	jp TextScriptEnd
 
-.ChampInMakingText:
-	text_far _VermilionGymGymGuideChampInMakingText
+VermilionGymGymGuideText.ChampInMakingText:
+	text_far WLA_GLOBAL_VermilionGymGymGuideChampInMakingText
 	text_end
 
-.BeatLTSurgeText:
-	text_far _VermilionGymGymGuideBeatLTSurgeText
+VermilionGymGymGuideText.BeatLTSurgeText:
+	text_far WLA_GLOBAL_VermilionGymGymGuideBeatLTSurgeText
 	text_end

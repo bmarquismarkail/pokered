@@ -11,10 +11,10 @@ SFX_Battle_36_Ch5:
 	square_note 2, 15, 1, 1984
 	square_note 2, 15, 1, 1792
 	square_note 2, 15, 1, 2000
-.loop1:
+SFX_Battle_36_Ch5.loop1:
 	square_note 2, 15, 1, 1792
 	square_note 2, 15, 1, 2016
-	sound_loop 12, .loop1
+	sound_loop 12, SFX_Battle_36_Ch5.loop1
 	square_note 15, 15, 1, 1792
 	sound_ret
 

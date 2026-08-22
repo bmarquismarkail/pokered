@@ -6,7 +6,7 @@ DoClearSaveDialogue:
 	ld hl, ClearSaveDataText
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, NO_YES_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU
@@ -19,5 +19,5 @@ DoClearSaveDialogue:
 	jp Init
 
 ClearSaveDataText:
-	text_far _ClearSaveDataText
+	text_far WLA_GLOBAL_ClearSaveDataText
 	text_end

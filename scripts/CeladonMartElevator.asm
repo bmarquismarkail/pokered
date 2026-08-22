@@ -20,9 +20,9 @@ CeladonMartElevatorStoreWarpEntriesScript:
 	ld b, a
 	ld a, [wWarpedFromWhichMap]
 	ld c, a
-	call .StoreWarpEntry
+	call CeladonMartElevatorStoreWarpEntriesScript.StoreWarpEntry
 	; fallthrough
-.StoreWarpEntry:
+CeladonMartElevatorStoreWarpEntriesScript.StoreWarpEntry:
 	inc hl
 	inc hl
 	ld a, b
@@ -40,23 +40,23 @@ CeladonMartElevatorCopyWarpMapsScript:
 	jp CopyData
 
 CeladonMartElevatorFloors:
-	db 5 ; #
-	db FLOOR_1F
-	db FLOOR_2F
-	db FLOOR_3F
-	db FLOOR_4F
-	db FLOOR_5F
-	db -1 ; end
+	.DB 5 ; #
+	.DB FLOOR_1F
+	.DB FLOOR_2F
+	.DB FLOOR_3F
+	.DB FLOOR_4F
+	.DB FLOOR_5F
+	.DB -1 ; end
 
 ; These specify where the player goes after getting out of the elevator.
 CeladonMartElevatorWarpMaps:
 	; warp number, map id
-	db 5, CELADON_MART_1F
-	db 2, CELADON_MART_2F
-	db 2, CELADON_MART_3F
-	db 2, CELADON_MART_4F
-	db 2, CELADON_MART_5F
-.End:
+	.DB 5, CELADON_MART_1F
+	.DB 2, CELADON_MART_2F
+	.DB 2, CELADON_MART_3F
+	.DB 2, CELADON_MART_4F
+	.DB 2, CELADON_MART_5F
+CeladonMartElevatorWarpMaps.End:
 
 CeladonMartElevatorShakeScript:
 	farjp ShakeElevator

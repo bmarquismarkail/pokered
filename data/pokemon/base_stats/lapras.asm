@@ -1,17 +1,17 @@
-	db DEX_LAPRAS ; pokedex id
+	.DB DEX_LAPRAS ; pokedex id
 
-	db 130,  85,  80,  60,  95
+	.DB 130,  85,  80,  60,  95
 	;   hp  atk  def  spd  spc
 
-	db WATER, ICE ; type
-	db 45 ; catch rate
-	db 219 ; base exp
+	.DB WATER, ICE ; type
+	.DB 45 ; catch rate
+	.DB 219 ; base exp
 
-	INCBIN "gfx/pokemon/front/lapras.pic", 0, 1 ; sprite dimensions
-	dw LaprasPicFront, LaprasPicBack
+	.INCBIN "gfx/pokemon/front/lapras.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW LaprasPicFront, LaprasPicBack
 
-	db WATER_GUN, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB WATER_GUN, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -22,4 +22,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

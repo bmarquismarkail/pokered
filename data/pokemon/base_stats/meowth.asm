@@ -1,17 +1,17 @@
-	db DEX_MEOWTH ; pokedex id
+	.DB DEX_MEOWTH ; pokedex id
 
-	db  40,  45,  35,  90,  40
+	.DB  40,  45,  35,  90,  40
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 255 ; catch rate
-	db 69 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 255 ; catch rate
+	.DB 69 ; base exp
 
-	INCBIN "gfx/pokemon/front/meowth.pic", 0, 1 ; sprite dimensions
-	dw MeowthPicFront, MeowthPicBack
+	.INCBIN "gfx/pokemon/front/meowth.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MeowthPicFront, MeowthPicBack
 
-	db SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

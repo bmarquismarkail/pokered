@@ -1,5 +1,5 @@
 InitBattleVariables:
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	ld [wSavedTileAnimations], a
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
@@ -21,18 +21,18 @@ InitBattleVariables:
 	ld [hl], a ; wEnemyHPBarColor
 	ld hl, wCanEvolveFlags
 	ld b, wMiscBattleDataEnd - wMiscBattleData
-.loop
+InitBattleVariables.loop
 	ld [hli], a
 	dec b
-	jr nz, .loop
+	jr nz, InitBattleVariables.loop
 	inc a ; POUND
 	ld [wTestBattlePlayerSelectedMove], a
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
-	jr c, .notSafariBattle
+	jr c, InitBattleVariables.notSafariBattle
 	cp SAFARI_ZONE_CENTER_REST_HOUSE
-	jr nc, .notSafariBattle
+	jr nc, InitBattleVariables.notSafariBattle
 	ld a, BATTLE_TYPE_SAFARI
 	ld [wBattleType], a
-.notSafariBattle
+InitBattleVariables.notSafariBattle
 	jpfar PlayBattleMusic

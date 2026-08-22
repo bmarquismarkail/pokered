@@ -1,16 +1,16 @@
 ; This file is INCLUDEd three times, once in each audio engine.
 
 	table_width 2
-	dw $F82C ; C_
-	dw $F89D ; C#
-	dw $F907 ; D_
-	dw $F96B ; D#
-	dw $F9CA ; E_
-	dw $FA23 ; F_
-	dw $FA77 ; F#
-	dw $FAC7 ; G_
-	dw $FB12 ; G#
-	dw $FB58 ; A_
-	dw $FB9B ; A#
-	dw $FBDA ; B_
+	.DW $F82C ; C_
+	.DW $F89D ; C_SHARP
+	.DW $F907 ; D_
+	.DW $F96B ; D_SHARP
+	.DW $F9CA ; E_
+	.DW $FA23 ; F_
+	.DW $FA77 ; F_SHARP
+	.DW $FAC7 ; G_
+	.DW $FB12 ; G_SHARP
+	.DW $FB58 ; A_
+	.DW $FB9B ; A_SHARP
+	.DW $FBDA ; B_
 	assert_table_length NUM_NOTES

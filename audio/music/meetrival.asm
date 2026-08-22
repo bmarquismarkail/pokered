@@ -1,10 +1,10 @@
-Music_MeetRival_Ch1_AlternateTempo::
+Music_MeetRival_Ch1_AlternateTempo:
 	tempo 100
 	sound_loop 0, Music_MeetRival_Ch1.body
 
-Music_MeetRival_Ch1::
+Music_MeetRival_Ch1:
 	tempo 112
-.body:
+Music_MeetRival_Ch1.body:
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
@@ -12,15 +12,15 @@ Music_MeetRival_Ch1::
 	note_type 12, 11, 3
 	octave 4
 	note D_, 1
-	note C#, 1
+	note C_SHARP, 1
 	note C_, 1
 	octave 3
 	note B_, 1
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 1
-	note G#, 1
+	note G_SHARP, 1
 	note G_, 1
-	note F#, 1
+	note F_SHARP, 1
 	note F_, 6
 	note D_, 1
 	rest 3
@@ -29,9 +29,9 @@ Music_MeetRival_Ch1::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-.mainloop:
+Music_MeetRival_Ch1.mainloop:
 	note B_, 4
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 4
 	note G_, 2
 	octave 4
@@ -39,7 +39,7 @@ Music_MeetRival_Ch1::
 	note D_, 2
 	rest 4
 	note D_, 4
-	note C#, 2
+	note C_SHARP, 2
 	note C_, 2
 	octave 3
 	note B_, 2
@@ -55,15 +55,15 @@ Music_MeetRival_Ch1::
 	rest 4
 	note G_, 4
 	note G_, 2
-	note F#, 2
+	note F_SHARP, 2
 	note E_, 2
 	note D_, 2
-	note F#, 2
+	note F_SHARP, 2
 	octave 3
 	note A_, 2
 	octave 4
 	note D_, 2
-	note F#, 2
+	note F_SHARP, 2
 	octave 3
 	note A_, 2
 	octave 4
@@ -79,7 +79,7 @@ Music_MeetRival_Ch1::
 	note C_, 4
 	octave 3
 	note B_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note B_, 2
 	octave 4
 	note C_, 2
@@ -89,17 +89,17 @@ Music_MeetRival_Ch1::
 	octave 4
 	note C_, 2
 	note F_, 2
-	note D#, 2
+	note D_SHARP, 2
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	note G_, 2
 	rest 4
-	note A#, 4
+	note A_SHARP, 4
 	octave 4
 	note C_, 2
 	octave 3
-	note A#, 2
+	note A_SHARP, 2
 	octave 4
 	note C_, 2
 	note_type 12, 11, 7
@@ -107,7 +107,7 @@ Music_MeetRival_Ch1::
 	note G_, 4
 	note D_, 2
 	note F_, 6
-	note F#, 4
+	note F_SHARP, 4
 	note D_, 2
 	rest 4
 	note D_, 4
@@ -115,15 +115,15 @@ Music_MeetRival_Ch1::
 	note A_, 2
 	note G_, 2
 	note A_, 2
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_MeetRival_Ch1.mainloop
 
-Music_MeetRival_Ch1_AlternateStartAndTempo::
+Music_MeetRival_Ch1_AlternateStartAndTempo:
 	tempo 100
 	sound_loop 0, Music_MeetRival_Ch1_AlternateStart.body
 
-Music_MeetRival_Ch1_AlternateStart::
+Music_MeetRival_Ch1_AlternateStart:
 	tempo 112
-.body:
+Music_MeetRival_Ch1_AlternateStart.body:
 	volume 7, 7
 	duty_cycle 3
 	vibrato 6, 3, 4
@@ -139,20 +139,20 @@ Music_MeetRival_Ch1_AlternateStart::
 	note A_, 2
 	sound_loop 0, Music_MeetRival_Ch1.mainloop
 
-Music_MeetRival_Ch2::
+Music_MeetRival_Ch2:
 	duty_cycle 3
 	vibrato 10, 2, 6
 	note_type 12, 12, 7
 	octave 4
 	note B_, 1
-	note A#, 1
+	note A_SHARP, 1
 	note A_, 1
-	note G#, 1
+	note G_SHARP, 1
 	note G_, 2
-	note F#, 1
+	note F_SHARP, 1
 	note F_, 1
 	note E_, 1
-	note D#, 1
+	note D_SHARP, 1
 	note D_, 6
 	octave 3
 	note G_, 1
@@ -164,24 +164,24 @@ Music_MeetRival_Ch2::
 	octave 4
 	note D_, 2
 	note F_, 2
-	note F#, 2
-.mainloop:
+	note F_SHARP, 2
+Music_MeetRival_Ch2.mainloop:
 	note_type 12, 12, 7
 	note G_, 4
 	note D_, 2
 	note F_, 6
-	note F#, 4
+	note F_SHARP, 4
 	note G_, 2
 	rest 4
 	note G_, 4
 	note G_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note B_, 2
 	octave 5
 	note C_, 4
 	octave 4
 	note G_, 2
-	note A#, 6
+	note A_SHARP, 6
 	note B_, 4
 	octave 5
 	note C_, 2
@@ -208,7 +208,7 @@ Music_MeetRival_Ch2::
 	octave 4
 	note C_, 2
 	rest 4
-	note A#, 4
+	note A_SHARP, 4
 	note G_, 2
 	note F_, 2
 	note_type 12, 11, 0
@@ -222,10 +222,10 @@ Music_MeetRival_Ch2::
 	octave 4
 	note D_, 2
 	note F_, 2
-	note F#, 2
-	sound_loop 0, .mainloop
+	note F_SHARP, 2
+	sound_loop 0, Music_MeetRival_Ch2.mainloop
 
-Music_MeetRival_Ch2_AlternateStart::
+Music_MeetRival_Ch2_AlternateStart:
 	duty_cycle 3
 	vibrato 10, 2, 6
 	note_type 12, 12, 7
@@ -239,15 +239,15 @@ Music_MeetRival_Ch2_AlternateStart::
 	octave 4
 	note D_, 2
 	note F_, 2
-	note F#, 2
+	note F_SHARP, 2
 	sound_loop 0, Music_MeetRival_Ch2.mainloop
 
-Music_MeetRival_Ch3::
+Music_MeetRival_Ch3:
 	note_type 12, 1, 4
 	octave 5
 	note D_, 2
 	rest 2
-	note C#, 2
+	note C_SHARP, 2
 	rest 2
 	note C_, 2
 	rest 2
@@ -266,7 +266,7 @@ Music_MeetRival_Ch3::
 	rest 1
 	note G_, 1
 	rest 1
-.mainloop:
+Music_MeetRival_Ch3.mainloop:
 	note G_, 2
 	octave 5
 	note D_, 2
@@ -287,7 +287,7 @@ Music_MeetRival_Ch3::
 	note D_, 4
 	octave 4
 	note G_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note B_, 2
 	note G_, 2
 	octave 5
@@ -309,20 +309,20 @@ Music_MeetRival_Ch3::
 	octave 4
 	note B_, 2
 	note A_, 2
-	note F#, 2
+	note F_SHARP, 2
 	note A_, 2
 	rest 2
-	note F#, 2
+	note F_SHARP, 2
 	note A_, 2
-	note F#, 2
+	note F_SHARP, 2
 	rest 2
 	note A_, 2
-	note F#, 2
+	note F_SHARP, 2
 	note A_, 2
 	rest 2
-	note F#, 2
+	note F_SHARP, 2
 	note A_, 2
-	note F#, 2
+	note F_SHARP, 2
 	octave 5
 	note D_, 2
 	octave 4
@@ -346,16 +346,16 @@ Music_MeetRival_Ch3::
 	note C_, 2
 	octave 4
 	note B_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note A_, 2
 	note G_, 2
-	note A#, 2
+	note A_SHARP, 2
 	rest 2
 	note G_, 2
-	note A#, 2
+	note A_SHARP, 2
 	note G_, 2
 	rest 2
-	note A#, 2
+	note A_SHARP, 2
 	note G_, 2
 	octave 5
 	note D_, 2
@@ -369,9 +369,9 @@ Music_MeetRival_Ch3::
 	rest 2
 	octave 5
 	note D_, 2
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_MeetRival_Ch3.mainloop
 
-Music_MeetRival_Ch3_AlternateStart::
+Music_MeetRival_Ch3_AlternateStart:
 	note_type 12, 1, 4
 	octave 4
 	note G_, 1

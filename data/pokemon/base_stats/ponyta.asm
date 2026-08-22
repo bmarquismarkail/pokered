@@ -1,17 +1,17 @@
-	db DEX_PONYTA ; pokedex id
+	.DB DEX_PONYTA ; pokedex id
 
-	db  50,  85,  55,  90,  65
+	.DB  50,  85,  55,  90,  65
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 190 ; catch rate
-	db 152 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 190 ; catch rate
+	.DB 152 ; base exp
 
-	INCBIN "gfx/pokemon/front/ponyta.pic", 0, 1 ; sprite dimensions
-	dw PonytaPicFront, PonytaPicBack
+	.INCBIN "gfx/pokemon/front/ponyta.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PonytaPicFront, PonytaPicBack
 
-	db EMBER, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB EMBER, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -19,4 +19,4 @@
 	     FIRE_BLAST,   SWIFT,        SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

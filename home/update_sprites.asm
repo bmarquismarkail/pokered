@@ -1,6 +1,6 @@
-UpdateSprites::
+UpdateSprites:
 	ld a, [wUpdateSpritesEnabled]
 	dec a
 	ret nz
-	homecall _UpdateSprites
+	homecall WLA_GLOBAL_UpdateSprites
 	ret

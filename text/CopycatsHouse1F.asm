@@ -1,11 +1,13 @@
-_CopycatsHouse1FMiddleAgedWomanText::
+_CopycatsHouse1FMiddleAgedWomanText:
+WLA_GLOBAL_CopycatsHouse1FMiddleAgedWomanText:
 	text "My daughter is so"
 	line "self-centered."
 	cont "She only has a"
 	cont "few friends."
 	done
 
-_CopycatsHouse1FMiddleAgedManText::
+_CopycatsHouse1FMiddleAgedManText:
+WLA_GLOBAL_CopycatsHouse1FMiddleAgedManText:
 	text "My daughter likes"
 	line "to mimic people."
 
@@ -15,7 +17,8 @@ _CopycatsHouse1FMiddleAgedManText::
 	cont "around here!"
 	done
 
-_CopycatsHouse1FChanseyText::
+_CopycatsHouse1FChanseyText:
+WLA_GLOBAL_CopycatsHouse1FChanseyText:
 	text "CHANSEY: Chaan!"
 	line "Sii!@"
 	text_end

@@ -1,17 +1,17 @@
-	db DEX_BUTTERFREE ; pokedex id
+	.DB DEX_BUTTERFREE ; pokedex id
 
-	db  60,  45,  50,  70,  80
+	.DB  60,  45,  50,  70,  80
 	;   hp  atk  def  spd  spc
 
-	db BUG, FLYING ; type
-	db 45 ; catch rate
-	db 160 ; base exp
+	.DB BUG, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 160 ; base exp
 
-	INCBIN "gfx/pokemon/front/butterfree.pic", 0, 1 ; sprite dimensions
-	dw ButterfreePicFront, ButterfreePicBack
+	.INCBIN "gfx/pokemon/front/butterfree.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ButterfreePicFront, ButterfreePicBack
 
-	db CONFUSION, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB CONFUSION, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     SWIFT,        REST,         PSYWAVE,      SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

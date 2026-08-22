@@ -15,16 +15,15 @@
 	const_export POWERPLANT_TM_REFLECT
 
 PowerPlant_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 3
 	warp_event  4, 35, LAST_MAP, 4
 	warp_event  5, 35, LAST_MAP, 4
 	warp_event  0, 11, LAST_MAP, 4
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 14
 	object_event  9, 20, SPRITE_POKE_BALL, STAY, NONE, TEXT_POWERPLANT_VOLTORB1, VOLTORB, 40
 	object_event 32, 18, SPRITE_POKE_BALL, STAY, NONE, TEXT_POWERPLANT_VOLTORB2, VOLTORB, 40
 	object_event 21, 25, SPRITE_POKE_BALL, STAY, NONE, TEXT_POWERPLANT_VOLTORB3, VOLTORB, 40
@@ -40,4 +39,8 @@ PowerPlant_Object:
 	object_event 26, 32, SPRITE_POKE_BALL, STAY, NONE, TEXT_POWERPLANT_TM_THUNDER, TM_THUNDER
 	object_event 20, 32, SPRITE_POKE_BALL, STAY, NONE, TEXT_POWERPLANT_TM_REFLECT, TM_REFLECT
 
-	def_warps_to POWER_PLANT
+	event_displacement POWER_PLANT_WIDTH, 4, 35
+
+	event_displacement POWER_PLANT_WIDTH, 5, 35
+
+	event_displacement POWER_PLANT_WIDTH, 0, 11

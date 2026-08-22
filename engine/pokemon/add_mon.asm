@@ -1,4 +1,5 @@
-_AddPartyMon::
+_AddPartyMon:
+WLA_GLOBAL_AddPartyMon:
 ; Adds a new mon to the player's or enemy's party.
 ; [wMonDataLocation] is used in an unusual way in this function.
 ; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
@@ -6,21 +7,23 @@ _AddPartyMon::
 	ld de, wPartyCount
 	ld a, [wMonDataLocation]
 	and $f
-	jr z, .next
+	jr z, WLA_GLOBAL_AddPartyMon__next
 	ld de, wEnemyPartyCount
-.next
+_AddPartyMon.next:
+WLA_GLOBAL_AddPartyMon__next:
 	ld a, [de]
 	inc a
 	cp PARTY_LENGTH + 1
 	ret nc ; return if the party is already full
 	ld [de], a
 	ld a, [de]
-	ldh [hNewPartyLength], a
+	ldh [lobyte(hNewPartyLength)], a
 	add e
 	ld e, a
-	jr nc, .noCarry
+	jr nc, WLA_GLOBAL_AddPartyMon__noCarry
 	inc d
-.noCarry
+_AddPartyMon.noCarry:
+WLA_GLOBAL_AddPartyMon__noCarry:
 	ld a, [wCurPartySpecies]
 	ld [de], a ; write species of new mon in party list
 	inc de
@@ -29,10 +32,11 @@ _AddPartyMon::
 	ld hl, wPartyMonOT
 	ld a, [wMonDataLocation]
 	and $f
-	jr z, .next2
+	jr z, WLA_GLOBAL_AddPartyMon__next2
 	ld hl, wEnemyMonOT
-.next2
-	ldh a, [hNewPartyLength]
+_AddPartyMon.next2:
+WLA_GLOBAL_AddPartyMon__next2:
+	ldh a, [lobyte(hNewPartyLength)]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
@@ -42,22 +46,24 @@ _AddPartyMon::
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
-	jr nz, .skipNaming
+	jr nz, WLA_GLOBAL_AddPartyMon__skipNaming
 	ld hl, wPartyMonNicks
-	ldh a, [hNewPartyLength]
+	ldh a, [lobyte(hNewPartyLength)]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
-.skipNaming
+_AddPartyMon.skipNaming:
+WLA_GLOBAL_AddPartyMon__skipNaming:
 	ld hl, wPartyMons
 	ld a, [wMonDataLocation]
 	and $f
-	jr z, .next3
+	jr z, WLA_GLOBAL_AddPartyMon__next3
 	ld hl, wEnemyMons
-.next3
-	ldh a, [hNewPartyLength]
+_AddPartyMon.next3:
+WLA_GLOBAL_AddPartyMon__next3:
+	ldh a, [lobyte(hNewPartyLength)]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -77,7 +83,7 @@ _AddPartyMon::
 	and $f
 	ld a, ATKDEFDV_TRAINER  ; set enemy trainer mon IVs to fixed average values
 	ld b, SPDSPCDV_TRAINER
-	jr nz, .next4
+	jr nz, WLA_GLOBAL_AddPartyMon__next4
 
 ; If the mon is being added to the player's party, update the pokedex.
 	ld a, [wCurPartySpecies]
@@ -108,14 +114,15 @@ _AddPartyMon::
 
 	ld a, [wIsInBattle]
 	and a ; is this a wild mon caught in battle?
-	jr nz, .copyEnemyMonData
+	jr nz, WLA_GLOBAL_AddPartyMon__copyEnemyMonData
 
 ; Not wild.
 	call Random ; generate random IVs
 	ld b, a
 	call Random
 
-.next4
+_AddPartyMon.next4:
+WLA_GLOBAL_AddPartyMon__next4:
 	push bc
 	ld bc, MON_DVS
 	add hl, bc
@@ -129,10 +136,10 @@ _AddPartyMon::
 	xor a
 	ld b, a
 	call CalcStat      ; calc HP stat (set cur Hp to max HP)
-	ldh a, [hMultiplicand+1]
+	ldh a, [lobyte(hMultiplicand+1)]
 	ld [de], a
 	inc de
-	ldh a, [hMultiplicand+2]
+	ldh a, [lobyte(hMultiplicand+2)]
 	ld [de], a
 	inc de
 	xor a
@@ -140,8 +147,9 @@ _AddPartyMon::
 	inc de
 	ld [de], a         ; status ailments
 	inc de
-	jr .copyMonTypesAndMoves
-.copyEnemyMonData
+	jr WLA_GLOBAL_AddPartyMon__copyMonTypesAndMoves
+_AddPartyMon.copyEnemyMonData:
+WLA_GLOBAL_AddPartyMon__copyEnemyMonData:
 	ld bc, MON_DVS
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
@@ -160,7 +168,8 @@ _AddPartyMon::
 	ld a, [wEnemyMonStatus]   ; copy status ailments from cur enemy mon
 	ld [de], a
 	inc de
-.copyMonTypesAndMoves
+_AddPartyMon.copyMonTypesAndMoves:
+WLA_GLOBAL_AddPartyMon__copyMonTypesAndMoves:
 	ld hl, wMonHTypes
 	ld a, [hli]       ; type 1
 	ld [de], a
@@ -204,21 +213,22 @@ _AddPartyMon::
 	callfar CalcExperience
 	pop de
 	inc de
-	ldh a, [hExperience] ; write experience
+	ldh a, [lobyte(hExperience)] ; write experience
 	ld [de], a
 	inc de
-	ldh a, [hExperience + 1]
+	ldh a, [lobyte(hExperience + 1)]
 	ld [de], a
 	inc de
-	ldh a, [hExperience + 2]
+	ldh a, [lobyte(hExperience + 2)]
 	ld [de], a
 	xor a
 	ld b, NUM_STATS * 2
-.writeEVsLoop              ; set all EVs to 0
+_AddPartyMon.writeEVsLoop:
+WLA_GLOBAL_AddPartyMon__writeEVsLoop:              ; set all EVs to 0
 	inc de
 	ld [de], a
 	dec b
-	jr nz, .writeEVsLoop
+	jr nz, WLA_GLOBAL_AddPartyMon__writeEVsLoop
 	inc de
 	inc de
 	pop hl
@@ -229,19 +239,21 @@ _AddPartyMon::
 	inc de
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .calcFreshStats
+	jr nz, WLA_GLOBAL_AddPartyMon__calcFreshStats
 	ld hl, wEnemyMonMaxHP
 	ld bc, NUM_STATS * 2
 	call CopyData          ; copy stats of cur enemy mon
 	pop hl
-	jr .done
-.calcFreshStats
+	jr WLA_GLOBAL_AddPartyMon__done
+_AddPartyMon.calcFreshStats:
+WLA_GLOBAL_AddPartyMon__calcFreshStats:
 	pop hl
 	ld bc, MON_HP_EXP - 1
 	add hl, bc
 	ld b, $0
 	call CalcStats         ; calculate fresh set of stats
-.done
+_AddPartyMon.done:
+WLA_GLOBAL_AddPartyMon__done:
 	scf
 	ret
 
@@ -250,10 +262,10 @@ LoadMovePPs:
 	; fallthrough
 AddPartyMon_WriteMovePP:
 	ld b, NUM_MOVES
-.pploop
+AddPartyMon_WriteMovePP.pploop
 	ld a, [hli]     ; read move ID
 	and a
-	jr z, .empty
+	jr z, AddPartyMon_WriteMovePP.empty
 	dec a
 	push hl
 	push de
@@ -262,22 +274,23 @@ AddPartyMon_WriteMovePP:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wMoveData
-	ld a, BANK(Moves)
+	ld a, bank(Moves)
 	call FarCopyData
 	pop bc
 	pop de
 	pop hl
 	ld a, [wMoveData + MOVE_PP]
-.empty
+AddPartyMon_WriteMovePP.empty
 	inc de
 	ld [de], a
 	dec b
-	jr nz, .pploop ; there are still moves to read
+	jr nz, AddPartyMon_WriteMovePP.pploop ; there are still moves to read
 	ret
 
 ; adds enemy mon [wCurPartySpecies] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
-_AddEnemyMonToPlayerParty::
+_AddEnemyMonToPlayerParty:
+WLA_GLOBAL_AddEnemyMonToPlayerParty:
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
@@ -338,30 +351,34 @@ _AddEnemyMonToPlayerParty::
 	and a
 	ret                  ; return success
 
-_MoveMon::
+_MoveMon:
+WLA_GLOBAL_MoveMon:
 	ld a, [wMoveMonType]
 	and a   ; BOX_TO_PARTY
-	jr z, .checkPartyMonSlots
+	jr z, WLA_GLOBAL_MoveMon__checkPartyMonSlots
 	cp DAYCARE_TO_PARTY
-	jr z, .checkPartyMonSlots
+	jr z, WLA_GLOBAL_MoveMon__checkPartyMonSlots
 	cp PARTY_TO_DAYCARE
 	ld hl, wDayCareMon
-	jr z, .findMonDataSrc
+	jr z, WLA_GLOBAL_MoveMon__findMonDataSrc
 	; else it's PARTY_TO_BOX
 	ld hl, wBoxCount
 	ld a, [hl]
 	cp MONS_PER_BOX
-	jr nz, .partyOrBoxNotFull
-	jr .boxFull
-.checkPartyMonSlots
+	jr nz, WLA_GLOBAL_MoveMon__partyOrBoxNotFull
+	jr WLA_GLOBAL_MoveMon__boxFull
+_MoveMon.checkPartyMonSlots:
+WLA_GLOBAL_MoveMon__checkPartyMonSlots:
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
-	jr nz, .partyOrBoxNotFull
-.boxFull
+	jr nz, WLA_GLOBAL_MoveMon__partyOrBoxNotFull
+_MoveMon.boxFull:
+WLA_GLOBAL_MoveMon__boxFull:
 	scf
 	ret
-.partyOrBoxNotFull
+_MoveMon.partyOrBoxNotFull:
+WLA_GLOBAL_MoveMon__partyOrBoxNotFull:
 	inc a
 	ld [hl], a           ; increment number of mons in party/box
 	ld c, a
@@ -370,9 +387,10 @@ _MoveMon::
 	ld a, [wMoveMonType]
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
-	jr z, .copySpecies
+	jr z, WLA_GLOBAL_MoveMon__copySpecies
 	ld a, [wCurPartySpecies]
-.copySpecies
+_MoveMon.copySpecies:
+WLA_GLOBAL_MoveMon__copySpecies:
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
 ; find mon data dest
@@ -381,15 +399,17 @@ _MoveMon::
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wPartyCount]
-	jr nz, .addMonOffset
+	jr nz, WLA_GLOBAL_MoveMon__addMonOffset
 	; if it's PARTY_TO_BOX
 	ld hl, wBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
 	ld a, [wBoxCount]
-.addMonOffset
+_MoveMon.addMonOffset:
+WLA_GLOBAL_MoveMon__addMonOffset:
 	dec a
 	call AddNTimes
-.findMonDataSrc
+_MoveMon.findMonDataSrc:
+WLA_GLOBAL_MoveMon__findMonDataSrc:
 	push hl
 	ld e, l
 	ld d, h
@@ -397,16 +417,18 @@ _MoveMon::
 	and a
 	ld hl, wBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
-	jr z, .addMonOffset2
+	jr z, WLA_GLOBAL_MoveMon__addMonOffset2
 	cp DAYCARE_TO_PARTY
 	ld hl, wDayCareMon
-	jr z, .copyMonData
+	jr z, WLA_GLOBAL_MoveMon__copyMonData
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
-.addMonOffset2
+_MoveMon.addMonOffset2:
+WLA_GLOBAL_MoveMon__addMonOffset2:
 	ld a, [wWhichPokemon]
 	call AddNTimes
-.copyMonData
+_MoveMon.copyMonData:
+WLA_GLOBAL_MoveMon__copyMonData:
 	push hl
 	push de
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -415,9 +437,9 @@ _MoveMon::
 	pop hl
 	ld a, [wMoveMonType]
 	and a ; BOX_TO_PARTY
-	jr z, .findOTdest
+	jr z, WLA_GLOBAL_MoveMon__findOTdest
 	cp DAYCARE_TO_PARTY
-	jr z, .findOTdest
+	jr z, WLA_GLOBAL_MoveMon__findOTdest
 	ld bc, BOXMON_STRUCT_LENGTH
 	add hl, bc
 	ld a, [hl] ; hl = Level
@@ -425,74 +447,83 @@ _MoveMon::
 	inc de
 	inc de
 	ld [de], a ; de = BoxLevel
-.findOTdest
+_MoveMon.findOTdest:
+WLA_GLOBAL_MoveMon__findOTdest:
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonOT
-	jr z, .findOTsrc
+	jr z, WLA_GLOBAL_MoveMon__findOTsrc
 	dec a
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
-	jr nz, .addOToffset
+	jr nz, WLA_GLOBAL_MoveMon__addOToffset
 	ld hl, wBoxMonOT
 	ld a, [wBoxCount]
-.addOToffset
+_MoveMon.addOToffset:
+WLA_GLOBAL_MoveMon__addOToffset:
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-.findOTsrc
+_MoveMon.findOTsrc:
+WLA_GLOBAL_MoveMon__findOTsrc:
 	ld hl, wBoxMonOT
 	ld a, [wMoveMonType]
 	and a
-	jr z, .addOToffset2
+	jr z, WLA_GLOBAL_MoveMon__addOToffset2
 	ld hl, wDayCareMonOT
 	cp DAYCARE_TO_PARTY
-	jr z, .copyOT
+	jr z, WLA_GLOBAL_MoveMon__copyOT
 	ld hl, wPartyMonOT
-.addOToffset2
+_MoveMon.addOToffset2:
+WLA_GLOBAL_MoveMon__addOToffset2:
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-.copyOT
+_MoveMon.copyOT:
+WLA_GLOBAL_MoveMon__copyOT:
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
 ; find nick dest
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonName
-	jr z, .findNickSrc
+	jr z, WLA_GLOBAL_MoveMon__findNickSrc
 	dec a
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
-	jr nz, .addNickOffset
+	jr nz, WLA_GLOBAL_MoveMon__addNickOffset
 	ld hl, wBoxMonNicks
 	ld a, [wBoxCount]
-.addNickOffset
+_MoveMon.addNickOffset:
+WLA_GLOBAL_MoveMon__addNickOffset:
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-.findNickSrc
+_MoveMon.findNickSrc:
+WLA_GLOBAL_MoveMon__findNickSrc:
 	ld hl, wBoxMonNicks
 	ld a, [wMoveMonType]
 	and a
-	jr z, .addNickOffset2
+	jr z, WLA_GLOBAL_MoveMon__addNickOffset2
 	ld hl, wDayCareMonName
 	cp DAYCARE_TO_PARTY
-	jr z, .copyNick
+	jr z, WLA_GLOBAL_MoveMon__copyNick
 	ld hl, wPartyMonNicks
-.addNickOffset2
+_MoveMon.addNickOffset2:
+WLA_GLOBAL_MoveMon__addNickOffset2:
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-.copyNick
+_MoveMon.copyNick:
+WLA_GLOBAL_MoveMon__copyNick:
 	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]
 	cp PARTY_TO_BOX
-	jr z, .done
+	jr z, WLA_GLOBAL_MoveMon__done
 	cp PARTY_TO_DAYCARE
-	jr z, .done
+	jr z, WLA_GLOBAL_MoveMon__done
 	; returning mon to party, compute level and stats
 	push hl
 	srl a
@@ -512,6 +543,7 @@ _MoveMon::
 	add hl, bc ; hl = wPartyMon*HPExp - 1
 	ld b, $1
 	call CalcStats
-.done
+_MoveMon.done:
+WLA_GLOBAL_MoveMon__done:
 	and a
 	ret

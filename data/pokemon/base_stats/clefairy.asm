@@ -1,17 +1,17 @@
-	db DEX_CLEFAIRY ; pokedex id
+	.DB DEX_CLEFAIRY ; pokedex id
 
-	db  70,  45,  48,  35,  60
+	.DB  70,  45,  48,  35,  60
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 150 ; catch rate
-	db 68 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 150 ; catch rate
+	.DB 68 ; base exp
 
-	INCBIN "gfx/pokemon/front/clefairy.pic", 0, 1 ; sprite dimensions
-	dw ClefairyPicFront, ClefairyPicBack
+	.INCBIN "gfx/pokemon/front/clefairy.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ClefairyPicFront, ClefairyPicBack
 
-	db POUND, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_FAST ; growth rate
+	.DB POUND, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -23,4 +23,4 @@
 	     SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,7 +1,7 @@
-MACRO special_effect
-	db \1
-	dw \2
-ENDM
+.MACRO special_effect
+	.DB \1
+	.DW \2
+.ENDM
 
 SpecialEffectPointers:
 	; special effect id, effect routine address
@@ -44,4 +44,4 @@ SpecialEffectPointers:
 	special_effect SE_SHAKE_BACK_AND_FORTH,      AnimationShakeBackAndForth       ; $DA
 	special_effect SE_SUBSTITUTE_MON,            AnimationSubstitute              ; $D9
 	special_effect SE_WAVY_SCREEN,               AnimationWavyScreen              ; $D8
-	db -1 ; end
+	.DB -1 ; end

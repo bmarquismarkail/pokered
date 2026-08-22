@@ -40,7 +40,7 @@ Route10TrainerHeader4:
 	trainer EVENT_BEAT_ROUTE_10_TRAINER_4, 2, Route10Hiker2BattleText, Route10Hiker2EndBattleText, Route10Hiker2AfterBattleText
 Route10TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_10_TRAINER_5, 2, Route10CooltrainerF2BattleText, Route10CooltrainerF2EndBattleText, Route10CooltrainerF2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route10SuperNerd1Text:
 	text_asm
@@ -49,15 +49,15 @@ Route10SuperNerd1Text:
 	jp TextScriptEnd
 
 Route10SuperNerd1BattleText:
-	text_far _Route10SuperNerd1BattleText
+	text_far WLA_GLOBAL_Route10SuperNerd1BattleText
 	text_end
 
 Route10SuperNerd1EndBattleText:
-	text_far _Route10SuperNerd1EndBattleText
+	text_far WLA_GLOBAL_Route10SuperNerd1EndBattleText
 	text_end
 
 Route10SuperNerd1AfterBattleText:
-	text_far _Route10SuperNerd1AfterBattleText
+	text_far WLA_GLOBAL_Route10SuperNerd1AfterBattleText
 	text_end
 
 Route10Hiker1Text:
@@ -67,15 +67,15 @@ Route10Hiker1Text:
 	jp TextScriptEnd
 
 Route10Hiker1BattleText:
-	text_far _Route10Hiker1BattleText
+	text_far WLA_GLOBAL_Route10Hiker1BattleText
 	text_end
 
 Route10Hiker1EndBattleText:
-	text_far _Route10Hiker1EndBattleText
+	text_far WLA_GLOBAL_Route10Hiker1EndBattleText
 	text_end
 
 Route10Hiker1AfterBattleText:
-	text_far _Route10Hiker1AfterBattleText
+	text_far WLA_GLOBAL_Route10Hiker1AfterBattleText
 	text_end
 
 Route10SuperNerd2Text:
@@ -85,15 +85,15 @@ Route10SuperNerd2Text:
 	jp TextScriptEnd
 
 Route10SuperNerd2BattleText:
-	text_far _Route10SuperNerd2BattleText
+	text_far WLA_GLOBAL_Route10SuperNerd2BattleText
 	text_end
 
 Route10SuperNerd2EndBattleText:
-	text_far _Route10SuperNerd2EndBattleText
+	text_far WLA_GLOBAL_Route10SuperNerd2EndBattleText
 	text_end
 
 Route10SuperNerd2AfterBattleText:
-	text_far _Route10SuperNerd2AfterBattleText
+	text_far WLA_GLOBAL_Route10SuperNerd2AfterBattleText
 	text_end
 
 Route10CooltrainerF1Text:
@@ -103,15 +103,15 @@ Route10CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route10CooltrainerF1BattleText:
-	text_far _Route10CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF1BattleText
 	text_end
 
 Route10CooltrainerF1EndBattleText:
-	text_far _Route10CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF1EndBattleText
 	text_end
 
 Route10CooltrainerF1AfterBattleText:
-	text_far _Route10CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF1AfterBattleText
 	text_end
 
 Route10Hiker2Text:
@@ -121,15 +121,15 @@ Route10Hiker2Text:
 	jp TextScriptEnd
 
 Route10Hiker2BattleText:
-	text_far _Route10Hiker2BattleText
+	text_far WLA_GLOBAL_Route10Hiker2BattleText
 	text_end
 
 Route10Hiker2EndBattleText:
-	text_far _Route10Hiker2EndBattleText
+	text_far WLA_GLOBAL_Route10Hiker2EndBattleText
 	text_end
 
 Route10Hiker2AfterBattleText:
-	text_far _Route10Hiker2AfterBattleText
+	text_far WLA_GLOBAL_Route10Hiker2AfterBattleText
 	text_end
 
 Route10CooltrainerF2Text:
@@ -139,21 +139,21 @@ Route10CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route10CooltrainerF2BattleText:
-	text_far _Route10CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF2BattleText
 	text_end
 
 Route10CooltrainerF2EndBattleText:
-	text_far _Route10CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF2EndBattleText
 	text_end
 
 Route10CooltrainerF2AfterBattleText:
-	text_far _Route10CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route10CooltrainerF2AfterBattleText
 	text_end
 
 Route10RockTunnelSignText:
-	text_far _Route10RockTunnelSignText
+	text_far WLA_GLOBAL_Route10RockTunnelSignText
 	text_end
 
 Route10PowerPlantSignText:
-	text_far _Route10PowerPlantSignText
+	text_far WLA_GLOBAL_Route10PowerPlantSignText
 	text_end

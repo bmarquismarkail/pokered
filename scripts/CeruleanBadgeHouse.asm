@@ -11,15 +11,15 @@ CeruleanBadgeHouse_TextPointers:
 
 CeruleanBadgeHouseMiddleAgedManText:
 	text_asm
-	ld hl, .Text
+	ld hl, CeruleanBadgeHouseMiddleAgedManText.Text
 	call PrintText
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
-.loop
-	ld hl, .WhichBadgeText
+CeruleanBadgeHouseMiddleAgedManText.loop
+	ld hl, CeruleanBadgeHouseMiddleAgedManText.WhichBadgeText
 	call PrintText
-	ld hl, .BadgeItemList
+	ld hl, CeruleanBadgeHouseMiddleAgedManText.BadgeItemList
 	call LoadItemList
 	ld hl, wItemList
 	ld a, l
@@ -32,7 +32,7 @@ CeruleanBadgeHouseMiddleAgedManText:
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jr c, .done
+	jr c, CeruleanBadgeHouseMiddleAgedManText.done
 	ld hl, CeruleanBadgeHouseBadgeTextPointers
 	ld a, [wCurItem]
 	sub BOULDERBADGE
@@ -44,80 +44,81 @@ CeruleanBadgeHouseMiddleAgedManText:
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jr .loop
-.done
+	jr CeruleanBadgeHouseMiddleAgedManText.loop
+CeruleanBadgeHouseMiddleAgedManText.done
 	xor a
 	ld [wListScrollOffset], a
-	ld hl, .VisitAnyTimeText
+	ld hl, CeruleanBadgeHouseMiddleAgedManText.VisitAnyTimeText
 	call PrintText
 	jp TextScriptEnd
 
-.BadgeItemList:
-	db NUM_BADGES ; #
+CeruleanBadgeHouseMiddleAgedManText.BadgeItemList:
+	.DB NUM_BADGES ; #
+CeruleanBadgeHouseMiddleAgedManText._table_width_u613:
 	table_width 1
-	db BOULDERBADGE
-	db CASCADEBADGE
-	db THUNDERBADGE
-	db RAINBOWBADGE
-	db SOULBADGE
-	db MARSHBADGE
-	db VOLCANOBADGE
-	db EARTHBADGE
+	.DB BOULDERBADGE
+	.DB CASCADEBADGE
+	.DB THUNDERBADGE
+	.DB RAINBOWBADGE
+	.DB SOULBADGE
+	.DB MARSHBADGE
+	.DB VOLCANOBADGE
+	.DB EARTHBADGE
 	assert_table_length NUM_BADGES
-	db -1 ; end
+	.DB -1 ; end
 
-.Text:
-	text_far _CeruleanBadgeHouseMiddleAgedManText
+CeruleanBadgeHouseMiddleAgedManText.Text:
+	text_far WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManText
 	text_end
 
-.WhichBadgeText:
-	text_far _CeruleanBadgeHouseMiddleAgedManWhichBadgeText
+CeruleanBadgeHouseMiddleAgedManText.WhichBadgeText:
+	text_far WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManWhichBadgeText
 	text_end
 
-.VisitAnyTimeText:
-	text_far _CeruleanBadgeHouseMiddleAgedManVisitAnyTimeText
+CeruleanBadgeHouseMiddleAgedManText.VisitAnyTimeText:
+	text_far WLA_GLOBAL_CeruleanBadgeHouseMiddleAgedManVisitAnyTimeText
 	text_end
 
 CeruleanBadgeHouseBadgeTextPointers:
 	table_width 2
-	dw CeruleanBadgeHouseBoulderBadgeText
-	dw CeruleanBadgeHouseCascadeBadgeText
-	dw CeruleanBadgeHouseThunderBadgeText
-	dw CeruleanBadgeHouseRainbowBadgeText
-	dw CeruleanBadgeHouseSoulBadgeText
-	dw CeruleanBadgeHouseMarshBadgeText
-	dw CeruleanBadgeHouseVolcanoBadgeText
-	dw CeruleanBadgeHouseEarthBadgeText
+	.DW CeruleanBadgeHouseBoulderBadgeText
+	.DW CeruleanBadgeHouseCascadeBadgeText
+	.DW CeruleanBadgeHouseThunderBadgeText
+	.DW CeruleanBadgeHouseRainbowBadgeText
+	.DW CeruleanBadgeHouseSoulBadgeText
+	.DW CeruleanBadgeHouseMarshBadgeText
+	.DW CeruleanBadgeHouseVolcanoBadgeText
+	.DW CeruleanBadgeHouseEarthBadgeText
 	assert_table_length NUM_BADGES
 
 CeruleanBadgeHouseBoulderBadgeText:
-	text_far _CeruleanBadgeHouseBoulderBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseBoulderBadgeText
 	text_end
 
 CeruleanBadgeHouseCascadeBadgeText:
-	text_far _CeruleanBadgeHouseCascadeBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseCascadeBadgeText
 	text_end
 
 CeruleanBadgeHouseThunderBadgeText:
-	text_far _CeruleanBadgeHouseThunderBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseThunderBadgeText
 	text_end
 
 CeruleanBadgeHouseRainbowBadgeText:
-	text_far _CeruleanBadgeHouseRainbowBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseRainbowBadgeText
 	text_end
 
 CeruleanBadgeHouseSoulBadgeText:
-	text_far _CeruleanBadgeHouseSoulBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseSoulBadgeText
 	text_end
 
 CeruleanBadgeHouseMarshBadgeText:
-	text_far _CeruleanBadgeHouseMarshBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseMarshBadgeText
 	text_end
 
 CeruleanBadgeHouseVolcanoBadgeText:
-	text_far _CeruleanBadgeHouseVolcanoBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseVolcanoBadgeText
 	text_end
 
 CeruleanBadgeHouseEarthBadgeText:
-	text_far _CeruleanBadgeHouseEarthBadgeText
+	text_far WLA_GLOBAL_CeruleanBadgeHouseEarthBadgeText
 	text_end

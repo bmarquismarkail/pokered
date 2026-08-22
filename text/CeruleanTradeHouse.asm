@@ -1,4 +1,5 @@
-_CeruleanTradeHouseGrannyText::
+_CeruleanTradeHouseGrannyText:
+WLA_GLOBAL_CeruleanTradeHouseGrannyText:
 	text "My husband likes"
 	line "trading #MON."
 

@@ -1,29 +1,29 @@
 Route13WildMons:
 	def_grass_wildmons 20 ; encounter rate
-IF DEF(_RED)
-	db 24, ODDISH
-	db 25, PIDGEY
-	db 27, PIDGEY
-	db 24, VENONAT
-	db 22, ODDISH
-	db 26, VENONAT
-	db 26, ODDISH
-	db 25, DITTO
-	db 28, GLOOM
-	db 30, GLOOM
-ENDC
-IF DEF(_BLUE)
-	db 24, BELLSPROUT
-	db 25, PIDGEY
-	db 27, PIDGEY
-	db 24, VENONAT
-	db 22, BELLSPROUT
-	db 26, VENONAT
-	db 26, BELLSPROUT
-	db 25, DITTO
-	db 28, WEEPINBELL
-	db 30, WEEPINBELL
-ENDC
+.IF defined(_RED)
+	.DB 24, ODDISH
+	.DB 25, PIDGEY
+	.DB 27, PIDGEY
+	.DB 24, VENONAT
+	.DB 22, ODDISH
+	.DB 26, VENONAT
+	.DB 26, ODDISH
+	.DB 25, DITTO
+	.DB 28, GLOOM
+	.DB 30, GLOOM
+.ENDIF
+.IF defined(_BLUE)
+	.DB 24, BELLSPROUT
+	.DB 25, PIDGEY
+	.DB 27, PIDGEY
+	.DB 24, VENONAT
+	.DB 22, BELLSPROUT
+	.DB 26, VENONAT
+	.DB 26, BELLSPROUT
+	.DB 25, DITTO
+	.DB 28, WEEPINBELL
+	.DB 30, WEEPINBELL
+.ENDIF
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

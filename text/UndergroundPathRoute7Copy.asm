@@ -1,4 +1,5 @@
-_UndergroundPathRoute7CopyUnusedGirlText::
+_UndergroundPathRoute7CopyUnusedGirlText:
+WLA_GLOBAL_UndergroundPathRoute7CopyUnusedGirlText:
 	text "I want to shop at"
 	line "the dept. store"
 	cont "in CELADON but..."
@@ -8,13 +9,15 @@ _UndergroundPathRoute7CopyUnusedGirlText::
 	cont "people there."
 	done
 
-_UndergroundPathRoute7CopyUnusedTeamRocketHadAHideoutText::
+_UndergroundPathRoute7CopyUnusedTeamRocketHadAHideoutText:
+WLA_GLOBAL_UndergroundPathRoute7CopyUnusedTeamRocketHadAHideoutText:
 	text "TEAM ROCKET had a"
 	line "secret hideout in"
 	cont "CELADON CITY?"
 	done
 
-_UndergroundPathRoute7CopyUnusedMiddleAgedManText::
+_UndergroundPathRoute7CopyUnusedMiddleAgedManText:
+WLA_GLOBAL_UndergroundPathRoute7CopyUnusedMiddleAgedManText:
 	text "You're here to"
 	line "shop in CELADON?"
 
@@ -22,7 +25,8 @@ _UndergroundPathRoute7CopyUnusedMiddleAgedManText::
 	line "and head west!"
 	done
 
-_UndergroundPathRoute7CopyUnusedGoesUnderSaffronText::
+_UndergroundPathRoute7CopyUnusedGoesUnderSaffronText:
+WLA_GLOBAL_UndergroundPathRoute7CopyUnusedGoesUnderSaffronText:
 	text "The UNDERGROUND"
 	line "PATH goes beneath"
 	cont "SAFFRON and leads"

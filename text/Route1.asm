@@ -1,4 +1,5 @@
-_Route1Youngster1MartSampleText::
+_Route1Youngster1MartSampleText:
+WLA_GLOBAL_Route1Youngster1MartSampleText:
 	text "Hi! I work at a"
 	line "#MON MART."
 
@@ -12,25 +13,29 @@ _Route1Youngster1MartSampleText::
 	cont "Here you go!"
 	prompt
 
-_Route1Youngster1GotPotionText::
+_Route1Youngster1GotPotionText:
+WLA_GLOBAL_Route1Youngster1GotPotionText:
 	text "<PLAYER> got"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_Route1Youngster1AlsoGotPokeballsText::
+_Route1Youngster1AlsoGotPokeballsText:
+WLA_GLOBAL_Route1Youngster1AlsoGotPokeballsText:
 	text "We also carry"
 	line "# BALLs for"
 	cont "catching #MON!"
 	done
 
-_Route1Youngster1NoRoomText::
+_Route1Youngster1NoRoomText:
+WLA_GLOBAL_Route1Youngster1NoRoomText:
 	text "You have too much"
 	line "stuff with you!"
 	done
 
-_Route1Youngster2Text::
+_Route1Youngster2Text:
+WLA_GLOBAL_Route1Youngster2Text:
 	text "See those ledges"
 	line "along the road?"
 
@@ -43,7 +48,8 @@ _Route1Youngster2Text::
 	cont "quicker that way."
 	done
 
-_Route1SignText::
+_Route1SignText:
+WLA_GLOBAL_Route1SignText:
 	text "ROUTE 1"
 	line "PALLET TOWN -"
 	cont "VIRIDIAN CITY"

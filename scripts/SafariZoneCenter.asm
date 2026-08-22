@@ -8,9 +8,9 @@ SafariZoneCenter_TextPointers:
 	dw_const SafariZoneCenterTrainerTipsSignText, TEXT_SAFARIZONECENTER_TRAINER_TIPS_SIGN
 
 SafariZoneCenterRestHouseSignText:
-	text_far _SafariZoneCenterRestHouseSignText
+	text_far WLA_GLOBAL_SafariZoneCenterRestHouseSignText
 	text_end
 
 SafariZoneCenterTrainerTipsSignText:
-	text_far _SafariZoneCenterTrainerTipsSignText
+	text_far WLA_GLOBAL_SafariZoneCenterTrainerTipsSignText
 	text_end

@@ -1,8 +1,10 @@
-_SafariZoneWestRestHouseSignText::
+_SafariZoneWestRestHouseSignText:
+WLA_GLOBAL_SafariZoneWestRestHouseSignText:
 	text "REST HOUSE"
 	done
 
-_SafariZoneWestFindWardensTeethSignText::
+_SafariZoneWestFindWardensTeethSignText:
+WLA_GLOBAL_SafariZoneWestFindWardensTeethSignText:
 	text "REQUEST NOTICE"
 
 	para "Please find the"
@@ -15,7 +17,8 @@ _SafariZoneWestFindWardensTeethSignText::
 	line "Contact: WARDEN"
 	done
 
-_SafariZoneWestTrainerTipsText::
+_SafariZoneWestTrainerTipsText:
+WLA_GLOBAL_SafariZoneWestTrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "Zone Exploration"
@@ -25,7 +28,8 @@ _SafariZoneWestTrainerTipsText::
 	line "the SECRET HOUSE!"
 	done
 
-_SafariZoneWestSignText::
+_SafariZoneWestSignText:
+WLA_GLOBAL_SafariZoneWestSignText:
 	text "AREA 3"
 	line "EAST: CENTER AREA"
 	done

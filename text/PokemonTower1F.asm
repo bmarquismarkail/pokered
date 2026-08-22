@@ -1,17 +1,20 @@
-_PokemonTower1FReceptionistText::
+_PokemonTower1FReceptionistText:
+WLA_GLOBAL_PokemonTower1FReceptionistText:
 	text "#MON TOWER was"
 	line "erected in the"
 	cont "memory of #MON"
 	cont "that had died."
 	done
 
-_PokemonTower1FMiddleAgedWomanText::
+_PokemonTower1FMiddleAgedWomanText:
+WLA_GLOBAL_PokemonTower1FMiddleAgedWomanText:
 	text "Did you come to"
 	line "pay respects?"
 	cont "Bless you!"
 	done
 
-_PokemonTower1FBaldingGuyText::
+_PokemonTower1FBaldingGuyText:
+WLA_GLOBAL_PokemonTower1FBaldingGuyText:
 	text "I came to pray"
 	line "for my CLEFAIRY."
 
@@ -19,12 +22,14 @@ _PokemonTower1FBaldingGuyText::
 	line "stop crying..."
 	done
 
-_PokemonTower1FGirlText::
+_PokemonTower1FGirlText:
+WLA_GLOBAL_PokemonTower1FGirlText:
 	text "My GROWLITHE..."
 	line "Why did you die?"
 	done
 
-_PokemonTower1FChannelerText::
+_PokemonTower1FChannelerText:
+WLA_GLOBAL_PokemonTower1FChannelerText:
 	text "I am a CHANNELER!"
 	line "There are spirits"
 	cont "up to mischief!"

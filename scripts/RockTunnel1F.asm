@@ -40,7 +40,7 @@ RockTunnel1TrainerHeader5:
 	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5, 4, RockTunnel1FCooltrainerF2BattleText, RockTunnel1FCooltrainerF2EndBattleText, RockTunnel1FCooltrainerF2AfterBattleText
 RockTunnel1TrainerHeader6:
 	trainer EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6, 4, RockTunnel1FCooltrainerF3BattleText, RockTunnel1FCooltrainerF3EndBattleText, RockTunnel1FCooltrainerF3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 RockTunnel1FHiker1Text:
 	text_asm
@@ -80,89 +80,89 @@ RockTunnel1FTalkToTrainer:
 	jp TextScriptEnd
 
 RockTunnel1FHiker1BattleText:
-	text_far _RockTunnel1FHiker1BattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker1BattleText
 	text_end
 
 RockTunnel1FHiker1EndBattleText:
-	text_far _RockTunnel1FHiker1EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker1EndBattleText
 	text_end
 
 RockTunnel1FHiker1AfterBattleText:
-	text_far _RockTunnel1FHiker1AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker1AfterBattleText
 	text_end
 
 RockTunnel1FHiker2BattleText:
-	text_far _RockTunnel1FHiker2BattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker2BattleText
 	text_end
 
 RockTunnel1FHiker2EndBattleText:
-	text_far _RockTunnel1FHiker2EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker2EndBattleText
 	text_end
 
 RockTunnel1FHiker2AfterBattleText:
-	text_far _RockTunnel1FHiker2AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker2AfterBattleText
 	text_end
 
 RockTunnel1FHiker3BattleText:
-	text_far _RockTunnel1FHiker3BattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker3BattleText
 	text_end
 
 RockTunnel1FHiker3EndBattleText:
-	text_far _RockTunnel1FHiker3EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker3EndBattleText
 	text_end
 
 RockTunnel1FHiker3AfterBattleText:
-	text_far _RockTunnel1FHiker3AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FHiker3AfterBattleText
 	text_end
 
 RockTunnel1FSuperNerdBattleText:
-	text_far _RockTunnel1FSuperNerdBattleText
+	text_far WLA_GLOBAL_RockTunnel1FSuperNerdBattleText
 	text_end
 
 RockTunnel1FSuperNerdEndBattleText:
-	text_far _RockTunnel1FSuperNerdEndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FSuperNerdEndBattleText
 	text_end
 
 RockTunnel1FSuperNerdAfterBattleText:
-	text_far _RockTunnel1FSuperNerdAfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FSuperNerdAfterBattleText
 	text_end
 
 RockTunnel1FCooltrainerF1BattleText:
-	text_far _RockTunnel1FCooltrainerF1BattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF1BattleText
 	text_end
 
 RockTunnel1FCooltrainerF1EndBattleText:
-	text_far _RockTunnel1FCooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF1EndBattleText
 	text_end
 
 RockTunnel1FCooltrainerF1AfterBattleText:
-	text_far _RockTunnel1FCooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF1AfterBattleText
 	text_end
 
 RockTunnel1FCooltrainerF2BattleText:
-	text_far _RockTunnel1FCooltrainerF2BattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF2BattleText
 	text_end
 
 RockTunnel1FCooltrainerF2EndBattleText:
-	text_far _RockTunnel1FCooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF2EndBattleText
 	text_end
 
 RockTunnel1FCooltrainerF2AfterBattleText:
-	text_far _RockTunnel1FCooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF2AfterBattleText
 	text_end
 
 RockTunnel1FCooltrainerF3BattleText:
-	text_far _RockTunnel1FCooltrainerF3BattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF3BattleText
 	text_end
 
 RockTunnel1FCooltrainerF3EndBattleText:
-	text_far _RockTunnel1FCooltrainerF3EndBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF3EndBattleText
 	text_end
 
 RockTunnel1FCooltrainerF3AfterBattleText:
-	text_far _RockTunnel1FCooltrainerF3AfterBattleText
+	text_far WLA_GLOBAL_RockTunnel1FCooltrainerF3AfterBattleText
 	text_end
 
 RockTunnel1FSignText:
-	text_far _RockTunnel1FSignText
+	text_far WLA_GLOBAL_RockTunnel1FSignText
 	text_end

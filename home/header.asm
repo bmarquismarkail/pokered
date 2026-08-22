@@ -1,83 +1,133 @@
 ; rst vectors (unused)
 
-SECTION "rst0", ROM0[$0000]
+; Native WLA-DX cartridge metadata. The linker writes these fields over the
+; reserved header bytes below and computes both Game Boy checksums.
+.GBHEADER
+	NAME "POKEMON RED"
+	LICENSEECODENEW "01"
+	CARTRIDGETYPE $13
+	ROMSIZE $05
+	RAMSIZE $03
+	COUNTRYCODE $01
+	NINTENDOLOGO
+	VERSION $00
+	ROMSGB
+.ENDGB
+
+.SECTION "rst0" FORCE BANK $00 SLOT 0 ORG $0000
 	rst $38
 
-	ds $08 - @, 0 ; unused
+	.DSB $08 - orga(), 0 ; unused
 
-SECTION "rst8", ROM0[$0008]
+
+.ENDS
+
+.SECTION "rst8" FORCE BANK $00 SLOT 0 ORG $0008
 	rst $38
 
-	ds $10 - @, 0 ; unused
+	.DSB $10 - orga(), 0 ; unused
 
-SECTION "rst10", ROM0[$0010]
+
+.ENDS
+
+.SECTION "rst10" FORCE BANK $00 SLOT 0 ORG $0010
 	rst $38
 
-	ds $18 - @, 0 ; unused
+	.DSB $18 - orga(), 0 ; unused
 
-SECTION "rst18", ROM0[$0018]
+
+.ENDS
+
+.SECTION "rst18" FORCE BANK $00 SLOT 0 ORG $0018
 	rst $38
 
-	ds $20 - @, 0 ; unused
+	.DSB $20 - orga(), 0 ; unused
 
-SECTION "rst20", ROM0[$0020]
+
+.ENDS
+
+.SECTION "rst20" FORCE BANK $00 SLOT 0 ORG $0020
 	rst $38
 
-	ds $28 - @, 0 ; unused
+	.DSB $28 - orga(), 0 ; unused
 
-SECTION "rst28", ROM0[$0028]
+
+.ENDS
+
+.SECTION "rst28" FORCE BANK $00 SLOT 0 ORG $0028
 	rst $38
 
-	ds $30 - @, 0 ; unused
+	.DSB $30 - orga(), 0 ; unused
 
-SECTION "rst30", ROM0[$0030]
+
+.ENDS
+
+.SECTION "rst30" FORCE BANK $00 SLOT 0 ORG $0030
 	rst $38
 
-	ds $38 - @, 0 ; unused
+	.DSB $38 - orga(), 0 ; unused
 
-SECTION "rst38", ROM0[$0038]
+
+.ENDS
+
+.SECTION "rst38" FORCE BANK $00 SLOT 0 ORG $0038
 	rst $38
 
-	ds $40 - @, 0 ; unused
+	.DSB $40 - orga(), 0 ; unused
 
 
 ; Game Boy hardware interrupts
 
-SECTION "vblank", ROM0[$0040]
+
+.ENDS
+
+.SECTION "vblank" FORCE BANK $00 SLOT 0 ORG $0040
 	jp VBlank
 
-	ds $48 - @, 0 ; unused
+	.DSB $48 - orga(), 0 ; unused
 
-SECTION "lcd", ROM0[$0048]
+
+.ENDS
+
+.SECTION "lcd" FORCE BANK $00 SLOT 0 ORG $0048
 	rst $38
 
-	ds $50 - @, 0 ; unused
+	.DSB $50 - orga(), 0 ; unused
 
-SECTION "timer", ROM0[$0050]
+
+.ENDS
+
+.SECTION "timer" FORCE BANK $00 SLOT 0 ORG $0050
 	jp Timer
 
-	ds $58 - @, 0 ; unused
+	.DSB $58 - orga(), 0 ; unused
 
-SECTION "serial", ROM0[$0058]
+
+.ENDS
+
+.SECTION "serial" FORCE BANK $00 SLOT 0 ORG $0058
 	jp Serial
 
-	ds $60 - @, 0 ; unused
+	.DSB $60 - orga(), 0 ; unused
 
-SECTION "joypad", ROM0[$0060]
+
+.ENDS
+
+.SECTION "joypad" FORCE BANK $00 SLOT 0 ORG $0060
 	reti
 
 
-SECTION "Header", ROM0[$0100]
 
-Start::
+.ENDS
+
+.SECTION "Header" FORCE BANK $00 SLOT 0 ORG $0100
+
+Start:
 ; Nintendo requires all Game Boy ROMs to begin with a nop ($00) and a jp ($C3)
 ; to the starting address.
 	nop
-	jp _Start
+	jp WLA_GLOBAL_Start
 
-; The Game Boy cartridge header data is patched over by rgbfix.
-; This makes sure it doesn't get used for anything else.
+; WLA-DX writes the native cartridge header over this reserved range.
 
-	ds $0150 - @
-
-ENDSECTION
+.ENDS

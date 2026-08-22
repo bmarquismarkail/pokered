@@ -1,4 +1,4 @@
-VendingMachineMenu::
+VendingMachineMenu:
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, MONEY_BOX
@@ -32,29 +32,29 @@ VendingMachineMenu::
 	res BIT_NO_TEXT_DELAY, [hl]
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .notThirsty
+	jr nz, VendingMachineMenu.notThirsty
 	ld a, [wCurrentMenuItem]
 	cp 3 ; chose Cancel?
-	jr z, .notThirsty
+	jr z, VendingMachineMenu.notThirsty
 	xor a
-	ldh [hMoney], a
-	ldh [hMoney + 2], a
+	ldh [lobyte(hMoney)], a
+	ldh [lobyte(hMoney + 2)], a
 	ld a, $2
-	ldh [hMoney + 1], a
+	ldh [lobyte(hMoney + 1)], a
 	call HasEnoughMoney
-	jr nc, .enoughMoney
+	jr nc, VendingMachineMenu.enoughMoney
 	ld hl, VendingMachineText4
 	jp PrintText
-.enoughMoney
+VendingMachineMenu.enoughMoney
 	call LoadVendingMachineItem
-	ldh a, [hVendingMachineItem]
+	ldh a, [lobyte(hVendingMachineItem)]
 	ld b, a
 	ld c, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, VendingMachineMenu.BagFull
 
 	ld b, 60 ; number of times to play the "brrrrr" sound
-.playDeliverySound
+VendingMachineMenu.playDeliverySound
 	ld c, 2
 	call DelayFrames
 	push bc
@@ -62,7 +62,7 @@ VendingMachineMenu::
 	call PlaySound
 	pop bc
 	dec b
-	jr nz, .playDeliverySound
+	jr nz, VendingMachineMenu.playDeliverySound
 
 	ld hl, VendingMachineText5
 	call PrintText
@@ -73,43 +73,43 @@ VendingMachineMenu::
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	jp DisplayTextBoxID
-.BagFull
+VendingMachineMenu.BagFull
 	ld hl, VendingMachineText6
 	jp PrintText
-.notThirsty
+VendingMachineMenu.notThirsty
 	ld hl, VendingMachineText7
 	jp PrintText
 
 VendingMachineText1:
-	text_far _VendingMachineText1
+	text_far WLA_GLOBAL_VendingMachineText1
 	text_end
 
 DrinkText:
-	db   "FRESH WATER"
+		.STRINGMAP pokemon, "FRESH WATER"
 	next "SODA POP"
 	next "LEMONADE"
 	next "CANCEL@"
 
 DrinkPriceText:
-	db   "¥200"
+		.STRINGMAP pokemon, "¥200"
 	next "¥300"
 	next "¥350"
 	next "@"
 
 VendingMachineText4:
-	text_far _VendingMachineText4
+	text_far WLA_GLOBAL_VendingMachineText4
 	text_end
 
 VendingMachineText5:
-	text_far _VendingMachineText5
+	text_far WLA_GLOBAL_VendingMachineText5
 	text_end
 
 VendingMachineText6:
-	text_far _VendingMachineText6
+	text_far WLA_GLOBAL_VendingMachineText6
 	text_end
 
 VendingMachineText7:
-	text_far _VendingMachineText7
+	text_far WLA_GLOBAL_VendingMachineText7
 	text_end
 
 LoadVendingMachineItem:
@@ -121,13 +121,13 @@ LoadVendingMachineItem:
 	ld e, a
 	add hl, de
 	ld a, [hli]
-	ldh [hVendingMachineItem], a
+	ldh [lobyte(hVendingMachineItem)], a
 	ld a, [hli]
-	ldh [hVendingMachinePrice], a
+	ldh [lobyte(hVendingMachinePrice)], a
 	ld a, [hli]
-	ldh [hVendingMachinePrice + 1], a
+	ldh [lobyte(hVendingMachinePrice + 1)], a
 	ld a, [hl]
-	ldh [hVendingMachinePrice + 2], a
+	ldh [lobyte(hVendingMachinePrice + 2)], a
 	ret
 
-INCLUDE "data/items/vending_prices.asm"
+.INCLUDE "data/items/vending_prices.asm"

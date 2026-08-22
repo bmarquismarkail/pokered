@@ -1,9 +1,9 @@
 ; items which close the item menu when used
 UsableItems_CloseMenu:
-	db ESCAPE_ROPE
-	db ITEMFINDER
-	db POKE_FLUTE
-	db OLD_ROD
-	db GOOD_ROD
-	db SUPER_ROD
-	db -1 ; end
+	.DB ESCAPE_ROPE
+	.DB ITEMFINDER
+	.DB POKE_FLUTE
+	.DB OLD_ROD
+	.DB GOOD_ROD
+	.DB SUPER_ROD
+	.DB -1 ; end

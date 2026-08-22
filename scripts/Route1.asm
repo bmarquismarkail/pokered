@@ -10,44 +10,44 @@ Route1_TextPointers:
 Route1Youngster1Text:
 	text_asm
 	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
-	jr nz, .got_item
-	ld hl, .MartSampleText
+	jr nz, Route1Youngster1Text.got_item
+	ld hl, Route1Youngster1Text.MartSampleText
 	call PrintText
-	lb bc, POTION, 1
+	lb "bc", POTION, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .GotPotionText
-	jr .done
-.bag_full
-	ld hl, .NoRoomText
-	jr .done
-.got_item
-	ld hl, .AlsoGotPokeballsText
-.done
+	jr nc, Route1Youngster1Text.bag_full
+	ld hl, Route1Youngster1Text.GotPotionText
+	jr Route1Youngster1Text.done
+Route1Youngster1Text.bag_full
+	ld hl, Route1Youngster1Text.NoRoomText
+	jr Route1Youngster1Text.done
+Route1Youngster1Text.got_item
+	ld hl, Route1Youngster1Text.AlsoGotPokeballsText
+Route1Youngster1Text.done
 	call PrintText
 	jp TextScriptEnd
 
-.MartSampleText:
-	text_far _Route1Youngster1MartSampleText
+Route1Youngster1Text.MartSampleText:
+	text_far WLA_GLOBAL_Route1Youngster1MartSampleText
 	text_end
 
-.GotPotionText:
-	text_far _Route1Youngster1GotPotionText
+Route1Youngster1Text.GotPotionText:
+	text_far WLA_GLOBAL_Route1Youngster1GotPotionText
 	sound_get_item_1
 	text_end
 
-.AlsoGotPokeballsText:
-	text_far _Route1Youngster1AlsoGotPokeballsText
+Route1Youngster1Text.AlsoGotPokeballsText:
+	text_far WLA_GLOBAL_Route1Youngster1AlsoGotPokeballsText
 	text_end
 
-.NoRoomText:
-	text_far _Route1Youngster1NoRoomText
+Route1Youngster1Text.NoRoomText:
+	text_far WLA_GLOBAL_Route1Youngster1NoRoomText
 	text_end
 
 Route1Youngster2Text:
-	text_far _Route1Youngster2Text
+	text_far WLA_GLOBAL_Route1Youngster2Text
 	text_end
 
 Route1SignText:
-	text_far _Route1SignText
+	text_far WLA_GLOBAL_Route1SignText
 	text_end

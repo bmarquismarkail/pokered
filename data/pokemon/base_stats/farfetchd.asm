@@ -1,17 +1,17 @@
-	db DEX_FARFETCHD ; pokedex id
+	.DB DEX_FARFETCHD ; pokedex id
 
-	db  52,  65,  55,  60,  58
+	.DB  52,  65,  55,  60,  58
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, FLYING ; type
-	db 45 ; catch rate
-	db 94 ; base exp
+	.DB NORMAL, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 94 ; base exp
 
-	INCBIN "gfx/pokemon/front/farfetchd.pic", 0, 1 ; sprite dimensions
-	dw FarfetchdPicFront, FarfetchdPicBack
+	.INCBIN "gfx/pokemon/front/farfetchd.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW FarfetchdPicFront, FarfetchdPicBack
 
-	db PECK, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB PECK, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   SWORDS_DANCE, WHIRLWIND,    TOXIC,        BODY_SLAM,    \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE,   CUT,          FLY
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

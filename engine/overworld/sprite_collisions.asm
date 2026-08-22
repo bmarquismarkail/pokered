@@ -1,29 +1,33 @@
-_UpdateSprites::
-	ld h, HIGH(wSpriteStateData1)
+_UpdateSprites:
+WLA_GLOBAL_UpdateSprites:
+	ld h, hibyte(wSpriteStateData1)
 	inc h
 	ld a, SPRITESTATEDATA2_IMAGEBASEOFFSET
-.spriteLoop
+_UpdateSprites.spriteLoop:
+WLA_GLOBAL_UpdateSprites__spriteLoop:
 	ld l, a
 	sub SPRITESTATEDATA2_IMAGEBASEOFFSET
 	ld c, a
-	ldh [hCurrentSpriteOffset], a
+	ldh [lobyte(hCurrentSpriteOffset)], a
 	ld a, [hl]
 	and a
-	jr z, .skipSprite   ; tests SPRITESTATEDATA2_IMAGEBASEOFFSET
+	jr z, WLA_GLOBAL_UpdateSprites__skipSprite   ; tests SPRITESTATEDATA2_IMAGEBASEOFFSET
 	push hl
 	push de
 	push bc
-	call .updateCurrentSprite
+	call WLA_GLOBAL_UpdateSprites__updateCurrentSprite
 	pop bc
 	pop de
 	pop hl
-.skipSprite
+_UpdateSprites.skipSprite:
+WLA_GLOBAL_UpdateSprites__skipSprite:
 	ld a, l
 	add $10             ; move to next sprite
 	cp SPRITESTATEDATA2_IMAGEBASEOFFSET ; test for overflow (back at beginning)
-	jr nz, .spriteLoop
+	jr nz, WLA_GLOBAL_UpdateSprites__spriteLoop
 	ret
-.updateCurrentSprite
+_UpdateSprites.updateCurrentSprite:
+WLA_GLOBAL_UpdateSprites__updateCurrentSprite:
 	cp $1
 	jp nz, UpdateNonPlayerSprite
 	jp UpdatePlayerSprite
@@ -31,14 +35,14 @@ _UpdateSprites::
 UpdateNonPlayerSprite:
 	dec a
 	swap a
-	ldh [hTilePlayerStandingOn], a  ; $10 * sprite#
+	ldh [lobyte(hTilePlayerStandingOn)], a  ; $10 * sprite#
 	ld a, [wNPCMovementScriptSpriteOffset] ; some sprite offset?
 	ld b, a
-	ldh a, [hCurrentSpriteOffset]
+	ldh a, [lobyte(hCurrentSpriteOffset)]
 	cp b
-	jr nz, .unequal
+	jr nz, UpdateNonPlayerSprite.unequal
 	jp DoScriptedNPCMovement
-.unequal
+UpdateNonPlayerSprite.unequal
 	jp UpdateNPCSprite
 
 ; This detects if the current sprite (whose offset is at hCurrentSpriteOffset)
@@ -54,9 +58,9 @@ UpdateNonPlayerSprite:
 DetectCollisionBetweenSprites:
 	nop
 
-	ld h, HIGH(wSpriteStateData1)
-	ldh a, [hCurrentSpriteOffset]
-	add LOW(wSpriteStateData1)
+	ld h, hibyte(wSpriteStateData1)
+	ldh a, [lobyte(hCurrentSpriteOffset)]
+	add lobyte(wSpriteStateData1)
 	ld l, a
 
 	ld a, [hl] ; a = [i#SPRITESTATEDATA1_PICTUREID] (0 if slot is unused)
@@ -80,7 +84,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hCollidingSpriteTempYValue], a ; y adjusted for direction of movement
+	ldh [lobyte(hCollidingSpriteTempYValue)], a ; y adjusted for direction of movement
 
 	ld a, [hli] ; a = [i#SPRITESTATEDATA1_XSTEPVECTOR] (-1, 0, or 1)
 	call SetSpriteCollisionValues
@@ -93,7 +97,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ldh [hCollidingSpriteTempXValue], a ; x adjusted for direction of movement
+	ldh [lobyte(hCollidingSpriteTempXValue)], a ; x adjusted for direction of movement
 
 	ld a, l
 	add 7
@@ -103,33 +107,33 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [i#SPRITESTATEDATA1_0D] XXX what's this for?
 	ld [hld], a ; zero [i#SPRITESTATEDATA1_COLLISIONDATA]
 
-	ldh a, [hCollidingSpriteTempXValue]
+	ldh a, [lobyte(hCollidingSpriteTempXValue)]
 	ld [hld], a ; [i#SPRITESTATEDATA1_XADJUSTED]
-	ldh a, [hCollidingSpriteTempYValue]
+	ldh a, [lobyte(hCollidingSpriteTempYValue)]
 	ld [hl], a ; [i#SPRITESTATEDATA1_YADJUSTED]
 
 	xor a ; zero the loop counter
 
-.loop
-	ldh [hCollidingSpriteOffset], a
+DetectCollisionBetweenSprites.loop
+	ldh [lobyte(hCollidingSpriteOffset)], a
 	swap a
 	ld e, a
-	ldh a, [hCurrentSpriteOffset]
+	ldh a, [lobyte(hCurrentSpriteOffset)]
 	cp e ; does the loop sprite match the current sprite?
-	jp z, .next ; go to the next sprite if they match
+	jp z, DetectCollisionBetweenSprites.next ; go to the next sprite if they match
 
 	ld d, h
 	ld a, [de] ; a = [j#SPRITESTATEDATA1_PICTUREID] (0 if slot is unused)
 	and a ; is this sprite slot slot used?
-	jp z, .next ; go the next sprite if not used
+	jp z, DetectCollisionBetweenSprites.next ; go the next sprite if not used
 
 	inc e
 	inc e
 	ld a, [de] ; a = [j#SPRITESTATEDATA1_IMAGEINDEX] ($ff means the sprite is offscreen)
 	inc a
-	jp z, .next ; go the next sprite if offscreen
+	jp z, DetectCollisionBetweenSprites.next ; go the next sprite if offscreen
 
-	ldh a, [hCurrentSpriteOffset]
+	ldh a, [lobyte(hCurrentSpriteOffset)]
 	add 10
 	ld l, a
 
@@ -151,11 +155,11 @@ DetectCollisionBetweenSprites:
 	sub [hl] ; subtract [i#SPRITESTATEDATA1_YADJUSTED] from [j#SPRITESTATEDATA1_YADJUSTED]
 
 ; calculate the absolute value of the difference to get the distance
-	jr nc, .noCarry1
+	jr nc, DetectCollisionBetweenSprites.noCarry1
 	cpl
 	inc a
-.noCarry1
-	ldh [hCollidingSpriteTempYValue], a ; store the distance between the two sprites' adjusted Y values
+DetectCollisionBetweenSprites.noCarry1
+	ldh [lobyte(hCollidingSpriteTempYValue)], a ; store the distance between the two sprites' adjusted Y values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; Y coordinate is larger. This information is used later to set
@@ -173,16 +177,16 @@ DetectCollisionBetweenSprites:
 	ld b, 7
 	ld a, [hl] ; a = [i#SPRITESTATEDATA1_YADJUSTED]
 	and $f
-	jr z, .next1
+	jr z, DetectCollisionBetweenSprites.next1
 	ld b, 9
 
-.next1
-	ldh a, [hCollidingSpriteTempYValue] ; a = distance between adjusted Y coordinates
+DetectCollisionBetweenSprites.next1
+	ldh a, [lobyte(hCollidingSpriteTempYValue)] ; a = distance between adjusted Y coordinates
 	sub b
-	ldh [hCollidingSpriteAdjustedDistance], a
+	ldh [lobyte(hCollidingSpriteAdjustedDistance)], a
 	ld a, b
-	ldh [hCollidingSpriteTempYValue], a ; store 7 or 9 depending on sprite i's delta Y
-	jr c, .checkXDistance
+	ldh [lobyte(hCollidingSpriteTempYValue)], a ; store 7 or 9 depending on sprite i's delta Y
+	jr c, DetectCollisionBetweenSprites.checkXDistance
 
 ; If sprite j's delta Y is 0, then b = 7, else b = 9.
 	ld b, 7
@@ -190,16 +194,16 @@ DetectCollisionBetweenSprites:
 	ld a, [de] ; a = [j#SPRITESTATEDATA1_YSTEPVECTOR]
 	inc e
 	and a
-	jr z, .next2
+	jr z, DetectCollisionBetweenSprites.next2
 	ld b, 9
 
-.next2
-	ldh a, [hCollidingSpriteAdjustedDistance]
+DetectCollisionBetweenSprites.next2
+	ldh a, [lobyte(hCollidingSpriteAdjustedDistance)]
 	sub b ; adjust distance using sprite j's direction
-	jr z, .checkXDistance
-	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
+	jr z, DetectCollisionBetweenSprites.checkXDistance
+	jr nc, DetectCollisionBetweenSprites.next ; go to next sprite if distance is still positive after both adjustments
 
-.checkXDistance
+DetectCollisionBetweenSprites.checkXDistance
 	inc e
 	inc l
 	ld a, [de] ; a = [j#SPRITESTATEDATA1_XSTEPVECTOR]
@@ -222,11 +226,11 @@ DetectCollisionBetweenSprites:
 	sub [hl] ; subtract [i#SPRITESTATEDATA1_XADJUSTED] from [j#SPRITESTATEDATA1_XADJUSTED]
 
 ; calculate the absolute value of the difference to get the distance
-	jr nc, .noCarry2
+	jr nc, DetectCollisionBetweenSprites.noCarry2
 	cpl
 	inc a
-.noCarry2
-	ldh [hCollidingSpriteTempXValue], a ; store the distance between the two sprites' adjusted X values
+DetectCollisionBetweenSprites.noCarry2
+	ldh [lobyte(hCollidingSpriteTempXValue)], a ; store the distance between the two sprites' adjusted X values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; X coordinate is larger. This information is used later to set
@@ -244,16 +248,16 @@ DetectCollisionBetweenSprites:
 	ld b, 7
 	ld a, [hl] ; a = [i#SPRITESTATEDATA1_XADJUSTED]
 	and $f
-	jr z, .next3
+	jr z, DetectCollisionBetweenSprites.next3
 	ld b, 9
 
-.next3
-	ldh a, [hCollidingSpriteTempXValue] ; a = distance between adjusted X coordinates
+DetectCollisionBetweenSprites.next3
+	ldh a, [lobyte(hCollidingSpriteTempXValue)] ; a = distance between adjusted X coordinates
 	sub b
-	ldh [hCollidingSpriteAdjustedDistance], a
+	ldh [lobyte(hCollidingSpriteAdjustedDistance)], a
 	ld a, b
-	ldh [hCollidingSpriteTempXValue], a ; store 7 or 9 depending on sprite i's delta X
-	jr c, .collision
+	ldh [lobyte(hCollidingSpriteTempXValue)], a ; store 7 or 9 depending on sprite i's delta X
+	jr c, DetectCollisionBetweenSprites.collision
 
 ; If sprite j's delta X is 0, then b = 7, else b = 9.
 	ld b, 7
@@ -261,31 +265,31 @@ DetectCollisionBetweenSprites:
 	ld a, [de] ; a = [j#SPRITESTATEDATA1_XSTEPVECTOR]
 	inc e
 	and a
-	jr z, .next4
+	jr z, DetectCollisionBetweenSprites.next4
 	ld b, 9
 
-.next4
-	ldh a, [hCollidingSpriteAdjustedDistance]
+DetectCollisionBetweenSprites.next4
+	ldh a, [lobyte(hCollidingSpriteAdjustedDistance)]
 	sub b ; adjust distance using sprite j's direction
-	jr z, .collision
-	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
+	jr z, DetectCollisionBetweenSprites.collision
+	jr nc, DetectCollisionBetweenSprites.next ; go to next sprite if distance is still positive after both adjustments
 
-.collision
-	ldh a, [hCollidingSpriteTempXValue] ; a = 7 or 9 depending on sprite i's delta X
+DetectCollisionBetweenSprites.collision
+	ldh a, [lobyte(hCollidingSpriteTempXValue)] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
-	ldh a, [hCollidingSpriteTempYValue] ; a = 7 or 9 depending on sprite i's delta Y
+	ldh a, [lobyte(hCollidingSpriteTempYValue)] ; a = 7 or 9 depending on sprite i's delta Y
 	inc l
 
 ; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
 ; (note that normally if delta X isn't 0, then delta Y must be 0 and vice versa)
 	cp b
-	jr c, .next5
+	jr c, DetectCollisionBetweenSprites.next5
 	ld b, %1100
-	jr .next6
-.next5
+	jr DetectCollisionBetweenSprites.next6
+DetectCollisionBetweenSprites.next5
 	ld b, %0011
 
-.next6
+DetectCollisionBetweenSprites.next6
 	ld a, c ; c has 2 bits set (one of bits 0-1 is set for the X axis and one of bits 2-3 for the Y axis)
 	and b ; we select either the bit in bits 0-1 or bits 2-3 based on the calculation immediately above
 	or [hl] ; or with existing collision direction bits in [i#SPRITESTATEDATA1_COLLISIONDATA]
@@ -296,14 +300,14 @@ DetectCollisionBetweenSprites:
 ; to indicate which sprite the collision occurred with
 	inc l
 	inc l
-	ldh a, [hCollidingSpriteOffset]
+	ldh a, [lobyte(hCollidingSpriteOffset)]
 	ld de, SpriteCollisionBitTable
 	add a
 	add e
 	ld e, a
-	jr nc, .noCarry3
+	jr nc, DetectCollisionBetweenSprites.noCarry3
 	inc d
-.noCarry3
+DetectCollisionBetweenSprites.noCarry3
 	ld a, [de]
 	or [hl]
 	ld [hli], a
@@ -312,11 +316,11 @@ DetectCollisionBetweenSprites:
 	or [hl]
 	ld [hl], a
 
-.next
-	ldh a, [hCollidingSpriteOffset]
+DetectCollisionBetweenSprites.next
+	ldh a, [lobyte(hCollidingSpriteOffset)]
 	inc a
 	cp $10
-	jp nz, .loop
+	jp nz, DetectCollisionBetweenSprites.loop
 	ret
 
 ; takes delta X or delta Y in a
@@ -328,18 +332,18 @@ SetSpriteCollisionValues:
 	and a
 	ld b, 0
 	ld c, 0
-	jr z, .done
+	jr z, SetSpriteCollisionValues.done
 	ld c, 9
 	cp -1
-	jr z, .ok
+	jr z, SetSpriteCollisionValues.ok
 	ld c, 7
 	ld a, 0
-.ok
+SetSpriteCollisionValues.ok
 	ld b, a
-.done
+SetSpriteCollisionValues.done
 	ret
 
 SpriteCollisionBitTable:
-FOR n, $10
+.REPEAT $10 INDEX n
 	bigdw 1 << n
-ENDR
+.ENDR

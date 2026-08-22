@@ -1,10 +1,12 @@
-_CeladonMart4FSuperNerdText::
+_CeladonMart4FSuperNerdText:
+WLA_GLOBAL_CeladonMart4FSuperNerdText:
 	text "I'm getting a"
 	line "# DOLL for my"
 	cont "girl friend!"
 	done
 
-_CeladonMart4FYoungsterText::
+_CeladonMart4FYoungsterText:
+WLA_GLOBAL_CeladonMart4FYoungsterText:
 	text "I heard something"
 	line "useful."
 
@@ -14,7 +16,8 @@ _CeladonMart4FYoungsterText::
 	cont "with a # DOLL!"
 	done
 
-_CeladonMart4FCurrentFloorSignText::
+_CeladonMart4FCurrentFloorSignText:
+WLA_GLOBAL_CeladonMart4FCurrentFloorSignText:
 	text "Express yourself"
 	line "with gifts!"
 

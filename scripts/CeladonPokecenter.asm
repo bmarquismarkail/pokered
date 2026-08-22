@@ -16,9 +16,9 @@ CeladonPokecenterNurseText:
 	script_pokecenter_nurse
 
 CeladonPokecenterGentlemanText:
-	text_far _CeladonPokecenterGentlemanText
+	text_far WLA_GLOBAL_CeladonPokecenterGentlemanText
 	text_end
 
 CeladonPokecenterBeautyText:
-	text_far _CeladonPokecenterBeautyText
+	text_far WLA_GLOBAL_CeladonPokecenterBeautyText
 	text_end

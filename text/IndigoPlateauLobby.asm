@@ -1,4 +1,5 @@
-_IndigoPlateauLobbyGymGuideText::
+_IndigoPlateauLobbyGymGuideText:
+WLA_GLOBAL_IndigoPlateauLobbyGymGuideText:
 	text "Yo! Champ in"
 	line "making!"
 
@@ -13,7 +14,8 @@ _IndigoPlateauLobbyGymGuideText::
 	cont "is it! Go for it!"
 	done
 
-_IndigoPlateauLobbyCooltrainerFText::
+_IndigoPlateauLobbyCooltrainerFText:
+WLA_GLOBAL_IndigoPlateauLobbyCooltrainerFText:
 	text "From here on, you"
 	line "face the ELITE"
 	cont "FOUR one by one!"

@@ -1,17 +1,17 @@
-	db DEX_RATTATA ; pokedex id
+	.DB DEX_RATTATA ; pokedex id
 
-	db  30,  56,  35,  72,  25
+	.DB  30,  56,  35,  72,  25
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 255 ; catch rate
-	db 57 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 255 ; catch rate
+	.DB 57 ; base exp
 
-	INCBIN "gfx/pokemon/front/rattata.pic", 0, 1 ; sprite dimensions
-	dw RattataPicFront, RattataPicBack
+	.INCBIN "gfx/pokemon/front/rattata.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW RattataPicFront, RattataPicBack
 
-	db TACKLE, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

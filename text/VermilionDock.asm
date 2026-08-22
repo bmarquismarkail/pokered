@@ -1,3 +1,4 @@
-_VermilionDockUnusedText::
+_VermilionDockUnusedText:
+WLA_GLOBAL_VermilionDockUnusedText:
 	text_start
 	done

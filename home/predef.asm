@@ -1,4 +1,4 @@
-Predef::
+Predef:
 ; Call predefined function a.
 ; To preserve other registers, have the
 ; destination call GetPredefRegisters.
@@ -8,31 +8,31 @@ Predef::
 
 	; A hack for LoadDestinationWarpPosition.
 	; See LoadTilesetHeader (predef $19).
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wPredefParentBank], a
 
 	push af
-	ld a, BANK(GetPredefPointer)
-	ldh [hLoadedROMBank], a
+	ld a, bank(GetPredefPointer)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
 	call GetPredefPointer
 
 	ld a, [wPredefBank]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
-	ld de, .done
+	ld de, Predef.done
 	push de
 	jp hl
-.done
+Predef.done
 
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-GetPredefRegisters::
+GetPredefRegisters:
 ; Restore the contents of register pairs
 ; when GetPredefPointer was called.
 	ld a, [wPredefHL]

@@ -7,7 +7,7 @@ DrawBadges:
 
 ; Tile ids for face/badge graphics.
 	ld de, wBadgeOrFaceTiles
-	ld hl, .FaceBadgeTiles
+	ld hl, DrawBadges.FaceBadgeTiles
 	ld bc, NUM_BADGES
 	call CopyData
 
@@ -23,19 +23,19 @@ DrawBadges:
 	ld a, [wObtainedBadges]
 	ld b, a
 	ld c, NUM_BADGES
-.CheckBadge
+DrawBadges.CheckBadge
 	srl b
-	jr nc, .NextBadge
+	jr nc, DrawBadges.NextBadge
 	ld a, [hl]
 	add 4 ; Badge graphics are after each face
 	ld [hl], a
 	ld a, 1
 	ld [de], a
-.NextBadge
+DrawBadges.NextBadge
 	inc hl
 	inc de
 	dec c
-	jr nz, .CheckBadge
+	jr nz, DrawBadges.CheckBadge
 
 ; Draw two rows of badges.
 	ld hl, wBadgeNumberTile
@@ -45,17 +45,17 @@ DrawBadges:
 
 	hlcoord 2, 11
 	ld de, wTempObtainedBadgesBooleans
-	call .DrawBadgeRow
+	call DrawBadges.DrawBadgeRow
 
 	hlcoord 2, 14
 	ld de, wTempObtainedBadgesBooleans + 4
 	; fallthrough
 
-.DrawBadgeRow
+DrawBadges.DrawBadgeRow
 ; Draw 4 badges.
 
 	ld c, 4
-.DrawBadge
+DrawBadges.DrawBadge
 	push de
 	push hl
 
@@ -69,23 +69,23 @@ DrawBadges:
 	ld a, [de]
 	and a
 	ld a, [wBadgeNameTile]
-	jr nz, .SkipName
-	call .PlaceTiles
-	jr .PlaceBadge
+	jr nz, DrawBadges.SkipName
+	call DrawBadges.PlaceTiles
+	jr DrawBadges.PlaceBadge
 
-.SkipName
+DrawBadges.SkipName
 	inc a
 	inc a
 	inc hl
 
-.PlaceBadge
+DrawBadges.PlaceBadge
 	ld [wBadgeNameTile], a
 	ld de, SCREEN_WIDTH - 1
 	add hl, de
 	ld a, [wBadgeOrFaceTiles]
-	call .PlaceTiles
+	call DrawBadges.PlaceTiles
 	add hl, de
-	call .PlaceTiles
+	call DrawBadges.PlaceTiles
 
 ; Shift badge array back one byte.
 	push bc
@@ -102,18 +102,18 @@ DrawBadges:
 	pop de
 	inc de
 	dec c
-	jr nz, .DrawBadge
+	jr nz, DrawBadges.DrawBadge
 	ret
 
-.PlaceTiles
+DrawBadges.PlaceTiles
 	ld [hli], a
 	inc a
 	ld [hl], a
 	inc a
 	ret
 
-.FaceBadgeTiles
-	db $20, $28, $30, $38, $40, $48, $50, $58
+DrawBadges.FaceBadgeTiles
+	.DB $20, $28, $30, $38, $40, $48, $50, $58
 
 GymLeaderFaceAndBadgeTileGraphics:
-	INCBIN "gfx/trainer_card/badges.2bpp"
+	.INCBIN "gfx/trainer_card/badges.2bpp"

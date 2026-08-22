@@ -1,4 +1,5 @@
-_SaffronGateGuardGeeImThirstyText::
+_SaffronGateGuardGeeImThirstyText:
+WLA_GLOBAL_SaffronGateGuardGeeImThirstyText:
 	text "I'm on guard duty."
 	line "Gee, I'm thirsty,"
 	cont "though!"
@@ -7,7 +8,8 @@ _SaffronGateGuardGeeImThirstyText::
 	line "the road's closed."
 	done
 
-_SaffronGateGuardImParchedText::
+_SaffronGateGuardImParchedText:
+WLA_GLOBAL_SaffronGateGuardImParchedText:
 	text "Whoa, boy!"
 	line "I'm parched!"
 	cont "..."
@@ -16,7 +18,8 @@ _SaffronGateGuardImParchedText::
 	cont "Gee, thanks!@"
 	text_end
 
-_SaffronGateGuardYouCanGoOnThroughText::
+_SaffronGateGuardYouCanGoOnThroughText:
+WLA_GLOBAL_SaffronGateGuardYouCanGoOnThroughText:
 	text_start
 
 	para "..."
@@ -32,7 +35,8 @@ _SaffronGateGuardYouCanGoOnThroughText::
 	cont "the other guards!"
 	done
 
-_SaffronGateGuardThanksForTheDrinkText::
+_SaffronGateGuardThanksForTheDrinkText:
+WLA_GLOBAL_SaffronGateGuardThanksForTheDrinkText:
 	text "Hi, thanks for"
 	line "the cool drinks!"
 	done

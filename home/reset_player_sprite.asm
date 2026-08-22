@@ -1,4 +1,4 @@
-ResetPlayerSpriteData::
+ResetPlayerSpriteData:
 	ld hl, wSpriteStateData1
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld hl, wSpriteStateData2
@@ -14,8 +14,8 @@ ResetPlayerSpriteData::
 	ret
 
 ; overwrites sprite data with zeroes
-ResetPlayerSpriteData_ClearSpriteData::
+ResetPlayerSpriteData_ClearSpriteData:
 	ld bc, SPRITESTATEDATA1_LENGTH
-	ASSERT SPRITESTATEDATA2_LENGTH == SPRITESTATEDATA1_LENGTH
+	.ASSERT ((SPRITESTATEDATA2_LENGTH)-(SPRITESTATEDATA1_LENGTH)) < 1 && ((SPRITESTATEDATA2_LENGTH)-(SPRITESTATEDATA1_LENGTH)) > -1
 	xor a
 	jp FillMemory

@@ -1,17 +1,17 @@
-	db DEX_MUK ; pokedex id
+	.DB DEX_MUK ; pokedex id
 
-	db 105, 105,  75,  50,  65
+	.DB 105, 105,  75,  50,  65
 	;   hp  atk  def  spd  spc
 
-	db POISON, POISON ; type
-	db 75 ; catch rate
-	db 157 ; base exp
+	.DB POISON, POISON ; type
+	.DB 75 ; catch rate
+	.DB 157 ; base exp
 
-	INCBIN "gfx/pokemon/front/muk.pic", 0, 1 ; sprite dimensions
-	dw MukPicFront, MukPicBack
+	.INCBIN "gfx/pokemon/front/muk.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MukPicFront, MukPicBack
 
-	db POUND, DISABLE, POISON_GAS, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB POUND, DISABLE, POISON_GAS, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    HYPER_BEAM,   RAGE,         MEGA_DRAIN,   \
@@ -19,4 +19,4 @@
 	     SELFDESTRUCT, FIRE_BLAST,   REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

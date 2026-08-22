@@ -1,132 +1,132 @@
-HandleMenuInput::
+HandleMenuInput:
 	xor a
 	ld [wPartyMenuAnimMonEnabled], a
 
-HandleMenuInput_::
-	ldh a, [hDownArrowBlinkCount1]
+HandleMenuInput_:
+	ldh a, [lobyte(hDownArrowBlinkCount1)]
 	push af
-	ldh a, [hDownArrowBlinkCount2]
+	ldh a, [lobyte(hDownArrowBlinkCount2)]
 	push af ; save existing values on stack
 	xor a
-	ldh [hDownArrowBlinkCount1], a ; blinking down arrow timing value 1
+	ldh [lobyte(hDownArrowBlinkCount1)], a ; blinking down arrow timing value 1
 	ld a, 6
-	ldh [hDownArrowBlinkCount2], a ; blinking down arrow timing value 2
-.loop1
+	ldh [lobyte(hDownArrowBlinkCount2)], a ; blinking down arrow timing value 2
+HandleMenuInput_.loop1
 	xor a
 	ld [wAnimCounter], a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
-.loop2
+HandleMenuInput_.loop2
 	push hl
 	ld a, [wPartyMenuAnimMonEnabled]
 	and a ; is it a pokemon selection menu?
-	jr z, .getJoypadState
+	jr z, HandleMenuInput_.getJoypadState
 	farcall AnimatePartyMon ; shake mini sprite of selected pokemon
-.getJoypadState
+HandleMenuInput_.getJoypadState
 	pop hl
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	and a ; was a key pressed?
-	jr nz, .keyPressed
+	jr nz, HandleMenuInput_.keyPressed
 	push hl
 	hlcoord 18, 11 ; coordinates of blinking down arrow in some menus
 	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
 	ld a, [wMenuJoypadPollCount]
 	dec a
-	jr z, .giveUpWaiting
-	jr .loop2
-.giveUpWaiting
+	jr z, HandleMenuInput_.giveUpWaiting
+	jr HandleMenuInput_.loop2
+HandleMenuInput_.giveUpWaiting
 ; if a key wasn't pressed within the specified number of checks
 	pop af
-	ldh [hDownArrowBlinkCount2], a
+	ldh [lobyte(hDownArrowBlinkCount2)], a
 	pop af
-	ldh [hDownArrowBlinkCount1], a ; restore previous values
+	ldh [lobyte(hDownArrowBlinkCount1)], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
 	ret
-.keyPressed
+HandleMenuInput_.keyPressed
 	xor a
 	ld [wCheckFor180DegreeTurn], a
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	ld b, a
 	bit B_PAD_UP, a
-	jr z, .checkIfDownPressed
+	jr z, HandleMenuInput_.checkIfDownPressed
 ; Up pressed
 	ld a, [wCurrentMenuItem] ; selected menu item
 	and a ; already at the top of the menu?
-	jr z, .alreadyAtTop
+	jr z, HandleMenuInput_.alreadyAtTop
 ; not at top
 	dec a
 	ld [wCurrentMenuItem], a ; move selected menu item up one space
-	jr .checkOtherKeys
-.alreadyAtTop
+	jr HandleMenuInput_.checkOtherKeys
+HandleMenuInput_.alreadyAtTop
 	ld a, [wMenuWrappingEnabled]
 	and a ; is wrapping around enabled?
-	jr z, .noWrappingAround
+	jr z, HandleMenuInput_.noWrappingAround
 	ld a, [wMaxMenuItem]
 	ld [wCurrentMenuItem], a ; wrap to the bottom of the menu
-	jr .checkOtherKeys
-.checkIfDownPressed
+	jr HandleMenuInput_.checkOtherKeys
+HandleMenuInput_.checkIfDownPressed
 	bit B_PAD_DOWN, a
-	jr z, .checkOtherKeys
+	jr z, HandleMenuInput_.checkOtherKeys
 ; Down pressed
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld c, a
 	ld a, [wMaxMenuItem]
 	cp c
-	jr nc, .notAtBottom
+	jr nc, HandleMenuInput_.notAtBottom
 ; already at bottom
 	ld a, [wMenuWrappingEnabled]
 	and a ; is wrapping around enabled?
-	jr z, .noWrappingAround
+	jr z, HandleMenuInput_.noWrappingAround
 	ld c, $00 ; wrap from bottom to top
-.notAtBottom
+HandleMenuInput_.notAtBottom
 	ld a, c
 	ld [wCurrentMenuItem], a
-.checkOtherKeys
+HandleMenuInput_.checkOtherKeys
 	ld a, [wMenuWatchedKeys]
 	and b ; does the menu care about any of the pressed keys?
-	jp z, .loop1
-.checkIfAButtonOrBButtonPressed
-	ldh a, [hJoy5]
+	jp z, HandleMenuInput_.loop1
+HandleMenuInput_.checkIfAButtonOrBButtonPressed
+	ldh a, [lobyte(hJoy5)]
 	and PAD_A | PAD_B
-	jr z, .skipPlayingSound
+	jr z, HandleMenuInput_.skipPlayingSound
 ; A or B pressed
 	push hl
 	ld hl, wMiscFlags
 	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
 	pop hl
-	jr nz, .skipPlayingSound
+	jr nz, HandleMenuInput_.skipPlayingSound
 	ld a, SFX_PRESS_AB
 	call PlaySound
-.skipPlayingSound
+HandleMenuInput_.skipPlayingSound
 	pop af
-	ldh [hDownArrowBlinkCount2], a
+	ldh [lobyte(hDownArrowBlinkCount2)], a
 	pop af
-	ldh [hDownArrowBlinkCount1], a ; restore previous values
+	ldh [lobyte(hDownArrowBlinkCount1)], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	ret
-.noWrappingAround
+HandleMenuInput_.noWrappingAround
 	ld a, [wMenuWatchMovingOutOfBounds]
 	and a ; should we return if the user tried to go past the top or bottom?
-	jr z, .checkOtherKeys
-	jr .checkIfAButtonOrBButtonPressed
+	jr z, HandleMenuInput_.checkOtherKeys
+	jr HandleMenuInput_.checkIfAButtonOrBButtonPressed
 
-PlaceMenuCursor::
+PlaceMenuCursor:
 	ld a, [wTopMenuItemY]
 	and a ; is the y coordinate 0?
-	jr z, .adjustForXCoord
+	jr z, PlaceMenuCursor.adjustForXCoord
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
-.topMenuItemLoop
+PlaceMenuCursor.topMenuItemLoop
 	add hl, bc
 	dec a
-	jr nz, .topMenuItemLoop
-.adjustForXCoord
+	jr nz, PlaceMenuCursor.topMenuItemLoop
+PlaceMenuCursor.adjustForXCoord
 	ld a, [wTopMenuItemX]
 	ld b, 0
 	ld c, a
@@ -134,54 +134,54 @@ PlaceMenuCursor::
 	push hl
 	ld a, [wLastMenuItem]
 	and a ; was the previous menu id 0?
-	jr z, .checkForArrow1
+	jr z, PlaceMenuCursor.checkForArrow1
 	push af
-	ldh a, [hUILayoutFlags]
+	ldh a, [lobyte(hUILayoutFlags)]
 	bit BIT_DOUBLE_SPACED_MENU, a
-	jr z, .doubleSpaced1
+	jr z, PlaceMenuCursor.doubleSpaced1
 	ld bc, SCREEN_WIDTH
-	jr .getOldMenuItemScreenPosition
-.doubleSpaced1
+	jr PlaceMenuCursor.getOldMenuItemScreenPosition
+PlaceMenuCursor.doubleSpaced1
 	ld bc, SCREEN_WIDTH * 2
-.getOldMenuItemScreenPosition
+PlaceMenuCursor.getOldMenuItemScreenPosition
 	pop af
-.oldMenuItemLoop
+PlaceMenuCursor.oldMenuItemLoop
 	add hl, bc
 	dec a
-	jr nz, .oldMenuItemLoop
-.checkForArrow1
+	jr nz, PlaceMenuCursor.oldMenuItemLoop
+PlaceMenuCursor.checkForArrow1
 	ld a, [hl]
-	cp '▶' ; was an arrow next to the previously selected menu item?
-	jr nz, .skipClearingArrow
+	cp $ed ; was an arrow next to the previously selected menu item?
+	jr nz, PlaceMenuCursor.skipClearingArrow
 ; clear arrow
 	ld a, [wTileBehindCursor]
 	ld [hl], a
-.skipClearingArrow
+PlaceMenuCursor.skipClearingArrow
 	pop hl
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .checkForArrow2
+	jr z, PlaceMenuCursor.checkForArrow2
 	push af
-	ldh a, [hUILayoutFlags]
+	ldh a, [lobyte(hUILayoutFlags)]
 	bit BIT_DOUBLE_SPACED_MENU, a
-	jr z, .doubleSpaced2
+	jr z, PlaceMenuCursor.doubleSpaced2
 	ld bc, SCREEN_WIDTH
-	jr .getCurrentMenuItemScreenPosition
-.doubleSpaced2
+	jr PlaceMenuCursor.getCurrentMenuItemScreenPosition
+PlaceMenuCursor.doubleSpaced2
 	ld bc, SCREEN_WIDTH * 2
-.getCurrentMenuItemScreenPosition
+PlaceMenuCursor.getCurrentMenuItemScreenPosition
 	pop af
-.currentMenuItemLoop
+PlaceMenuCursor.currentMenuItemLoop
 	add hl, bc
 	dec a
-	jr nz, .currentMenuItemLoop
-.checkForArrow2
+	jr nz, PlaceMenuCursor.currentMenuItemLoop
+PlaceMenuCursor.checkForArrow2
 	ld a, [hl]
-	cp '▶' ; has the right arrow already been placed?
-	jr z, .skipSavingTile ; if so, don't lose the saved tile
+	cp $ed ; has the right arrow already been placed?
+	jr z, PlaceMenuCursor.skipSavingTile ; if so, don't lose the saved tile
 	ld [wTileBehindCursor], a ; save tile before overwriting with right arrow
-.skipSavingTile
-	ld a, '▶' ; place right arrow
+PlaceMenuCursor.skipSavingTile
+	ld a, $ed ; place right arrow
 	ld [hl], a
 	ld a, l
 	ld [wMenuCursorLocation], a
@@ -195,23 +195,23 @@ PlaceMenuCursor::
 ; manipulated. In the case of submenus, this is used to show the location of
 ; the menu cursor in the parent menu. In the case of swapping items in list,
 ; this is used to mark the item that was first chosen to be swapped.
-PlaceUnfilledArrowMenuCursor::
+PlaceUnfilledArrowMenuCursor:
 	ld b, a
 	ld a, [wMenuCursorLocation]
 	ld l, a
 	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld [hl], '▷'
+	ld [hl], $ec
 	ld a, b
 	ret
 
 ; Replaces the menu cursor with a blank space.
-EraseMenuCursor::
+EraseMenuCursor:
 	ld a, [wMenuCursorLocation]
 	ld l, a
 	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld [hl], ' '
+	ld [hl], $7f
 	ret
 
 ; This toggles a blinking down arrow at hl on and off after a delay has passed.
@@ -222,44 +222,44 @@ EraseMenuCursor::
 ; initialized with a down arrow, this function does nothing.
 ; That allows this to be called without worrying about if a down arrow should
 ; be blinking.
-HandleDownArrowBlinkTiming::
+HandleDownArrowBlinkTiming:
 	ld a, [hl]
 	ld b, a
-	ld a, '▼'
+	ld a, $ee
 	cp b
-	jr nz, .downArrowOff
-.downArrowOn
-	ldh a, [hDownArrowBlinkCount1]
+	jr nz, HandleDownArrowBlinkTiming.downArrowOff
+HandleDownArrowBlinkTiming.downArrowOn
+	ldh a, [lobyte(hDownArrowBlinkCount1)]
 	dec a
-	ldh [hDownArrowBlinkCount1], a
+	ldh [lobyte(hDownArrowBlinkCount1)], a
 	ret nz
-	ldh a, [hDownArrowBlinkCount2]
+	ldh a, [lobyte(hDownArrowBlinkCount2)]
 	dec a
-	ldh [hDownArrowBlinkCount2], a
+	ldh [lobyte(hDownArrowBlinkCount2)], a
 	ret nz
-	ld a, ' '
+	ld a, $7f
 	ld [hl], a
 	ld a, $ff
-	ldh [hDownArrowBlinkCount1], a
+	ldh [lobyte(hDownArrowBlinkCount1)], a
 	ld a, $06
-	ldh [hDownArrowBlinkCount2], a
+	ldh [lobyte(hDownArrowBlinkCount2)], a
 	ret
-.downArrowOff
-	ldh a, [hDownArrowBlinkCount1]
+HandleDownArrowBlinkTiming.downArrowOff
+	ldh a, [lobyte(hDownArrowBlinkCount1)]
 	and a
 	ret z
 	dec a
-	ldh [hDownArrowBlinkCount1], a
+	ldh [lobyte(hDownArrowBlinkCount1)], a
 	ret nz
 	dec a
-	ldh [hDownArrowBlinkCount1], a
-	ldh a, [hDownArrowBlinkCount2]
+	ldh [lobyte(hDownArrowBlinkCount1)], a
+	ldh a, [lobyte(hDownArrowBlinkCount2)]
 	dec a
-	ldh [hDownArrowBlinkCount2], a
+	ldh [lobyte(hDownArrowBlinkCount2)], a
 	ret nz
 	ld a, $06
-	ldh [hDownArrowBlinkCount2], a
-	ld a, '▼'
+	ldh [lobyte(hDownArrowBlinkCount2)], a
+	ld a, $ee
 	ld [hl], a
 	ret
 
@@ -267,20 +267,20 @@ HandleDownArrowBlinkTiming::
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
 ; for a button press after displaying text (unless [wEnteringCableClub] is set).
 
-EnableAutoTextBoxDrawing::
+EnableAutoTextBoxDrawing:
 	xor a
 	jr AutoTextBoxDrawingCommon
 
-DisableAutoTextBoxDrawing::
+DisableAutoTextBoxDrawing:
 	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
 
-AutoTextBoxDrawingCommon::
+AutoTextBoxDrawingCommon:
 	ld [wAutoTextBoxDrawingControl], a
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a ; make DisplayTextID wait for button press
 	ret
 
-PrintText::
+PrintText:
 ; Print text hl at (1, 14).
 	push hl
 	ld a, MESSAGE_BOX
@@ -289,6 +289,6 @@ PrintText::
 	call UpdateSprites
 	call Delay3
 	pop hl
-PrintText_NoCreatingTextBox::
+PrintText_NoCreatingTextBox:
 	bccoord 1, 14
 	jp TextCommandProcessor

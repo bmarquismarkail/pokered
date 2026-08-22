@@ -7,9 +7,9 @@
 	const_export SEAFOAMISLANDSB3F_BOULDER6
 
 SeafoamIslandsB3F_Object:
-	db $7d ; border block
+	.DB $7d ; border block
 
-	def_warp_events
+	.DB 7
 	warp_event  5, 12, SEAFOAM_ISLANDS_B2F, 2
 	warp_event  8,  6, SEAFOAM_ISLANDS_B4F, 3
 	warp_event 25,  4, SEAFOAM_ISLANDS_B4F, 4
@@ -18,9 +18,8 @@ SeafoamIslandsB3F_Object:
 	warp_event 20, 17, SEAFOAM_ISLANDS_B4F, 1
 	warp_event 21, 17, SEAFOAM_ISLANDS_B4F, 2
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 6
 	object_event  5, 14, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_SEAFOAMISLANDSB3F_BOULDER1
 	object_event  3, 15, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_SEAFOAMISLANDSB3F_BOULDER2
 	object_event  8, 14, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_SEAFOAMISLANDSB3F_BOULDER3
@@ -28,4 +27,16 @@ SeafoamIslandsB3F_Object:
 	object_event 18,  6, SPRITE_BOULDER, STAY, NONE, TEXT_SEAFOAMISLANDSB3F_BOULDER5
 	object_event 19,  6, SPRITE_BOULDER, STAY, NONE, TEXT_SEAFOAMISLANDSB3F_BOULDER6
 
-	def_warps_to SEAFOAM_ISLANDS_B3F
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 5, 12
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 8, 6
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 25, 4
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 25, 3
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 25, 14
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 20, 17
+
+	event_displacement SEAFOAM_ISLANDS_B3F_WIDTH, 21, 17

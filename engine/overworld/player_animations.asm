@@ -1,4 +1,4 @@
-EnterMapAnim::
+EnterMapAnim:
 	call InitFacingDirectionList
 	ld a, $ec
 	ld [wSpritePlayerStateData1YPixels], a
@@ -8,21 +8,21 @@ EnterMapAnim::
 	ld hl, wStatusFlags7
 	bit BIT_USED_FLY, [hl]
 	res BIT_USED_FLY, [hl]
-	jr nz, .flyAnimation
+	jr nz, EnterMapAnim.flyAnimation
 	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
 	ld hl, wStatusFlags6
 	bit BIT_DUNGEON_WARP, [hl]
 	res BIT_DUNGEON_WARP, [hl]
 	pop hl
-	jr nz, .dungeonWarpAnimation
+	jr nz, EnterMapAnim.dungeonWarpAnimation
 	call PlayerSpinWhileMovingDown
 	ld a, SFX_TELEPORT_ENTER_2
 	call PlaySound
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
-	jr nz, .done
+	jr nz, EnterMapAnim.done
 ; if the player is not standing on a warp pad or hole
 	ld hl, wPlayerSpinInPlaceAnimFrameDelay
 	xor a
@@ -34,20 +34,20 @@ EnterMapAnim::
 	ld [hl], $ff ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
-.restoreDefaultMusic
+EnterMapAnim.restoreDefaultMusic
 	call PlayDefaultMusic
-.done
+EnterMapAnim.done
 	jp RestoreFacingDirectionAndYScreenPos
-.dungeonWarpAnimation
+EnterMapAnim.dungeonWarpAnimation
 	ld c, 50
 	call DelayFrames
 	call PlayerSpinWhileMovingDown
-	jr .done
-.flyAnimation
+	jr EnterMapAnim.done
+EnterMapAnim.flyAnimation
 	pop hl
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), $0c
+	lb "bc", bank(BirdSprite), $0c
 	call CopyVideoData
 	call LoadBirdSpriteGraphics
 	ld a, SFX_FLY
@@ -61,24 +61,24 @@ EnterMapAnim::
 	ld de, FlyAnimationEnterScreenCoords
 	call DoFlyAnimation
 	call LoadPlayerSpriteGraphics
-	jr .restoreDefaultMusic
+	jr EnterMapAnim.restoreDefaultMusic
 
 FlyAnimationEnterScreenCoords:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the overworld
 ; Fly animation when the player is entering a map.
-	db $05, $98
-	db $0F, $90
-	db $18, $88
-	db $20, $80
-	db $27, $78
-	db $2D, $70
-	db $32, $68
-	db $36, $60
-	db $39, $58
-	db $3B, $50
-	db $3C, $48
-	db $3C, $40
+	.DB $05, $98
+	.DB $0F, $90
+	.DB $18, $88
+	.DB $20, $80
+	.DB $27, $78
+	.DB $2D, $70
+	.DB $32, $68
+	.DB $36, $60
+	.DB $39, $58
+	.DB $3B, $50
+	.DB $3C, $48
+	.DB $3C, $40
 
 PlayerSpinWhileMovingDown:
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
@@ -90,15 +90,17 @@ PlayerSpinWhileMovingDown:
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	jp PlayerSpinWhileMovingUpOrDown
 
-_LeaveMapAnim::
+_LeaveMapAnim:
+WLA_GLOBAL_LeaveMapAnim:
 	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
-	jr z, .playerNotStandingOnWarpPadOrHole
+	jr z, WLA_GLOBAL_LeaveMapAnim__playerNotStandingOnWarpPadOrHole
 	dec a
 	jp nz, LeaveMapThroughHoleAnim
-.spinWhileMovingUp
+_LeaveMapAnim.spinWhileMovingUp:
+WLA_GLOBAL_LeaveMapAnim__spinWhileMovingUp:
 	ld a, SFX_TELEPORT_EXIT_1
 	call PlaySound
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
@@ -112,19 +114,21 @@ _LeaveMapAnim::
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	dec a
-	jr z, .playerStandingOnWarpPad
+	jr z, WLA_GLOBAL_LeaveMapAnim__playerStandingOnWarpPad
 ; if not standing on a warp pad, there is an extra delay
 	ld c, 10
 	call DelayFrames
-.playerStandingOnWarpPad
+_LeaveMapAnim.playerStandingOnWarpPad:
+WLA_GLOBAL_LeaveMapAnim__playerStandingOnWarpPad:
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
-.playerNotStandingOnWarpPadOrHole
+_LeaveMapAnim.playerNotStandingOnWarpPadOrHole:
+WLA_GLOBAL_LeaveMapAnim__playerNotStandingOnWarpPadOrHole:
 	ld a, $4
 	call StopMusic
 	ld a, [wStatusFlags6]
 	bit BIT_ESCAPE_WARP, a
-	jr z, .flyAnimation
+	jr z, WLA_GLOBAL_LeaveMapAnim__flyAnimation
 ; if going to the last used pokemon center
 	ld hl, wPlayerSpinInPlaceAnimFrameDelay
 	ld a, 16
@@ -136,8 +140,9 @@ _LeaveMapAnim::
 	ld [hl], SFX_TELEPORT_EXIT_2 ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
-	jr .spinWhileMovingUp
-.flyAnimation
+	jr WLA_GLOBAL_LeaveMapAnim__spinWhileMovingUp
+_LeaveMapAnim.flyAnimation:
+WLA_GLOBAL_LeaveMapAnim__flyAnimation:
 	call LoadBirdSpriteGraphics
 	ld hl, wFlyAnimUsingCoordList
 	ld a, $ff ; is not using coord list (flap in place)
@@ -171,35 +176,35 @@ FlyAnimationScreenCoords1:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the first part
 ; of the Fly overworld animation.
-	db $3C, $48
-	db $3C, $50
-	db $3B, $58
-	db $3A, $60
-	db $39, $68
-	db $37, $70
-	db $37, $78
-	db $33, $80
-	db $30, $88
-	db $2D, $90
-	db $2A, $98
-	db $27, $A0
+	.DB $3C, $48
+	.DB $3C, $50
+	.DB $3B, $58
+	.DB $3A, $60
+	.DB $39, $68
+	.DB $37, $70
+	.DB $37, $78
+	.DB $33, $80
+	.DB $30, $88
+	.DB $2D, $90
+	.DB $2A, $98
+	.DB $27, $A0
 
 FlyAnimationScreenCoords2:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the second part
 ; of the Fly overworld animation.
-	db $1A, $90
-	db $19, $80
-	db $17, $70
-	db $15, $60
-	db $12, $50
-	db $0F, $40
-	db $0C, $30
-	db $09, $20
-	db $05, $10
-	db $00, $00
+	.DB $1A, $90
+	.DB $19, $80
+	.DB $17, $70
+	.DB $15, $60
+	.DB $12, $50
+	.DB $0F, $40
+	.DB $0C, $30
+	.DB $09, $20
+	.DB $05, $10
+	.DB $00, $00
 
-	db $F0, $00
+	.DB $F0, $00
 
 LeaveMapThroughHoleAnim:
 	ld a, $ff
@@ -231,7 +236,7 @@ DoFlyAnimation:
 	call Delay3
 	ld a, [wFlyAnimUsingCoordList]
 	cp $ff
-	jr z, .skipCopyingCoords ; if the bird is flapping its wings in place
+	jr z, DoFlyAnimation.skipCopyingCoords ; if the bird is flapping its wings in place
 	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [de]
 	inc de
@@ -240,7 +245,7 @@ DoFlyAnimation:
 	ld a, [de]
 	inc de
 	ld [hl], a ; x
-.skipCopyingCoords
+DoFlyAnimation.skipCopyingCoords
 	ld a, [wFlyAnimCounter]
 	dec a
 	ld [wFlyAnimCounter], a
@@ -250,11 +255,11 @@ DoFlyAnimation:
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), 12
+	lb "bc", bank(BirdSprite), 12
 	call CopyVideoData
-	ld de, BirdSprite tile 12 ; moving animation sprite
+	ld de, BirdSprite + TILE_SIZE * 12 ; moving animation sprite
 	ld hl, vNPCSprites2
-	lb bc, BANK(BirdSprite), 12
+	lb "bc", bank(BirdSprite), 12
 	jp CopyVideoData
 
 InitFacingDirectionList:
@@ -269,17 +274,17 @@ InitFacingDirectionList:
 	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld hl, wFacingDirectionList
 ; find the place in the list that matches the current facing direction
-.loop
+InitFacingDirectionList.loop
 	cp [hl]
 	inc hl
-	jr nz, .loop
+	jr nz, InitFacingDirectionList.loop
 	dec hl
 	ret
 
 PlayerSpinningFacingOrder:
 ; The order of the direction the player's sprite is facing when teleporting
 ; away. Creates a spinning effect.
-	db SPRITE_FACING_DOWN, SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT
+	.DB SPRITE_FACING_DOWN, SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT
 
 SpinPlayerSprite:
 ; copy the current value from the list into the sprite data and rotate the list
@@ -300,12 +305,12 @@ PlayerSpinInPlace:
 	ld a, [wPlayerSpinInPlaceAnimFrameDelay]
 	ld c, a
 	and $3
-	jr nz, .skipPlayingSound
+	jr nz, PlayerSpinInPlace.skipPlayingSound
 ; when the last delay was a multiple of 4, play a sound if there is one
 	ld a, [wPlayerSpinInPlaceAnimSoundID]
 	cp $ff
 	call nz, PlaySound
-.skipPlayingSound
+PlayerSpinInPlace.skipPlayingSound
 	ld a, [wPlayerSpinInPlaceAnimFrameDelayDelta]
 	add c
 	ld [wPlayerSpinInPlaceAnimFrameDelay], a
@@ -347,33 +352,33 @@ GetPlayerTeleportAnimFrameDelay:
 	inc a
 	ret
 
-IsPlayerStandingOnWarpPadOrHole::
+IsPlayerStandingOnWarpPadOrHole:
 	ld b, 0
 	ld hl, WarpPadAndHoleData
 	ld a, [wCurMapTileset]
 	ld c, a
-.loop
+IsPlayerStandingOnWarpPadOrHole.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .done
+	jr z, IsPlayerStandingOnWarpPadOrHole.done
 	cp c
-	jr nz, .nextEntry
+	jr nz, IsPlayerStandingOnWarpPadOrHole.nextEntry
 	lda_coord 8, 9
 	cp [hl]
-	jr z, .foundMatch
-.nextEntry
+	jr z, IsPlayerStandingOnWarpPadOrHole.foundMatch
+IsPlayerStandingOnWarpPadOrHole.nextEntry
 	inc hl
 	inc hl
-	jr .loop
-.foundMatch
+	jr IsPlayerStandingOnWarpPadOrHole.loop
+IsPlayerStandingOnWarpPadOrHole.foundMatch
 	inc hl
 	ld b, [hl]
-.done
+IsPlayerStandingOnWarpPadOrHole.done
 	ld a, b
 	ld [wStandingOnWarpPadOrHole], a
 	ret
 
-INCLUDE "data/tilesets/warp_pad_hole_tile_ids.asm"
+.INCLUDE "data/tilesets/warp_pad_hole_tile_ids.asm"
 
 FishingAnim:
 	ld c, 10
@@ -381,8 +386,8 @@ FishingAnim:
 	ld hl, wMovementFlags
 	set BIT_LEDGE_OR_FISHING, [hl]
 	ld de, RedSprite
-	ld hl, vNPCSprites tile $00
-	lb bc, BANK(RedSprite), 12
+	ld hl, vNPCSprites + TILE_SIZE * $00
+	lb "bc", bank(RedSprite), 12
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles
@@ -400,33 +405,33 @@ FishingAnim:
 	ld a, [wRodResponse]
 	and a
 	ld hl, NoNibbleText
-	jr z, .done
+	jr z, FishingAnim.done
 	cp $2
 	ld hl, NothingHereText
-	jr z, .done
+	jr z, FishingAnim.done
 
 ; there was a bite
 
 ; shake the player's sprite vertically
 	ld b, 10
-.loop
+FishingAnim.loop
 	ld hl, wSpritePlayerStateData1YPixels
-	call .ShakePlayerSprite
+	call FishingAnim.ShakePlayerSprite
 	ld hl, wShadowOAMSprite39
-	call .ShakePlayerSprite
+	call FishingAnim.ShakePlayerSprite
 	call Delay3
 	dec b
-	jr nz, .loop
+	jr nz, FishingAnim.loop
 
 ; If the player is facing up, hide the fishing rod so it doesn't overlap with
 ; the exclamation bubble that will be shown next.
 	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
-	jr nz, .skipHidingFishingRod
+	jr nz, FishingAnim.skipHidingFishingRod
 	ld a, SCREEN_HEIGHT_PX + OAM_Y_OFS
 	ld [wShadowOAMSprite39YCoord], a
 
-.skipHidingFishingRod
+FishingAnim.skipHidingFishingRod
 	ld hl, wEmotionBubbleSpriteIndex
 	xor a
 	ld [hli], a ; player's sprite
@@ -436,36 +441,36 @@ FishingAnim:
 ; If the player is facing up, unhide the fishing rod.
 	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
-	jr nz, .skipUnhidingFishingRod
+	jr nz, FishingAnim.skipUnhidingFishingRod
 	ld a, $44
 	ld [wShadowOAMSprite39YCoord], a
 
-.skipUnhidingFishingRod
+FishingAnim.skipUnhidingFishingRod
 	ld hl, ItsABiteText
 
-.done
+FishingAnim.done
 	call PrintText
 	ld hl, wMovementFlags
 	res BIT_LEDGE_OR_FISHING, [hl]
 	call LoadFontTilePatterns
 	ret
 
-.ShakePlayerSprite
+FishingAnim.ShakePlayerSprite
 	ld a, [hl]
 	xor $1
 	ld [hl], a
 	ret
 
 NoNibbleText:
-	text_far _NoNibbleText
+	text_far WLA_GLOBAL_NoNibbleText
 	text_end
 
 NothingHereText:
-	text_far _NothingHereText
+	text_far WLA_GLOBAL_NothingHereText
 	text_end
 
 ItsABiteText:
-	text_far _ItsABiteText
+	text_far WLA_GLOBAL_ItsABiteText
 	text_end
 
 FishingRodOAM:
@@ -475,12 +480,12 @@ FishingRodOAM:
 	dbsprite  8, 10,  0,  0, $fe, 0         ; left
 	dbsprite 11, 10,  0,  0, $fe, OAM_XFLIP ; right
 
-MACRO fishing_gfx
-	dw \1
-	db \2
-	db BANK(\1)
-	dw vNPCSprites tile \3
-ENDM
+.MACRO fishing_gfx
+	.DW \1
+	.DB \2
+	.DB bank(\1)
+	.DW vNPCSprites + TILE_SIZE * \3
+.ENDM
 
 RedFishingTiles:
 	fishing_gfx RedFishingTilesFront, 2, $02
@@ -488,12 +493,14 @@ RedFishingTiles:
 	fishing_gfx RedFishingTilesSide,  2, $0a
 	fishing_gfx RedFishingRodTiles,   3, $fd
 
-_HandleMidJump::
+HandleMidJumpFar:
+_HandleMidJump:
+WLA_GLOBAL_HandleMidJump:
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a
 	cp $10
-	jr nc, .finishedJump
+	jr nc, WLA_GLOBAL_HandleMidJump__finishedJump
 	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld b, 0
 	ld hl, PlayerJumpingYScreenCoords
@@ -501,16 +508,17 @@ _HandleMidJump::
 	ld a, [hl]
 	ld [wSpritePlayerStateData1YPixels], a
 	ret
-.finishedJump
+_HandleMidJump.finishedJump:
+WLA_GLOBAL_HandleMidJump__finishedJump:
 	ld a, [wWalkCounter]
 	cp 0
 	ret nz
 	call UpdateSprites
 	call Delay3
 	xor a
-	ldh [hJoyHeld], a
-	ldh [hJoyPressed], a
-	ldh [hJoyReleased], a
+	ldh [lobyte(hJoyHeld)], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyReleased)], a
 	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld hl, wMovementFlags
 	res BIT_LEDGE_OR_FISHING, [hl]
@@ -522,4 +530,4 @@ _HandleMidJump::
 
 PlayerJumpingYScreenCoords:
 ; Sequence of y screen coordinates for player's sprite when jumping over a ledge.
-	db $38, $36, $34, $32, $31, $30, $30, $30, $31, $32, $33, $34, $36, $38, $3C, $3C
+	.DB $38, $36, $34, $32, $31, $30, $30, $30, $31, $32, $33, $34, $36, $38, $3C, $3C

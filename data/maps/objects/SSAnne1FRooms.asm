@@ -12,9 +12,9 @@
 	const_export SSANNE1FROOMS_GENTLEMAN3
 
 SSAnne1FRooms_Object:
-	db $c ; border block
+	.DB $c ; border block
 
-	def_warp_events
+	.DB 6
 	warp_event  0,  0, SS_ANNE_1F, 3
 	warp_event 10,  0, SS_ANNE_1F, 4
 	warp_event 20,  0, SS_ANNE_1F, 5
@@ -22,9 +22,8 @@ SSAnne1FRooms_Object:
 	warp_event 10, 10, SS_ANNE_1F, 7
 	warp_event 20, 10, SS_ANNE_1F, 8
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 11
 	object_event  2,  3, SPRITE_GENTLEMAN, STAY, LEFT, TEXT_SSANNE1FROOMS_GENTLEMAN1, OPP_GENTLEMAN, 1
 	object_event 11,  4, SPRITE_GENTLEMAN, STAY, UP, TEXT_SSANNE1FROOMS_GENTLEMAN2, OPP_GENTLEMAN, 2
 	object_event 11, 14, SPRITE_YOUNGSTER, STAY, UP, TEXT_SSANNE1FROOMS_YOUNGSTER, OPP_YOUNGSTER, 8
@@ -37,4 +36,14 @@ SSAnne1FRooms_Object:
 	object_event 12, 15, SPRITE_POKE_BALL, STAY, NONE, TEXT_SSANNE1FROOMS_TM_BODY_SLAM, TM_BODY_SLAM
 	object_event 21, 13, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, TEXT_SSANNE1FROOMS_GENTLEMAN3
 
-	def_warps_to SS_ANNE_1F_ROOMS
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 0, 0
+
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 10, 0
+
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 20, 0
+
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 0, 10
+
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 10, 10
+
+	event_displacement SS_ANNE_1F_ROOMS_WIDTH, 20, 10

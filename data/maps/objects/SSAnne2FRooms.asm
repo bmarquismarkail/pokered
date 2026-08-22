@@ -14,9 +14,9 @@
 	const_export SSANNE2FROOMS_BEAUTY
 
 SSAnne2FRooms_Object:
-	db $c ; border block
+	.DB $c ; border block
 
-	def_warp_events
+	.DB 12
 	warp_event  2,  5, SS_ANNE_2F, 1
 	warp_event  3,  5, SS_ANNE_2F, 1
 	warp_event 12,  5, SS_ANNE_2F, 2
@@ -30,9 +30,8 @@ SSAnne2FRooms_Object:
 	warp_event 22, 15, SS_ANNE_2F, 6
 	warp_event 23, 15, SS_ANNE_2F, 6
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 13
 	object_event 10,  2, SPRITE_GENTLEMAN, STAY, RIGHT, TEXT_SSANNE2FROOMS_GENTLEMAN1, OPP_GENTLEMAN, 3
 	object_event 13,  4, SPRITE_FISHER, STAY, LEFT, TEXT_SSANNE2FROOMS_FISHER, OPP_FISHER, 1
 	object_event  0, 14, SPRITE_GENTLEMAN, STAY, RIGHT, TEXT_SSANNE2FROOMS_GENTLEMAN2, OPP_GENTLEMAN, 5
@@ -47,4 +46,26 @@ SSAnne2FRooms_Object:
 	object_event 22, 12, SPRITE_BRUNETTE_GIRL, STAY, LEFT, TEXT_SSANNE2FROOMS_BRUNETTE_GIRL
 	object_event 20, 12, SPRITE_BEAUTY, STAY, RIGHT, TEXT_SSANNE2FROOMS_BEAUTY
 
-	def_warps_to SS_ANNE_2F_ROOMS
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 2, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 3, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 12, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 13, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 22, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 23, 5
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 2, 15
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 3, 15
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 12, 15
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 13, 15
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 22, 15
+
+	event_displacement SS_ANNE_2F_ROOMS_WIDTH, 23, 15

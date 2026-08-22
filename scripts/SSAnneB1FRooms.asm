@@ -41,7 +41,7 @@ SSAnne10TrainerHeader4:
 	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_4, 2, SSAnneB1FRoomsSailor5BattleText, SSAnneB1FRoomsSailor5EndBattleText, SSAnneB1FRoomsSailor5AfterBattleText
 SSAnne10TrainerHeader5:
 	trainer EVENT_BEAT_SS_ANNE_10_TRAINER_5, 3, SSAnneB1FRoomsFisherBattleText, SSAnneB1FRoomsFisherEndBattleText, SSAnneB1FRoomsFisherAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SSAnneB1FRoomsSailor1Text:
 	text_asm
@@ -80,84 +80,84 @@ SSAnneB1FRoomsFisherText:
 	jp TextScriptEnd
 
 SSAnneB1FRoomsMachokeText:
-	text_far _SSAnneB1FRoomsMachokeText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsMachokeText
 	text_asm
 	ld a, MACHOKE
 	call PlayCry
 	jp TextScriptEnd
 
 SSAnneB1FRoomsSailor1BattleText:
-	text_far _SSAnneB1FRoomsSailor1BattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor1BattleText
 	text_end
 
 SSAnneB1FRoomsSailor1EndBattleText:
-	text_far _SSAnneB1FRoomsSailor1EndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor1EndBattleText
 	text_end
 
 SSAnneB1FRoomsSailor1AfterBattleText:
-	text_far _SSAnneB1FRoomsSailor1AfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor1AfterBattleText
 	text_end
 
 SSAnneB1FRoomsSailor2BattleText:
-	text_far _SSAnneB1FRoomsSailor2BattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor2BattleText
 	text_end
 
 SSAnneB1FRoomsSailor2EndBattleText:
-	text_far _SSAnneB1FRoomsSailor2EndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor2EndBattleText
 	text_end
 
 SSAnneB1FRoomsSailor2AfterBattleText:
-	text_far _SSAnneB1FRoomsSailor2AfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor2AfterBattleText
 	text_end
 
 SSAnneB1FRoomsSailor3BattleText:
-	text_far _SSAnneB1FRoomsSailor3BattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor3BattleText
 	text_end
 
 SSAnneB1FRoomsSailor3EndBattleText:
-	text_far _SSAnneB1FRoomsSailor3EndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor3EndBattleText
 	text_end
 
 SSAnneB1FRoomsSailor3AfterBattleText:
-	text_far _SSAnneB1FRoomsSailor3AfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor3AfterBattleText
 	text_end
 
 SSAnneB1FRoomsSailor4BattleText:
-	text_far _SSAnneB1FRoomsSailor4BattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor4BattleText
 	text_end
 
 SSAnneB1FRoomsSailor4EndBattleText:
-	text_far _SSAnneB1FRoomsSailor4EndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor4EndBattleText
 	text_end
 
 SSAnneB1FRoomsSailor4AfterBattleText:
-	text_far _SSAnneB1FRoomsSailor4AfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor4AfterBattleText
 	text_end
 
 SSAnneB1FRoomsSailor5BattleText:
-	text_far _SSAnneB1FRoomsSailor5BattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor5BattleText
 	text_end
 
 SSAnneB1FRoomsSailor5EndBattleText:
-	text_far _SSAnneB1FRoomsSailor5EndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor5EndBattleText
 	text_end
 
 SSAnneB1FRoomsSailor5AfterBattleText:
-	text_far _SSAnneB1FRoomsSailor5AfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSailor5AfterBattleText
 	text_end
 
 SSAnneB1FRoomsFisherBattleText:
-	text_far _SSAnneB1FRoomsFisherBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsFisherBattleText
 	text_end
 
 SSAnneB1FRoomsFisherEndBattleText:
-	text_far _SSAnneB1FRoomsFisherEndBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsFisherEndBattleText
 	text_end
 
 SSAnneB1FRoomsFisherAfterBattleText:
-	text_far _SSAnneB1FRoomsFisherAfterBattleText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsFisherAfterBattleText
 	text_end
 
 SSAnneB1FRoomsSuperNerdText:
-	text_far _SSAnneB1FRoomsSuperNerdText
+	text_far WLA_GLOBAL_SSAnneB1FRoomsSuperNerdText
 	text_end

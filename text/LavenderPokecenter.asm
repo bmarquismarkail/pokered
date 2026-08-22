@@ -1,10 +1,12 @@
-_LavenderPokecenterGentlemanText::
+_LavenderPokecenterGentlemanText:
+WLA_GLOBAL_LavenderPokecenterGentlemanText:
 	text "TEAM ROCKET will"
 	line "do anything for"
 	cont "the sake of gold!"
 	done
 
-_LavenderPokecenterLittleGirlText::
+_LavenderPokecenterLittleGirlText:
+WLA_GLOBAL_LavenderPokecenterLittleGirlText:
 	text "I saw CUBONE's"
 	line "mother die trying"
 	cont "to escape from"

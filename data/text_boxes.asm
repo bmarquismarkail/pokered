@@ -3,24 +3,24 @@ TextBoxFunctionTable:
 	dbw MONEY_BOX,           DisplayMoneyBox
 	dbw BUY_SELL_QUIT_MENU,  DoBuySellQuitMenu
 	dbw FIELD_MOVE_MON_MENU, DisplayFieldMoveMonMenu
-	db -1 ; end
+	.DB -1 ; end
 
 TextBoxCoordTable:
 	; text box ID, upper-left X, upper-left Y, lower-right X, lower-right Y
-	db MESSAGE_BOX,       0, 12, 19, 17
-	db MENU_TEMPLATE_03,  0,  0, 19, 14
-	db MENU_TEMPLATE_07,  0,  0, 11,  6
-	db LIST_MENU_BOX,     4,  2, 19, 12
-	db MENU_TEMPLATE_10,  7,  0, 19, 17
-	db MON_SPRITE_POPUP,  6,  4, 14, 13
-	db -1 ; end
+	.DB MESSAGE_BOX,       0, 12, 19, 17
+	.DB MENU_TEMPLATE_03,  0,  0, 19, 14
+	.DB MENU_TEMPLATE_07,  0,  0, 11,  6
+	.DB LIST_MENU_BOX,     4,  2, 19, 12
+	.DB MENU_TEMPLATE_10,  7,  0, 19, 17
+	.DB MON_SPRITE_POPUP,  6,  4, 14, 13
+	.DB -1 ; end
 
-MACRO text_box_text
-	db \1 ; text box ID
-	db \2, \3, \4, \5 ; text box coordinates
-	dw \6 ; text pointer
-	db \7, \8 ; text coordinates
-ENDM
+.MACRO text_box_text
+	.DB \1 ; text box ID
+	.DB \2, \3, \4, \5 ; text box coordinates
+	.DW \6 ; text pointer
+	.DB \7, \8 ; text coordinates
+.ENDM
 
 TextBoxTextAndCoordTable:
 	; text box ID, upper-left X, upper-left Y, lower-right X, lower-right Y, text pointer, text X, text Y
@@ -37,52 +37,52 @@ TextBoxTextAndCoordTable:
 	text_box_text JP_POKEDEX_MENU_TEMPLATE,          11,  8, 19, 17, JapanesePokedexMenu,     12, 10
 
 BuySellQuitText:
-	db   "BUY"
+		.STRINGMAP pokemon, "BUY"
 	next "SELL"
 	next "QUIT@"
 
-	db "@" ; unused
+		.STRINGMAP pokemon, "@" ; unused
 
 UseTossText:
-	db   "USE"
+		.STRINGMAP pokemon, "USE"
 	next "TOSS@"
 
 JapaneseSaveMessageText:
-	db   "きろく"
+		.STRINGMAP pokemon, "きろく"
 	next "メッセージ@"
 
 JapaneseSpeedOptionsText:
-	db   "はやい"
+		.STRINGMAP pokemon, "はやい"
 	next "おそい@"
 
 MoneyText:
-	db "MONEY@"
+		.STRINGMAP pokemon, "MONEY@"
 
 JapaneseMochimonoText:
-	db "もちもの@"
+		.STRINGMAP pokemon, "もちもの@"
 
 JapaneseMainMenuText:
-	db   "つづきから"
+		.STRINGMAP pokemon, "つづきから"
 	next "さいしょから@"
 
 BattleMenuText:
-	db   "FIGHT <PK><MN>"
+		.STRINGMAP pokemon, "FIGHT <PK><MN>"
 	next "ITEM  RUN@"
 
 SafariZoneBattleMenuText:
-	db   "BALL×       BAIT"
+		.STRINGMAP pokemon, "BALL×       BAIT"
 	next "THROW ROCK  RUN@"
 
 SwitchStatsCancelText:
-	db   "SWITCH"
+		.STRINGMAP pokemon, "SWITCH"
 	next "STATS"
 	next "CANCEL@"
 
 JapaneseAhText:
-	db "アッ！@"
+		.STRINGMAP pokemon, "アッ！@"
 
 JapanesePokedexMenu:
-	db   "データをみる"
+		.STRINGMAP pokemon, "データをみる"
 	next "なきごえ"
 	next "ぶんぷをみる"
 	next "キャンセル@"

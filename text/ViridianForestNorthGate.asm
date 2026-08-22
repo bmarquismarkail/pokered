@@ -1,4 +1,5 @@
-_ViridianForestNorthGateSuperNerdText::
+_ViridianForestNorthGateSuperNerdText:
+WLA_GLOBAL_ViridianForestNorthGateSuperNerdText:
 	text "Many #MON live"
 	line "only in forests "
 	cont "and caves."
@@ -8,7 +9,8 @@ _ViridianForestNorthGateSuperNerdText::
 	cont "different kinds!"
 	done
 
-_ViridianForestNorthGateGrampsText::
+_ViridianForestNorthGateGrampsText:
+WLA_GLOBAL_ViridianForestNorthGateGrampsText:
 	text "Have you noticed"
 	line "the bushes on the"
 	cont "roadside?"

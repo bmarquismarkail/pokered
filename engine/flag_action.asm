@@ -26,46 +26,46 @@ FlagAction:
 	srl a
 	add l
 	ld l, a
-	jr nc, .ok
+	jr nc, FlagAction.ok
 	inc h
-.ok
+FlagAction.ok
 
 	; d = 1 << e (bitmask)
 	inc e
 	ld d, 1
-.shift
+FlagAction.shift
 	dec e
-	jr z, .shifted
+	jr z, FlagAction.shifted
 	sla d
-	jr .shift
-.shifted
+	jr FlagAction.shift
+FlagAction.shifted
 
 	ld a, b
 	and a
-	jr z, .reset
+	jr z, FlagAction.reset
 	cp FLAG_TEST
-	jr z, .read
+	jr z, FlagAction.read
 
 ; set
 	ld b, [hl]
 	ld a, d
 	or b
 	ld [hl], a
-	jr .done
+	jr FlagAction.done
 
-.reset
+FlagAction.reset
 	ld b, [hl]
 	ld a, d
 	xor $ff
 	and b
 	ld [hl], a
-	jr .done
+	jr FlagAction.done
 
-.read
+FlagAction.read
 	ld b, [hl]
 	ld a, d
 	and b
-.done
+FlagAction.done
 	pop bc
 	pop de
 	pop hl

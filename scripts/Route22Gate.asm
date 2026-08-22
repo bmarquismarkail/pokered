@@ -6,9 +6,9 @@ Route22Gate_Script:
 	ld a, [wYCoord]
 	cp 4
 	ld a, ROUTE_23
-	jr c, .set_last_map
+	jr c, Route22Gate_Script.set_last_map
 	ld a, ROUTE_22
-.set_last_map
+Route22Gate_Script.set_last_map
 	ld [wLastMap], a
 	ret
 
@@ -23,15 +23,15 @@ Route22GateDefaultScript:
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_ROUTE22GATE_GUARD
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 Route22GateScriptCoords:
 	dbmapcoord  4,  2
 	dbmapcoord  5,  2
-	db -1 ; end
+	.DB -1 ; end
 
 Route22GateMovePlayerDownScript:
 	ld a, $1
@@ -62,22 +62,22 @@ Route22GateGuardText:
 	text_asm
 	ld a, [wObtainedBadges]
 	bit BIT_BOULDERBADGE, a
-	jr nz, .has_boulderbadge
+	jr nz, Route22GateGuardText.has_boulderbadge
 	ld hl, Route22GateGuardNoBoulderbadgeText
 	call PrintText
 	call Route22GateMovePlayerDownScript
 	ld a, SCRIPT_ROUTE22GATE_PLAYER_MOVING
-	jr .set_current_script
-.has_boulderbadge
+	jr Route22GateGuardText.set_current_script
+Route22GateGuardText.has_boulderbadge
 	ld hl, Route22GateGuardGoRightAheadText
 	call PrintText
 	ld a, SCRIPT_ROUTE22GATE_NOOP
-.set_current_script
+Route22GateGuardText.set_current_script
 	ld [wRoute22GateCurScript], a
 	jp TextScriptEnd
 
 Route22GateGuardNoBoulderbadgeText:
-	text_far _Route22GateGuardNoBoulderbadgeText
+	text_far WLA_GLOBAL_Route22GateGuardNoBoulderbadgeText
 	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
@@ -86,10 +86,10 @@ Route22GateGuardNoBoulderbadgeText:
 	ret
 
 Route22GateGuardICantLetYouPassText:
-	text_far _Route22GateGuardICantLetYouPassText
+	text_far WLA_GLOBAL_Route22GateGuardICantLetYouPassText
 	text_end
 
 Route22GateGuardGoRightAheadText:
-	text_far _Route22GateGuardGoRightAheadText
+	text_far WLA_GLOBAL_Route22GateGuardGoRightAheadText
 	sound_get_item_1
 	text_end

@@ -1,9 +1,9 @@
-MACRO mon_cry
-	db (\1 - CRY_SFX_START) / 3
-	db \2, \3
-ENDM
+.MACRO mon_cry
+	.DB (\1 - CRY_SFX_START) / 3
+	.DB \2, \3
+.ENDM
 
-CryData::
+CryData:
 	table_width 3
 	; base cry, pitch, length
 	mon_cry SFX_CRY_11, $00, $80 ; Rhydon

@@ -51,67 +51,67 @@ RocketHideout3ArrowTilePlayerMovement:
 	map_coord_movement 16, 13, RocketHideout3ArrowMovement11
 	map_coord_movement 17, 12, RocketHideout3ArrowMovement10
 	map_coord_movement 18, 16, RocketHideout3ArrowMovement12
-	db -1 ; end
+	.DB -1 ; end
 
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
 RocketHideout3ArrowMovement1:
-	db PAD_RIGHT, 4
-	db PAD_UP, 4
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 4
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement2:
-	db PAD_DOWN, 4
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_DOWN, 4
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement3:
-	db PAD_LEFT, 2
-	db -1 ; end
+	.DB PAD_LEFT, 2
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement4:
-	db PAD_RIGHT, 4
-	db PAD_UP, 2
-	db PAD_RIGHT, 2
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 2
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement5:
-	db PAD_RIGHT, 4
-	db PAD_UP, 2
-	db PAD_RIGHT, 2
-	db PAD_UP, 3
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 2
+	.DB PAD_UP, 3
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement6:
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement7:
-	db PAD_RIGHT, 2
-	db -1 ; end
+	.DB PAD_RIGHT, 2
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement8:
-	db PAD_RIGHT, 4
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement9:
-	db PAD_RIGHT, 4
-	db PAD_UP, 4
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 4
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement10:
-	db PAD_DOWN, 4
-	db -1 ; end
+	.DB PAD_DOWN, 4
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement11:
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout3ArrowMovement12:
-	db PAD_UP, 1
-	db -1 ; end
+	.DB PAD_UP, 1
+	.DB -1 ; end
 
 RocketHideoutB3FPlayerSpinningScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -138,7 +138,7 @@ RocketHideout3TrainerHeader0:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0, 2, RocketHideoutB3FRocket1BattleText, RocketHideoutB3FRocket1EndBattleText, RocketHideoutB3FRocket1AfterBattleText
 RocketHideout3TrainerHeader1:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1, 4, RocketHideoutB3FRocket2BattleText, RocketHideoutB3FRocket2EndBattleText, RocketHideoutB3FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 RocketHideoutB3FRocket1Text:
 	text_asm
@@ -147,15 +147,15 @@ RocketHideoutB3FRocket1Text:
 	jp TextScriptEnd
 
 RocketHideoutB3FRocket1BattleText:
-	text_far _RocketHideoutB3FRocket1BattleText
+	text_far WLA_GLOBAL_RocketHideoutB3FRocket1BattleText
 	text_end
 
 RocketHideoutB3FRocket1EndBattleText:
-	text_far _RocketHideoutB3FRocket1EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB3FRocket1EndBattleText
 	text_end
 
 RocketHideoutB3FRocket1AfterBattleText:
-	text_far _RocketHideoutB3FRocket1AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB3FRocket1AfterBattleText
 	text_end
 
 RocketHideoutB3FRocket2Text:
@@ -165,13 +165,13 @@ RocketHideoutB3FRocket2Text:
 	jp TextScriptEnd
 
 RocketHideoutB3FRocket2BattleText:
-	text_far _RocketHideout3BattleText
+	text_far WLA_GLOBAL_RocketHideout3BattleText
 	text_end
 
 RocketHideoutB3FRocket2EndBattleText:
-	text_far _RocketHideout3EndBattleText3
+	text_far WLA_GLOBAL_RocketHideout3EndBattleText3
 	text_end
 
 RocketHideoutB3FRocket2AfterBattleText:
-	text_far _RocketHide3AfterBattleText3
+	text_far WLA_GLOBAL_RocketHide3AfterBattleText3
 	text_end

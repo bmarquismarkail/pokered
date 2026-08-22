@@ -1,26 +1,26 @@
-FadeOutAudio::
+FadeOutAudio:
 	ld a, [wAudioFadeOutControl]
 	and a ; currently fading out audio?
-	jr nz, .fadingOut
+	jr nz, FadeOutAudio.fadingOut
 	ld a, [wStatusFlags2]
 	bit BIT_NO_AUDIO_FADE_OUT, a
 	ret nz
 	ld a, $77
-	ldh [rAUDVOL], a
+	ldh [lobyte(rAUDVOL)], a
 	ret
-.fadingOut
+FadeOutAudio.fadingOut
 	ld a, [wAudioFadeOutCounter]
 	and a
-	jr z, .counterReachedZero
+	jr z, FadeOutAudio.counterReachedZero
 	dec a
 	ld [wAudioFadeOutCounter], a
 	ret
-.counterReachedZero
+FadeOutAudio.counterReachedZero
 	ld a, [wAudioFadeOutCounterReloadValue]
 	ld [wAudioFadeOutCounter], a
-	ldh a, [rAUDVOL]
+	ldh a, [lobyte(rAUDVOL)]
 	and a ; has the volume reached 0?
-	jr z, .fadeOutComplete
+	jr z, FadeOutAudio.fadeOutComplete
 	ld b, a
 	and $f
 	dec a
@@ -31,9 +31,9 @@ FadeOutAudio::
 	dec a
 	swap a
 	or c
-	ldh [rAUDVOL], a
+	ldh [lobyte(rAUDVOL)], a
 	ret
-.fadeOutComplete
+FadeOutAudio.fadeOutComplete
 	ld a, [wAudioFadeOutControl]
 	ld b, a
 	xor a

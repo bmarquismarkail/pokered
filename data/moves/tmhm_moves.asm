@@ -4,12 +4,12 @@
 TechnicalMachines:
 	table_width 1
 
-FOR n, 1, NUM_TMS + 1
-	db TM{02d:n}_MOVE
-ENDR
+.REPEAT NUM_TMS START 1 INDEX n
+.DB TM{%.2d{n}}_MOVE
+.ENDR
 	assert_table_length NUM_TMS
 
-FOR n, 1, NUM_HMS + 1
-	db HM{02d:n}_MOVE
-ENDR
+.REPEAT NUM_HMS START 1 INDEX n
+.DB HM{%.2d{n}}_MOVE
+.ENDR
 	assert_table_length NUM_TM_HM

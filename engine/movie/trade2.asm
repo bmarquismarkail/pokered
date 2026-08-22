@@ -7,7 +7,7 @@ Trade_PrintPlayerMonInfoText:
 	predef IndexToPokedex
 	hlcoord 9, 0
 	ld de, wPokedexNum
-	lb bc, LEADING_ZEROES | 1, 3
+	lb "bc", LEADING_ZEROES | 1, 3
 	call PrintNumber
 	hlcoord 5, 2
 	ld de, wStringBuffer
@@ -17,7 +17,7 @@ Trade_PrintPlayerMonInfoText:
 	call PlaceString
 	hlcoord 8, 6
 	ld de, wTradedPlayerMonOTID
-	lb bc, LEADING_ZEROES | 2, 5
+	lb "bc", LEADING_ZEROES | 2, 5
 	jp PrintNumber
 
 Trade_PrintEnemyMonInfoText:
@@ -29,7 +29,7 @@ Trade_PrintEnemyMonInfoText:
 	predef IndexToPokedex
 	hlcoord 9, 10
 	ld de, wPokedexNum
-	lb bc, LEADING_ZEROES | 1, 3
+	lb "bc", LEADING_ZEROES | 1, 3
 	call PrintNumber
 	hlcoord 5, 12
 	ld de, wNameBuffer
@@ -39,11 +39,11 @@ Trade_PrintEnemyMonInfoText:
 	call PlaceString
 	hlcoord 8, 16
 	ld de, wTradedEnemyMonOTID
-	lb bc, LEADING_ZEROES | 2, 5
+	lb "bc", LEADING_ZEROES | 2, 5
 	jp PrintNumber
 
 Trade_MonInfoText:
-	db   "──№<DOT>"
+		.STRINGMAP pokemon, "──№<DOT>"
 	next ""
 	next "OT/"
 	next "<ID>№<DOT>@"

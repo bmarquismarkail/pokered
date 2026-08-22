@@ -1,18 +1,18 @@
-FarCopyData::
+FarCopyData:
 ; Copy bc bytes from a:hl to de.
 	ld [wBuffer], a
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	ld a, [wBuffer]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call CopyData
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-CopyData::
+CopyData:
 ; Copy bc bytes from hl to de.
 	ld a, [hli]
 	ld [de], a

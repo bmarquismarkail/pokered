@@ -8,21 +8,21 @@ TryDoWildEncounter:
 	and a ; is player exiting a door, jumping over a ledge, or fishing?
 	ret nz
 	callfar IsPlayerStandingOnDoorTileOrWarpTile
-	jr nc, .notStandingOnDoorOrWarpTile
-.CantEncounter
+	jr nc, TryDoWildEncounter.notStandingOnDoorOrWarpTile
+TryDoWildEncounter.CantEncounter
 	ld a, $1
 	and a
 	ret
-.notStandingOnDoorOrWarpTile
+TryDoWildEncounter.notStandingOnDoorOrWarpTile
 	callfar IsPlayerJustOutsideMap
-	jr z, .CantEncounter
+	jr z, TryDoWildEncounter.CantEncounter
 	ld a, [wRepelRemainingSteps]
 	and a
-	jr z, .next
+	jr z, TryDoWildEncounter.next
 	dec a
-	jr z, .lastRepelStep
+	jr z, TryDoWildEncounter.lastRepelStep
 	ld [wRepelRemainingSteps], a
-.next
+TryDoWildEncounter.next
 ; determine if wild pokemon can appear in the half-block we're standing in
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	hlcoord 9, 9
@@ -30,47 +30,47 @@ TryDoWildEncounter:
 	ld a, [wGrassTile]
 	cp c
 	ld a, [wGrassRate]
-	jr z, .CanEncounter
+	jr z, TryDoWildEncounter.CanEncounter
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
 	ld a, [wWaterRate]
-	jr z, .CanEncounter
+	jr z, TryDoWildEncounter.CanEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokemon
 ; so long as the map is "indoor" and has wild pokemon defined.
 ; ...as long as it's not Viridian Forest or Safari Zone.
 	ld a, [wCurMap]
 	cp FIRST_INDOOR_MAP ; is this an indoor map?
-	jr c, .CantEncounter2
+	jr c, TryDoWildEncounter.CantEncounter2
 	ld a, [wCurMapTileset]
 	cp FOREST ; Viridian Forest/Safari Zone
-	jr z, .CantEncounter2
+	jr z, TryDoWildEncounter.CantEncounter2
 	ld a, [wGrassRate]
-.CanEncounter
+TryDoWildEncounter.CanEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
-	ldh a, [hRandomAdd]
+	ldh a, [lobyte(hRandomAdd)]
 	cp b
-	jr nc, .CantEncounter2
-	ldh a, [hRandomSub]
+	jr nc, TryDoWildEncounter.CantEncounter2
+	ldh a, [lobyte(hRandomSub)]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
-.determineEncounterSlot
+TryDoWildEncounter.determineEncounterSlot
 	ld a, [hli]
 	cp b
-	jr nc, .gotEncounterSlot
+	jr nc, TryDoWildEncounter.gotEncounterSlot
 	inc hl
-	jr .determineEncounterSlot
-.gotEncounterSlot
+	jr TryDoWildEncounter.determineEncounterSlot
+TryDoWildEncounter.gotEncounterSlot
 ; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, wGrassMons
 	lda_coord 8, 9
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
-	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
+	jr nz, TryDoWildEncounter.gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, wWaterMons
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
-.gotWildEncounterType
+TryDoWildEncounter.gotWildEncounterType
 	ld b, 0
 	add hl, bc
 	ld a, [hli]
@@ -80,25 +80,25 @@ TryDoWildEncounter:
 	ld [wEnemyMonSpecies2], a
 	ld a, [wRepelRemainingSteps]
 	and a
-	jr z, .willEncounter
+	jr z, TryDoWildEncounter.willEncounter
 	ld a, [wPartyMon1Level]
 	ld b, a
 	ld a, [wCurEnemyLevel]
 	cp b
-	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
-	jr .willEncounter
-.lastRepelStep
+	jr c, TryDoWildEncounter.CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
+	jr TryDoWildEncounter.willEncounter
+TryDoWildEncounter.lastRepelStep
 	ld [wRepelRemainingSteps], a
 	ld a, TEXT_REPEL_WORE_OFF
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
-.CantEncounter2
+TryDoWildEncounter.CantEncounter2
 	ld a, $1
 	and a
 	ret
-.willEncounter
+TryDoWildEncounter.willEncounter
 	xor a
 	ret
 
-INCLUDE "data/wild/probabilities.asm"
+.INCLUDE "data/wild/probabilities.asm"

@@ -1,17 +1,17 @@
-	db DEX_GROWLITHE ; pokedex id
+	.DB DEX_GROWLITHE ; pokedex id
 
-	db  55,  70,  45,  60,  50
+	.DB  55,  70,  45,  60,  50
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 190 ; catch rate
-	db 91 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 190 ; catch rate
+	.DB 91 ; base exp
 
-	INCBIN "gfx/pokemon/front/growlithe.pic", 0, 1 ; sprite dimensions
-	dw GrowlithePicFront, GrowlithePicBack
+	.INCBIN "gfx/pokemon/front/growlithe.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GrowlithePicFront, GrowlithePicBack
 
-	db BITE, ROAR, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB BITE, ROAR, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

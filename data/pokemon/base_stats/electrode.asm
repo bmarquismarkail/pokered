@@ -1,17 +1,17 @@
-	db DEX_ELECTRODE ; pokedex id
+	.DB DEX_ELECTRODE ; pokedex id
 
-	db  60,  50,  70, 140,  80
+	.DB  60,  50,  70, 140,  80
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 60 ; catch rate
-	db 150 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 60 ; catch rate
+	.DB 150 ; base exp
 
-	INCBIN "gfx/pokemon/front/electrode.pic", 0, 1 ; sprite dimensions
-	dw ElectrodePicFront, ElectrodePicBack
+	.INCBIN "gfx/pokemon/front/electrode.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ElectrodePicFront, ElectrodePicBack
 
-	db TACKLE, SCREECH, SONICBOOM, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SCREECH, SONICBOOM, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    HYPER_BEAM,   RAGE,         THUNDERBOLT,  \
@@ -20,4 +20,4 @@
 	     THUNDER_WAVE, EXPLOSION,    SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

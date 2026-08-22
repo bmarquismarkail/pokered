@@ -5,18 +5,19 @@
 	const_export VIRIDIANNICKNAMEHOUSE_SPEARY_SIGN
 
 ViridianNicknameHouse_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  2,  7, LAST_MAP, 4
 	warp_event  3,  7, LAST_MAP, 4
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 4
 	object_event  5,  3, SPRITE_BALDING_GUY, STAY, NONE, TEXT_VIRIDIANNICKNAMEHOUSE_BALDING_GUY
 	object_event  1,  4, SPRITE_LITTLE_GIRL, WALK, UP_DOWN, TEXT_VIRIDIANNICKNAMEHOUSE_LITTLE_GIRL
 	object_event  5,  5, SPRITE_BIRD, WALK, LEFT_RIGHT, TEXT_VIRIDIANNICKNAMEHOUSE_SPEAROW
 	object_event  4,  0, SPRITE_CLIPBOARD, STAY, NONE, TEXT_VIRIDIANNICKNAMEHOUSE_SPEARY_SIGN
 
-	def_warps_to VIRIDIAN_NICKNAME_HOUSE
+	event_displacement VIRIDIAN_NICKNAME_HOUSE_WIDTH, 2, 7
+
+	event_displacement VIRIDIAN_NICKNAME_HOUSE_WIDTH, 3, 7

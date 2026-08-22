@@ -9,13 +9,13 @@ FuchsiaMeetingRoom_TextPointers:
 	dw_const FuchsiaMeetingRoomSafariZoneWorker3, TEXT_FUCHSIAMEETINGROOM_SAFARI_ZONE_WORKER3
 
 FuchsiaMeetingRoomSafariZoneWorker1:
-	text_far _FuchsiaMeetingRoomSafariZoneWorker1
+	text_far WLA_GLOBAL_FuchsiaMeetingRoomSafariZoneWorker1
 	text_end
 
 FuchsiaMeetingRoomSafariZoneWorker2:
-	text_far _FuchsiaMeetingRoomSafariZoneWorker2
+	text_far WLA_GLOBAL_FuchsiaMeetingRoomSafariZoneWorker2
 	text_end
 
 FuchsiaMeetingRoomSafariZoneWorker3:
-	text_far _FuchsiaMeetingRoomSafariZoneWorker3
+	text_far WLA_GLOBAL_FuchsiaMeetingRoomSafariZoneWorker3
 	text_end

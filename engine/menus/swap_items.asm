@@ -1,4 +1,4 @@
-HandleItemListSwapping::
+HandleItemListSwapping:
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jp nz, DisplayListMenuIDLoop ; only rearrange item list menus
@@ -22,7 +22,7 @@ HandleItemListSwapping::
 	jp z, DisplayListMenuIDLoop ; ignore attempts to swap the Cancel menu item
 	ld a, [wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; has the first item to swap already been chosen?
-	jr nz, .swapItems
+	jr nz, HandleItemListSwapping.swapItems
 ; if not, set the currently selected item as the first item
 	ld a, [wCurrentMenuItem]
 	inc a
@@ -33,7 +33,7 @@ HandleItemListSwapping::
 	ld c, 20
 	call DelayFrames
 	jp DisplayListMenuIDLoop
-.swapItems
+HandleItemListSwapping.swapItems
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld b, a
@@ -68,48 +68,48 @@ HandleItemListSwapping::
 	add a
 	add e
 	ld e, a
-	jr nc, .noCarry
+	jr nc, HandleItemListSwapping.noCarry
 	inc d
-.noCarry ; de = address of first item to swap
+HandleItemListSwapping.noCarry ; de = address of first item to swap
 	ld a, [de]
 	ld b, a
 	ld a, [hli]
 	cp b
-	jr z, .swapSameItemType
+	jr z, HandleItemListSwapping.swapSameItemType
 ; swap different items
-	ldh [hSwapItemID], a ; save second item ID
+	ldh [lobyte(hSwapItemID)], a ; save second item ID
 	ld a, [hld]
-	ldh [hSwapItemQuantity], a ; save second item quantity
+	ldh [lobyte(hSwapItemQuantity)], a ; save second item quantity
 	ld a, [de]
 	ld [hli], a ; put first item ID in second item slot
 	inc de
 	ld a, [de]
 	ld [hl], a ; put first item quantity in second item slot
-	ldh a, [hSwapItemQuantity]
+	ldh a, [lobyte(hSwapItemQuantity)]
 	ld [de], a ; put second item quantity in first item slot
 	dec de
-	ldh a, [hSwapItemID]
+	ldh a, [lobyte(hSwapItemID)]
 	ld [de], a ; put second item ID in first item slot
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
 	jp DisplayListMenuIDLoop
-.swapSameItemType
+HandleItemListSwapping.swapSameItemType
 	inc de
 	ld a, [hl]
 	ld b, a
 	ld a, [de]
 	add b ; a = sum of both item quantities
 	cp 100 ; is the sum too big for one item slot?
-	jr c, .combineItemSlots
+	jr c, HandleItemListSwapping.combineItemSlots
 ; swap enough items from the first slot to max out the second slot if they can't be combined
 	sub 99
 	ld [de], a
 	ld a, 99
 	ld [hl], a
-	jr .done
-.combineItemSlots
+	jr HandleItemListSwapping.done
+HandleItemListSwapping.combineItemSlots
 	ld [hl], a ; put the sum in the second item slot
 	ld hl, wListPointer
 	ld a, [hli]
@@ -119,29 +119,29 @@ HandleItemListSwapping::
 	ld a, [hl]
 	ld [wListCount], a ; update number of items variable
 	cp 1
-	jr nz, .skipSettingMaxMenuItemID
+	jr nz, HandleItemListSwapping.skipSettingMaxMenuItemID
 	ld [wMaxMenuItem], a ; if the number of items is only one now, update the max menu item ID
-.skipSettingMaxMenuItemID
+HandleItemListSwapping.skipSettingMaxMenuItemID
 	dec de
 	ld h, d
 	ld l, e
 	inc hl
 	inc hl ; hl = address of item after first item to swap
-.moveItemsUpLoop ; erase the first item slot and move up all the following item slots to fill the gap
+HandleItemListSwapping.moveItemsUpLoop ; erase the first item slot and move up all the following item slots to fill the gap
 	ld a, [hli]
 	ld [de], a
 	inc de
 	inc a ; reached the $ff terminator?
-	jr z, .afterMovingItemsUp
+	jr z, HandleItemListSwapping.afterMovingItemsUp
 	ld a, [hli]
 	ld [de], a
 	inc de
-	jr .moveItemsUpLoop
-.afterMovingItemsUp
+	jr HandleItemListSwapping.moveItemsUpLoop
+HandleItemListSwapping.afterMovingItemsUp
 	xor a
 	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
-.done
+HandleItemListSwapping.done
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	pop de

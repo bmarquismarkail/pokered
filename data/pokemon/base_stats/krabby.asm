@@ -1,17 +1,17 @@
-	db DEX_KRABBY ; pokedex id
+	.DB DEX_KRABBY ; pokedex id
 
-	db  30, 105,  90,  50,  25
+	.DB  30, 105,  90,  50,  25
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 225 ; catch rate
-	db 115 ; base exp
+	.DB WATER, WATER ; type
+	.DB 225 ; catch rate
+	.DB 115 ; base exp
 
-	INCBIN "gfx/pokemon/front/krabby.pic", 0, 1 ; sprite dimensions
-	dw KrabbyPicFront, KrabbyPicBack
+	.INCBIN "gfx/pokemon/front/krabby.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW KrabbyPicFront, KrabbyPicBack
 
-	db BUBBLE, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB BUBBLE, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     CUT,          SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,13 +1,13 @@
 RocketHideoutElevator_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  2,  1, ROCKET_HIDEOUT_B1F, 3
 	warp_event  3,  1, ROCKET_HIDEOUT_B1F, 5
 
-	def_bg_events
+	.DB 1
 	bg_event  1,  1, TEXT_ROCKETHIDEOUTELEVATOR
 
-	def_object_events
-
-	def_warps_to ROCKET_HIDEOUT_ELEVATOR
+	.DB 0
+	event_displacement ROCKET_HIDEOUT_ELEVATOR_WIDTH, 2, 1
+	event_displacement ROCKET_HIDEOUT_ELEVATOR_WIDTH, 3, 1

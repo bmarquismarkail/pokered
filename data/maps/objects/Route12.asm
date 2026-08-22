@@ -11,19 +11,19 @@
 	const_export ROUTE12_IRON
 
 Route12_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event 10, 15, ROUTE_12_GATE_1F, 1
 	warp_event 11, 15, ROUTE_12_GATE_1F, 2
 	warp_event 10, 21, ROUTE_12_GATE_1F, 3
 	warp_event 11, 77, ROUTE_12_SUPER_ROD_HOUSE, 1
 
-	def_bg_events
+	.DB 2
 	bg_event 13, 13, TEXT_ROUTE12_SIGN
 	bg_event 11, 63, TEXT_ROUTE12_SPORT_FISHING_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 10, 62, SPRITE_SNORLAX, STAY, DOWN, TEXT_ROUTE12_SNORLAX
 	object_event 14, 31, SPRITE_FISHER, STAY, LEFT, TEXT_ROUTE12_FISHER1, OPP_FISHER, 3
 	object_event  5, 39, SPRITE_FISHER, STAY, UP, TEXT_ROUTE12_FISHER2, OPP_FISHER, 4
@@ -35,4 +35,10 @@ Route12_Object:
 	object_event 14, 35, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE12_TM_PAY_DAY, TM_PAY_DAY
 	object_event  5, 89, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE12_IRON, IRON
 
-	def_warps_to ROUTE_12
+	event_displacement ROUTE_12_WIDTH, 10, 15
+
+	event_displacement ROUTE_12_WIDTH, 11, 15
+
+	event_displacement ROUTE_12_WIDTH, 10, 21
+
+	event_displacement ROUTE_12_WIDTH, 11, 77

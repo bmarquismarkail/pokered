@@ -3,12 +3,12 @@ IsPlayerJustOutsideMap:
 	ld a, [wYCoord]
 	ld b, a
 	ld a, [wCurMapHeight]
-	call .compareCoordWithMapDimension
+	call IsPlayerJustOutsideMap.compareCoordWithMapDimension
 	ret z
 	ld a, [wXCoord]
 	ld b, a
 	ld a, [wCurMapWidth]
-.compareCoordWithMapDimension
+IsPlayerJustOutsideMap.compareCoordWithMapDimension
 	add a
 	cp b
 	ret z

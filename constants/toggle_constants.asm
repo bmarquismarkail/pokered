@@ -1,10 +1,9 @@
-DEF OFF EQU $11
-DEF ON  EQU $15
+.DEFINE OFF $11
+.DEFINE ON $15
 
-MACRO toggle_consts_for
-	DEF TOGGLEMAP{\1}_ID EQU const_value
-	DEF TOGGLEMAP{\1}_NAME EQUS "\1"
-ENDM
+.MACRO toggle_consts_for
+	; Pointer and offset validation is performed on the linked native image.
+.ENDM
 
 ; ToggleableObjectStates indexes (see data/maps/toggleable_objects.asm)
 ; This lists the object_events that can be toggled by ShowObject/HideObject.
@@ -391,4 +390,4 @@ ENDM
 	const TOGGLE_SEAFOAM_ISLANDS_B4F_BOULDER_2 ; E2
 	const TOGGLE_ARTICUNO                      ; E3 X
 
-DEF NUM_TOGGLEABLE_OBJECTS EQU const_value
+.DEFINE NUM_TOGGLEABLE_OBJECTS const_value

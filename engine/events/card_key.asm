@@ -2,18 +2,18 @@ PrintCardKeyText:
 	ld hl, SilphCoMapList
 	ld a, [wCurMap]
 	ld b, a
-.silphCoMapListLoop
+PrintCardKeyText.silphCoMapListLoop
 	ld a, [hli]
 	cp -1
 	ret z
 	cp b
-	jr nz, .silphCoMapListLoop
+	jr nz, PrintCardKeyText.silphCoMapListLoop
 	predef GetTileAndCoordsInFrontOfPlayer
 	ld a, [wTileInFrontOfPlayer]
 	cp $18
-	jr z, .cardKeyDoorInFrontOfPlayer
+	jr z, PrintCardKeyText.cardKeyDoorInFrontOfPlayer
 	cp $24
-	jr z, .cardKeyDoorInFrontOfPlayer
+	jr z, PrintCardKeyText.cardKeyDoorInFrontOfPlayer
 	ld b, a
 	ld a, [wCurMap]
 	cp SILPH_CO_11F
@@ -21,14 +21,14 @@ PrintCardKeyText:
 	ld a, b
 	cp $5e
 	ret nz
-.cardKeyDoorInFrontOfPlayer
+PrintCardKeyText.cardKeyDoorInFrontOfPlayer
 	ld b, CARD_KEY
 	call IsItemInBag
-	jr z, .noCardKey
+	jr z, PrintCardKeyText.noCardKey
 	call GetCoordsInFrontOfPlayer
 	push de
 	tx_pre_id CardKeySuccessText
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call PrintPredefTextID
 	pop de
 	srl d
@@ -41,33 +41,33 @@ PrintCardKeyText:
 	ld [wCardKeyDoorX], a
 	ld a, [wCurMap]
 	cp SILPH_CO_11F
-	jr nz, .notSilphCo11F
+	jr nz, PrintCardKeyText.notSilphCo11F
 	ld a, $3
-	jr .replaceCardKeyDoorTileBlock
-.notSilphCo11F
+	jr PrintCardKeyText.replaceCardKeyDoorTileBlock
+PrintCardKeyText.notSilphCo11F
 	ld a, $e
-.replaceCardKeyDoorTileBlock
+PrintCardKeyText.replaceCardKeyDoorTileBlock
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	ld a, SFX_GO_INSIDE
 	jp PlaySound
-.noCardKey
+PrintCardKeyText.noCardKey
 	tx_pre_id CardKeyFailText
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp PrintPredefTextID
 
-INCLUDE "data/events/card_key_maps.asm"
+.INCLUDE "data/events/card_key_maps.asm"
 
-CardKeySuccessText::
-	text_far _CardKeySuccessText1
+CardKeySuccessText:
+	text_far WLA_GLOBAL_CardKeySuccessText1
 	sound_get_item_1
-	text_far _CardKeySuccessText2
+	text_far WLA_GLOBAL_CardKeySuccessText2
 	text_end
 
-CardKeyFailText::
-	text_far _CardKeyFailText
+CardKeyFailText:
+	text_far WLA_GLOBAL_CardKeyFailText
 	text_end
 
 ; d = Y
@@ -79,23 +79,23 @@ GetCoordsInFrontOfPlayer:
 	ld e, a
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a
-	jr nz, .notFacingDown
+	jr nz, GetCoordsInFrontOfPlayer.notFacingDown
 ; facing down
 	inc d
 	ret
-.notFacingDown
+GetCoordsInFrontOfPlayer.notFacingDown
 	cp SPRITE_FACING_UP
-	jr nz, .notFacingUp
+	jr nz, GetCoordsInFrontOfPlayer.notFacingUp
 ; facing up
 	dec d
 	ret
-.notFacingUp
+GetCoordsInFrontOfPlayer.notFacingUp
 	cp SPRITE_FACING_LEFT
-	jr nz, .notFacingLeft
+	jr nz, GetCoordsInFrontOfPlayer.notFacingLeft
 ; facing left
 	dec e
 	ret
-.notFacingLeft
+GetCoordsInFrontOfPlayer.notFacingLeft
 ; facing right
 	inc e
 	ret

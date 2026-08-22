@@ -1,4 +1,5 @@
-_VermilionPokecenterFishingGuruText::
+_VermilionPokecenterFishingGuruText:
+WLA_GLOBAL_VermilionPokecenterFishingGuruText:
 	text "Even if they are"
 	line "the same level,"
 	cont "#MON can have"
@@ -11,7 +12,8 @@ _VermilionPokecenterFishingGuruText::
 	cont "in the wild."
 	done
 
-_VermilionPokecenterSailorText::
+_VermilionPokecenterSailorText:
+WLA_GLOBAL_VermilionPokecenterSailorText:
 	text "My #MON was"
 	line "poisoned! It"
 	cont "fainted while we"

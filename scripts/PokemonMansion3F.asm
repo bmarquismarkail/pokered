@@ -14,20 +14,20 @@ Mansion3CheckReplaceSwitchDoorBlocks:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .switchTurnedOn
+	jr nz, Mansion3CheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $e
-	lb bc, 2, 7
+	lb "bc", 2, 7
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	lb bc, 5, 7
+	lb "bc", 5, 7
 	call Mansion2ReplaceBlock
 	ret
-.switchTurnedOn
+Mansion3CheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $5f
-	lb bc, 2, 7
+	lb "bc", 2, 7
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 5, 7
+	lb "bc", 5, 7
 	call Mansion2ReplaceBlock
 	ret
 
@@ -38,26 +38,26 @@ PokemonMansion3F_ScriptPointers:
 	dw_const EndTrainerBattle,                      SCRIPT_POKEMONMANSION3F_END_BATTLE
 
 PokemonMansion3FDefaultScript:
-	ld hl, .holeCoords
-	call .isPlayerFallingDownHole
+	ld hl, PokemonMansion3FDefaultScript.holeCoords
+	call PokemonMansion3FDefaultScript.isPlayerFallingDownHole
 	ld a, [wWhichDungeonWarp]
 	and a
 	jp z, CheckFightingMapTrainers
 	cp $3
 	ld a, POKEMON_MANSION_1F
-	jr nz, .fellDownHoleTo1F
+	jr nz, PokemonMansion3FDefaultScript.fellDownHoleTo1F
 	ld a, POKEMON_MANSION_2F
-.fellDownHoleTo1F
+PokemonMansion3FDefaultScript.fellDownHoleTo1F
 	ld [wDungeonWarpDestinationMap], a
 	ret
 
-.holeCoords:
+PokemonMansion3FDefaultScript.holeCoords:
 	dbmapcoord 16, 14
 	dbmapcoord 17, 14
 	dbmapcoord 19, 14
-	db -1 ; end
+	.DB -1 ; end
 
-.isPlayerFallingDownHole:
+PokemonMansion3FDefaultScript.isPlayerFallingDownHole:
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wStatusFlags3]
@@ -73,14 +73,14 @@ PokemonMansion3FDefaultScript:
 	set BIT_DUNGEON_WARP, [hl]
 	ret
 
-Mansion3Script_Switches::
+Mansion3Script_Switches:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_POKEMONMANSION3F_SWITCH
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 PokemonMansion3F_TextPointers:
@@ -98,7 +98,7 @@ Mansion3TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, PokemonMansion3FSuperNerdBattleText, PokemonMansion3FSuperNerdEndBattleText, PokemonMansion3FSuperNerdAfterBattleText
 Mansion3TrainerHeader1:
 	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, PokemonMansion3FScientistBattleText, PokemonMansion3FScientistEndBattleText, PokemonMansion3FScientistAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonMansion3FSuperNerdText:
 	text_asm
@@ -113,29 +113,29 @@ PokemonMansion3FScientistText:
 	jp TextScriptEnd
 
 PokemonMansion3FSuperNerdBattleText:
-	text_far _PokemonMansion3FSuperNerdBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FSuperNerdBattleText
 	text_end
 
 PokemonMansion3FSuperNerdEndBattleText:
-	text_far _PokemonMansion3FSuperNerdEndBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FSuperNerdEndBattleText
 	text_end
 
 PokemonMansion3FSuperNerdAfterBattleText:
-	text_far _PokemonMansion3FSuperNerdAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FSuperNerdAfterBattleText
 	text_end
 
 PokemonMansion3FScientistBattleText:
-	text_far _PokemonMansion3FScientistBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FScientistBattleText
 	text_end
 
 PokemonMansion3FScientistEndBattleText:
-	text_far _PokemonMansion3FScientistEndBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FScientistEndBattleText
 	text_end
 
 PokemonMansion3FScientistAfterBattleText:
-	text_far _PokemonMansion3FScientistAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansion3FScientistAfterBattleText
 	text_end
 
 PokemonMansion3FDiaryText:
-	text_far _PokemonMansion3FDiaryText
+	text_far WLA_GLOBAL_PokemonMansion3FDiaryText
 	text_end

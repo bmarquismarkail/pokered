@@ -1,4 +1,5 @@
-_DiglettsCaveRoute2FishingGuruText::
+_DiglettsCaveRoute2FishingGuruText:
+WLA_GLOBAL_DiglettsCaveRoute2FishingGuruText:
 	text "I went to ROCK"
 	line "TUNNEL, but it's"
 	cont "dark and scary."

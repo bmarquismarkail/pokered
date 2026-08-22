@@ -1,156 +1,187 @@
-_Route19CooltrainerM1BattleText::
+_Route19CooltrainerM1BattleText:
+WLA_GLOBAL_Route19CooltrainerM1BattleText:
 	text "Have to warm up"
 	line "before my swim!"
 	done
 
-_Route19CooltrainerM1EndBattleText::
+_Route19CooltrainerM1EndBattleText:
+WLA_GLOBAL_Route19CooltrainerM1EndBattleText:
 	text "All"
 	line "warmed up!"
 	prompt
 
-_Route19CooltrainerM1AfterBattleText::
+_Route19CooltrainerM1AfterBattleText:
+WLA_GLOBAL_Route19CooltrainerM1AfterBattleText:
 	text "Thanks, kid! I'm"
 	line "ready for a swim!"
 	done
 
-_Route19CooltrainerM2BattleText::
+_Route19CooltrainerM2BattleText:
+WLA_GLOBAL_Route19CooltrainerM2BattleText:
 	text "Wait! You'll have"
 	line "a heart attack!"
 	done
 
-_Route19CooltrainerM2EndBattleText::
+_Route19CooltrainerM2EndBattleText:
+WLA_GLOBAL_Route19CooltrainerM2EndBattleText:
 	text "Ooh!"
 	line "That's chilly!"
 	prompt
 
-_Route19CooltrainerM2AfterBattleText::
+_Route19CooltrainerM2AfterBattleText:
+WLA_GLOBAL_Route19CooltrainerM2AfterBattleText:
 	text "Watch out for"
 	line "TENTACOOL!"
 	done
 
-_Route19Swimmer1BattleText::
+_Route19Swimmer1BattleText:
+WLA_GLOBAL_Route19Swimmer1BattleText:
 	text "I love swimming!"
 	line "What about you?"
 	done
 
-_Route19Swimmer1EndBattleText::
+_Route19Swimmer1EndBattleText:
+WLA_GLOBAL_Route19Swimmer1EndBattleText:
 	text "Belly"
 	line "flop!"
 	prompt
 
-_Route19Swimmer1AfterBattleText::
+_Route19Swimmer1AfterBattleText:
+WLA_GLOBAL_Route19Swimmer1AfterBattleText:
 	text "I can beat #MON"
 	line "at swimming!"
 	done
 
-_Route19Swimmer2BattleText::
+_Route19Swimmer2BattleText:
+WLA_GLOBAL_Route19Swimmer2BattleText:
 	text "What's beyond the"
 	line "horizon?"
 	done
 
-_Route19Swimmer2EndBattleText::
+_Route19Swimmer2EndBattleText:
+WLA_GLOBAL_Route19Swimmer2EndBattleText:
 	text "Glub!"
 	prompt
 
-_Route19Swimmer2AfterBattleText::
+_Route19Swimmer2AfterBattleText:
+WLA_GLOBAL_Route19Swimmer2AfterBattleText:
 	text "I see a couple of"
 	line "islands!"
 	done
 
-_Route19Swimmer3BattleText::
+_Route19Swimmer3BattleText:
+WLA_GLOBAL_Route19Swimmer3BattleText:
 	text "I tried diving"
 	line "for #MON, but"
 	cont "it was a no go!"
 	done
 
-_Route19Swimmer3EndBattleText::
+_Route19Swimmer3EndBattleText:
+WLA_GLOBAL_Route19Swimmer3EndBattleText:
 	text "Help!"
 	prompt
 
-_Route19Swimmer3AfterBattleText::
+_Route19Swimmer3AfterBattleText:
+WLA_GLOBAL_Route19Swimmer3AfterBattleText:
 	text "You have to fish"
 	line "for sea #MON!"
 	done
 
-_Route19Swimmer4BattleText::
+_Route19Swimmer4BattleText:
+WLA_GLOBAL_Route19Swimmer4BattleText:
 	text "I look at the"
 	line "sea to forget!"
 	done
 
-_Route19Swimmer4EndBattleText::
+_Route19Swimmer4EndBattleText:
+WLA_GLOBAL_Route19Swimmer4EndBattleText:
 	text "Ooh!"
 	line "Traumatic!"
 	prompt
 
-_Route19Swimmer4AfterBattleText::
+_Route19Swimmer4AfterBattleText:
+WLA_GLOBAL_Route19Swimmer4AfterBattleText:
 	text "I'm looking at the"
 	line "sea to forget!"
 	done
 
-_Route19Swimmer5BattleText::
+_Route19Swimmer5BattleText:
+WLA_GLOBAL_Route19Swimmer5BattleText:
 	text "Oh, I just love"
 	line "your ride! Can I"
 	cont "have it if I win?"
 	done
 
-_Route19Swimmer5EndBattleText::
+_Route19Swimmer5EndBattleText:
+WLA_GLOBAL_Route19Swimmer5EndBattleText:
 	text "Oh!"
 	line "I lost!"
 	prompt
 
-_Route19Swimmer5AfterBattleText::
+_Route19Swimmer5AfterBattleText:
+WLA_GLOBAL_Route19Swimmer5AfterBattleText:
 	text "It's still a long"
 	line "way to go to"
 	cont "SEAFOAM ISLANDS."
 	done
 
-_Route19Swimmer6BattleText::
+_Route19Swimmer6BattleText:
+WLA_GLOBAL_Route19Swimmer6BattleText:
 	text "Swimming's great!"
 	line "Sunburns aren't!"
 	done
 
-_Route19Swimmer6EndBattleText::
+_Route19Swimmer6EndBattleText:
+WLA_GLOBAL_Route19Swimmer6EndBattleText:
 	text "Shocker!"
 	prompt
 
-_Route19Swimmer6AfterBattleText::
+_Route19Swimmer6AfterBattleText:
+WLA_GLOBAL_Route19Swimmer6AfterBattleText:
 	text "My boy friend"
 	line "wanted to swim to"
 	cont "SEAFOAM ISLANDS."
 	done
 
-_Route19Swimmer7BattleText::
+_Route19Swimmer7BattleText:
+WLA_GLOBAL_Route19Swimmer7BattleText:
 	text "These waters are"
 	line "treacherous!"
 	done
 
-_Route19Swimmer7EndBattleText::
+_Route19Swimmer7EndBattleText:
+WLA_GLOBAL_Route19Swimmer7EndBattleText:
 	text "Ooh!"
 	line "Dangerous!"
 	prompt
 
-_Route19Swimmer7AfterBattleText::
+_Route19Swimmer7AfterBattleText:
+WLA_GLOBAL_Route19Swimmer7AfterBattleText:
 	text "I got a cramp!"
 	line "Glub, glub..."
 	done
 
-_Route19Swimmer8BattleText::
+_Route19Swimmer8BattleText:
+WLA_GLOBAL_Route19Swimmer8BattleText:
 	text "I swam here, but"
 	line "I'm tired."
 	done
 
-_Route19Swimmer8EndBattleText::
+_Route19Swimmer8EndBattleText:
+WLA_GLOBAL_Route19Swimmer8EndBattleText:
 	text "I'm"
 	line "exhausted..."
 	prompt
 
-_Route19Swimmer8AfterBattleText::
+_Route19Swimmer8AfterBattleText:
+WLA_GLOBAL_Route19Swimmer8AfterBattleText:
 	text "LAPRAS is so big,"
 	line "it must keep you"
 	cont "dry on water."
 	done
 
-_Route19SignText::
+_Route19SignText:
+WLA_GLOBAL_Route19SignText:
 	text "SEA ROUTE 19"
 	line "FUCHSIA CITY -"
 	cont "SEAFOAM ISLANDS"

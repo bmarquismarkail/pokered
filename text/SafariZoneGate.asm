@@ -1,9 +1,11 @@
-_SafariZoneGateSafariZoneWorker1Text::
+_SafariZoneGateSafariZoneWorker1Text:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1Text:
 	text "Welcome to the"
 	line "SAFARI ZONE!"
 	done
 
-_SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText::
+_SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
 	text "For just ¥500,"
 	line "you can catch all"
 	cont "the #MON you"
@@ -13,7 +15,8 @@ _SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText::
 	line "join the hunt?@"
 	text_end
 
-_SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText::
+_SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText:
 	text "That'll be ¥500"
 	line "please!"
 
@@ -25,7 +28,8 @@ _SafariZoneGateSafariZoneWorker1ThatllBe500PleaseText::
 	line "30 SAFARI BALLs!@"
 	text_end
 
-_SafariZoneGateSafariZoneWorker1CallYouOnThePAText::
+_SafariZoneGateSafariZoneWorker1CallYouOnThePAText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1CallYouOnThePAText:
 	text_start
 
 	para "We'll call you on"
@@ -34,42 +38,50 @@ _SafariZoneGateSafariZoneWorker1CallYouOnThePAText::
 	cont "or SAFARI BALLs!"
 	done
 
-_SafariZoneGateSafariZoneWorker1PleaseComeAgainText::
+_SafariZoneGateSafariZoneWorker1PleaseComeAgainText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1PleaseComeAgainText:
 	text "OK! Please come"
 	line "again!"
 	done
 
-_SafariZoneGateSafariZoneWorker1NotEnoughMoneyText::
+_SafariZoneGateSafariZoneWorker1NotEnoughMoneyText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1NotEnoughMoneyText:
 	text "Oops! Not enough"
 	line "money!"
 	done
 
-_SafariZoneGateSafariZoneWorker1LeavingEarlyText::
+_SafariZoneGateSafariZoneWorker1LeavingEarlyText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1LeavingEarlyText:
 	text "Leaving early?@"
 	text_end
 
-_SafariZoneGateSafariZoneWorker1ReturnSafariBallsText::
+_SafariZoneGateSafariZoneWorker1ReturnSafariBallsText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1ReturnSafariBallsText:
 	text "Please return any"
 	line "SAFARI BALLs you"
 	cont "have left."
 	done
 
-_SafariZoneGateSafariZoneWorker1GoodLuckText::
+_SafariZoneGateSafariZoneWorker1GoodLuckText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1GoodLuckText:
 	text "Good Luck!"
 	done
 
-_SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText::
+_SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText:
 	text "Did you get a"
 	line "good haul?"
 	cont "Come again!"
 	done
 
-_SafariZoneGateSafariZoneWorker2FirstTimeHereText::
+_SafariZoneGateSafariZoneWorker2FirstTimeHereText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker2FirstTimeHereText:
 	text "Hi! Is it your"
 	line "first time here?"
 	done
 
-_SafariZoneGateSafariZoneWorker2SafariZoneExplanationText::
+_SafariZoneGateSafariZoneWorker2SafariZoneExplanationText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker2SafariZoneExplanationText:
 	text "SAFARI ZONE has 4"
 	line "zones in it."
 
@@ -91,7 +103,8 @@ _SafariZoneGateSafariZoneWorker2SafariZoneExplanationText::
 	cont "new #MON!"
 	done
 
-_SafariZoneGateSafariZoneWorker2YoureARegularHereText::
+_SafariZoneGateSafariZoneWorker2YoureARegularHereText:
+WLA_GLOBAL_SafariZoneGateSafariZoneWorker2YoureARegularHereText:
 	text "Sorry, you're a"
 	line "regular here!"
 	done

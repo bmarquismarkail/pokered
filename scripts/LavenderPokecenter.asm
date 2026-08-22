@@ -16,9 +16,9 @@ LavenderPokecenterNurseText:
 	script_pokecenter_nurse
 
 LavenderPokecenterGentlemanText:
-	text_far _LavenderPokecenterGentlemanText
+	text_far WLA_GLOBAL_LavenderPokecenterGentlemanText
 	text_end
 
 LavenderPokecenterLittleGirlText:
-	text_far _LavenderPokecenterLittleGirlText
+	text_far WLA_GLOBAL_LavenderPokecenterLittleGirlText
 	text_end

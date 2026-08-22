@@ -1,4 +1,4 @@
-TrackPlayTime::
+TrackPlayTime:
 	call CountDownIgnoreInputBitReset
 	ld a, [wStatusFlags6]
 	bit BIT_GAME_TIMER_COUNTING, a
@@ -39,12 +39,12 @@ TrackPlayTime::
 CountDownIgnoreInputBitReset:
 	ld a, [wIgnoreInputCounter]
 	and a
-	jr nz, .decrement
+	jr nz, CountDownIgnoreInputBitReset.decrement
 	ld a, $ff
-	jr .continue
-.decrement
+	jr CountDownIgnoreInputBitReset.continue
+CountDownIgnoreInputBitReset.decrement
 	dec a
-.continue
+CountDownIgnoreInputBitReset.continue
 	ld [wIgnoreInputCounter], a
 	and a
 	ret nz
@@ -56,6 +56,6 @@ CountDownIgnoreInputBitReset:
 	ld [wStatusFlags5], a
 	ret z
 	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyHeld)], a
 	ret

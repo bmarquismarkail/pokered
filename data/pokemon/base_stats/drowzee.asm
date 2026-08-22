@@ -1,17 +1,17 @@
-	db DEX_DROWZEE ; pokedex id
+	.DB DEX_DROWZEE ; pokedex id
 
-	db  60,  48,  45,  42,  90
+	.DB  60,  48,  45,  42,  90
 	;   hp  atk  def  spd  spc
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
-	db 190 ; catch rate
-	db 102 ; base exp
+	.DB PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	.DB 190 ; catch rate
+	.DB 102 ; base exp
 
-	INCBIN "gfx/pokemon/front/drowzee.pic", 0, 1 ; sprite dimensions
-	dw DrowzeePicFront, DrowzeePicBack
+	.INCBIN "gfx/pokemon/front/drowzee.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DrowzeePicFront, DrowzeePicBack
 
-	db POUND, HYPNOSIS, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB POUND, HYPNOSIS, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     THUNDER_WAVE, PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

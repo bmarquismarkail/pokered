@@ -9,13 +9,13 @@ SafariZoneNorthRestHouse_TextPointers:
 	dw_const SafariZoneNorthRestHouseGentlemanText,        TEXT_SAFARIZONENORTHRESTHOUSE_GENTLEMAN
 
 SafariZoneNorthRestHouseScientistText:
-	text_far _SafariZoneNorthRestHouseScientistText
+	text_far WLA_GLOBAL_SafariZoneNorthRestHouseScientistText
 	text_end
 
 SafariZoneNorthRestHouseSafariZoneWorkerText:
-	text_far _SafariZoneNorthRestHouseSafariZoneWorkerText
+	text_far WLA_GLOBAL_SafariZoneNorthRestHouseSafariZoneWorkerText
 	text_end
 
 SafariZoneNorthRestHouseGentlemanText:
-	text_far _SafariZoneNorthRestHouseGentlemanText
+	text_far WLA_GLOBAL_SafariZoneNorthRestHouseGentlemanText
 	text_end

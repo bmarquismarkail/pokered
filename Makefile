@@ -1,215 +1,152 @@
-roms := \
-	pokered.gbc \
-	pokeblue.gbc \
-	pokeblue_debug.gbc
-patches := \
-	pokered.patch \
-	pokeblue.patch
+WLA ?= wla-gb
+WLALINK ?= wlalink
+PYTHON ?= python3
+SHA1 ?= sha1sum
 
-rom_obj := \
-	audio.o \
-	home.o \
-	main.o \
-	maps.o \
-	ram.o \
-	text.o \
-	gfx/pics.o \
-	gfx/sprites.o \
-	gfx/tilesets.o
+ROM := pokered.gbc
+RAW_SYMBOLS := wla/build/pokered.wla.sym
+LINKFILE := wla/native/pokered.link
+EXPECTED_SHA1 := ea9bcae617fdf159b045185467ae58b2e4a48b9a
 
-pokered_obj        := $(rom_obj:.o=_red.o)
-pokeblue_obj       := $(rom_obj:.o=_blue.o)
-pokeblue_debug_obj := $(rom_obj:.o=_blue_debug.o)
-pokered_vc_obj     := $(rom_obj:.o=_red_vc.o)
-pokeblue_vc_obj    := $(rom_obj:.o=_blue_vc.o)
+root_sources := \
+	home.asm \
+	main.asm \
+	maps.asm \
+	audio.asm \
+	text.asm \
+	gfx/pics.asm \
+	gfx/sprites.asm \
+	gfx/tilesets.asm \
+	ram.asm
+root_names := home main maps audio text gfx-pics gfx-sprites gfx-tilesets ram
+root_objects := $(addprefix wla/build/native-,$(addsuffix .o,$(root_names)))
+root_deps := $(root_objects:.o=.d)
 
+# A clean checkout contains only PNG sources. Build one planar conversion for
+# every PNG (all 668), then every compressed picture consumed by the sources.
+png_sources := $(shell find gfx -type f -name '*.png' -print | sort)
+one_bpp_assets := $(shell rg --no-filename -o '\.INCBIN\s+"gfx/[^"]+\.1bpp"' \
+	--glob '*.asm' --glob '!wla/**' | sed -E 's/^[^"]*"([^"]+)"/\1/' | sort -u)
+one_bpp_pngs := $(one_bpp_assets:.1bpp=.png)
+two_bpp_pngs := $(filter-out $(one_bpp_pngs),$(png_sources))
+two_bpp_assets := $(two_bpp_pngs:.png=.2bpp)
+pic_assets := $(shell rg --no-filename -o '\.INCBIN\s+"gfx/[^"]+\.pic"' \
+	--glob '*.asm' --glob '!wla/**' | sed -E 's/^[^"]*"([^"]+)"/\1/' | sort -u)
+generated_graphics := $(one_bpp_assets) $(two_bpp_assets) $(pic_assets)
 
-### Build tools
-
-ifeq (,$(shell command -v sha1sum 2>/dev/null))
-SHA1 := shasum
-else
-SHA1 := sha1sum
-endif
-
-RGBDS ?=
-RGBASM  ?= $(RGBDS)rgbasm
-RGBFIX  ?= $(RGBDS)rgbfix
-RGBGFX  ?= $(RGBDS)rgbgfx
-RGBLINK ?= $(RGBDS)rgblink
-
-RGBASMFLAGS  ?= -Weverything -Wtruncation=1
-RGBLINKFLAGS ?= -Weverything -Wtruncation=1
-RGBFIXFLAGS  ?= -Weverything
-RGBGFXFLAGS  ?= -Weverything
-
-
-### Build targets
-
+.DEFAULT_GOAL := red
 .SUFFIXES:
-.SECONDEXPANSION:
-.PRECIOUS:
 .SECONDARY:
-.PHONY: \
-	all \
-	red \
-	blue \
-	blue_debug \
-	red_vc \
-	blue_vc \
-	clean \
-	tidy \
-	compare \
-	tools
+.PHONY: all red check check-rom check-banks check-symbols check-layout \
+	check-native-sources check-native-gfx clean tools
 
-all: $(roms)
-red:        pokered.gbc
-blue:       pokeblue.gbc
-blue_debug: pokeblue_debug.gbc
-red_vc:     pokered.patch
-blue_vc:    pokeblue.patch
+all: red
+red: $(ROM)
 
-clean: tidy
-	find gfx \
-	     \( -iname '*.1bpp' \
-	        -o -iname '*.2bpp' \
-	        -o -iname '*.pic' \) \
-	     -delete
+$(ROM): $(root_objects) $(LINKFILE) wla/tools/canonicalize_symbols.py
+	$(WLALINK) -C -S $(LINKFILE) $@
+	mv pokered.sym $(RAW_SYMBOLS)
+	$(PYTHON) wla/tools/canonicalize_symbols.py $(RAW_SYMBOLS) pokered.sym
 
-tidy:
-	$(RM) $(roms) \
-	      $(roms:.gbc=.sym) \
-	      $(roms:.gbc=.map) \
-	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
-	      $(patches:.patch=_vc.sym) \
-	      $(patches:.patch=_vc.map) \
-	      $(patches:%.patch=vc/%.constants.sym) \
-	      $(pokered_obj) \
-	      $(pokeblue_obj) \
-	      $(pokered_vc_obj) \
-	      $(pokeblue_vc_obj) \
-	      $(pokeblue_debug_obj) \
-	      rgbdscheck.o
-	$(MAKE) clean -C tools/
+pokered.sym: $(ROM)
+	@test -f $@
 
-compare: $(roms) $(patches)
-	@$(SHA1) -c roms.sha1
+$(RAW_SYMBOLS): $(ROM)
+	@test -f $@
+
+wla/build:
+	mkdir -p $@
+
+define assemble_root
+wla/build/native-$(1).o: $(2) $(generated_graphics) | wla/build
+	$$(WLA) -k -I . -M -MD -MF wla/build/native-$(1).d -o $$@ $$<
+endef
+
+$(eval $(call assemble_root,home,home.asm))
+$(eval $(call assemble_root,main,main.asm))
+$(eval $(call assemble_root,maps,maps.asm))
+$(eval $(call assemble_root,audio,audio.asm))
+$(eval $(call assemble_root,text,text.asm))
+$(eval $(call assemble_root,gfx-pics,gfx/pics.asm))
+$(eval $(call assemble_root,gfx-sprites,gfx/sprites.asm))
+$(eval $(call assemble_root,gfx-tilesets,gfx/tilesets.asm))
+$(eval $(call assemble_root,ram,ram.asm))
+
+-include $(root_deps)
+
+### Deterministic graphics conversion
+
+PNG2GB := $(PYTHON) tools/png2gb.py
+
+gfx/battle/move_anim_0.2bpp: tools/gfx_flags += --trim-whitespace
+gfx/battle/move_anim_1.2bpp: tools/gfx_flags += --trim-whitespace
+
+gfx/intro/blue_jigglypuff_1.2bpp: png2gb_flags += --columns
+gfx/intro/blue_jigglypuff_2.2bpp: png2gb_flags += --columns
+gfx/intro/blue_jigglypuff_3.2bpp: png2gb_flags += --columns
+gfx/intro/red_nidorino_1.2bpp: png2gb_flags += --columns
+gfx/intro/red_nidorino_2.2bpp: png2gb_flags += --columns
+gfx/intro/red_nidorino_3.2bpp: png2gb_flags += --columns
+gfx/intro/gengar.2bpp: png2gb_flags += --columns
+gfx/intro/gengar.2bpp: tools/gfx_flags += --remove-duplicates --preserve=0x19,0x76
+
+gfx/credits/the_end.2bpp: tools/gfx_flags += --interleave --png=$<
+gfx/slots/red_slots_1.2bpp: tools/gfx_flags += --trim-whitespace
+gfx/slots/blue_slots_1.2bpp: tools/gfx_flags += --trim-whitespace
+gfx/tilesets/%.2bpp: tools/gfx_flags += --trim-whitespace
+gfx/tilesets/reds_house.2bpp: tools/gfx_flags += --preserve=0x48
+gfx/trade/game_boy.2bpp: tools/gfx_flags += --remove-duplicates
+
+%.2bpp: %.png tools/png2gb.py | tools/gfx
+	$(PNG2GB) --colors dmg $(png2gb_flags) -o $@ $<
+	$(if $(tools/gfx_flags),tools/gfx $(tools/gfx_flags) -o $@ $@ || ($(RM) $@ && false))
+
+%.1bpp: %.png tools/png2gb.py | tools/gfx
+	$(PNG2GB) --colors dmg $(png2gb_flags) --depth 1 -o $@ $<
+	$(if $(tools/gfx_flags),tools/gfx $(tools/gfx_flags) --depth 1 -o $@ $@ || ($(RM) $@ && false))
+
+%.pic: %.2bpp | tools/pkmncompress
+	tools/pkmncompress $< $@
+
+tools/gfx tools/pkmncompress:
+	$(MAKE) -C tools/ $(notdir $@)
+
+### Validation
+
+check: clean
+	$(MAKE) red
+	$(MAKE) check-rom check-banks check-layout check-symbols check-native-gfx check-native-sources
+	git diff --check
+
+check-rom: $(ROM)
+	test "$$(stat -c %s $(ROM))" = 1048576
+	printf '%s  %s\n' $(EXPECTED_SHA1) $(ROM) | $(SHA1) -c -
+
+check-banks: $(ROM)
+	$(PYTHON) wla/tools/check_rom_banks.py $(ROM)
+
+check-symbols: pokered.sym wla/reference/pokered.sym
+	$(PYTHON) wla/tools/check_linked_symbols.py pokered.sym wla/reference/pokered.sym
+
+check-layout: $(ROM) wla/native/section_layout.tsv
+	$(PYTHON) wla/tools/check_section_layout.py $(RAW_SYMBOLS) wla/native/section_layout.tsv
+
+check-native-sources:
+	$(PYTHON) wla/tools/check_native_sources.py .
+
+check-native-gfx: $(generated_graphics)
+	test "$$(find gfx -type f -name '*.png' | wc -l)" = 668
+	@echo "all 668 PNG sources have deterministic planar output"
 
 tools:
 	$(MAKE) -C tools/
 
+clean:
+	$(RM) $(ROM) pokered.sym pokered.map
+	$(RM) -r wla/build
+	find . -not -path './.git/*' -type f \( -name '*.o' -o -name '*.lst' \) -delete
+	find gfx -type f \( -name '*.1bpp' -o -name '*.2bpp' -o -name '*.pic' \) -delete
+	find . -path './.git' -prune -o -type d -name '__pycache__' -exec $(RM) -r {} +
+	$(MAKE) clean -C tools/
 
-RGBASMFLAGS += -Q8 -P includes.asm
-# Create a sym/map for debug purposes if `make` run with `DEBUG=1`
-ifeq ($(DEBUG),1)
-RGBASMFLAGS += -E
-endif
-
-$(pokered_obj):        RGBASMFLAGS += -D _RED
-$(pokeblue_obj):       RGBASMFLAGS += -D _BLUE
-$(pokeblue_debug_obj): RGBASMFLAGS += -D _BLUE -D _DEBUG
-$(pokered_vc_obj):     RGBASMFLAGS += -D _RED -D _RED_VC
-$(pokeblue_vc_obj):    RGBASMFLAGS += -D _BLUE -D _BLUE_VC
-
-%.patch: %_vc.gbc %.gbc vc/%.patch.template
-	tools/make_patch $*_vc.sym $^ $@
-
-rgbdscheck.o: rgbdscheck.asm
-	$(RGBASM) -o $@ $<
-
-# Build tools when building the rom.
-# This has to happen before the rules are processed, since that's when scan_includes is run.
-ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
-
-$(info $(shell $(MAKE) -C tools))
-
-# The dep rules have to be explicit or else missing files won't be reported.
-# As a side effect, they're evaluated immediately instead of when the rule is invoked.
-# It doesn't look like $(shell) can be deferred so there might not be a better way.
-preinclude_deps := includes.asm $(shell tools/scan_includes includes.asm)
-define DEP
-$1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
-	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
-endef
-
-# Dependencies for objects (drop _red and _blue from asm file basenames)
-$(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
-$(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
-$(foreach obj, $(pokeblue_debug_obj), $(eval $(call DEP,$(obj),$(obj:_blue_debug.o=.asm))))
-$(foreach obj, $(pokered_vc_obj), $(eval $(call DEP,$(obj),$(obj:_red_vc.o=.asm))))
-$(foreach obj, $(pokeblue_vc_obj), $(eval $(call DEP,$(obj),$(obj:_blue_vc.o=.asm))))
-
-endif
-
-
-RGBLINKFLAGS += -d
-pokered.gbc:        RGBLINKFLAGS += -p 0x00
-pokeblue.gbc:       RGBLINKFLAGS += -p 0x00
-pokeblue_debug.gbc: RGBLINKFLAGS += -p 0xff
-pokered_vc.gbc:     RGBLINKFLAGS += -p 0x00
-pokeblue_vc.gbc:    RGBLINKFLAGS += -p 0x00
-
-RGBFIXFLAGS += -jsv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03
-pokered.gbc:        RGBFIXFLAGS += -p 0x00 -t "POKEMON RED"
-pokeblue.gbc:       RGBFIXFLAGS += -p 0x00 -t "POKEMON BLUE"
-pokeblue_debug.gbc: RGBFIXFLAGS += -p 0xff -t "POKEMON BLUE"
-pokered_vc.gbc:     RGBFIXFLAGS += -p 0x00 -t "POKEMON RED"
-pokeblue_vc.gbc:    RGBFIXFLAGS += -p 0x00 -t "POKEMON BLUE"
-
-%.gbc: $$(%_obj) layout.link
-	$(RGBLINK) $(RGBLINKFLAGS) -l layout.link -m $*.map -n $*.sym -o $@ $(filter %.o,$^)
-	$(RGBFIX) $(RGBFIXFLAGS) $@
-
-
-### Misc file-specific graphics rules
-
-gfx/battle/move_anim_0.2bpp: tools/gfx += --trim-whitespace
-gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
-
-gfx/intro/blue_jigglypuff_1.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/blue_jigglypuff_2.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/blue_jigglypuff_3.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/red_nidorino_1.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/red_nidorino_2.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/red_nidorino_3.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/gengar.2bpp: RGBGFXFLAGS += --columns
-gfx/intro/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
-
-gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
-
-gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
-gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
-
-gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
-gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48
-
-gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
-
-
-### Catch-all graphics rules
-
-%.2bpp: %.png
-	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@ || $$($(RM) $@ && false))
-
-%.1bpp: %.png
-	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) --depth 1 -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) --depth 1 -o $@ $@ || $$($(RM) $@ && false))
-
-%.pic: %.2bpp
-	tools/pkmncompress $< $@
-
-
-### File extensions that are never generated and should be manually created
-
-%.asm: ;
-%.inc: ;
-%.png: ;
-%.pal: ;
-%.bin: ;
-%.blk: ;
-%.bst: ;
-%.rle: ;
+%.asm %.inc %.png %.pal %.bin %.blk %.bst %.rle:

@@ -1,7 +1,7 @@
 VermilionDock_Script:
 	call EnableAutoTextBoxDrawing
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
-	jr nz, .walking_out_of_dock
+	jr nz, VermilionDock_Script.walking_out_of_dock
 	CheckEventReuseHL EVENT_GOT_HM01
 	ret z
 	ld a, [wDestinationWarpID]
@@ -26,7 +26,7 @@ VermilionDock_Script:
 	dec a
 	ld [wJoyIgnore], a
 	ret
-.walking_out_of_dock
+VermilionDock_Script.walking_out_of_dock
 	CheckEventAfterBranchReuseHL EVENT_WALKED_OUT_OF_DOCK, EVENT_STARTED_WALKING_OUT_OF_DOCK
 	ret nz
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -42,7 +42,7 @@ VermilionDockSSAnneLeavesScript:
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
 	call PlaySound
-	ld c, BANK(Music_Surfing)
+	ld c, bank(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
 	farcall LoadSmokeTileFourTimes
@@ -50,19 +50,19 @@ VermilionDockSSAnneLeavesScript:
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
 	call DelayFrames
-	ld b, HIGH(vBGMap1)
+	ld b, hibyte(vBGMap1)
 	call CopyScreenTileBufferToVRAM
 	hlcoord 0, 10
 	ld bc, SCREEN_WIDTH * 6
 	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call Delay3
 	xor a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld [wSSAnneSmokeDriftAmount], a
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	ld a, 88
 	ld [wSSAnneSmokeX], a
 	ld hl, wMapViewVRAMPointer
@@ -77,7 +77,7 @@ VermilionDockSSAnneLeavesScript:
 	ld [wUpdateSpritesEnabled], a
 	ld d, $0
 	ld e, $8
-.shift_columns_up
+VermilionDockSSAnneLeavesScript.shift_columns_up
 	ld hl, $2
 	add hl, bc
 	ld a, l
@@ -90,25 +90,25 @@ VermilionDockSSAnneLeavesScript:
 	call VermilionDock_EmitSmokePuff
 	pop de
 	ld b, $10
-.smoke_puff_drift_loop
+VermilionDockSSAnneLeavesScript.smoke_puff_drift_loop
 	call VermilionDock_AnimSmokePuffDriftRight
 	ld c, $8
-.delay_between_drifts
+VermilionDockSSAnneLeavesScript.delay_between_drifts
 	call VermilionDock_SyncScrollWithLY
 	dec c
-	jr nz, .delay_between_drifts
+	jr nz, VermilionDockSSAnneLeavesScript.delay_between_drifts
 	inc d
 	dec b
-	jr nz, .smoke_puff_drift_loop
+	jr nz, VermilionDockSSAnneLeavesScript.smoke_puff_drift_loop
 	pop bc
 	dec e
-	jr nz, .shift_columns_up
+	jr nz, VermilionDockSSAnneLeavesScript.shift_columns_up
 	xor a
-	ldh [rWY], a
-	ldh [hWY], a
+	ldh [lobyte(rWY)], a
+	ldh [lobyte(hWY)], a
 	call VermilionDock_EraseSSAnne
 	ld a, $90
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	pop hl
@@ -129,12 +129,12 @@ VermilionDock_AnimSmokePuffDriftRight:
 	swap a
 	ld c, a
 	ld de, OBJ_SIZE
-.drift_loop
+VermilionDock_AnimSmokePuffDriftRight.drift_loop
 	inc [hl]
 	inc [hl]
 	add hl, de
 	dec c
-	jr nz, .drift_loop
+	jr nz, VermilionDock_AnimSmokePuffDriftRight.drift_loop
 	pop de
 	pop bc
 	ret
@@ -156,27 +156,27 @@ VermilionDock_EmitSmokePuff:
 
 VermilionDockOAMBlock:
 ; tile ID, attributes
-	db $fc, OAM_PAL1
-	db $fd, OAM_PAL1
-	db $fe, OAM_PAL1
-	db $ff, OAM_PAL1
+	.DB $fc, OAM_PAL1
+	.DB $fd, OAM_PAL1
+	.DB $fe, OAM_PAL1
+	.DB $ff, OAM_PAL1
 
 VermilionDock_SyncScrollWithLY:
 	ld h, d
 	ld l, $50
-	call .sync_scroll_ly
+	call VermilionDock_SyncScrollWithLY.sync_scroll_ly
 	ld h, $0
 	ld l, $80
-.sync_scroll_ly
-	ldh a, [rLY]
+VermilionDock_SyncScrollWithLY.sync_scroll_ly
+	ldh a, [lobyte(rLY)]
 	cp l
-	jr nz, .sync_scroll_ly
+	jr nz, VermilionDock_SyncScrollWithLY.sync_scroll_ly
 	ld a, h
-	ldh [rSCX], a
-.wait_for_ly_match
-	ldh a, [rLY]
+	ldh [lobyte(rSCX)], a
+VermilionDock_SyncScrollWithLY.wait_for_ly_match
+	ldh a, [lobyte(rLY)]
 	cp h
-	jr z, .wait_for_ly_match
+	jr z, VermilionDock_SyncScrollWithLY.wait_for_ly_match
 	ret
 
 VermilionDock_EraseSSAnne:
@@ -187,7 +187,7 @@ VermilionDock_EraseSSAnne:
 	call FillMemory
 	hlbgcoord 0, 10
 	ld de, wVermilionDockTileMapBuffer
-	lb bc, BANK(wVermilionDockTileMapBuffer), 12
+	lb "bc", bank(wVermilionDockTileMapBuffer), 12
 	call CopyVideoData
 
 ; Replace the blocks of the lower half of the ship with water blocks. This
@@ -213,5 +213,5 @@ VermilionDock_TextPointers:
 	dw_const VermilionDockUnusedText, TEXT_VERMILIONDOCK_UNUSED
 
 VermilionDockUnusedText:
-	text_far _VermilionDockUnusedText
+	text_far WLA_GLOBAL_VermilionDockUnusedText
 	text_end

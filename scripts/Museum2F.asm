@@ -12,29 +12,29 @@ Museum2F_TextPointers:
 	dw_const Museum2FMoonStoneSignText,    TEXT_MUSEUM2F_MOON_STONE_SIGN
 
 Museum2FYoungsterText:
-	text_far _Museum2FYoungsterText
+	text_far WLA_GLOBAL_Museum2FYoungsterText
 	text_end
 
 Museum2FGrampsText:
-	text_far _Museum2FGrampsText
+	text_far WLA_GLOBAL_Museum2FGrampsText
 	text_end
 
 Museum2FScientistText:
-	text_far _Museum2FScientistText
+	text_far WLA_GLOBAL_Museum2FScientistText
 	text_end
 
 Museum2FBrunetteGirlText:
-	text_far _Museum2FBrunetteGirlText
+	text_far WLA_GLOBAL_Museum2FBrunetteGirlText
 	text_end
 
 Museum2FHikerText:
-	text_far _Museum2FHikerText
+	text_far WLA_GLOBAL_Museum2FHikerText
 	text_end
 
 Museum2FSpaceShuttleSignText:
-	text_far _Museum2FSpaceShuttleSignText
+	text_far WLA_GLOBAL_Museum2FSpaceShuttleSignText
 	text_end
 
 Museum2FMoonStoneSignText:
-	text_far _Museum2FMoonStoneSignText
+	text_far WLA_GLOBAL_Museum2FMoonStoneSignText
 	text_end

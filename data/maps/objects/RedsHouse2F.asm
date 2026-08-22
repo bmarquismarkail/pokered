@@ -1,11 +1,9 @@
 RedsHouse2F_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 1
 	warp_event  7,  1, REDS_HOUSE_1F, 3
 
-	def_bg_events
-
-	def_object_events
-
-	def_warps_to REDS_HOUSE_2F
+	.DB 0
+	.DB 0
+	event_displacement REDS_HOUSE_2F_WIDTH, 7, 1

@@ -1,3 +1,3 @@
-ElevatorText::
-	text_far _ElevatorText
+ElevatorText:
+	text_far WLA_GLOBAL_ElevatorText
 	text_end

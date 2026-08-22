@@ -1,4 +1,4 @@
-LoadSpinnerArrowTiles::
+LoadSpinnerArrowTiles:
 	ld a, [wSpritePlayerStateData1ImageIndex]
 	srl a
 	srl a
@@ -11,18 +11,18 @@ LoadSpinnerArrowTiles::
 	ld a, [wCurMapTileset]
 	cp FACILITY
 	ld hl, FacilitySpinnerArrows
-	jr z, .gotSpinnerArrows
+	jr z, LoadSpinnerArrowTiles.gotSpinnerArrows
 	ld hl, GymSpinnerArrows
-.gotSpinnerArrows
+LoadSpinnerArrowTiles.gotSpinnerArrows
 	ld a, [wSimulatedJoypadStatesIndex]
 	bit 0, a ; even or odd?
-	jr nz, .alternateGraphics
+	jr nz, LoadSpinnerArrowTiles.alternateGraphics
 	ld de, 6 * 4
 	add hl, de
-.alternateGraphics
+LoadSpinnerArrowTiles.alternateGraphics
 	ld a, $4
 	ld bc, $0
-.loop
+LoadSpinnerArrowTiles.loop
 	push af
 	push hl
 	push bc
@@ -46,20 +46,20 @@ LoadSpinnerArrowTiles::
 	pop hl
 	pop af
 	dec a
-	jr nz, .loop
+	jr nz, LoadSpinnerArrowTiles.loop
 	ret
 
-INCLUDE "data/tilesets/spinner_tiles.asm"
+.INCLUDE "data/tilesets/spinner_tiles.asm"
 
 SpinnerPlayerFacingDirections:
 ; This isn't the order of the facing directions.  Rather, it's a list of
 ; the facing directions that come next. For example, when the player is
 ; facing down (00), the next facing direction is left (08).
-	db SPRITE_FACING_LEFT  ; down -> left
-	db SPRITE_FACING_RIGHT ; up -> right
-	db SPRITE_FACING_UP    ; left -> up
-	db SPRITE_FACING_DOWN  ; right -> down
+	.DB SPRITE_FACING_LEFT  ; down -> left
+	.DB SPRITE_FACING_RIGHT ; up -> right
+	.DB SPRITE_FACING_UP    ; left -> up
+	.DB SPRITE_FACING_DOWN  ; right -> down
 
 ; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
 SpinnerArrowAnimTiles:
-	INCBIN "gfx/overworld/spinners.2bpp"
+	.INCBIN "gfx/overworld/spinners.2bpp"

@@ -32,9 +32,9 @@ DisplayElevatorFloorMenu:
 	ld a, [hl]
 	ld c, a
 	ld hl, wWarpEntries
-	call .UpdateWarp
+	call DisplayElevatorFloorMenu.UpdateWarp
 
-.UpdateWarp
+DisplayElevatorFloorMenu.UpdateWarp
 	inc hl
 	inc hl
 	ld a, b
@@ -44,5 +44,5 @@ DisplayElevatorFloorMenu:
 	ret
 
 WhichFloorText:
-	text_far _WhichFloorText
+	text_far WLA_GLOBAL_WhichFloorText
 	text_end

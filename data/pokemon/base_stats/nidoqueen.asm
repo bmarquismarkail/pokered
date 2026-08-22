@@ -1,17 +1,17 @@
-	db DEX_NIDOQUEEN ; pokedex id
+	.DB DEX_NIDOQUEEN ; pokedex id
 
-	db  90,  82,  87,  76,  75
+	.DB  90,  82,  87,  76,  75
 	;   hp  atk  def  spd  spc
 
-	db POISON, GROUND ; type
-	db 45 ; catch rate
-	db 194 ; base exp
+	.DB POISON, GROUND ; type
+	.DB 45 ; catch rate
+	.DB 194 ; base exp
 
-	INCBIN "gfx/pokemon/front/nidoqueen.pic", 0, 1 ; sprite dimensions
-	dw NidoqueenPicFront, NidoqueenPicBack
+	.INCBIN "gfx/pokemon/front/nidoqueen.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW NidoqueenPicFront, NidoqueenPicBack
 
-	db TACKLE, SCRATCH, TAIL_WHIP, BODY_SLAM ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB TACKLE, SCRATCH, TAIL_WHIP, BODY_SLAM ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        HORN_DRILL,   BODY_SLAM,    \
@@ -23,4 +23,4 @@
 	     SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

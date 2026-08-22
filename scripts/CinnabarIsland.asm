@@ -26,10 +26,10 @@ CinnabarIslandDefaultScript:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, TEXT_CINNABARISLAND_DOOR_IS_LOCKED
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, PAD_DOWN
@@ -63,25 +63,25 @@ CinnabarIsland_TextPointers:
 	dw_const CinnabarIslandDoorIsLockedText,   TEXT_CINNABARISLAND_DOOR_IS_LOCKED
 
 CinnabarIslandDoorIsLockedText:
-	text_far _CinnabarIslandDoorIsLockedText
+	text_far WLA_GLOBAL_CinnabarIslandDoorIsLockedText
 	text_end
 
 CinnabarIslandGirlText:
-	text_far _CinnabarIslandGirlText
+	text_far WLA_GLOBAL_CinnabarIslandGirlText
 	text_end
 
 CinnabarIslandGamblerText:
-	text_far _CinnabarIslandGamblerText
+	text_far WLA_GLOBAL_CinnabarIslandGamblerText
 	text_end
 
 CinnabarIslandSignText:
-	text_far _CinnabarIslandSignText
+	text_far WLA_GLOBAL_CinnabarIslandSignText
 	text_end
 
 CinnabarIslandPokemonLabSignText:
-	text_far _CinnabarIslandPokemonLabSignText
+	text_far WLA_GLOBAL_CinnabarIslandPokemonLabSignText
 	text_end
 
 CinnabarIslandGymSignText:
-	text_far _CinnabarIslandGymSignText
+	text_far WLA_GLOBAL_CinnabarIslandGymSignText
 	text_end

@@ -6,10 +6,10 @@ PKMNLeaguePC:
 	push hl
 	ld a, [wUpdateSpritesEnabled]
 	push af
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	push af
 	xor a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	ld [wSpriteFlipped], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wHoFTeamIndex2], a
@@ -17,13 +17,13 @@ PKMNLeaguePC:
 	ld a, [wNumHoFTeams]
 	ld b, a
 	cp HOF_TEAM_CAPACITY + 1
-	jr c, .loop
+	jr c, PKMNLeaguePC.loop
 ; If the total number of hall of fame teams is greater than the storage
 ; capacity, then calculate the number of the first team that is still recorded.
 	ld b, HOF_TEAM_CAPACITY
 	sub b
 	ld [wHoFTeamNo], a
-.loop
+PKMNLeaguePC.loop
 	ld hl, wHoFTeamNo
 	inc [hl]
 	push bc
@@ -32,15 +32,15 @@ PKMNLeaguePC:
 	farcall LoadHallOfFameTeams
 	call LeaguePCShowTeam
 	pop bc
-	jr c, .doneShowingTeams
+	jr c, PKMNLeaguePC.doneShowingTeams
 	ld hl, wHoFTeamIndex2
 	inc [hl]
 	ld a, [hl]
 	cp b
-	jr nz, .loop
-.doneShowingTeams
+	jr nz, PKMNLeaguePC.loop
+PKMNLeaguePC.doneShowingTeams
 	pop af
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	pop hl
@@ -52,13 +52,13 @@ PKMNLeaguePC:
 
 LeaguePCShowTeam:
 	ld c, PARTY_LENGTH
-.loop
+LeaguePCShowTeam.loop
 	push bc
 	call LeaguePCShowMon
 	call WaitForTextScrollButtonPress
-	ldh a, [hJoyHeld]
+	ldh a, [lobyte(hJoyHeld)]
 	bit B_PAD_B, a
-	jr nz, .exit
+	jr nz, LeaguePCShowTeam.exit
 	ld hl, wHallOfFame + HOF_MON
 	ld de, wHallOfFame
 	ld bc, HOF_TEAM - HOF_MON
@@ -66,13 +66,13 @@ LeaguePCShowTeam:
 	pop bc
 	ld a, [wHallOfFame + 0]
 	cp $ff
-	jr z, .done
+	jr z, LeaguePCShowTeam.done
 	dec c
-	jr nz, .loop
-.done
+	jr nz, LeaguePCShowTeam.loop
+LeaguePCShowTeam.done
 	and a
 	ret
-.exit
+LeaguePCShowTeam.exit
 	pop bc
 	scf
 	ret
@@ -108,13 +108,13 @@ LeaguePCShowMon:
 	call PlaceString
 	hlcoord 16, 15
 	ld de, wHoFTeamNo
-	lb bc, 1, 3
+	lb "bc", 1, 3
 	call PrintNumber
 	farjp HoFDisplayMonInfo
 
 HallOfFameNoText:
-	db "HALL OF FAME No   @"
+		.STRINGMAP pokemon, "HALL OF FAME No   @"
 
 AccessedHoFPCText:
-	text_far _AccessedHoFPCText
+	text_far WLA_GLOBAL_AccessedHoFPCText
 	text_end

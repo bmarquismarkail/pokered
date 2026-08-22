@@ -10,9 +10,9 @@
 	const_export CELADONCITY_ROCKET2
 
 CeladonCity_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 13
 	warp_event  8, 13, CELADON_MART_1F, 1
 	warp_event 10, 13, CELADON_MART_1F, 3
 	warp_event 24,  9, CELADON_MANSION_1F, 1
@@ -27,7 +27,7 @@ CeladonCity_Object:
 	warp_event 35, 27, CELADON_CHIEF_HOUSE, 1
 	warp_event 43, 27, CELADON_HOTEL, 1
 
-	def_bg_events
+	.DB 9
 	bg_event 27, 15, TEXT_CELADONCITY_TRAINER_TIPS1
 	bg_event 19, 15, TEXT_CELADONCITY_SIGN
 	bg_event 42,  9, TEXT_CELADONCITY_POKECENTER_SIGN
@@ -38,7 +38,7 @@ CeladonCity_Object:
 	bg_event 33, 21, TEXT_CELADONCITY_PRIZEEXCHANGE_SIGN
 	bg_event 27, 21, TEXT_CELADONCITY_GAMECORNER_SIGN
 
-	def_object_events
+	.DB 9
 	object_event  8, 17, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, TEXT_CELADONCITY_LITTLE_GIRL
 	object_event 11, 28, SPRITE_GRAMPS, STAY, UP, TEXT_CELADONCITY_GRAMPS1
 	object_event 14, 19, SPRITE_GIRL, WALK, UP_DOWN, TEXT_CELADONCITY_GIRL
@@ -49,4 +49,28 @@ CeladonCity_Object:
 	object_event 32, 29, SPRITE_ROCKET, WALK, LEFT_RIGHT, TEXT_CELADONCITY_ROCKET1
 	object_event 42, 14, SPRITE_ROCKET, WALK, LEFT_RIGHT, TEXT_CELADONCITY_ROCKET2
 
-	def_warps_to CELADON_CITY
+	event_displacement CELADON_CITY_WIDTH, 8, 13
+
+	event_displacement CELADON_CITY_WIDTH, 10, 13
+
+	event_displacement CELADON_CITY_WIDTH, 24, 9
+
+	event_displacement CELADON_CITY_WIDTH, 24, 3
+
+	event_displacement CELADON_CITY_WIDTH, 25, 3
+
+	event_displacement CELADON_CITY_WIDTH, 41, 9
+
+	event_displacement CELADON_CITY_WIDTH, 12, 27
+
+	event_displacement CELADON_CITY_WIDTH, 28, 19
+
+	event_displacement CELADON_CITY_WIDTH, 39, 19
+
+	event_displacement CELADON_CITY_WIDTH, 33, 19
+
+	event_displacement CELADON_CITY_WIDTH, 31, 27
+
+	event_displacement CELADON_CITY_WIDTH, 35, 27
+
+	event_displacement CELADON_CITY_WIDTH, 43, 27

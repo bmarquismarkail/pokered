@@ -13,13 +13,13 @@ EvolveMon:
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld a, SFX_TINK
 	call PlaySound
 	call Delay3
 	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
+	ldh [lobyte(hTileAnimations)], a
 	ld a, [wEvoOldSpecies]
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld c, 0
@@ -37,35 +37,35 @@ EvolveMon:
 	ld [wCurSpecies], a
 	call Evolution_LoadPic
 	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld a, [wEvoOldSpecies]
 	call PlayCry
 	call WaitForSoundToFinish
-	ld c, BANK(Music_SafariZone)
+	ld c, bank(Music_SafariZone)
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld c, 80
 	call DelayFrames
 	ld c, 1 ; set PAL_BLACK instead of mon palette
 	call EvolutionSetWholeScreenPalette
-	lb bc, $1, $10
-.animLoop
+	lb "bc", $1, $10
+EvolveMon.animLoop
 	push bc
 	call Evolution_CheckForCancel
-	jr c, .evolutionCancelled
+	jr c, EvolveMon.evolutionCancelled
 	call Evolution_BackAndForthAnim
 	pop bc
 	inc b
 	dec c
 	dec c
-	jr nz, .animLoop
+	jr nz, EvolveMon.animLoop
 	xor a
 	ld [wEvoCancelled], a
 	ld a, $31
 	ld [wEvoMonTileOffset], a
 	call Evolution_ChangeMonPic ; show the new species pic
 	ld a, [wEvoNewSpecies]
-.done
+EvolveMon.done
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
@@ -86,12 +86,12 @@ EvolveMon:
 	ret z
 	scf
 	ret
-.evolutionCancelled
+EvolveMon.evolutionCancelled
 	pop bc
 	ld a, 1
 	ld [wEvoCancelled], a
 	ld a, [wEvoOldSpecies]
-	jr .done
+	jr EvolveMon.done
 
 EvolutionSetWholeScreenPalette:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
@@ -117,24 +117,24 @@ Evolution_BackAndForthAnim:
 Evolution_ChangeMonPic:
 	push bc
 	xor a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	hlcoord 7, 2
-	lb bc, 7, 7
+	lb "bc", 7, 7
 	ld de, SCREEN_WIDTH - 7
-.loop
+Evolution_ChangeMonPic.loop
 	push bc
-.innerLoop
+Evolution_ChangeMonPic.innerLoop
 	ld a, [wEvoMonTileOffset]
 	add [hl]
 	ld [hli], a
 	dec c
-	jr nz, .innerLoop
+	jr nz, Evolution_ChangeMonPic.innerLoop
 	pop bc
 	add hl, de
 	dec b
-	jr nz, .loop
+	jr nz, Evolution_ChangeMonPic.loop
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call Delay3
 	pop bc
 	ret
@@ -143,18 +143,18 @@ Evolution_CheckForCancel:
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	pop bc
 	and PAD_B
-	jr nz, .pressedB
-.notAllowedToCancel
+	jr nz, Evolution_CheckForCancel.pressedB
+Evolution_CheckForCancel.notAllowedToCancel
 	dec c
 	jr nz, Evolution_CheckForCancel
 	and a
 	ret
-.pressedB
+Evolution_CheckForCancel.pressedB
 	ld a, [wForceEvolution]
 	and a
-	jr nz, .notAllowedToCancel
+	jr nz, Evolution_CheckForCancel.notAllowedToCancel
 	scf
 	ret

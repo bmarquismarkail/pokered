@@ -8,39 +8,39 @@ MrPsychicsHouse_TextPointers:
 MrPsychicsHouseMrPsychicText:
 	text_asm
 	CheckEvent EVENT_GOT_TM29
-	jr nz, .got_item
-	ld hl, .YouWantedThisText
+	jr nz, MrPsychicsHouseMrPsychicText.got_item
+	ld hl, MrPsychicsHouseMrPsychicText.YouWantedThisText
 	call PrintText
-	lb bc, TM_PSYCHIC_M, 1
+	lb "bc", TM_PSYCHIC_M, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedTM29Text
+	jr nc, MrPsychicsHouseMrPsychicText.bag_full
+	ld hl, MrPsychicsHouseMrPsychicText.ReceivedTM29Text
 	call PrintText
 	SetEvent EVENT_GOT_TM29
-	jr .done
-.bag_full
-	ld hl, .TM29NoRoomText
+	jr MrPsychicsHouseMrPsychicText.done
+MrPsychicsHouseMrPsychicText.bag_full
+	ld hl, MrPsychicsHouseMrPsychicText.TM29NoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .TM29ExplanationText
+	jr MrPsychicsHouseMrPsychicText.done
+MrPsychicsHouseMrPsychicText.got_item
+	ld hl, MrPsychicsHouseMrPsychicText.TM29ExplanationText
 	call PrintText
-.done
+MrPsychicsHouseMrPsychicText.done
 	jp TextScriptEnd
 
-.YouWantedThisText:
-	text_far _MrPsychicsHouseMrPsychicYouWantedThisText
+MrPsychicsHouseMrPsychicText.YouWantedThisText:
+	text_far WLA_GLOBAL_MrPsychicsHouseMrPsychicYouWantedThisText
 	text_end
 
-.ReceivedTM29Text:
-	text_far _MrPsychicsHouseMrPsychicReceivedTM29Text
+MrPsychicsHouseMrPsychicText.ReceivedTM29Text:
+	text_far WLA_GLOBAL_MrPsychicsHouseMrPsychicReceivedTM29Text
 	sound_get_item_1
 	text_end
 
-.TM29ExplanationText:
-	text_far _MrPsychicsHouseMrPsychicTM29ExplanationText
+MrPsychicsHouseMrPsychicText.TM29ExplanationText:
+	text_far WLA_GLOBAL_MrPsychicsHouseMrPsychicTM29ExplanationText
 	text_end
 
-.TM29NoRoomText:
-	text_far _MrPsychicsHouseMrPsychicTM29NoRoomText
+MrPsychicsHouseMrPsychicText.TM29NoRoomText:
+	text_far WLA_GLOBAL_MrPsychicsHouseMrPsychicTM29NoRoomText
 	text_end

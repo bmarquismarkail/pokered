@@ -1,17 +1,17 @@
-	db DEX_GOLDUCK ; pokedex id
+	.DB DEX_GOLDUCK ; pokedex id
 
-	db  80,  82,  78,  85,  80
+	.DB  80,  82,  78,  85,  80
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 75 ; catch rate
-	db 174 ; base exp
+	.DB WATER, WATER ; type
+	.DB 75 ; catch rate
+	.DB 174 ; base exp
 
-	INCBIN "gfx/pokemon/front/golduck.pic", 0, 1 ; sprite dimensions
-	dw GolduckPicFront, GolduckPicBack
+	.INCBIN "gfx/pokemon/front/golduck.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GolduckPicFront, GolduckPicBack
 
-	db SCRATCH, TAIL_WHIP, DISABLE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, TAIL_WHIP, DISABLE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,10 +1,10 @@
-MACRO tileset
-	db BANK(\1_GFX)
-	dw \1_Block, \1_GFX, \1_Coll
-	db \2, \3, \4 ; counter tiles
-	db \5         ; grass tile
-	db \6         ; animations (TILEANIM_* value)
-ENDM
+.MACRO tileset
+	.DB bank(\1_GFX)
+	.DW \1_Block, \1_GFX, \1_Coll
+	.DB \2, \3, \4 ; counter tiles
+	.DB \5         ; grass tile
+	.DB \6         ; animations (TILEANIM_* value)
+.ENDM
 
 Tilesets:
 	table_width 12

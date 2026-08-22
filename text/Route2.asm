@@ -1,9 +1,11 @@
-_Route2SignText::
+_Route2SignText:
+WLA_GLOBAL_Route2SignText:
 	text "ROUTE 2"
 	line "VIRIDIAN CITY -"
 	cont "PEWTER CITY"
 	done
 
-_Route2DiglettsCaveSignText::
+_Route2DiglettsCaveSignText:
+WLA_GLOBAL_Route2DiglettsCaveSignText:
 	text "DIGLETT's CAVE"
 	done

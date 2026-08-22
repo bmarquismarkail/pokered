@@ -8,9 +8,9 @@ VermilionMart_TextPointers:
 	dw_const VermilionMartCooltrainerFText, TEXT_VERMILIONMART_COOLTRAINER_F
 
 VermilionMartCooltrainerMText:
-	text_far _VermilionMartCooltrainerMText
+	text_far WLA_GLOBAL_VermilionMartCooltrainerMText
 	text_end
 
 VermilionMartCooltrainerFText:
-	text_far _VermilionMartCooltrainerFText
+	text_far WLA_GLOBAL_VermilionMartCooltrainerFText
 	text_end

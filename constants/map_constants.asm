@@ -1,15 +1,20 @@
-MACRO map_const
+.ARRAYDEFINE NAME map_widths SIZE 256
+.ARRAYDEFINE NAME map_heights SIZE 256
+
+.MACRO map_const
+	.ARRAYIN NAME map_widths INDEX const_value VALUE \2
+	.ARRAYIN NAME map_heights INDEX const_value VALUE \3
 	const \1
-	DEF \1_WIDTH EQU \2
-	DEF \1_HEIGHT EQU \3
-ENDM
+	.DEFINE \1_WIDTH \2
+	.DEFINE \1_HEIGHT \3
+.ENDM
 
 ; "Indoor" maps are grouped sequentially (see data/maps/town_map_entries.asm)
-DEF NUM_INDOOR_MAP_GROUPS EQU 0
-MACRO end_indoor_group
-	DEF INDOORGROUP_\1 EQU const_value
-	REDEF NUM_INDOOR_MAP_GROUPS EQU NUM_INDOOR_MAP_GROUPS + 1
-ENDM
+.DEFINE NUM_INDOOR_MAP_GROUPS 0
+.MACRO end_indoor_group
+	.DEFINE INDOORGROUP_\1 const_value
+	.REDEFINE NUM_INDOOR_MAP_GROUPS NUM_INDOOR_MAP_GROUPS + 1
+.ENDM
 
 ; map ids
 ; indexes for:
@@ -34,11 +39,11 @@ ENDM
 	map_const CINNABAR_ISLAND,               10,  9 ; $08
 	map_const INDIGO_PLATEAU,                10,  9 ; $09
 	map_const SAFFRON_CITY,                  20, 18 ; $0A
-DEF NUM_CITY_MAPS EQU const_value
+.DEFINE NUM_CITY_MAPS const_value
 
 	map_const UNUSED_MAP_0B,                  0,  0 ; $0B
 
-DEF FIRST_ROUTE_MAP EQU const_value
+.DEFINE FIRST_ROUTE_MAP const_value
 	map_const ROUTE_1,                       10, 18 ; $0C
 	map_const ROUTE_2,                       10, 36 ; $0D
 	map_const ROUTE_3,                       35,  9 ; $0E
@@ -65,7 +70,7 @@ DEF FIRST_ROUTE_MAP EQU const_value
 	map_const ROUTE_24,                      10, 18 ; $23
 	map_const ROUTE_25,                      30,  9 ; $24
 
-DEF FIRST_INDOOR_MAP EQU const_value
+.DEFINE FIRST_INDOOR_MAP const_value
 	map_const REDS_HOUSE_1F,                  4,  4 ; $25
 	map_const REDS_HOUSE_2F,                  4,  4 ; $26
 	map_const BLUES_HOUSE,                    4,  4 ; $27
@@ -396,10 +401,10 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7
 	end_indoor_group POKEMON_LEAGUE_3
-DEF NUM_MAPS EQU const_value
+.DEFINE NUM_MAPS const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps
 ; This map ID takes the player back to the last outdoor map they were on, stored in wLastMap
-DEF LAST_MAP EQU $ff
+.DEFINE LAST_MAP $ff
 
-ASSERT NUM_MAPS <= LAST_MAP, "map IDs overlap LAST_MAP"
+.ASSERT NUM_MAPS <= LAST_MAP

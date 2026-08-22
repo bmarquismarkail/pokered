@@ -7,12 +7,12 @@ ViridianMart_Script:
 
 ViridianMartCheckParcelDeliveredScript:
 	CheckEvent EVENT_OAK_GOT_PARCEL
-	jr nz, .delivered_parcel
+	jr nz, ViridianMartCheckParcelDeliveredScript.delivered_parcel
 	ld hl, ViridianMart_TextPointers
-	jr .done
-.delivered_parcel
+	jr ViridianMartCheckParcelDeliveredScript.done
+ViridianMartCheckParcelDeliveredScript.delivered_parcel
 	ld hl, ViridianMart_TextPointers2
-.done
+ViridianMartCheckParcelDeliveredScript.done
 	ld a, l
 	ld [wCurMapTextPtr], a
 	ld a, h
@@ -28,10 +28,10 @@ ViridianMart_ScriptPointers:
 ViridianMartDefaultScript:
 	call UpdateSprites
 	ld a, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, .PlayerMovement
+	ld de, ViridianMartDefaultScript.PlayerMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -40,10 +40,10 @@ ViridianMartDefaultScript:
 	ld [wViridianMartCurScript], a
 	ret
 
-.PlayerMovement:
-	db PAD_LEFT, 1
-	db PAD_UP, 2
-	db -1 ; end
+ViridianMartDefaultScript.PlayerMovement:
+	.DB PAD_LEFT, 1
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 ViridianMartOaksParcelScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -51,9 +51,9 @@ ViridianMartOaksParcelScript:
 	ret nz
 	call Delay3
 	ld a, TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-	lb bc, OAKS_PARCEL, 1
+	lb "bc", OAKS_PARCEL, 1
 	call GiveItem
 	SetEvent EVENT_GOT_OAKS_PARCEL
 	ld a, SCRIPT_VIRIDIANMART_NOOP
@@ -63,9 +63,9 @@ ViridianMartNoopScript:
 	ret
 
 ViridianMart_TextPointers:
-	dw ViridianMartClerkSayHiToOakText
-	dw ViridianMartYoungsterText
-	dw ViridianMartCooltrainerMText
+	.DW ViridianMartClerkSayHiToOakText
+	.DW ViridianMartYoungsterText
+	.DW ViridianMartCooltrainerMText
 	const_def 4
 	dw_const ViridianMartClerkYouCameFromPalletTownText, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
 	dw_const ViridianMartClerkParcelQuestText,           TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
@@ -78,22 +78,22 @@ ViridianMart_TextPointers2:
 	dw_const ViridianMartCooltrainerMText, TEXT_VIRIDIANMART_COOLTRAINER_M
 
 ViridianMartClerkSayHiToOakText:
-	text_far _ViridianMartClerkSayHiToOakText
+	text_far WLA_GLOBAL_ViridianMartClerkSayHiToOakText
 	text_end
 
 ViridianMartClerkYouCameFromPalletTownText:
-	text_far _ViridianMartClerkYouCameFromPalletTownText
+	text_far WLA_GLOBAL_ViridianMartClerkYouCameFromPalletTownText
 	text_end
 
 ViridianMartClerkParcelQuestText:
-	text_far _ViridianMartClerkParcelQuestText
+	text_far WLA_GLOBAL_ViridianMartClerkParcelQuestText
 	sound_get_key_item
 	text_end
 
 ViridianMartYoungsterText:
-	text_far _ViridianMartYoungsterText
+	text_far WLA_GLOBAL_ViridianMartYoungsterText
 	text_end
 
 ViridianMartCooltrainerMText:
-	text_far _ViridianMartCooltrainerMText
+	text_far WLA_GLOBAL_ViridianMartCooltrainerMText
 	text_end

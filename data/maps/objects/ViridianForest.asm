@@ -9,9 +9,9 @@
 	const_export VIRIDIANFOREST_YOUNGSTER5
 
 ViridianForest_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 6
 	warp_event  1,  0, VIRIDIAN_FOREST_NORTH_GATE, 3
 	warp_event  2,  0, VIRIDIAN_FOREST_NORTH_GATE, 4
 	warp_event 15, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
@@ -19,7 +19,7 @@ ViridianForest_Object:
 	warp_event 17, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
 	warp_event 18, 47, VIRIDIAN_FOREST_SOUTH_GATE, 2
 
-	def_bg_events
+	.DB 6
 	bg_event 24, 40, TEXT_VIRIDIANFOREST_TRAINER_TIPS1
 	bg_event 16, 32, TEXT_VIRIDIANFOREST_USE_ANTIDOTE_SIGN
 	bg_event 26, 17, TEXT_VIRIDIANFOREST_TRAINER_TIPS2
@@ -27,7 +27,7 @@ ViridianForest_Object:
 	bg_event 18, 45, TEXT_VIRIDIANFOREST_TRAINER_TIPS4
 	bg_event  2,  1, TEXT_VIRIDIANFOREST_LEAVING_SIGN
 
-	def_object_events
+	.DB 8
 	object_event 16, 43, SPRITE_YOUNGSTER, STAY, NONE, TEXT_VIRIDIANFOREST_YOUNGSTER1
 	object_event 30, 33, SPRITE_YOUNGSTER, STAY, LEFT, TEXT_VIRIDIANFOREST_YOUNGSTER2, OPP_BUG_CATCHER, 1
 	object_event 30, 19, SPRITE_YOUNGSTER, STAY, LEFT, TEXT_VIRIDIANFOREST_YOUNGSTER3, OPP_BUG_CATCHER, 2
@@ -37,4 +37,14 @@ ViridianForest_Object:
 	object_event  1, 31, SPRITE_POKE_BALL, STAY, NONE, TEXT_VIRIDIANFOREST_POKE_BALL, POKE_BALL
 	object_event 27, 40, SPRITE_YOUNGSTER, STAY, NONE, TEXT_VIRIDIANFOREST_YOUNGSTER5
 
-	def_warps_to VIRIDIAN_FOREST
+	event_displacement VIRIDIAN_FOREST_WIDTH, 1, 0
+
+	event_displacement VIRIDIAN_FOREST_WIDTH, 2, 0
+
+	event_displacement VIRIDIAN_FOREST_WIDTH, 15, 47
+
+	event_displacement VIRIDIAN_FOREST_WIDTH, 16, 47
+
+	event_displacement VIRIDIAN_FOREST_WIDTH, 17, 47
+
+	event_displacement VIRIDIAN_FOREST_WIDTH, 18, 47

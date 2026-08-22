@@ -13,15 +13,15 @@ CeladonMansion3F_TextPointers:
 	dw_const CeladonMansion3FDevRoomSignText,    TEXT_CELADONMANSION3F_DEV_ROOM_SIGN
 
 CeladonMansion3FProgrammerText:
-	text_far _CeladonMansion3FProgrammerText
+	text_far WLA_GLOBAL_CeladonMansion3FProgrammerText
 	text_end
 
 CeladonMansion3FGraphicArtistText:
-	text_far _CeladonMansion3FGraphicArtistText
+	text_far WLA_GLOBAL_CeladonMansion3FGraphicArtistText
 	text_end
 
 CeladonMansion3FWriterText:
-	text_far _CeladonMansion3FWriterText
+	text_far WLA_GLOBAL_CeladonMansion3FWriterText
 	text_end
 
 CeladonMansion3FGameDesignerText:
@@ -31,21 +31,21 @@ CeladonMansion3FGameDesignerText:
 	call CountSetBits
 	ld a, [wNumSetBits]
 	cp NUM_POKEMON - 1 ; discount Mew
-	jr nc, .completed_dex
-	ld hl, .Text
-	jr .done
-.completed_dex
-	ld hl, .CompletedDexText
-.done
+	jr nc, CeladonMansion3FGameDesignerText.completed_dex
+	ld hl, CeladonMansion3FGameDesignerText.Text
+	jr CeladonMansion3FGameDesignerText.done
+CeladonMansion3FGameDesignerText.completed_dex
+	ld hl, CeladonMansion3FGameDesignerText.CompletedDexText
+CeladonMansion3FGameDesignerText.done
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _CeladonMansion3FGameDesignerText
+CeladonMansion3FGameDesignerText.Text:
+	text_far WLA_GLOBAL_CeladonMansion3FGameDesignerText
 	text_end
 
-.CompletedDexText:
-	text_far _CeladonMansion3FGameDesignerCompletedDexText
+CeladonMansion3FGameDesignerText.CompletedDexText:
+	text_far WLA_GLOBAL_CeladonMansion3FGameDesignerCompletedDexText
 	text_promptbutton
 	text_asm
 	callfar DisplayDiploma
@@ -54,17 +54,17 @@ CeladonMansion3FGameDesignerText:
 	jp TextScriptEnd
 
 CeladonMansion3FGameProgramPCText:
-	text_far _CeladonMansion3FGameProgramPCText
+	text_far WLA_GLOBAL_CeladonMansion3FGameProgramPCText
 	text_end
 
 CeladonMansion3FPlayingGamePCText:
-	text_far _CeladonMansion3FPlayingGamePCText
+	text_far WLA_GLOBAL_CeladonMansion3FPlayingGamePCText
 	text_end
 
 CeladonMansion3FGameScriptPCText:
-	text_far _CeladonMansion3FGameScriptPCText
+	text_far WLA_GLOBAL_CeladonMansion3FGameScriptPCText
 	text_end
 
 CeladonMansion3FDevRoomSignText:
-	text_far _CeladonMansion3FDevRoomSignText
+	text_far WLA_GLOBAL_CeladonMansion3FDevRoomSignText
 	text_end

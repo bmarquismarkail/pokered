@@ -8,9 +8,9 @@ FuchsiaMart_TextPointers:
 	dw_const FuchsiaMartCooltrainerFText,  TEXT_FUCHSIAMART_COOLTRAINER_F
 
 FuchsiaMartMiddleAgedManText:
-	text_far _FuchsiaMartMiddleAgedManText
+	text_far WLA_GLOBAL_FuchsiaMartMiddleAgedManText
 	text_end
 
 FuchsiaMartCooltrainerFText:
-	text_far _FuchsiaMartCooltrainerFText
+	text_far WLA_GLOBAL_FuchsiaMartCooltrainerFText
 	text_end

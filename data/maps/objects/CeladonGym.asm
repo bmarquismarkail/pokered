@@ -9,15 +9,14 @@
 	const_export CELADONGYM_COOLTRAINER_F4
 
 CeladonGym_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  4, 17, LAST_MAP, 7
 	warp_event  5, 17, LAST_MAP, 7
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 8
 	object_event  4,  3, SPRITE_SILPH_WORKER_F, STAY, DOWN, TEXT_CELADONGYM_ERIKA, OPP_ERIKA, 1
 	object_event  2, 11, SPRITE_COOLTRAINER_F, STAY, RIGHT, TEXT_CELADONGYM_COOLTRAINER_F1, OPP_LASS, 17
 	object_event  7, 10, SPRITE_BEAUTY, STAY, LEFT, TEXT_CELADONGYM_BEAUTY1, OPP_BEAUTY, 1
@@ -27,4 +26,6 @@ CeladonGym_Object:
 	object_event  3,  3, SPRITE_BEAUTY, STAY, DOWN, TEXT_CELADONGYM_BEAUTY3, OPP_BEAUTY, 3
 	object_event  5,  3, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_CELADONGYM_COOLTRAINER_F4, OPP_COOLTRAINER_F, 1
 
-	def_warps_to CELADON_GYM
+	event_displacement CELADON_GYM_WIDTH, 4, 17
+
+	event_displacement CELADON_GYM_WIDTH, 5, 17

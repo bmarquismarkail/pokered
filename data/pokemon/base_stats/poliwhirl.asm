@@ -1,17 +1,17 @@
-	db DEX_POLIWHIRL ; pokedex id
+	.DB DEX_POLIWHIRL ; pokedex id
 
-	db  65,  65,  65,  90,  50
+	.DB  65,  65,  65,  90,  50
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 120 ; catch rate
-	db 131 ; base exp
+	.DB WATER, WATER ; type
+	.DB 120 ; catch rate
+	.DB 131 ; base exp
 
-	INCBIN "gfx/pokemon/front/poliwhirl.pic", 0, 1 ; sprite dimensions
-	dw PoliwhirlPicFront, PoliwhirlPicBack
+	.INCBIN "gfx/pokemon/front/poliwhirl.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PoliwhirlPicFront, PoliwhirlPicBack
 
-	db BUBBLE, HYPNOSIS, WATER_GUN, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB BUBBLE, HYPNOSIS, WATER_GUN, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -15,14 +15,14 @@ BrunoShowOrHideExitBlock:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
+	jr z, BrunoShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $5
-	jp .setExitBlock
-.blockExitToNextRoom
+	jp BrunoShowOrHideExitBlock.setExitBlock
+BrunoShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $24
-.setExitBlock
+BrunoShowOrHideExitBlock.setExitBlock
 	ld [wNewTileBlockID], a
-	lb bc, 0, 2
+	lb "bc", 0, 2
 	predef_jump ReplaceTileBlock
 
 ResetBrunoScript:
@@ -64,18 +64,18 @@ BrunosRoomDefaultScript:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyHeld)], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing one tile above the exit?
-	jr c, .stopPlayerFromLeaving
+	jr c, BrunosRoomDefaultScript.stopPlayerFromLeaving
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_BRUNOS_ROOM
 	jr z, BrunoScriptWalkIntoRoom
-.stopPlayerFromLeaving
+BrunosRoomDefaultScript.stopPlayerFromLeaving
 	ld a, TEXT_BRUNOSROOM_BRUNO_DONT_RUN_AWAY
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID  ; "Don't run away!"
 	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -92,7 +92,7 @@ BrunoEntranceCoords:
 	dbmapcoord  5, 10
 	dbmapcoord  4, 11
 	dbmapcoord  5, 11
-	db -1 ; end
+	.DB -1 ; end
 
 BrunosRoomPlayerIsMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -111,7 +111,7 @@ BrunosRoomBrunoEndBattleScript:
 	cp $ff
 	jp z, ResetBrunoScript
 	ld a, TEXT_BRUNOSROOM_BRUNO
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 BrunosRoom_TextPointers:
@@ -123,7 +123,7 @@ BrunosRoomTrainerHeaders:
 	def_trainers
 BrunosRoomTrainerHeader0:
 	trainer EVENT_BEAT_BRUNOS_ROOM_TRAINER_0, 0, BrunoBeforeBattleText, BrunoEndBattleText, BrunoAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 BrunosRoomBrunoText:
 	text_asm
@@ -132,17 +132,17 @@ BrunosRoomBrunoText:
 	jp TextScriptEnd
 
 BrunoBeforeBattleText:
-	text_far _BrunoBeforeBattleText
+	text_far WLA_GLOBAL_BrunoBeforeBattleText
 	text_end
 
 BrunoEndBattleText:
-	text_far _BrunoEndBattleText
+	text_far WLA_GLOBAL_BrunoEndBattleText
 	text_end
 
 BrunoAfterBattleText:
-	text_far _BrunoAfterBattleText
+	text_far WLA_GLOBAL_BrunoAfterBattleText
 	text_end
 
 BrunosRoomBrunoDontRunAwayText:
-	text_far _BrunosRoomBrunoDontRunAwayText
+	text_far WLA_GLOBAL_BrunosRoomBrunoDontRunAwayText
 	text_end

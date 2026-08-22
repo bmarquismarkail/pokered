@@ -1,4 +1,5 @@
-_ChampionsRoomRivalIntroText::
+_ChampionsRoomRivalIntroText:
+WLA_GLOBAL_ChampionsRoomRivalIntroText:
 	text "<RIVAL>: Hey!"
 
 	para "I was looking"
@@ -35,7 +36,8 @@ _ChampionsRoomRivalIntroText::
 	cont "in the world!"
 	done
 
-_RivalDefeatedText::
+_RivalDefeatedText:
+WLA_GLOBAL_RivalDefeatedText:
 	text "NO!"
 	line "That can't be!"
 	cont "You beat my best!"
@@ -49,7 +51,8 @@ _RivalDefeatedText::
 	cont "It's not fair!"
 	prompt
 
-_RivalVictoryText::
+_RivalVictoryText:
+WLA_GLOBAL_RivalVictoryText:
 	text "Hahaha!"
 	line "I won, I won!"
 
@@ -65,7 +68,8 @@ _RivalVictoryText::
 	line "Hahaha!"
 	prompt
 
-_ChampionsRoomRivalAfterBattleText::
+_ChampionsRoomRivalAfterBattleText:
+WLA_GLOBAL_ChampionsRoomRivalAfterBattleText:
 	text "Why?"
 	line "Why did I lose?"
 
@@ -81,11 +85,13 @@ _ChampionsRoomRivalAfterBattleText::
 	line "like to admit it."
 	done
 
-_ChampionsRoomOakText::
+_ChampionsRoomOakText:
+WLA_GLOBAL_ChampionsRoomOakText:
 	text "OAK: <PLAYER>!"
 	done
 
-_ChampionsRoomOakCongratulatesPlayerText::
+_ChampionsRoomOakCongratulatesPlayerText:
+WLA_GLOBAL_ChampionsRoomOakCongratulatesPlayerText:
 	text "OAK: So, you won!"
 	line "Congratulations!"
 	cont "You're the new"
@@ -103,7 +109,8 @@ _ChampionsRoomOakCongratulatesPlayerText::
 	line "come of age!"
 	done
 
-_ChampionsRoomOakDisappointedWithRivalText::
+_ChampionsRoomOakDisappointedWithRivalText:
+WLA_GLOBAL_ChampionsRoomOakDisappointedWithRivalText:
 	text "OAK: <RIVAL>! I'm"
 	line "disappointed!"
 
@@ -129,7 +136,8 @@ _ChampionsRoomOakDisappointedWithRivalText::
 	cont "a champ again!"
 	done
 
-_ChampionsRoomOakComeWithMeText::
+_ChampionsRoomOakComeWithMeText:
+WLA_GLOBAL_ChampionsRoomOakComeWithMeText:
 	text "OAK: <PLAYER>!"
 
 	para "You understand"

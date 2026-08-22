@@ -16,13 +16,13 @@ DontAbandonLearning:
 	ld d, h
 	ld e, l
 	ld b, NUM_MOVES
-.findEmptyMoveSlotLoop
+DontAbandonLearning.findEmptyMoveSlotLoop
 	ld a, [hl]
 	and a
-	jr z, .next
+	jr z, DontAbandonLearning.next
 	inc hl
 	dec b
-	jr nz, .findEmptyMoveSlotLoop
+	jr nz, DontAbandonLearning.findEmptyMoveSlotLoop
 	push de
 	call TryingToLearn
 	pop de
@@ -35,7 +35,7 @@ DontAbandonLearning:
 	call PrintText
 	pop de
 	pop hl
-.next
+DontAbandonLearning.next
 	ld a, [wMoveNum]
 	ld [hl], a
 	ld bc, MON_PP - MON_MOVES
@@ -47,7 +47,7 @@ DontAbandonLearning:
 	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld de, wBuffer
-	ld a, BANK(Moves)
+	ld a, bank(Moves)
 	call FarCopyData
 	ld a, [wBuffer + MOVE_PP]
 	pop de
@@ -77,7 +77,7 @@ AbandonLearning:
 	ld hl, AbandonLearningText
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -100,7 +100,7 @@ TryingToLearn:
 	ld hl, TryingToLearnText
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -116,7 +116,7 @@ TryingToLearn:
 	call CopyData
 	callfar FormatMovesString
 	pop hl
-.loop
+TryingToLearn.loop
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
@@ -126,13 +126,13 @@ TryingToLearn:
 	call TextBoxBorder
 	hlcoord 6, 8
 	ld de, wMovesString
-	ldh a, [hUILayoutFlags]
+	ldh a, [lobyte(hUILayoutFlags)]
 	set BIT_SINGLE_SPACED_LINES, a
-	ldh [hUILayoutFlags], a
+	ldh [lobyte(hUILayoutFlags)], a
 	call PlaceString
-	ldh a, [hUILayoutFlags]
+	ldh a, [lobyte(hUILayoutFlags)]
 	res BIT_SINGLE_SPACED_LINES, a
-	ldh [hUILayoutFlags], a
+	ldh [lobyte(hUILayoutFlags)], a
 	ld hl, wTopMenuItemY
 	ld a, 8
 	ld [hli], a ; wTopMenuItemY
@@ -156,7 +156,7 @@ TryingToLearn:
 	pop af
 	pop hl
 	bit B_PAD_B, a
-	jr nz, .cancel
+	jr nz, TryingToLearn.cancel
 	push hl
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -169,44 +169,44 @@ TryingToLearn:
 	pop bc
 	pop de
 	ld a, d
-	jr c, .hm
+	jr c, TryingToLearn.hm
 	pop hl
 	add hl, bc
 	and a
 	ret
-.hm
+TryingToLearn.hm
 	ld hl, HMCantDeleteText
 	call PrintText
 	pop hl
-	jr .loop
-.cancel
+	jr TryingToLearn.loop
+TryingToLearn.cancel
 	scf
 	ret
 
 LearnedMove1Text:
-	text_far _LearnedMove1Text
+	text_far WLA_GLOBAL_LearnedMove1Text
 	sound_get_item_1 ; plays SFX_GET_ITEM_1 in the party menu (rare candy) and plays SFX_LEVEL_UP in battle
 	text_promptbutton
 	text_end
 
 WhichMoveToForgetText:
-	text_far _WhichMoveToForgetText
+	text_far WLA_GLOBAL_WhichMoveToForgetText
 	text_end
 
 AbandonLearningText:
-	text_far _AbandonLearningText
+	text_far WLA_GLOBAL_AbandonLearningText
 	text_end
 
 DidNotLearnText:
-	text_far _DidNotLearnText
+	text_far WLA_GLOBAL_DidNotLearnText
 	text_end
 
 TryingToLearnText:
-	text_far _TryingToLearnText
+	text_far WLA_GLOBAL_TryingToLearnText
 	text_end
 
 OneTwoAndText:
-	text_far _OneTwoAndText
+	text_far WLA_GLOBAL_OneTwoAndText
 	text_pause
 	text_asm
 	ld a, SFX_SWAP
@@ -215,12 +215,12 @@ OneTwoAndText:
 	ret
 
 PoofText:
-	text_far _PoofText
+	text_far WLA_GLOBAL_PoofText
 	text_pause
 ForgotAndText:
-	text_far _ForgotAndText
+	text_far WLA_GLOBAL_ForgotAndText
 	text_end
 
 HMCantDeleteText:
-	text_far _HMCantDeleteText
+	text_far WLA_GLOBAL_HMCantDeleteText
 	text_end

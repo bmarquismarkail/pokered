@@ -13,11 +13,11 @@ ViridianPokecenterNurseText:
 	script_pokecenter_nurse
 
 ViridianPokecenterGentlemanText:
-	text_far _ViridianPokecenterGentlemanText
+	text_far WLA_GLOBAL_ViridianPokecenterGentlemanText
 	text_end
 
 ViridianPokecenterCooltrainerMText:
-	text_far _ViridianPokecenterCooltrainerMText
+	text_far WLA_GLOBAL_ViridianPokecenterCooltrainerMText
 	text_end
 
 ViridianPokecenterLinkReceptionistText:

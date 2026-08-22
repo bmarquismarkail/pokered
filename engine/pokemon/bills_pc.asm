@@ -1,42 +1,42 @@
-DisplayPCMainMenu::
+DisplayPCMainMenu:
 	xor a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call SaveScreenTilesToBuffer2
 	ld a, [wNumHoFTeams]
 	and a
-	jr nz, .leaguePCAvailable
+	jr nz, DisplayPCMainMenu.leaguePCAvailable
 	CheckEvent EVENT_GOT_POKEDEX
-	jr z, .noOaksPC
+	jr z, DisplayPCMainMenu.noOaksPC
 	ld a, [wNumHoFTeams]
 	and a
-	jr nz, .leaguePCAvailable
+	jr nz, DisplayPCMainMenu.leaguePCAvailable
 	hlcoord 0, 0
 	ld b, 8
 	ld c, 14
-	jr .next
-.noOaksPC
+	jr DisplayPCMainMenu.next
+DisplayPCMainMenu.noOaksPC
 	hlcoord 0, 0
 	ld b, 6
 	ld c, 14
-	jr .next
-.leaguePCAvailable
+	jr DisplayPCMainMenu.next
+DisplayPCMainMenu.leaguePCAvailable
 	hlcoord 0, 0
 	ld b, 10
 	ld c, 14
-.next
+DisplayPCMainMenu.next
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 3
 	ld [wMaxMenuItem], a
 	CheckEvent EVENT_MET_BILL
-	jr nz, .metBill
+	jr nz, DisplayPCMainMenu.metBill
 	hlcoord 2, 2
 	ld de, SomeonesPCText
-	jr .next2
-.metBill
+	jr DisplayPCMainMenu.next2
+DisplayPCMainMenu.metBill
 	hlcoord 2, 2
 	ld de, BillsPCText
-.next2
+DisplayPCMainMenu.next2
 	call PlaceString
 	hlcoord 2, 4
 	ld de, wPlayerName
@@ -46,13 +46,13 @@ DisplayPCMainMenu::
 	ld de, PlayersPCText
 	call PlaceString
 	CheckEvent EVENT_GOT_POKEDEX
-	jr z, .noOaksPC2
+	jr z, DisplayPCMainMenu.noOaksPC2
 	hlcoord 2, 6
 	ld de, OaksPCText
 	call PlaceString
 	ld a, [wNumHoFTeams]
 	and a
-	jr z, .noLeaguePC
+	jr z, DisplayPCMainMenu.noLeaguePC
 	ld a, 4
 	ld [wMaxMenuItem], a
 	hlcoord 2, 8
@@ -60,17 +60,17 @@ DisplayPCMainMenu::
 	call PlaceString
 	hlcoord 2, 10
 	ld de, LogOffPCText
-	jr .next3
-.noLeaguePC
+	jr DisplayPCMainMenu.next3
+DisplayPCMainMenu.noLeaguePC
 	hlcoord 2, 8
 	ld de, LogOffPCText
-	jr .next3
-.noOaksPC2
+	jr DisplayPCMainMenu.next3
+DisplayPCMainMenu.noOaksPC2
 	ld a, $2
 	ld [wMaxMenuItem], a
 	hlcoord 2, 6
 	ld de, LogOffPCText
-.next3
+DisplayPCMainMenu.next3
 	call PlaceString
 	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
@@ -82,17 +82,23 @@ DisplayPCMainMenu::
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ret
 
-SomeonesPCText:   db "SOMEONE's PC@"
-BillsPCText:      db "BILL's PC@"
-PlayersPCText:    db "'s PC@"
-OaksPCText:       db "PROF.OAK's PC@"
-PKMNLeaguePCText: db "<PKMN>LEAGUE@"
-LogOffPCText:     db "LOG OFF@"
+SomeonesPCText:
+	.STRINGMAP pokemon, "SOMEONE's PC@"
+BillsPCText:
+	.STRINGMAP pokemon, "BILL's PC@"
+PlayersPCText:
+	.STRINGMAP pokemon, "'s PC@"
+OaksPCText:
+	.STRINGMAP pokemon, "PROF.OAK's PC@"
+PKMNLeaguePCText:
+	.STRINGMAP pokemon, "<PKMN>LEAGUE@"
+LogOffPCText:
+	.STRINGMAP pokemon, "LOG OFF@"
 
-BillsPC_::
+BillsPC_:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	xor a
@@ -114,9 +120,9 @@ BillsPC_::
 BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
-	ld hl, vChars2 tile $78
+	ld hl, vChars2 + TILE_SIZE * $78
 	ld de, PokeballTileGraphics
-	lb bc, BANK(PokeballTileGraphics), 1
+	lb "bc", bank(PokeballTileGraphics), 1
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0
@@ -153,22 +159,22 @@ BillsPCMenu:
 	ld a, [wCurrentBoxNum]
 	and BOX_NUM_MASK
 	cp 9
-	jr c, .singleDigitBoxNum
+	jr c, BillsPCMenu.singleDigitBoxNum
 ; two digit box num
 	sub 9
 	hlcoord 17, 16
-	ld [hl], '1'
-	add '0'
-	jr .next
-.singleDigitBoxNum
-	add '1'
-.next
+	ld [hl], $f7
+	add $f6
+	jr BillsPCMenu.next
+BillsPCMenu.singleDigitBoxNum
+	add $f7
+BillsPCMenu.next
 	ldcoord_a 18, 16
 	hlcoord 10, 16
 	ld de, BoxNoPCText
 	call PlaceString
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call Delay3
 	call HandleMenuInput
 	bit B_PAD_B, a
@@ -188,13 +194,13 @@ BillsPCMenu:
 ExitBillsPC:
 	ld a, [wMiscFlags]
 	bit BIT_USING_GENERIC_PC, a
-	jr nz, .next
+	jr nz, ExitBillsPC.next
 ; accessing it directly
 	call LoadTextBoxTilePatterns
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
-.next
+ExitBillsPC.next
 	ld hl, wMiscFlags
 	res BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
@@ -207,18 +213,18 @@ ExitBillsPC:
 BillsPCDeposit:
 	ld a, [wPartyCount]
 	dec a
-	jr nz, .partyLargeEnough
+	jr nz, BillsPCDeposit.partyLargeEnough
 	ld hl, CantDepositLastMonText
 	call PrintText
 	jp BillsPCMenu
-.partyLargeEnough
+BillsPCDeposit.partyLargeEnough
 	ld a, [wBoxCount]
 	cp MONS_PER_BOX
-	jr nz, .boxNotFull
+	jr nz, BillsPCDeposit.boxNotFull
 	ld hl, BoxFullText
 	call PrintText
 	jp BillsPCMenu
-.boxNotFull
+BillsPCDeposit.boxNotFull
 	ld hl, wPartyCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
@@ -238,17 +244,17 @@ BillsPCDeposit:
 	ld a, [wCurrentBoxNum]
 	and BOX_NUM_MASK
 	cp 9
-	jr c, .singleDigitBoxNum
+	jr c, BillsPCDeposit.singleDigitBoxNum
 	sub 9
-	ld [hl], '1'
+	ld [hl], $f7
 	inc hl
-	add '0'
-	jr .next
-.singleDigitBoxNum
-	add '1'
-.next
+	add $f6
+	jr BillsPCDeposit.next
+BillsPCDeposit.singleDigitBoxNum
+	add $f7
+BillsPCDeposit.next
 	ld [hli], a
-	ld [hl], '@'
+	ld [hl], $50
 	ld hl, MonWasStoredText
 	call PrintText
 	jp BillsPCMenu
@@ -256,18 +262,18 @@ BillsPCDeposit:
 BillsPCWithdraw:
 	ld a, [wBoxCount]
 	and a
-	jr nz, .boxNotEmpty
+	jr nz, BillsPCWithdraw.boxNotEmpty
 	ld hl, NoMonText
 	call PrintText
 	jp BillsPCMenu
-.boxNotEmpty
+BillsPCWithdraw.boxNotEmpty
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	jr nz, .partyNotFull
+	jr nz, BillsPCWithdraw.partyNotFull
 	ld hl, CantTakeMonText
 	call PrintText
 	jp BillsPCMenu
-.partyNotFull
+BillsPCWithdraw.partyNotFull
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
@@ -293,11 +299,11 @@ BillsPCWithdraw:
 BillsPCRelease:
 	ld a, [wBoxCount]
 	and a
-	jr nz, .loop
+	jr nz, BillsPCRelease.loop
 	ld hl, NoMonText
 	call PrintText
 	jp BillsPCMenu
-.loop
+BillsPCRelease.loop
 	ld hl, wBoxCount
 	call DisplayMonListMenu
 	jp c, BillsPCMenu
@@ -306,7 +312,7 @@ BillsPCRelease:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .loop
+	jr nz, BillsPCRelease.loop
 	inc a
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
@@ -339,29 +345,29 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW <PKMN>"
+		.STRINGMAP pokemon, "WITHDRAW <PKMN>"
 	next "DEPOSIT <PKMN>"
 	next "RELEASE <PKMN>"
 	next "CHANGE BOX"
 	next "SEE YA!"
-	db "@"
+		.STRINGMAP pokemon, "@"
 
 BoxNoPCText:
-	db "BOX No.@"
+		.STRINGMAP pokemon, "BOX No.@"
 
-KnowsHMMove::
+KnowsHMMove:
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
-	jr .next
+	jr KnowsHMMove.next
 ; unreachable
 	ld hl, wBoxMon1Moves
 	ld bc, BOXMON_STRUCT_LENGTH
-.next
+KnowsHMMove.next
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld b, NUM_MOVES
-.loop
+KnowsHMMove.loop
 	ld a, [hli]
 	push hl
 	push bc
@@ -372,12 +378,12 @@ KnowsHMMove::
 	pop hl
 	ret c
 	dec b
-	jr nz, .loop
+	jr nz, KnowsHMMove.loop
 	and a
 	ret
 
 HMMoveArray:
-INCLUDE "data/moves/hm_moves.asm"
+.INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
 	hlcoord 9, 10
@@ -387,9 +393,9 @@ DisplayDepositWithdrawMenu:
 	ld a, [wParentMenuItem]
 	and a ; was the Deposit or Withdraw item selected in the parent menu?
 	ld de, DepositPCText
-	jr nz, .next
+	jr nz, DisplayDepositWithdrawMenu.next
 	ld de, WithdrawPCText
-.next
+DisplayDepositWithdrawMenu.next
 	hlcoord 11, 12
 	call PlaceString
 	hlcoord 11, 14
@@ -414,29 +420,29 @@ DisplayDepositWithdrawMenu:
 	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld [wPartyAndBillsPCSavedMenuItem], a
-.loop
+DisplayDepositWithdrawMenu.loop
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .exit
+	jr nz, DisplayDepositWithdrawMenu.exit
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .choseDepositWithdraw
+	jr z, DisplayDepositWithdrawMenu.choseDepositWithdraw
 	dec a
-	jr z, .viewStats
-.exit
+	jr z, DisplayDepositWithdrawMenu.viewStats
+DisplayDepositWithdrawMenu.exit
 	and a
 	ret
-.choseDepositWithdraw
+DisplayDepositWithdrawMenu.choseDepositWithdraw
 	scf
 	ret
-.viewStats
+DisplayDepositWithdrawMenu.viewStats
 	call SaveScreenTilesToBuffer1
 	ld a, [wParentMenuItem]
 	and a
 	ld a, PLAYER_PARTY_DATA
-	jr nz, .next2
+	jr nz, DisplayDepositWithdrawMenu.next2
 	ld a, BOX_DATA
-.next2
+DisplayDepositWithdrawMenu.next2
 	ld [wMonDataLocation], a
 	predef StatusScreen
 	predef StatusScreen2
@@ -444,64 +450,66 @@ DisplayDepositWithdrawMenu:
 	call ReloadTilesetTilePatterns
 	call RunDefaultPaletteCommand
 	call LoadGBPal
-	jr .loop
+	jr DisplayDepositWithdrawMenu.loop
 
-DepositPCText:  db "DEPOSIT@"
-WithdrawPCText: db "WITHDRAW@"
+DepositPCText:
+	.STRINGMAP pokemon, "DEPOSIT@"
+WithdrawPCText:
+	.STRINGMAP pokemon, "WITHDRAW@"
 StatsCancelPCText:
-	db   "STATS"
+		.STRINGMAP pokemon, "STATS"
 	next "CANCEL@"
 
 SwitchOnText:
-	text_far _SwitchOnText
+	text_far WLA_GLOBAL_SwitchOnText
 	text_end
 
 WhatText:
-	text_far _WhatText
+	text_far WLA_GLOBAL_WhatText
 	text_end
 
 DepositWhichMonText:
-	text_far _DepositWhichMonText
+	text_far WLA_GLOBAL_DepositWhichMonText
 	text_end
 
 MonWasStoredText:
-	text_far _MonWasStoredText
+	text_far WLA_GLOBAL_MonWasStoredText
 	text_end
 
 CantDepositLastMonText:
-	text_far _CantDepositLastMonText
+	text_far WLA_GLOBAL_CantDepositLastMonText
 	text_end
 
 BoxFullText:
-	text_far _BoxFullText
+	text_far WLA_GLOBAL_BoxFullText
 	text_end
 
 MonIsTakenOutText:
-	text_far _MonIsTakenOutText
+	text_far WLA_GLOBAL_MonIsTakenOutText
 	text_end
 
 NoMonText:
-	text_far _NoMonText
+	text_far WLA_GLOBAL_NoMonText
 	text_end
 
 CantTakeMonText:
-	text_far _CantTakeMonText
+	text_far WLA_GLOBAL_CantTakeMonText
 	text_end
 
 ReleaseWhichMonText:
-	text_far _ReleaseWhichMonText
+	text_far WLA_GLOBAL_ReleaseWhichMonText
 	text_end
 
 OnceReleasedText:
-	text_far _OnceReleasedText
+	text_far WLA_GLOBAL_OnceReleasedText
 	text_end
 
 MonWasReleasedText:
-	text_far _MonWasReleasedText
+	text_far WLA_GLOBAL_MonWasReleasedText
 	text_end
 
-CableClubLeftGameboy::
-	ldh a, [hSerialConnectionStatus]
+CableClubLeftGameboy:
+	ldh a, [lobyte(hSerialConnectionStatus)]
 	cp USING_EXTERNAL_CLOCK
 	ret z
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -510,15 +518,15 @@ CableClubLeftGameboy::
 	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
-	jr z, .next
+	jr z, CableClubLeftGameboy.next
 	inc a ; LINK_STATE_START_BATTLE
-.next
+CableClubLeftGameboy.next
 	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump JustAMomentText
 
-CableClubRightGameboy::
-	ldh a, [hSerialConnectionStatus]
+CableClubRightGameboy:
+	ldh a, [lobyte(hSerialConnectionStatus)]
 	cp USING_INTERNAL_CLOCK
 	ret z
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -527,15 +535,15 @@ CableClubRightGameboy::
 	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
-	jr z, .next
+	jr z, CableClubRightGameboy.next
 	inc a ; LINK_STATE_START_BATTLE
-.next
+CableClubRightGameboy.next
 	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump JustAMomentText
 
-JustAMomentText::
-	text_far _JustAMomentText
+JustAMomentText:
+	text_far WLA_GLOBAL_JustAMomentText
 	text_end
 
 UnusedOpenBillsPC: ; unreferenced
@@ -545,5 +553,5 @@ UnusedOpenBillsPC: ; unreferenced
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump OpenBillsPCText
 
-OpenBillsPCText::
+OpenBillsPCText:
 	script_bills_pc

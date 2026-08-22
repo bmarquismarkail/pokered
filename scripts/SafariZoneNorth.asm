@@ -12,21 +12,21 @@ SafariZoneNorth_TextPointers:
 	dw_const SafariZoneNorthTrainerTips3Text,  TEXT_SAFARIZONENORTH_TRAINER_TIPS_3
 
 SafariZoneNorthRestHouseSignText:
-	text_far _SafariZoneNorthRestHouseSignText
+	text_far WLA_GLOBAL_SafariZoneNorthRestHouseSignText
 	text_end
 
 SafariZoneNorthTrainerTips1Text:
-	text_far _SafariZoneNorthTrainerTips1Text
+	text_far WLA_GLOBAL_SafariZoneNorthTrainerTips1Text
 	text_end
 
 SafariZoneNorthSignText:
-	text_far _SafariZoneNorthSignText
+	text_far WLA_GLOBAL_SafariZoneNorthSignText
 	text_end
 
 SafariZoneNorthTrainerTips2Text:
-	text_far _SafariZoneNorthTrainerTips2Text
+	text_far WLA_GLOBAL_SafariZoneNorthTrainerTips2Text
 	text_end
 
 SafariZoneNorthTrainerTips3Text:
-	text_far _SafariZoneNorthTrainerTips3Text
+	text_far WLA_GLOBAL_SafariZoneNorthTrainerTips3Text
 	text_end

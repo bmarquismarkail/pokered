@@ -1,13 +1,13 @@
-MACRO add_predef
-\1Predef::
-	IF _NARG == 1
+.MACRO add_predef
+\1Predef:
+	.IF (((NARGS))-(1)) < 1 && (((NARGS))-(1)) > -1
 		dba \1
-	ELSE
+	.ELSE
 		dbw \2, \1
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-PredefPointers::
+PredefPointers:
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
 	add_predef DrawPlayerHUDAndHPBar
@@ -79,9 +79,11 @@ PredefPointers::
 	add_predef SetPartyMonTypes
 	add_predef CanLearnTM
 	add_predef TMToMove
-	add_predef _RunPaletteCommand
+	_RunPaletteCommandPredef:
+	add_predef WLA_GLOBAL_RunPaletteCommand
 	add_predef StarterDex
-	add_predef _AddPartyMon
+	_AddPartyMonPredef:
+	add_predef WLA_GLOBAL_AddPartyMon
 	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
@@ -97,7 +99,8 @@ PredefPointers::
 	add_predef DoInGameTradeDialogue
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
-	add_predef _LeaveMapAnim, $1E ; wrong bank
+	_LeaveMapAnimPredef:
+	add_predef WLA_GLOBAL_LeaveMapAnim, $1E ; wrong bank
 	add_predef EnterMapAnim, $1E ; wrong bank
 	add_predef GetTileTwoStepsInFrontOfPlayer
 	add_predef CheckForCollisionWhenPushingBoulder

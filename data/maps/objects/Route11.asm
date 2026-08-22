@@ -11,19 +11,19 @@
 	const_export ROUTE11_YOUNGSTER4
 
 Route11_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 5
 	warp_event 49,  8, ROUTE_11_GATE_1F, 1
 	warp_event 49,  9, ROUTE_11_GATE_1F, 2
 	warp_event 58,  8, ROUTE_11_GATE_1F, 3
 	warp_event 58,  9, ROUTE_11_GATE_1F, 4
 	warp_event  4,  5, DIGLETTS_CAVE_ROUTE_11, 1
 
-	def_bg_events
+	.DB 1
 	bg_event  1,  5, TEXT_ROUTE11_DIGLETTSCAVE_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 10, 14, SPRITE_GAMBLER, STAY, DOWN, TEXT_ROUTE11_GAMBLER1, OPP_GAMBLER, 1
 	object_event 26,  9, SPRITE_GAMBLER, STAY, DOWN, TEXT_ROUTE11_GAMBLER2, OPP_GAMBLER, 2
 	object_event 13,  5, SPRITE_YOUNGSTER, STAY, LEFT, TEXT_ROUTE11_YOUNGSTER1, OPP_YOUNGSTER, 9
@@ -35,4 +35,12 @@ Route11_Object:
 	object_event 45, 16, SPRITE_SUPER_NERD, STAY, LEFT, TEXT_ROUTE11_SUPER_NERD2, OPP_ENGINEER, 3
 	object_event 22, 12, SPRITE_YOUNGSTER, STAY, UP, TEXT_ROUTE11_YOUNGSTER4, OPP_YOUNGSTER, 12
 
-	def_warps_to ROUTE_11
+	event_displacement ROUTE_11_WIDTH, 49, 8
+
+	event_displacement ROUTE_11_WIDTH, 49, 9
+
+	event_displacement ROUTE_11_WIDTH, 58, 8
+
+	event_displacement ROUTE_11_WIDTH, 58, 9
+
+	event_displacement ROUTE_11_WIDTH, 4, 5

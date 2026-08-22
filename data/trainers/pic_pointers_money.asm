@@ -1,9 +1,9 @@
-MACRO pic_money
-	dw \1
+.MACRO pic_money
+	.DW \1
 	bcd3 \2
-ENDM
+.ENDM
 
-TrainerPicAndMoneyPointers::
+TrainerPicAndMoneyPointers:
 	table_width 5
 	; pic pointer, base reward money
 	; money received after battle = base money × level of last enemy mon

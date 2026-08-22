@@ -19,11 +19,11 @@ Route11Gate2FScriptEnd:
 Route11Gate2FOaksAideText:
 	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
-	jr c, .got_item
+	jr c, Route11Gate2FOaksAideText.got_item
 	ld a, 30
-	ldh [hOaksAideRequirement], a
+	ldh [lobyte(hOaksAideRequirement)], a
 	ld a, ITEMFINDER
-	ldh [hOaksAideRewardItem], a
+	ldh [lobyte(hOaksAideRewardItem)], a
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld h, d
@@ -32,18 +32,18 @@ Route11Gate2FOaksAideText:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ldh a, [hOaksAideResult]
+	ldh a, [lobyte(hOaksAideResult)]
 	dec a ; OAKS_AIDE_GOT_ITEM?
-	jr nz, .no_item
+	jr nz, Route11Gate2FOaksAideText.no_item
 	SetEvent EVENT_GOT_ITEMFINDER
-.got_item
-	ld hl, .ItemfinderDescriptionText
+Route11Gate2FOaksAideText.got_item
+	ld hl, Route11Gate2FOaksAideText.ItemfinderDescriptionText
 	call PrintText
-.no_item
+Route11Gate2FOaksAideText.no_item
 	jr Route11Gate2FScriptEnd
 
-.ItemfinderDescriptionText:
-	text_far _Route11Gate2FOaksAideItemfinderDescriptionText
+Route11Gate2FOaksAideText.ItemfinderDescriptionText:
+	text_far WLA_GLOBAL_Route11Gate2FOaksAideItemfinderDescriptionText
 	text_end
 
 Route11Gate2FLeftBinocularsText:
@@ -52,26 +52,26 @@ Route11Gate2FLeftBinocularsText:
 	cp SPRITE_FACING_UP
 	jp nz, GateUpstairsScript_PrintIfFacingUp
 	CheckEvent EVENT_BEAT_ROUTE12_SNORLAX
-	ld hl, .SnorlaxText
-	jr z, .print
-	ld hl, .NoSnorlaxText
-.print
+	ld hl, Route11Gate2FLeftBinocularsText.SnorlaxText
+	jr z, Route11Gate2FLeftBinocularsText.print
+	ld hl, Route11Gate2FLeftBinocularsText.NoSnorlaxText
+Route11Gate2FLeftBinocularsText.print
 	call PrintText
 	jp TextScriptEnd
 
-.SnorlaxText:
-	text_far _Route11Gate2FLeftBinocularsSnorlaxText
+Route11Gate2FLeftBinocularsText.SnorlaxText:
+	text_far WLA_GLOBAL_Route11Gate2FLeftBinocularsSnorlaxText
 	text_end
 
-.NoSnorlaxText:
-	text_far _Route11Gate2FLeftBinocularsNoSnorlaxText
+Route11Gate2FLeftBinocularsText.NoSnorlaxText:
+	text_far WLA_GLOBAL_Route11Gate2FLeftBinocularsNoSnorlaxText
 	text_end
 
 Route11Gate2FRightBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route11Gate2FRightBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route11Gate2FRightBinocularsText
+Route11Gate2FRightBinocularsText.Text:
+	text_far WLA_GLOBAL_Route11Gate2FRightBinocularsText
 	text_end

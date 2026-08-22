@@ -1,17 +1,17 @@
-	db DEX_DODUO ; pokedex id
+	.DB DEX_DODUO ; pokedex id
 
-	db  35,  85,  45,  75,  35
+	.DB  35,  85,  45,  75,  35
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, FLYING ; type
-	db 190 ; catch rate
-	db 96 ; base exp
+	.DB NORMAL, FLYING ; type
+	.DB 190 ; catch rate
+	.DB 96 ; base exp
 
-	INCBIN "gfx/pokemon/front/doduo.pic", 0, 1 ; sprite dimensions
-	dw DoduoPicFront, DoduoPicBack
+	.INCBIN "gfx/pokemon/front/doduo.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DoduoPicFront, DoduoPicBack
 
-	db PECK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB PECK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm WHIRLWIND,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     FLY
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,46 +1,46 @@
-MACRO two_option_menu
-	db \1, \2, \3
-	dw \4
-ENDM
+.MACRO two_option_menu
+	.DB \1, \2, \3
+	.DW \4
+.ENDM
 
 TwoOptionMenuStrings:
 ; entries correspond to *_MENU constants
 	table_width 5
 	; width, height, blank line before first menu item?, text pointer
-	two_option_menu 4, 3, FALSE, .YesNoMenu
-	two_option_menu 6, 3, FALSE, .NorthWestMenu
-	two_option_menu 6, 3, FALSE, .SouthEastMenu
-	two_option_menu 6, 3, FALSE, .YesNoMenu
-	two_option_menu 6, 3, FALSE, .NorthEastMenu
-	two_option_menu 7, 3, FALSE, .TradeCancelMenu
-	two_option_menu 7, 4, TRUE,  .HealCancelMenu
-	two_option_menu 4, 3, FALSE, .NoYesMenu
+	two_option_menu 4, 3, FALSE, TwoOptionMenuStrings.YesNoMenu
+	two_option_menu 6, 3, FALSE, TwoOptionMenuStrings.NorthWestMenu
+	two_option_menu 6, 3, FALSE, TwoOptionMenuStrings.SouthEastMenu
+	two_option_menu 6, 3, FALSE, TwoOptionMenuStrings.YesNoMenu
+	two_option_menu 6, 3, FALSE, TwoOptionMenuStrings.NorthEastMenu
+	two_option_menu 7, 3, FALSE, TwoOptionMenuStrings.TradeCancelMenu
+	two_option_menu 7, 4, TRUE,  TwoOptionMenuStrings.HealCancelMenu
+	two_option_menu 4, 3, FALSE, TwoOptionMenuStrings.NoYesMenu
 	assert_table_length NUM_TWO_OPTION_MENUS
 
-.NoYesMenu:
-	db   "NO"
+TwoOptionMenuStrings.NoYesMenu:
+		.STRINGMAP pokemon, "NO"
 	next "YES@"
 
-.YesNoMenu:
-	db   "YES"
+TwoOptionMenuStrings.YesNoMenu:
+		.STRINGMAP pokemon, "YES"
 	next "NO@"
 
-.NorthWestMenu:
-	db   "NORTH"
+TwoOptionMenuStrings.NorthWestMenu:
+		.STRINGMAP pokemon, "NORTH"
 	next "WEST@"
 
-.SouthEastMenu:
-	db   "SOUTH"
+TwoOptionMenuStrings.SouthEastMenu:
+		.STRINGMAP pokemon, "SOUTH"
 	next "EAST@"
 
-.NorthEastMenu:
-	db   "NORTH"
+TwoOptionMenuStrings.NorthEastMenu:
+		.STRINGMAP pokemon, "NORTH"
 	next "EAST@"
 
-.TradeCancelMenu:
-	db   "TRADE"
+TwoOptionMenuStrings.TradeCancelMenu:
+		.STRINGMAP pokemon, "TRADE"
 	next "CANCEL@"
 
-.HealCancelMenu:
-	db   "HEAL"
+TwoOptionMenuStrings.HealCancelMenu:
+		.STRINGMAP pokemon, "HEAL"
 	next "CANCEL@"

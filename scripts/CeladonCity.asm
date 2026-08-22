@@ -26,108 +26,108 @@ CeladonCity_TextPointers:
 	dw_const CeladonCityGameCornerSignText,    TEXT_CELADONCITY_GAMECORNER_SIGN
 
 CeladonCityLittleGirlText:
-	text_far _CeladonCityLittleGirlText
+	text_far WLA_GLOBAL_CeladonCityLittleGirlText
 	text_end
 
 CeladonCityGramps1Text:
-	text_far _CeladonCityGramps1Text
+	text_far WLA_GLOBAL_CeladonCityGramps1Text
 	text_end
 
 CeladonCityGirlText:
-	text_far _CeladonCityGirlText
+	text_far WLA_GLOBAL_CeladonCityGirlText
 	text_end
 
 CeladonCityGramps2Text:
-	text_far _CeladonCityGramps2Text
+	text_far WLA_GLOBAL_CeladonCityGramps2Text
 	text_end
 
 CeladonCityGramps3Text:
 	text_asm
 	CheckEvent EVENT_GOT_TM41
-	jr nz, .gotTM41
-	ld hl, .Text
+	jr nz, CeladonCityGramps3Text.gotTM41
+	ld hl, CeladonCityGramps3Text.Text
 	call PrintText
-	lb bc, TM_SOFTBOILED, 1
+	lb "bc", TM_SOFTBOILED, 1
 	call GiveItem
-	jr c, .Success
-	ld hl, .TM41NoRoomText
+	jr c, CeladonCityGramps3Text.Success
+	ld hl, CeladonCityGramps3Text.TM41NoRoomText
 	call PrintText
-	jr .Done
-.Success
-	ld hl, .ReceivedTM41Text
+	jr CeladonCityGramps3Text.Done
+CeladonCityGramps3Text.Success
+	ld hl, CeladonCityGramps3Text.ReceivedTM41Text
 	call PrintText
 	SetEvent EVENT_GOT_TM41
-	jr .Done
-.gotTM41
-	ld hl, .TM41ExplanationText
+	jr CeladonCityGramps3Text.Done
+CeladonCityGramps3Text.gotTM41
+	ld hl, CeladonCityGramps3Text.TM41ExplanationText
 	call PrintText
-.Done
+CeladonCityGramps3Text.Done
 	jp TextScriptEnd
 
-.Text:
-	text_far _CeladonCityGramps3Text
+CeladonCityGramps3Text.Text:
+	text_far WLA_GLOBAL_CeladonCityGramps3Text
 	text_end
 
-.ReceivedTM41Text:
-	text_far _CeladonCityGramps3ReceivedTM41Text
+CeladonCityGramps3Text.ReceivedTM41Text:
+	text_far WLA_GLOBAL_CeladonCityGramps3ReceivedTM41Text
 	sound_get_item_1
 	text_end
 
-.TM41ExplanationText:
-	text_far _CeladonCityGramps3TM41ExplanationText
+CeladonCityGramps3Text.TM41ExplanationText:
+	text_far WLA_GLOBAL_CeladonCityGramps3TM41ExplanationText
 	text_end
 
-.TM41NoRoomText:
-	text_far _CeladonCityGramps3TM41NoRoomText
+CeladonCityGramps3Text.TM41NoRoomText:
+	text_far WLA_GLOBAL_CeladonCityGramps3TM41NoRoomText
 	text_end
 
 CeladonCityFisherText:
-	text_far _CeladonCityFisherText
+	text_far WLA_GLOBAL_CeladonCityFisherText
 	text_end
 
 CeladonCityPoliwrathText:
-	text_far _CeladonCityPoliwrathText
+	text_far WLA_GLOBAL_CeladonCityPoliwrathText
 	text_asm
 	ld a, POLIWRATH
 	call PlayCry
 	jp TextScriptEnd
 
 CeladonCityRocket1Text:
-	text_far _CeladonCityRocket1Text
+	text_far WLA_GLOBAL_CeladonCityRocket1Text
 	text_end
 
 CeladonCityRocket2Text:
-	text_far _CeladonCityRocket2Text
+	text_far WLA_GLOBAL_CeladonCityRocket2Text
 	text_end
 
 CeladonCityTrainerTips1Text:
-	text_far _CeladonCityTrainerTips1Text
+	text_far WLA_GLOBAL_CeladonCityTrainerTips1Text
 	text_end
 
 CeladonCitySignText:
-	text_far _CeladonCitySignText
+	text_far WLA_GLOBAL_CeladonCitySignText
 	text_end
 
 CeladonCityGymSignText:
-	text_far _CeladonCityGymSignText
+	text_far WLA_GLOBAL_CeladonCityGymSignText
 	text_end
 
 CeladonCityMansionSignText:
-	text_far _CeladonCityMansionSignText
+	text_far WLA_GLOBAL_CeladonCityMansionSignText
 	text_end
 
 CeladonCityDeptStoreSignText:
-	text_far _CeladonCityDeptStoreSignText
+	text_far WLA_GLOBAL_CeladonCityDeptStoreSignText
 	text_end
 
 CeladonCityTrainerTips2Text:
-	text_far _CeladonCityTrainerTips2Text
+	text_far WLA_GLOBAL_CeladonCityTrainerTips2Text
 	text_end
 
 CeladonCityPrizeExchangeSignText:
-	text_far _CeladonCityPrizeExchangeSignText
+	text_far WLA_GLOBAL_CeladonCityPrizeExchangeSignText
 	text_end
 
 CeladonCityGameCornerSignText:
-	text_far _CeladonCityGameCornerSignText
+	text_far WLA_GLOBAL_CeladonCityGameCornerSignText
 	text_end

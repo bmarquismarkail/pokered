@@ -24,81 +24,81 @@ CeladonMart3F_TextPointers:
 CeladonMart3FClerkText:
 	text_asm
 	CheckEvent EVENT_GOT_TM18
-	jr nz, .got_item
-	ld hl, .TM18PreReceiveText
+	jr nz, CeladonMart3FClerkText.got_item
+	ld hl, CeladonMart3FClerkText.TM18PreReceiveText
 	call PrintText
-	lb bc, TM_COUNTER, 1
+	lb "bc", TM_COUNTER, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, CeladonMart3FClerkText.bag_full
 	SetEvent EVENT_GOT_TM18
-	ld hl, .ReceivedTM18Text
-	jr .done
-.bag_full
-	ld hl, .TM18NoRoomText
-	jr .done
-.got_item
-	ld hl, .TM18ExplanationText
-.done
+	ld hl, CeladonMart3FClerkText.ReceivedTM18Text
+	jr CeladonMart3FClerkText.done
+CeladonMart3FClerkText.bag_full
+	ld hl, CeladonMart3FClerkText.TM18NoRoomText
+	jr CeladonMart3FClerkText.done
+CeladonMart3FClerkText.got_item
+	ld hl, CeladonMart3FClerkText.TM18ExplanationText
+CeladonMart3FClerkText.done
 	call PrintText
 	jp TextScriptEnd
 
-.TM18PreReceiveText:
-	text_far _CeladonMart3FClerkTM18PreReceiveText
+CeladonMart3FClerkText.TM18PreReceiveText:
+	text_far WLA_GLOBAL_CeladonMart3FClerkTM18PreReceiveText
 	text_end
 
-.ReceivedTM18Text:
-	text_far _CeladonMart3FClerkReceivedTM18Text
+CeladonMart3FClerkText.ReceivedTM18Text:
+	text_far WLA_GLOBAL_CeladonMart3FClerkReceivedTM18Text
 	sound_get_item_1
 	text_end
 
-.TM18ExplanationText:
-	text_far _CeladonMart3FClerkTM18ExplanationText
+CeladonMart3FClerkText.TM18ExplanationText:
+	text_far WLA_GLOBAL_CeladonMart3FClerkTM18ExplanationText
 	text_end
 
-.TM18NoRoomText:
-	text_far _CeladonMart3FClerkTM18NoRoomText
+CeladonMart3FClerkText.TM18NoRoomText:
+	text_far WLA_GLOBAL_CeladonMart3FClerkTM18NoRoomText
 	text_end
 
 CeladonMart3FGameBoyKid1Text:
-	text_far _CeladonMart3FGameBoyKid1Text
+	text_far WLA_GLOBAL_CeladonMart3FGameBoyKid1Text
 	text_end
 
 CeladonMart3FGameBoyKid2Text:
-	text_far _CeladonMart3FGameBoyKid2Text
+	text_far WLA_GLOBAL_CeladonMart3FGameBoyKid2Text
 	text_end
 
 CeladonMart3FGameBoyKid3Text:
-	text_far _CeladonMart3FGameBoyKid3Text
+	text_far WLA_GLOBAL_CeladonMart3FGameBoyKid3Text
 	text_end
 
 CeladonMart3FLittleBoyText:
-	text_far _CeladonMart3FLittleBoyText
+	text_far WLA_GLOBAL_CeladonMart3FLittleBoyText
 	text_end
 
 CeladonMart3FSNESText:
-	text_far _CeladonMart3FSNESText
+	text_far WLA_GLOBAL_CeladonMart3FSNESText
 	text_end
 
 CeladonMart3FRPGText:
-	text_far _CeladonMart3FRPGText
+	text_far WLA_GLOBAL_CeladonMart3FRPGText
 	text_end
 
 CeladonMart3FSportsGameText:
-	text_far _CeladonMart3FSportsGameText
+	text_far WLA_GLOBAL_CeladonMart3FSportsGameText
 	text_end
 
 CeladonMart3FPuzzleGameText:
-	text_far _CeladonMart3FPuzzleGameText
+	text_far WLA_GLOBAL_CeladonMart3FPuzzleGameText
 	text_end
 
 CeladonMart3FFightingGameText:
-	text_far _CeladonMart3FFightingGameText
+	text_far WLA_GLOBAL_CeladonMart3FFightingGameText
 	text_end
 
 CeladonMart3FCurrentFloorSignText:
-	text_far _CeladonMart3FCurrentFloorSignText
+	text_far WLA_GLOBAL_CeladonMart3FCurrentFloorSignText
 	text_end
 
 CeladonMart3FPokemonPosterText:
-	text_far _CeladonMart3FPokemonPosterText
+	text_far WLA_GLOBAL_CeladonMart3FPokemonPosterText
 	text_end

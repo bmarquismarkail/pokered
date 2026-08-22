@@ -1,24 +1,24 @@
 PickUpItem:
 	call EnableAutoTextBoxDrawing
 
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld b, a
 	ld hl, wToggleableObjectList
-.toggleableObjectsListLoop
+PickUpItem.toggleableObjectsListLoop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .isToggleable
+	jr z, PickUpItem.isToggleable
 	inc hl
-	jr .toggleableObjectsListLoop
+	jr PickUpItem.toggleableObjectsListLoop
 
-.isToggleable
+PickUpItem.isToggleable
 	ld a, [hl]
-	ldh [hToggleableObjectIndex], a
+	ldh [lobyte(hToggleableObjectIndex)], a
 
 	ld hl, wMapSpriteExtraData
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	dec a
 	add a
 	ld d, 0
@@ -28,27 +28,27 @@ PickUpItem:
 	ld b, a ; item
 	ld c, 1 ; quantity
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, PickUpItem.BagFull
 
-	ldh a, [hToggleableObjectIndex]
+	ldh a, [lobyte(hToggleableObjectIndex)]
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, FoundItemText
-	jr .print
+	jr PickUpItem.print
 
-.BagFull
+PickUpItem.BagFull
 	ld hl, NoMoreRoomForItemText
-.print
+PickUpItem.print
 	call PrintText
 	ret
 
 FoundItemText:
-	text_far _FoundItemText
+	text_far WLA_GLOBAL_FoundItemText
 	sound_get_item_1
 	text_end
 
 NoMoreRoomForItemText:
-	text_far _NoMoreRoomForItemText
+	text_far WLA_GLOBAL_NoMoreRoomForItemText
 	text_end
