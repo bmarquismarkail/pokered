@@ -352,7 +352,7 @@ OverworldLoopLessDelay.noFaintCheck
 	call DelayFrames
 	jp EnterMap
 OverworldLoopLessDelay.allPokemonFainted
-	ld a, $ff
+	ld a, LOST_BATTLE
 	ld [wIsInBattle], a
 	call RunMapScript
 	jp HandleBlackOut
@@ -935,7 +935,7 @@ LoadTileBlockMap.rowInnerLoop
 LoadTileBlockMap.noCarry
 	dec b
 	jr nz, LoadTileBlockMap.rowLoop
-LoadTileBlockMap.northConnection
+; north connection
 	ld a, [wNorthConnectedMap]
 	cp $ff
 	jr z, LoadTileBlockMap.southConnection
@@ -1132,7 +1132,7 @@ IsSpriteInFrontOfPlayer:
 IsSpriteInFrontOfPlayer2:
 	lb "bc", $3c, $40 ; Y and X position of player sprite
 	ld a, [wSpritePlayerStateData1FacingDirection]
-IsSpriteInFrontOfPlayer2.checkIfPlayerFacingUp
+; check if player facing up
 	cp SPRITE_FACING_UP
 	jr nz, IsSpriteInFrontOfPlayer2.checkIfPlayerFacingDown
 ; facing up
@@ -1400,7 +1400,7 @@ LoadCurrentMapView.noCarry2
 	jr nz, LoadCurrentMapView.rowLoop
 	ld hl, wSurroundingTiles
 	ld bc, 0
-LoadCurrentMapView.adjustForYCoordWithinTileBlock
+; adjust for Y coord within tile block
 	ld a, [wYBlockCoord]
 	and a
 	jr z, LoadCurrentMapView.adjustForXCoordWithinTileBlock
@@ -1898,7 +1898,7 @@ CollisionCheckOnWater:
 	call CheckForJumpingAndTilePairCollisions
 	jr c, CollisionCheckOnWater.collision
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player (puts it in c and [wTileInFrontOfPlayer])
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
+	ld a, [wTileInFrontOfPlayer]
 	cp $14 ; water tile
 	jr z, CollisionCheckOnWater.noCollision ; keep surfing if it's a water tile
 	cp $32 ; either the left tile of the S.S. Anne boarding platform or the tile on eastern coastlines (depending on the current tileset)
@@ -1939,11 +1939,10 @@ CollisionCheckOnWater.stopSurfing
 	jr CollisionCheckOnWater.noCollision
 CollisionCheckOnWater.checkIfVermilionDockTileset
 	ld a, [wCurMapTileset]
-	cp SHIP_PORT ; Vermilion Dock tileset
+	cp SHIP_PORT
 	jr nz, CollisionCheckOnWater.noCollision ; keep surfing if it's not the boarding platform tile
 	jr CollisionCheckOnWater.stopSurfing ; if it is the boarding platform tile, stop surfing
 
-; function to run the current map's script
 RunMapScript:
 	push hl
 	push de
@@ -1958,15 +1957,15 @@ RunMapScript.afterBoulderEffect
 	pop de
 	pop hl
 	call RunNPCMovementScript
-	ld a, [wCurMap] ; current map number
-	call SwitchToMapRomBank ; change to the ROM bank the map's data is in
+	ld a, [wCurMap]
+	call SwitchToMapRomBank
 	ld hl, wCurMapScriptPtr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld de, RunMapScript.return
 	push de
-	jp hl ; jump to script
+	jp hl
 RunMapScript.return
 	ret
 

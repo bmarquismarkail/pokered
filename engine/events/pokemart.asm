@@ -67,7 +67,7 @@ DisplayPokemartDialogue_.sellMenuLoop
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jp c, DisplayPokemartDialogue_.returnToMainPokemartMenu ; if the player closed the menu
-DisplayPokemartDialogue_.confirmItemSale ; if the player is trying to sell a specific item
+; if the player is trying to sell a specific item, confirm the sale
 	call IsKeyItem
 	ld a, [wIsKeyItem]
 	and a

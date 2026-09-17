@@ -164,6 +164,7 @@ WLA_GLOBAL_PoofText:
 _ForgotAndText:
 WLA_GLOBAL_ForgotAndText:
 	text_start
+
 	para "@"
 	text_ram wLearnMoveMonName
 	text " forgot"

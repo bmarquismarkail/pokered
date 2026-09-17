@@ -9,6 +9,9 @@ The native Pokémon Red build requires:
 
 RGBDS and third-party Python imaging libraries are not required.
 
+On Windows 10, 11, or newer, use Windows Subsystem for Linux (WSL) and
+follow the Linux instructions in its terminal.
+
 On Debian or Ubuntu, install the host dependencies with:
 
 ```bash

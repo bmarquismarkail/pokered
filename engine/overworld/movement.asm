@@ -29,7 +29,7 @@ UpdatePlayerSprite.lowerLeftTileIsMapTile
 ; check if down
 	bit PLAYER_DIR_BIT_DOWN, a
 	jr z, UpdatePlayerSprite.checkIfUp
-	xor a ; ld a, SPRITE_FACING_DOWN
+	xor a ; SPRITE_FACING_DOWN
 	jr UpdatePlayerSprite.next
 UpdatePlayerSprite.checkIfUp
 	bit PLAYER_DIR_BIT_UP, a

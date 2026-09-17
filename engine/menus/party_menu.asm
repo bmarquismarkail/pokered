@@ -157,7 +157,7 @@ RedrawPartyMenu_.checkEvolutionsLoop
 ; if it does match
 	ld de, RedrawPartyMenu_.ableToEvolveText
 RedrawPartyMenu_.placeEvolutionStoneString
-	ld bc, 20 + 9 ; down 1 row and right 9 columns
+	ld bc, SCREEN_WIDTH + 9 ; down 1 row and right 9 columns
 	pop hl
 	push hl
 	add hl, bc

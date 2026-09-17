@@ -96,7 +96,7 @@ CinnabarGymFlagAction:
 
 CinnabarGymOpenGateScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp LOST_BATTLE
 	jp z, CinnabarGymResetScripts
 	ld a, [wTrainerHeaderFlagBit]
 	ldh [lobyte(hGymGateIndex)], a
@@ -138,7 +138,7 @@ CinnabarGymOpenGateScript.no_sound
 
 CinnabarGymBlainePostBattleScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp LOST_BATTLE
 	jp z, CinnabarGymResetScripts
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a

@@ -26,9 +26,9 @@ PrintType:
 ; erase "TYPE2/" if the mon only has 1 type
 EraseType2Text:
 	ld a, $7f
-	ld bc, $13
+	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld bc, $6
+	ld bc, 6 ; length of "TYPE2/" in the game character map
 	jp FillMemory
 
 PrintMoveType:

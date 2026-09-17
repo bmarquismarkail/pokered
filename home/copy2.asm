@@ -91,7 +91,7 @@ CopyVideoData.loop
 	cp 8
 	jr nc, CopyVideoData.keepgoing
 
-CopyVideoData.done
+; done
 	ldh [lobyte(hVBlankCopySize)], a
 	call DelayFrame
 	ldh a, [lobyte(hROMBankTemp)]
@@ -140,7 +140,7 @@ CopyVideoDataDouble.loop
 	cp 8
 	jr nc, CopyVideoDataDouble.keepgoing
 
-CopyVideoDataDouble.done
+; done
 	ldh [lobyte(hVBlankCopyDoubleSize)], a
 	call DelayFrame
 	ldh a, [lobyte(hROMBankTemp)]

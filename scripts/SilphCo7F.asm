@@ -205,7 +205,7 @@ SilphCo7FRivalStartBattleScript.set_trainer_no
 
 SilphCo7FRivalAfterBattleScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp LOST_BATTLE
 	jp z, SilphCo7FSetDefaultScript
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a

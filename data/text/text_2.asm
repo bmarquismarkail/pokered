@@ -880,6 +880,7 @@ WLA_GLOBAL_FoundHiddenCoins2Text:
 _DroppedHiddenCoinsText:
 WLA_GLOBAL_DroppedHiddenCoinsText:
 	text_start
+
 	para "Oops! Dropped"
 	line "some coins!"
 	done

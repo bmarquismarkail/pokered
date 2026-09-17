@@ -24,12 +24,12 @@ TitleScroll:
 	ld e, 0 ; don't animate titleball
 
 	and a
-	jr nz, TitleScroll.ok
+	jr nz, WLA_GLOBAL_TitleScroll
 
 	ld bc, TitleScroll_Out
 	ld d, $00
 	ld e, 0 ; don't animate titleball
-TitleScroll.ok
+	; fallthrough
 
 _TitleScroll:
 WLA_GLOBAL_TitleScroll:
