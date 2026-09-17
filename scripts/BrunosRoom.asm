@@ -108,7 +108,7 @@ BrunosRoomPlayerIsMovingScript:
 BrunosRoomBrunoEndBattleScript:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
-	cp $ff
+	cp LOST_BATTLE
 	jp z, ResetBrunoScript
 	ld a, TEXT_BRUNOSROOM_BRUNO
 	ldh [lobyte(hTextID)], a

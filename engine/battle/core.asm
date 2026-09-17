@@ -3561,7 +3561,7 @@ CheckPlayerStatusConditions.MultiturnMoveCheck
 	ld [wPlayerNumAttacksLeft], a
 	ld hl, GetPlayerAnimationType ; skip damage calculation (deal damage equal to last hit),
 	                              ; DecrementPP and MoveHitTest
-	jp nz, CheckPlayerStatusConditions.returnToHL  ; redundant leftover code, the case wEnemyNumAttacksLeft = 0
+	jp nz, CheckPlayerStatusConditions.returnToHL  ; redundant leftover code, the case wPlayerNumAttacksLeft == 0
 						; is handled within CheckNumAttacksLeft
 	jp CheckPlayerStatusConditions.returnToHL
 
@@ -6003,7 +6003,7 @@ LoadEnemyMonData:
 	ld b, [hl]
 	jr nz, LoadEnemyMonData.storeDVs
 	ld a, [wIsInBattle]
-	cp $2 ; is it a trainer battle?
+	cp TRAINER_BATTLE
 ; fixed DVs for trainer mon
 	ld a, ATKDEFDV_TRAINER
 	ld b, SPDSPCDV_TRAINER
@@ -6026,7 +6026,7 @@ LoadEnemyMonData.storeDVs
 	call CalcStats
 	pop hl
 	ld a, [wIsInBattle]
-	cp $2 ; is it a trainer battle?
+	cp TRAINER_BATTLE
 	jr z, LoadEnemyMonData.copyHPAndStatusFromPartyData
 	ld a, [wEnemyBattleStatus3]
 	bit TRANSFORMED, a ; is enemy mon transformed?
@@ -6069,7 +6069,7 @@ LoadEnemyMonData.copyTypes
 	ld [de], a
 	inc de
 	ld a, [wIsInBattle]
-	cp $2 ; is it a trainer battle?
+	cp TRAINER_BATTLE
 	jr nz, LoadEnemyMonData.copyStandardMoves
 ; if it's a trainer battle, copy moves from enemy party data
 	ld hl, wEnemyMon1Moves
@@ -6686,12 +6686,12 @@ InitBattleCommon:
 	predef CopyUncompressedPicToTilemap
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
-	ld a, $2
+	ld a, TRAINER_BATTLE
 	ld [wIsInBattle], a
 	jp WLA_GLOBAL_InitBattleCommon
 
 InitWildBattle:
-	ld a, $1
+	ld a, WILD_BATTLE
 	ld [wIsInBattle], a
 	call LoadEnemyMonData
 	call DoBattleTransitionAndInitBattleVariables
@@ -6792,8 +6792,7 @@ WLA_GLOBAL_LoadTrainerPic__loadSprite:
 	ld c, a
 	jp LoadUncompressedSpriteData
 
-; unreferenced
-ResetCryModifiers:
+ResetCryModifiers: ; unreferenced
 	xor a
 	ld [wFrequencyModifier], a
 	ld [wTempoModifier], a

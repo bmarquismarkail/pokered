@@ -83,7 +83,7 @@ WLA_GLOBAL_SilphCo11FGiovanniText:
 
 _SilphCo11FGiovanniILostAgainText:
 _SilphCo10FGiovanniILostAgainText:
-WLA_GLOBAL_SilphCo10FGiovanniILostAgainText:
+WLA_GLOBAL_SilphCo11FGiovanniILostAgainText:
 	text "Arrgh!!"
 	line "I lost again!?"
 	prompt
@@ -146,7 +146,7 @@ WLA_GLOBAL_SilphCo11FRocket2AfterBattleText:
 
 _SilphCo11FPorygonText:
 _SilphCo10FPorygonText:
-WLA_GLOBAL_SilphCo10FPorygonText:
+WLA_GLOBAL_SilphCo11FPorygonText:
 	text "The monitor has"
 	line "#MON on it!"
 	done

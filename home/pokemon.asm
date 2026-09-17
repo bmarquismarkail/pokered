@@ -279,8 +279,8 @@ HandlePartyMenuInput.noPokemonChosen
 	ret
 HandlePartyMenuInput.swappingPokemon
 	bit B_PAD_B, b
-	jr z, HandlePartyMenuInput.handleSwap ; if not, handle swapping the pokemon
-HandlePartyMenuInput.cancelSwap ; if the B button was pressed
+	jr z, HandlePartyMenuInput.handleSwap
+; cancel swap if the B button was pressed
 	farcall ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap], a

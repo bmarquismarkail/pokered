@@ -207,7 +207,7 @@ SilphCo11FSetPlayerAndSpriteFacingDirectionScript:
 
 SilphCo11FGiovanniAfterBattleScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp LOST_BATTLE
 	jp z, SilphCo11FResetCurScript
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, upper-right entry in SilphCo11FDefaultScript.PlayerCoordsArray
@@ -261,8 +261,8 @@ SilphCo11FGiovanniStartBattleScript:
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
-	ld hl, SilphCo10FGiovanniILostAgainText
-	ld de, SilphCo10FGiovanniILostAgainText
+	ld hl, SilphCo11FGiovanniILostAgainText
+	ld de, SilphCo11FGiovanniILostAgainText
 	call SaveEndBattleTextPointers
 	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
@@ -340,7 +340,7 @@ SilphCo11FGiovanniText:
 
 SilphCo11FGiovanniILostAgainText:
 SilphCo10FGiovanniILostAgainText:
-	text_far WLA_GLOBAL_SilphCo10FGiovanniILostAgainText
+	text_far WLA_GLOBAL_SilphCo11FGiovanniILostAgainText
 	text_end
 
 SilphCo11FGiovanniYouRuinedOurPlansText:
@@ -386,7 +386,7 @@ SilphCo11FRocket2AfterBattleText:
 SilphCo11FPorygonText: ; unreferenced
 SilphCo10FPorygonText:
 	text_asm
-	ld hl, SilphCo10FPorygonText.Text
+	ld hl, SilphCo11FPorygonText.Text
 	call PrintText
 	ld a, PORYGON
 	call DisplayPokedex
@@ -394,5 +394,5 @@ SilphCo10FPorygonText:
 
 SilphCo11FPorygonText.Text:
 SilphCo10FPorygonText.Text:
-	text_far WLA_GLOBAL_SilphCo10FPorygonText
+	text_far WLA_GLOBAL_SilphCo11FPorygonText
 	text_end

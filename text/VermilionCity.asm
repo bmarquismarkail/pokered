@@ -84,6 +84,7 @@ WLA_GLOBAL_VermilionCityMachopText:
 _VermilionCityMachopStompingTheLandFlatText:
 WLA_GLOBAL_VermilionCityMachopStompingTheLandFlatText:
 	text_start
+
 	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."

@@ -117,6 +117,7 @@ WLA_GLOBAL_OaksLabOak1DeliverParcelText:
 _OaksLabOak1ParcelThanksText:
 WLA_GLOBAL_OaksLabOak1ParcelThanksText:
 	text_start
+
 	para "Ah! This is the"
 	line "custom # BALL"
 	cont "I ordered!"
@@ -149,6 +150,7 @@ WLA_GLOBAL_OaksLabOak1ReceivedPokeballsText:
 _OaksLabGivePokeballsExplanationText:
 WLA_GLOBAL_OaksLabGivePokeballsExplanationText:
 	text_start
+
 	para "When a wild"
 	line "#MON appears,"
 	cont "it's fair game."

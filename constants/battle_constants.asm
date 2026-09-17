@@ -38,6 +38,12 @@ MOVE_PP     db
 MOVE_LENGTH: ds 0
 .ENDE
 
+; battle classes (wIsInBattle values)
+	const_def 1
+	const WILD_BATTLE
+	const TRAINER_BATTLE
+.DEFINE LOST_BATTLE $FF
+
 ; battle type constants (wBattleType values)
 	const_def
 	const BATTLE_TYPE_NORMAL  ; 0

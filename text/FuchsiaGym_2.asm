@@ -37,6 +37,7 @@ WLA_GLOBAL_FuchsiaGymKogaReceivedTM06Text:
 _FuchsiaGymKogaTM06ExplanationText:
 WLA_GLOBAL_FuchsiaGymKogaTM06ExplanationText:
 	text_start
+
 	para "TM06 contains"
 	line "TOXIC!"
 

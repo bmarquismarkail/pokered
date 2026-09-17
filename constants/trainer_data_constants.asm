@@ -1,0 +1,11 @@
+; trainer data structure fields (see macros/scripts/maps.asm)
+.ENUM 0 EXPORT
+TRAINER_EVENT_FLAG_BIT     db ;  0
+TRAINER_VIEW_RANGE         db ;  1
+TRAINER_EVENT_FLAG_POINTER dw ;  2
+TRAINER_BEFORE_BATTLE_TEXT dw ;  4
+TRAINER_AFTER_BATTLE_TEXT  dw ;  6
+TRAINER_WON_BATTLE_TEXT    dw ;  8
+TRAINER_LOST_BATTLE_TEXT   dw ; 10
+TRAINER_STRUCT_SIZE: ds 0   ; 12
+.ENDE
