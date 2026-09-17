@@ -9,10 +9,18 @@ The native Pokémon Red build requires:
 
 RGBDS and third-party Python imaging libraries are not required.
 
-On Debian or Ubuntu, install the host dependencies with:
+On Debian or Ubuntu, install the host dependencies and a pinned WLA-DX
+release with:
 
 ```bash
-sudo apt-get install build-essential make python3 wla-dx
+sudo apt-get install build-essential cmake curl make python3
+tmpdir="$(mktemp -d)"
+curl -L https://github.com/vhelin/wla-dx/archive/refs/tags/v10.7.tar.gz -o "$tmpdir/wla-dx.tar.gz"
+tar -xzf "$tmpdir/wla-dx.tar.gz" -C "$tmpdir"
+cmake -S "$tmpdir/wla-dx-10.7" -B "$tmpdir/build"
+cmake --build "$tmpdir/build"
+sudo cmake --install "$tmpdir/build"
+rm -rf "$tmpdir"
 ```
 
 On macOS with Homebrew:

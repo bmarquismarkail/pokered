@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  WLA_DX_VERSION: v10.7
+
 on:
   push:
     branches: [ master ]
@@ -15,7 +18,14 @@ jobs:
       - name: Install WLA-DX
         run: |
           sudo apt-get update
-          sudo apt-get install -yq build-essential wla-dx
+          sudo apt-get install -yq build-essential cmake curl
+          tmpdir="$(mktemp -d)"
+          trap 'rm -rf "$tmpdir"' EXIT
+          curl -L "https://github.com/vhelin/wla-dx/archive/refs/tags/${WLA_DX_VERSION}.tar.gz" -o "$tmpdir/wla-dx.tar.gz"
+          tar -xzf "$tmpdir/wla-dx.tar.gz" -C "$tmpdir"
+          cmake -S "$tmpdir/wla-dx-${WLA_DX_VERSION#v}" -B "$tmpdir/build"
+          cmake --build "$tmpdir/build" -j"$(nproc)"
+          sudo cmake --install "$tmpdir/build"
 
       - name: Build and validate Red
         run: make -j$(nproc) check
