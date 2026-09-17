@@ -1,94 +1,95 @@
 WarpTileIDPointers:
 	table_width 2
-	dw .OverworldWarpTileIDs
-	dw .RedsHouse1WarpTileIDs
-	dw .MartWarpTileIDs
-	dw .ForestWarpTileIDs
-	dw .RedsHouse2WarpTileIDs
-	dw .DojoWarpTileIDs
-	dw .PokecenterWarpTileIDs
-	dw .GymWarpTileIDs
-	dw .HouseWarpTileIDs
-	dw .ForestGateWarpTileIDs
-	dw .MuseumWarpTileIDs
-	dw .UndergroundWarpTileIDs
-	dw .GateWarpTileIDs
-	dw .ShipWarpTileIDs
-	dw .ShipPortWarpTileIDs
-	dw .CemeteryWarpTileIDs
-	dw .InteriorWarpTileIDs
-	dw .CavernWarpTileIDs
-	dw .LobbyWarpTileIDs
-	dw .MansionWarpTileIDs
-	dw .LabWarpTileIDs
-	dw .ClubWarpTileIDs
-	dw .FacilityWarpTileIDs
-	dw .PlateauWarpTileIDs
+	.DW WarpTileIDPointers.OverworldWarpTileIDs
+	.DW WarpTileIDPointers.RedsHouse1WarpTileIDs
+	.DW WarpTileIDPointers.MartWarpTileIDs
+	.DW WarpTileIDPointers.ForestWarpTileIDs
+	.DW WarpTileIDPointers.RedsHouse2WarpTileIDs
+	.DW WarpTileIDPointers.DojoWarpTileIDs
+	.DW WarpTileIDPointers.PokecenterWarpTileIDs
+	.DW WarpTileIDPointers.GymWarpTileIDs
+	.DW WarpTileIDPointers.HouseWarpTileIDs
+	.DW WarpTileIDPointers.ForestGateWarpTileIDs
+	.DW WarpTileIDPointers.MuseumWarpTileIDs
+	.DW WarpTileIDPointers.UndergroundWarpTileIDs
+	.DW WarpTileIDPointers.GateWarpTileIDs
+	.DW WarpTileIDPointers.ShipWarpTileIDs
+	.DW WarpTileIDPointers.ShipPortWarpTileIDs
+	.DW WarpTileIDPointers.CemeteryWarpTileIDs
+	.DW WarpTileIDPointers.InteriorWarpTileIDs
+	.DW WarpTileIDPointers.CavernWarpTileIDs
+	.DW WarpTileIDPointers.LobbyWarpTileIDs
+	.DW WarpTileIDPointers.MansionWarpTileIDs
+	.DW WarpTileIDPointers.LabWarpTileIDs
+	.DW WarpTileIDPointers.ClubWarpTileIDs
+	.DW WarpTileIDPointers.FacilityWarpTileIDs
+	.DW WarpTileIDPointers.PlateauWarpTileIDs
 	assert_table_length NUM_TILESETS
 
-MACRO warp_tiles
-	IF _NARG
-		db \# ; all args
-	ENDC
-	db -1 ; end
-ENDM
+.MACRO warp_tiles
+	.REPT NARGS
+		.DB \1 ; all args
+		.SHIFT
+	.ENDR
+	.DB -1 ; end
+.ENDM
 
-.OverworldWarpTileIDs:
+WarpTileIDPointers.OverworldWarpTileIDs:
 	warp_tiles $1B, $58
 
-.ForestGateWarpTileIDs:
-.MuseumWarpTileIDs:
-.GateWarpTileIDs:
-	db $3B
+WarpTileIDPointers.ForestGateWarpTileIDs:
+WarpTileIDPointers.MuseumWarpTileIDs:
+WarpTileIDPointers.GateWarpTileIDs:
+	.DB $3B
 	; fallthrough
-.RedsHouse1WarpTileIDs:
-.RedsHouse2WarpTileIDs:
+WarpTileIDPointers.RedsHouse1WarpTileIDs:
+WarpTileIDPointers.RedsHouse2WarpTileIDs:
 	warp_tiles $1A, $1C
 
-.MartWarpTileIDs:
-.PokecenterWarpTileIDs:
+WarpTileIDPointers.MartWarpTileIDs:
+WarpTileIDPointers.PokecenterWarpTileIDs:
 	warp_tiles $5E
 
-.ForestWarpTileIDs:
+WarpTileIDPointers.ForestWarpTileIDs:
 	warp_tiles $5A, $5C, $3A
 
-.DojoWarpTileIDs:
-.GymWarpTileIDs:
+WarpTileIDPointers.DojoWarpTileIDs:
+WarpTileIDPointers.GymWarpTileIDs:
 	warp_tiles $4A
 
-.HouseWarpTileIDs:
+WarpTileIDPointers.HouseWarpTileIDs:
 	warp_tiles $54, $5C, $32
 
-.ShipWarpTileIDs:
+WarpTileIDPointers.ShipWarpTileIDs:
 	warp_tiles $37, $39, $1E, $4A
 
-.InteriorWarpTileIDs:
+WarpTileIDPointers.InteriorWarpTileIDs:
 	warp_tiles $15, $55, $04
 
-.CavernWarpTileIDs:
+WarpTileIDPointers.CavernWarpTileIDs:
 	warp_tiles $18, $1A, $22
 
-.LobbyWarpTileIDs:
+WarpTileIDPointers.LobbyWarpTileIDs:
 	warp_tiles $1A, $1C, $38
 
-.MansionWarpTileIDs:
+WarpTileIDPointers.MansionWarpTileIDs:
 	warp_tiles $1A, $1C, $53
 
-.LabWarpTileIDs:
+WarpTileIDPointers.LabWarpTileIDs:
 	warp_tiles $34
 
-.FacilityWarpTileIDs:
-	db $43, $58, $20
+WarpTileIDPointers.FacilityWarpTileIDs:
+	.DB $43, $58, $20
 	; fallthrough
-.CemeteryWarpTileIDs:
-	db $1B
+WarpTileIDPointers.CemeteryWarpTileIDs:
+	.DB $1B
 	; fallthrough
-.UndergroundWarpTileIDs:
+WarpTileIDPointers.UndergroundWarpTileIDs:
 	warp_tiles $13
 
-.PlateauWarpTileIDs:
-	db $1B, $3B
+WarpTileIDPointers.PlateauWarpTileIDs:
+	.DB $1B, $3B
 	; fallthrough
-.ShipPortWarpTileIDs:
-.ClubWarpTileIDs:
+WarpTileIDPointers.ShipPortWarpTileIDs:
+WarpTileIDPointers.ClubWarpTileIDs:
 	warp_tiles ; end

@@ -11,18 +11,17 @@
 	const_export SILPHCO6F_X_ACCURACY
 
 SilphCo6F_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 5
 	warp_event 16,  0, SILPH_CO_7F, 2
 	warp_event 14,  0, SILPH_CO_5F, 1
 	warp_event 18,  0, SILPH_CO_ELEVATOR, 1
 	warp_event  3,  3, SILPH_CO_4F, 5
 	warp_event 23,  3, SILPH_CO_2F, 7
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 10
 	object_event 10,  6, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO6F_SILPH_WORKER_M1
 	object_event 20,  6, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO6F_SILPH_WORKER_M2
 	object_event 21,  6, SPRITE_SILPH_WORKER_F, STAY, DOWN, TEXT_SILPHCO6F_SILPH_WORKER_F1
@@ -34,4 +33,12 @@ SilphCo6F_Object:
 	object_event  3, 12, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO6F_HP_UP, HP_UP
 	object_event  2, 15, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO6F_X_ACCURACY, X_ACCURACY
 
-	def_warps_to SILPH_CO_6F
+	event_displacement SILPH_CO_6F_WIDTH, 16, 0
+
+	event_displacement SILPH_CO_6F_WIDTH, 14, 0
+
+	event_displacement SILPH_CO_6F_WIDTH, 18, 0
+
+	event_displacement SILPH_CO_6F_WIDTH, 3, 3
+
+	event_displacement SILPH_CO_6F_WIDTH, 23, 3

@@ -50,7 +50,7 @@ Voltorb7TrainerHeader:
 	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 0, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText, PowerPlantVoltorbBattleText
 ZapdosTrainerHeader:
 	trainer EVENT_BEAT_ZAPDOS, 0, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText, PowerPlantZapdosBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PowerPlantInitBattleScript:
 	call TalkToTrainer
@@ -104,11 +104,11 @@ PowerPlantZapdosText:
 	jr PowerPlantInitBattleScript
 
 PowerPlantVoltorbBattleText:
-	text_far _PowerPlantVoltorbBattleText
+	text_far WLA_GLOBAL_PowerPlantVoltorbBattleText
 	text_end
 
 PowerPlantZapdosBattleText:
-	text_far _PowerPlantZapdosBattleText
+	text_far WLA_GLOBAL_PowerPlantZapdosBattleText
 	text_asm
 	ld a, ZAPDOS
 	call PlayCry

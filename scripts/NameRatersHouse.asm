@@ -16,25 +16,25 @@ NameRatersHouseCheckMonOTScript:
 	call AddNTimes
 	ld de, wPlayerName
 	ld c, NAME_LENGTH
-	call .check_match_loop
-	jr c, .no_match
+	call NameRatersHouseCheckMonOTScript.check_match_loop
+	jr c, NameRatersHouseCheckMonOTScript.no_match
 	ld hl, wPartyMon1OTID
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wPlayerID
 	ld c, $2
-.check_match_loop
+NameRatersHouseCheckMonOTScript.check_match_loop
 	ld a, [de]
 	cp [hl]
-	jr nz, .no_match
+	jr nz, NameRatersHouseCheckMonOTScript.no_match
 	inc hl
 	inc de
 	dec c
-	jr nz, .check_match_loop
+	jr nz, NameRatersHouseCheckMonOTScript.check_match_loop
 	and a
 	ret
-.no_match
+NameRatersHouseCheckMonOTScript.no_match
 	scf
 	ret
 
@@ -45,10 +45,10 @@ NameRatersHouse_TextPointers:
 NameRatersHouseNameRaterText:
 	text_asm
 	call SaveScreenTilesToBuffer2
-	ld hl, .WantMeToRateText
+	ld hl, NameRatersHouseNameRaterText.WantMeToRateText
 	call NameRatersHouseYesNoScript
-	jr nz, .did_not_rename
-	ld hl, .WhichPokemonText
+	jr nz, NameRatersHouseNameRaterText.did_not_rename
+	ld hl, NameRatersHouseNameRaterText.WhichPokemonText
 	call PrintText
 	xor a
 	ld [wPartyMenuTypeOrMessageID], a
@@ -60,50 +60,50 @@ NameRatersHouseNameRaterText:
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
-	jr c, .did_not_rename
+	jr c, NameRatersHouseNameRaterText.did_not_rename
 	call GetPartyMonName2
 	call NameRatersHouseCheckMonOTScript
-	ld hl, .ATrulyImpeccableNameText
-	jr c, .done
-	ld hl, .GiveItANiceNameText
+	ld hl, NameRatersHouseNameRaterText.ATrulyImpeccableNameText
+	jr c, NameRatersHouseNameRaterText.done
+	ld hl, NameRatersHouseNameRaterText.GiveItANiceNameText
 	call NameRatersHouseYesNoScript
-	jr nz, .did_not_rename
-	ld hl, .WhatShouldWeNameItText
+	jr nz, NameRatersHouseNameRaterText.did_not_rename
+	ld hl, NameRatersHouseNameRaterText.WhatShouldWeNameItText
 	call PrintText
 	farcall DisplayNameRaterScreen
-	jr c, .did_not_rename
-	ld hl, .PokemonHasBeenRenamedText
-.done
+	jr c, NameRatersHouseNameRaterText.did_not_rename
+	ld hl, NameRatersHouseNameRaterText.PokemonHasBeenRenamedText
+NameRatersHouseNameRaterText.done
 	call PrintText
 	jp TextScriptEnd
-.did_not_rename
-	ld hl, .ComeAnyTimeYouLikeText
-	jr .done
+NameRatersHouseNameRaterText.did_not_rename
+	ld hl, NameRatersHouseNameRaterText.ComeAnyTimeYouLikeText
+	jr NameRatersHouseNameRaterText.done
 
-.WantMeToRateText:
-	text_far _NameRatersHouseNameRaterWantMeToRateText
+NameRatersHouseNameRaterText.WantMeToRateText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterWantMeToRateText
 	text_end
 
-.WhichPokemonText:
-	text_far _NameRatersHouseNameRaterWhichPokemonText
+NameRatersHouseNameRaterText.WhichPokemonText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterWhichPokemonText
 	text_end
 
-.GiveItANiceNameText:
-	text_far _NameRatersHouseNameRaterGiveItANiceNameText
+NameRatersHouseNameRaterText.GiveItANiceNameText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterGiveItANiceNameText
 	text_end
 
-.WhatShouldWeNameItText:
-	text_far _NameRatersHouseNameRaterWhatShouldWeNameItText
+NameRatersHouseNameRaterText.WhatShouldWeNameItText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterWhatShouldWeNameItText
 	text_end
 
-.PokemonHasBeenRenamedText:
-	text_far _NameRatersHouseNameRaterPokemonHasBeenRenamedText
+NameRatersHouseNameRaterText.PokemonHasBeenRenamedText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterPokemonHasBeenRenamedText
 	text_end
 
-.ComeAnyTimeYouLikeText:
-	text_far _NameRatersHouseNameRaterComeAnyTimeYouLikeText
+NameRatersHouseNameRaterText.ComeAnyTimeYouLikeText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterComeAnyTimeYouLikeText
 	text_end
 
-.ATrulyImpeccableNameText:
-	text_far _NameRatersHouseNameRaterATrulyImpeccableNameText
+NameRatersHouseNameRaterText.ATrulyImpeccableNameText:
+	text_far WLA_GLOBAL_NameRatersHouseNameRaterATrulyImpeccableNameText
 	text_end

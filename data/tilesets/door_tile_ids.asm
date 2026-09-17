@@ -1,55 +1,56 @@
 DoorTileIDPointers:
-	dbw OVERWORLD,   .OverworldDoorTileIDs
-	dbw FOREST,      .ForestDoorTileIDs
-	dbw MART,        .MartDoorTileIDs
-	dbw HOUSE,       .HouseDoorTileIDs
-	dbw FOREST_GATE, .TilesetMuseumDoorTileIDs
-	dbw MUSEUM,      .TilesetMuseumDoorTileIDs
-	dbw GATE,        .TilesetMuseumDoorTileIDs
-	dbw SHIP,        .ShipDoorTileIDs
-	dbw LOBBY,       .LobbyDoorTileIDs
-	dbw MANSION,     .MansionDoorTileIDs
-	dbw LAB,         .LabDoorTileIDs
-	dbw FACILITY,    .FacilityDoorTileIDs
-	dbw PLATEAU,     .PlateauDoorTileIDs
-	db -1 ; end
+	dbw OVERWORLD,   DoorTileIDPointers.OverworldDoorTileIDs
+	dbw FOREST,      DoorTileIDPointers.ForestDoorTileIDs
+	dbw MART,        DoorTileIDPointers.MartDoorTileIDs
+	dbw HOUSE,       DoorTileIDPointers.HouseDoorTileIDs
+	dbw FOREST_GATE, DoorTileIDPointers.TilesetMuseumDoorTileIDs
+	dbw MUSEUM,      DoorTileIDPointers.TilesetMuseumDoorTileIDs
+	dbw GATE,        DoorTileIDPointers.TilesetMuseumDoorTileIDs
+	dbw SHIP,        DoorTileIDPointers.ShipDoorTileIDs
+	dbw LOBBY,       DoorTileIDPointers.LobbyDoorTileIDs
+	dbw MANSION,     DoorTileIDPointers.MansionDoorTileIDs
+	dbw LAB,         DoorTileIDPointers.LabDoorTileIDs
+	dbw FACILITY,    DoorTileIDPointers.FacilityDoorTileIDs
+	dbw PLATEAU,     DoorTileIDPointers.PlateauDoorTileIDs
+	.DB -1 ; end
 
-MACRO door_tiles
-	IF _NARG
-		db \# ; all args
-	ENDC
-	db 0 ; end
-ENDM
+.MACRO door_tiles
+	.REPT NARGS
+		.DB \1 ; all args
+		.SHIFT
+	.ENDR
+	.DB 0 ; end
+.ENDM
 
-.OverworldDoorTileIDs:
+DoorTileIDPointers.OverworldDoorTileIDs:
 	door_tiles $1B, $58
 
-.ForestDoorTileIDs:
+DoorTileIDPointers.ForestDoorTileIDs:
 	door_tiles $3a
 
-.MartDoorTileIDs:
+DoorTileIDPointers.MartDoorTileIDs:
 	door_tiles $5e
 
-.HouseDoorTileIDs:
+DoorTileIDPointers.HouseDoorTileIDs:
 	door_tiles $54
 
-.TilesetMuseumDoorTileIDs:
+DoorTileIDPointers.TilesetMuseumDoorTileIDs:
 	door_tiles $3b
 
-.ShipDoorTileIDs:
+DoorTileIDPointers.ShipDoorTileIDs:
 	door_tiles $1e
 
-.LobbyDoorTileIDs:
+DoorTileIDPointers.LobbyDoorTileIDs:
 	door_tiles $1c, $38, $1a
 
-.MansionDoorTileIDs:
+DoorTileIDPointers.MansionDoorTileIDs:
 	door_tiles $1a, $1c, $53
 
-.LabDoorTileIDs:
+DoorTileIDPointers.LabDoorTileIDs:
 	door_tiles $34
 
-.FacilityDoorTileIDs:
+DoorTileIDPointers.FacilityDoorTileIDs:
 	door_tiles $43, $58, $1b
 
-.PlateauDoorTileIDs:
+DoorTileIDPointers.PlateauDoorTileIDs:
 	door_tiles $3b, $1b

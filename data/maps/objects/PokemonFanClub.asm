@@ -7,17 +7,17 @@
 	const_export POKEMONFANCLUB_RECEPTIONIST
 
 PokemonFanClub_Object:
-	db $d ; border block
+	.DB $d ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  2,  7, LAST_MAP, 2
 	warp_event  3,  7, LAST_MAP, 2
 
-	def_bg_events
+	.DB 2
 	bg_event  1,  0, TEXT_POKEMONFANCLUB_SIGN_1
 	bg_event  6,  0, TEXT_POKEMONFANCLUB_SIGN_2
 
-	def_object_events
+	.DB 6
 	object_event  6,  3, SPRITE_FISHER, STAY, LEFT, TEXT_POKEMONFANCLUB_PIKACHU_FAN
 	object_event  1,  3, SPRITE_GIRL, STAY, RIGHT, TEXT_POKEMONFANCLUB_SEEL_FAN
 	object_event  6,  4, SPRITE_FAIRY, STAY, LEFT, TEXT_POKEMONFANCLUB_PIKACHU
@@ -25,4 +25,6 @@ PokemonFanClub_Object:
 	object_event  3,  1, SPRITE_GENTLEMAN, STAY, DOWN, TEXT_POKEMONFANCLUB_CHAIRMAN
 	object_event  5,  1, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_POKEMONFANCLUB_RECEPTIONIST
 
-	def_warps_to POKEMON_FAN_CLUB
+	event_displacement POKEMON_FAN_CLUB_WIDTH, 2, 7
+
+	event_displacement POKEMON_FAN_CLUB_WIDTH, 3, 7

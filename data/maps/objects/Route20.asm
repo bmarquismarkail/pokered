@@ -11,17 +11,17 @@
 	const_export ROUTE20_SWIMMER9
 
 Route20_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event 48,  5, SEAFOAM_ISLANDS_1F, 1
 	warp_event 58,  9, SEAFOAM_ISLANDS_1F, 3
 
-	def_bg_events
+	.DB 2
 	bg_event 51,  7, TEXT_ROUTE20_SEAFOAM_ISLANDS_WEST_SIGN
 	bg_event 57, 11, TEXT_ROUTE20_SEAFOAM_ISLANDS_EAST_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 87,  8, SPRITE_SWIMMER, STAY, UP, TEXT_ROUTE20_SWIMMER1, OPP_SWIMMER, 9
 	object_event 68, 11, SPRITE_SWIMMER, STAY, UP, TEXT_ROUTE20_SWIMMER2, OPP_BEAUTY, 15
 	object_event 45, 10, SPRITE_SWIMMER, STAY, DOWN, TEXT_ROUTE20_SWIMMER3, OPP_BEAUTY, 6
@@ -33,4 +33,6 @@ Route20_Object:
 	object_event 24, 12, SPRITE_SWIMMER, STAY, DOWN, TEXT_ROUTE20_SWIMMER8, OPP_JR_TRAINER_F, 16
 	object_event 15,  8, SPRITE_SWIMMER, STAY, UP, TEXT_ROUTE20_SWIMMER9, OPP_BEAUTY, 8
 
-	def_warps_to ROUTE_20
+	event_displacement ROUTE_20_WIDTH, 48, 5
+
+	event_displacement ROUTE_20_WIDTH, 58, 9

@@ -13,22 +13,22 @@ SilphCo6F_GateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo6F_GateCallbackScript.GateCoordinates
 	call SilphCo4F_SetCardKeyDoorYScript
 	call SilphCo6F_UnlockedDoorEventScript
 	CheckEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 6, 2
+	lb "bc", 6, 2
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo6F_GateCallbackScript.GateCoordinates:
 	dbmapcoord  2,  6
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo6F_UnlockedDoorEventScript:
-	ldh a, [hUnlockedSilphCoDoors]
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
@@ -61,91 +61,91 @@ SilphCo6TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_1, 3, SilphCo6FScientistBattleText, SilphCo6FScientistEndBattleText, SilphCo6FScientistAfterBattleText
 SilphCo6TrainerHeader2:
 	trainer EVENT_BEAT_SILPH_CO_6F_TRAINER_2, 2, SilphCo6FRocket2BattleText, SilphCo6FRocket2EndBattleText, SilphCo6FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo6FBeatGiovanniPrintDEOrPrintHLScript:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
-	jr nz, .beat_giovanni
-	jr .print_text
-.beat_giovanni
+	jr nz, SilphCo6FBeatGiovanniPrintDEOrPrintHLScript.beat_giovanni
+	jr SilphCo6FBeatGiovanniPrintDEOrPrintHLScript.print_text
+SilphCo6FBeatGiovanniPrintDEOrPrintHLScript.beat_giovanni
 	ld h, d
 	ld l, e
-.print_text
+SilphCo6FBeatGiovanniPrintDEOrPrintHLScript.print_text
 	jp PrintText
 
 SilphCo6FSilphWorkerM1Text:
 	text_asm
-	ld hl, .TookOverTheBuildingText
-	ld de, .BackToWorkText
+	ld hl, SilphCo6FSilphWorkerM1Text.TookOverTheBuildingText
+	ld de, SilphCo6FSilphWorkerM1Text.BackToWorkText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.TookOverTheBuildingText:
-	text_far _SilphCo6FSilphWorkerM1TookOverTheBuildingText
+SilphCo6FSilphWorkerM1Text.TookOverTheBuildingText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerM1TookOverTheBuildingText
 	text_end
 
-.BackToWorkText:
-	text_far _SilphCo6FSilphWorkerM1BackToWorkText
+SilphCo6FSilphWorkerM1Text.BackToWorkText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerM1BackToWorkText
 	text_end
 
 SilphCo6FSilphWorkerM2Text:
 	text_asm
-	ld hl, .HelpMePleaseText
-	ld de, .WeGotEngagedText
+	ld hl, SilphCo6FSilphWorkerM2Text.HelpMePleaseText
+	ld de, SilphCo6FSilphWorkerM2Text.WeGotEngagedText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.HelpMePleaseText:
-	text_far _SilphCo6FSilphWorkerMHelpMePleaseText
+SilphCo6FSilphWorkerM2Text.HelpMePleaseText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerMHelpMePleaseText
 	text_end
 
-.WeGotEngagedText:
-	text_far _SilphCo6FSilphWorkerMWeGotEngagedText
+SilphCo6FSilphWorkerM2Text.WeGotEngagedText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerMWeGotEngagedText
 	text_end
 
 SilphCo6FSilphWorkerF1Text:
 	text_asm
-	ld hl, .SuchACowardText
-	ld de, .HaveToMarryHimText
+	ld hl, SilphCo6FSilphWorkerF1Text.SuchACowardText
+	ld de, SilphCo6FSilphWorkerF1Text.HaveToMarryHimText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.SuchACowardText:
-	text_far _SilphCo6FSilphWorkerF1SuchACowardText
+SilphCo6FSilphWorkerF1Text.SuchACowardText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerF1SuchACowardText
 	text_end
 
-.HaveToMarryHimText:
-	text_far _SilphCo6FSilphWorkerF1HaveToMarryHimText
+SilphCo6FSilphWorkerF1Text.HaveToMarryHimText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerF1HaveToMarryHimText
 	text_end
 
 SilphCo6FSilphWorkerF2Text:
 	text_asm
-	ld hl, .TeamRocketConquerWorldText
-	ld de, .TeamRocketRanText
+	ld hl, SilphCo6FSilphWorkerF2Text.TeamRocketConquerWorldText
+	ld de, SilphCo6FSilphWorkerF2Text.TeamRocketRanText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.TeamRocketConquerWorldText:
-	text_far _SilphCo6FSilphWorkerF2TeamRocketConquerWorldText
+SilphCo6FSilphWorkerF2Text.TeamRocketConquerWorldText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerF2TeamRocketConquerWorldText
 	text_end
 
-.TeamRocketRanText:
-	text_far _SilphCo6FSilphWorkerF2TeamRocketRanText
+SilphCo6FSilphWorkerF2Text.TeamRocketRanText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerF2TeamRocketRanText
 	text_end
 
 SilphCo6FSilphWorkerM3Text:
 	text_asm
-	ld hl, .TargetedSilphText
-	ld de, .WorkForSilphText
+	ld hl, SilphCo6FSilphWorkerM3Text.TargetedSilphText
+	ld de, SilphCo6FSilphWorkerM3Text.WorkForSilphText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.TargetedSilphText:
-	text_far _SilphCo6FSilphWorkerM3TargetedSilphText
+SilphCo6FSilphWorkerM3Text.TargetedSilphText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerM3TargetedSilphText
 	text_end
 
-.WorkForSilphText:
-	text_far _SilphCo6FSilphWorkerM3WorkForSilphText
+SilphCo6FSilphWorkerM3Text.WorkForSilphText:
+	text_far WLA_GLOBAL_SilphCo6FSilphWorkerM3WorkForSilphText
 	text_end
 
 SilphCo6FRocket1Text:
@@ -155,15 +155,15 @@ SilphCo6FRocket1Text:
 	jp TextScriptEnd
 
 SilphCo6FRocket1BattleText:
-	text_far _SilphCo6FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket1BattleText
 	text_end
 
 SilphCo6FRocket1EndBattleText:
-	text_far _SilphCo6FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket1EndBattleText
 	text_end
 
 SilphCo6FRocket1AfterBattleText:
-	text_far _SilphCo6FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket1AfterBattleText
 	text_end
 
 SilphCo6FScientistText:
@@ -173,15 +173,15 @@ SilphCo6FScientistText:
 	jp TextScriptEnd
 
 SilphCo6FScientistBattleText:
-	text_far _SilphCo6FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo6FScientistBattleText
 	text_end
 
 SilphCo6FScientistEndBattleText:
-	text_far _SilphCo6FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo6FScientistEndBattleText
 	text_end
 
 SilphCo6FScientistAfterBattleText:
-	text_far _SilphCo6FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo6FScientistAfterBattleText
 	text_end
 
 SilphCo6FRocket2Text:
@@ -191,13 +191,13 @@ SilphCo6FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo6FRocket2BattleText:
-	text_far _SilphCo6FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket2BattleText
 	text_end
 
 SilphCo6FRocket2EndBattleText:
-	text_far _SilphCo6FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket2EndBattleText
 	text_end
 
 SilphCo6FRocket2AfterBattleText:
-	text_far _SilphCo6FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo6FRocket2AfterBattleText
 	text_end

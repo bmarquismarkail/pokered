@@ -30,27 +30,27 @@ Route23DefaultScript:
 	ld a, [wYCoord]
 	ld b, a
 	ld e, $0
-	EventFlagBit c, EVENT_PASSED_EARTHBADGE_CHECK + 1, EVENT_PASSED_CASCADEBADGE_CHECK
-.loop
+	EventFlagBit "c", EVENT_PASSED_EARTHBADGE_CHECK + 1, EVENT_PASSED_CASCADEBADGE_CHECK
+Route23DefaultScript.loop
 	ld a, [hli]
 	cp -1
 	ret z
 	inc e
 	dec c
 	cp b
-	jr nz, .loop
+	jr nz, Route23DefaultScript.loop
 	cp 35
-	jr nz, .not_past_victory_road
+	jr nz, Route23DefaultScript.not_past_victory_road
 	ld a, [wXCoord]
 	cp 14
 	ret nc
-.not_past_victory_road
+Route23DefaultScript.not_past_victory_road
 	ld a, e
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST
-	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagAddress "hl", EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -58,18 +58,18 @@ Route23DefaultScript:
 	call Route23CopyBadgeTextScript
 	call DisplayTextID
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ret
 
 Route23GuardsYCoords:
-	db 35
-	db 56
-	db 85
-	db 96
-	db 105
-	db 119
-	db 136
-	db -1 ; end
+	.DB 35
+	.DB 56
+	.DB 85
+	.DB 96
+	.DB 105
+	.DB 119
+	.DB 136
+	.DB -1 ; end
 
 Route23CopyBadgeTextScript:
 	ld hl, BadgeTextPointers
@@ -82,43 +82,43 @@ Route23CopyBadgeTextScript:
 	ld h, [hl]
 	ld l, a
 	ld de, wNameBuffer
-.copyTextLoop
+Route23CopyBadgeTextScript.copyTextLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp '@'
-	jr nz, .copyTextLoop
+	cp $50
+	jr nz, Route23CopyBadgeTextScript.copyTextLoop
 	ret
 
 BadgeTextPointers:
-	dw CascadeBadgeText
-	dw ThunderBadgeText
-	dw RainbowBadgeText
-	dw SoulBadgeText
-	dw MarshBadgeText
-	dw VolcanoBadgeText
-	dw EarthBadgeText
+	.DW CascadeBadgeText
+	.DW ThunderBadgeText
+	.DW RainbowBadgeText
+	.DW SoulBadgeText
+	.DW MarshBadgeText
+	.DW VolcanoBadgeText
+	.DW EarthBadgeText
 
 EarthBadgeText:
-	db "EARTHBADGE@"
+		.STRINGMAP pokemon, "EARTHBADGE@"
 
 VolcanoBadgeText:
-	db "VOLCANOBADGE@"
+		.STRINGMAP pokemon, "VOLCANOBADGE@"
 
 MarshBadgeText:
-	db "MARSHBADGE@"
+		.STRINGMAP pokemon, "MARSHBADGE@"
 
 SoulBadgeText:
-	db "SOULBADGE@"
+		.STRINGMAP pokemon, "SOULBADGE@"
 
 RainbowBadgeText:
-	db "RAINBOWBADGE@"
+		.STRINGMAP pokemon, "RAINBOWBADGE@"
 
 ThunderBadgeText:
-	db "THUNDERBADGE@"
+		.STRINGMAP pokemon, "THUNDERBADGE@"
 
 CascadeBadgeText:
-	db "CASCADEBADGE@"
+		.STRINGMAP pokemon, "CASCADEBADGE@"
 
 Route23MovePlayerDownScript:
 	ld a, $1
@@ -152,43 +152,43 @@ Route23_TextPointers:
 
 Route23Guard1Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Guard2Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Swimmer1Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Swimmer2Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Guard3Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Guard4Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
 Route23Guard5Text:
 	text_asm
-	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagBit "a", EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23CheckForBadgeScript
 	jp TextScriptEnd
 
@@ -203,20 +203,20 @@ Route23CheckForBadgeScript:
 	predef FlagActionPredef
 	ld a, c
 	and a
-	jr nz, .have_badge
+	jr nz, Route23CheckForBadgeScript.have_badge
 	ld hl, Route23YouDontHaveTheBadgeYetText
 	call PrintText
 	call Route23MovePlayerDownScript
 	ld a, SCRIPT_ROUTE23_PLAYER_MOVING
 	ld [wRoute23CurScript], a
 	ret
-.have_badge
+Route23CheckForBadgeScript.have_badge
 	ld hl, Route23OhThatIsTheBadgeText
 	call PrintText
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET
-	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
+	EventFlagAddress "hl", EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
 	ld a, SCRIPT_ROUTE23_RESET_TO_DEFAULT
 	ld [wRoute23CurScript], a
@@ -227,7 +227,7 @@ Route23PrintOhThatsTheBadgeTextScript: ; unreferenced
 	jp PrintText
 
 Route23YouDontHaveTheBadgeYetText:
-	text_far _Route23YouDontHaveTheBadgeYetText
+	text_far WLA_GLOBAL_Route23YouDontHaveTheBadgeYetText
 	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
@@ -235,11 +235,11 @@ Route23YouDontHaveTheBadgeYetText:
 	jp TextScriptEnd
 
 Route23OhThatIsTheBadgeText:
-	text_far _Route23OhThatIsTheBadgeText
+	text_far WLA_GLOBAL_Route23OhThatIsTheBadgeText
 	sound_get_item_1
-	text_far _Route23GoRightAheadText
+	text_far WLA_GLOBAL_Route23GoRightAheadText
 	text_end
 
 Route23VictoryRoadGateSignText:
-	text_far _Route23VictoryRoadGateSignText
+	text_far WLA_GLOBAL_Route23VictoryRoadGateSignText
 	text_end

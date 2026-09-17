@@ -1,17 +1,17 @@
-	db DEX_WEEZING ; pokedex id
+	.DB DEX_WEEZING ; pokedex id
 
-	db  65,  90, 120,  60,  85
+	.DB  65,  90, 120,  60,  85
 	;   hp  atk  def  spd  spc
 
-	db POISON, POISON ; type
-	db 60 ; catch rate
-	db 173 ; base exp
+	.DB POISON, POISON ; type
+	.DB 60 ; catch rate
+	.DB 173 ; base exp
 
-	INCBIN "gfx/pokemon/front/weezing.pic", 0, 1 ; sprite dimensions
-	dw WeezingPicFront, WeezingPicBack
+	.INCBIN "gfx/pokemon/front/weezing.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW WeezingPicFront, WeezingPicBack
 
-	db TACKLE, SMOG, SLUDGE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SMOG, SLUDGE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HYPER_BEAM,   RAGE,         THUNDERBOLT,  THUNDER,      \
@@ -19,4 +19,4 @@
 	     REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

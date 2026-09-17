@@ -1,5 +1,5 @@
-TownMapText::
-	text_far _TownMapText
+TownMapText:
+	text_far WLA_GLOBAL_TownMapText
 	text_promptbutton
 	text_asm
 	ld a, $1
@@ -8,15 +8,15 @@ TownMapText::
 	set BIT_NO_TEXT_DELAY, [hl]
 	call GBPalWhiteOutWithDelay3
 	xor a
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	inc a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call LoadFontTilePatterns
 	farcall DisplayTownMap
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld de, TextScriptEnd
 	push de
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	jp CloseTextDisplay

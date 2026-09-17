@@ -1,17 +1,17 @@
-	db DEX_GRIMER ; pokedex id
+	.DB DEX_GRIMER ; pokedex id
 
-	db  80,  80,  50,  25,  40
+	.DB  80,  80,  50,  25,  40
 	;   hp  atk  def  spd  spc
 
-	db POISON, POISON ; type
-	db 190 ; catch rate
-	db 90 ; base exp
+	.DB POISON, POISON ; type
+	.DB 190 ; catch rate
+	.DB 90 ; base exp
 
-	INCBIN "gfx/pokemon/front/grimer.pic", 0, 1 ; sprite dimensions
-	dw GrimerPicFront, GrimerPicBack
+	.INCBIN "gfx/pokemon/front/grimer.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GrimerPicFront, GrimerPicBack
 
-	db POUND, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB POUND, DISABLE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    RAGE,         MEGA_DRAIN,   THUNDERBOLT,  \
@@ -19,4 +19,4 @@
 	     FIRE_BLAST,   REST,         EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,17 +1,17 @@
-	db DEX_SNORLAX ; pokedex id
+	.DB DEX_SNORLAX ; pokedex id
 
-	db 160, 110,  65,  30,  65
+	.DB 160, 110,  65,  30,  65
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 25 ; catch rate
-	db 154 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 25 ; catch rate
+	.DB 154 ; base exp
 
-	INCBIN "gfx/pokemon/front/snorlax.pic", 0, 1 ; sprite dimensions
-	dw SnorlaxPicFront, SnorlaxPicBack
+	.INCBIN "gfx/pokemon/front/snorlax.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW SnorlaxPicFront, SnorlaxPicBack
 
-	db HEADBUTT, AMNESIA, REST, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB HEADBUTT, AMNESIA, REST, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -24,4 +24,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

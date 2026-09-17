@@ -8,9 +8,9 @@ CeruleanMart_TextPointers:
 	dw_const CeruleanMartCooltrainerFText, TEXT_CERULEANMART_COOLTRAINER_F
 
 CeruleanMartCooltrainerMText:
-	text_far _CeruleanMartCooltrainerMText
+	text_far WLA_GLOBAL_CeruleanMartCooltrainerMText
 	text_end
 
 CeruleanMartCooltrainerFText:
-	text_far _CeruleanMartCooltrainerFText
+	text_far WLA_GLOBAL_CeruleanMartCooltrainerFText
 	text_end

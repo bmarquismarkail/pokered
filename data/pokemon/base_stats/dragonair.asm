@@ -1,17 +1,17 @@
-	db DEX_DRAGONAIR ; pokedex id
+	.DB DEX_DRAGONAIR ; pokedex id
 
-	db  61,  84,  65,  70,  70
+	.DB  61,  84,  65,  70,  70
 	;   hp  atk  def  spd  spc
 
-	db DRAGON, DRAGON ; type
-	db 45 ; catch rate
-	db 144 ; base exp
+	.DB DRAGON, DRAGON ; type
+	.DB 45 ; catch rate
+	.DB 144 ; base exp
 
-	INCBIN "gfx/pokemon/front/dragonair.pic", 0, 1 ; sprite dimensions
-	dw DragonairPicFront, DragonairPicBack
+	.INCBIN "gfx/pokemon/front/dragonair.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DragonairPicFront, DragonairPicBack
 
-	db WRAP, LEER, THUNDER_WAVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB WRAP, LEER, THUNDER_WAVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -21,4 +21,4 @@
 	     REST,         THUNDER_WAVE, SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

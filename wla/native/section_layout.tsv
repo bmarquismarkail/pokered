@@ -1,0 +1,118 @@
+section	source_owner	bank	slot	origin	size	first_symbol	last_symbol	status
+Tilesets 3	gfx/tilesets.asm	1b	1	0000	4000	Cemetery_GFX	Underground_Block	converted
+Tilesets 1	gfx/tilesets.asm	19	1	0000	3fe0	Overworld_GFX	Plateau_Block	converted
+bank1E	main.asm	1e	1	0000	3fc0	DrawFrameBlock	TechnicalMachinePrices	converted
+Tilesets 2	gfx/tilesets.asm	1a	1	007f	3f80	Dojo_GFX	Facility_Block	converted
+Pics 4	gfx/pics.asm	0c	1	0000	3f2b	DodrioPicFront	OldManPicBack	converted
+Pics 2	gfx/pics.asm	0a	1	0000	3ea9	GrowlithePicFront	MoltresPicBack	converted
+Home	home.asm	00	0	0150	3e56	_Start	PokemonStuffText_id	converted
+Pics 1	gfx/pics.asm	09	1	0000	3d6b	RhydonPicFront	TangelaPicBack	converted
+Trainer Pics	gfx/pics.asm	13	1	0000	3d04	YoungsterPic	LancePic	converted
+bank3	main.asm	03	1	0000	3c4a	_Joypad	PokemonStuffText	converted
+bank1	main.asm	01	1	0000	3c49	SpriteFacingAndAnimationTable	_DisplayPokedex	converted
+Battle Engine 7	main.asm	0e	1	0000	3be6	Moves	EffectCallBattleCore	converted
+Battle Core	main.asm	0f	1	0000	3bc8	BattleCore	PlayBattleAnimationGotID	converted
+bank1C	main.asm	1c	1	0000	3b9d	LoadShootingStarGraphics	ClearAllSRAMBanks.PadSRAM_FF	converted
+Pics 3	gfx/pics.asm	0b	1	0000	3b7b	ArticunoPicFront	FossilKabutopsPic	converted
+NPC Sprites 2	gfx/sprites.asm	05	1	0000	3840	RedBikeSprite	SeelSprite	converted
+Pokédex Text	text.asm	2b	1	0000	3838	_RhydonDexEntry	_VictreebelDexEntry	converted
+Pics 5	gfx/pics.asm	0d	1	0000	3244	BulbasaurPicFront	VictreebelPicBack	converted
+Text 3	text.asm	22	1	0000	2cf9	_RockTunnelB1FHiker3AfterBattleText	_DaycareGentlemanMonNeedsMoreTimeText	converted
+Text 2	text.asm	21	1	0000	2ca1	_SilphCo5FRockerEndBattleText	_RockTunnelB1FHiker3EndBattleText	converted
+Text 4	text.asm	23	1	0000	2c09	_DaycareGentlemanAllRightThenText	_Route11SuperNerd2BattleText	converted
+Text 10	text.asm	29	1	0000	2b94	_CableClubNPCPleaseComeAgainText	_BoxFullCannotThrowBallText	converted
+Text 7	text.asm	26	1	0000	2b7b	_PewterGymBrockPostBattleAdviceText	_VermilionGymLTSurgePreBattleText	converted
+Text 1	text.asm	20	1	0000	2aaf	_CardKeySuccessText1	_SilphCo5FRockerBattleText	converted
+Text 8	text.asm	27	1	0000	2aa4	_VermilionGymLTSurgePostBattleAdviceText	_FuchsiaGymKogaReceivedSoulBadgeText	converted
+Text 6	text.asm	25	1	0000	2a38	_Route24CooltrainerM2EndBattleText	_PewterGymBrockPreBattleText	converted
+Text 9	text.asm	28	1	0000	2a37	_FuchsiaGymKogaPostBattleAdviceText	_CableClubNPCLinkClosedBecauseOfInactivityText	converted
+Text 5	text.asm	24	1	0000	2903	_Route11SuperNerd2EndBattleText	_Route24CooltrainerM2BattleText	converted
+bank10	main.asm	10	1	0000	27f3	ShowPokedexMenu	Trade_MonInfoText	converted
+Maps 6	maps.asm	11	1	0251	2730	ViridianPokecenter_h	SeafoamIslandsB4F_Blocks	converted
+Maps 10	maps.asm	14	1	0000	25af	Route22_h	PokemonMansionB1F_Blocks	converted
+Music 1	audio.asm	02	1	1ba3	2451	Music_PkmnHealed_Ch1	Music_Pokecenter_Ch3.sub3	converted
+Music 3	audio.asm	1f	1	1bbb	243f	Music_BikeRiding_Ch1	Music_Credits_Ch3.sub8	converted
+Maps 8	maps.asm	12	1	0152	223d	Route7_Script	SafariZoneSecretHouse_Blocks	converted
+Maps 4	maps.asm	07	1	0a19	1efc	CinnabarIsland_Script	BillsHouse_Blocks	converted
+Music 2	audio.asm	08	1	2322	1c30	SFX_Pokeflute_Ch5	Music_DefeatedGymLeader_Ch3.mainloop	converted
+Maps 16	maps.asm	17	1	00eb	1a73	Museum1F_h	VictoryRoad1F_Blocks	converted
+Maps 2	maps.asm	06	1	0e5b	1585	PalletTown_Script	SilphCo6F_Blocks	converted
+Maps 21	maps.asm	1d	1	100c	1572	FuchsiaBillsGrandpasHouse_h	AgathasRoom_Blocks	converted
+Font Graphics	main.asm	04	1	1380	1558	PokemonLogoGraphics	WorldMapTileGraphicsEnd	converted
+Maps 14	maps.asm	16	1	10b0	14ef	Route6_Script	HallOfFame_Blocks	converted
+NPC Sprites 1	gfx/sprites.asm	04	1	0000	1380	ScientistSprite	GamblerAsleepSprite	converted
+Maps 18	maps.asm	18	1	1101	1318	ViridianForest_h	SilphCo11F_Blocks	converted
+Maps 11	maps.asm	15	1	0000	124f	Route2_h	FuchsiaGoodRodHouse_Blocks	converted
+Maps 12	maps.asm	15	1	14e3	11ff	Route2_Script	SilphCo8F_Blocks	converted
+Battle Engine 1	main.asm	04	1	28d8	11c8	IsPlayerJustOutsideMap	Random_	converted
+Sound Effects 2	audio.asm	08	1	02fd	1071	SFX_Noise_Instrument01_2_Ch8	SFX_Cry22_2_Ch8	converted
+Maps 17	maps.asm	18	1	0000	1006	ViridianForest_Blocks	CeladonMart1F_Blocks	converted
+Sound Effects 3	audio.asm	1f	1	02fd	0e3e	SFX_Noise_Instrument01_3_Ch8	SFX_Cry22_3_Ch8	converted
+Maps 1	maps.asm	06	1	0000	0dee	CeladonCity_h	FuchsiaCity_Blocks	converted
+Sound Effects 1	audio.asm	02	1	02fd	0dc9	SFX_Noise_Instrument01_1_Ch8	SFX_Cry22_1_Ch8	converted
+Maps 13	maps.asm	16	1	0000	0d99	Route6_h	Route18_Blocks	converted
+Slot Machines	main.asm	0d	1	3244	0c44	TitleScroll_WaitBall	GameCornerSomeonesKeysText	converted
+Audio Engine 1	audio.asm	02	1	10c6	0add	PlayBattleMusic	Music_Cities1AlternateTempo	converted
+Audio Engine 2	audio.asm	08	1	1879	0aa9	Audio2_UpdateMusic	Audio2_OverwriteChannelPointer	converted
+Audio Engine 3	audio.asm	1f	1	113b	0a80	PlayPokedexRatingSfx	Audio3_Pitches	converted
+Itemfinder 1	main.asm	1d	1	005c	0816	HallOfFamePC	Sub5ClampTo0	converted
+Pokémon Names	main.asm	07	1	021e	07fb	MonsterNames	WhichFloorText	converted
+Hidden Events Core	main.asm	11	1	2981	072a	IsPlayerOnDungeonWarp	HiddenEventsFor_ROUTE_4	converted
+Battle Engine 2	main.asm	05	1	3840	071f	LoadPokedexTilePatterns	RemoveItemByID.foundItem	converted
+Maps 20	maps.asm	1d	1	0872	066e	CeruleanHideRocket	CeruleanBadgeHouse_Object	converted
+Move Names	text.asm	2c	1	0000	060f	MoveNames	MoveNames	converted
+Bill's PC	main.asm	08	1	13c8	04b1	DisplayPCMainMenu	OpenBillsPCText	converted
+Hidden Events 2	main.asm	14	1	2673	03cf	PrintCardKeyText	IndigoPlateauHQText	converted
+Battle Engine 5	main.asm	0b	1	3b7b	03c1	DisplayEffectiveness	GameCornerNoCoinsText	converted
+Hidden Events 3	main.asm	17	1	1b5e	03b7	SetPartyMonTypes	VermilionGymTrashFailText	converted
+Hidden Events 1	main.asm	07	1	2915	03ad	OpenOaksPC	OakLabEmailText	converted
+Doors and Ledges	main.asm	06	1	23e0	0338	PlayerStepOutFromDoor	LedgeHoppingShadowOAMBlock	converted
+Text 11	text.asm	2a	1	0000	0330	_ItemUseText001	_UsedCutText	converted
+Battle Engine 10	main.asm	16	1	0d99	0317	PrintBeginningBattleText	OaksAideNoRoomText	converted
+Itemfinder 2	main.asm	1d	1	257e	02fd	PKMNLeaguePC	FindHiddenItemOrCoinsIndex.next2	converted
+Sound Effect Headers 2	audio.asm	08	1	0000	02be	SFX_Headers_2	SFX_Trainer_Appeared	converted
+Battle Engine 9	main.asm	15	1	124f	0294	GainExperience	GrewLevelText	converted
+Trainer Sight	main.asm	15	1	27f9	0252	_GetSpritePosition1	CheckPlayerIsInFrontOfSprite.done	converted
+Battle Engine 3	main.asm	09	1	3d6b	024d	PrintMonType	GettingPumpedText	converted
+Sound Effect Headers 3	audio.asm	1f	1	0000	0249	SFX_Headers_3	SFX_Shooting_Star	converted
+Sound Effect Headers 1	audio.asm	02	1	0000	022e	SFX_Headers_1	SFX_Safari_Zone_PA	converted
+Maps 3	maps.asm	07	1	0000	021e	CinnabarIsland_h	DiglettsCaveRoute2_Blocks	converted
+Predefs	main.asm	13	1	3da5	01fd	_GivePokemon	OaksAideScriptPredef	converted
+Maps 5	maps.asm	11	1	0000	0169	LavenderTown_h	LavenderTownPokemonTowerSignText	converted
+Vending Machine	main.asm	1d	1	0ee0	012c	VendingMachineMenu	VendingPrices	converted
+Diploma	main.asm	15	1	26e2	0117	DisplayDiploma	DiplomaGameFreak	converted
+Hidden Events 4	main.asm	18	1	2419	0111	GymStatues	PokemonCenterPCText	converted
+Cinnabar Lab Fossils	main.asm	18	1	1006	00fb	GiveFossilToCinnabarLab	LoadFossilItemAndMonName	converted
+Maps 7	maps.asm	12	1	0000	00eb	Route7_h	Route18Gate2F_Blocks	converted
+Pokédex Rating	main.asm	11	1	0169	00e8	DisplayDexRating	DexRatingText_Own150To151	converted
+Maps 15	maps.asm	17	1	0000	00dc	CeruleanMart_Blocks	RedsHouse2F_Object	converted
+Music Headers 1	audio.asm	02	1	022e	00cf	Music_PalletTown	Music_IndigoPlateau	converted
+Battle Engine 8	main.asm	14	1	25af	00c4	InitBattleVariables	ParalyzeEffect_.doesntAffect	converted
+Music Headers 3	audio.asm	1f	1	0249	00b4	Music_TitleScreen	Music_MeetMaleTrainer	converted
+Maps 9	maps.asm	13	1	3d04	00a1	TradeCenter_h	Colosseum_Blocks	converted
+Battle Engine 11	main.asm	1a	1	0000	007f	DecrementPP	Version_GFX	converted
+Play Time	main.asm	06	1	0dee	006d	TrackPlayTime	CountDownIgnoreInputBitReset.continue	converted
+Screen Effects	main.asm	12	1	00eb	0067	ChangeBGPalColor0_4Frames	PredefShakeScreenHorizontally.skipZeroing	converted
+Battle Engine 6	main.asm	0c	1	3f2b	0065	MistEffect_	OneHitKOEffect_.userIsSlower	converted
+High Home	home.asm	00	0	0061	005d	DisableLCD	CopyData	converted
+Maps 19	maps.asm	1d	1	0000	005c	CopycatsHouse1F_Blocks	CeruleanBadgeHouse_Blocks	converted
+Low Health Alarm (Audio Engine 2)	audio.asm	08	1	136e	005a	Music_DoLowHealthAlarm	Music_DoLowHealthAlarm.toneDataSilence	converted
+Battle Engine 4	main.asm	0a	1	3ea9	0053	LeechSeedEffect_	EvadedAttackText	converted
+Music Headers 2	audio.asm	08	1	02be	003f	Music_GymLeaderBattle	Music_DefeatedGymLeader	converted
+Saffron Guards	main.asm	16	1	259f	001c	RemoveGuardDrink	GuardDrinksList	converted
+Starter Dex	main.asm	17	1	00dc	000f	StarterDex	StarterDex	converted
+rst0	home.asm	00	0	0000	0008	NULL	NULL	converted
+rst8	home.asm	00	0	0008	0008	-	-	converted
+rst10	home.asm	00	0	0010	0008	-	-	converted
+rst18	home.asm	00	0	0018	0008	-	-	converted
+rst20	home.asm	00	0	0020	0008	-	-	converted
+rst28	home.asm	00	0	0028	0008	-	-	converted
+rst30	home.asm	00	0	0030	0008	-	-	converted
+rst38	home.asm	00	0	0038	0008	-	-	converted
+vblank	home.asm	00	0	0040	0008	-	-	converted
+lcd	home.asm	00	0	0048	0008	-	-	converted
+timer	home.asm	00	0	0050	0008	-	-	converted
+serial	home.asm	00	0	0058	0008	-	-	converted
+Header	home.asm	00	0	0100	0004	Start	Start	converted
+joypad	home.asm	00	0	0060	0001	-	-	converted
+NULL	home.asm	00	0	0000	0000	-	-	converted

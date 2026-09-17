@@ -1,5 +1,5 @@
 ; stores hl in [wTrainerHeaderPtr]
-StoreTrainerHeaderPointer::
+StoreTrainerHeaderPointer:
 	ld a, h
 	ld [wTrainerHeaderPtr], a
 	ld a, l
@@ -9,7 +9,7 @@ StoreTrainerHeaderPointer::
 ; executes the current map script from the function pointer array provided in de.
 ; a: map script index to execute (unless overridden by [wStatusFlags7] BIT_USE_CUR_MAP_SCRIPT)
 ; hl: trainer header pointer
-ExecuteCurMapScriptInTable::
+ExecuteCurMapScriptInTable:
 	push af
 	push de
 	call StoreTrainerHeaderPointer
@@ -19,16 +19,16 @@ ExecuteCurMapScriptInTable::
 	ld hl, wStatusFlags7
 	bit BIT_USE_CUR_MAP_SCRIPT, [hl]
 	res BIT_USE_CUR_MAP_SCRIPT, [hl]
-	jr z, .useProvidedIndex ; test if map script index was overridden manually
+	jr z, ExecuteCurMapScriptInTable.useProvidedIndex ; test if map script index was overridden manually
 	ld a, [wCurMapScript]
-.useProvidedIndex
+ExecuteCurMapScriptInTable.useProvidedIndex
 	pop hl
 	ld [wCurMapScript], a
 	call CallFunctionInTable
 	ld a, [wCurMapScript]
 	ret
 
-LoadGymLeaderAndCityName::
+LoadGymLeaderAndCityName:
 	push de
 	ld de, wGymCityName
 	ld bc, GYM_CITY_LENGTH
@@ -45,7 +45,7 @@ LoadGymLeaderAndCityName::
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
 ;    8 -> end battle text (into hl)
-ReadTrainerHeaderInfo::
+ReadTrainerHeaderInfo:
 	push de
 	push af
 	ld d, $0
@@ -57,37 +57,37 @@ ReadTrainerHeaderInfo::
 	add hl, de
 	pop af
 	and a
-	jr nz, .nonZeroOffset
+	jr nz, ReadTrainerHeaderInfo.nonZeroOffset
 	ld a, [hl]
 	ld [wTrainerHeaderFlagBit], a  ; store flag's bit
-	jr .done
-.nonZeroOffset
+	jr ReadTrainerHeaderInfo.done
+ReadTrainerHeaderInfo.nonZeroOffset
 	cp $2
-	jr z, .readPointer ; read flag's byte ptr
+	jr z, ReadTrainerHeaderInfo.readPointer ; read flag's byte ptr
 	cp $4
-	jr z, .readPointer ; read before battle text
+	jr z, ReadTrainerHeaderInfo.readPointer ; read before battle text
 	cp $6
-	jr z, .readPointer ; read after battle text
+	jr z, ReadTrainerHeaderInfo.readPointer ; read after battle text
 	cp $8
-	jr z, .readPointer ; read end battle text
+	jr z, ReadTrainerHeaderInfo.readPointer ; read end battle text
 	cp $a
-	jr nz, .done
+	jr nz, ReadTrainerHeaderInfo.done
 	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
 	ld d, [hl]
 	ld e, a
-	jr .done
-.readPointer
+	jr ReadTrainerHeaderInfo.done
+ReadTrainerHeaderInfo.readPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.done
+ReadTrainerHeaderInfo.done
 	pop de
 	ret
 
-TrainerFlagAction::
+TrainerFlagAction:
 	predef_jump FlagActionPredef
 
-TalkToTrainer::
+TalkToTrainer:
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -99,11 +99,11 @@ TalkToTrainer::
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
-	jr z, .trainerNotYetFought     ; test trainer's flag
+	jr z, TalkToTrainer.trainerNotYetFought     ; test trainer's flag
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text
 	jp PrintText
-.trainerNotYetFought
+TalkToTrainer.trainerNotYetFought
 	ld a, $4
 	call ReadTrainerHeaderInfo     ; print before battle text
 	call PrintText
@@ -126,23 +126,23 @@ TalkToTrainer::
 	jp StartTrainerBattle
 
 ; checks if any trainers are seeing the player and wanting to fight
-CheckFightingMapTrainers::
-IF DEF(_DEBUG)
+CheckFightingMapTrainers:
+.IF defined(_DEBUG)
 	call DebugPressedOrHeldB
-	jr nz, .trainerNotEngaging
-ENDC
+	jr nz, CheckFightingMapTrainers.trainerNotEngaging
+.ENDIF
 	call CheckForEngagingTrainers
 	ld a, [wSpriteIndex]
 	cp $ff
-	jr nz, .trainerEngaging
-IF DEF(_DEBUG)
-.trainerNotEngaging
-ENDC
+	jr nz, CheckFightingMapTrainers.trainerEngaging
+.IF defined(_DEBUG)
+CheckFightingMapTrainers.trainerNotEngaging
+.ENDIF
 	xor a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ret
-.trainerEngaging
+CheckFightingMapTrainers.trainerEngaging
 	ld hl, wStatusFlags7
 	set BIT_TRAINER_BATTLE, [hl]
 	ld [wEmotionBubbleSpriteIndex], a
@@ -152,24 +152,24 @@ ENDC
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	call TrainerWalkUpToPlayer_Bank0
 	ld hl, wCurMapScript
 	inc [hl] ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
 
 ; display the before battle text after the enemy trainer has walked up to the player's sprite
-DisplayEnemyTrainerTextAndStartBattle::
+DisplayEnemyTrainerTextAndStartBattle:
 	ld a, [wStatusFlags5]
 	and 1 << BIT_SCRIPTED_NPC_MOVEMENT
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call DisplayTextID
 	; fall through
 
-StartTrainerBattle::
+StartTrainerBattle:
 	xor a
 	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
@@ -182,7 +182,7 @@ StartTrainerBattle::
 	inc [hl] ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
 
-EndTrainerBattle::
+EndTrainerBattle:
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	set BIT_CUR_MAP_LOADED_2, [hl]
@@ -201,7 +201,7 @@ EndTrainerBattle::
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [wEnemyMonOrTrainerClass]
 	cp OPP_ID_OFFSET
-	jr nc, .skipRemoveSprite ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	jr nc, EndTrainerBattle.skipRemoveSprite ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, wToggleableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
@@ -210,63 +210,63 @@ EndTrainerBattle::
 	ld a, [hl]
 	ld [wToggleableObjectIndex], a ; load corresponding toggleable object index and remove it
 	predef HideObject
-.skipRemoveSprite
+EndTrainerBattle.skipRemoveSprite
 	ld hl, wStatusFlags5
 	bit BIT_UNKNOWN_5_4, [hl]
 	res BIT_UNKNOWN_5_4, [hl]
 	ret nz
 
-ResetButtonPressedAndMapScript::
+ResetButtonPressedAndMapScript:
 	xor a
 	ld [wJoyIgnore], a
-	ldh [hJoyHeld], a
-	ldh [hJoyPressed], a
-	ldh [hJoyReleased], a
+	ldh [lobyte(hJoyHeld)], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyReleased)], a
 	ld [wCurMapScript], a               ; reset battle status
 	ret
 
 ; calls TrainerWalkUpToPlayer
-TrainerWalkUpToPlayer_Bank0::
+TrainerWalkUpToPlayer_Bank0:
 	farjp TrainerWalkUpToPlayer
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
-InitBattleEnemyParameters::
+InitBattleEnemyParameters:
 	ld a, [wEngagedTrainerClass]
 	ld [wCurOpponent], a
 	ld [wEnemyMonOrTrainerClass], a
 	cp OPP_ID_OFFSET
 	ld a, [wEngagedTrainerSet]
-	jr c, .noTrainer
+	jr c, InitBattleEnemyParameters.noTrainer
 	ld [wTrainerNo], a
 	ret
-.noTrainer
+InitBattleEnemyParameters.noTrainer
 	ld [wCurEnemyLevel], a
 	ret
 
-GetSpritePosition1::
-	ld hl, _GetSpritePosition1
+GetSpritePosition1:
+	ld hl, WLA_GLOBAL_GetSpritePosition1
 	jr SpritePositionBankswitch
 
-GetSpritePosition2::
-	ld hl, _GetSpritePosition2
+GetSpritePosition2:
+	ld hl, WLA_GLOBAL_GetSpritePosition2
 	jr SpritePositionBankswitch
 
-SetSpritePosition1::
-	ld hl, _SetSpritePosition1
+SetSpritePosition1:
+	ld hl, WLA_GLOBAL_SetSpritePosition1
 	jr SpritePositionBankswitch
 
-SetSpritePosition2::
-	ld hl, _SetSpritePosition2
-SpritePositionBankswitch::
-	ld b, BANK("Trainer Sight")
+SetSpritePosition2:
+	ld hl, WLA_GLOBAL_SetSpritePosition2
+SpritePositionBankswitch:
+	ld b, $15
 	jp Bankswitch ; indirect jump to one of the four functions
 
-CheckForEngagingTrainers::
+CheckForEngagingTrainers:
 	xor a
 	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
 	ld d, h                          ; store trainer header address in de
 	ld e, l
-.trainerLoop
+CheckForEngagingTrainers.trainerLoop
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
 	ld a, [de]
 	ld [wSpriteIndex], a             ; store trainer flag's bit
@@ -281,7 +281,7 @@ CheckForEngagingTrainers::
 	call TrainerFlagAction           ; read trainer flag
 	ld a, c
 	and a ; has the trainer already been defeated?
-	jr nz, .continue
+	jr nz, CheckForEngagingTrainers.continue
 	push hl
 	push de
 	push hl
@@ -300,17 +300,17 @@ CheckForEngagingTrainers::
 	ld a, [wTrainerSpriteOffset]
 	and a
 	ret nz ; break if the trainer is engaging
-.continue
+CheckForEngagingTrainers.continue
 	ld hl, $c
 	add hl, de
 	ld d, h
 	ld e, l
-	jr .trainerLoop
+	jr CheckForEngagingTrainers.trainerLoop
 
 ; hl = text if the player wins
 ; de = text if the player loses
-SaveEndBattleTextPointers::
-	ldh a, [hLoadedROMBank]
+SaveEndBattleTextPointers:
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wEndBattleTextRomBank], a
 	ld a, h
 	ld [wEndBattleWinTextPointer], a
@@ -324,7 +324,7 @@ SaveEndBattleTextPointers::
 
 ; loads data of some trainer on the current map and plays pre-battle music
 ; [wSpriteIndex]: sprite ID of trainer who is engaged
-EngageMapTrainer::
+EngageMapTrainer:
 	ld hl, wMapSpriteExtraData
 	ld d, $0
 	ld a, [wSpriteIndex]
@@ -338,17 +338,17 @@ EngageMapTrainer::
 	ld [wEngagedTrainerSet], a
 	jp PlayTrainerMusic
 
-PrintEndBattleText::
+PrintEndBattleText:
 	push hl
 	ld hl, wStatusFlags3
 	bit BIT_PRINT_END_BATTLE_TEXT, [hl]
 	res BIT_PRINT_END_BATTLE_TEXT, [hl]
 	pop hl
 	ret z
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	ld a, [wEndBattleTextRomBank]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	push hl
 	farcall SaveTrainerName
@@ -356,30 +356,30 @@ PrintEndBattleText::
 	call PrintText
 	pop hl
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	farcall SetEnemyTrainerToStayAndFaceAnyDirection
 	jp WaitForSoundToFinish
 
-GetSavedEndBattleTextPointer::
+GetSavedEndBattleTextPointer:
 	ld a, [wBattleResult]
 	and a
-	jr nz, .lostBattle
+	jr nz, GetSavedEndBattleTextPointer.lostBattle
 ; won battle
 	ld a, [wEndBattleWinTextPointer]
 	ld h, a
 	ld a, [wEndBattleWinTextPointer + 1]
 	ld l, a
 	ret
-.lostBattle
+GetSavedEndBattleTextPointer.lostBattle
 	ld a, [wEndBattleLoseTextPointer]
 	ld h, a
 	ld a, [wEndBattleLoseTextPointer + 1]
 	ld l, a
 	ret
 
-TrainerEndBattleText::
-	text_far _TrainerNameText
+TrainerEndBattleText:
+	text_far WLA_GLOBAL_TrainerNameText
 	text_asm
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
@@ -388,7 +388,7 @@ TrainerEndBattleText::
 ; only engage with the trainer if the player is not already
 ; engaged with another trainer
 ; XXX unused?
-CheckIfAlreadyEngaged::
+CheckIfAlreadyEngaged:
 	ld a, [wMiscFlags]
 	bit BIT_SEEN_BY_TRAINER, a
 	ret nz
@@ -396,7 +396,7 @@ CheckIfAlreadyEngaged::
 	xor a
 	ret
 
-PlayTrainerMusic::
+PlayTrainerMusic:
 	ld a, [wEngagedTrainerClass]
 	cp OPP_RIVAL1
 	ret z
@@ -411,34 +411,34 @@ PlayTrainerMusic::
 	ld [wAudioFadeOutControl], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld a, BANK(Music_MeetEvilTrainer)
+	ld a, bank(Music_MeetEvilTrainer)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, [wEngagedTrainerClass]
 	ld b, a
 	ld hl, EvilTrainerList
-.evilTrainerListLoop
+PlayTrainerMusic.evilTrainerListLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .noEvilTrainer
+	jr z, PlayTrainerMusic.noEvilTrainer
 	cp b
-	jr nz, .evilTrainerListLoop
+	jr nz, PlayTrainerMusic.evilTrainerListLoop
 	ld a, MUSIC_MEET_EVIL_TRAINER
-	jr .PlaySound
-.noEvilTrainer
+	jr PlayTrainerMusic.PlaySound
+PlayTrainerMusic.noEvilTrainer
 	ld hl, FemaleTrainerList
-.femaleTrainerListLoop
+PlayTrainerMusic.femaleTrainerListLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .maleTrainer
+	jr z, PlayTrainerMusic.maleTrainer
 	cp b
-	jr nz, .femaleTrainerListLoop
+	jr nz, PlayTrainerMusic.femaleTrainerListLoop
 	ld a, MUSIC_MEET_FEMALE_TRAINER
-	jr .PlaySound
-.maleTrainer
+	jr PlayTrainerMusic.PlaySound
+PlayTrainerMusic.maleTrainer
 	ld a, MUSIC_MEET_MALE_TRAINER
-.PlaySound
+PlayTrainerMusic.PlaySound
 	ld [wNewSoundID], a
 	jp PlaySound
 
-INCLUDE "data/trainers/encounter_types.asm"
+.INCLUDE "data/trainers/encounter_types.asm"

@@ -1,7 +1,7 @@
 HiddenItemNear:
 	ld hl, HiddenItemCoords
 	ld b, 0
-.loop
+HiddenItemNear.loop
 	ld de, 3
 	ld a, [wCurMap]
 	call IsInRestOfArray
@@ -22,24 +22,24 @@ HiddenItemNear:
 	inc hl
 	ld e, [hl]
 	inc hl
-	jr nz, .loop ; if the item has already been obtained
-; check if the item is within 4-5 tiles (depending on the direction of item)
+	jr nz, HiddenItemNear.loop ; if the item has already been obtained
+; check if the item is within 4-5 * TILE_SIZE (depending on the direction of item)
 	ld a, [wYCoord]
 	call Sub5ClampTo0
 	cp d
-	jr nc, .loop
+	jr nc, HiddenItemNear.loop
 	ld a, [wYCoord]
 	add 4
 	cp d
-	jr c, .loop
+	jr c, HiddenItemNear.loop
 	ld a, [wXCoord]
 	call Sub5ClampTo0
 	cp e
-	jr nc, .loop
+	jr nc, HiddenItemNear.loop
 	ld a, [wXCoord]
 	add 5
 	cp e
-	jr c, .loop
+	jr c, HiddenItemNear.loop
 	scf
 	ret
 

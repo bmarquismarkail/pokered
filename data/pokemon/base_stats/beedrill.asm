@@ -1,17 +1,17 @@
-	db DEX_BEEDRILL ; pokedex id
+	.DB DEX_BEEDRILL ; pokedex id
 
-	db  65,  80,  40,  75,  45
+	.DB  65,  80,  40,  75,  45
 	;   hp  atk  def  spd  spc
 
-	db BUG, POISON ; type
-	db 45 ; catch rate
-	db 159 ; base exp
+	.DB BUG, POISON ; type
+	.DB 45 ; catch rate
+	.DB 159 ; base exp
 
-	INCBIN "gfx/pokemon/front/beedrill.pic", 0, 1 ; sprite dimensions
-	dw BeedrillPicFront, BeedrillPicBack
+	.INCBIN "gfx/pokemon/front/beedrill.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW BeedrillPicFront, BeedrillPicBack
 
-	db FURY_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB FURY_ATTACK, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
@@ -20,4 +20,4 @@
 	     CUT
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

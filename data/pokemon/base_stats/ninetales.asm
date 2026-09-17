@@ -1,17 +1,17 @@
-	db DEX_NINETALES ; pokedex id
+	.DB DEX_NINETALES ; pokedex id
 
-	db  73,  76,  75, 100, 100
+	.DB  73,  76,  75, 100, 100
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 75 ; catch rate
-	db 178 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 75 ; catch rate
+	.DB 178 ; base exp
 
-	INCBIN "gfx/pokemon/front/ninetales.pic", 0, 1 ; sprite dimensions
-	dw NinetalesPicFront, NinetalesPicBack
+	.INCBIN "gfx/pokemon/front/ninetales.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW NinetalesPicFront, NinetalesPicBack
 
-	db EMBER, TAIL_WHIP, QUICK_ATTACK, ROAR ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB EMBER, TAIL_WHIP, QUICK_ATTACK, ROAR ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

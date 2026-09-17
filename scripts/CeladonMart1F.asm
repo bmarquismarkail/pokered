@@ -8,13 +8,13 @@ CeladonMart1F_TextPointers:
 	dw_const CeladonMart1FCurrentFloorSignText, TEXT_CELADONMART1F_CURRENT_FLOOR_SIGN
 
 CeladonMart1FReceptionistText:
-	text_far _CeladonMart1FReceptionistText
+	text_far WLA_GLOBAL_CeladonMart1FReceptionistText
 	text_end
 
 CeladonMart1FDirectorySignText:
-	text_far _CeladonMart1FDirectorySignText
+	text_far WLA_GLOBAL_CeladonMart1FDirectorySignText
 	text_end
 
 CeladonMart1FCurrentFloorSignText:
-	text_far _CeladonMart1FCurrentFloorSignText
+	text_far WLA_GLOBAL_CeladonMart1FCurrentFloorSignText
 	text_end

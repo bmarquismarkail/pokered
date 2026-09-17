@@ -1,4 +1,5 @@
-_PewterGymBrockPostBattleAdviceText::
+_PewterGymBrockPostBattleAdviceText:
+WLA_GLOBAL_PewterGymBrockPostBattleAdviceText:
 	text "There are all"
 	line "kinds of trainers"
 	cont "in the world!"
@@ -12,17 +13,20 @@ _PewterGymBrockPostBattleAdviceText::
 	cont "your abilities!"
 	done
 
-_PewterGymBrockWaitTakeThisText::
+_PewterGymBrockWaitTakeThisText:
+WLA_GLOBAL_PewterGymBrockWaitTakeThisText:
 	text "Wait! Take this"
 	line "with you!"
 	done
 
-_PewterGymReceivedTM34Text::
+_PewterGymReceivedTM34Text:
+WLA_GLOBAL_PewterGymReceivedTM34Text:
 	text "<PLAYER> received"
 	line "TM34!@"
 	text_end
 
-_TM34ExplanationText::
+_TM34ExplanationText:
+WLA_GLOBAL_TM34ExplanationText:
 	text_start
 
 	para "A TM contains a"
@@ -46,12 +50,14 @@ _TM34ExplanationText::
 	cont "it back double!"
 	done
 
-_PewterGymTM34NoRoomText::
+_PewterGymTM34NoRoomText:
+WLA_GLOBAL_PewterGymTM34NoRoomText:
 	text "You don't have"
 	line "room for this!"
 	done
 
-_PewterGymBrockReceivedBoulderBadgeText::
+_PewterGymBrockReceivedBoulderBadgeText:
+WLA_GLOBAL_PewterGymBrockReceivedBoulderBadgeText:
 	text "I took"
 	line "you for granted."
 
@@ -63,7 +69,8 @@ _PewterGymBrockReceivedBoulderBadgeText::
 	line "the BOULDERBADGE!@"
 	text_end
 
-_PewterGymBrockBoulderBadgeInfoText::
+_PewterGymBrockBoulderBadgeInfoText:
+WLA_GLOBAL_PewterGymBrockBoulderBadgeInfoText:
 	text_start
 
 	para "That's an official"
@@ -79,7 +86,8 @@ _PewterGymBrockBoulderBadgeInfoText::
 	cont "used any time!"
 	prompt
 
-_PewterGymCooltrainerMBattleText::
+_PewterGymCooltrainerMBattleText:
+WLA_GLOBAL_PewterGymCooltrainerMBattleText:
 	text "Stop right there,"
 	line "kid!"
 
@@ -88,7 +96,8 @@ _PewterGymCooltrainerMBattleText::
 	cont "BROCK!"
 	done
 
-_PewterGymCooltrainerMEndBattleText::
+_PewterGymCooltrainerMEndBattleText:
+WLA_GLOBAL_PewterGymCooltrainerMEndBattleText:
 	text "Darn!"
 
 	para "Light years isn't"
@@ -96,13 +105,15 @@ _PewterGymCooltrainerMEndBattleText::
 	cont "distance!"
 	prompt
 
-_PewterGymCooltrainerMAfterBattleText::
+_PewterGymCooltrainerMAfterBattleText:
+WLA_GLOBAL_PewterGymCooltrainerMAfterBattleText:
 	text "You're pretty hot,"
 	line "but not as hot"
 	cont "as BROCK!"
 	done
 
-_PewterGymGuidePreAdviceText::
+_PewterGymGuidePreAdviceText:
+WLA_GLOBAL_PewterGymGuidePreAdviceText:
 	text "Hiya! I can tell"
 	line "you have what it"
 	cont "takes to become a"
@@ -116,12 +127,14 @@ _PewterGymGuidePreAdviceText::
 	line "to the top!"
 	done
 
-_PewterGymGuideBeginAdviceText::
+_PewterGymGuideBeginAdviceText:
+WLA_GLOBAL_PewterGymGuideBeginAdviceText:
 	text "All right! Let's"
 	line "get happening!"
 	prompt
 
-_PewterGymGuideAdviceText::
+_PewterGymGuideAdviceText:
+WLA_GLOBAL_PewterGymGuideAdviceText:
 	text "The 1st #MON"
 	line "out in a match is"
 	cont "at the top of the"
@@ -133,13 +146,15 @@ _PewterGymGuideAdviceText::
 	cont "made easier!"
 	done
 
-_PewterGymGuideFreeServiceText::
+_PewterGymGuideFreeServiceText:
+WLA_GLOBAL_PewterGymGuideFreeServiceText:
 	text "It's a free"
 	line "service! Let's"
 	cont "get happening!"
 	prompt
 
-_PewterGymGuidePostBattleText::
+_PewterGymGuidePostBattleText:
+WLA_GLOBAL_PewterGymGuidePostBattleText:
 	text "Just as I thought!"
 	line "You're #MON"
 	cont "champ material!"

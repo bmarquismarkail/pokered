@@ -1,15 +1,15 @@
 Route3WildMons:
 	def_grass_wildmons 20 ; encounter rate
-	db  6, PIDGEY
-	db  5, SPEAROW
-	db  7, PIDGEY
-	db  6, SPEAROW
-	db  7, SPEAROW
-	db  8, PIDGEY
-	db  8, SPEAROW
-	db  3, JIGGLYPUFF
-	db  5, JIGGLYPUFF
-	db  7, JIGGLYPUFF
+	.DB  6, PIDGEY
+	.DB  5, SPEAROW
+	.DB  7, PIDGEY
+	.DB  6, SPEAROW
+	.DB  7, SPEAROW
+	.DB  8, PIDGEY
+	.DB  8, SPEAROW
+	.DB  3, JIGGLYPUFF
+	.DB  5, JIGGLYPUFF
+	.DB  7, JIGGLYPUFF
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

@@ -12,15 +12,14 @@
 	const_export VIRIDIANGYM_REVIVE
 
 ViridianGym_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event 16, 17, LAST_MAP, 5
 	warp_event 17, 17, LAST_MAP, 5
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 11
 	object_event  2,  1, SPRITE_GIOVANNI, STAY, DOWN, TEXT_VIRIDIANGYM_GIOVANNI, OPP_GIOVANNI, 3
 	object_event 12,  7, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_VIRIDIANGYM_COOLTRAINER_M1, OPP_COOLTRAINER_M, 9
 	object_event 11, 11, SPRITE_HIKER, STAY, UP, TEXT_VIRIDIANGYM_HIKER1, OPP_BLACKBELT, 6
@@ -33,4 +32,6 @@ ViridianGym_Object:
 	object_event 16, 15, SPRITE_GYM_GUIDE, STAY, DOWN, TEXT_VIRIDIANGYM_GYM_GUIDE
 	object_event 16,  9, SPRITE_POKE_BALL, STAY, NONE, TEXT_VIRIDIANGYM_REVIVE, REVIVE
 
-	def_warps_to VIRIDIAN_GYM
+	event_displacement VIRIDIAN_GYM_WIDTH, 16, 17
+
+	event_displacement VIRIDIAN_GYM_WIDTH, 17, 17

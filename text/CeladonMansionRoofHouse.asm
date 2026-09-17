@@ -1,4 +1,5 @@
-_CeladonMansionRoofHouseHikerText::
+_CeladonMansionRoofHouseHikerText:
+WLA_GLOBAL_CeladonMansionRoofHouseHikerText:
 	text "I know everything"
 	line "about the world"
 	cont "of #MON in"

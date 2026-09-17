@@ -1,17 +1,17 @@
-	db DEX_DRATINI ; pokedex id
+	.DB DEX_DRATINI ; pokedex id
 
-	db  41,  64,  45,  50,  50
+	.DB  41,  64,  45,  50,  50
 	;   hp  atk  def  spd  spc
 
-	db DRAGON, DRAGON ; type
-	db 45 ; catch rate
-	db 67 ; base exp
+	.DB DRAGON, DRAGON ; type
+	.DB 45 ; catch rate
+	.DB 67 ; base exp
 
-	INCBIN "gfx/pokemon/front/dratini.pic", 0, 1 ; sprite dimensions
-	dw DratiniPicFront, DratiniPicBack
+	.INCBIN "gfx/pokemon/front/dratini.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DratiniPicFront, DratiniPicBack
 
-	db WRAP, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB WRAP, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -21,4 +21,4 @@
 	     THUNDER_WAVE, SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

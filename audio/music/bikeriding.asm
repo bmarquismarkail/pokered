@@ -1,4 +1,4 @@
-Music_BikeRiding_Ch1::
+Music_BikeRiding_Ch1:
 	tempo 144
 	volume 7, 7
 	duty_cycle 3
@@ -6,7 +6,7 @@ Music_BikeRiding_Ch1::
 	note_type 12, 11, 5
 	octave 3
 	note G_, 2
-.mainloop:
+Music_BikeRiding_Ch1.mainloop:
 	octave 4
 	note C_, 4
 	note D_, 4
@@ -140,7 +140,7 @@ Music_BikeRiding_Ch1::
 	note C_, 4
 	note F_, 4
 	note D_, 4
-	note F#, 4
+	note F_SHARP, 4
 	vibrato 10, 2, 6
 	note_type 12, 8, 0
 	note G_, 16
@@ -149,15 +149,15 @@ Music_BikeRiding_Ch1::
 	note G_, 12
 	note_type 12, 11, 5
 	vibrato 8, 1, 4
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_BikeRiding_Ch1.mainloop
 
-Music_BikeRiding_Ch2::
+Music_BikeRiding_Ch2:
 	duty_cycle 2
 	vibrato 6, 1, 5
 	note_type 12, 12, 3
 	octave 4
 	note C_, 2
-.mainloop:
+Music_BikeRiding_Ch2.mainloop:
 	note E_, 4
 	note F_, 4
 	note G_, 4
@@ -185,7 +185,7 @@ Music_BikeRiding_Ch2::
 	note G_, 4
 	duty_cycle 3
 	note_type 12, 8, 4
-	note A#, 6
+	note A_SHARP, 6
 	duty_cycle 2
 	note_type 12, 12, 5
 	octave 5
@@ -266,7 +266,7 @@ Music_BikeRiding_Ch2::
 	note B_, 4
 	note A_, 4
 	note G_, 2
-	note A#, 4
+	note A_SHARP, 4
 	note A_, 2
 	note G_, 4
 	note F_, 2
@@ -296,12 +296,12 @@ Music_BikeRiding_Ch2::
 	note_type 12, 12, 7
 	note B_, 12
 	note_type 12, 12, 3
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_BikeRiding_Ch2.mainloop
 
-Music_BikeRiding_Ch3::
+Music_BikeRiding_Ch3:
 	note_type 12, 1, 3
 	rest 2
-.mainloop:
+Music_BikeRiding_Ch3.mainloop:
 	octave 4
 	note C_, 1
 	rest 1
@@ -543,17 +543,17 @@ Music_BikeRiding_Ch3::
 	rest 1
 	note G_, 1
 	rest 1
-	note A#, 1
+	note A_SHARP, 1
 	rest 1
 	note E_, 1
 	rest 1
-	note A#, 1
+	note A_SHARP, 1
 	rest 1
 	note G_, 1
 	rest 1
-	note A#, 1
+	note A_SHARP, 1
 	rest 1
-	note A#, 1
+	note A_SHARP, 1
 	rest 1
 	note G_, 1
 	rest 1
@@ -635,34 +635,34 @@ Music_BikeRiding_Ch3::
 	octave 4
 	note F_, 1
 	rest 1
-	sound_loop 0, .mainloop
+	sound_loop 0, Music_BikeRiding_Ch3.mainloop
 
-Music_BikeRiding_Ch4::
+Music_BikeRiding_Ch4:
 	drum_speed 12
 	rest 2
-.mainloop:
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub3
-	sound_call .sub2
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub1
-	sound_call .sub1
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub3
-	sound_call .sub1
-	sound_call .sub2
-	sound_call .sub1
-	sound_call .sub1
-	sound_call .sub1
-	sound_call .sub1
-	sound_loop 0, .mainloop
+Music_BikeRiding_Ch4.mainloop:
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub2
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub3
+	sound_call Music_BikeRiding_Ch4.sub2
+	sound_call Music_BikeRiding_Ch4.sub2
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub2
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub3
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub2
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_call Music_BikeRiding_Ch4.sub1
+	sound_loop 0, Music_BikeRiding_Ch4.mainloop
 
-.sub1:
+Music_BikeRiding_Ch4.sub1:
 	rest 2
 	drum_note 16, 2
 	rest 2
@@ -673,7 +673,7 @@ Music_BikeRiding_Ch4::
 	drum_note 16, 2
 	sound_ret
 
-.sub2:
+Music_BikeRiding_Ch4.sub2:
 	rest 2
 	drum_note 16, 2
 	rest 2
@@ -684,7 +684,7 @@ Music_BikeRiding_Ch4::
 	drum_note 16, 2
 	sound_ret
 
-.sub3:
+Music_BikeRiding_Ch4.sub3:
 	rest 2
 	drum_note 16, 2
 	rest 2

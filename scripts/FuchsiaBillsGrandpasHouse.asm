@@ -9,13 +9,13 @@ FuchsiaBillsGrandpasHouse_TextPointers:
 	dw_const FuchsiaBillsGrandpasHouseYoungsterText,       TEXT_FUCHSIABILLSGRANDPASHOUSE_YOUNGSTER
 
 FuchsiaBillsGrandpasHouseMiddleAgedWomanText:
-	text_far _FuchsiaBillsGrandpasHouseMiddleAgedWomanText
+	text_far WLA_GLOBAL_FuchsiaBillsGrandpasHouseMiddleAgedWomanText
 	text_end
 
 FuchsiaBillsGrandpasHouseBillsGrandpaText:
-	text_far _FuchsiaBillsGrandpasHouseBillsGrandpaText
+	text_far WLA_GLOBAL_FuchsiaBillsGrandpasHouseBillsGrandpaText
 	text_end
 
 FuchsiaBillsGrandpasHouseYoungsterText:
-	text_far _FuchsiaBillsGrandpasHouseYoungsterText
+	text_far WLA_GLOBAL_FuchsiaBillsGrandpasHouseYoungsterText
 	text_end

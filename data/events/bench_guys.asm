@@ -1,7 +1,7 @@
-MACRO bench_guy_text
-	db \1, \2
+.MACRO bench_guy_text
+	.DB \1, \2
 	db_tx_pre \3
-ENDM
+.ENDM
 
 BenchGuyTextPointers:
 	; map id, player facing direction, predef text
@@ -17,4 +17,4 @@ BenchGuyTextPointers:
 	bench_guy_text SAFFRON_POKECENTER,     SPRITE_FACING_LEFT, SaffronCityPokecenterBenchGuyText
 	bench_guy_text MT_MOON_POKECENTER,     SPRITE_FACING_LEFT, MtMoonPokecenterBenchGuyText
 	bench_guy_text ROCK_TUNNEL_POKECENTER, SPRITE_FACING_LEFT, RockTunnelPokecenterBenchGuyText
-	db -1 ; end
+	.DB -1 ; end

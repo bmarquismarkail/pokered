@@ -32,7 +32,7 @@ PokemonTower7FEndBattleScript:
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call DisplayTextID
 	call PokemonTower7FRocketLeaveMovementScript
 	ld a, SCRIPT_POKEMONTOWER7F_HIDE_NPC
@@ -47,11 +47,11 @@ PokemonTower7FHideNPCScript:
 	ld hl, wToggleableObjectList
 	ld a, [wSpriteIndex]
 	ld b, a
-.toggleableObjectsListLoop
+PokemonTower7FHideNPCScript.toggleableObjectsListLoop
 	ld a, [hli]
 	cp b            ; search for sprite ID in toggleable objects list
 	ld a, [hli]
-	jr nz, .toggleableObjectsListLoop
+	jr nz, PokemonTower7FHideNPCScript.toggleableObjectsListLoop
 	ld [wToggleableObjectIndex], a   ; remove toggleable object
 	predef HideObject
 	xor a
@@ -73,7 +73,7 @@ PokemonTower7FWarpToMrFujiHouseScript:
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, MR_FUJIS_HOUSE
-	ldh [hWarpDestinationMap], a
+	ldh [lobyte(hWarpDestinationMap)], a
 	ld a, $1
 	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
@@ -97,25 +97,25 @@ PokemonTower7FRocketLeaveMovementScript:
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
-.loop
+PokemonTower7FRocketLeaveMovementScript.loop
 	ld a, [hli]
 	cp b
-	jr nz, .inc_and_skip
+	jr nz, PokemonTower7FRocketLeaveMovementScript.inc_and_skip
 	ld a, [hli]
 	cp c
-	jr nz, .skip
+	jr nz, PokemonTower7FRocketLeaveMovementScript.skip
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	jp MoveSprite
-.inc_and_skip
+PokemonTower7FRocketLeaveMovementScript.inc_and_skip
 	inc hl
-.skip
+PokemonTower7FRocketLeaveMovementScript.skip
 	inc hl
 	inc hl
-	jr .loop
+	jr PokemonTower7FRocketLeaveMovementScript.loop
 
 PokemonTower7FNPCCoordMovementTable:
 	map_coord_movement  9, 12, PokemonTower7FRocket1ExitRightDownMovement
@@ -132,60 +132,60 @@ PokemonTower7FNPCCoordMovementTable:
 	map_coord_movement 12,  7, PokemonTower7FRocketExitDownMovement
 
 PokemonTower7FRocket1ExitRightDownMovement:
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_LEFT
-	db -1 ; end
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_LEFT
+	.DB -1 ; end
 
 PokemonTower7FRocket1ExitDownRightMovement:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 PokemonTower7FRocketExitDownMovement:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 PokemonTower7FRocket2ExitLeftDownMovement:
-	db NPC_MOVEMENT_LEFT
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+	.DB NPC_MOVEMENT_LEFT
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 PokemonTower7FRocket2ExitDownLeftMovement:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_LEFT
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_LEFT
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 PokemonTower7FRocket3ExitRightDownMovement:
-	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+	.DB NPC_MOVEMENT_RIGHT
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 PokemonTower7F_TextPointers:
 	def_text_pointers
@@ -202,7 +202,7 @@ PokemonTower7TrainerHeader1:
 	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_1, 3, PokemonTower7FRocket2BattleText, PokemonTower7FRocket2EndBattleText, PokemonTower7FRocket2AfterBattleText
 PokemonTower7TrainerHeader2:
 	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_2, 3, PokemonTower7FRocket3BattleText, PokemonTower7FRocket3EndBattleText, PokemonTower7FRocket3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower7FRocket1Text:
 	text_asm
@@ -224,7 +224,7 @@ PokemonTower7FRocket3Text:
 
 PokemonTower7FMrFujiText:
 	text_asm
-	ld hl, .RescueText
+	ld hl, PokemonTower7FMrFujiText.RescueText
 	call PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
 	SetEvent EVENT_RESCUED_MR_FUJI_2
@@ -242,42 +242,42 @@ PokemonTower7FMrFujiText:
 	ld [wCurMapScript], a
 	jp TextScriptEnd
 
-.RescueText:
-	text_far _PokemonTower7FMrFujiRescueText
+PokemonTower7FMrFujiText.RescueText:
+	text_far WLA_GLOBAL_PokemonTower7FMrFujiRescueText
 	text_end
 
 PokemonTower7FRocket1BattleText:
-	text_far _PokemonTower7FRocket1BattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket1BattleText
 	text_end
 
 PokemonTower7FRocket1EndBattleText:
-	text_far _PokemonTower7FRocket1EndBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket1EndBattleText
 	text_end
 
 PokemonTower7FRocket1AfterBattleText:
-	text_far _PokemonTower7FRocket1AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket1AfterBattleText
 	text_end
 
 PokemonTower7FRocket2BattleText:
-	text_far _PokemonTower7FRocket2BattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket2BattleText
 	text_end
 
 PokemonTower7FRocket2EndBattleText:
-	text_far _PokemonTower7FRocket2EndBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket2EndBattleText
 	text_end
 
 PokemonTower7FRocket2AfterBattleText:
-	text_far _PokemonTower7FRocket2AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket2AfterBattleText
 	text_end
 
 PokemonTower7FRocket3BattleText:
-	text_far _PokemonTower7FRocket3BattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket3BattleText
 	text_end
 
 PokemonTower7FRocket3EndBattleText:
-	text_far _PokemonTower7FRocket3EndBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket3EndBattleText
 	text_end
 
 PokemonTower7FRocket3AfterBattleText:
-	text_far _PokemonTower7FRocket3AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower7FRocket3AfterBattleText
 	text_end

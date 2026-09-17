@@ -8,16 +8,16 @@
 	const_export VIRIDIANCITY_OLD_MAN
 
 ViridianCity_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 5
 	warp_event 23, 25, VIRIDIAN_POKECENTER, 1
 	warp_event 29, 19, VIRIDIAN_MART, 1
 	warp_event 21, 15, VIRIDIAN_SCHOOL_HOUSE, 1
 	warp_event 21,  9, VIRIDIAN_NICKNAME_HOUSE, 1
 	warp_event 32,  7, VIRIDIAN_GYM, 1
 
-	def_bg_events
+	.DB 6
 	bg_event 17, 17, TEXT_VIRIDIANCITY_SIGN
 	bg_event 19,  1, TEXT_VIRIDIANCITY_TRAINER_TIPS1
 	bg_event 21, 29, TEXT_VIRIDIANCITY_TRAINER_TIPS2
@@ -25,7 +25,7 @@ ViridianCity_Object:
 	bg_event 24, 25, TEXT_VIRIDIANCITY_POKECENTER_SIGN
 	bg_event 27,  7, TEXT_VIRIDIANCITY_GYM_SIGN
 
-	def_object_events
+	.DB 7
 	object_event 13, 20, SPRITE_YOUNGSTER, WALK, ANY_DIR, TEXT_VIRIDIANCITY_YOUNGSTER1
 	object_event 30,  8, SPRITE_GAMBLER, STAY, NONE, TEXT_VIRIDIANCITY_GAMBLER1
 	object_event 30, 25, SPRITE_YOUNGSTER, WALK, ANY_DIR, TEXT_VIRIDIANCITY_YOUNGSTER2
@@ -34,4 +34,12 @@ ViridianCity_Object:
 	object_event  6, 23, SPRITE_FISHER, STAY, DOWN, TEXT_VIRIDIANCITY_FISHER
 	object_event 17,  5, SPRITE_GAMBLER, WALK, LEFT_RIGHT, TEXT_VIRIDIANCITY_OLD_MAN
 
-	def_warps_to VIRIDIAN_CITY
+	event_displacement VIRIDIAN_CITY_WIDTH, 23, 25
+
+	event_displacement VIRIDIAN_CITY_WIDTH, 29, 19
+
+	event_displacement VIRIDIAN_CITY_WIDTH, 21, 15
+
+	event_displacement VIRIDIAN_CITY_WIDTH, 21, 9
+
+	event_displacement VIRIDIAN_CITY_WIDTH, 32, 7

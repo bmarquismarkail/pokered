@@ -2,9 +2,9 @@
 	const_export CELADONMART1F_RECEPTIONIST
 
 CeladonMart1F_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 6
 	warp_event  2,  7, LAST_MAP, 1
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event 16,  7, LAST_MAP, 2
@@ -12,11 +12,21 @@ CeladonMart1F_Object:
 	warp_event 12,  1, CELADON_MART_2F, 1
 	warp_event  1,  1, CELADON_MART_ELEVATOR, 1
 
-	def_bg_events
+	.DB 2
 	bg_event 11,  4, TEXT_CELADONMART1F_DIRECTORY_SIGN
 	bg_event 14,  1, TEXT_CELADONMART1F_CURRENT_FLOOR_SIGN
 
-	def_object_events
+	.DB 1
 	object_event  8,  3, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_CELADONMART1F_RECEPTIONIST
 
-	def_warps_to CELADON_MART_1F
+	event_displacement CELADON_MART_1F_WIDTH, 2, 7
+
+	event_displacement CELADON_MART_1F_WIDTH, 3, 7
+
+	event_displacement CELADON_MART_1F_WIDTH, 16, 7
+
+	event_displacement CELADON_MART_1F_WIDTH, 17, 7
+
+	event_displacement CELADON_MART_1F_WIDTH, 12, 1
+
+	event_displacement CELADON_MART_1F_WIDTH, 1, 1

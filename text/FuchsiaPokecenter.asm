@@ -1,4 +1,5 @@
-_FuchsiaPokecenterRockerText::
+_FuchsiaPokecenterRockerText:
+WLA_GLOBAL_FuchsiaPokecenterRockerText:
 	text "You can't win"
 	line "with just one"
 	cont "strong #MON."
@@ -8,7 +9,8 @@ _FuchsiaPokecenterRockerText::
 	cont "them evenly."
 	done
 
-_FuchsiaPokecenterCooltrainerFText::
+_FuchsiaPokecenterCooltrainerFText:
+WLA_GLOBAL_FuchsiaPokecenterCooltrainerFText:
 	text "There's a narrow"
 	line "trail west of"
 	cont "VIRIDIAN CITY."

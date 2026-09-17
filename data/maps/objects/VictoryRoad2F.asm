@@ -14,9 +14,9 @@
 	const_export VICTORYROAD2F_BOULDER3
 
 VictoryRoad2F_Object:
-	db $7d ; border block
+	.DB $7d ; border block
 
-	def_warp_events
+	.DB 7
 	warp_event  0,  8, VICTORY_ROAD_1F, 3
 	warp_event 29,  7, LAST_MAP, 4
 	warp_event 29,  8, LAST_MAP, 4
@@ -25,9 +25,8 @@ VictoryRoad2F_Object:
 	warp_event 27,  7, VICTORY_ROAD_3F, 2
 	warp_event  1,  1, VICTORY_ROAD_3F, 4
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 13
 	object_event 12,  9, SPRITE_HIKER, STAY, LEFT, TEXT_VICTORYROAD2F_HIKER, OPP_BLACKBELT, 9
 	object_event 21, 13, SPRITE_SUPER_NERD, STAY, LEFT, TEXT_VICTORYROAD2F_SUPER_NERD1, OPP_JUGGLER, 2
 	object_event 19,  8, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_VICTORYROAD2F_COOLTRAINER_M, OPP_TAMER, 5
@@ -42,4 +41,16 @@ VictoryRoad2F_Object:
 	object_event  5,  5, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_VICTORYROAD2F_BOULDER2
 	object_event 23, 16, SPRITE_BOULDER, STAY, BOULDER_MOVEMENT_BYTE_2, TEXT_VICTORYROAD2F_BOULDER3
 
-	def_warps_to VICTORY_ROAD_2F
+	event_displacement VICTORY_ROAD_2F_WIDTH, 0, 8
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 29, 7
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 29, 8
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 23, 7
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 25, 14
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 27, 7
+
+	event_displacement VICTORY_ROAD_2F_WIDTH, 1, 1

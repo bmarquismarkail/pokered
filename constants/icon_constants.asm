@@ -14,4 +14,4 @@
 	const_skip 4
 	const ICON_TRADEBUBBLE ; $e
 
-DEF ICONOFFSET EQU $40 ; difference between alternating icon frames' tile IDs
+.DEFINE ICONOFFSET $40 ; difference between alternating icon frames' tile IDs

@@ -8,9 +8,9 @@ SSAnne1F_TextPointers:
 	dw_const SSAnne1FSailorText, TEXT_SSANNE1F_SAILOR
 
 SSAnne1FWaiterText:
-	text_far _SSAnne1FWaiterText
+	text_far WLA_GLOBAL_SSAnne1FWaiterText
 	text_end
 
 SSAnne1FSailorText:
-	text_far _SSAnne1FSailorText
+	text_far WLA_GLOBAL_SSAnne1FSailorText
 	text_end

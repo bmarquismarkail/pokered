@@ -1,17 +1,17 @@
-	db DEX_PORYGON ; pokedex id
+	.DB DEX_PORYGON ; pokedex id
 
-	db  65,  60,  70,  40,  75
+	.DB  65,  60,  70,  40,  75
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 45 ; catch rate
-	db 130 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 45 ; catch rate
+	.DB 130 ; base exp
 
-	INCBIN "gfx/pokemon/front/porygon.pic", 0, 1 ; sprite dimensions
-	dw PorygonPicFront, PorygonPicBack
+	.INCBIN "gfx/pokemon/front/porygon.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PorygonPicFront, PorygonPicBack
 
-	db TACKLE, SHARPEN, CONVERSION, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SHARPEN, CONVERSION, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  ICE_BEAM,     BLIZZARD,     \
@@ -21,4 +21,4 @@
 	     TRI_ATTACK,   SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

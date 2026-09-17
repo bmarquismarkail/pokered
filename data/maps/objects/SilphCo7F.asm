@@ -13,9 +13,9 @@
 	const_export SILPHCO7F_UNUSED ; referenced in data/maps/toggleable_objects.asm, no corresponding object_event
 
 SilphCo7F_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 6
 	warp_event 16,  0, SILPH_CO_8F, 2
 	warp_event 22,  0, SILPH_CO_6F, 1
 	warp_event 18,  0, SILPH_CO_ELEVATOR, 1
@@ -23,9 +23,8 @@ SilphCo7F_Object:
 	warp_event  5,  3, SILPH_CO_3F, 9
 	warp_event 21, 15, SILPH_CO_5F, 4
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 11
 	object_event  1,  5, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO7F_SILPH_WORKER_M1
 	object_event 13, 13, SPRITE_SILPH_WORKER_M, STAY, UP, TEXT_SILPHCO7F_SILPH_WORKER_M2
 	object_event  7, 10, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO7F_SILPH_WORKER_M3
@@ -38,4 +37,14 @@ SilphCo7F_Object:
 	object_event  1,  9, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO7F_CALCIUM, CALCIUM
 	object_event 24, 11, SPRITE_POKE_BALL, STAY, NONE, TEXT_SILPHCO7F_TM_SWORDS_DANCE, TM_SWORDS_DANCE
 
-	def_warps_to SILPH_CO_7F
+	event_displacement SILPH_CO_7F_WIDTH, 16, 0
+
+	event_displacement SILPH_CO_7F_WIDTH, 22, 0
+
+	event_displacement SILPH_CO_7F_WIDTH, 18, 0
+
+	event_displacement SILPH_CO_7F_WIDTH, 5, 7
+
+	event_displacement SILPH_CO_7F_WIDTH, 5, 3
+
+	event_displacement SILPH_CO_7F_WIDTH, 21, 15

@@ -9,13 +9,13 @@ SafariZoneWestRestHouse_TextPointers:
 	dw_const SafariZoneWestRestHouseSilphWorkerFText, TEXT_SAFARIZONEWESTRESTHOUSE_SILPH_WORKER_F
 
 SafariZoneWestRestHouseScientistText:
-	text_far _SafariZoneWestRestHouseScientistText
+	text_far WLA_GLOBAL_SafariZoneWestRestHouseScientistText
 	text_end
 
 SafariZoneWestRestHouseCooltrainerMText:
-	text_far _SafariZoneWestRestHouseCooltrainerMText
+	text_far WLA_GLOBAL_SafariZoneWestRestHouseCooltrainerMText
 	text_end
 
 SafariZoneWestRestHouseSilphWorkerFText:
-	text_far _SafariZoneWestRestHouseSilphWorkerFText
+	text_far WLA_GLOBAL_SafariZoneWestRestHouseSilphWorkerFText
 	text_end

@@ -1,7 +1,7 @@
 ; TypeNames indexes (see data/types/names.asm)
 	const_def
 
-DEF PHYSICAL EQU const_value
+.DEFINE PHYSICAL const_value
 	const NORMAL       ; $00
 	const FIGHTING     ; $01
 	const FLYING       ; $02
@@ -12,11 +12,11 @@ DEF PHYSICAL EQU const_value
 	const BUG          ; $07
 	const GHOST        ; $08
 
-DEF UNUSED_TYPES EQU const_value
+.DEFINE UNUSED_TYPES const_value
 	const_next 20
-DEF UNUSED_TYPES_END EQU const_value
+.DEFINE UNUSED_TYPES_END const_value
 
-DEF SPECIAL EQU const_value
+.DEFINE SPECIAL const_value
 	const FIRE         ; $14
 	const WATER        ; $15
 	const GRASS        ; $16
@@ -25,4 +25,4 @@ DEF SPECIAL EQU const_value
 	const ICE          ; $19
 	const DRAGON       ; $1A
 
-DEF NUM_TYPES EQU const_value
+.DEFINE NUM_TYPES const_value

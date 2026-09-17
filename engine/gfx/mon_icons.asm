@@ -9,7 +9,7 @@ AnimatePartyMon_ForceSpeed1:
 ; 0: green
 ; 1: yellow
 ; 2: red
-AnimatePartyMon::
+AnimatePartyMon:
 	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -29,18 +29,18 @@ GetAnimationSpeed:
 	ld b, a
 	ld a, [wAnimCounter]
 	and a
-	jr z, .resetSprites
+	jr z, GetAnimationSpeed.resetSprites
 	cp c
-	jr z, .animateSprite
-.incTimer
+	jr z, GetAnimationSpeed.animateSprite
+GetAnimationSpeed.incTimer
 	inc a
 	cp b
-	jr nz, .skipResetTimer
+	jr nz, GetAnimationSpeed.skipResetTimer
 	xor a ; reset timer
-.skipResetTimer
+GetAnimationSpeed.skipResetTimer
 	ld [wAnimCounter], a
 	jp DelayFrame
-.resetSprites
+GetAnimationSpeed.resetSprites
 	push bc
 	ld hl, wMonPartySpritesSavedOAM
 	ld de, wShadowOAM
@@ -48,8 +48,8 @@ GetAnimationSpeed:
 	call CopyData
 	pop bc
 	xor a
-	jr .incTimer
-.animateSprite
+	jr GetAnimationSpeed.incTimer
+GetAnimationSpeed.animateSprite
 	push bc
 	ld hl, wShadowOAMSprite00TileID
 	ld bc, OBJ_SIZE * 4
@@ -58,35 +58,35 @@ GetAnimationSpeed:
 	ld c, ICONOFFSET
 	ld a, [hl]
 	cp ICON_BALL << 2
-	jr z, .editCoords
+	jr z, GetAnimationSpeed.editCoords
 	cp ICON_HELIX << 2
-	jr nz, .editTileIDS
+	jr nz, GetAnimationSpeed.editTileIDS
 ; ICON_BALL and ICON_HELIX only shake up and down
-.editCoords
+GetAnimationSpeed.editCoords
 	dec hl
 	dec hl ; dec hl to the OAM y coord
 	ld c, $1 ; amount to increase the y coord by
 ; otherwise, load a second sprite frame
-.editTileIDS
+GetAnimationSpeed.editTileIDS
 	ld b, 4
 	ld de, OBJ_SIZE
-.loop
+GetAnimationSpeed.loop
 	ld a, [hl]
 	add c
 	ld [hl], a
 	add hl, de
 	dec b
-	jr nz, .loop
+	jr nz, GetAnimationSpeed.loop
 	pop bc
 	ld a, c
-	jr .incTimer
+	jr GetAnimationSpeed.incTimer
 
 ; Party mon animations cycle between 2 frames.
 ; The members of the PartyMonSpeeds array specify the number of V-blanks
 ; that each frame lasts for green HP, yellow HP, and red HP in order.
 ; On the naming screen, the yellow HP speed is always used.
 PartyMonSpeeds:
-	db 5, 16, 32
+	.DB 5, 16, 32
 
 LoadMonPartySpriteGfx:
 ; Load mon party sprite tile patterns into VRAM during V-blank.
@@ -98,7 +98,7 @@ LoadAnimSpriteGfx:
 ; of an array of structures that contain arguments for CopyVideoData and a is
 ; the number of structures in the array.
 	ld bc, $0
-.loop
+LoadAnimSpriteGfx.loop
 	push af
 	push bc
 	push hl
@@ -122,7 +122,7 @@ LoadAnimSpriteGfx:
 	ld c, a
 	pop af
 	dec a
-	jr nz, .loop
+	jr nz, LoadAnimSpriteGfx.loop
 	ret
 
 LoadMonPartySpriteGfxWithLCDDisabled:
@@ -132,7 +132,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	ld hl, MonPartySpritePointers
 	ld a, $1c
 	ld bc, $0
-.loop
+LoadMonPartySpriteGfxWithLCDDisabled.loop
 	push af
 	push bc
 	push hl
@@ -159,17 +159,17 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	ld c, a
 	pop af
 	dec a
-	jr nz, .loop
+	jr nz, LoadMonPartySpriteGfxWithLCDDisabled.loop
 	jp EnableLCD
 
-INCLUDE "data/icon_pointers.asm"
+.INCLUDE "data/icon_pointers.asm"
 
 WriteMonPartySpriteOAMByPartyIndex:
 ; Write OAM blocks for the party mon in [hPartyMonIndex].
 	push hl
 	push de
 	push bc
-	ldh a, [hPartyMonIndex]
+	ldh a, [lobyte(hPartyMonIndex)]
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
@@ -187,7 +187,7 @@ WriteMonPartySpriteOAMBySpecies:
 ; Write OAM blocks for the party sprite of the species in
 ; [wMonPartySpriteSpecies].
 	xor a
-	ldh [hPartyMonIndex], a
+	ldh [lobyte(hPartyMonIndex)], a
 	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
@@ -201,17 +201,17 @@ UnusedPartyMonSpriteFunction:
 	ld a, [wCurPartySpecies]
 	call GetPartyMonSpriteID
 	push af
-	ld hl, vSprites tile $00
-	call .LoadTilePatterns
+	ld hl, vSprites + TILE_SIZE * $00
+	call UnusedPartyMonSpriteFunction.LoadTilePatterns
 	pop af
 	add $54
-	ld hl, vSprites tile $04
-	call .LoadTilePatterns
+	ld hl, vSprites + TILE_SIZE * $04
+	call UnusedPartyMonSpriteFunction.LoadTilePatterns
 	xor a
 	ld [wMonPartySpriteSpecies], a
 	jr WriteMonPartySpriteOAMBySpecies
 
-.LoadTilePatterns
+UnusedPartyMonSpriteFunction.LoadTilePatterns
 	push hl
 	add a
 	ld c, a
@@ -236,22 +236,22 @@ WriteMonPartySpriteOAM:
 ; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
-	ld h, HIGH(wShadowOAM)
-	ldh a, [hPartyMonIndex]
+	ld h, hibyte(wShadowOAM)
+	ldh a, [lobyte(hPartyMonIndex)]
 	swap a
 	ld l, a
 	add $10
 	ld b, a
 	pop af
 	cp ICON_HELIX << 2
-	jr z, .helix
+	jr z, WriteMonPartySpriteOAM.helix
 	call WriteSymmetricMonPartySpriteOAM
-	jr .makeCopy
-.helix
+	jr WriteMonPartySpriteOAM.makeCopy
+WriteMonPartySpriteOAM.helix
 	call WriteAsymmetricMonPartySpriteOAM
 ; Make a copy of the OAM buffer with the first animation frame written so that
 ; we can flip back to it from the second frame by copying it back.
-.makeCopy
+WriteMonPartySpriteOAM.makeCopy
 	ld hl, wShadowOAM
 	ld de, wMonPartySpritesSavedOAM
 	ld bc, OBJ_SIZE * 4 * PARTY_LENGTH
@@ -270,26 +270,23 @@ GetPartyMonSpriteID:
 	add hl, de
 	ld a, [hl]
 	bit 0, c ; even or odd?
-	jr nz, .skipSwap
+	jr nz, GetPartyMonSpriteID.skipSwap
 	swap a ; use lower nybble if pokedex num is even
-.skipSwap
+GetPartyMonSpriteID.skipSwap
 	and $f0
-	srl a ; value == ICON constant << 2
+	srl a ; value = ICON constant << 2
 	srl a
 	ret
 
-INCLUDE "data/pokemon/menu_icons.asm"
+.INCLUDE "data/pokemon/menu_icons.asm"
 
-DEF INC_FRAME_1 EQUS "0, $20"
-DEF INC_FRAME_2 EQUS "$20, $20"
+BugIconFrame1: .INCBIN "gfx/icons/bug.2bpp" SKIP 0 READ $20
+PlantIconFrame1: .INCBIN "gfx/icons/plant.2bpp" SKIP 0 READ $20
+BugIconFrame2: .INCBIN "gfx/icons/bug.2bpp" SKIP $20 READ $20
+PlantIconFrame2: .INCBIN "gfx/icons/plant.2bpp" SKIP $20 READ $20
+SnakeIconFrame1: .INCBIN "gfx/icons/snake.2bpp" SKIP 0 READ $20
+QuadrupedIconFrame1: .INCBIN "gfx/icons/quadruped.2bpp" SKIP 0 READ $20
+SnakeIconFrame2: .INCBIN "gfx/icons/snake.2bpp" SKIP $20 READ $20
+QuadrupedIconFrame2: .INCBIN "gfx/icons/quadruped.2bpp" SKIP $20 READ $20
 
-BugIconFrame1:       INCBIN "gfx/icons/bug.2bpp",       INC_FRAME_1
-PlantIconFrame1:     INCBIN "gfx/icons/plant.2bpp",     INC_FRAME_1
-BugIconFrame2:       INCBIN "gfx/icons/bug.2bpp",       INC_FRAME_2
-PlantIconFrame2:     INCBIN "gfx/icons/plant.2bpp",     INC_FRAME_2
-SnakeIconFrame1:     INCBIN "gfx/icons/snake.2bpp",     INC_FRAME_1
-QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
-SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp",     INC_FRAME_2
-QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
-
-TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"
+TradeBubbleIconGFX: .INCBIN "gfx/trade/bubble.2bpp"

@@ -2,15 +2,15 @@
 	const_export ROUTE15GATE2F_OAKS_AIDE
 
 Route15Gate2F_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 1
 	warp_event  7,  7, ROUTE_15_GATE_1F, 5
 
-	def_bg_events
+	.DB 1
 	bg_event  6,  2, TEXT_ROUTE15GATE2F_BINOCULARS
 
-	def_object_events
+	.DB 1
 	object_event  4,  2, SPRITE_SCIENTIST, STAY, DOWN, TEXT_ROUTE15GATE2F_OAKS_AIDE
 
-	def_warps_to ROUTE_15_GATE_2F
+	event_displacement ROUTE_15_GATE_2F_WIDTH, 7, 7

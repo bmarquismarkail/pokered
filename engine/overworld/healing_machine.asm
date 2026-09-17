@@ -1,17 +1,17 @@
 AnimateHealingMachine:
 	ld de, PokeCenterFlashingMonitorAndHealBall
-	ld hl, vChars0 tile $7c
-	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), 3 ; should be 2
+	ld hl, vChars0 + TILE_SIZE * $7c
+	lb "bc", bank(PokeCenterFlashingMonitorAndHealBall), 3 ; should be 2
 	call CopyVideoData
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
-	ldh a, [rOBP1]
+	ldh a, [lobyte(rOBP1)]
 	push af
 	ld a, $e0
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	ld hl, wShadowOAMSprite33
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
@@ -20,50 +20,50 @@ AnimateHealingMachine:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-.waitLoop
+AnimateHealingMachine.waitLoop
 	ld a, [wAudioFadeOutControl]
 	and a ; is fade-out finished?
-	jr nz, .waitLoop ; if not, check again
+	jr nz, AnimateHealingMachine.waitLoop ; if not, check again
 	ld a, [wPartyCount]
 	ld b, a
-.partyLoop
+AnimateHealingMachine.partyLoop
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
 	call PlaySound
 	ld c, 30
 	call DelayFrames
 	dec b
-	jr nz, .partyLoop
+	jr nz, AnimateHealingMachine.partyLoop
 	ld a, [wAudioROMBank]
-	cp BANK("Audio Engine 3")
+	cp $1f
 	ld [wAudioSavedROMBank], a
-	jr nz, .next
+	jr nz, AnimateHealingMachine.next
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, BANK(Music_PkmnHealed)
+	ld a, bank(Music_PkmnHealed)
 	ld [wAudioROMBank], a
-.next
+AnimateHealingMachine.next
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
 	call PlaySound
 	ld d, $28
 	call FlashSprite8Times
-.waitLoop2
+AnimateHealingMachine.waitLoop2
 	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
-	jr z, .waitLoop2 ; if so, check gain
+	jr z, AnimateHealingMachine.waitLoop2 ; if so, check gain
 	ld c, 32
 	call DelayFrames
 	pop af
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	pop hl
 	pop af
 	ld [hl], a
 	jp UpdateSprites
 
 PokeCenterFlashingMonitorAndHealBall:
-	INCBIN "gfx/overworld/heal_machine.2bpp"
+	.INCBIN "gfx/overworld/heal_machine.2bpp"
 
 PokeCenterOAMData:
 	; heal machine monitor
@@ -79,21 +79,21 @@ PokeCenterOAMData:
 ; d = value to xor with palette
 FlashSprite8Times:
 	ld b, 8
-.loop
-	ldh a, [rOBP1]
+FlashSprite8Times.loop
+	ldh a, [lobyte(rOBP1)]
 	xor d
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 	ld c, 10
 	call DelayFrames
 	dec b
-	jr nz, .loop
+	jr nz, FlashSprite8Times.loop
 	ret
 
 CopyHealingMachineOAM:
 ; copy one OAM entry and advance the pointers
-REPT 4
+.REPT 4
 	ld a, [de]
 	inc de
 	ld [hli], a
-ENDR
+.ENDR
 	ret

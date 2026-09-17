@@ -1,4 +1,4 @@
-GiveItem::
+GiveItem:
 ; Give player quantity c of item b,
 ; and copy the item's name to wStringBuffer.
 ; Return carry on success.
@@ -15,7 +15,7 @@ GiveItem::
 	scf
 	ret
 
-GivePokemon::
+GivePokemon:
 ; Give the player monster b at level c.
 	ld a, b
 	ld [wCurPartySpecies], a
@@ -23,4 +23,4 @@ GivePokemon::
 	ld [wCurEnemyLevel], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	farjp _GivePokemon
+	farjp WLA_GLOBAL_GivePokemon

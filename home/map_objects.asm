@@ -2,15 +2,15 @@
 ; and if so, decodes the RLE movement data
 ; b = player Y
 ; c = player X
-DecodeArrowMovementRLE::
+DecodeArrowMovementRLE:
 	ld a, [hli]
 	cp $ff
 	ret z ; no match in the list
 	cp b
-	jr nz, .nextArrowMovementTileEntry1
+	jr nz, DecodeArrowMovementRLE.nextArrowMovementTileEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .nextArrowMovementTileEntry2
+	jr nz, DecodeArrowMovementRLE.nextArrowMovementTileEntry2
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -19,38 +19,38 @@ DecodeArrowMovementRLE::
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	ret
-.nextArrowMovementTileEntry1
+DecodeArrowMovementRLE.nextArrowMovementTileEntry1
 	inc hl
-.nextArrowMovementTileEntry2
+DecodeArrowMovementRLE.nextArrowMovementTileEntry2
 	inc hl
 	inc hl
 	jr DecodeArrowMovementRLE
 
-TextScript_ItemStoragePC::
+TextScript_ItemStoragePC:
 	call SaveScreenTilesToBuffer2
-	ld b, BANK(PlayerPC)
+	ld b, bank(PlayerPC)
 	ld hl, PlayerPC
 	jr BankswitchAndContinue
 
-TextScript_BillsPC::
+TextScript_BillsPC:
 	call SaveScreenTilesToBuffer2
-	ld b, BANK(BillsPC_)
+	ld b, bank(BillsPC_)
 	ld hl, BillsPC_
 	jr BankswitchAndContinue
 
-TextScript_GameCornerPrizeMenu::
-	ld b, BANK(CeladonPrizeMenu)
+TextScript_GameCornerPrizeMenu:
+	ld b, bank(CeladonPrizeMenu)
 	ld hl, CeladonPrizeMenu
-BankswitchAndContinue::
+BankswitchAndContinue:
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-TextScript_PokemonCenterPC::
-	ld b, BANK(ActivatePC)
+TextScript_PokemonCenterPC:
+	ld b, bank(ActivatePC)
 	ld hl, ActivatePC
 	jr BankswitchAndContinue
 
-StartSimulatingJoypadStates::
+StartSimulatingJoypadStates:
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ld [wSpritePlayerStateData2MovementByte1], a
@@ -58,7 +58,7 @@ StartSimulatingJoypadStates::
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ret
 
-IsItemInBag::
+IsItemInBag:
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
@@ -68,24 +68,24 @@ IsItemInBag::
 	and a
 	ret
 
-DisplayPokedex::
+DisplayPokedex:
 	ld [wPokedexNum], a
-	farjp _DisplayPokedex
+	farjp WLA_GLOBAL_DisplayPokedex
 
-SetSpriteFacingDirectionAndDelay::
+SetSpriteFacingDirectionAndDelay:
 	call SetSpriteFacingDirection
 	ld c, 6
 	jp DelayFrames
 
-SetSpriteFacingDirection::
+SetSpriteFacingDirection:
 	ld a, SPRITESTATEDATA1_FACINGDIRECTION
-	ldh [hSpriteDataOffset], a
+	ldh [lobyte(hSpriteDataOffset)], a
 	call GetPointerWithinSpriteStateData1
-	ldh a, [hSpriteFacingDirection]
+	ldh a, [lobyte(hSpriteFacingDirection)]
 	ld [hl], a
 	ret
 
-SetSpriteImageIndexAfterSettingFacingDirection::
+SetSpriteImageIndexAfterSettingFacingDirection:
 	ld de, SPRITESTATEDATA1_IMAGEINDEX - SPRITESTATEDATA1_FACINGDIRECTION
 	add hl, de
 	ld [hl], a
@@ -97,37 +97,37 @@ SetSpriteImageIndexAfterSettingFacingDirection::
 ; OUTPUT:
 ; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-ArePlayerCoordsInArray::
+ArePlayerCoordsInArray:
 	ld a, [wYCoord]
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
 	; fallthrough
 
-CheckCoords::
+CheckCoords:
 	xor a
 	ld [wCoordIndex], a
-.loop
+CheckCoords.loop
 	ld a, [hli]
 	cp $ff ; reached terminator?
-	jr z, .notInArray
+	jr z, CheckCoords.notInArray
 	push hl
 	ld hl, wCoordIndex
 	inc [hl]
 	pop hl
 ; compare Y coord
 	cp b
-	jr z, .compareXCoord
+	jr z, CheckCoords.compareXCoord
 	inc hl
-	jr .loop
-.compareXCoord
+	jr CheckCoords.loop
+CheckCoords.compareXCoord
 	ld a, [hli]
 	cp c
-	jr nz, .loop
+	jr nz, CheckCoords.loop
 ; in array
 	scf
 	ret
-.notInArray
+CheckCoords.notInArray
 	and a
 	ret
 
@@ -138,10 +138,10 @@ CheckCoords::
 ; OUTPUT:
 ; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-CheckBoulderCoords::
+CheckBoulderCoords:
 	push hl
 	ld hl, wSpritePlayerStateData2MapY
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	swap a
 	ld d, $0
 	ld e, a
@@ -155,17 +155,18 @@ CheckBoulderCoords::
 	pop hl
 	jp CheckCoords
 
-GetPointerWithinSpriteStateData1::
-	ld h, HIGH(wSpriteStateData1)
-	jr _GetPointerWithinSpriteStateData
+GetPointerWithinSpriteStateData1:
+	ld h, hibyte(wSpriteStateData1)
+	jr WLA_GLOBAL_GetPointerWithinSpriteStateData
 
-GetPointerWithinSpriteStateData2::
-	ld h, HIGH(wSpriteStateData2)
+GetPointerWithinSpriteStateData2:
+	ld h, hibyte(wSpriteStateData2)
 
 _GetPointerWithinSpriteStateData:
-	ldh a, [hSpriteDataOffset]
+WLA_GLOBAL_GetPointerWithinSpriteStateData:
+	ldh a, [lobyte(hSpriteDataOffset)]
 	ld b, a
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	swap a
 	add b
 	ld l, a
@@ -176,14 +177,14 @@ _GetPointerWithinSpriteStateData:
 ; the final $ff will be replicated in the output list and a contains the number of bytes written
 ; de: input list
 ; hl: output list
-DecodeRLEList::
+DecodeRLEList:
 	xor a
 	ld [wRLEByteCount], a     ; count written bytes here
-.listLoop
+DecodeRLEList.listLoop
 	ld a, [de]
 	cp $ff
-	jr z, .endOfList
-	ldh [hRLEByteValue], a ; store byte value to be written
+	jr z, DecodeRLEList.endOfList
+	ldh [lobyte(hRLEByteValue)], a ; store byte value to be written
 	inc de
 	ld a, [de]
 	ld b, $0
@@ -191,11 +192,11 @@ DecodeRLEList::
 	ld a, [wRLEByteCount]
 	add c
 	ld [wRLEByteCount], a     ; update total number of written bytes
-	ldh a, [hRLEByteValue]
+	ldh a, [lobyte(hRLEByteValue)]
 	call FillMemory              ; write a c-times to output
 	inc de
-	jr .listLoop
-.endOfList
+	jr DecodeRLEList.listLoop
+DecodeRLEList.endOfList
 	ld a, $ff
 	ld [hl], a                   ; write final $ff
 	ld a, [wRLEByteCount]
@@ -203,18 +204,18 @@ DecodeRLEList::
 	ret
 
 ; sets movement byte 1 for sprite [hSpriteIndex] to $FE and byte 2 to [hSpriteMovementByte2]
-SetSpriteMovementBytesToFE::
+SetSpriteMovementBytesToFE:
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
 	call GetSpriteMovementByte2Pointer
-	ldh a, [hSpriteMovementByte2]
+	ldh a, [lobyte(hSpriteMovementByte2)]
 	ld [hl], a
 	pop hl
 	ret
 
 ; sets both movement bytes for sprite [hSpriteIndex] to $FF
-SetSpriteMovementBytesToFF::
+SetSpriteMovementBytesToFF:
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], STAY
@@ -224,19 +225,19 @@ SetSpriteMovementBytesToFF::
 	ret
 
 ; returns the sprite movement byte 1 pointer for sprite [hSpriteIndex] in hl
-GetSpriteMovementByte1Pointer::
-	ld h, HIGH(wSpriteStateData2)
-	ldh a, [hSpriteIndex]
+GetSpriteMovementByte1Pointer:
+	ld h, hibyte(wSpriteStateData2)
+	ldh a, [lobyte(hSpriteIndex)]
 	swap a
 	add 6
 	ld l, a
 	ret
 
 ; returns the sprite movement byte 2 pointer for sprite [hSpriteIndex] in hl
-GetSpriteMovementByte2Pointer::
+GetSpriteMovementByte2Pointer:
 	push de
 	ld hl, wMapSpriteData
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	dec a
 	add a
 	ld d, 0

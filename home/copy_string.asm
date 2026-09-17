@@ -1,13 +1,13 @@
 ; copies a string from de to wStringBuffer
-CopyToStringBuffer::
+CopyToStringBuffer:
 	ld hl, wStringBuffer
 	; fall through
 
 ; copies a string from de to hl
-CopyString::
+CopyString:
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp '@'
+	cp $50
 	jr nz, CopyString
 	ret

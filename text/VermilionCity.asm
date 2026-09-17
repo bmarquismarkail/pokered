@@ -1,4 +1,5 @@
-_VermilionCityBeautyText::
+_VermilionCityBeautyText:
+WLA_GLOBAL_VermilionCityBeautyText:
 	text "We're careful"
 	line "about pollution!"
 
@@ -7,13 +8,15 @@ _VermilionCityBeautyText::
 	cont "toxic sludge!"
 	done
 
-_VermilionCityGambler1DidYouSeeText::
+_VermilionCityGambler1DidYouSeeText:
+WLA_GLOBAL_VermilionCityGambler1DidYouSeeText:
 	text "Did you see S.S."
 	line "ANNE moored in"
 	cont "the harbor?"
 	done
 
-_VermilionCityGambler1SSAnneDepartedText::
+_VermilionCityGambler1SSAnneDepartedText:
+WLA_GLOBAL_VermilionCityGambler1SSAnneDepartedText:
 	text "So, S.S.ANNE has"
 	line "departed!"
 
@@ -21,12 +24,14 @@ _VermilionCityGambler1SSAnneDepartedText::
 	line "about a year."
 	done
 
-_VermilionCitySailor1WelcomeToSSAnneText::
+_VermilionCitySailor1WelcomeToSSAnneText:
+WLA_GLOBAL_VermilionCitySailor1WelcomeToSSAnneText:
 	text "Welcome to S.S."
 	line "ANNE!"
 	done
 
-_VermilionCitySailor1DoYouHaveATicketText::
+_VermilionCitySailor1DoYouHaveATicketText:
+WLA_GLOBAL_VermilionCitySailor1DoYouHaveATicketText:
 	text "Welcome to S.S."
 	line "ANNE!"
 
@@ -34,7 +39,8 @@ _VermilionCitySailor1DoYouHaveATicketText::
 	line "have a ticket?"
 	prompt
 
-_VermilionCitySailor1FlashedTicketText::
+_VermilionCitySailor1FlashedTicketText:
+WLA_GLOBAL_VermilionCitySailor1FlashedTicketText:
 	text "<PLAYER> flashed"
 	line "the S.S.TICKET!"
 
@@ -42,7 +48,8 @@ _VermilionCitySailor1FlashedTicketText::
 	line "S.S.ANNE!"
 	done
 
-_VermilionCitySailor1YouNeedATicketText::
+_VermilionCitySailor1YouNeedATicketText:
+WLA_GLOBAL_VermilionCitySailor1YouNeedATicketText:
 	text "<PLAYER> doesn't"
 	line "have the needed"
 	cont "S.S.TICKET."
@@ -53,11 +60,13 @@ _VermilionCitySailor1YouNeedATicketText::
 	line "to get aboard."
 	done
 
-_VermilionCitySailor1ShipSetSailText::
+_VermilionCitySailor1ShipSetSailText:
+WLA_GLOBAL_VermilionCitySailor1ShipSetSailText:
 	text "The ship set sail."
 	done
 
-_VermilionCityGambler2Text::
+_VermilionCityGambler2Text:
+WLA_GLOBAL_VermilionCityGambler2Text:
 	text "I'm putting up a"
 	line "building on this"
 	cont "plot of land."
@@ -66,19 +75,22 @@ _VermilionCityGambler2Text::
 	line "tamping the land."
 	done
 
-_VermilionCityMachopText::
+_VermilionCityMachopText:
+WLA_GLOBAL_VermilionCityMachopText:
 	text "MACHOP: Guoh!"
 	line "Gogogoh!@"
 	text_end
 
-_VermilionCityMachopStompingTheLandFlatText::
+_VermilionCityMachopStompingTheLandFlatText:
+WLA_GLOBAL_VermilionCityMachopStompingTheLandFlatText:
 	text_start
 	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."
 	done
 
-_VermilionCitySailor2Text::
+_VermilionCitySailor2Text:
+WLA_GLOBAL_VermilionCitySailor2Text:
 	text "S.S.ANNE is a"
 	line "famous luxury"
 	cont "cruise ship."
@@ -87,13 +99,15 @@ _VermilionCitySailor2Text::
 	line "once a year."
 	done
 
-_VermilionCitySignText::
+_VermilionCitySignText:
+WLA_GLOBAL_VermilionCitySignText:
 	text "VERMILION CITY"
 	line "The Port of"
 	cont "Exquisite Sunsets"
 	done
 
-_VermilionCityNoticeSignText::
+_VermilionCityNoticeSignText:
+WLA_GLOBAL_VermilionCityNoticeSignText:
 	text "NOTICE!"
 
 	para "ROUTE 12 may be"
@@ -107,13 +121,15 @@ _VermilionCityNoticeSignText::
 	para "VERMILION POLICE"
 	done
 
-_VermilionCityPokemonFanClubSignText::
+_VermilionCityPokemonFanClubSignText:
+WLA_GLOBAL_VermilionCityPokemonFanClubSignText:
 	text "#MON FAN CLUB"
 	line "All #MON fans"
 	cont "welcome!"
 	done
 
-_VermilionCityGymSignText::
+_VermilionCityGymSignText:
+WLA_GLOBAL_VermilionCityGymSignText:
 	text "VERMILION CITY"
 	line "#MON GYM"
 	cont "LEADER: LT.SURGE"
@@ -122,6 +138,7 @@ _VermilionCityGymSignText::
 	line "American!"
 	done
 
-_VermilionCityHarborSignText::
+_VermilionCityHarborSignText:
+WLA_GLOBAL_VermilionCityHarborSignText:
 	text "VERMILION HARBOR"
 	done

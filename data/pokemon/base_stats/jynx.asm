@@ -1,17 +1,17 @@
-	db DEX_JYNX ; pokedex id
+	.DB DEX_JYNX ; pokedex id
 
-	db  65,  50,  35,  95,  95
+	.DB  65,  50,  35,  95,  95
 	;   hp  atk  def  spd  spc
 
-	db ICE, PSYCHIC_TYPE ; type
-	db 45 ; catch rate
-	db 137 ; base exp
+	.DB ICE, PSYCHIC_TYPE ; type
+	.DB 45 ; catch rate
+	.DB 137 ; base exp
 
-	INCBIN "gfx/pokemon/front/jynx.pic", 0, 1 ; sprite dimensions
-	dw JynxPicFront, JynxPicBack
+	.INCBIN "gfx/pokemon/front/jynx.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW JynxPicFront, JynxPicBack
 
-	db POUND, LOVELY_KISS, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB POUND, LOVELY_KISS, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

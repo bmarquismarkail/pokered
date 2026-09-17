@@ -10,15 +10,14 @@
 	const_export CINNABARGYM_GYM_GUIDE
 
 CinnabarGym_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event 16, 17, LAST_MAP, 2
 	warp_event 17, 17, LAST_MAP, 2
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 9
 	object_event  3,  3, SPRITE_MIDDLE_AGED_MAN, STAY, DOWN, TEXT_CINNABARGYM_BLAINE, OPP_BLAINE, 1
 	object_event 17,  2, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_CINNABARGYM_SUPER_NERD1, OPP_SUPER_NERD, 9
 	object_event 17,  8, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_CINNABARGYM_SUPER_NERD2, OPP_BURGLAR, 4
@@ -29,4 +28,6 @@ CinnabarGym_Object:
 	object_event  3,  8, SPRITE_SUPER_NERD, STAY, DOWN, TEXT_CINNABARGYM_SUPER_NERD7, OPP_SUPER_NERD, 12
 	object_event 16, 13, SPRITE_GYM_GUIDE, STAY, DOWN, TEXT_CINNABARGYM_GYM_GUIDE
 
-	def_warps_to CINNABAR_GYM
+	event_displacement CINNABAR_GYM_WIDTH, 16, 17
+
+	event_displacement CINNABAR_GYM_WIDTH, 17, 17

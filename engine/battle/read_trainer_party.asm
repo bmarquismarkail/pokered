@@ -31,44 +31,44 @@ ReadTrainer:
 ; and hl points to the trainer class.
 ; Our next task is to iterate through the trainers,
 ; decrementing b each time, until we get to the right one.
-.CheckNextTrainer
+ReadTrainer.CheckNextTrainer
 	dec b
-	jr z, .IterateTrainer
-.SkipTrainer
+	jr z, ReadTrainer.IterateTrainer
+ReadTrainer.SkipTrainer
 	ld a, [hli]
 	and a
-	jr nz, .SkipTrainer
-	jr .CheckNextTrainer
+	jr nz, ReadTrainer.SkipTrainer
+	jr ReadTrainer.CheckNextTrainer
 
 ; if the first byte of trainer data is FF,
 ; - each pokemon has a specific level
 ;      (as opposed to the whole team being of the same level)
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 ; else the first byte is the level of every pokemon on the team
-.IterateTrainer
+ReadTrainer.IterateTrainer
 	ld a, [hli]
 	cp $FF ; is the trainer special?
-	jr z, .SpecialTrainer ; if so, check for special moves
+	jr z, ReadTrainer.SpecialTrainer ; if so, check for special moves
 	ld [wCurEnemyLevel], a
-.LoopTrainerData
+ReadTrainer.LoopTrainerData
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .FinishUp
+	jr z, ReadTrainer.FinishUp
 	ld [wCurPartySpecies], a
 	ld a, ENEMY_PARTY_DATA
 	ld [wMonDataLocation], a
 	push hl
 	call AddPartyMon
 	pop hl
-	jr .LoopTrainerData
-.SpecialTrainer
+	jr ReadTrainer.LoopTrainerData
+ReadTrainer.SpecialTrainer
 ; if this code is being run:
 ; - each pokemon has a specific level
 ;      (as opposed to the whole team being of the same level)
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 	ld a, [hli]
 	and a ; have we reached the end of the trainer data?
-	jr z, .AddLoneMove
+	jr z, ReadTrainer.AddLoneMove
 	ld [wCurEnemyLevel], a
 	ld a, [hli]
 	ld [wCurPartySpecies], a
@@ -77,12 +77,12 @@ ReadTrainer:
 	push hl
 	call AddPartyMon
 	pop hl
-	jr .SpecialTrainer
-.AddLoneMove
+	jr ReadTrainer.SpecialTrainer
+ReadTrainer.AddLoneMove
 ; does the trainer have a single monster with a different move?
 	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
-	jr z, .AddTeamMove
+	jr z, ReadTrainer.AddTeamMove
 	dec a
 	add a
 	ld c, a
@@ -95,8 +95,8 @@ ReadTrainer:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld [hl], d
-	jr .FinishUp
-.AddTeamMove
+	jr ReadTrainer.FinishUp
+ReadTrainer.AddTeamMove
 ; check if our trainer's team has special moves
 
 ; get trainer class number
@@ -106,24 +106,24 @@ ReadTrainer:
 	ld hl, TeamMoves
 
 ; iterate through entries in TeamMoves, checking each for our trainer class
-.IterateTeamMoves
+ReadTrainer.IterateTeamMoves
 	ld a, [hli]
 	cp b
-	jr z, .GiveTeamMoves ; is there a match?
+	jr z, ReadTrainer.GiveTeamMoves ; is there a match?
 	inc hl ; if not, go to the next entry
 	inc a
-	jr nz, .IterateTeamMoves
+	jr nz, ReadTrainer.IterateTeamMoves
 
 ; no matches found. is this trainer champion rival?
 	ld a, b
 	cp RIVAL3
-	jr z, .ChampionRival
-	jr .FinishUp ; nope
-.GiveTeamMoves
+	jr z, ReadTrainer.ChampionRival
+	jr ReadTrainer.FinishUp ; nope
+ReadTrainer.GiveTeamMoves
 	ld a, [hl]
 	ld [wEnemyMon5Moves + 2], a
-	jr .FinishUp
-.ChampionRival ; give moves to his team
+	jr ReadTrainer.FinishUp
+ReadTrainer.ChampionRival ; give moves to his team
 
 ; pidgeot
 	ld a, SKY_ATTACK
@@ -133,15 +133,15 @@ ReadTrainer:
 	ld a, [wRivalStarter]
 	cp STARTER3
 	ld b, MEGA_DRAIN
-	jr z, .GiveStarterMove
+	jr z, ReadTrainer.GiveStarterMove
 	cp STARTER1
 	ld b, FIRE_BLAST
-	jr z, .GiveStarterMove
+	jr z, ReadTrainer.GiveStarterMove
 	ld b, BLIZZARD ; must be squirtle
-.GiveStarterMove
+ReadTrainer.GiveStarterMove
 	ld a, b
 	ld [wEnemyMon6Moves + 2], a
-.FinishUp
+ReadTrainer.FinishUp
 ; clear wAmountMoneyWon addresses
 	xor a
 	ld de, wAmountMoneyWon
@@ -152,7 +152,7 @@ ReadTrainer:
 	ld [de], a
 	ld a, [wCurEnemyLevel]
 	ld b, a
-.LastLoop
+ReadTrainer.LastLoop
 ; update wAmountMoneyWon addresses (money to win) based on enemy's level
 	ld hl, wTrainerBaseMoney + 1
 	ld c, 2 ; wAmountMoneyWon is a 3-byte number
@@ -162,5 +162,5 @@ ReadTrainer:
 	inc de
 	inc de
 	dec b
-	jr nz, .LastLoop ; repeat wCurEnemyLevel times
+	jr nz, ReadTrainer.LastLoop ; repeat wCurEnemyLevel times
 	ret

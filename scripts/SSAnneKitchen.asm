@@ -13,61 +13,61 @@ SSAnneKitchen_TextPointers:
 	dw_const SSAnneKitchenCook7Text, TEXT_SSANNEKITCHEN_COOK7
 
 SSAnneKitchenCook1Text:
-	text_far _SSAnneKitchenCook1Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook1Text
 	text_end
 
 SSAnneKitchenCook2Text:
-	text_far _SSAnneKitchenCook2Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook2Text
 	text_end
 
 SSAnneKitchenCook3Text:
-	text_far _SSAnneKitchenCook3Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook3Text
 	text_end
 
 SSAnneKitchenCook4Text:
-	text_far _SSAnneKitchenCook4Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook4Text
 	text_end
 
 SSAnneKitchenCook5Text:
-	text_far _SSAnneKitchenCook5Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook5Text
 	text_end
 
 SSAnneKitchenCook6Text:
-	text_far _SSAnneKitchenCook6Text
+	text_far WLA_GLOBAL_SSAnneKitchenCook6Text
 	text_end
 
 SSAnneKitchenCook7Text:
 	text_asm
-	ld hl, .MainCourseIsText
+	ld hl, SSAnneKitchenCook7Text.MainCourseIsText
 	call PrintText
-	ldh a, [hRandomAdd]
+	ldh a, [lobyte(hRandomAdd)]
 	bit 7, a
-	jr z, .not_dialog_1
-	ld hl, .SalmonDuSaladText
-	jr .done
-.not_dialog_1
+	jr z, SSAnneKitchenCook7Text.not_dialog_1
+	ld hl, SSAnneKitchenCook7Text.SalmonDuSaladText
+	jr SSAnneKitchenCook7Text.done
+SSAnneKitchenCook7Text.not_dialog_1
 	bit 4, a
-	jr z, .not_dialog_2
-	ld hl, .EelsAuBarbecueText
-	jr .done
-.not_dialog_2
-	ld hl, .PrimeBeefSteakText
-.done
+	jr z, SSAnneKitchenCook7Text.not_dialog_2
+	ld hl, SSAnneKitchenCook7Text.EelsAuBarbecueText
+	jr SSAnneKitchenCook7Text.done
+SSAnneKitchenCook7Text.not_dialog_2
+	ld hl, SSAnneKitchenCook7Text.PrimeBeefSteakText
+SSAnneKitchenCook7Text.done
 	call PrintText
 	jp TextScriptEnd
 
-.MainCourseIsText:
-	text_far _SSAnneKitchenCook7MainCourseIsText
+SSAnneKitchenCook7Text.MainCourseIsText:
+	text_far WLA_GLOBAL_SSAnneKitchenCook7MainCourseIsText
 	text_end
 
-.SalmonDuSaladText:
+SSAnneKitchenCook7Text.SalmonDuSaladText:
 	text_far SSAnneKitchenCook7SalmonDuSaladText
 	text_end
 
-.EelsAuBarbecueText:
+SSAnneKitchenCook7Text.EelsAuBarbecueText:
 	text_far SSAnneKitchenCook7EelsAuBarbecueText
 	text_end
 
-.PrimeBeefSteakText:
+SSAnneKitchenCook7Text.PrimeBeefSteakText:
 	text_far SSAnneKitchenCook7PrimeBeefSteakText
 	text_end

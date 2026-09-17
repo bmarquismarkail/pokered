@@ -1,6 +1,6 @@
-DEF CIRCLE_TILE_ID EQU $70
+.DEFINE CIRCLE_TILE_ID $70
 
-DisplayDiploma::
+DisplayDiploma:
 	call SaveScreenTilesToBuffer2
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
@@ -10,17 +10,17 @@ DisplayDiploma::
 	set BIT_NO_TEXT_DELAY, [hl]
 	call DisableLCD
 	ld hl, CircleTile
-	ld de, vChars2 tile CIRCLE_TILE_ID
+	ld de, vChars2 + TILE_SIZE * CIRCLE_TILE_ID
 	ld bc, TILE_SIZE
-	ld a, BANK(CircleTile)
+	ld a, bank(CircleTile)
 	call FarCopyData2
 	hlcoord 0, 0
-	lb bc, 16, 18
+	lb "bc", 16, 18
 	predef Diploma_TextBoxBorder
 
 	ld hl, DiplomaTextPointersAndCoords
 	ld c, $5
-.placeTextLoop
+DisplayDiploma.placeTextLoop
 	push bc
 	ld a, [hli]
 	ld e, a
@@ -35,7 +35,7 @@ DisplayDiploma::
 	inc hl
 	pop bc
 	dec c
-	jr nz, .placeTextLoop
+	jr nz, DisplayDiploma.placeTextLoop
 	hlcoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
@@ -44,8 +44,8 @@ DisplayDiploma::
 ; Move the player 33 pixels right and set the priority bit so he appears
 ; behind the background layer.
 	ld hl, wShadowOAMSprite00XCoord
-	lb bc, $80, $28
-.adjustPlayerGfxLoop
+	lb "bc", $80, $28
+DisplayDiploma.adjustPlayerGfxLoop
 	ld a, [hl] ; X
 	add 33
 	ld [hli], a
@@ -54,7 +54,7 @@ DisplayDiploma::
 	ld [hli], a ; attributes
 	inc hl
 	dec c
-	jr nz, .adjustPlayerGfxLoop
+	jr nz, DisplayDiploma.adjustPlayerGfxLoop
 
 	call EnableLCD
 	farcall LoadTrainerInfoTextBoxTiles
@@ -63,7 +63,7 @@ DisplayDiploma::
 	call Delay3
 	call GBPalNormal
 	ld a, $90
-	ldh [rOBP0], a
+	ldh [lobyte(rOBP0)], a
 	call WaitForTextScrollButtonPress
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
@@ -76,18 +76,18 @@ UnusedPlayerNameLengthFunc:
 ; Unused function that performs bc = -(player name's length)
 ; leftover from the JPN versions
 	ld hl, wPlayerName
-	lb bc, $ff, $00
-.loop
+	lb "bc", $ff, $00
+UnusedPlayerNameLengthFunc.loop
 	ld a, [hli]
-	cp '@'
+	cp $50
 	ret z
 	dec c
-	jr .loop
+	jr UnusedPlayerNameLengthFunc.loop
 
-MACRO diploma_text
-	dw \3
+.MACRO diploma_text
+	.DW \3
 	dwcoord \1, \2
-ENDM
+.ENDM
 
 DiplomaTextPointersAndCoords:
 	; x, y, text
@@ -98,20 +98,23 @@ DiplomaTextPointersAndCoords:
 	diploma_text  9, 16, DiplomaGameFreak
 
 DiplomaText:
-	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
+		.DB CIRCLE_TILE_ID
+		.STRINGMAP pokemon, "Diploma"
+		.DB CIRCLE_TILE_ID
+		.STRINGMAP pokemon, "@"
 
 DiplomaPlayer:
-	db "Player@"
+		.STRINGMAP pokemon, "Player@"
 
 DiplomaEmptyText:
-	db "@"
+		.STRINGMAP pokemon, "@"
 
 DiplomaCongrats:
-	db   "Congrats! This"
+		.STRINGMAP pokemon, "Congrats! This"
 	next "diploma certifies"
 	next "that you have"
 	next "completed your"
 	next "#DEX.@"
 
 DiplomaGameFreak:
-	db "GAME FREAK@"
+		.STRINGMAP pokemon, "GAME FREAK@"

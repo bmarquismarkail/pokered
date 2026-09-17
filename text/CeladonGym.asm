@@ -1,4 +1,5 @@
-_CeladonGymErikaPreBattleText::
+_CeladonGymErikaPreBattleText:
+WLA_GLOBAL_CeladonGymErikaPreBattleText:
 	text "Hello. Lovely"
 	line "weather isn't it?"
 	cont "It's so pleasant."
@@ -25,7 +26,8 @@ _CeladonGymErikaPreBattleText::
 	line "shall not lose."
 	done
 
-_CeladonGymErikaReceivedRainbowBadgeText::
+_CeladonGymErikaReceivedRainbowBadgeText:
+WLA_GLOBAL_CeladonGymErikaReceivedRainbowBadgeText:
 	text "Oh!"
 	line "I concede defeat."
 
@@ -36,7 +38,8 @@ _CeladonGymErikaReceivedRainbowBadgeText::
 	line "the RAINBOWBADGE."
 	prompt
 
-_CeladonGymErikaPostBattleAdviceText::
+_CeladonGymErikaPostBattleAdviceText:
+WLA_GLOBAL_CeladonGymErikaPostBattleAdviceText:
 	text "You are cataloging"
 	line "#MON? I must"
 	cont "say I'm impressed."
@@ -47,7 +50,8 @@ _CeladonGymErikaPostBattleAdviceText::
 	cont "unattractive."
 	done
 
-_CeladonGymRainbowBadgeInfoText::
+_CeladonGymRainbowBadgeInfoText:
+WLA_GLOBAL_CeladonGymRainbowBadgeInfoText:
 	text "The RAINBOWBADGE"
 	line "will make #MON"
 	cont "up to L50 obey."
@@ -61,14 +65,16 @@ _CeladonGymRainbowBadgeInfoText::
 	line "this with you."
 	done
 
-_CeladonGymReceivedTM21Text::
+_CeladonGymReceivedTM21Text:
+WLA_GLOBAL_CeladonGymReceivedTM21Text:
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM21ExplanationText::
+_TM21ExplanationText:
+WLA_GLOBAL_TM21ExplanationText:
 	text_start
 
 	para "TM21 contains"
@@ -80,40 +86,47 @@ _TM21ExplanationText::
 	cont "your #MON!"
 	done
 
-_CeladonGymTM21NoRoomText::
+_CeladonGymTM21NoRoomText:
+WLA_GLOBAL_CeladonGymTM21NoRoomText:
 	text "You should make"
 	line "room for this."
 	done
 
-_CeladonGymBattleText2::
+_CeladonGymBattleText2:
+WLA_GLOBAL_CeladonGymBattleText2:
 	text "Hey!"
 
 	para "You are not"
 	line "allowed in here!"
 	done
 
-_CeladonGymEndBattleText2::
+_CeladonGymEndBattleText2:
+WLA_GLOBAL_CeladonGymEndBattleText2:
 	text "You're"
 	line "too rough!"
 	prompt
 
-_CeladonGymAfterBattleText2::
+_CeladonGymAfterBattleText2:
+WLA_GLOBAL_CeladonGymAfterBattleText2:
 	text "Bleaah!"
 	line "I hope ERIKA"
 	cont "wipes you out!"
 	done
 
-_CeladonGymBattleText3::
+_CeladonGymBattleText3:
+WLA_GLOBAL_CeladonGymBattleText3:
 	text "I was getting"
 	line "bored."
 	done
 
-_CeladonGymEndBattleText3::
+_CeladonGymEndBattleText3:
+WLA_GLOBAL_CeladonGymEndBattleText3:
 	text "My"
 	line "makeup!"
 	prompt
 
-_CeladonGymAfterBattleText3::
+_CeladonGymAfterBattleText3:
+WLA_GLOBAL_CeladonGymAfterBattleText3:
 	text "Grass-type #MON"
 	line "are tough against"
 	cont "the water-type!"
@@ -123,23 +136,27 @@ _CeladonGymAfterBattleText3::
 	cont "ground #MON!"
 	done
 
-_CeladonGymBattleText4::
+_CeladonGymBattleText4:
+WLA_GLOBAL_CeladonGymBattleText4:
 	text "Aren't you the"
 	line "peeping Tom?"
 	done
 
-_CeladonGymEndBattleText4::
+_CeladonGymEndBattleText4:
+WLA_GLOBAL_CeladonGymEndBattleText4:
 	text "I'm"
 	line "in shock!"
 	prompt
 
-_CeladonGymAfterBattleText4::
+_CeladonGymAfterBattleText4:
+WLA_GLOBAL_CeladonGymAfterBattleText4:
 	text "Oh, you weren't"
 	line "peeping? We get a"
 	cont "lot of gawkers!"
 	done
 
-_CeladonGymBattleText5::
+_CeladonGymBattleText5:
+WLA_GLOBAL_CeladonGymBattleText5:
 	text "Look at my grass"
 	line "#MON!"
 
@@ -147,11 +164,13 @@ _CeladonGymBattleText5::
 	line "to raise!"
 	done
 
-_CeladonGymEndBattleText5::
+_CeladonGymEndBattleText5:
+WLA_GLOBAL_CeladonGymEndBattleText5:
 	text "No!"
 	prompt
 
-_CeladonGymAfterBattleText5::
+_CeladonGymAfterBattleText5:
+WLA_GLOBAL_CeladonGymAfterBattleText5:
 	text "We only use grass-"
 	line "type #MON at"
 	cont "our GYM!"
@@ -161,43 +180,50 @@ _CeladonGymAfterBattleText5::
 	cont "arrangements!"
 	done
 
-_CeladonGymBattleText6::
+_CeladonGymBattleText6:
+WLA_GLOBAL_CeladonGymBattleText6:
 	text "Don't bring any"
 	line "bugs or fire"
 	cont "#MON in here!"
 	done
 
-_CeladonGymEndBattleText6::
+_CeladonGymEndBattleText6:
+WLA_GLOBAL_CeladonGymEndBattleText6:
 	text "Oh!"
 	line "You!"
 	prompt
 
-_CeladonGymAfterBattleText6::
+_CeladonGymAfterBattleText6:
+WLA_GLOBAL_CeladonGymAfterBattleText6:
 	text "Our LEADER, ERIKA,"
 	line "might be quiet,"
 	cont "but she's also"
 	cont "very skilled!"
 	done
 
-_CeladonGymBattleText7::
+_CeladonGymBattleText7:
+WLA_GLOBAL_CeladonGymBattleText7:
 	text "Pleased to meet"
 	line "you. My hobby is"
 	cont "#MON training."
 	done
 
-_CeladonGymEndBattleText7::
+_CeladonGymEndBattleText7:
+WLA_GLOBAL_CeladonGymEndBattleText7:
 	text "Oh!"
 	line "Splendid!"
 	prompt
 
-_CeladonGymAfterBattleText7::
+_CeladonGymAfterBattleText7:
+WLA_GLOBAL_CeladonGymAfterBattleText7:
 	text "I have a blind"
 	line "date coming up."
 	cont "I have to learn"
 	cont "to be polite."
 	done
 
-_CeladonGymBattleText8::
+_CeladonGymBattleText8:
+WLA_GLOBAL_CeladonGymBattleText8:
 	text "Welcome to"
 	line "CELADON GYM!"
 
@@ -206,12 +232,14 @@ _CeladonGymBattleText8::
 	cont "girl power!"
 	done
 
-_CeladonGymEndBattleText8::
+_CeladonGymEndBattleText8:
+WLA_GLOBAL_CeladonGymEndBattleText8:
 	text "Oh!"
 	line "Beaten!"
 	prompt
 
-_CeladonGymAfterBattleText8::
+_CeladonGymAfterBattleText8:
+WLA_GLOBAL_CeladonGymAfterBattleText8:
 	text "I didn't bring my"
 	line "best #MON!"
 

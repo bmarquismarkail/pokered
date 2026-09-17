@@ -1,8 +1,10 @@
-_SafariZoneCenterRestHouseSignText::
+_SafariZoneCenterRestHouseSignText:
+WLA_GLOBAL_SafariZoneCenterRestHouseSignText:
 	text "REST HOUSE"
 	done
 
-_SafariZoneCenterTrainerTipsSignText::
+_SafariZoneCenterTrainerTipsSignText:
+WLA_GLOBAL_SafariZoneCenterTrainerTipsSignText:
 	text "TRAINER TIPS"
 
 	para "Press the START"

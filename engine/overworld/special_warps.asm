@@ -1,27 +1,27 @@
-PrepareForSpecialWarp::
+PrepareForSpecialWarp:
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wStatusFlags6
 	bit BIT_FLY_OR_DUNGEON_WARP, [hl]
 	res BIT_FLY_OR_DUNGEON_WARP, [hl]
-	jr z, .debugNewGameWarp
+	jr z, PrepareForSpecialWarp.debugNewGameWarp
 	ld a, [wDestinationMap]
-	jr .next
-.debugNewGameWarp
+	jr PrepareForSpecialWarp.next
+PrepareForSpecialWarp.debugNewGameWarp
 	bit BIT_DEBUG_MODE, [hl]
-	jr z, .setNewGameMatWarp ; apply to StartNewGameDebug only
+	jr z, PrepareForSpecialWarp.setNewGameMatWarp ; apply to StartNewGameDebug only
 	call PrepareNewGameDebug
-.setNewGameMatWarp
+PrepareForSpecialWarp.setNewGameMatWarp
 	; This is called by OakSpeech during StartNewGame and
 	; loads the first warp event for the specified map index.
 	ld a, PALLET_TOWN
-.next
+PrepareForSpecialWarp.next
 	ld b, a
 	ld a, [wStatusFlags3]
 	and a ; ???
-	jr nz, .next2
+	jr nz, PrepareForSpecialWarp.next2
 	ld a, b
-.next2
+PrepareForSpecialWarp.next2
 	ld hl, wStatusFlags6
 	bit BIT_DUNGEON_WARP, [hl]
 	ret nz
@@ -31,54 +31,54 @@ PrepareForSpecialWarp::
 LoadSpecialWarpData:
 	ld a, [wCableClubDestinationMap]
 	cp TRADE_CENTER
-	jr nz, .notTradeCenter
+	jr nz, LoadSpecialWarpData.notTradeCenter
 	ld hl, TradeCenterPlayerWarp
-	ldh a, [hSerialConnectionStatus]
+	ldh a, [lobyte(hSerialConnectionStatus)]
 	cp USING_INTERNAL_CLOCK
-	jr z, .copyWarpData
+	jr z, LoadSpecialWarpData.copyWarpData
 	ld hl, TradeCenterFriendWarp
-	jr .copyWarpData
-.notTradeCenter
+	jr LoadSpecialWarpData.copyWarpData
+LoadSpecialWarpData.notTradeCenter
 	cp COLOSSEUM
-	jr nz, .notColosseum
+	jr nz, LoadSpecialWarpData.notColosseum
 	ld hl, ColosseumPlayerWarp
-	ldh a, [hSerialConnectionStatus]
+	ldh a, [lobyte(hSerialConnectionStatus)]
 	cp USING_INTERNAL_CLOCK
-	jr z, .copyWarpData
+	jr z, LoadSpecialWarpData.copyWarpData
 	ld hl, ColosseumFriendWarp
-	jr .copyWarpData
-.notColosseum
+	jr LoadSpecialWarpData.copyWarpData
+LoadSpecialWarpData.notColosseum
 	ld a, [wStatusFlags6]
 	bit BIT_DEBUG_MODE, a
 	; warp to wLastMap (PALLET_TOWN) for StartNewGameDebug
-	jr nz, .notNewGameWarp
+	jr nz, LoadSpecialWarpData.notNewGameWarp
 	bit BIT_FLY_OR_DUNGEON_WARP, a
-	jr nz, .notNewGameWarp
+	jr nz, LoadSpecialWarpData.notNewGameWarp
 	ld hl, NewGameWarp
-.copyWarpData
+LoadSpecialWarpData.copyWarpData
 	ld de, wCurMap
 	ld c, $7
-.copyWarpDataLoop
+LoadSpecialWarpData.copyWarpDataLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .copyWarpDataLoop
+	jr nz, LoadSpecialWarpData.copyWarpDataLoop
 	ld a, [hli]
 	ld [wCurMapTileset], a
 	xor a
-	jr .done
-.notNewGameWarp
+	jr LoadSpecialWarpData.done
+LoadSpecialWarpData.notNewGameWarp
 	ld a, [wLastMap] ; this value is overwritten before it's ever read
 	ld hl, wStatusFlags6
 	bit BIT_DUNGEON_WARP, [hl]
-	jr nz, .usedDungeonWarp
+	jr nz, LoadSpecialWarpData.usedDungeonWarp
 	bit BIT_ESCAPE_WARP, [hl]
 	res BIT_ESCAPE_WARP, [hl]
-	jr z, .otherDestination
+	jr z, LoadSpecialWarpData.otherDestination
 	ld a, [wLastBlackoutMap]
-	jr .usedFlyWarp
-.usedDungeonWarp
+	jr LoadSpecialWarpData.usedFlyWarp
+LoadSpecialWarpData.usedDungeonWarp
 	ld hl, wStatusFlags3
 	res BIT_ON_DUNGEON_WARP, [hl]
 	ld a, [wDungeonWarpDestinationMap]
@@ -90,59 +90,59 @@ LoadSpecialWarpData:
 	ld de, 0
 	ld a, 6
 	ld [wDungeonWarpDataEntrySize], a
-.dungeonWarpListLoop
+LoadSpecialWarpData.dungeonWarpListLoop
 	ld a, [hli]
 	cp b
-	jr z, .matchedDungeonWarpDestinationMap
+	jr z, LoadSpecialWarpData.matchedDungeonWarpDestinationMap
 	inc hl
-	jr .nextDungeonWarp
-.matchedDungeonWarpDestinationMap
+	jr LoadSpecialWarpData.nextDungeonWarp
+LoadSpecialWarpData.matchedDungeonWarpDestinationMap
 	ld a, [hli]
 	cp c
-	jr z, .matchedDungeonWarpID
-.nextDungeonWarp
+	jr z, LoadSpecialWarpData.matchedDungeonWarpID
+LoadSpecialWarpData.nextDungeonWarp
 	ld a, [wDungeonWarpDataEntrySize]
 	add e
 	ld e, a
-	jr .dungeonWarpListLoop
-.matchedDungeonWarpID
+	jr LoadSpecialWarpData.dungeonWarpListLoop
+LoadSpecialWarpData.matchedDungeonWarpID
 	ld hl, DungeonWarpData
 	add hl, de
-	jr .copyWarpData2
-.otherDestination
+	jr LoadSpecialWarpData.copyWarpData2
+LoadSpecialWarpData.otherDestination
 	ld a, [wDestinationMap]
-.usedFlyWarp
+LoadSpecialWarpData.usedFlyWarp
 	ld b, a
 	ld [wCurMap], a
 	ld hl, FlyWarpDataPtr
-.flyWarpDataPtrLoop
+LoadSpecialWarpData.flyWarpDataPtrLoop
 	ld a, [hli]
 	inc hl
 	cp b
-	jr z, .foundFlyWarpMatch
+	jr z, LoadSpecialWarpData.foundFlyWarpMatch
 	inc hl
 	inc hl
-	jr .flyWarpDataPtrLoop
-.foundFlyWarpMatch
+	jr LoadSpecialWarpData.flyWarpDataPtrLoop
+LoadSpecialWarpData.foundFlyWarpMatch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.copyWarpData2
+LoadSpecialWarpData.copyWarpData2
 	ld de, wCurrentTileBlockMapViewPointer
 	ld c, $6
-.copyWarpDataLoop2
+LoadSpecialWarpData.copyWarpDataLoop2
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .copyWarpDataLoop2
+	jr nz, LoadSpecialWarpData.copyWarpDataLoop2
 	xor a ; OVERWORLD
 	ld [wCurMapTileset], a
-.done
+LoadSpecialWarpData.done
 	ld [wYOffsetSinceLastSpecialWarp], a
 	ld [wXOffsetSinceLastSpecialWarp], a
 	ld a, -1 ; exclude normal warps
 	ld [wDestinationWarpID], a
 	ret
 
-INCLUDE "data/maps/special_warps.asm"
+.INCLUDE "data/maps/special_warps.asm"

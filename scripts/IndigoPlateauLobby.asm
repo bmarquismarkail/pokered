@@ -26,11 +26,11 @@ IndigoPlateauLobbyNurseText:
 	script_pokecenter_nurse
 
 IndigoPlateauLobbyGymGuideText:
-	text_far _IndigoPlateauLobbyGymGuideText
+	text_far WLA_GLOBAL_IndigoPlateauLobbyGymGuideText
 	text_end
 
 IndigoPlateauLobbyCooltrainerFText:
-	text_far _IndigoPlateauLobbyCooltrainerFText
+	text_far WLA_GLOBAL_IndigoPlateauLobbyCooltrainerFText
 	text_end
 
 IndigoPlateauLobbyLinkReceptionistText:

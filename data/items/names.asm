@@ -1,4 +1,4 @@
-ItemNames::
+ItemNames:
 	list_start ITEM_NAME_LENGTH - 1
 	li "MASTER BALL"
 	li "ULTRA BALL"

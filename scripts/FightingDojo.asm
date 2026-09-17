@@ -31,7 +31,7 @@ FightingDojoDefaultScript:
 	CheckEvent EVENT_BEAT_KARATE_MASTER
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld [wSavedCoordIndex], a
 	ld a, [wYCoord]
 	cp 3
@@ -44,12 +44,12 @@ FightingDojoDefaultScript:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, FIGHTINGDOJO_KARATE_MASTER
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_LEFT
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ret
 
@@ -59,20 +59,20 @@ FightingDojoKarateMasterPostBattleScript:
 	jp z, FightingDojoResetScripts
 	ld a, [wSavedCoordIndex]
 	and a ; nz if the player was at (4, 3), left of the Karate Master
-	jr z, .already_facing
+	jr z, FightingDojoKarateMasterPostBattleScript.already_facing
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, FIGHTINGDOJO_KARATE_MASTER
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_LEFT
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
-.already_facing
+FightingDojoKarateMasterPostBattleScript.already_facing
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, TEXT_FIGHTINGDOJO_KARATE_MASTER_I_WILL_GIVE_YOU_A_POKEMON
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a ; SCRIPT_FIGHTINGDOJO_DEFAULT
 	ld [wJoyIgnore], a
@@ -101,54 +101,54 @@ FightingDojoTrainerHeader2:
 	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_2, 3, FightingDojoBlackbelt3BattleText, FightingDojoBlackbelt3EndBattleText, FightingDojoBlackbelt3AfterBattleText
 FightingDojoTrainerHeader3:
 	trainer EVENT_BEAT_FIGHTING_DOJO_TRAINER_3, 3, FightingDojoBlackbelt4BattleText, FightingDojoBlackbelt4EndBattleText, FightingDojoBlackbelt4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 FightingDojoKarateMasterText:
 	text_asm
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
-	jp nz, .defeated_dojo
+	jp nz, FightingDojoKarateMasterText.defeated_dojo
 	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
-	jp nz, .defeated_master
-	ld hl, .Text
+	jp nz, FightingDojoKarateMasterText.defeated_master
+	ld hl, FightingDojoKarateMasterText.Text
 	call PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
-	ld hl, .DefeatedText
-	ld de, .DefeatedText
+	ld hl, FightingDojoKarateMasterText.DefeatedText
+	ld de, FightingDojoKarateMasterText.DefeatedText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, SCRIPT_FIGHTINGDOJO_KARATE_MASTER_POST_BATTLE
 	ld [wFightingDojoCurScript], a
 	ld [wCurMapScript], a
-	jr .end
-.defeated_dojo
-	ld hl, .StayAndTrainWithUsText
+	jr FightingDojoKarateMasterText.end
+FightingDojoKarateMasterText.defeated_dojo
+	ld hl, FightingDojoKarateMasterText.StayAndTrainWithUsText
 	call PrintText
-	jr .end
-.defeated_master
-	ld hl, .IWillGiveYouAPokemonText
+	jr FightingDojoKarateMasterText.end
+FightingDojoKarateMasterText.defeated_master
+	ld hl, FightingDojoKarateMasterText.IWillGiveYouAPokemonText
 	call PrintText
-.end
+FightingDojoKarateMasterText.end
 	jp TextScriptEnd
 
-.Text:
-	text_far _FightingDojoKarateMasterText
+FightingDojoKarateMasterText.Text:
+	text_far WLA_GLOBAL_FightingDojoKarateMasterText
 	text_end
 
-.DefeatedText:
-	text_far _FightingDojoKarateMasterDefeatedText
+FightingDojoKarateMasterText.DefeatedText:
+	text_far WLA_GLOBAL_FightingDojoKarateMasterDefeatedText
 	text_end
 
-.IWillGiveYouAPokemonText:
-	text_far _FightingDojoKarateMasterIWillGiveYouAPokemonText
+FightingDojoKarateMasterText.IWillGiveYouAPokemonText:
+	text_far WLA_GLOBAL_FightingDojoKarateMasterIWillGiveYouAPokemonText
 	text_end
 
-.StayAndTrainWithUsText:
-	text_far _FightingDojoKarateMasterStayAndTrainWithUsText
+FightingDojoKarateMasterText.StayAndTrainWithUsText:
+	text_far WLA_GLOBAL_FightingDojoKarateMasterStayAndTrainWithUsText
 	text_end
 
 FightingDojoBlackbelt1Text:
@@ -158,15 +158,15 @@ FightingDojoBlackbelt1Text:
 	jp TextScriptEnd
 
 FightingDojoBlackbelt1BattleText:
-	text_far _FightingDojoBlackbelt1BattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt1BattleText
 	text_end
 
 FightingDojoBlackbelt1EndBattleText:
-	text_far _FightingDojoBlackbelt1EndBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt1EndBattleText
 	text_end
 
 FightingDojoBlackbelt1AfterBattleText:
-	text_far _FightingDojoBlackbelt1AfterBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt1AfterBattleText
 	text_end
 
 FightingDojoBlackbelt2Text:
@@ -176,15 +176,15 @@ FightingDojoBlackbelt2Text:
 	jp TextScriptEnd
 
 FightingDojoBlackbelt2BattleText:
-	text_far _FightingDojoBlackbelt2BattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt2BattleText
 	text_end
 
 FightingDojoBlackbelt2EndBattleText:
-	text_far _FightingDojoBlackbelt2EndBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt2EndBattleText
 	text_end
 
 FightingDojoBlackbelt2AfterBattleText:
-	text_far _FightingDojoBlackbelt2AfterBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt2AfterBattleText
 	text_end
 
 FightingDojoBlackbelt3Text:
@@ -194,15 +194,15 @@ FightingDojoBlackbelt3Text:
 	jp TextScriptEnd
 
 FightingDojoBlackbelt3BattleText:
-	text_far _FightingDojoBlackbelt3BattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt3BattleText
 	text_end
 
 FightingDojoBlackbelt3EndBattleText:
-	text_far _FightingDojoBlackbelt3EndBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt3EndBattleText
 	text_end
 
 FightingDojoBlackbelt3AfterBattleText:
-	text_far _FightingDojoBlackbelt3AfterBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt3AfterBattleText
 	text_end
 
 FightingDojoBlackbelt4Text:
@@ -212,85 +212,85 @@ FightingDojoBlackbelt4Text:
 	jp TextScriptEnd
 
 FightingDojoBlackbelt4BattleText:
-	text_far _FightingDojoBlackbelt4BattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt4BattleText
 	text_end
 
 FightingDojoBlackbelt4EndBattleText:
-	text_far _FightingDojoBlackbelt4EndBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt4EndBattleText
 	text_end
 
 FightingDojoBlackbelt4AfterBattleText:
-	text_far _FightingDojoBlackbelt4AfterBattleText
+	text_far WLA_GLOBAL_FightingDojoBlackbelt4AfterBattleText
 	text_end
 
 FightingDojoHitmonleePokeBallText:
 	text_asm
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
-	jr z, .GetMon
+	jr z, FightingDojoHitmonleePokeBallText.GetMon
 	ld hl, FightingDojoBetterNotGetGreedyText
 	call PrintText
-	jr .done
-.GetMon
+	jr FightingDojoHitmonleePokeBallText.done
+FightingDojoHitmonleePokeBallText.GetMon
 	ld a, HITMONLEE
 	call DisplayPokedex
-	ld hl, .Text
+	ld hl, FightingDojoHitmonleePokeBallText.Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .done
+	jr nz, FightingDojoHitmonleePokeBallText.done
 	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .done
+	jr nc, FightingDojoHitmonleePokeBallText.done
 
 	; once Poké Ball is taken, hide sprite
 	ld a, TOGGLE_FIGHTING_DOJO_GIFT_1
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
-.done
+FightingDojoHitmonleePokeBallText.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _FightingDojoHitmonleePokeBallText
+FightingDojoHitmonleePokeBallText.Text:
+	text_far WLA_GLOBAL_FightingDojoHitmonleePokeBallText
 	text_end
 
 FightingDojoHitmonchanPokeBallText:
 	text_asm
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
-	jr z, .GetMon
+	jr z, FightingDojoHitmonchanPokeBallText.GetMon
 	ld hl, FightingDojoBetterNotGetGreedyText
 	call PrintText
-	jr .done
-.GetMon
+	jr FightingDojoHitmonchanPokeBallText.done
+FightingDojoHitmonchanPokeBallText.GetMon
 	ld a, HITMONCHAN
 	call DisplayPokedex
-	ld hl, .Text
+	ld hl, FightingDojoHitmonchanPokeBallText.Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .done
+	jr nz, FightingDojoHitmonchanPokeBallText.done
 	ld a, [wCurPartySpecies]
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .done
+	jr nc, FightingDojoHitmonchanPokeBallText.done
 	SetEvents EVENT_GOT_HITMONCHAN, EVENT_DEFEATED_FIGHTING_DOJO
 
 	; once Poké Ball is taken, hide sprite
 	ld a, TOGGLE_FIGHTING_DOJO_GIFT_2
 	ld [wToggleableObjectIndex], a
 	predef HideObject
-.done
+FightingDojoHitmonchanPokeBallText.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _FightingDojoHitmonchanPokeBallText
+FightingDojoHitmonchanPokeBallText.Text:
+	text_far WLA_GLOBAL_FightingDojoHitmonchanPokeBallText
 	text_end
 
 FightingDojoBetterNotGetGreedyText:
-	text_far _FightingDojoBetterNotGetGreedyText
+	text_far WLA_GLOBAL_FightingDojoBetterNotGetGreedyText
 	text_end

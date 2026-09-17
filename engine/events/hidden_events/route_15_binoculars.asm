@@ -9,6 +9,6 @@ Route15GateLeftBinoculars:
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 
-Route15UpstairsBinocularsText::
-	text_far _Route15UpstairsBinocularsText
+Route15UpstairsBinocularsText:
+	text_far WLA_GLOBAL_Route15UpstairsBinocularsText
 	text_end

@@ -1,17 +1,17 @@
-	db DEX_DRAGONITE ; pokedex id
+	.DB DEX_DRAGONITE ; pokedex id
 
-	db  91, 134,  95,  80, 100
+	.DB  91, 134,  95,  80, 100
 	;   hp  atk  def  spd  spc
 
-	db DRAGON, FLYING ; type
-	db 45 ; catch rate
-	db 218 ; base exp
+	.DB DRAGON, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 218 ; base exp
 
-	INCBIN "gfx/pokemon/front/dragonite.pic", 0, 1 ; sprite dimensions
-	dw DragonitePicFront, DragonitePicBack
+	.INCBIN "gfx/pokemon/front/dragonite.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DragonitePicFront, DragonitePicBack
 
-	db WRAP, LEER, THUNDER_WAVE, AGILITY ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB WRAP, LEER, THUNDER_WAVE, AGILITY ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

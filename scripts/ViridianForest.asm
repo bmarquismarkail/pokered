@@ -38,10 +38,10 @@ ViridianForestTrainerHeader1:
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1, 4, ViridianForestYoungster3BattleText, ViridianForestYoungster3EndBattleText, ViridianForestYoungster3AfterBattleText
 ViridianForestTrainerHeader2:
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2, 1, ViridianForestYoungster4BattleText, ViridianForestYoungster4EndBattleText, ViridianForestYoungster4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 ViridianForestYoungster1Text:
-	text_far _ViridianForestYoungster1Text
+	text_far WLA_GLOBAL_ViridianForestYoungster1Text
 	text_end
 
 ViridianForestYoungster2Text:
@@ -63,65 +63,65 @@ ViridianForestYoungster4Text:
 	jp TextScriptEnd
 
 ViridianForestYoungster2BattleText:
-	text_far _ViridianForestYoungster2BattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster2BattleText
 	text_end
 
 ViridianForestYoungster2EndBattleText:
-	text_far _ViridianForestYoungster2EndBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster2EndBattleText
 	text_end
 
 ViridianForestYoungster2AfterBattleText:
-	text_far _ViridianForestYoungster2AfterBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster2AfterBattleText
 	text_end
 
 ViridianForestYoungster3BattleText:
-	text_far _ViridianForestYoungster3BattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster3BattleText
 	text_end
 
 ViridianForestYoungster3EndBattleText:
-	text_far _ViridianForestYoungster3EndBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster3EndBattleText
 	text_end
 
 ViridianForestYoungster3AfterBattleText:
-	text_far _ViridianForestYoungster3AfterBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster3AfterBattleText
 	text_end
 
 ViridianForestYoungster4BattleText:
-	text_far _ViridianForestYoungster4BattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster4BattleText
 	text_end
 
 ViridianForestYoungster4EndBattleText:
-	text_far _ViridianForestYoungster4EndBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster4EndBattleText
 	text_end
 
 ViridianForestYoungster4AfterBattleText:
-	text_far _ViridianForestYoungster4AfterBattleText
+	text_far WLA_GLOBAL_ViridianForestYoungster4AfterBattleText
 	text_end
 
 ViridianForestYoungster5Text:
-	text_far _ViridianForestYoungster5Text
+	text_far WLA_GLOBAL_ViridianForestYoungster5Text
 	text_end
 
 ViridianForestTrainerTips1Text:
-	text_far _ViridianForestTrainerTips1Text
+	text_far WLA_GLOBAL_ViridianForestTrainerTips1Text
 	text_end
 
 ViridianForestUseAntidoteSignText:
-	text_far _ViridianForestUseAntidoteSignText
+	text_far WLA_GLOBAL_ViridianForestUseAntidoteSignText
 	text_end
 
 ViridianForestTrainerTips2Text:
-	text_far _ViridianForestTrainerTips2Text
+	text_far WLA_GLOBAL_ViridianForestTrainerTips2Text
 	text_end
 
 ViridianForestTrainerTips3Text:
-	text_far _ViridianForestTrainerTips3Text
+	text_far WLA_GLOBAL_ViridianForestTrainerTips3Text
 	text_end
 
 ViridianForestTrainerTips4Text:
-	text_far _ViridianForestTrainerTips4Text
+	text_far WLA_GLOBAL_ViridianForestTrainerTips4Text
 	text_end
 
 ViridianForestLeavingSignText:
-	text_far _ViridianForestLeavingSignText
+	text_far WLA_GLOBAL_ViridianForestLeavingSignText
 	text_end

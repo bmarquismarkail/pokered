@@ -1,12 +1,11 @@
 DiglettsCave_Object:
-	db $19 ; border block
+	.DB $19 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  5,  5, DIGLETTS_CAVE_ROUTE_2, 3
 	warp_event 37, 31, DIGLETTS_CAVE_ROUTE_11, 3
 
-	def_bg_events
-
-	def_object_events
-
-	def_warps_to DIGLETTS_CAVE
+	.DB 0
+	.DB 0
+	event_displacement DIGLETTS_CAVE_WIDTH, 5, 5
+	event_displacement DIGLETTS_CAVE_WIDTH, 37, 31

@@ -1,4 +1,4 @@
-GetMachinePrice::
+GetMachinePrice:
 ; Input:  [wCurItem] = Item ID of a TM
 ; Output: Stores the TM price at hItemPrice
 	ld a, [wCurItem]
@@ -12,14 +12,14 @@ GetMachinePrice::
 	add hl, bc
 	ld a, [hl] ; a contains byte whose high or low nybble is the TM price (in thousands)
 	srl d
-	jr nc, .highNybbleIsPrice ; is TM id odd?
+	jr nc, GetMachinePrice.highNybbleIsPrice ; is TM id odd?
 	swap a
-.highNybbleIsPrice
+GetMachinePrice.highNybbleIsPrice
 	and $f0
-	ldh [hItemPrice + 1], a
+	ldh [lobyte(hItemPrice + 1)], a
 	xor a
-	ldh [hItemPrice], a
-	ldh [hItemPrice + 2], a
+	ldh [lobyte(hItemPrice)], a
+	ldh [lobyte(hItemPrice + 2)], a
 	ret
 
-INCLUDE "data/items/tm_prices.asm"
+.INCLUDE "data/items/tm_prices.asm"

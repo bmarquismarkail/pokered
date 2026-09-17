@@ -1,4 +1,5 @@
-_VermilionGymLTSurgePostBattleAdviceText::
+_VermilionGymLTSurgePostBattleAdviceText:
+WLA_GLOBAL_VermilionGymLTSurgePostBattleAdviceText:
 	text "A little word of"
 	line "advice, kid!"
 
@@ -10,7 +11,8 @@ _VermilionGymLTSurgePostBattleAdviceText::
 	cont "type #MON!"
 	done
 
-_VermilionGymLTSurgeThunderBadgeInfoText::
+_VermilionGymLTSurgeThunderBadgeInfoText:
+WLA_GLOBAL_VermilionGymLTSurgeThunderBadgeInfoText:
 	text "The THUNDERBADGE"
 	line "cranks up your"
 	cont "#MON's SPEED!"
@@ -23,14 +25,16 @@ _VermilionGymLTSurgeThunderBadgeInfoText::
 	line "kid! Take this!"
 	done
 
-_VermilionGymLTSurgeReceivedTM24Text::
+_VermilionGymLTSurgeReceivedTM24Text:
+WLA_GLOBAL_VermilionGymLTSurgeReceivedTM24Text:
 	text "<PLAYER> received "
 	line "@"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_TM24ExplanationText::
+_TM24ExplanationText:
+WLA_GLOBAL_TM24ExplanationText:
 	text_start
 
 	para "TM24 contains"
@@ -40,12 +44,14 @@ _TM24ExplanationText::
 	line "electric #MON!"
 	done
 
-_VermilionGymLTSurgeTM24NoRoomText::
+_VermilionGymLTSurgeTM24NoRoomText:
+WLA_GLOBAL_VermilionGymLTSurgeTM24NoRoomText:
 	text "Yo kid, make room"
 	line "in your pack!"
 	done
 
-_VermilionGymLTSurgeReceivedThunderBadgeText::
+_VermilionGymLTSurgeReceivedThunderBadgeText:
+WLA_GLOBAL_VermilionGymLTSurgeReceivedThunderBadgeText:
 	text "Whoa!"
 
 	para "You're the real"
@@ -55,18 +61,21 @@ _VermilionGymLTSurgeReceivedThunderBadgeText::
 	line "the THUNDERBADGE!"
 	prompt
 
-_VermilionGymGentlemanBattleText::
+_VermilionGymGentlemanBattleText:
+WLA_GLOBAL_VermilionGymGentlemanBattleText:
 	text "When I was in the"
 	line "Army, LT.SURGE"
 	cont "was my strict CO!"
 	done
 
-_VermilionGymGentlemanEndBattleText::
+_VermilionGymGentlemanEndBattleText:
+WLA_GLOBAL_VermilionGymGentlemanEndBattleText:
 	text "Stop!"
 	line "You're very good!"
 	prompt
 
-_VermilionGymGentlemanAfterBattleText::
+_VermilionGymGentlemanAfterBattleText:
+WLA_GLOBAL_VermilionGymGentlemanAfterBattleText:
 	text "The door won't"
 	line "open?"
 
@@ -74,17 +83,20 @@ _VermilionGymGentlemanAfterBattleText::
 	line "was cautious!"
 	done
 
-_VermilionGymSuperNerdBattleText::
+_VermilionGymSuperNerdBattleText:
+WLA_GLOBAL_VermilionGymSuperNerdBattleText:
 	text "I'm a lightweight,"
 	line "but I'm good with"
 	cont "electricity!"
 	done
 
-_VermilionGymSuperNerdEndBattleText::
+_VermilionGymSuperNerdEndBattleText:
+WLA_GLOBAL_VermilionGymSuperNerdEndBattleText:
 	text "Fried!"
 	prompt
 
-_VermilionGymSuperNerdAfterBattleText::
+_VermilionGymSuperNerdAfterBattleText:
+WLA_GLOBAL_VermilionGymSuperNerdAfterBattleText:
 	text "OK, I'll talk!"
 
 	para "LT.SURGE said he"
@@ -92,17 +104,20 @@ _VermilionGymSuperNerdAfterBattleText::
 	cont "inside something!"
 	done
 
-_VermilionGymSailorBattleText::
+_VermilionGymSailorBattleText:
+WLA_GLOBAL_VermilionGymSailorBattleText:
 	text "This is no place"
 	line "for kids!"
 	done
 
-_VermilionGymSailorEndBattleText::
+_VermilionGymSailorEndBattleText:
+WLA_GLOBAL_VermilionGymSailorEndBattleText:
 	text "Wow!"
 	line "Surprised me!"
 	prompt
 
-_VermilionGymSailorAfterBattleText::
+_VermilionGymSailorAfterBattleText:
+WLA_GLOBAL_VermilionGymSailorAfterBattleText:
 	text "LT.SURGE set up"
 	line "double locks!"
 	cont "Here's a hint!"
@@ -113,7 +128,8 @@ _VermilionGymSailorAfterBattleText::
 	cont "next to it!"
 	done
 
-_VermilionGymGymGuideChampInMakingText::
+_VermilionGymGymGuideChampInMakingText:
+WLA_GLOBAL_VermilionGymGymGuideChampInMakingText:
 	text "Yo! Champ in"
 	line "making!"
 
@@ -139,7 +155,8 @@ _VermilionGymGymGuideChampInMakingText::
 	cont "get to him!"
 	done
 
-_VermilionGymGymGuideBeatLTSurgeText::
+_VermilionGymGymGuideBeatLTSurgeText:
+WLA_GLOBAL_VermilionGymGymGuideBeatLTSurgeText:
 	text "Whew! That match"
 	line "was electric!"
 	done

@@ -7,9 +7,9 @@ PewterSpeechHouse_TextPointers:
 	dw_const PewterSpeechHouseYoungsterText, TEXT_PEWTERSPEECHHOUSE_YOUNGSTER
 
 PewterSpeechHouseGamblerText:
-	text_far _PewterSpeechHouseGamblerText
+	text_far WLA_GLOBAL_PewterSpeechHouseGamblerText
 	text_end
 
 PewterSpeechHouseYoungsterText:
-	text_far _PewterSpeechHouseYoungsterText
+	text_far WLA_GLOBAL_PewterSpeechHouseYoungsterText
 	text_end

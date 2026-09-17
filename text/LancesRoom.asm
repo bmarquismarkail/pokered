@@ -1,4 +1,5 @@
-_LancesRoomLanceBeforeBattleText::
+_LancesRoomLanceBeforeBattleText:
+WLA_GLOBAL_LancesRoomLanceBeforeBattleText:
 	text "Ah! I heard about"
 	line "you <PLAYER>!"
 
@@ -27,7 +28,8 @@ _LancesRoomLanceBeforeBattleText::
 	cont "with me, <PLAYER>!"
 	done
 
-_LancesRoomLanceEndBattleText::
+_LancesRoomLanceEndBattleText:
+WLA_GLOBAL_LancesRoomLanceEndBattleText:
 	text "That's it!"
 
 	para "I hate to admit"
@@ -35,7 +37,8 @@ _LancesRoomLanceEndBattleText::
 	cont "#MON master!"
 	prompt
 
-_LancesRoomLanceAfterBattleText::
+_LancesRoomLanceAfterBattleText:
+WLA_GLOBAL_LancesRoomLanceAfterBattleText:
 	text "I still can't"
 	line "believe my"
 	cont "dragons lost to"

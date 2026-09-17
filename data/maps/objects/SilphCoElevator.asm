@@ -1,13 +1,13 @@
 SilphCoElevator_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  1,  3, UNUSED_MAP_ED, 1
 	warp_event  2,  3, UNUSED_MAP_ED, 1
 
-	def_bg_events
+	.DB 1
 	bg_event  3,  0, TEXT_SILPHCOELEVATOR_ELEVATOR
 
-	def_object_events
-
-	def_warps_to SILPH_CO_ELEVATOR
+	.DB 0
+	event_displacement SILPH_CO_ELEVATOR_WIDTH, 1, 3
+	event_displacement SILPH_CO_ELEVATOR_WIDTH, 2, 3

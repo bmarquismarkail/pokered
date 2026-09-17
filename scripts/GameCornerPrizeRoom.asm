@@ -8,14 +8,14 @@ GameCornerPrizeRoom_TextPointers:
 	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1
 	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_2
 	dw_const GameCornerPRizeRoomPrizeVendorText, TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_3
-	EXPORT TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1 ; used by engine/events/prize_menu.asm
+	.EXPORT TEXT_GAMECORNERPRIZEROOM_PRIZE_VENDOR_1 ; used by engine/events/prize_menu.asm
 
 GameCornerPrizeRoomBaldingGuyText:
-	text_far _GameCornerPrizeRoomBaldingGuyText
+	text_far WLA_GLOBAL_GameCornerPrizeRoomBaldingGuyText
 	text_end
 
 GameCornerPrizeRoomGamblerText:
-	text_far _GameCornerPrizeRoomGamblerText
+	text_far WLA_GLOBAL_GameCornerPrizeRoomGamblerText
 	text_end
 
 GameCornerPRizeRoomPrizeVendorText:

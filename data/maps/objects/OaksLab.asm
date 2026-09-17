@@ -12,15 +12,14 @@
 	const_export OAKSLAB_SCIENTIST2
 
 OaksLab_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  4, 11, LAST_MAP, 3
 	warp_event  5, 11, LAST_MAP, 3
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 11
 	object_event  4,  3, SPRITE_BLUE, STAY, NONE, TEXT_OAKSLAB_RIVAL, OPP_RIVAL1, 1
 	object_event  6,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_OAKSLAB_CHARMANDER_POKE_BALL
 	object_event  7,  3, SPRITE_POKE_BALL, STAY, NONE, TEXT_OAKSLAB_SQUIRTLE_POKE_BALL
@@ -33,4 +32,6 @@ OaksLab_Object:
 	object_event  2, 10, SPRITE_SCIENTIST, STAY, NONE, TEXT_OAKSLAB_SCIENTIST1
 	object_event  8, 10, SPRITE_SCIENTIST, STAY, NONE, TEXT_OAKSLAB_SCIENTIST2
 
-	def_warps_to OAKS_LAB
+	event_displacement OAKS_LAB_WIDTH, 4, 11
+
+	event_displacement OAKS_LAB_WIDTH, 5, 11

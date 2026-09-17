@@ -4,9 +4,9 @@
 	const_export LAVENDERTOWN_SUPER_NERD
 
 LavenderTown_Object:
-	db $2c ; border block
+	.DB $2c ; border block
 
-	def_warp_events
+	.DB 6
 	warp_event  3,  5, LAVENDER_POKECENTER, 1
 	warp_event 14,  5, POKEMON_TOWER_1F, 1
 	warp_event  7,  9, MR_FUJIS_HOUSE, 1
@@ -14,7 +14,7 @@ LavenderTown_Object:
 	warp_event  3, 13, LAVENDER_CUBONE_HOUSE, 1
 	warp_event  7, 13, NAME_RATERS_HOUSE, 1
 
-	def_bg_events
+	.DB 6
 	bg_event 11,  9, TEXT_LAVENDERTOWN_SIGN
 	bg_event  9,  3, TEXT_LAVENDERTOWN_SILPH_SCOPE_SIGN
 	bg_event 16, 13, TEXT_LAVENDERTOWN_MART_SIGN
@@ -22,9 +22,19 @@ LavenderTown_Object:
 	bg_event  5,  9, TEXT_LAVENDERTOWN_POKEMON_HOUSE_SIGN
 	bg_event 17,  7, TEXT_LAVENDERTOWN_POKEMON_TOWER_SIGN
 
-	def_object_events
+	.DB 3
 	object_event 15,  9, SPRITE_LITTLE_GIRL, WALK, ANY_DIR, TEXT_LAVENDERTOWN_LITTLE_GIRL
 	object_event  9, 10, SPRITE_COOLTRAINER_M, STAY, NONE, TEXT_LAVENDERTOWN_COOLTRAINER_M
 	object_event  8,  7, SPRITE_SUPER_NERD, WALK, LEFT_RIGHT, TEXT_LAVENDERTOWN_SUPER_NERD
 
-	def_warps_to LAVENDER_TOWN
+	event_displacement LAVENDER_TOWN_WIDTH, 3, 5
+
+	event_displacement LAVENDER_TOWN_WIDTH, 14, 5
+
+	event_displacement LAVENDER_TOWN_WIDTH, 7, 9
+
+	event_displacement LAVENDER_TOWN_WIDTH, 15, 13
+
+	event_displacement LAVENDER_TOWN_WIDTH, 3, 13
+
+	event_displacement LAVENDER_TOWN_WIDTH, 7, 13

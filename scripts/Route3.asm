@@ -44,10 +44,10 @@ Route3TrainerHeader6:
 	trainer EVENT_BEAT_ROUTE_3_TRAINER_6, 3, Route3Youngster5BattleText, Route3Youngster5EndBattleText, Route3Youngster5AfterBattleText
 Route3TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_3_TRAINER_7, 2, Route3CooltrainerF3BattleText, Route3CooltrainerF3EndBattleText, Route3CooltrainerF3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route3SuperNerdText:
-	text_far _Route3Text1
+	text_far WLA_GLOBAL_Route3Text1
 	text_end
 
 Route3Youngster1Text:
@@ -57,15 +57,15 @@ Route3Youngster1Text:
 	jp TextScriptEnd
 
 Route3Youngster1BattleText:
-	text_far _Route3Youngster1BattleText
+	text_far WLA_GLOBAL_Route3Youngster1BattleText
 	text_end
 
 Route3Youngster1EndBattleText:
-	text_far _Route3Youngster1EndBattleText
+	text_far WLA_GLOBAL_Route3Youngster1EndBattleText
 	text_end
 
 Route3Youngster1AfterBattleText:
-	text_far _Route3Youngster1AfterBattleText
+	text_far WLA_GLOBAL_Route3Youngster1AfterBattleText
 	text_end
 
 Route3Youngster2Text:
@@ -75,15 +75,15 @@ Route3Youngster2Text:
 	jp TextScriptEnd
 
 Route3Youngster2BattleText:
-	text_far _Route3Youngster2BattleText
+	text_far WLA_GLOBAL_Route3Youngster2BattleText
 	text_end
 
 Route3Youngster2EndBattleText:
-	text_far _Route3Youngster2EndBattleText
+	text_far WLA_GLOBAL_Route3Youngster2EndBattleText
 	text_end
 
 Route3Youngster2AfterBattleText:
-	text_far _Route3Youngster2AfterBattleText
+	text_far WLA_GLOBAL_Route3Youngster2AfterBattleText
 	text_end
 
 Route3CooltrainerF1Text:
@@ -93,15 +93,15 @@ Route3CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route3CooltrainerF1BattleText:
-	text_far _Route3CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF1BattleText
 	text_end
 
 Route3CooltrainerF1EndBattleText:
-	text_far _Route3CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF1EndBattleText
 	text_end
 
 Route3CooltrainerF1AfterBattleText:
-	text_far _Route3CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF1AfterBattleText
 	text_end
 
 Route3Youngster3Text:
@@ -111,15 +111,15 @@ Route3Youngster3Text:
 	jp TextScriptEnd
 
 Route3Youngster3BattleText:
-	text_far _Route3Youngster3BattleText
+	text_far WLA_GLOBAL_Route3Youngster3BattleText
 	text_end
 
 Route3Youngster3EndBattleText:
-	text_far _Route3Youngster3EndBattleText
+	text_far WLA_GLOBAL_Route3Youngster3EndBattleText
 	text_end
 
 Route3Youngster3AfterBattleText:
-	text_far _Route3Youngster3AfterBattleText
+	text_far WLA_GLOBAL_Route3Youngster3AfterBattleText
 	text_end
 
 Route3CooltrainerF2Text:
@@ -129,15 +129,15 @@ Route3CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route3CooltrainerF2BattleText:
-	text_far _Route3CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF2BattleText
 	text_end
 
 Route3CooltrainerF2EndBattleText:
-	text_far _Route3CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF2EndBattleText
 	text_end
 
 Route3CooltrainerF2AfterBattleText:
-	text_far _Route3CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF2AfterBattleText
 	text_end
 
 Route3Youngster4Text:
@@ -147,15 +147,15 @@ Route3Youngster4Text:
 	jp TextScriptEnd
 
 Route3Youngster4BattleText:
-	text_far _Route3Youngster4BattleText
+	text_far WLA_GLOBAL_Route3Youngster4BattleText
 	text_end
 
 Route3Youngster4EndBattleText:
-	text_far _Route3Youngster4EndBattleText
+	text_far WLA_GLOBAL_Route3Youngster4EndBattleText
 	text_end
 
 Route3Youngster4AfterBattleText:
-	text_far _Route3Youngster4AfterBattleText
+	text_far WLA_GLOBAL_Route3Youngster4AfterBattleText
 	text_end
 
 Route3Youngster5Text:
@@ -165,15 +165,15 @@ Route3Youngster5Text:
 	jp TextScriptEnd
 
 Route3Youngster5BattleText:
-	text_far _Route3Youngster5BattleText
+	text_far WLA_GLOBAL_Route3Youngster5BattleText
 	text_end
 
 Route3Youngster5EndBattleText:
-	text_far _Route3Youngster5EndBattleText
+	text_far WLA_GLOBAL_Route3Youngster5EndBattleText
 	text_end
 
 Route3Youngster5AfterBattleText:
-	text_far _Route3Youngster5AfterBattleText
+	text_far WLA_GLOBAL_Route3Youngster5AfterBattleText
 	text_end
 
 Route3CooltrainerF3Text:
@@ -183,17 +183,17 @@ Route3CooltrainerF3Text:
 	jp TextScriptEnd
 
 Route3CooltrainerF3BattleText:
-	text_far _Route3CooltrainerF3BattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF3BattleText
 	text_end
 
 Route3CooltrainerF3EndBattleText:
-	text_far _Route3CooltrainerF3EndBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF3EndBattleText
 	text_end
 
 Route3CooltrainerF3AfterBattleText:
-	text_far _Route3CooltrainerF3AfterBattleText
+	text_far WLA_GLOBAL_Route3CooltrainerF3AfterBattleText
 	text_end
 
 Route3SignText:
-	text_far _Route3SignText
+	text_far WLA_GLOBAL_Route3SignText
 	text_end

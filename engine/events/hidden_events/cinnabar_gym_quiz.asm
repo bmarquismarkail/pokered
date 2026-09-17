@@ -5,21 +5,21 @@ PrintCinnabarQuiz:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump CinnabarGymQuiz
 
-CinnabarGymQuiz::
+CinnabarGymQuiz:
 	text_asm
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
 	ld a, [wHiddenEventFunctionArgument]
 	push af
 	and $f
-	ldh [hGymGateIndex], a
+	ldh [lobyte(hGymGateIndex)], a
 	pop af
 	and $f0
 	swap a
-	ldh [hGymGateAnswer], a
+	ldh [lobyte(hGymGateAnswer)], a
 	ld hl, CinnabarGymQuizIntroText
 	call PrintText
-	ldh a, [hGymGateIndex]
+	ldh a, [lobyte(hGymGateIndex)]
 	dec a
 	add a
 	ld d, 0
@@ -36,93 +36,93 @@ CinnabarGymQuiz::
 	jp TextScriptEnd
 
 CinnabarGymQuizIntroText:
-	text_far _CinnabarGymQuizIntroText
+	text_far WLA_GLOBAL_CinnabarGymQuizIntroText
 	text_end
 
 CinnabarQuizQuestions:
-	dw CinnabarQuizQuestionsText1
-	dw CinnabarQuizQuestionsText2
-	dw CinnabarQuizQuestionsText3
-	dw CinnabarQuizQuestionsText4
-	dw CinnabarQuizQuestionsText5
-	dw CinnabarQuizQuestionsText6
+	.DW CinnabarQuizQuestionsText1
+	.DW CinnabarQuizQuestionsText2
+	.DW CinnabarQuizQuestionsText3
+	.DW CinnabarQuizQuestionsText4
+	.DW CinnabarQuizQuestionsText5
+	.DW CinnabarQuizQuestionsText6
 
 CinnabarQuizQuestionsText1:
-	text_far _CinnabarQuizQuestionsText1
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText1
 	text_end
 
 CinnabarQuizQuestionsText2:
-	text_far _CinnabarQuizQuestionsText2
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText2
 	text_end
 
 CinnabarQuizQuestionsText3:
-	text_far _CinnabarQuizQuestionsText3
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText3
 	text_end
 
 CinnabarQuizQuestionsText4:
-	text_far _CinnabarQuizQuestionsText4
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText4
 	text_end
 
 CinnabarQuizQuestionsText5:
-	text_far _CinnabarQuizQuestionsText5
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText5
 	text_end
 
 CinnabarQuizQuestionsText6:
-	text_far _CinnabarQuizQuestionsText6
+	text_far WLA_GLOBAL_CinnabarQuizQuestionsText6
 	text_end
 
 CinnabarGymGateFlagAction:
-	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
+	EventFlagAddress "hl", EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_AskQuestion:
 	call YesNoChoice
-	ldh a, [hGymGateAnswer]
+	ldh a, [lobyte(hGymGateAnswer)]
 	ld c, a
 	ld a, [wCurrentMenuItem]
 	cp c
-	jr nz, .wrongAnswer
+	jr nz, CinnabarGymQuiz_AskQuestion.wrongAnswer
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
-	ldh a, [hGymGateIndex]
-	ldh [hBackupGymGateIndex], a
+	ldh a, [lobyte(hGymGateIndex)]
+	ldh [lobyte(hBackupGymGateIndex)], a
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
-	ldh a, [hBackupGymGateIndex]
+	ldh a, [lobyte(hBackupGymGateIndex)]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_SET
 	call CinnabarGymGateFlagAction
 	jp UpdateCinnabarGymGateTileBlocks_
-.wrongAnswer
+CinnabarGymQuiz_AskQuestion.wrongAnswer
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
 	call PrintText
-	ldh a, [hGymGateIndex]
+	ldh a, [lobyte(hGymGateIndex)]
 	add $2
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_TEST
-	EventFlagAddress hl, EVENT_BEAT_CINNABAR_GYM_TRAINER_0
+	EventFlagAddress "hl", EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	predef FlagActionPredef
 	ld a, c
 	and a
 	ret nz
-	ldh a, [hGymGateIndex]
+	ldh a, [lobyte(hGymGateIndex)]
 	add $2
 	ld [wOpponentAfterWrongAnswer], a
 	ret
 
 CinnabarGymQuizCorrectText:
 	sound_get_item_1
-	text_far _CinnabarGymQuizCorrectText
+	text_far WLA_GLOBAL_CinnabarGymQuizCorrectText
 	text_promptbutton
 	text_asm
 
-	ldh a, [hBackupGymGateIndex]
+	ldh a, [lobyte(hBackupGymGateIndex)]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
@@ -137,16 +137,16 @@ CinnabarGymQuizCorrectText:
 	jp TextScriptEnd
 
 CinnabarGymQuizIncorrectText:
-	text_far _CinnabarGymQuizIncorrectText
+	text_far WLA_GLOBAL_CinnabarGymQuizIncorrectText
 	text_end
 
-UpdateCinnabarGymGateTileBlocks_::
+UpdateCinnabarGymGateTileBlocks_:
 ; Update the overworld map with open floor blocks or locked gate blocks
 ; depending on event flags.
 	ld a, 6
-	ldh [hGymGateIndex], a
-.loop
-	ldh a, [hGymGateIndex]
+	ldh [lobyte(hGymGateIndex)], a
+UpdateCinnabarGymGateTileBlocks_.loop
+	ldh a, [lobyte(hGymGateIndex)]
 	dec a
 	add a
 	add a
@@ -161,34 +161,34 @@ UpdateCinnabarGymGateTileBlocks_::
 	ld a, [hl]
 	ld [wGymGateTileBlock], a
 	push bc
-	ldh a, [hGymGateIndex]
-	ldh [hBackupGymGateIndex], a
+	ldh a, [lobyte(hGymGateIndex)]
+	ldh [lobyte(hBackupGymGateIndex)], a
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
 	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jr nz, .unlocked
+	jr nz, UpdateCinnabarGymGateTileBlocks_.unlocked
 	ld a, [wGymGateTileBlock]
-	jr .next
-.unlocked
+	jr UpdateCinnabarGymGateTileBlocks_.next
+UpdateCinnabarGymGateTileBlocks_.unlocked
 	ld a, $e
-.next
+UpdateCinnabarGymGateTileBlocks_.next
 	pop bc
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, hGymGateIndex
 	dec [hl]
-	jr nz, .loop
+	jr nz, UpdateCinnabarGymGateTileBlocks_.loop
 	ret
 
-MACRO gym_gate_coord
-	db \1, \2, \3, 0
-ENDM
+.MACRO gym_gate_coord
+	.DB \1, \2, \3, 0
+.ENDM
 
-DEF HORIZONTAL_GATE_BLOCK EQU $54
-DEF VERTICAL_GATE_BLOCK   EQU $5f
+.DEFINE HORIZONTAL_GATE_BLOCK $54
+.DEFINE VERTICAL_GATE_BLOCK $5f
 
 CinnabarGymGateCoords:
 	; x coord, y coord, block id

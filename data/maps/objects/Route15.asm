@@ -12,18 +12,18 @@
 	const_export ROUTE15_TM_RAGE
 
 Route15_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event  7,  8, ROUTE_15_GATE_1F, 1
 	warp_event  7,  9, ROUTE_15_GATE_1F, 2
 	warp_event 14,  8, ROUTE_15_GATE_1F, 3
 	warp_event 14,  9, ROUTE_15_GATE_1F, 4
 
-	def_bg_events
+	.DB 1
 	bg_event 39,  9, TEXT_ROUTE15_SIGN
 
-	def_object_events
+	.DB 11
 	object_event 41, 11, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_ROUTE15_COOLTRAINER_F1, OPP_JR_TRAINER_F, 20
 	object_event 53, 10, SPRITE_COOLTRAINER_F, STAY, LEFT, TEXT_ROUTE15_COOLTRAINER_F2, OPP_JR_TRAINER_F, 21
 	object_event 31, 13, SPRITE_COOLTRAINER_M, STAY, UP, TEXT_ROUTE15_COOLTRAINER_M1, OPP_BIRD_KEEPER, 6
@@ -36,4 +36,10 @@ Route15_Object:
 	object_event 18, 13, SPRITE_COOLTRAINER_F, STAY, UP, TEXT_ROUTE15_COOLTRAINER_F4, OPP_JR_TRAINER_F, 23
 	object_event 18,  5, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE15_TM_RAGE, TM_RAGE
 
-	def_warps_to ROUTE_15
+	event_displacement ROUTE_15_WIDTH, 7, 8
+
+	event_displacement ROUTE_15_WIDTH, 7, 9
+
+	event_displacement ROUTE_15_WIDTH, 14, 8
+
+	event_displacement ROUTE_15_WIDTH, 14, 9

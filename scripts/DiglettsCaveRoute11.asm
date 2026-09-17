@@ -9,5 +9,5 @@ DiglettsCaveRoute11_TextPointers:
 	dw_const DiglettsCaveRoute11GamblerText, TEXT_DIGLETTSCAVEROUTE11_GAMBLER
 
 DiglettsCaveRoute11GamblerText:
-	text_far _DiglettsCaveRoute11GamblerText
+	text_far WLA_GLOBAL_DiglettsCaveRoute11GamblerText
 	text_end

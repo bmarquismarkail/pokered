@@ -26,10 +26,10 @@ Route4TrainerHeaders:
 	def_trainers 2
 Route4TrainerHeader0:
 	trainer EVENT_BEAT_ROUTE_4_TRAINER_0, 3, Route4CooltrainerF2BattleText, Route4CooltrainerF2EndBattleText, Route4CooltrainerF2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route4CooltrainerF1Text:
-	text_far _Route4CooltrainerF1Text
+	text_far WLA_GLOBAL_Route4CooltrainerF1Text
 	text_end
 
 Route4CooltrainerF2Text:
@@ -39,21 +39,21 @@ Route4CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route4CooltrainerF2BattleText:
-	text_far _Route4CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route4CooltrainerF2BattleText
 	text_end
 
 Route4CooltrainerF2EndBattleText:
-	text_far _Route4CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route4CooltrainerF2EndBattleText
 	text_end
 
 Route4CooltrainerF2AfterBattleText:
-	text_far _Route4CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route4CooltrainerF2AfterBattleText
 	text_end
 
 Route4MtMoonSignText:
-	text_far _Route4MtMoonSignText
+	text_far WLA_GLOBAL_Route4MtMoonSignText
 	text_end
 
 Route4SignText:
-	text_far _Route4SignText
+	text_far WLA_GLOBAL_Route4SignText
 	text_end

@@ -1,29 +1,35 @@
-_PokemonMansion1FScientistBattleText::
+_PokemonMansion1FScientistBattleText:
+WLA_GLOBAL_PokemonMansion1FScientistBattleText:
 	text "Who are you? There"
 	line "shouldn't be"
 	cont "anyone here."
 	done
 
-_PokemonMansion1FScientistEndBattleText::
+_PokemonMansion1FScientistEndBattleText:
+WLA_GLOBAL_PokemonMansion1FScientistEndBattleText:
 	text "Ouch!"
 	prompt
 
-_PokemonMansion1FScientistAfterBattleText::
+_PokemonMansion1FScientistAfterBattleText:
+WLA_GLOBAL_PokemonMansion1FScientistAfterBattleText:
 	text "A key? I don't"
 	line "know what you're"
 	cont "talking about."
 	done
 
-_PokemonMansion1FSwitchText::
+_PokemonMansion1FSwitchText:
+WLA_GLOBAL_PokemonMansion1FSwitchText:
 	text "A secret switch!"
 
 	para "Press it?"
 	done
 
-_PokemonMansion1FSwitchPressedText::
+_PokemonMansion1FSwitchPressedText:
+WLA_GLOBAL_PokemonMansion1FSwitchPressedText:
 	text "Who wouldn't?"
 	prompt
 
-_PokemonMansion1FSwitchNotPressedText::
+_PokemonMansion1FSwitchNotPressedText:
+WLA_GLOBAL_PokemonMansion1FSwitchNotPressedText:
 	text "Not quite yet!"
 	done

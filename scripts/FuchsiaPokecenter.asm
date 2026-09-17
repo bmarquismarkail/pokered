@@ -13,11 +13,11 @@ FuchsiaPokecenterNurseText:
 	script_pokecenter_nurse
 
 FuchsiaPokecenterRockerText:
-	text_far _FuchsiaPokecenterRockerText
+	text_far WLA_GLOBAL_FuchsiaPokecenterRockerText
 	text_end
 
 FuchsiaPokecenterCooltrainerFText:
-	text_far _FuchsiaPokecenterCooltrainerFText
+	text_far WLA_GLOBAL_FuchsiaPokecenterCooltrainerFText
 	text_end
 
 FuchsiaPokecenterLinkReceptionistText:

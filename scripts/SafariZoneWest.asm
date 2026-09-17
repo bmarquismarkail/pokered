@@ -13,17 +13,17 @@ SafariZoneWest_TextPointers:
 	dw_const SafariZoneWestSignText,                 TEXT_SAFARIZONEWEST_SIGN
 
 SafariZoneWestRestHouseSignText:
-	text_far _SafariZoneWestRestHouseSignText
+	text_far WLA_GLOBAL_SafariZoneWestRestHouseSignText
 	text_end
 
 SafariZoneWestFindWardensTeethSignText:
-	text_far _SafariZoneWestFindWardensTeethSignText
+	text_far WLA_GLOBAL_SafariZoneWestFindWardensTeethSignText
 	text_end
 
 SafariZoneWestTrainerTipsText:
-	text_far _SafariZoneWestTrainerTipsText
+	text_far WLA_GLOBAL_SafariZoneWestTrainerTipsText
 	text_end
 
 SafariZoneWestSignText:
-	text_far _SafariZoneWestSignText
+	text_far WLA_GLOBAL_SafariZoneWestSignText
 	text_end

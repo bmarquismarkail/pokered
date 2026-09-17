@@ -8,13 +8,13 @@ CeladonHotel_TextPointers:
 	dw_const CeladonHotelSuperNerdText, TEXT_CELADONHOTEL_SUPER_NERD
 
 CeladonHotelGrannyText:
-	text_far _CeladonHotelGrannyText
+	text_far WLA_GLOBAL_CeladonHotelGrannyText
 	text_end
 
 CeladonHotelBeautyText:
-	text_far _CeladonHotelBeautyText
+	text_far WLA_GLOBAL_CeladonHotelBeautyText
 	text_end
 
 CeladonHotelSuperNerdText:
-	text_far _CeladonHotelSuperNerdText
+	text_far WLA_GLOBAL_CeladonHotelSuperNerdText
 	text_end

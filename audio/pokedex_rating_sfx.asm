@@ -1,14 +1,14 @@
-PlayPokedexRatingSfx::
-	ldh a, [hDexRatingNumMonsOwned]
+PlayPokedexRatingSfx:
+	ldh a, [lobyte(hDexRatingNumMonsOwned)]
 	ld c, $0
 	ld hl, OwnedMonValues
-.getSfxPointer
+PlayPokedexRatingSfx.getSfxPointer
 	cp [hl]
-	jr c, .gotSfxPointer
+	jr c, PlayPokedexRatingSfx.gotSfxPointer
 	inc c
 	inc hl
-	jr .getSfxPointer
-.gotSfxPointer
+	jr PlayPokedexRatingSfx.getSfxPointer
+PlayPokedexRatingSfx.gotSfxPointer
 	push bc
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
@@ -24,13 +24,13 @@ PlayPokedexRatingSfx::
 	jp PlayDefaultMusic
 
 PokedexRatingSfxPointers:
-	db SFX_DENIED,         BANK(SFX_Denied_3)
-	db SFX_POKEDEX_RATING, BANK(SFX_Pokedex_Rating_1)
-	db SFX_GET_ITEM_1,     BANK(SFX_Get_Item1_1)
-	db SFX_CAUGHT_MON,     BANK(SFX_Caught_Mon)
-	db SFX_LEVEL_UP,       BANK(SFX_Level_Up)
-	db SFX_GET_KEY_ITEM,   BANK(SFX_Get_Key_Item_1)
-	db SFX_GET_ITEM_2,     BANK(SFX_Get_Item2_1)
+	.DB SFX_DENIED,         bank(SFX_Denied_3)
+	.DB SFX_POKEDEX_RATING, bank(SFX_Pokedex_Rating_1)
+	.DB SFX_GET_ITEM_1,     bank(SFX_Get_Item1_1)
+	.DB SFX_CAUGHT_MON,     bank(SFX_Caught_Mon)
+	.DB SFX_LEVEL_UP,       bank(SFX_Level_Up)
+	.DB SFX_GET_KEY_ITEM,   bank(SFX_Get_Key_Item_1)
+	.DB SFX_GET_ITEM_2,     bank(SFX_Get_Item2_1)
 
 OwnedMonValues:
-	db 10, 40, 60, 90, 120, 150, $ff
+	.DB 10, 40, 60, 90, 120, 150, $ff

@@ -1,17 +1,17 @@
-	db DEX_RAPIDASH ; pokedex id
+	.DB DEX_RAPIDASH ; pokedex id
 
-	db  65, 100,  70, 105,  80
+	.DB  65, 100,  70, 105,  80
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 60 ; catch rate
-	db 192 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 60 ; catch rate
+	.DB 192 ; base exp
 
-	INCBIN "gfx/pokemon/front/rapidash.pic", 0, 1 ; sprite dimensions
-	dw RapidashPicFront, RapidashPicBack
+	.INCBIN "gfx/pokemon/front/rapidash.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW RapidashPicFront, RapidashPicBack
 
-	db EMBER, TAIL_WHIP, STOMP, GROWL ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB EMBER, TAIL_WHIP, STOMP, GROWL ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

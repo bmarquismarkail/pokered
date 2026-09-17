@@ -3,9 +3,9 @@
 	const_export SAFARIZONENORTH_TM_SKULL_BASH
 
 SafariZoneNorth_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 9
 	warp_event  2, 35, SAFARI_ZONE_WEST, 1
 	warp_event  3, 35, SAFARI_ZONE_WEST, 2
 	warp_event  8, 35, SAFARI_ZONE_WEST, 3
@@ -16,15 +16,31 @@ SafariZoneNorth_Object:
 	warp_event 39, 31, SAFARI_ZONE_EAST, 2
 	warp_event 35,  3, SAFARI_ZONE_NORTH_REST_HOUSE, 1
 
-	def_bg_events
+	.DB 5
 	bg_event 36,  4, TEXT_SAFARIZONENORTH_REST_HOUSE_SIGN
 	bg_event  4, 25, TEXT_SAFARIZONENORTH_TRAINER_TIPS_1
 	bg_event 13, 31, TEXT_SAFARIZONENORTH_SIGN
 	bg_event 19, 33, TEXT_SAFARIZONENORTH_TRAINER_TIPS_2
 	bg_event 26, 28, TEXT_SAFARIZONENORTH_TRAINER_TIPS_3
 
-	def_object_events
+	.DB 2
 	object_event 25,  1, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONENORTH_PROTEIN, PROTEIN
 	object_event 19,  7, SPRITE_POKE_BALL, STAY, NONE, TEXT_SAFARIZONENORTH_TM_SKULL_BASH, TM_SKULL_BASH
 
-	def_warps_to SAFARI_ZONE_NORTH
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 2, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 3, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 8, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 9, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 20, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 21, 35
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 39, 30
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 39, 31
+
+	event_displacement SAFARI_ZONE_NORTH_WIDTH, 35, 3

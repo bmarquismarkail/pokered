@@ -4,31 +4,31 @@ ChoosePlayerName:
 	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .customName
+	jr z, ChoosePlayerName.customName
 	ld hl, DefaultNamesPlayerList
 	call GetDefaultName
 	ld de, wPlayerName
 	call OakSpeechSlidePicLeft
-	jr .done
-.customName
+	jr ChoosePlayerName.done
+ChoosePlayerName.customName
 	ld hl, wPlayerName
 	xor a ; NAME_PLAYER_SCREEN
 	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wStringBuffer]
-	cp '@'
-	jr z, .customName
+	cp $50
+	jr z, ChoosePlayerName.customName
 	call ClearScreen
 	call Delay3
 	ld de, RedPicFront
-	ld b, BANK(RedPicFront)
+	ld b, bank(RedPicFront)
 	call IntroDisplayPicCenteredOrUpperRight
-.done
+ChoosePlayerName.done
 	ld hl, YourNameIsText
 	jp PrintText
 
 YourNameIsText:
-	text_far _YourNameIsText
+	text_far WLA_GLOBAL_YourNameIsText
 	text_end
 
 ChooseRivalName:
@@ -37,37 +37,37 @@ ChooseRivalName:
 	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .customName
+	jr z, ChooseRivalName.customName
 	ld hl, DefaultNamesRivalList
 	call GetDefaultName
 	ld de, wRivalName
 	call OakSpeechSlidePicLeft
-	jr .done
-.customName
+	jr ChooseRivalName.done
+ChooseRivalName.customName
 	ld hl, wRivalName
 	ld a, NAME_RIVAL_SCREEN
 	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wStringBuffer]
-	cp '@'
-	jr z, .customName
+	cp $50
+	jr z, ChooseRivalName.customName
 	call ClearScreen
 	call Delay3
 	ld de, Rival1Pic
-	ld b, BANK(Rival1Pic)
+	ld b, bank(Rival1Pic)
 	call IntroDisplayPicCenteredOrUpperRight
-.done
+ChooseRivalName.done
 	ld hl, HisNameIsText
 	jp PrintText
 
 HisNameIsText:
-	text_far _HisNameIsText
+	text_far WLA_GLOBAL_HisNameIsText
 	text_end
 
 OakSpeechSlidePicLeft:
 	push de
 	hlcoord 0, 0
-	lb bc, 12, 11
+	lb "bc", 12, 11
 	call ClearScreenArea ; clear the name list text box
 	ld c, 10
 	call DelayFrames
@@ -77,83 +77,83 @@ OakSpeechSlidePicLeft:
 	call CopyData
 	call Delay3
 	hlcoord 12, 4
-	lb de, 6, 6 * SCREEN_WIDTH + 5
+	lb "de", 6, 6 * SCREEN_WIDTH + 5
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
 OakSpeechSlidePicRight:
 	hlcoord 5, 4
-	lb de, 6, 6 * SCREEN_WIDTH + 5
+	lb "de", 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
 OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
-	ldh [hSlideDirection], a
+	ldh [lobyte(hSlideDirection)], a
 	ld a, d
-	ldh [hSlideAmount], a
+	ldh [lobyte(hSlideAmount)], a
 	ld a, e
-	ldh [hSlidingRegionSize], a
+	ldh [lobyte(hSlidingRegionSize)], a
 	ld c, a
-	ldh a, [hSlideDirection]
+	ldh a, [lobyte(hSlideDirection)]
 	and a
-	jr nz, .next
+	jr nz, OakSpeechSlidePicCommon.next
 ; If sliding right, point hl to the end of the pic's tiles.
 	ld d, 0
 	add hl, de
-.next
+OakSpeechSlidePicCommon.next
 	ld d, h
 	ld e, l
-.loop
+OakSpeechSlidePicCommon.loop
 	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ldh a, [hSlideDirection]
+	ldh [lobyte(hAutoBGTransferEnabled)], a
+	ldh a, [lobyte(hSlideDirection)]
 	and a
-	jr nz, .slideLeft
+	jr nz, OakSpeechSlidePicCommon.slideLeft
 ; sliding right
 	ld a, [hli]
 	ld [hld], a
 	dec hl
-	jr .next2
-.slideLeft
+	jr OakSpeechSlidePicCommon.next2
+OakSpeechSlidePicCommon.slideLeft
 	ld a, [hld]
 	ld [hli], a
 	inc hl
-.next2
+OakSpeechSlidePicCommon.next2
 	dec c
-	jr nz, .loop
-	ldh a, [hSlideDirection]
+	jr nz, OakSpeechSlidePicCommon.loop
+	ldh a, [lobyte(hSlideDirection)]
 	and a
-	jr z, .next3
+	jr z, OakSpeechSlidePicCommon.next3
 ; If sliding left, we need to zero the last tile in the pic (there is no need
 ; to take a corresponding action when sliding right because hl initially points
 ; to a 0 tile in that case).
 	xor a
 	dec hl
 	ld [hl], a
-.next3
+OakSpeechSlidePicCommon.next3
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call Delay3
-	ldh a, [hSlidingRegionSize]
+	ldh a, [lobyte(hSlidingRegionSize)]
 	ld c, a
 	ld h, d
 	ld l, e
-	ldh a, [hSlideDirection]
+	ldh a, [lobyte(hSlideDirection)]
 	and a
-	jr nz, .slideLeft2
+	jr nz, OakSpeechSlidePicCommon.slideLeft2
 	inc hl
-	jr .next4
-.slideLeft2
+	jr OakSpeechSlidePicCommon.next4
+OakSpeechSlidePicCommon.slideLeft2
 	dec hl
-.next4
+OakSpeechSlidePicCommon.next4
 	ld d, h
 	ld e, l
-	ldh a, [hSlideAmount]
+	ldh a, [lobyte(hSlideAmount)]
 	dec a
-	ldh [hSlideAmount], a
-	jr nz, .loop
+	ldh [lobyte(hSlideAmount)], a
+	jr nz, OakSpeechSlidePicCommon.loop
 	pop bc
 	pop de
 	pop hl
@@ -166,7 +166,7 @@ DisplayIntroNameTextBox:
 	ld c, $9
 	call TextBoxBorder
 	hlcoord 3, 0
-	ld de, .namestring
+	ld de, DisplayIntroNameTextBox.namestring
 	call PlaceString
 	pop de
 	hlcoord 2, 2
@@ -184,36 +184,36 @@ DisplayIntroNameTextBox:
 	ld [wMaxMenuItem], a
 	jp HandleMenuInput
 
-.namestring
-	db "NAME@"
+DisplayIntroNameTextBox.namestring
+		.STRINGMAP pokemon, "NAME@"
 
-INCLUDE "data/player/names.asm"
+.INCLUDE "data/player/names.asm"
 
 GetDefaultName:
 ; a = name index
 ; hl = name list
 	ld b, a
 	ld c, 0
-.loop
+GetDefaultName.loop
 	ld d, h
 	ld e, l
-.innerLoop
+GetDefaultName.innerLoop
 	ld a, [hli]
-	cp '@'
-	jr nz, .innerLoop
+	cp $50
+	jr nz, GetDefaultName.innerLoop
 	ld a, b
 	cp c
-	jr z, .foundName
+	jr z, GetDefaultName.foundName
 	inc c
-	jr .loop
-.foundName
+	jr GetDefaultName.loop
+GetDefaultName.foundName
 	ld h, d
 	ld l, e
 	ld de, wNameBuffer
 	ld bc, NAME_BUFFER_LENGTH
 	jp CopyData
 
-INCLUDE "data/player/names_list.asm"
+.INCLUDE "data/player/names_list.asm"
 
 LinkMenuEmptyText:
 	text_end

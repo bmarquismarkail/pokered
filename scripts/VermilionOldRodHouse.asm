@@ -9,50 +9,50 @@ VermilionOldRodHouseFishingGuruText:
 	text_asm
 	ld a, [wStatusFlags1]
 	bit BIT_GOT_OLD_ROD, a
-	jr nz, .got_old_rod
-	ld hl, .DoYouLikeToFishText
+	jr nz, VermilionOldRodHouseFishingGuruText.got_old_rod
+	ld hl, VermilionOldRodHouseFishingGuruText.DoYouLikeToFishText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .refused
-	lb bc, OLD_ROD, 1
+	jr nz, VermilionOldRodHouseFishingGuruText.refused
+	lb "bc", OLD_ROD, 1
 	call GiveItem
-	jr nc, .bag_full
+	jr nc, VermilionOldRodHouseFishingGuruText.bag_full
 	ld hl, wStatusFlags1
 	set BIT_GOT_OLD_ROD, [hl]
-	ld hl, .TakeThisText
-	jr .print_text
-.bag_full
-	ld hl, .NoRoomText
-	jr .print_text
-.refused
-	ld hl, .ThatsSoDisappointingText
-	jr .print_text
-.got_old_rod
-	ld hl, .HowAreTheFishBitingText
-.print_text
+	ld hl, VermilionOldRodHouseFishingGuruText.TakeThisText
+	jr VermilionOldRodHouseFishingGuruText.print_text
+VermilionOldRodHouseFishingGuruText.bag_full
+	ld hl, VermilionOldRodHouseFishingGuruText.NoRoomText
+	jr VermilionOldRodHouseFishingGuruText.print_text
+VermilionOldRodHouseFishingGuruText.refused
+	ld hl, VermilionOldRodHouseFishingGuruText.ThatsSoDisappointingText
+	jr VermilionOldRodHouseFishingGuruText.print_text
+VermilionOldRodHouseFishingGuruText.got_old_rod
+	ld hl, VermilionOldRodHouseFishingGuruText.HowAreTheFishBitingText
+VermilionOldRodHouseFishingGuruText.print_text
 	call PrintText
 	jp TextScriptEnd
 
-.DoYouLikeToFishText:
-	text_far _VermilionOldRodHouseFishingGuruDoYouLikeToFishText
+VermilionOldRodHouseFishingGuruText.DoYouLikeToFishText:
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruDoYouLikeToFishText
 	text_end
 
-.TakeThisText:
-	text_far _VermilionOldRodHouseFishingGuruTakeThisText
+VermilionOldRodHouseFishingGuruText.TakeThisText:
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruTakeThisText
 	sound_get_item_1
-	text_far _VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruFishingIsAWayOfLifeText
 	text_end
 
-.ThatsSoDisappointingText:
-	text_far _VermilionOldRodHouseFishingGuruThatsSoDisappointingText
+VermilionOldRodHouseFishingGuruText.ThatsSoDisappointingText:
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruThatsSoDisappointingText
 	text_end
 
-.HowAreTheFishBitingText:
-	text_far _VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
+VermilionOldRodHouseFishingGuruText.HowAreTheFishBitingText:
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruHowAreTheFishBitingText
 	text_end
 
-.NoRoomText:
-	text_far _VermilionOldRodHouseFishingGuruNoRoomText
+VermilionOldRodHouseFishingGuruText.NoRoomText:
+	text_far WLA_GLOBAL_VermilionOldRodHouseFishingGuruNoRoomText
 	text_end

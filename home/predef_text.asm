@@ -1,28 +1,28 @@
-PrintPredefTextID::
-	ldh [hTextID], a
+PrintPredefTextID:
+	ldh [lobyte(hTextID)], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag
 	set BIT_TEXT_PREDEF, [hl]
 	call DisplayTextID
 
-RestoreMapTextPointer::
+RestoreMapTextPointer:
 	ld hl, wCurMapTextPtr
-	ldh a, [hSavedMapTextPtr]
+	ldh a, [lobyte(hSavedMapTextPtr)]
 	ld [hli], a
-	ldh a, [hSavedMapTextPtr + 1]
+	ldh a, [lobyte(hSavedMapTextPtr + 1)]
 	ld [hl], a
 	ret
 
-SetMapTextPointer::
+SetMapTextPointer:
 	ld a, [wCurMapTextPtr]
-	ldh [hSavedMapTextPtr], a
+	ldh [lobyte(hSavedMapTextPtr)], a
 	ld a, [wCurMapTextPtr + 1]
-	ldh [hSavedMapTextPtr + 1], a
+	ldh [lobyte(hSavedMapTextPtr + 1)], a
 	ld a, l
 	ld [wCurMapTextPtr], a
 	ld a, h
 	ld [wCurMapTextPtr + 1], a
 	ret
 
-INCLUDE "data/text_predef_pointers.asm"
+.INCLUDE "data/text_predef_pointers.asm"

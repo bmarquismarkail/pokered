@@ -1,20 +1,24 @@
-_SSAnneKitchenCook1Text::
+_SSAnneKitchenCook1Text:
+WLA_GLOBAL_SSAnneKitchenCook1Text:
 	text "You, mon petit!"
 	line "We're busy here!"
 	cont "Out of the way!"
 	done
 
-_SSAnneKitchenCook2Text::
+_SSAnneKitchenCook2Text:
+WLA_GLOBAL_SSAnneKitchenCook2Text:
 	text "I saw an odd ball"
 	line "in the trash."
 	done
 
-_SSAnneKitchenCook3Text::
+_SSAnneKitchenCook3Text:
+WLA_GLOBAL_SSAnneKitchenCook3Text:
 	text "I'm so busy I'm"
 	line "getting dizzy!"
 	done
 
-_SSAnneKitchenCook4Text::
+_SSAnneKitchenCook4Text:
+WLA_GLOBAL_SSAnneKitchenCook4Text:
 	text "Hum-de-hum-de-"
 	line "ho..."
 
@@ -23,7 +27,8 @@ _SSAnneKitchenCook4Text::
 	cont "Hum-hum..."
 	done
 
-_SSAnneKitchenCook5Text::
+_SSAnneKitchenCook5Text:
+WLA_GLOBAL_SSAnneKitchenCook5Text:
 	text "Did you hear about"
 	line "SNORLAX?"
 
@@ -31,7 +36,8 @@ _SSAnneKitchenCook5Text::
 	line "eat and sleep!"
 	done
 
-_SSAnneKitchenCook6Text::
+_SSAnneKitchenCook6Text:
+WLA_GLOBAL_SSAnneKitchenCook6Text:
 	text "Snivel...Sniff..."
 
 	para "I only get to"
@@ -39,14 +45,15 @@ _SSAnneKitchenCook6Text::
 	cont "Snivel..."
 	done
 
-_SSAnneKitchenCook7MainCourseIsText::
+_SSAnneKitchenCook7MainCourseIsText:
+WLA_GLOBAL_SSAnneKitchenCook7MainCourseIsText:
 	text "Er-hem! Indeed I"
 	line "am le CHEF!"
 
 	para "Le main course is"
 	prompt
 
-SSAnneKitchenCook7SalmonDuSaladText::
+SSAnneKitchenCook7SalmonDuSaladText:
 	text "Salmon du Salad!"
 
 	para "Les guests may"
@@ -54,14 +61,14 @@ SSAnneKitchenCook7SalmonDuSaladText::
 	cont "again, however!"
 	done
 
-SSAnneKitchenCook7EelsAuBarbecueText::
+SSAnneKitchenCook7EelsAuBarbecueText:
 	text "Eels au Barbecue!"
 
 	para "Les guests will"
 	line "mutiny, I fear."
 	done
 
-SSAnneKitchenCook7PrimeBeefSteakText::
+SSAnneKitchenCook7PrimeBeefSteakText:
 	text "Prime Beef Steak!"
 
 	para "But, have I enough"

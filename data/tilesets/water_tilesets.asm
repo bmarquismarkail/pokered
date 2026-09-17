@@ -1,12 +1,12 @@
 ; tilesets with water
 WaterTilesets:
-	db OVERWORLD
-	db FOREST
-	db DOJO
-	db GYM
-	db SHIP
-	db SHIP_PORT
-	db CAVERN
-	db FACILITY
-	db PLATEAU
-	db -1 ; end
+	.DB OVERWORLD
+	.DB FOREST
+	.DB DOJO
+	.DB GYM
+	.DB SHIP
+	.DB SHIP_PORT
+	.DB CAVERN
+	.DB FACILITY
+	.DB PLATEAU
+	.DB -1 ; end

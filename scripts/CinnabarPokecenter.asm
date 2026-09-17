@@ -13,11 +13,11 @@ CinnabarPokecenterNurseText:
 	script_pokecenter_nurse
 
 CinnabarPokecenterCooltrainerFText:
-	text_far _CinnabarPokecenterCooltrainerFText
+	text_far WLA_GLOBAL_CinnabarPokecenterCooltrainerFText
 	text_end
 
 CinnabarPokecenterGentlemanText:
-	text_far _CinnabarPokecenterGentlemanText
+	text_far WLA_GLOBAL_CinnabarPokecenterGentlemanText
 	text_end
 
 CinnabarPokecenterLinkReceptionistText:

@@ -1,202 +1,267 @@
 CreditsTextPointers:
 ; entries correspond to CRED_* constants
 	table_width 2
-	dw CredVersion
-	dw CredTajiri
-	dw CredTaOota
-	dw CredMorimoto
-	dw CredWatanabe
-	dw CredMasuda
-	dw CredNisino
-	dw CredSugimori
-	dw CredNishida
-	dw CredMiyamoto
-	dw CredKawaguchi
-	dw CredIshihara
-	dw CredYamauchi
-	dw CredZinnai
-	dw CredHishida
-	dw CredSakai
-	dw CredYamaguchi
-	dw CredYamamoto
-	dw CredTaniguchi
-	dw CredNonomura
-	dw CredFuziwara
-	dw CredMatsusima
-	dw CredTomisawa
-	dw CredKawamoto
-	dw CredKakei
-	dw CredTsuchiya
-	dw CredTaNakamura
-	dw CredYuda
-	dw CredMon
-	dw CredDirector
-	dw CredProgrammers
-	dw CredCharDesign
-	dw CredMusic
-	dw CredSoundEffects
-	dw CredGameDesign
-	dw CredMonsterDesign
-	dw CredGameScene
-	dw CredParam
-	dw CredMap
-	dw CredTest
-	dw CredSpecial
-	dw CredProducers
-	dw CredProducer
-	dw CredExecutive
-	dw CredTamada
-	dw CredSaOota
-	dw CredYoshikawa
-	dw CredToOota
-	dw CredUSStaff
-	dw CredUSCoord
-	dw CredTilden
-	dw CredKawakami
-	dw CredHiNakamura
-	dw CredGiese
-	dw CredOsborne
-	dw CredTrans
-	dw CredOgasawara
-	dw CredIwata
-	dw CredIzushi
-	dw CredHarada
-	dw CredMurakawa
-	dw CredFukui
-	dw CredClub
-	dw CredPAAD
+	.DW CredVersion
+	.DW CredTajiri
+	.DW CredTaOota
+	.DW CredMorimoto
+	.DW CredWatanabe
+	.DW CredMasuda
+	.DW CredNisino
+	.DW CredSugimori
+	.DW CredNishida
+	.DW CredMiyamoto
+	.DW CredKawaguchi
+	.DW CredIshihara
+	.DW CredYamauchi
+	.DW CredZinnai
+	.DW CredHishida
+	.DW CredSakai
+	.DW CredYamaguchi
+	.DW CredYamamoto
+	.DW CredTaniguchi
+	.DW CredNonomura
+	.DW CredFuziwara
+	.DW CredMatsusima
+	.DW CredTomisawa
+	.DW CredKawamoto
+	.DW CredKakei
+	.DW CredTsuchiya
+	.DW CredTaNakamura
+	.DW CredYuda
+	.DW CredMon
+	.DW CredDirector
+	.DW CredProgrammers
+	.DW CredCharDesign
+	.DW CredMusic
+	.DW CredSoundEffects
+	.DW CredGameDesign
+	.DW CredMonsterDesign
+	.DW CredGameScene
+	.DW CredParam
+	.DW CredMap
+	.DW CredTest
+	.DW CredSpecial
+	.DW CredProducers
+	.DW CredProducer
+	.DW CredExecutive
+	.DW CredTamada
+	.DW CredSaOota
+	.DW CredYoshikawa
+	.DW CredToOota
+	.DW CredUSStaff
+	.DW CredUSCoord
+	.DW CredTilden
+	.DW CredKawakami
+	.DW CredHiNakamura
+	.DW CredGiese
+	.DW CredOsborne
+	.DW CredTrans
+	.DW CredOgasawara
+	.DW CredIwata
+	.DW CredIzushi
+	.DW CredHarada
+	.DW CredMurakawa
+	.DW CredFukui
+	.DW CredClub
+	.DW CredPAAD
 	assert_table_length NUM_CRED_STRINGS
 
 CredVersion:
-IF DEF(_RED)
-	db -8, "RED VERSION STAFF@"
-ENDC
-IF DEF(_BLUE)
-	db -8, "BLUE VERSION STAFF@"
-ENDC
+.IF defined(_RED)
+		.DB -8
+		.STRINGMAP pokemon, "RED VERSION STAFF@"
+.ENDIF
+.IF defined(_BLUE)
+		.DB -8
+		.STRINGMAP pokemon, "BLUE VERSION STAFF@"
+.ENDIF
 CredTajiri:
-	db -6, "SATOSHI TAJIRI@"
+		.DB -6
+		.STRINGMAP pokemon, "SATOSHI TAJIRI@"
 CredTaOota:
-	db -6, "TAKENORI OOTA@"
+		.DB -6
+		.STRINGMAP pokemon, "TAKENORI OOTA@"
 CredMorimoto:
-	db -7, "SHIGEKI MORIMOTO@"
+		.DB -7
+		.STRINGMAP pokemon, "SHIGEKI MORIMOTO@"
 CredWatanabe:
-	db -7, "TETSUYA WATANABE@"
+		.DB -7
+		.STRINGMAP pokemon, "TETSUYA WATANABE@"
 CredMasuda:
-	db -6, "JUNICHI MASUDA@"
+		.DB -6
+		.STRINGMAP pokemon, "JUNICHI MASUDA@"
 CredNisino:
-	db -5, "KOHJI NISINO@"
+		.DB -5
+		.STRINGMAP pokemon, "KOHJI NISINO@"
 CredSugimori:
-	db -5, "KEN SUGIMORI@"
+		.DB -5
+		.STRINGMAP pokemon, "KEN SUGIMORI@"
 CredNishida:
-	db -6, "ATSUKO NISHIDA@"
+		.DB -6
+		.STRINGMAP pokemon, "ATSUKO NISHIDA@"
 CredMiyamoto:
-	db -7, "SHIGERU MIYAMOTO@"
+		.DB -7
+		.STRINGMAP pokemon, "SHIGERU MIYAMOTO@"
 CredKawaguchi:
-	db -8, "TAKASHI KAWAGUCHI@"
+		.DB -8
+		.STRINGMAP pokemon, "TAKASHI KAWAGUCHI@"
 CredIshihara:
-	db -8, "TSUNEKAZU ISHIHARA@"
+		.DB -8
+		.STRINGMAP pokemon, "TSUNEKAZU ISHIHARA@"
 CredYamauchi:
-	db -7, "HIROSHI YAMAUCHI@"
+		.DB -7
+		.STRINGMAP pokemon, "HIROSHI YAMAUCHI@"
 CredZinnai:
-	db -7, "HIROYUKI ZINNAI@"
+		.DB -7
+		.STRINGMAP pokemon, "HIROYUKI ZINNAI@"
 CredHishida:
-	db -7, "TATSUYA HISHIDA@"
+		.DB -7
+		.STRINGMAP pokemon, "TATSUYA HISHIDA@"
 CredSakai:
-	db -6, "YASUHIRO SAKAI@"
+		.DB -6
+		.STRINGMAP pokemon, "YASUHIRO SAKAI@"
 CredYamaguchi:
-	db -7, "WATARU YAMAGUCHI@"
+		.DB -7
+		.STRINGMAP pokemon, "WATARU YAMAGUCHI@"
 CredYamamoto:
-	db -8, "KAZUYUKI YAMAMOTO@"
+		.DB -8
+		.STRINGMAP pokemon, "KAZUYUKI YAMAMOTO@"
 CredTaniguchi:
-	db -8, "RYOHSUKE TANIGUCHI@"
+		.DB -8
+		.STRINGMAP pokemon, "RYOHSUKE TANIGUCHI@"
 CredNonomura:
-	db -8, "FUMIHIRO NONOMURA@"
+		.DB -8
+		.STRINGMAP pokemon, "FUMIHIRO NONOMURA@"
 CredFuziwara:
-	db -7, "MOTOFUMI FUZIWARA@"
+		.DB -7
+		.STRINGMAP pokemon, "MOTOFUMI FUZIWARA@"
 CredMatsusima:
-	db -7, "KENJI MATSUSIMA@"
+		.DB -7
+		.STRINGMAP pokemon, "KENJI MATSUSIMA@"
 CredTomisawa:
-	db -7, "AKIHITO TOMISAWA@"
+		.DB -7
+		.STRINGMAP pokemon, "AKIHITO TOMISAWA@"
 CredKawamoto:
-	db -7, "HIROSHI KAWAMOTO@"
+		.DB -7
+		.STRINGMAP pokemon, "HIROSHI KAWAMOTO@"
 CredKakei:
-	db -6, "AKIYOSHI KAKEI@"
+		.DB -6
+		.STRINGMAP pokemon, "AKIYOSHI KAKEI@"
 CredTsuchiya:
-	db -7, "KAZUKI TSUCHIYA@"
+		.DB -7
+		.STRINGMAP pokemon, "KAZUKI TSUCHIYA@"
 CredTaNakamura:
-	db -6, "TAKEO NAKAMURA@"
+		.DB -6
+		.STRINGMAP pokemon, "TAKEO NAKAMURA@"
 CredYuda:
-	db -6, "MASAMITSU YUDA@"
+		.DB -6
+		.STRINGMAP pokemon, "MASAMITSU YUDA@"
 CredMon:
-	db -3, "#MON@"
+		.DB -3
+		.STRINGMAP pokemon, "#MON@"
 CredDirector:
-	db -3, "DIRECTOR@"
+		.DB -3
+		.STRINGMAP pokemon, "DIRECTOR@"
 CredProgrammers:
-	db -5, "PROGRAMMERS@"
+		.DB -5
+		.STRINGMAP pokemon, "PROGRAMMERS@"
 CredCharDesign:
-	db -7, "CHARACTER DESIGN@"
+		.DB -7
+		.STRINGMAP pokemon, "CHARACTER DESIGN@"
 CredMusic:
-	db -2, "MUSIC@"
+		.DB -2
+		.STRINGMAP pokemon, "MUSIC@"
 CredSoundEffects:
-	db -6, "SOUND EFFECTS@"
+		.DB -6
+		.STRINGMAP pokemon, "SOUND EFFECTS@"
 CredGameDesign:
-	db -5, "GAME DESIGN@"
+		.DB -5
+		.STRINGMAP pokemon, "GAME DESIGN@"
 CredMonsterDesign:
-	db -6, "MONSTER DESIGN@"
+		.DB -6
+		.STRINGMAP pokemon, "MONSTER DESIGN@"
 CredGameScene:
-	db -6, "GAME SCENARIO@"
+		.DB -6
+		.STRINGMAP pokemon, "GAME SCENARIO@"
 CredParam:
-	db -8, "PARAMETRIC DESIGN@"
+		.DB -8
+		.STRINGMAP pokemon, "PARAMETRIC DESIGN@"
 CredMap:
-	db -4, "MAP DESIGN@"
+		.DB -4
+		.STRINGMAP pokemon, "MAP DESIGN@"
 CredTest:
-	db -7, "PRODUCT TESTING@"
+		.DB -7
+		.STRINGMAP pokemon, "PRODUCT TESTING@"
 CredSpecial:
-	db -6, "SPECIAL THANKS@"
+		.DB -6
+		.STRINGMAP pokemon, "SPECIAL THANKS@"
 CredProducers:
-	db -4, "PRODUCERS@"
+		.DB -4
+		.STRINGMAP pokemon, "PRODUCERS@"
 CredProducer:
-	db -4, "PRODUCER@"
+		.DB -4
+		.STRINGMAP pokemon, "PRODUCER@"
 CredExecutive:
-	db -8, "EXECUTIVE PRODUCER@"
+		.DB -8
+		.STRINGMAP pokemon, "EXECUTIVE PRODUCER@"
 CredTamada:
-	db -6, "SOUSUKE TAMADA@"
+		.DB -6
+		.STRINGMAP pokemon, "SOUSUKE TAMADA@"
 CredSaOota:
-	db -5, "SATOSHI OOTA@"
+		.DB -5
+		.STRINGMAP pokemon, "SATOSHI OOTA@"
 CredYoshikawa:
-	db -6, "RENA YOSHIKAWA@"
+		.DB -6
+		.STRINGMAP pokemon, "RENA YOSHIKAWA@"
 CredToOota:
-	db -6, "TOMOMICHI OOTA@"
+		.DB -6
+		.STRINGMAP pokemon, "TOMOMICHI OOTA@"
 CredUSStaff:
-	db -7, "US VERSION STAFF@"
+		.DB -7
+		.STRINGMAP pokemon, "US VERSION STAFF@"
 CredUSCoord:
-	db -7, "US COORDINATION@"
+		.DB -7
+		.STRINGMAP pokemon, "US COORDINATION@"
 CredTilden:
-	db -5, "GAIL TILDEN@"
+		.DB -5
+		.STRINGMAP pokemon, "GAIL TILDEN@"
 CredKawakami:
-	db -6, "NAOKO KAWAKAMI@"
+		.DB -6
+		.STRINGMAP pokemon, "NAOKO KAWAKAMI@"
 CredHiNakamura:
-	db -6, "HIRO NAKAMURA@"
+		.DB -6
+		.STRINGMAP pokemon, "HIRO NAKAMURA@"
 CredGiese:
-	db -6, "WILLIAM GIESE@"
+		.DB -6
+		.STRINGMAP pokemon, "WILLIAM GIESE@"
 CredOsborne:
-	db -5, "SARA OSBORNE@"
+		.DB -5
+		.STRINGMAP pokemon, "SARA OSBORNE@"
 CredTrans:
-	db -7, "TEXT TRANSLATION@"
+		.DB -7
+		.STRINGMAP pokemon, "TEXT TRANSLATION@"
 CredOgasawara:
-	db -6, "NOB OGASAWARA@"
+		.DB -6
+		.STRINGMAP pokemon, "NOB OGASAWARA@"
 CredIwata:
-	db -5, "SATORU IWATA@"
+		.DB -5
+		.STRINGMAP pokemon, "SATORU IWATA@"
 CredIzushi:
-	db -7, "TAKEHIRO IZUSHI@"
+		.DB -7
+		.STRINGMAP pokemon, "TAKEHIRO IZUSHI@"
 CredHarada:
-	db -7, "TAKAHIRO HARADA@"
+		.DB -7
+		.STRINGMAP pokemon, "TAKAHIRO HARADA@"
 CredMurakawa:
-	db -7, "TERUKI MURAKAWA@"
+		.DB -7
+		.STRINGMAP pokemon, "TERUKI MURAKAWA@"
 CredFukui:
-	db -5, "KOHTA FUKUI@"
+		.DB -5
+		.STRINGMAP pokemon, "KOHTA FUKUI@"
 CredClub:
-	db -9, "NCL SUPER MARIO CLUB@"
+		.DB -9
+		.STRINGMAP pokemon, "NCL SUPER MARIO CLUB@"
 CredPAAD:
-	db -5, "PAAD TESTING@"
+		.DB -5
+		.STRINGMAP pokemon, "PAAD TESTING@"

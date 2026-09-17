@@ -1,17 +1,17 @@
-	db DEX_HYPNO ; pokedex id
+	.DB DEX_HYPNO ; pokedex id
 
-	db  85,  73,  70,  67, 115
+	.DB  85,  73,  70,  67, 115
 	;   hp  atk  def  spd  spc
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
-	db 75 ; catch rate
-	db 165 ; base exp
+	.DB PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	.DB 75 ; catch rate
+	.DB 165 ; base exp
 
-	INCBIN "gfx/pokemon/front/hypno.pic", 0, 1 ; sprite dimensions
-	dw HypnoPicFront, HypnoPicBack
+	.INCBIN "gfx/pokemon/front/hypno.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW HypnoPicFront, HypnoPicBack
 
-	db POUND, HYPNOSIS, DISABLE, CONFUSION ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB POUND, HYPNOSIS, DISABLE, CONFUSION ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

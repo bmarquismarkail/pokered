@@ -1,10 +1,12 @@
-_OaksLabRivalGrampsIsntAroundText::
+_OaksLabRivalGrampsIsntAroundText:
+WLA_GLOBAL_OaksLabRivalGrampsIsntAroundText:
 	text "<RIVAL>: Yo"
 	line "<PLAYER>! Gramps"
 	cont "isn't around!"
 	done
 
-_OaksLabRivalGoAheadAndChooseText::
+_OaksLabRivalGoAheadAndChooseText:
+WLA_GLOBAL_OaksLabRivalGoAheadAndChooseText:
 	text "<RIVAL>: Heh, I"
 	line "don't need to be"
 	cont "greedy like you!"
@@ -13,74 +15,86 @@ _OaksLabRivalGoAheadAndChooseText::
 	line "choose, <PLAYER>!"
 	done
 
-_OaksLabRivalMyPokemonLooksStrongerText::
+_OaksLabRivalMyPokemonLooksStrongerText:
+WLA_GLOBAL_OaksLabRivalMyPokemonLooksStrongerText:
 	text "<RIVAL>: My"
 	line "#MON looks a"
 	cont "lot stronger."
 	done
 
-_OaksLabThoseArePokeBallsText::
+_OaksLabThoseArePokeBallsText:
+WLA_GLOBAL_OaksLabThoseArePokeBallsText:
 	text "Those are #"
 	line "BALLs. They"
 	cont "contain #MON!"
 	done
 
-_OaksLabYouWantCharmanderText::
+_OaksLabYouWantCharmanderText:
+WLA_GLOBAL_OaksLabYouWantCharmanderText:
 	text "So! You want the"
 	line "fire #MON,"
 	cont "CHARMANDER?"
 	done
 
-_OaksLabYouWantSquirtleText::
+_OaksLabYouWantSquirtleText:
+WLA_GLOBAL_OaksLabYouWantSquirtleText:
 	text "So! You want the"
 	line "water #MON,"
 	cont "SQUIRTLE?"
 	done
 
-_OaksLabYouWantBulbasaurText::
+_OaksLabYouWantBulbasaurText:
+WLA_GLOBAL_OaksLabYouWantBulbasaurText:
 	text "So! You want the"
 	line "plant #MON,"
 	cont "BULBASAUR?"
 	done
 
-_OaksLabMonEnergeticText::
+_OaksLabMonEnergeticText:
+WLA_GLOBAL_OaksLabMonEnergeticText:
 	text "This #MON is"
 	line "really energetic!"
 	prompt
 
-_OaksLabReceivedMonText::
+_OaksLabReceivedMonText:
+WLA_GLOBAL_OaksLabReceivedMonText:
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wNameBuffer
 	text "!@"
 	text_end
 
-_OaksLabLastMonText::
+_OaksLabLastMonText:
+WLA_GLOBAL_OaksLabLastMonText:
 	text "That's PROF.OAK's"
 	line "last #MON!"
 	done
 
-_OaksLabOak1WhichPokemonDoYouWantText::
+_OaksLabOak1WhichPokemonDoYouWantText:
+WLA_GLOBAL_OaksLabOak1WhichPokemonDoYouWantText:
 	text "OAK: Now, <PLAYER>,"
 	line "which #MON do"
 	cont "you want?"
 	done
 
-_OaksLabOak1YourPokemonCanFightText::
+_OaksLabOak1YourPokemonCanFightText:
+WLA_GLOBAL_OaksLabOak1YourPokemonCanFightText:
 	text "OAK: If a wild"
 	line "#MON appears,"
 	cont "your #MON can"
 	cont "fight against it!"
 	done
 
-_OaksLabOak1RaiseYourYoungPokemonText::
+_OaksLabOak1RaiseYourYoungPokemonText:
+WLA_GLOBAL_OaksLabOak1RaiseYourYoungPokemonText:
 	text "OAK: <PLAYER>,"
 	line "raise your young"
 	cont "#MON by making"
 	cont "it fight!"
 	done
 
-_OaksLabOak1DeliverParcelText::
+_OaksLabOak1DeliverParcelText:
+WLA_GLOBAL_OaksLabOak1DeliverParcelText:
 	text "OAK: Oh, <PLAYER>!"
 
 	para "How is my old"
@@ -100,7 +114,8 @@ _OaksLabOak1DeliverParcelText::
 	line "OAK's PARCEL.@"
 	text_end
 
-_OaksLabOak1ParcelThanksText::
+_OaksLabOak1ParcelThanksText:
+WLA_GLOBAL_OaksLabOak1ParcelThanksText:
 	text_start
 	para "Ah! This is the"
 	line "custom # BALL"
@@ -108,13 +123,15 @@ _OaksLabOak1ParcelThanksText::
 	cont "Thank you!"
 	done
 
-_OaksLabOak1PokemonAroundTheWorldText::
+_OaksLabOak1PokemonAroundTheWorldText:
+WLA_GLOBAL_OaksLabOak1PokemonAroundTheWorldText:
 	text "#MON around the"
 	line "world wait for"
 	cont "you, <PLAYER>!"
 	done
 
-_OaksLabOak1ReceivedPokeballsText::
+_OaksLabOak1ReceivedPokeballsText:
+WLA_GLOBAL_OaksLabOak1ReceivedPokeballsText:
 	text "OAK: You can't get"
 	line "detailed data on"
 	cont "#MON by just"
@@ -129,7 +146,8 @@ _OaksLabOak1ReceivedPokeballsText::
 	line "# BALLs!@"
 	text_end
 
-_OaksLabGivePokeballsExplanationText::
+_OaksLabGivePokeballsExplanationText:
+WLA_GLOBAL_OaksLabGivePokeballsExplanationText:
 	text_start
 	para "When a wild"
 	line "#MON appears,"
@@ -147,7 +165,8 @@ _OaksLabGivePokeballsExplanationText::
 	cont "have to be lucky!"
 	done
 
-_OaksLabOak1ComeSeeMeSometimesText::
+_OaksLabOak1ComeSeeMeSometimesText:
+WLA_GLOBAL_OaksLabOak1ComeSeeMeSometimesText:
 	text "OAK: Come see me"
 	line "sometimes."
 
@@ -156,7 +175,8 @@ _OaksLabOak1ComeSeeMeSometimesText::
 	cont "coming along."
 	done
 
-_OaksLabOak1HowIsYourPokedexComingText::
+_OaksLabOak1HowIsYourPokedexComingText:
+WLA_GLOBAL_OaksLabOak1HowIsYourPokedexComingText:
 	text "OAK: Good to see "
 	line "you! How is your "
 	cont "#DEX coming? "
@@ -164,17 +184,20 @@ _OaksLabOak1HowIsYourPokedexComingText::
 	cont "a look!"
 	prompt
 
-_OaksLabPokedexText::
+_OaksLabPokedexText:
+WLA_GLOBAL_OaksLabPokedexText:
 	text "It's encyclopedia-"
 	line "like, but the"
 	cont "pages are blank!"
 	done
 
-_OaksLabOak2Text::
+_OaksLabOak2Text:
+WLA_GLOBAL_OaksLabOak2Text:
 	text "?"
 	done
 
-_OaksLabGirlText::
+_OaksLabGirlText:
+WLA_GLOBAL_OaksLabGirlText:
 	text "PROF.OAK is the"
 	line "authority on"
 	cont "#MON!"
@@ -184,13 +207,15 @@ _OaksLabGirlText::
 	cont "in high regard!"
 	done
 
-_OaksLabRivalFedUpWithWaitingText::
+_OaksLabRivalFedUpWithWaitingText:
+WLA_GLOBAL_OaksLabRivalFedUpWithWaitingText:
 	text "<RIVAL>: Gramps!"
 	line "I'm fed up with"
 	cont "waiting!"
 	done
 
-_OaksLabOakChooseMonText::
+_OaksLabOakChooseMonText:
+WLA_GLOBAL_OaksLabOakChooseMonText:
 	text "OAK: <RIVAL>?"
 	line "Let me think..."
 
@@ -218,36 +243,42 @@ _OaksLabOakChooseMonText::
 	cont "one! Choose!"
 	done
 
-_OaksLabRivalWhatAboutMeText::
+_OaksLabRivalWhatAboutMeText:
+WLA_GLOBAL_OaksLabRivalWhatAboutMeText:
 	text "<RIVAL>: Hey!"
 	line "Gramps! What"
 	cont "about me?"
 	done
 
-_OaksLabOakBePatientText::
+_OaksLabOakBePatientText:
+WLA_GLOBAL_OaksLabOakBePatientText:
 	text "OAK: Be patient!"
 	line "<RIVAL>, you can"
 	cont "have one too!"
 	done
 
-_OaksLabOakDontGoAwayYetText::
+_OaksLabOakDontGoAwayYetText:
+WLA_GLOBAL_OaksLabOakDontGoAwayYetText:
 	text "OAK: Hey! Don't go"
 	line "away yet!"
 	done
 
-_OaksLabRivalIllTakeThisOneText::
+_OaksLabRivalIllTakeThisOneText:
+WLA_GLOBAL_OaksLabRivalIllTakeThisOneText:
 	text "<RIVAL>: I'll take"
 	line "this one, then!"
 	done
 
-_OaksLabRivalReceivedMonText::
+_OaksLabRivalReceivedMonText:
+WLA_GLOBAL_OaksLabRivalReceivedMonText:
 	text "<RIVAL> received"
 	line "a @"
 	text_ram wNameBuffer
 	text "!@"
 	text_end
 
-_OaksLabRivalIllTakeYouOnText::
+_OaksLabRivalIllTakeYouOnText:
+WLA_GLOBAL_OaksLabRivalIllTakeYouOnText:
 	text "<RIVAL>: Wait"
 	line "<PLAYER>!"
 	cont "Let's check out"
@@ -257,19 +288,22 @@ _OaksLabRivalIllTakeYouOnText::
 	line "you on!"
 	done
 
-_OaksLabRivalIPickedTheWrongPokemonText::
+_OaksLabRivalIPickedTheWrongPokemonText:
+WLA_GLOBAL_OaksLabRivalIPickedTheWrongPokemonText:
 	text "WHAT?"
 	line "Unbelievable!"
 	cont "I picked the"
 	cont "wrong #MON!"
 	prompt
 
-_OaksLabRivalAmIGreatOrWhatText::
+_OaksLabRivalAmIGreatOrWhatText:
+WLA_GLOBAL_OaksLabRivalAmIGreatOrWhatText:
 	text "<RIVAL>: Yeah! Am"
 	line "I great or what?"
 	prompt
 
-_OaksLabRivalSmellYouLaterText::
+_OaksLabRivalSmellYouLaterText:
+WLA_GLOBAL_OaksLabRivalSmellYouLaterText:
 	text "<RIVAL>: Okay!"
 	line "I'll make my"
 	cont "#MON fight to"
@@ -279,22 +313,26 @@ _OaksLabRivalSmellYouLaterText::
 	line "Smell you later!"
 	done
 
-_OaksLabRivalGrampsText::
+_OaksLabRivalGrampsText:
+WLA_GLOBAL_OaksLabRivalGrampsText:
 	text "<RIVAL>: Gramps!"
 	done
 
-_OaksLabRivalWhatDidYouCallMeForText::
+_OaksLabRivalWhatDidYouCallMeForText:
+WLA_GLOBAL_OaksLabRivalWhatDidYouCallMeForText:
 	text "<RIVAL>: What did"
 	line "you call me for?"
 	done
 
-_OaksLabOakIHaveARequestText::
+_OaksLabOakIHaveARequestText:
+WLA_GLOBAL_OaksLabOakIHaveARequestText:
 	text "OAK: Oh right! I"
 	line "have a request"
 	cont "of you two."
 	done
 
-_OaksLabOakMyInventionPokedexText::
+_OaksLabOakMyInventionPokedexText:
+WLA_GLOBAL_OaksLabOakMyInventionPokedexText:
 	text "On the desk there"
 	line "is my invention,"
 	cont "#DEX!"
@@ -308,7 +346,8 @@ _OaksLabOakMyInventionPokedexText::
 	line "encyclopedia!"
 	done
 
-_OaksLabOakGotPokedexText::
+_OaksLabOakGotPokedexText:
+WLA_GLOBAL_OaksLabOakGotPokedexText:
 	text "OAK: <PLAYER> and"
 	line "<RIVAL>! Take"
 	cont "these with you!"
@@ -317,7 +356,8 @@ _OaksLabOakGotPokedexText::
 	line "#DEX from OAK!@"
 	text_end
 
-_OaksLabOakThatWasMyDreamText::
+_OaksLabOakThatWasMyDreamText:
+WLA_GLOBAL_OaksLabOakThatWasMyDreamText:
 	text "To make a complete"
 	line "guide on all the"
 	cont "#MON in the"
@@ -340,7 +380,8 @@ _OaksLabOakThatWasMyDreamText::
 	cont "#MON history!"
 	done
 
-_OaksLabRivalLeaveItAllToMeText::
+_OaksLabRivalLeaveItAllToMeText:
+WLA_GLOBAL_OaksLabRivalLeaveItAllToMeText:
 	text "<RIVAL>: Alright"
 	line "Gramps! Leave it"
 	cont "all to me!"
@@ -358,7 +399,8 @@ _OaksLabRivalLeaveItAllToMeText::
 	cont "<PLAYER>! Hahaha!"
 	done
 
-_OaksLabScientistText::
+_OaksLabScientistText:
+WLA_GLOBAL_OaksLabScientistText:
 	text "I study #MON as"
 	line "PROF.OAK's AIDE."
 	done

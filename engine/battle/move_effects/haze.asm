@@ -15,22 +15,22 @@ HazeEffect_:
 ; cure non-volatile status, but only for the target
 	ld hl, wEnemyMonStatus
 	ld de, wEnemySelectedMove
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .cureStatuses
+	jr z, HazeEffect_.cureStatuses
 	ld hl, wBattleMonStatus
 	dec de ; wPlayerSelectedMove
 
-.cureStatuses
+HazeEffect_.cureStatuses
 	ld a, [hl]
 	ld [hl], $0
 	and (1 << FRZ) | SLP_MASK
-	jr z, .cureVolatileStatuses
+	jr z, HazeEffect_.cureVolatileStatuses
 ; prevent the Pokemon from executing a move if it was asleep or frozen
 	ld a, $ff
 	ld [de], a
 
-.cureVolatileStatuses
+HazeEffect_.cureVolatileStatuses
 	xor a
 	ld [wPlayerDisabledMove], a
 	ld [wEnemyDisabledMove], a
@@ -60,22 +60,22 @@ CureVolatileStatuses:
 
 ResetStatMods:
 	ld b, NUM_STAT_MODS
-.loop
+ResetStatMods.loop
 	ld [hli], a
 	dec b
-	jr nz, .loop
+	jr nz, ResetStatMods.loop
 	ret
 
 ResetStats:
 	ld b, (NUM_STATS - 1) * 2 ; doesn't reset STAT_HEALTH
-.loop
+ResetStats.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .loop
+	jr nz, ResetStats.loop
 	ret
 
 StatusChangesEliminatedText:
-	text_far _StatusChangesEliminatedText
+	text_far WLA_GLOBAL_StatusChangesEliminatedText
 	text_end

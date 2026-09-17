@@ -4,34 +4,34 @@ SeafoamIslands1F_Script:
 	ld hl, wMiscFlags
 	bit BIT_PUSHED_BOULDER, [hl]
 	res BIT_PUSHED_BOULDER, [hl]
-	jr z, .noBoulderWasPushed
+	jr z, SeafoamIslands1F_Script.noBoulderWasPushed
 	ld hl, Seafoam1HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	EventFlagAddress hl, EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
+	EventFlagAddress "hl", EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, [wCoordIndex]
 	cp $1
-	jr nz, .boulder2FellDownHole
+	jr nz, SeafoamIslands1F_Script.boulder2FellDownHole
 	SetEventReuseHL EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, TOGGLE_SEAFOAM_ISLANDS_1F_BOULDER_1
 	ld [wObjectToHide], a
 	ld a, TOGGLE_SEAFOAM_ISLANDS_B1F_BOULDER_1
 	ld [wObjectToShow], a
-	jr .hideAndShowBoulderObjects
-.boulder2FellDownHole
+	jr SeafoamIslands1F_Script.hideAndShowBoulderObjects
+SeafoamIslands1F_Script.boulder2FellDownHole
 	SetEventAfterBranchReuseHL EVENT_SEAFOAM1_BOULDER2_DOWN_HOLE, EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, TOGGLE_SEAFOAM_ISLANDS_1F_BOULDER_2
 	ld [wObjectToHide], a
 	ld a, TOGGLE_SEAFOAM_ISLANDS_B1F_BOULDER_2
 	ld [wObjectToShow], a
-.hideAndShowBoulderObjects
+SeafoamIslands1F_Script.hideAndShowBoulderObjects
 	ld a, [wObjectToHide]
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, [wObjectToShow]
 	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
-.noBoulderWasPushed
+SeafoamIslands1F_Script.noBoulderWasPushed
 	ld a, SEAFOAM_ISLANDS_B1F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam1HolesCoords
@@ -40,7 +40,7 @@ SeafoamIslands1F_Script:
 Seafoam1HolesCoords:
 	dbmapcoord 17,  6
 	dbmapcoord 24,  6
-	db -1 ; end
+	.DB -1 ; end
 
 SeafoamIslands1F_TextPointers:
 	def_text_pointers

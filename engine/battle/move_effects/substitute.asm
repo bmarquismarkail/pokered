@@ -4,16 +4,16 @@ SubstituteEffect_:
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, wPlayerBattleStatus2
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jr z, .notEnemy
+	jr z, SubstituteEffect_.notEnemy
 	ld hl, wEnemyMonMaxHP
 	ld de, wEnemySubstituteHP
 	ld bc, wEnemyBattleStatus2
-.notEnemy
+SubstituteEffect_.notEnemy
 	ld a, [bc]
 	bit HAS_SUBSTITUTE_UP, a ; user already has substitute?
-	jr nz, .alreadyHasSubstitute
+	jr nz, SubstituteEffect_.alreadyHasSubstitute
 ; quarter health to remove from user
 ; assumes max HP is 1023 or lower
 	push bc
@@ -36,7 +36,7 @@ SubstituteEffect_:
 	ld a, [hl]
 	sbc 0
 	pop bc
-	jr c, .notEnoughHP ; underflow means user would be left with negative health
+	jr c, SubstituteEffect_.notEnoughHP ; underflow means user would be left with negative health
                        ; bug: since it only branches on carry, it will possibly leave user with 0 HP
 ; user has 0 or more HP
 	ld [hli], a ; save resulting HP after subtraction into current HP
@@ -47,31 +47,31 @@ SubstituteEffect_:
 	ld a, [wOptions]
 	bit BIT_BATTLE_ANIMATION, a
 	ld hl, PlayCurrentMoveAnimation
-	ld b, BANK(PlayCurrentMoveAnimation)
-	jr z, .animationEnabled
+	ld b, bank(PlayCurrentMoveAnimation)
+	jr z, SubstituteEffect_.animationEnabled
 	ld hl, AnimationSubstitute
-	ld b, BANK(AnimationSubstitute)
-.animationEnabled
+	ld b, bank(AnimationSubstitute)
+SubstituteEffect_.animationEnabled
 	call Bankswitch ; jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
 	jpfar DrawHUDsAndHPBars
-.alreadyHasSubstitute
+SubstituteEffect_.alreadyHasSubstitute
 	ld hl, HasSubstituteText
-	jr .printText
-.notEnoughHP
+	jr SubstituteEffect_.printText
+SubstituteEffect_.notEnoughHP
 	ld hl, TooWeakSubstituteText
-.printText
+SubstituteEffect_.printText
 	jp PrintText
 
 SubstituteText:
-	text_far _SubstituteText
+	text_far WLA_GLOBAL_SubstituteText
 	text_end
 
 HasSubstituteText:
-	text_far _HasSubstituteText
+	text_far WLA_GLOBAL_HasSubstituteText
 	text_end
 
 TooWeakSubstituteText:
-	text_far _TooWeakSubstituteText
+	text_far WLA_GLOBAL_TooWeakSubstituteText
 	text_end

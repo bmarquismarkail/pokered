@@ -5,6 +5,6 @@ PrintIndigoPlateauHQText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump IndigoPlateauHQText
 
-IndigoPlateauHQText::
-	text_far _IndigoPlateauHQText
+IndigoPlateauHQText:
+	text_far WLA_GLOBAL_IndigoPlateauHQText
 	text_end

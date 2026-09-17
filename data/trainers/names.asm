@@ -1,4 +1,4 @@
-TrainerNames::
+TrainerNames:
 	list_start TRAINER_NAME_LENGTH - 1
 	li "YOUNGSTER"
 	li "BUG CATCHER"

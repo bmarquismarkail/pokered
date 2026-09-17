@@ -1,4 +1,5 @@
-_VermilionGymLTSurgePreBattleText::
+_VermilionGymLTSurgePreBattleText:
+WLA_GLOBAL_VermilionGymLTSurgePreBattleText:
 	text "Hey, kid! What do"
 	line "you think you're"
 	cont "doing here?"

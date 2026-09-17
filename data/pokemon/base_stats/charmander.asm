@@ -1,17 +1,17 @@
-	db DEX_CHARMANDER ; pokedex id
+	.DB DEX_CHARMANDER ; pokedex id
 
-	db  39,  52,  43,  65,  50
+	.DB  39,  52,  43,  65,  50
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FIRE ; type
-	db 45 ; catch rate
-	db 65 ; base exp
+	.DB FIRE, FIRE ; type
+	.DB 45 ; catch rate
+	.DB 65 ; base exp
 
-	INCBIN "gfx/pokemon/front/charmander.pic", 0, 1 ; sprite dimensions
-	dw CharmanderPicFront, CharmanderPicBack
+	.INCBIN "gfx/pokemon/front/charmander.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW CharmanderPicFront, CharmanderPicBack
 
-	db SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \
@@ -21,4 +21,4 @@
 	     REST,         SUBSTITUTE,   CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

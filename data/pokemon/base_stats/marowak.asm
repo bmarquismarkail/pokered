@@ -1,17 +1,17 @@
-	db DEX_MAROWAK ; pokedex id
+	.DB DEX_MAROWAK ; pokedex id
 
-	db  60,  80, 110,  45,  50
+	.DB  60,  80, 110,  45,  50
 	;   hp  atk  def  spd  spc
 
-	db GROUND, GROUND ; type
-	db 75 ; catch rate
-	db 124 ; base exp
+	.DB GROUND, GROUND ; type
+	.DB 75 ; catch rate
+	.DB 124 ; base exp
 
-	INCBIN "gfx/pokemon/front/marowak.pic", 0, 1 ; sprite dimensions
-	dw MarowakPicFront, MarowakPicBack
+	.INCBIN "gfx/pokemon/front/marowak.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MarowakPicFront, MarowakPicBack
 
-	db BONE_CLUB, GROWL, LEER, FOCUS_ENERGY ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB BONE_CLUB, GROWL, LEER, FOCUS_ENERGY ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,16 +1,16 @@
 ; function that displays the start menu
-DrawStartMenu::
+DrawStartMenu:
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	hlcoord 10, 0
 	ld b, $0e
 	ld c, $08
-	jr nz, .drawTextBoxBorder
+	jr nz, DrawStartMenu.drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
 	hlcoord 10, 0
 	ld b, $0c
 	ld c, $08
-.drawTextBoxBorder
+DrawStartMenu.drawTextBoxBorder
 	call TextBoxBorder
 	ld a, PAD_DOWN | PAD_UP | PAD_START | PAD_B | PAD_A
 	ld [wMenuWatchedKeys], a
@@ -29,12 +29,12 @@ DrawStartMenu::
 	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokedex
 	ld a, $06
-	jr z, .storeMenuItemCount
+	jr z, DrawStartMenu.storeMenuItemCount
 ; case for having pokedex
 	ld de, StartMenuPokedexText
 	call PrintStartMenuItem
 	ld a, $07
-.storeMenuItemCount
+DrawStartMenu.storeMenuItemCount
 	ld [wMaxMenuItem], a ; number of menu items
 	ld de, StartMenuPokemonText
 	call PrintStartMenuItem
@@ -46,10 +46,10 @@ DrawStartMenu::
 	bit BIT_LINK_CONNECTED, a
 ; case for not using link feature
 	ld de, StartMenuSaveText
-	jr z, .printSaveOrResetText
+	jr z, DrawStartMenu.printSaveOrResetText
 ; case for using link feature
 	ld de, StartMenuResetText
-.printSaveOrResetText
+DrawStartMenu.printSaveOrResetText
 	call PrintStartMenuItem
 	ld de, StartMenuOptionText
 	call PrintStartMenuItem
@@ -60,25 +60,25 @@ DrawStartMenu::
 	ret
 
 StartMenuPokedexText:
-	db "POKéDEX@"
+		.STRINGMAP pokemon, "POKéDEX@"
 
 StartMenuPokemonText:
-	db "POKéMON@"
+		.STRINGMAP pokemon, "POKéMON@"
 
 StartMenuItemText:
-	db "ITEM@"
+		.STRINGMAP pokemon, "ITEM@"
 
 StartMenuSaveText:
-	db "SAVE@"
+		.STRINGMAP pokemon, "SAVE@"
 
 StartMenuResetText:
-	db "RESET@"
+		.STRINGMAP pokemon, "RESET@"
 
 StartMenuExitText:
-	db "EXIT@"
+		.STRINGMAP pokemon, "EXIT@"
 
 StartMenuOptionText:
-	db "OPTION@"
+		.STRINGMAP pokemon, "OPTION@"
 
 PrintStartMenuItem:
 	push hl

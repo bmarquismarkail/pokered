@@ -1,7 +1,7 @@
-MACRO anim_special_effect
-	db \1
-	dw \2
-ENDM
+.MACRO anim_special_effect
+	.DB \1
+	.DW \2
+.ENDM
 
 AnimationIdSpecialEffects:
 	; animation id, effect routine address
@@ -29,4 +29,4 @@ AnimationIdSpecialEffects:
 	anim_special_effect POOF_ANIM,             DoPoofSpecialEffects
 	anim_special_effect GREATTOSS_ANIM,        DoBallTossSpecialEffects
 	anim_special_effect ULTRATOSS_ANIM,        DoBallTossSpecialEffects
-	db -1 ; end
+	.DB -1 ; end

@@ -8,14 +8,14 @@ VermilionCity_Script:
 	pop hl
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
-	call nz, .setFirstLockTrashCanIndex
+	call nz, VermilionCity_Script.setFirstLockTrashCanIndex
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]
 	jp CallFunctionInTable
 
-.setFirstLockTrashCanIndex
+VermilionCity_Script.setFirstLockTrashCanIndex
 	call Random
-	ldh a, [hRandomSub]
+	ldh a, [lobyte(hRandomSub)]
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
@@ -46,19 +46,19 @@ VermilionCityDefaultScript:
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld [wSavedCoordIndex], a ; unnecessary
 	ld a, TEXT_VERMILIONCITY_SAILOR1
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	CheckEvent EVENT_SS_ANNE_LEFT
-	jr nz, .ship_departed
+	jr nz, VermilionCityDefaultScript.ship_departed
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
 	ret nz
-.ship_departed
+VermilionCityDefaultScript.ship_departed
 	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
@@ -70,7 +70,7 @@ VermilionCityDefaultScript:
 
 SSAnneTicketCheckCoords:
 	dbmapcoord 18, 30
-	db -1 ; end
+	.DB -1 ; end
 
 VermilionCityPlayerAllowedToPassScript:
 	ld hl, SSAnneTicketCheckCoords
@@ -99,7 +99,7 @@ VermilionCityPlayerMovingUp2Script:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, SCRIPT_VERMILIONCITY_DEFAULT
 	ld [wVermilionCityCurScript], a
 	ret
@@ -131,129 +131,129 @@ VermilionCity_TextPointers:
 	dw_const VermilionCityHarborSignText,         TEXT_VERMILIONCITY_HARBOR_SIGN
 
 VermilionCityBeautyText:
-	text_far _VermilionCityBeautyText
+	text_far WLA_GLOBAL_VermilionCityBeautyText
 	text_end
 
 VermilionCityGambler1Text:
 	text_asm
 	CheckEvent EVENT_SS_ANNE_LEFT
-	jr nz, .ship_departed
-	ld hl, .DidYouSeeText
+	jr nz, VermilionCityGambler1Text.ship_departed
+	ld hl, VermilionCityGambler1Text.DidYouSeeText
 	call PrintText
-	jr .text_script_end
-.ship_departed
-	ld hl, .SSAnneDepartedText
+	jr VermilionCityGambler1Text.text_script_end
+VermilionCityGambler1Text.ship_departed
+	ld hl, VermilionCityGambler1Text.SSAnneDepartedText
 	call PrintText
-.text_script_end
+VermilionCityGambler1Text.text_script_end
 	jp TextScriptEnd
 
-.DidYouSeeText:
-	text_far _VermilionCityGambler1DidYouSeeText
+VermilionCityGambler1Text.DidYouSeeText:
+	text_far WLA_GLOBAL_VermilionCityGambler1DidYouSeeText
 	text_end
 
-.SSAnneDepartedText:
-	text_far _VermilionCityGambler1SSAnneDepartedText
+VermilionCityGambler1Text.SSAnneDepartedText:
+	text_far WLA_GLOBAL_VermilionCityGambler1SSAnneDepartedText
 	text_end
 
 VermilionCitySailor1Text:
 	text_asm
 	CheckEvent EVENT_SS_ANNE_LEFT
-	jr nz, .ship_departed
+	jr nz, VermilionCitySailor1Text.ship_departed
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_RIGHT
-	jr z, .greet_player
-	ld hl, .inFrontOfOrBehindGuardCoords
+	jr z, VermilionCitySailor1Text.greet_player
+	ld hl, VermilionCitySailor1Text.inFrontOfOrBehindGuardCoords
 	call ArePlayerCoordsInArray
-	jr nc, .greet_player_and_check_ticket
-.greet_player
-	ld hl, .WelcomeToSSAnneText
+	jr nc, VermilionCitySailor1Text.greet_player_and_check_ticket
+VermilionCitySailor1Text.greet_player
+	ld hl, VermilionCitySailor1Text.WelcomeToSSAnneText
 	call PrintText
-	jr .end
-.greet_player_and_check_ticket
-	ld hl, .DoYouHaveATicketText
+	jr VermilionCitySailor1Text.end
+VermilionCitySailor1Text.greet_player_and_check_ticket
+	ld hl, VermilionCitySailor1Text.DoYouHaveATicketText
 	call PrintText
 	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
-	jr nz, .player_has_ticket
-	ld hl, .YouNeedATicketText
+	jr nz, VermilionCitySailor1Text.player_has_ticket
+	ld hl, VermilionCitySailor1Text.YouNeedATicketText
 	call PrintText
-	jr .end
-.player_has_ticket
-	ld hl, .FlashedTicketText
+	jr VermilionCitySailor1Text.end
+VermilionCitySailor1Text.player_has_ticket
+	ld hl, VermilionCitySailor1Text.FlashedTicketText
 	call PrintText
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_ALLOWED_TO_PASS
 	ld [wVermilionCityCurScript], a
-	jr .end
-.ship_departed
-	ld hl, .ShipSetSailText
+	jr VermilionCitySailor1Text.end
+VermilionCitySailor1Text.ship_departed
+	ld hl, VermilionCitySailor1Text.ShipSetSailText
 	call PrintText
-.end
+VermilionCitySailor1Text.end
 	jp TextScriptEnd
 
-.inFrontOfOrBehindGuardCoords
+VermilionCitySailor1Text.inFrontOfOrBehindGuardCoords
 	dbmapcoord 19, 29 ; in front of guard
 	dbmapcoord 19, 31 ; behind guard
-	db -1 ; end
+	.DB -1 ; end
 
-.WelcomeToSSAnneText:
-	text_far _VermilionCitySailor1WelcomeToSSAnneText
+VermilionCitySailor1Text.WelcomeToSSAnneText:
+	text_far WLA_GLOBAL_VermilionCitySailor1WelcomeToSSAnneText
 	text_end
 
-.DoYouHaveATicketText:
-	text_far _VermilionCitySailor1DoYouHaveATicketText
+VermilionCitySailor1Text.DoYouHaveATicketText:
+	text_far WLA_GLOBAL_VermilionCitySailor1DoYouHaveATicketText
 	text_end
 
-.FlashedTicketText:
-	text_far _VermilionCitySailor1FlashedTicketText
+VermilionCitySailor1Text.FlashedTicketText:
+	text_far WLA_GLOBAL_VermilionCitySailor1FlashedTicketText
 	text_end
 
-.YouNeedATicketText:
-	text_far _VermilionCitySailor1YouNeedATicketText
+VermilionCitySailor1Text.YouNeedATicketText:
+	text_far WLA_GLOBAL_VermilionCitySailor1YouNeedATicketText
 	text_end
 
-.ShipSetSailText:
-	text_far _VermilionCitySailor1ShipSetSailText
+VermilionCitySailor1Text.ShipSetSailText:
+	text_far WLA_GLOBAL_VermilionCitySailor1ShipSetSailText
 	text_end
 
 VermilionCityGambler2Text:
-	text_far _VermilionCityGambler2Text
+	text_far WLA_GLOBAL_VermilionCityGambler2Text
 	text_end
 
 VermilionCityMachopText:
-	text_far _VermilionCityMachopText
+	text_far WLA_GLOBAL_VermilionCityMachopText
 	text_asm
 	ld a, MACHOP
 	call PlayCry
 	call WaitForSoundToFinish
-	ld hl, .StompingTheLandFlatText
+	ld hl, VermilionCityMachopText.StompingTheLandFlatText
 	ret
 
-.StompingTheLandFlatText:
-	text_far _VermilionCityMachopStompingTheLandFlatText
+VermilionCityMachopText.StompingTheLandFlatText:
+	text_far WLA_GLOBAL_VermilionCityMachopStompingTheLandFlatText
 	text_end
 
 VermilionCitySailor2Text:
-	text_far _VermilionCitySailor2Text
+	text_far WLA_GLOBAL_VermilionCitySailor2Text
 	text_end
 
 VermilionCitySignText:
-	text_far _VermilionCitySignText
+	text_far WLA_GLOBAL_VermilionCitySignText
 	text_end
 
 VermilionCityNoticeSignText:
-	text_far _VermilionCityNoticeSignText
+	text_far WLA_GLOBAL_VermilionCityNoticeSignText
 	text_end
 
 VermilionCityPokemonFanClubSignText:
-	text_far _VermilionCityPokemonFanClubSignText
+	text_far WLA_GLOBAL_VermilionCityPokemonFanClubSignText
 	text_end
 
 VermilionCityGymSignText:
-	text_far _VermilionCityGymSignText
+	text_far WLA_GLOBAL_VermilionCityGymSignText
 	text_end
 
 VermilionCityHarborSignText:
-	text_far _VermilionCityHarborSignText
+	text_far WLA_GLOBAL_VermilionCityHarborSignText
 	text_end

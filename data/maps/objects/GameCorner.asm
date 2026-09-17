@@ -12,17 +12,17 @@
 	const_export GAMECORNER_ROCKET
 
 GameCorner_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 3
 	warp_event 15, 17, LAST_MAP, 8
 	warp_event 16, 17, LAST_MAP, 8
 	warp_event 17,  4, ROCKET_HIDEOUT_B1F, 2
 
-	def_bg_events
+	.DB 1
 	bg_event  9,  4, TEXT_GAMECORNER_POSTER
 
-	def_object_events
+	.DB 11
 	object_event  2,  6, SPRITE_BEAUTY, STAY, DOWN, TEXT_GAMECORNER_BEAUTY1
 	object_event  5,  6, SPRITE_CLERK, STAY, DOWN, TEXT_GAMECORNER_CLERK1
 	object_event  2, 10, SPRITE_MIDDLE_AGED_MAN, STAY, LEFT, TEXT_GAMECORNER_MIDDLE_AGED_MAN1
@@ -35,4 +35,8 @@ GameCorner_Object:
 	object_event 17, 13, SPRITE_GENTLEMAN, STAY, RIGHT, TEXT_GAMECORNER_GENTLEMAN
 	object_event  9,  5, SPRITE_ROCKET, STAY, UP, TEXT_GAMECORNER_ROCKET, OPP_ROCKET, 7
 
-	def_warps_to GAME_CORNER
+	event_displacement GAME_CORNER_WIDTH, 15, 17
+
+	event_displacement GAME_CORNER_WIDTH, 16, 17
+
+	event_displacement GAME_CORNER_WIDTH, 17, 4

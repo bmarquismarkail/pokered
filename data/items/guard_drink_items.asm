@@ -1,5 +1,5 @@
 GuardDrinksList:
-	db FRESH_WATER
-	db SODA_POP
-	db LEMONADE
-	db 0 ; end
+	.DB FRESH_WATER
+	.DB SODA_POP
+	.DB LEMONADE
+	.DB 0 ; end

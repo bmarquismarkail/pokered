@@ -28,7 +28,7 @@ Route16DefaultScript:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE16_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, TEXT_ROUTE16_SNORLAX_WOKE_UP
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -50,11 +50,11 @@ Route16SnorlaxPostBattleScript:
 	call UpdateSprites
 	ld a, [wBattleResult]
 	cp $2
-	jr z, .caught
+	jr z, Route16SnorlaxPostBattleScript.caught
 	ld a, TEXT_ROUTE16_SNORLAX_RETURNED_TO_MOUNTAINS
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-.caught
+Route16SnorlaxPostBattleScript.caught
 	SetEvent EVENT_BEAT_ROUTE16_SNORLAX
 	call Delay3
 	ld a, SCRIPT_ROUTE16_DEFAULT
@@ -90,7 +90,7 @@ Route16TrainerHeader4:
 	trainer EVENT_BEAT_ROUTE_16_TRAINER_4, 2, Route16Biker5BattleText, Route16Biker5EndBattleText, Route16Biker5AfterBattleText
 Route16TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_16_TRAINER_5, 4, Route16Biker6BattleText, Route16Biker6EndBattleText, Route16Biker6AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route16Biker1Text:
 	text_asm
@@ -99,15 +99,15 @@ Route16Biker1Text:
 	jp TextScriptEnd
 
 Route16Biker1BattleText:
-	text_far _Route16Biker1BattleText
+	text_far WLA_GLOBAL_Route16Biker1BattleText
 	text_end
 
 Route16Biker1EndBattleText:
-	text_far _Route16Biker1EndBattleText
+	text_far WLA_GLOBAL_Route16Biker1EndBattleText
 	text_end
 
 Route16Biker1AfterBattleText:
-	text_far _Route16Biker1AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker1AfterBattleText
 	text_end
 
 Route16Biker2Text:
@@ -117,15 +117,15 @@ Route16Biker2Text:
 	jp TextScriptEnd
 
 Route16Biker2BattleText:
-	text_far _Route16Biker2BattleText
+	text_far WLA_GLOBAL_Route16Biker2BattleText
 	text_end
 
 Route16Biker2EndBattleText:
-	text_far _Route16Biker2EndBattleText
+	text_far WLA_GLOBAL_Route16Biker2EndBattleText
 	text_end
 
 Route16Biker2AfterBattleText:
-	text_far _Route16Biker2AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker2AfterBattleText
 	text_end
 
 Route16Biker3Text:
@@ -135,15 +135,15 @@ Route16Biker3Text:
 	jp TextScriptEnd
 
 Route16Biker3BattleText:
-	text_far _Route16Biker3BattleText
+	text_far WLA_GLOBAL_Route16Biker3BattleText
 	text_end
 
 Route16Biker3EndBattleText:
-	text_far _Route16Biker3EndBattleText
+	text_far WLA_GLOBAL_Route16Biker3EndBattleText
 	text_end
 
 Route16Biker3AfterBattleText:
-	text_far _Route16Biker3AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker3AfterBattleText
 	text_end
 
 Route16Biker4Text:
@@ -153,15 +153,15 @@ Route16Biker4Text:
 	jp TextScriptEnd
 
 Route16biker4BattleText:
-	text_far _Route16biker4BattleText
+	text_far WLA_GLOBAL_Route16biker4BattleText
 	text_end
 
 Route16Biker4EndBattleText:
-	text_far _Route16Biker4EndBattleText
+	text_far WLA_GLOBAL_Route16Biker4EndBattleText
 	text_end
 
 Route16Biker4AfterBattleText:
-	text_far _Route16Biker4AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker4AfterBattleText
 	text_end
 
 Route16Biker5Text:
@@ -171,15 +171,15 @@ Route16Biker5Text:
 	jp TextScriptEnd
 
 Route16Biker5BattleText:
-	text_far _Route16Biker5BattleText
+	text_far WLA_GLOBAL_Route16Biker5BattleText
 	text_end
 
 Route16Biker5EndBattleText:
-	text_far _Route16Biker5EndBattleText
+	text_far WLA_GLOBAL_Route16Biker5EndBattleText
 	text_end
 
 Route16Biker5AfterBattleText:
-	text_far _Route16Biker5AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker5AfterBattleText
 	text_end
 
 Route16Biker6Text:
@@ -189,33 +189,33 @@ Route16Biker6Text:
 	jp TextScriptEnd
 
 Route16Biker6BattleText:
-	text_far _Route16Biker6BattleText
+	text_far WLA_GLOBAL_Route16Biker6BattleText
 	text_end
 
 Route16Biker6EndBattleText:
-	text_far _Route16Biker6EndBattleText
+	text_far WLA_GLOBAL_Route16Biker6EndBattleText
 	text_end
 
 Route16Biker6AfterBattleText:
-	text_far _Route16Biker6AfterBattleText
+	text_far WLA_GLOBAL_Route16Biker6AfterBattleText
 	text_end
 
 Route16SnorlaxText:
-	text_far _Route16Text7
+	text_far WLA_GLOBAL_Route16Text7
 	text_end
 
 Route16SnorlaxWokeUpText:
-	text_far _Route16SnorlaxWokeUpText
+	text_far WLA_GLOBAL_Route16SnorlaxWokeUpText
 	text_end
 
 Route16SnorlaxReturnedToMountainsText:
-	text_far _Route16SnorlaxReturnedToMountainsText
+	text_far WLA_GLOBAL_Route16SnorlaxReturnedToMountainsText
 	text_end
 
 Route16CyclingRoadSignText:
-	text_far _Route16CyclingRoadSignText
+	text_far WLA_GLOBAL_Route16CyclingRoadSignText
 	text_end
 
 Route16SignText:
-	text_far _Route16SignText
+	text_far WLA_GLOBAL_Route16SignText
 	text_end

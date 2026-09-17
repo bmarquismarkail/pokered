@@ -1,37 +1,37 @@
 ; only used for setting BIT_STANDING_ON_WARP of wMovementFlags upon entering a new map
-IsPlayerStandingOnWarp::
+IsPlayerStandingOnWarp:
 	ld a, [wNumberOfWarps]
 	and a
 	ret z
 	ld c, a
 	ld hl, wWarpEntries
-.loop
+IsPlayerStandingOnWarp.loop
 	ld a, [wYCoord]
 	cp [hl]
-	jr nz, .nextWarp1
+	jr nz, IsPlayerStandingOnWarp.nextWarp1
 	inc hl
 	ld a, [wXCoord]
 	cp [hl]
-	jr nz, .nextWarp2
+	jr nz, IsPlayerStandingOnWarp.nextWarp2
 	inc hl
 	ld a, [hli] ; target warp
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
-	ldh [hWarpDestinationMap], a
+	ldh [lobyte(hWarpDestinationMap)], a
 	ld hl, wMovementFlags
 	set BIT_STANDING_ON_WARP, [hl]
 	ret
-.nextWarp1
+IsPlayerStandingOnWarp.nextWarp1
 	inc hl
-.nextWarp2
+IsPlayerStandingOnWarp.nextWarp2
 	inc hl
 	inc hl
 	inc hl
 	dec c
-	jr nz, .loop
+	jr nz, IsPlayerStandingOnWarp.loop
 	ret
 
-CheckForceBikeOrSurf::
+CheckForceBikeOrSurf:
 	ld hl, wStatusFlags6
 	bit BIT_ALWAYS_ON_BIKE, [hl]
 	ret nz
@@ -42,48 +42,48 @@ CheckForceBikeOrSurf::
 	ld c, a
 	ld a, [wCurMap]
 	ld d, a
-.loop
+CheckForceBikeOrSurf.loop
 	ld a, [hli]
 	cp $ff
 	ret z ; if we reach FF then it's not part of the list
 	cp d ; compare to current map
-	jr nz, .incorrectMap
+	jr nz, CheckForceBikeOrSurf.incorrectMap
 	ld a, [hli]
 	cp b ; compare y-coord
-	jr nz, .incorrectY
+	jr nz, CheckForceBikeOrSurf.incorrectY
 	ld a, [hli]
 	cp c ; compare x-coord
-	jr nz, .loop ; incorrect x-coord, check next item
+	jr nz, CheckForceBikeOrSurf.loop ; incorrect x-coord, check next item
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_B3F
 	ld a, SCRIPT_SEAFOAMISLANDSB3F_MOVE_OBJECT
 	ld [wSeafoamIslandsB3FCurScript], a
-	jr z, .forceSurfing
+	jr z, CheckForceBikeOrSurf.forceSurfing
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_B4F
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 	ld [wSeafoamIslandsB4FCurScript], a
-	jr z, .forceSurfing
+	jr z, CheckForceBikeOrSurf.forceSurfing
 	ld hl, wStatusFlags6
 	set BIT_ALWAYS_ON_BIKE, [hl]
 	ld a, $1
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
-.incorrectMap
+CheckForceBikeOrSurf.incorrectMap
 	inc hl
-.incorrectY
+CheckForceBikeOrSurf.incorrectY
 	inc hl
-	jr .loop
-.forceSurfing
+	jr CheckForceBikeOrSurf.loop
+CheckForceBikeOrSurf.forceSurfing
 	ld a, $2
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
 
-INCLUDE "data/maps/force_bike_surf.asm"
+.INCLUDE "data/maps/force_bike_surf.asm"
 
-IsPlayerFacingEdgeOfMap::
+IsPlayerFacingEdgeOfMap:
 	push hl
 	push de
 	push bc
@@ -91,7 +91,7 @@ IsPlayerFacingEdgeOfMap::
 	srl a
 	ld c, a
 	ld b, $0
-	ld hl, .functionPointerTable
+	ld hl, IsPlayerFacingEdgeOfMap.functionPointerTable
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -100,60 +100,60 @@ IsPlayerFacingEdgeOfMap::
 	ld b, a
 	ld a, [wXCoord]
 	ld c, a
-	ld de, .return
+	ld de, IsPlayerFacingEdgeOfMap.return
 	push de
 	jp hl
-.return
+IsPlayerFacingEdgeOfMap.return
 	pop bc
 	pop de
 	pop hl
 	ret
 
-.functionPointerTable
-	dw .facingDown
-	dw .facingUp
-	dw .facingLeft
-	dw .facingRight
+IsPlayerFacingEdgeOfMap.functionPointerTable
+	.DW IsPlayerFacingEdgeOfMap.facingDown
+	.DW IsPlayerFacingEdgeOfMap.facingUp
+	.DW IsPlayerFacingEdgeOfMap.facingLeft
+	.DW IsPlayerFacingEdgeOfMap.facingRight
 
-.facingDown
+IsPlayerFacingEdgeOfMap.facingDown
 	ld a, [wCurMapHeight]
 	add a
 	dec a
 	cp b
-	jr z, .setCarry
-	jr .resetCarry
+	jr z, IsPlayerFacingEdgeOfMap.setCarry
+	jr IsPlayerFacingEdgeOfMap.resetCarry
 
-.facingUp
+IsPlayerFacingEdgeOfMap.facingUp
 	ld a, b
 	and a
-	jr z, .setCarry
-	jr .resetCarry
+	jr z, IsPlayerFacingEdgeOfMap.setCarry
+	jr IsPlayerFacingEdgeOfMap.resetCarry
 
-.facingLeft
+IsPlayerFacingEdgeOfMap.facingLeft
 	ld a, c
 	and a
-	jr z, .setCarry
-	jr .resetCarry
+	jr z, IsPlayerFacingEdgeOfMap.setCarry
+	jr IsPlayerFacingEdgeOfMap.resetCarry
 
-.facingRight
+IsPlayerFacingEdgeOfMap.facingRight
 	ld a, [wCurMapWidth]
 	add a
 	dec a
 	cp c
-	jr z, .setCarry
-	jr .resetCarry
-.resetCarry
+	jr z, IsPlayerFacingEdgeOfMap.setCarry
+	jr IsPlayerFacingEdgeOfMap.resetCarry
+IsPlayerFacingEdgeOfMap.resetCarry
 	and a
 	ret
-.setCarry
+IsPlayerFacingEdgeOfMap.setCarry
 	scf
 	ret
 
-IsWarpTileInFrontOfPlayer::
+IsWarpTileInFrontOfPlayer:
 	push hl
 	push de
 	push bc
-	call _GetTileAndCoordsInFrontOfPlayer
+	call WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer
 	ld a, [wCurMap]
 	cp SS_ANNE_BOW
 	jr z, IsSSAnneBowWarpTileInFrontOfPlayer
@@ -169,30 +169,30 @@ IsWarpTileInFrontOfPlayer::
 	ld a, [wTileInFrontOfPlayer]
 	ld de, $1
 	call IsInArray
-.done
+IsWarpTileInFrontOfPlayer.done
 	pop bc
 	pop de
 	pop hl
 	ret
 
-INCLUDE "data/tilesets/warp_carpet_tile_ids.asm"
+.INCLUDE "data/tilesets/warp_carpet_tile_ids.asm"
 
 IsSSAnneBowWarpTileInFrontOfPlayer:
 	ld a, [wTileInFrontOfPlayer]
 	cp $15
-	jr nz, .notSSAnne5Warp
+	jr nz, IsSSAnneBowWarpTileInFrontOfPlayer.notSSAnne5Warp
 	scf
 	jr IsWarpTileInFrontOfPlayer.done
-.notSSAnne5Warp
+IsSSAnneBowWarpTileInFrontOfPlayer.notSSAnne5Warp
 	and a
 	jr IsWarpTileInFrontOfPlayer.done
 
-IsPlayerStandingOnDoorTileOrWarpTile::
+IsPlayerStandingOnDoorTileOrWarpTile:
 	push hl
 	push de
 	push bc
 	farcall IsPlayerStandingOnDoorTile
-	jr c, .done
+	jr c, IsPlayerStandingOnDoorTileOrWarpTile.done
 	ld a, [wCurMapTileset]
 	add a
 	ld c, a
@@ -205,18 +205,18 @@ IsPlayerStandingOnDoorTileOrWarpTile::
 	ld de, $1
 	lda_coord 8, 9
 	call IsInArray
-	jr nc, .done
+	jr nc, IsPlayerStandingOnDoorTileOrWarpTile.done
 	ld hl, wMovementFlags
 	res BIT_STANDING_ON_WARP, [hl]
-.done
+IsPlayerStandingOnDoorTileOrWarpTile.done
 	pop bc
 	pop de
 	pop hl
 	ret
 
-INCLUDE "data/tilesets/warp_tile_ids.asm"
+.INCLUDE "data/tilesets/warp_tile_ids.asm"
 
-PrintSafariZoneSteps::
+PrintSafariZoneSteps:
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	ret c
@@ -228,7 +228,7 @@ PrintSafariZoneSteps::
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, wSafariSteps
-	lb bc, 2, 3
+	lb "bc", 2, 3
 	call PrintNumber
 	hlcoord 4, 1
 	ld de, SafariSteps
@@ -238,58 +238,63 @@ PrintSafariZoneSteps::
 	call PlaceString
 	ld a, [wNumSafariBalls]
 	cp 10
-	jr nc, .tenOrMore
+	jr nc, PrintSafariZoneSteps.tenOrMore
 	hlcoord 5, 3
-	ld a, ' '
+	ld a, $7f
 	ld [hl], a
-.tenOrMore
+PrintSafariZoneSteps.tenOrMore
 	hlcoord 6, 3
 	ld de, wNumSafariBalls
-	lb bc, 1, 2
+	lb "bc", 1, 2
 	jp PrintNumber
 
 SafariSteps:
-	db "/500@"
+		.STRINGMAP pokemon, "/500@"
 
 SafariBallText:
-	db "BALL×× @"
+		.STRINGMAP pokemon, "BALL×× @"
 
 GetTileAndCoordsInFrontOfPlayer:
 	call GetPredefRegisters
 
 _GetTileAndCoordsInFrontOfPlayer:
+WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer:
 	ld a, [wYCoord]
 	ld d, a
 	ld a, [wXCoord]
 	ld e, a
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	jr nz, .notFacingDown
+	jr nz, WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingDown
 ; facing down
 	lda_coord 8, 11
 	inc d
-	jr .storeTile
-.notFacingDown
+	jr WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__storeTile
+_GetTileAndCoordsInFrontOfPlayer.notFacingDown:
+WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingDown:
 	cp SPRITE_FACING_UP
-	jr nz, .notFacingUp
+	jr nz, WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingUp
 ; facing up
 	lda_coord 8, 7
 	dec d
-	jr .storeTile
-.notFacingUp
+	jr WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__storeTile
+_GetTileAndCoordsInFrontOfPlayer.notFacingUp:
+WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingUp:
 	cp SPRITE_FACING_LEFT
-	jr nz, .notFacingLeft
+	jr nz, WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingLeft
 ; facing left
 	lda_coord 6, 9
 	dec e
-	jr .storeTile
-.notFacingLeft
+	jr WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__storeTile
+_GetTileAndCoordsInFrontOfPlayer.notFacingLeft:
+WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__notFacingLeft:
 	cp SPRITE_FACING_RIGHT
-	jr nz, .storeTile
+	jr nz, WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__storeTile
 ; facing right
 	lda_coord 10, 9
 	inc e
-.storeTile
+_GetTileAndCoordsInFrontOfPlayer.storeTile:
+WLA_GLOBAL_GetTileAndCoordsInFrontOfPlayer__storeTile:
 	ld c, a
 	ld [wTileInFrontOfPlayer], a
 	ret
@@ -303,47 +308,47 @@ _GetTileAndCoordsInFrontOfPlayer:
 
 GetTileTwoStepsInFrontOfPlayer:
 	xor a
-	ldh [hPlayerFacing], a
+	ldh [lobyte(hPlayerFacing)], a
 	ld hl, wYCoord
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	jr nz, .notFacingDown
+	jr nz, GetTileTwoStepsInFrontOfPlayer.notFacingDown
 ; facing down
 	ld hl, hPlayerFacing
 	set BIT_FACING_DOWN, [hl]
 	lda_coord 8, 13
 	inc d
-	jr .storeTile
-.notFacingDown
+	jr GetTileTwoStepsInFrontOfPlayer.storeTile
+GetTileTwoStepsInFrontOfPlayer.notFacingDown
 	cp SPRITE_FACING_UP
-	jr nz, .notFacingUp
+	jr nz, GetTileTwoStepsInFrontOfPlayer.notFacingUp
 ; facing up
 	ld hl, hPlayerFacing
 	set BIT_FACING_UP, [hl]
 	lda_coord 8, 5
 	dec d
-	jr .storeTile
-.notFacingUp
+	jr GetTileTwoStepsInFrontOfPlayer.storeTile
+GetTileTwoStepsInFrontOfPlayer.notFacingUp
 	cp SPRITE_FACING_LEFT
-	jr nz, .notFacingLeft
+	jr nz, GetTileTwoStepsInFrontOfPlayer.notFacingLeft
 ; facing left
 	ld hl, hPlayerFacing
 	set BIT_FACING_LEFT, [hl]
 	lda_coord 4, 9
 	dec e
-	jr .storeTile
-.notFacingLeft
+	jr GetTileTwoStepsInFrontOfPlayer.storeTile
+GetTileTwoStepsInFrontOfPlayer.notFacingLeft
 	cp SPRITE_FACING_RIGHT
-	jr nz, .storeTile
+	jr nz, GetTileTwoStepsInFrontOfPlayer.storeTile
 ; facing right
 	ld hl, hPlayerFacing
 	set BIT_FACING_RIGHT, [hl]
 	lda_coord 12, 9
 	inc e
-.storeTile
+GetTileTwoStepsInFrontOfPlayer.storeTile
 	ld c, a
 	ld [wTileInFrontOfBoulderAndBoulderCollisionResult], a
 	ld [wTileInFrontOfPlayer], a
@@ -355,22 +360,22 @@ CheckForCollisionWhenPushingBoulder:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.loop
+CheckForCollisionWhenPushingBoulder.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .done ; if the tile two steps ahead is not passable
+	jr z, CheckForCollisionWhenPushingBoulder.done ; if the tile two steps ahead is not passable
 	cp c
-	jr nz, .loop
+	jr nz, CheckForCollisionWhenPushingBoulder.loop
 	ld hl, TilePairCollisionsLand
 	call CheckForTilePairCollisions2
 	ld a, $ff
-	jr c, .done ; if there is an elevation difference between the current tile and the one two steps ahead
+	jr c, CheckForCollisionWhenPushingBoulder.done ; if there is an elevation difference between the current tile and the one two steps ahead
 	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
 	cp $15 ; stairs tile
 	ld a, $ff
-	jr z, .done ; if the tile two steps ahead is stairs
+	jr z, CheckForCollisionWhenPushingBoulder.done ; if the tile two steps ahead is stairs
 	call CheckForBoulderCollisionWithSprites
-.done
+CheckForCollisionWhenPushingBoulder.done
 	ld [wTileInFrontOfBoulderAndBoulderCollisionResult], a
 	ret
 
@@ -384,71 +389,71 @@ CheckForBoulderCollisionWithSprites:
 	ld hl, wSprite01StateData2MapY
 	add hl, de
 	ld a, [hli] ; map Y position
-	ldh [hPlayerYCoord], a
+	ldh [lobyte(hPlayerYCoord)], a
 	ld a, [hl] ; map X position
-	ldh [hPlayerXCoord], a
+	ldh [lobyte(hPlayerXCoord)], a
 	ld a, [wNumSprites]
 	ld c, a
 	ld de, $f
 	ld hl, wSprite01StateData2MapY
-	ldh a, [hPlayerFacing]
+	ldh a, [lobyte(hPlayerFacing)]
 	and (1 << BIT_FACING_UP) | (1 << BIT_FACING_DOWN)
-	jr z, .pushingHorizontallyLoop
-.pushingVerticallyLoop
+	jr z, CheckForBoulderCollisionWithSprites.pushingHorizontallyLoop
+CheckForBoulderCollisionWithSprites.pushingVerticallyLoop
 	inc hl
-	ldh a, [hPlayerXCoord]
+	ldh a, [lobyte(hPlayerXCoord)]
 	cp [hl]
-	jr nz, .nextSprite1 ; if X coordinates don't match
+	jr nz, CheckForBoulderCollisionWithSprites.nextSprite1 ; if X coordinates don't match
 	dec hl
 	ld a, [hli]
 	ld b, a
-	ldh a, [hPlayerFacing]
-	ASSERT BIT_FACING_DOWN == 0
+	ldh a, [lobyte(hPlayerFacing)]
+	.ASSERT ((BIT_FACING_DOWN)-(0)) < 1 && ((BIT_FACING_DOWN)-(0)) > -1
 	rrca
-	jr c, .pushingDown
+	jr c, CheckForBoulderCollisionWithSprites.pushingDown
 ; pushing up
-	ldh a, [hPlayerYCoord]
+	ldh a, [lobyte(hPlayerYCoord)]
 	dec a
-	jr .compareYCoords
-.pushingDown
-	ldh a, [hPlayerYCoord]
+	jr CheckForBoulderCollisionWithSprites.compareYCoords
+CheckForBoulderCollisionWithSprites.pushingDown
+	ldh a, [lobyte(hPlayerYCoord)]
 	inc a
-.compareYCoords
+CheckForBoulderCollisionWithSprites.compareYCoords
 	cp b
-	jr z, .failure
-.nextSprite1
+	jr z, CheckForBoulderCollisionWithSprites.failure
+CheckForBoulderCollisionWithSprites.nextSprite1
 	dec c
-	jr z, .success
+	jr z, CheckForBoulderCollisionWithSprites.success
 	add hl, de
-	jr .pushingVerticallyLoop
-.pushingHorizontallyLoop
+	jr CheckForBoulderCollisionWithSprites.pushingVerticallyLoop
+CheckForBoulderCollisionWithSprites.pushingHorizontallyLoop
 	ld a, [hli]
 	ld b, a
-	ldh a, [hPlayerYCoord]
+	ldh a, [lobyte(hPlayerYCoord)]
 	cp b
-	jr nz, .nextSprite2
+	jr nz, CheckForBoulderCollisionWithSprites.nextSprite2
 	ld b, [hl]
-	ldh a, [hPlayerFacing]
+	ldh a, [lobyte(hPlayerFacing)]
 	bit BIT_FACING_LEFT, a
-	jr nz, .pushingLeft
+	jr nz, CheckForBoulderCollisionWithSprites.pushingLeft
 ; pushing right
-	ldh a, [hPlayerXCoord]
+	ldh a, [lobyte(hPlayerXCoord)]
 	inc a
-	jr .compareXCoords
-.pushingLeft
-	ldh a, [hPlayerXCoord]
+	jr CheckForBoulderCollisionWithSprites.compareXCoords
+CheckForBoulderCollisionWithSprites.pushingLeft
+	ldh a, [lobyte(hPlayerXCoord)]
 	dec a
-.compareXCoords
+CheckForBoulderCollisionWithSprites.compareXCoords
 	cp b
-	jr z, .failure
-.nextSprite2
+	jr z, CheckForBoulderCollisionWithSprites.failure
+CheckForBoulderCollisionWithSprites.nextSprite2
 	dec c
-	jr z, .success
+	jr z, CheckForBoulderCollisionWithSprites.success
 	add hl, de
-	jr .pushingHorizontallyLoop
-.failure
+	jr CheckForBoulderCollisionWithSprites.pushingHorizontallyLoop
+CheckForBoulderCollisionWithSprites.failure
 	ld a, $ff
 	ret
-.success
+CheckForBoulderCollisionWithSprites.success
 	xor a
 	ret

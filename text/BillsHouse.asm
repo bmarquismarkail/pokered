@@ -1,4 +1,5 @@
-_BillsHouseBillImNotAPokemonText::
+_BillsHouseBillImNotAPokemonText:
+WLA_GLOBAL_BillsHouseBillImNotAPokemonText:
 	text "Hiya! I'm a"
 	line "#MON..."
 	cont "...No I'm not!"
@@ -19,7 +20,8 @@ _BillsHouseBillImNotAPokemonText::
 	line "Help me out here!"
 	done
 
-_BillsHouseBillUseSeparationSystemText::
+_BillsHouseBillUseSeparationSystemText:
+WLA_GLOBAL_BillsHouseBillUseSeparationSystemText:
 	text "When I'm in the"
 	line "TELEPORTER, go to"
 	cont "my PC and run the"
@@ -27,7 +29,8 @@ _BillsHouseBillUseSeparationSystemText::
 	cont "System!"
 	done
 
-_BillsHouseBillNoYouGottaHelpText::
+_BillsHouseBillNoYouGottaHelpText:
+WLA_GLOBAL_BillsHouseBillNoYouGottaHelpText:
 	text "No!? Come on, you"
 	line "gotta help a guy"
 	cont "in deep trouble!"
@@ -37,7 +40,8 @@ _BillsHouseBillNoYouGottaHelpText::
 	cont "OK? All right!"
 	prompt
 
-_BillsHouseBillThankYouText::
+_BillsHouseBillThankYouText:
+WLA_GLOBAL_BillsHouseBillThankYouText:
 	text "BILL: Yeehah!"
 	line "Thanks, bud! I"
 	cont "owe you one!"
@@ -53,19 +57,22 @@ _BillsHouseBillThankYouText::
 	cont "maybe this'll do."
 	prompt
 
-_SSTicketReceivedText::
+_SSTicketReceivedText:
+WLA_GLOBAL_SSTicketReceivedText:
 	text "<PLAYER> received"
 	line "an @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_SSTicketNoRoomText::
+_SSTicketNoRoomText:
+WLA_GLOBAL_SSTicketNoRoomText:
 	text "You've got too"
 	line "much stuff, bud!"
 	done
 
-_BillsHouseBillWhyDontYouGoInsteadOfMeText::
+_BillsHouseBillWhyDontYouGoInsteadOfMeText:
+WLA_GLOBAL_BillsHouseBillWhyDontYouGoInsteadOfMeText:
 	text "That cruise ship,"
 	line "S.S.ANNE, is in"
 	cont "VERMILION CITY."
@@ -80,7 +87,8 @@ _BillsHouseBillWhyDontYouGoInsteadOfMeText::
 	cont "instead of me?"
 	done
 
-_BillsHouseBillCheckOutMyRarePokemonText::
+_BillsHouseBillCheckOutMyRarePokemonText:
+WLA_GLOBAL_BillsHouseBillCheckOutMyRarePokemonText:
 	text "BILL: Look, bud,"
 	line "just check out"
 	cont "some of my rare"

@@ -1,11 +1,11 @@
 StartSlotMachine:
 	ld a, [wHiddenEventFunctionArgument]
 	cp SLOTS_OUTOFORDER
-	jr z, .printOutOfOrder
+	jr z, StartSlotMachine.printOutOfOrder
 	cp SLOTS_OUTTOLUNCH
-	jr z, .printOutToLunch
+	jr z, StartSlotMachine.printOutToLunch
 	cp SLOTS_SOMEONESKEYS
-	jr z, .printSomeonesKeys
+	jr z, StartSlotMachine.printSomeonesKeys
 	farcall AbleToPlaySlotsCheck
 	ld a, [wCanPlaySlots]
 	and a
@@ -15,40 +15,40 @@ StartSlotMachine:
 	ld a, [wHiddenEventIndex]
 	inc a
 	cp b
-	jr z, .match
+	jr z, StartSlotMachine.match
 	ld a, 253
-	jr .next
-.match
+	jr StartSlotMachine.next
+StartSlotMachine.match
 	ld a, 250
-.next
+StartSlotMachine.next
 	ld [wSlotMachineSevenAndBarModeChance], a
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wSlotMachineSavedROMBank], a
 	call PromptUserToPlaySlots
 	ret
-.printOutOfOrder
+StartSlotMachine.printOutOfOrder
 	tx_pre_id GameCornerOutOfOrderText
-	jr .printText
-.printOutToLunch
+	jr StartSlotMachine.printText
+StartSlotMachine.printOutToLunch
 	tx_pre_id GameCornerOutToLunchText
-	jr .printText
-.printSomeonesKeys
+	jr StartSlotMachine.printText
+StartSlotMachine.printSomeonesKeys
 	tx_pre_id GameCornerSomeonesKeysText
-.printText
+StartSlotMachine.printText
 	push af
 	call EnableAutoTextBoxDrawing
 	pop af
 	call PrintPredefTextID
 	ret
 
-GameCornerOutOfOrderText::
-	text_far _GameCornerOutOfOrderText
+GameCornerOutOfOrderText:
+	text_far WLA_GLOBAL_GameCornerOutOfOrderText
 	text_end
 
-GameCornerOutToLunchText::
-	text_far _GameCornerOutToLunchText
+GameCornerOutToLunchText:
+	text_far WLA_GLOBAL_GameCornerOutToLunchText
 	text_end
 
-GameCornerSomeonesKeysText::
-	text_far _GameCornerSomeonesKeysText
+GameCornerSomeonesKeysText:
+	text_far WLA_GLOBAL_GameCornerSomeonesKeysText
 	text_end

@@ -1,7 +1,7 @@
 ; this function seems to be used only once
 ; it store the address of a row and column of the VRAM background map in hl
 ; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
-GetRowColAddressBgMap::
+GetRowColAddressBgMap:
 	xor a
 	srl h
 	rr a
@@ -18,24 +18,24 @@ GetRowColAddressBgMap::
 
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
-ClearBgMap::
-	ld a, ' '
+ClearBgMap:
+	ld a, $7f
 	jr FillBgMapCommon
 
 ; fills a VRAM background map with tile index in register l
 ; INPUT: h - high byte of background tile map address in VRAM
-FillBgMap:: ; unreferenced
+FillBgMap: ; unreferenced
 	ld a, l
 
 FillBgMapCommon:
 	ld de, TILEMAP_AREA
 	ld l, e
-.loop
+FillBgMapCommon.loop
 	ld [hli], a
 	dec e
-	jr nz, .loop
+	jr nz, FillBgMapCommon.loop
 	dec d
-	jr nz, .loop
+	jr nz, FillBgMapCommon.loop
 	ret
 
 ; This function redraws a BG row of height 2 or a BG column of width 2.
@@ -44,23 +44,23 @@ FillBgMapCommon:
 ; row or column is more efficient than redrawing the entire screen.
 ; However, this function is also called repeatedly to redraw the whole screen
 ; when necessary. It is also used in trade animation and elevator code.
-RedrawRowOrColumn::
-	ldh a, [hRedrawRowOrColumnMode]
+RedrawRowOrColumn:
+	ldh a, [lobyte(hRedrawRowOrColumnMode)]
 	and a
 	ret z
 	ld b, a
 	xor a
-	ldh [hRedrawRowOrColumnMode], a
+	ldh [lobyte(hRedrawRowOrColumnMode)], a
 	dec b
-	jr nz, .redrawRow
-.redrawColumn
+	jr nz, RedrawRowOrColumn.redrawRow
+RedrawRowOrColumn.redrawColumn
 	ld hl, wRedrawRowOrColumnSrcTiles
-	ldh a, [hRedrawRowOrColumnDest]
+	ldh a, [lobyte(hRedrawRowOrColumnDest)]
 	ld e, a
-	ldh a, [hRedrawRowOrColumnDest + 1]
+	ldh a, [lobyte(hRedrawRowOrColumnDest + 1)]
 	ld d, a
 	ld c, SCREEN_HEIGHT
-.loop1
+RedrawRowOrColumn.loop1
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -69,36 +69,36 @@ RedrawRowOrColumn::
 	ld a, TILEMAP_WIDTH - 1
 	add e
 	ld e, a
-	jr nc, .noCarry
+	jr nc, RedrawRowOrColumn.noCarry
 	inc d
-.noCarry
+RedrawRowOrColumn.noCarry
 ; the following 4 lines wrap us from bottom to top if necessary
 	ld a, d
-	and HIGH(TILEMAP_AREA - 1)
-	or HIGH(vBGMap0)
+	and hibyte(TILEMAP_AREA - 1)
+	or hibyte(vBGMap0)
 	ld d, a
 	dec c
-	jr nz, .loop1
+	jr nz, RedrawRowOrColumn.loop1
 	xor a
-	ldh [hRedrawRowOrColumnMode], a
+	ldh [lobyte(hRedrawRowOrColumnMode)], a
 	ret
-.redrawRow
+RedrawRowOrColumn.redrawRow
 	ld hl, wRedrawRowOrColumnSrcTiles
-	ldh a, [hRedrawRowOrColumnDest]
+	ldh a, [lobyte(hRedrawRowOrColumnDest)]
 	ld e, a
-	ldh a, [hRedrawRowOrColumnDest + 1]
+	ldh a, [lobyte(hRedrawRowOrColumnDest + 1)]
 	ld d, a
 	push de
-	call .DrawHalf ; draw upper half
+	call RedrawRowOrColumn.DrawHalf ; draw upper half
 	pop de
 	ld a, TILEMAP_WIDTH
 	add e
 	ld e, a
 	; fall through and draw lower half
 
-.DrawHalf
+RedrawRowOrColumn.DrawHalf
 	ld c, SCREEN_WIDTH / 2
-.loop2
+RedrawRowOrColumn.loop2
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -114,7 +114,7 @@ RedrawRowOrColumn::
 	or b
 	ld e, a
 	dec c
-	jr nz, .loop2
+	jr nz, RedrawRowOrColumn.loop2
 	ret
 
 ; This function automatically transfers tile number data from the tile map at
@@ -124,63 +124,63 @@ RedrawRowOrColumn::
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawRowOrColumn, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer::
-	ldh a, [hAutoBGTransferEnabled]
+AutoBgMapTransfer:
+	ldh a, [lobyte(hAutoBGTransferEnabled)]
 	and a
 	ret z
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, h
-	ldh [hSPTemp], a
+	ldh [lobyte(hSPTemp)], a
 	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pointer
-	ldh a, [hAutoBGTransferPortion]
+	ldh [lobyte(hSPTemp + 1)], a ; save stack pointer
+	ldh a, [lobyte(hAutoBGTransferPortion)]
 	and a
-	jr z, .transferTopThird
+	jr z, AutoBgMapTransfer.transferTopThird
 	dec a
-	jr z, .transferMiddleThird
-.transferBottomThird
+	jr z, AutoBgMapTransfer.transferMiddleThird
+AutoBgMapTransfer.transferBottomThird
 	hlcoord 0, 2 * SCREEN_HEIGHT / 3
 	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
+	ldh a, [lobyte(hAutoBGTransferDest + 1)]
 	ld h, a
-	ldh a, [hAutoBGTransferDest]
+	ldh a, [lobyte(hAutoBGTransferDest)]
 	ld l, a
 	ld de, 12 * TILEMAP_WIDTH
 	add hl, de
 	xor a ; TRANSFERTOP
-	jr .doTransfer
-.transferTopThird
+	jr AutoBgMapTransfer.doTransfer
+AutoBgMapTransfer.transferTopThird
 	hlcoord 0, 0
 	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
+	ldh a, [lobyte(hAutoBGTransferDest + 1)]
 	ld h, a
-	ldh a, [hAutoBGTransferDest]
+	ldh a, [lobyte(hAutoBGTransferDest)]
 	ld l, a
 	ld a, TRANSFERMIDDLE
-	jr .doTransfer
-.transferMiddleThird
+	jr AutoBgMapTransfer.doTransfer
+AutoBgMapTransfer.transferMiddleThird
 	hlcoord 0, SCREEN_HEIGHT / 3
 	ld sp, hl
-	ldh a, [hAutoBGTransferDest + 1]
+	ldh a, [lobyte(hAutoBGTransferDest + 1)]
 	ld h, a
-	ldh a, [hAutoBGTransferDest]
+	ldh a, [lobyte(hAutoBGTransferDest)]
 	ld l, a
 	ld de, 6 * TILEMAP_WIDTH
 	add hl, de
 	ld a, TRANSFERBOTTOM
-.doTransfer
-	ldh [hAutoBGTransferPortion], a ; store next portion
+AutoBgMapTransfer.doTransfer
+	ldh [lobyte(hAutoBGTransferPortion)], a ; store next portion
 	ld b, SCREEN_HEIGHT / 3
 
-TransferBgRows::
+TransferBgRows:
 ; unrolled loop and using pop for speed
-REPT SCREEN_WIDTH / 2 - 1
+.REPT SCREEN_WIDTH / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-ENDR
+.ENDR
 	pop de
 	ld [hl], e
 	inc l
@@ -189,47 +189,47 @@ ENDR
 	ld a, TILEMAP_WIDTH - (SCREEN_WIDTH - 1)
 	add l
 	ld l, a
-	jr nc, .ok
+	jr nc, TransferBgRows.ok
 	inc h
-.ok
+TransferBgRows.ok
 	dec b
 	jr nz, TransferBgRows
 
-	ldh a, [hSPTemp]
+	ldh a, [lobyte(hSPTemp)]
 	ld h, a
-	ldh a, [hSPTemp + 1]
+	ldh a, [lobyte(hSPTemp + 1)]
 	ld l, a
 	ld sp, hl
 	ret
 
 ; Copies [hVBlankCopyBGNumRows] rows from hVBlankCopyBGSource to hVBlankCopyBGDest.
 ; If hVBlankCopyBGSource is XX00, the transfer is disabled.
-VBlankCopyBgMap::
-	ldh a, [hVBlankCopyBGSource] ; doubles as enabling byte
+VBlankCopyBgMap:
+	ldh a, [lobyte(hVBlankCopyBGSource)] ; doubles as enabling byte
 	and a
 	ret z
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, h
-	ldh [hSPTemp], a
+	ldh [lobyte(hSPTemp)], a
 	ld a, l
-	ldh [hSPTemp + 1], a ; save stack pointer
-	ldh a, [hVBlankCopyBGSource]
+	ldh [lobyte(hSPTemp + 1)], a ; save stack pointer
+	ldh a, [lobyte(hVBlankCopyBGSource)]
 	ld l, a
-	ldh a, [hVBlankCopyBGSource + 1]
+	ldh a, [lobyte(hVBlankCopyBGSource + 1)]
 	ld h, a
 	ld sp, hl
-	ldh a, [hVBlankCopyBGDest]
+	ldh a, [lobyte(hVBlankCopyBGDest)]
 	ld l, a
-	ldh a, [hVBlankCopyBGDest + 1]
+	ldh a, [lobyte(hVBlankCopyBGDest + 1)]
 	ld h, a
-	ldh a, [hVBlankCopyBGNumRows]
+	ldh a, [lobyte(hVBlankCopyBGNumRows)]
 	ld b, a
 	xor a
-	ldh [hVBlankCopyBGSource], a ; disable transfer so it doesn't continue next V-blank
+	ldh [lobyte(hVBlankCopyBGSource)], a ; disable transfer so it doesn't continue next V-blank
 	jr TransferBgRows
 
 
-VBlankCopyDouble::
+VBlankCopyDouble:
 ; Copy [hVBlankCopyDoubleSize] 1bpp tiles
 ; from hVBlankCopyDoubleSource to hVBlankCopyDoubleDest.
 
@@ -237,34 +237,34 @@ VBlankCopyDouble::
 ; The process is straightforward:
 ; copy each byte twice.
 
-	ldh a, [hVBlankCopyDoubleSize]
+	ldh a, [lobyte(hVBlankCopyDoubleSize)]
 	and a
 	ret z
 
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, h
-	ldh [hSPTemp], a
+	ldh [lobyte(hSPTemp)], a
 	ld a, l
-	ldh [hSPTemp + 1], a
+	ldh [lobyte(hSPTemp + 1)], a
 
-	ldh a, [hVBlankCopyDoubleSource]
+	ldh a, [lobyte(hVBlankCopyDoubleSource)]
 	ld l, a
-	ldh a, [hVBlankCopyDoubleSource + 1]
+	ldh a, [lobyte(hVBlankCopyDoubleSource + 1)]
 	ld h, a
 	ld sp, hl
 
-	ldh a, [hVBlankCopyDoubleDest]
+	ldh a, [lobyte(hVBlankCopyDoubleDest)]
 	ld l, a
-	ldh a, [hVBlankCopyDoubleDest + 1]
+	ldh a, [lobyte(hVBlankCopyDoubleDest + 1)]
 	ld h, a
 
-	ldh a, [hVBlankCopyDoubleSize]
+	ldh a, [lobyte(hVBlankCopyDoubleSize)]
 	ld b, a
 	xor a ; transferred
-	ldh [hVBlankCopyDoubleSize], a
+	ldh [lobyte(hVBlankCopyDoubleSize)], a
 
-.loop
-REPT TILE_SIZE / 4 - 1
+VBlankCopyDouble.loop
+.REPT TILE_SIZE / 4 - 1
 	pop de
 	ld [hl], e
 	inc l
@@ -274,7 +274,7 @@ REPT TILE_SIZE / 4 - 1
 	inc l
 	ld [hl], d
 	inc l
-ENDR
+.ENDR
 	pop de
 	ld [hl], e
 	inc l
@@ -285,116 +285,116 @@ ENDR
 	ld [hl], d
 	inc hl
 	dec b
-	jr nz, .loop
+	jr nz, VBlankCopyDouble.loop
 
 	ld a, l
-	ldh [hVBlankCopyDoubleDest], a
+	ldh [lobyte(hVBlankCopyDoubleDest)], a
 	ld a, h
-	ldh [hVBlankCopyDoubleDest + 1], a
+	ldh [lobyte(hVBlankCopyDoubleDest + 1)], a
 
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, l
-	ldh [hVBlankCopyDoubleSource], a
+	ldh [lobyte(hVBlankCopyDoubleSource)], a
 	ld a, h
-	ldh [hVBlankCopyDoubleSource + 1], a
+	ldh [lobyte(hVBlankCopyDoubleSource + 1)], a
 
-	ldh a, [hSPTemp]
+	ldh a, [lobyte(hSPTemp)]
 	ld h, a
-	ldh a, [hSPTemp + 1]
+	ldh a, [lobyte(hSPTemp + 1)]
 	ld l, a
 	ld sp, hl
 
 	ret
 
 
-VBlankCopy::
+VBlankCopy:
 ; Copy [hVBlankCopySize] 2bpp tiles (or 16 * [hVBlankCopySize] tile map entries)
 ; from hVBlankCopySource to hVBlankCopyDest.
 
 ; Source and destination addresses are updated,
 ; so transfer can continue in subsequent calls.
 
-	ldh a, [hVBlankCopySize]
+	ldh a, [lobyte(hVBlankCopySize)]
 	and a
 	ret z
 
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, h
-	ldh [hSPTemp], a
+	ldh [lobyte(hSPTemp)], a
 	ld a, l
-	ldh [hSPTemp + 1], a
+	ldh [lobyte(hSPTemp + 1)], a
 
-	ldh a, [hVBlankCopySource]
+	ldh a, [lobyte(hVBlankCopySource)]
 	ld l, a
-	ldh a, [hVBlankCopySource + 1]
+	ldh a, [lobyte(hVBlankCopySource + 1)]
 	ld h, a
 	ld sp, hl
 
-	ldh a, [hVBlankCopyDest]
+	ldh a, [lobyte(hVBlankCopyDest)]
 	ld l, a
-	ldh a, [hVBlankCopyDest + 1]
+	ldh a, [lobyte(hVBlankCopyDest + 1)]
 	ld h, a
 
-	ldh a, [hVBlankCopySize]
+	ldh a, [lobyte(hVBlankCopySize)]
 	ld b, a
 	xor a ; transferred
-	ldh [hVBlankCopySize], a
+	ldh [lobyte(hVBlankCopySize)], a
 
-.loop
-REPT TILE_SIZE / 2 - 1
+VBlankCopy.loop
+.REPT TILE_SIZE / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-ENDR
+.ENDR
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc hl
 	dec b
-	jr nz, .loop
+	jr nz, VBlankCopy.loop
 
 	ld a, l
-	ldh [hVBlankCopyDest], a
+	ldh [lobyte(hVBlankCopyDest)], a
 	ld a, h
-	ldh [hVBlankCopyDest + 1], a
+	ldh [lobyte(hVBlankCopyDest + 1)], a
 
-	ld hl, sp + 0
+	ld hl, sp+0
 	ld a, l
-	ldh [hVBlankCopySource], a
+	ldh [lobyte(hVBlankCopySource)], a
 	ld a, h
-	ldh [hVBlankCopySource + 1], a
+	ldh [lobyte(hVBlankCopySource + 1)], a
 
-	ldh a, [hSPTemp]
+	ldh a, [lobyte(hSPTemp)]
 	ld h, a
-	ldh a, [hSPTemp + 1]
+	ldh a, [lobyte(hSPTemp + 1)]
 	ld l, a
 	ld sp, hl
 
 	ret
 
 
-UpdateMovingBgTiles::
+UpdateMovingBgTiles:
 ; Animate water and flower
 ; tiles in the overworld.
 
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	and a
 	ret z
 
-	ldh a, [hMovingBGTilesCounter1]
+	ldh a, [lobyte(hMovingBGTilesCounter1)]
 	inc a
-	ldh [hMovingBGTilesCounter1], a
+	ldh [lobyte(hMovingBGTilesCounter1)], a
 	cp 20
 	ret c
 	cp 21
-	jr z, .flower
+	jr z, UpdateMovingBgTiles.flower
 
 ; water
 
-	ld hl, vTileset tile $14
+	ld hl, vTileset + TILE_SIZE * $14
 	ld c, TILE_SIZE
 
 	ld a, [wMovingBGTilesCounter2]
@@ -403,52 +403,52 @@ UpdateMovingBgTiles::
 	ld [wMovingBGTilesCounter2], a
 
 	and 4
-	jr nz, .left
-.right
+	jr nz, UpdateMovingBgTiles.left
+UpdateMovingBgTiles.right
 	ld a, [hl]
 	rrca
 	ld [hli], a
 	dec c
-	jr nz, .right
-	jr .done
-.left
+	jr nz, UpdateMovingBgTiles.right
+	jr UpdateMovingBgTiles.done
+UpdateMovingBgTiles.left
 	ld a, [hl]
 	rlca
 	ld [hli], a
 	dec c
-	jr nz, .left
-.done
-	ldh a, [hTileAnimations]
+	jr nz, UpdateMovingBgTiles.left
+UpdateMovingBgTiles.done
+	ldh a, [lobyte(hTileAnimations)]
 	rrca
 	ret nc
 
 	xor a
-	ldh [hMovingBGTilesCounter1], a
+	ldh [lobyte(hMovingBGTilesCounter1)], a
 	ret
 
-.flower
+UpdateMovingBgTiles.flower
 	xor a
-	ldh [hMovingBGTilesCounter1], a
+	ldh [lobyte(hMovingBGTilesCounter1)], a
 
 	ld a, [wMovingBGTilesCounter2]
 	and 3
 	cp 2
 	ld hl, FlowerTile1
-	jr c, .copy
+	jr c, UpdateMovingBgTiles.copy
 	ld hl, FlowerTile2
-	jr z, .copy
+	jr z, UpdateMovingBgTiles.copy
 	ld hl, FlowerTile3
-.copy
-	ld de, vTileset tile $03
+UpdateMovingBgTiles.copy
+	ld de, vTileset + TILE_SIZE * $03
 	ld c, TILE_SIZE
-.loop
+UpdateMovingBgTiles.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .loop
+	jr nz, UpdateMovingBgTiles.loop
 	ret
 
-FlowerTile1: INCBIN "gfx/tilesets/flower/flower1.2bpp"
-FlowerTile2: INCBIN "gfx/tilesets/flower/flower2.2bpp"
-FlowerTile3: INCBIN "gfx/tilesets/flower/flower3.2bpp"
+FlowerTile1: .INCBIN "gfx/tilesets/flower/flower1.2bpp"
+FlowerTile2: .INCBIN "gfx/tilesets/flower/flower2.2bpp"
+FlowerTile3: .INCBIN "gfx/tilesets/flower/flower3.2bpp"

@@ -1,39 +1,39 @@
-UpdateCinnabarGymGateTileBlocks::
+UpdateCinnabarGymGateTileBlocks:
 	farjp UpdateCinnabarGymGateTileBlocks_
 
-CheckForHiddenEventOrBookshelfOrCardKeyDoor::
-	ldh a, [hLoadedROMBank]
+CheckForHiddenEventOrBookshelfOrCardKeyDoor:
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ldh a, [hJoyHeld]
+	ldh a, [lobyte(hJoyHeld)]
 	bit B_PAD_A, a
-	jr z, .nothingFound
+	jr z, CheckForHiddenEventOrBookshelfOrCardKeyDoor.nothingFound
 ; A button is pressed
-	ld a, BANK(CheckForHiddenEvent)
+	ld a, bank(CheckForHiddenEvent)
 	ld [rROMB], a
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	call CheckForHiddenEvent
-	ldh a, [hDidntFindAnyHiddenEvent]
+	ldh a, [lobyte(hDidntFindAnyHiddenEvent)]
 	and a
-	jr nz, .hiddenEventNotFound
+	jr nz, CheckForHiddenEventOrBookshelfOrCardKeyDoor.hiddenEventNotFound
 	ld a, [wHiddenEventFunctionRomBank]
 	ld [rROMB], a
-	ldh [hLoadedROMBank], a
-	ld de, .returnAddress
+	ldh [lobyte(hLoadedROMBank)], a
+	ld de, CheckForHiddenEventOrBookshelfOrCardKeyDoor.returnAddress
 	push de
 	jp hl
-.returnAddress
+CheckForHiddenEventOrBookshelfOrCardKeyDoor.returnAddress
 	xor a
-	jr .done
-.hiddenEventNotFound
+	jr CheckForHiddenEventOrBookshelfOrCardKeyDoor.done
+CheckForHiddenEventOrBookshelfOrCardKeyDoor.hiddenEventNotFound
 	farcall PrintBookshelfText
-	ldh a, [hInteractedWithBookshelf]
+	ldh a, [lobyte(hInteractedWithBookshelf)]
 	and a
-	jr z, .done
-.nothingFound
+	jr z, CheckForHiddenEventOrBookshelfOrCardKeyDoor.done
+CheckForHiddenEventOrBookshelfOrCardKeyDoor.nothingFound
 	ld a, $ff
-.done
-	ldh [hItemAlreadyFound], a
+CheckForHiddenEventOrBookshelfOrCardKeyDoor.done
+	ldh [lobyte(hItemAlreadyFound)], a
 	pop af
 	ld [rROMB], a
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ret

@@ -1,10 +1,10 @@
 ; subtracts the amount the player paid from their money
 ; OUTPUT: carry = 0(success) or 1(fail because there is not enough money)
-SubtractAmountPaidFromMoney::
+SubtractAmountPaidFromMoney:
 	farjp SubtractAmountPaidFromMoney_
 
 ; adds the amount the player sold to their money
-AddAmountSoldToMoney::
+AddAmountSoldToMoney:
 	ld de, wPlayerMoney + 2
 	ld hl, hMoney + 2 ; total price of items
 	ld c, 3 ; length of money in bytes
@@ -21,7 +21,7 @@ AddAmountSoldToMoney::
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
-RemoveItemFromInventory::
+RemoveItemFromInventory:
 	homecall RemoveItemFromInventory_
 	ret
 
@@ -31,7 +31,7 @@ RemoveItemFromInventory::
 ; [wCurItem] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory::
+AddItemToInventory:
 	push bc
 	homecall_sf AddItemToInventory_
 	pop bc

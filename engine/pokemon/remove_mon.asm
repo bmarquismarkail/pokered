@@ -1,10 +1,12 @@
-_RemovePokemon::
+_RemovePokemon:
+WLA_GLOBAL_RemovePokemon:
 	ld hl, wPartyCount
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .gotCount
+	jr z, WLA_GLOBAL_RemovePokemon__gotCount
 	ld hl, wBoxCount
-.gotCount
+_RemovePokemon.gotCount:
+WLA_GLOBAL_RemovePokemon__gotCount:
 	ld a, [hl]
 	dec a
 	ld [hli], a
@@ -16,26 +18,28 @@ _RemovePokemon::
 	ld e, l
 	ld d, h
 	inc de
-.shiftMonSpeciesLoop
+_RemovePokemon.shiftMonSpeciesLoop:
+WLA_GLOBAL_RemovePokemon__shiftMonSpeciesLoop:
 	ld a, [de]
 	inc de
 	ld [hli], a
 	inc a ; reached terminator?
-	jr nz, .shiftMonSpeciesLoop ; if not, continue shifting species
+	jr nz, WLA_GLOBAL_RemovePokemon__shiftMonSpeciesLoop ; if not, continue shifting species
 
 	ld hl, wPartyMonOT
 	ld d, PARTY_LENGTH - 1 ; max number of pokemon to shift
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .gotOTsPointer
+	jr z, WLA_GLOBAL_RemovePokemon__gotOTsPointer
 	ld hl, wBoxMonOT
 	ld d, MONS_PER_BOX - 1
-.gotOTsPointer
+_RemovePokemon.gotOTsPointer:
+WLA_GLOBAL_RemovePokemon__gotOTsPointer:
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld a, [wWhichPokemon]
 	cp d ; are we removing the last pokemon?
-	jr nz, .notRemovingLastMon ; if not, shift the pokemon below
+	jr nz, WLA_GLOBAL_RemovePokemon__notRemovingLastMon ; if not, shift the pokemon below
 
 	; bug: to erase a string, this should be ld [hl], '@'
 	; This is not needed, as wBoxSpecies/wPartySpecies determine if a slot is used.
@@ -43,7 +47,8 @@ _RemovePokemon::
 	ld [hl], $ff
 	ret
 
-.notRemovingLastMon
+_RemovePokemon.notRemovingLastMon:
+WLA_GLOBAL_RemovePokemon__notRemovingLastMon:
 	ld d, h
 	ld e, l
 	ld bc, NAME_LENGTH
@@ -51,19 +56,21 @@ _RemovePokemon::
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .gotNicksPointer
+	jr z, WLA_GLOBAL_RemovePokemon__gotNicksPointer
 	ld bc, wBoxMonNicks
-.gotNicksPointer
+_RemovePokemon.gotNicksPointer:
+WLA_GLOBAL_RemovePokemon__gotNicksPointer:
 	call CopyDataUntil
 
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .gotMonStructs
+	jr z, WLA_GLOBAL_RemovePokemon__gotMonStructs
 	ld hl, wBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
-.gotMonStructs
+_RemovePokemon.gotMonStructs:
+WLA_GLOBAL_RemovePokemon__gotMonStructs:
 	ld a, [wWhichPokemon]
 	call AddNTimes ; get address of the pokemon removed
 
@@ -71,25 +78,28 @@ _RemovePokemon::
 	ld e, l
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .copyUntilPartyMonOT
+	jr z, WLA_GLOBAL_RemovePokemon__copyUntilPartyMonOT
 ; copy until wBoxMonOT
 	ld bc, BOXMON_STRUCT_LENGTH
 	add hl, bc ; get address of next slot
 	ld bc, wBoxMonOT
-	jr .shiftOTs
-.copyUntilPartyMonOT
+	jr WLA_GLOBAL_RemovePokemon__shiftOTs
+_RemovePokemon.copyUntilPartyMonOT:
+WLA_GLOBAL_RemovePokemon__copyUntilPartyMonOT:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	add hl, bc ; get address of next slot
 	ld bc, wPartyMonOT
-.shiftOTs
+_RemovePokemon.shiftOTs:
+WLA_GLOBAL_RemovePokemon__shiftOTs:
 	call CopyDataUntil ; shift all pokemon data up one slot
 
 	ld hl, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .gotNicksPointer2
+	jr z, WLA_GLOBAL_RemovePokemon__gotNicksPointer2
 	ld hl, wBoxMonNicks
-.gotNicksPointer2
+_RemovePokemon.gotNicksPointer2:
+WLA_GLOBAL_RemovePokemon__gotNicksPointer2:
 	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
@@ -101,7 +111,8 @@ _RemovePokemon::
 	ld bc, wPartyMonNicksEnd
 	ld a, [wRemoveMonFromBox]
 	and a
-	jr z, .shiftMonNicks
+	jr z, WLA_GLOBAL_RemovePokemon__shiftMonNicks
 	ld bc, wBoxMonNicksEnd
-.shiftMonNicks
+_RemovePokemon.shiftMonNicks:
+WLA_GLOBAL_RemovePokemon__shiftMonNicks:
 	jp CopyDataUntil ; shift all pokemon nicknames up one slot

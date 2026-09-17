@@ -5,51 +5,51 @@
 ; We use the more natural name "farcall" for the more common order.
 ; The same goes for `farjp` and `jpfar`.
 
-MACRO farcall
-	ld b, BANK(\1)
+.MACRO farcall
+	ld b, bank(\1)
 	ld hl, \1
 	call Bankswitch
-ENDM
+.ENDM
 
-MACRO callfar
+.MACRO callfar
 	ld hl, \1
-	ld b, BANK(\1)
+	ld b, bank(\1)
 	call Bankswitch
-ENDM
+.ENDM
 
-MACRO farjp
-	ld b, BANK(\1)
+.MACRO farjp
+	ld b, bank(\1)
 	ld hl, \1
 	jp Bankswitch
-ENDM
+.ENDM
 
-MACRO jpfar
+.MACRO jpfar
 	ld hl, \1
-	ld b, BANK(\1)
+	ld b, bank(\1)
 	jp Bankswitch
-ENDM
+.ENDM
 
-MACRO homecall
-	ldh a, [hLoadedROMBank]
+.MACRO homecall
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ld a, BANK(\1)
-	ldh [hLoadedROMBank], a
+	ld a, bank(\1)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call \1
 	pop af
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-ENDM
+.ENDM
 
-MACRO homecall_sf ; homecall but save flags by popping into bc instead of af
-	ldh a, [hLoadedROMBank]
+.MACRO homecall_sf ; homecall but save flags by popping into bc instead of af
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ld a, BANK(\1)
-	ldh [hLoadedROMBank], a
+	ld a, bank(\1)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call \1
 	pop bc
 	ld a, b
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-ENDM
+.ENDM

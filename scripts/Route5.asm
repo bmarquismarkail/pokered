@@ -6,5 +6,5 @@ Route5_TextPointers:
 	dw_const Route5UndergroundPathSignText, TEXT_ROUTE5_UNDERGROUND_PATH_SIGN
 
 Route5UndergroundPathSignText:
-	text_far _Route5UndergroundPathSignText
+	text_far WLA_GLOBAL_Route5UndergroundPathSignText
 	text_end

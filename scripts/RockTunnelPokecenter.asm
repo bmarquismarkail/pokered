@@ -13,11 +13,11 @@ RockTunnelPokecenterNurseText:
 	script_pokecenter_nurse
 
 RockTunnelPokecenterGentlemanText:
-	text_far _RockTunnelPokecenterGentlemanText
+	text_far WLA_GLOBAL_RockTunnelPokecenterGentlemanText
 	text_end
 
 RockTunnelPokecenterFisherText:
-	text_far _RockTunnelPokecenterFisherText
+	text_far WLA_GLOBAL_RockTunnelPokecenterFisherText
 	text_end
 
 RockTunnelPokecenterLinkReceptionistText:

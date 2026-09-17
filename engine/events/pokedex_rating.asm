@@ -3,28 +3,28 @@ DisplayDexRating:
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ldh [hDexRatingNumMonsSeen], a
+	ldh [lobyte(hDexRatingNumMonsSeen)], a
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ldh [hDexRatingNumMonsOwned], a
+	ldh [lobyte(hDexRatingNumMonsOwned)], a
 	ld hl, DexRatingsTable
-.findRating
+DisplayDexRating.findRating
 	ld a, [hli]
 	ld b, a
-	ldh a, [hDexRatingNumMonsOwned]
+	ldh a, [lobyte(hDexRatingNumMonsOwned)]
 	cp b
-	jr c, .foundRating
+	jr c, DisplayDexRating.foundRating
 	inc hl
 	inc hl
-	jr .findRating
-.foundRating
+	jr DisplayDexRating.findRating
+DisplayDexRating.foundRating
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; load text pointer into hl
 	CheckAndResetEventA EVENT_HALL_OF_FAME_DEX_RATING
-	jr nz, .hallOfFame
+	jr nz, DisplayDexRating.hallOfFame
 	push hl
 	ld hl, DexCompletionText
 	call PrintText
@@ -32,27 +32,27 @@ DisplayDexRating:
 	call PrintText
 	farcall PlayPokedexRatingSfx
 	jp WaitForTextScrollButtonPress
-.hallOfFame
+DisplayDexRating.hallOfFame
 	ld de, wDexRatingNumMonsSeen
-	ldh a, [hDexRatingNumMonsSeen]
+	ldh a, [lobyte(hDexRatingNumMonsSeen)]
 	ld [de], a
 	inc de
-	ldh a, [hDexRatingNumMonsOwned]
+	ldh a, [lobyte(hDexRatingNumMonsOwned)]
 	ld [de], a
 	inc de
-.copyRatingTextLoop
+DisplayDexRating.copyRatingTextLoop
 	ld a, [hli]
-	cp '@'
-	jr z, .doneCopying
+	cp $50
+	jr z, DisplayDexRating.doneCopying
 	ld [de], a
 	inc de
-	jr .copyRatingTextLoop
-.doneCopying
+	jr DisplayDexRating.copyRatingTextLoop
+DisplayDexRating.doneCopying
 	ld [de], a
 	ret
 
 DexCompletionText:
-	text_far _DexCompletionText
+	text_far WLA_GLOBAL_DexCompletionText
 	text_end
 
 DexRatingsTable:
@@ -74,65 +74,65 @@ DexRatingsTable:
 	dbw NUM_POKEMON + 1, DexRatingText_Own150To151
 
 DexRatingText_Own0To9:
-	text_far _DexRatingText_Own0To9
+	text_far WLA_GLOBAL_DexRatingText_Own0To9
 	text_end
 
 DexRatingText_Own10To19:
-	text_far _DexRatingText_Own10To19
+	text_far WLA_GLOBAL_DexRatingText_Own10To19
 	text_end
 
 DexRatingText_Own20To29:
-	text_far _DexRatingText_Own20To29
+	text_far WLA_GLOBAL_DexRatingText_Own20To29
 	text_end
 
 DexRatingText_Own30To39:
-	text_far _DexRatingText_Own30To39
+	text_far WLA_GLOBAL_DexRatingText_Own30To39
 	text_end
 
 DexRatingText_Own40To49:
-	text_far _DexRatingText_Own40To49
+	text_far WLA_GLOBAL_DexRatingText_Own40To49
 	text_end
 
 DexRatingText_Own50To59:
-	text_far _DexRatingText_Own50To59
+	text_far WLA_GLOBAL_DexRatingText_Own50To59
 	text_end
 
 DexRatingText_Own60To69:
-	text_far _DexRatingText_Own60To69
+	text_far WLA_GLOBAL_DexRatingText_Own60To69
 	text_end
 
 DexRatingText_Own70To79:
-	text_far _DexRatingText_Own70To79
+	text_far WLA_GLOBAL_DexRatingText_Own70To79
 	text_end
 
 DexRatingText_Own80To89:
-	text_far _DexRatingText_Own80To89
+	text_far WLA_GLOBAL_DexRatingText_Own80To89
 	text_end
 
 DexRatingText_Own90To99:
-	text_far _DexRatingText_Own90To99
+	text_far WLA_GLOBAL_DexRatingText_Own90To99
 	text_end
 
 DexRatingText_Own100To109:
-	text_far _DexRatingText_Own100To109
+	text_far WLA_GLOBAL_DexRatingText_Own100To109
 	text_end
 
 DexRatingText_Own110To119:
-	text_far _DexRatingText_Own110To119
+	text_far WLA_GLOBAL_DexRatingText_Own110To119
 	text_end
 
 DexRatingText_Own120To129:
-	text_far _DexRatingText_Own120To129
+	text_far WLA_GLOBAL_DexRatingText_Own120To129
 	text_end
 
 DexRatingText_Own130To139:
-	text_far _DexRatingText_Own130To139
+	text_far WLA_GLOBAL_DexRatingText_Own130To139
 	text_end
 
 DexRatingText_Own140To149:
-	text_far _DexRatingText_Own140To149
+	text_far WLA_GLOBAL_DexRatingText_Own140To149
 	text_end
 
 DexRatingText_Own150To151:
-	text_far _DexRatingText_Own150To151
+	text_far WLA_GLOBAL_DexRatingText_Own150To151
 	text_end

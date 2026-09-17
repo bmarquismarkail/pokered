@@ -1,4 +1,5 @@
-_PewterPokecenterGentlemanText::
+_PewterPokecenterGentlemanText:
+WLA_GLOBAL_PewterPokecenterGentlemanText:
 	text "What!?"
 
 	para "TEAM ROCKET is"
@@ -8,7 +9,8 @@ _PewterPokecenterGentlemanText::
 	para "Scram!"
 	done
 
-_PewterPokecenterJigglypuffText::
+_PewterPokecenterJigglypuffText:
+WLA_GLOBAL_PewterPokecenterJigglypuffText:
 	text "JIGGLYPUFF: Puu"
 	line "pupuu!"
 	done

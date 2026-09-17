@@ -1,20 +1,24 @@
-_Route4CooltrainerF1Text::
+_Route4CooltrainerF1Text:
+WLA_GLOBAL_Route4CooltrainerF1Text:
 	text "Ouch! I tripped"
 	line "over a rocky"
 	cont "#MON, GEODUDE!"
 	done
 
-_Route4CooltrainerF2BattleText::
+_Route4CooltrainerF2BattleText:
+WLA_GLOBAL_Route4CooltrainerF2BattleText:
 	text "I came to get my"
 	line "mushroom #MON!"
 	done
 
-_Route4CooltrainerF2EndBattleText::
+_Route4CooltrainerF2EndBattleText:
+WLA_GLOBAL_Route4CooltrainerF2EndBattleText:
 	text "Oh! My cute"
 	line "mushroom #MON!"
 	prompt
 
-_Route4CooltrainerF2AfterBattleText::
+_Route4CooltrainerF2AfterBattleText:
+WLA_GLOBAL_Route4CooltrainerF2AfterBattleText:
 	text "There might not"
 	line "be any more"
 	cont "mushrooms here."
@@ -23,12 +27,14 @@ _Route4CooltrainerF2AfterBattleText::
 	line "them all."
 	done
 
-_Route4MtMoonSignText::
+_Route4MtMoonSignText:
+WLA_GLOBAL_Route4MtMoonSignText:
 	text "MT.MOON"
 	line "Tunnel Entrance"
 	done
 
-_Route4SignText::
+_Route4SignText:
+WLA_GLOBAL_Route4SignText:
 	text "ROUTE 4"
 	line "MT.MOON -"
 	cont "CERULEAN CITY"

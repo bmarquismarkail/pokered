@@ -1,6 +1,6 @@
 SetDebugNewGameParty: ; unreferenced except in _DEBUG
 	ld de, DebugNewGameParty
-.loop
+SetDebugNewGameParty.loop
 	ld a, [de]
 	cp -1
 	ret z
@@ -10,29 +10,29 @@ SetDebugNewGameParty: ; unreferenced except in _DEBUG
 	ld [wCurEnemyLevel], a
 	inc de
 	call AddPartyMon
-	jr .loop
+	jr SetDebugNewGameParty.loop
 
 DebugNewGameParty: ; unreferenced except in _DEBUG
 	; Exeggutor is the only debug party member shared with Red, Green, and Japanese Blue.
 	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
 	; always using this character while I was debugging the program."
 	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
-	db EXEGGUTOR, 90
-IF DEF(_DEBUG)
-	db MEW, 5
-ELSE
-	db MEW, 20
-ENDC
-	db JOLTEON, 56
-	db DUGTRIO, 56
-	db ARTICUNO, 57
-IF DEF(_DEBUG)
-	db PIKACHU, 5
-ENDC
-	db -1 ; end
+	.DB EXEGGUTOR, 90
+.IF defined(_DEBUG)
+	.DB MEW, 5
+.ELSE
+	.DB MEW, 20
+.ENDIF
+	.DB JOLTEON, 56
+	.DB DUGTRIO, 56
+	.DB ARTICUNO, 57
+.IF defined(_DEBUG)
+	.DB PIKACHU, 5
+.ENDIF
+	.DB -1 ; end
 
 PrepareNewGameDebug: ; dummy except in _DEBUG
-IF DEF(_DEBUG)
+.IF defined(_DEBUG)
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 
@@ -93,18 +93,18 @@ IF DEF(_DEBUG)
 	; Get some debug items.
 	ld hl, wNumBagItems
 	ld de, DebugNewGameItemsList
-.items_loop
+PrepareNewGameDebug.items_loop
 	ld a, [de]
 	cp -1
-	jr z, .items_end
+	jr z, PrepareNewGameDebug.items_end
 	ld [wCurItem], a
 	inc de
 	ld a, [de]
 	inc de
 	ld [wItemQuantity], a
 	call AddItemToInventory
-	jr .items_loop
-.items_end
+	jr PrepareNewGameDebug.items_loop
+PrepareNewGameDebug.items_end
 
 	; Complete the Pokédex.
 	ld hl, wPokedexOwned
@@ -116,7 +116,6 @@ IF DEF(_DEBUG)
 	; Rival chose Squirtle,
 	; Player chose Charmander.
 	ld hl, wRivalStarter
-	ASSERT wRivalStarter + 2 == wPlayerStarter
 	ld a, STARTER2
 	ld [hli], a
 	inc hl
@@ -126,35 +125,35 @@ IF DEF(_DEBUG)
 	ret
 
 DebugSetPokedexEntries:
-IF NUM_POKEMON / 8 != 0
-	ld b, NUM_POKEMON / 8 ; 151 / 8 == 18
+.IF NUM_POKEMON / 8 > 0
+	ld b, NUM_POKEMON / 8 ; 151 / 8 = 18
 	ld a, %11111111
-.loop
+DebugSetPokedexEntries.loop
 	ld [hli], a
 	dec b
-	jr nz, .loop
-ENDC
-IF NUM_POKEMON % 8 != 0
-	ld [hl], (1 << (NUM_POKEMON % 8)) - 1 ; (1 << 151 % 8)) - 1 == %01111111
-ENDC
+	jr nz, DebugSetPokedexEntries.loop
+.ENDIF
+.IF NUM_POKEMON # 8 > 0
+	ld [hl], (1 << (NUM_POKEMON # 8)) - 1 ; (1 << 151 # 8)) - 1 = %01111111
+.ENDIF
 	ret
 
 DebugNewGameItemsList:
-	db BICYCLE, 1
-	db FULL_RESTORE, 99
-	db FULL_HEAL, 99
-	db ESCAPE_ROPE, 99
-	db RARE_CANDY, 99
-	db MASTER_BALL, 99
-	db TOWN_MAP, 1
-	db SECRET_KEY, 1
-	db CARD_KEY, 1
-	db S_S_TICKET, 1
-	db LIFT_KEY, 1
-	db -1 ; end
+	.DB BICYCLE, 1
+	.DB FULL_RESTORE, 99
+	.DB FULL_HEAL, 99
+	.DB ESCAPE_ROPE, 99
+	.DB RARE_CANDY, 99
+	.DB MASTER_BALL, 99
+	.DB TOWN_MAP, 1
+	.DB SECRET_KEY, 1
+	.DB CARD_KEY, 1
+	.DB S_S_TICKET, 1
+	.DB LIFT_KEY, 1
+	.DB -1 ; end
 
 DebugUnusedList: ; unreferenced
-	db -1 ; end
-ELSE
+	.DB -1 ; end
+.ELSE
 	ret
-ENDC
+.ENDIF

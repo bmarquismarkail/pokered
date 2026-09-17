@@ -1,17 +1,17 @@
-	db DEX_RHYDON ; pokedex id
+	.DB DEX_RHYDON ; pokedex id
 
-	db 105, 130, 120,  40,  45
+	.DB 105, 130, 120,  40,  45
 	;   hp  atk  def  spd  spc
 
-	db GROUND, ROCK ; type
-	db 60 ; catch rate
-	db 204 ; base exp
+	.DB GROUND, ROCK ; type
+	.DB 60 ; catch rate
+	.DB 204 ; base exp
 
-	INCBIN "gfx/pokemon/front/rhydon.pic", 0, 1 ; sprite dimensions
-	dw RhydonPicFront, RhydonPicBack
+	.INCBIN "gfx/pokemon/front/rhydon.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW RhydonPicFront, RhydonPicBack
 
-	db HORN_ATTACK, STOMP, TAIL_WHIP, FURY_ATTACK ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB HORN_ATTACK, STOMP, TAIL_WHIP, FURY_ATTACK ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        HORN_DRILL,   BODY_SLAM,    \
@@ -23,4 +23,4 @@
 	     SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

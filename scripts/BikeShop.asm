@@ -10,31 +10,31 @@ BikeShop_TextPointers:
 BikeShopClerkText:
 	text_asm
 	CheckEvent EVENT_GOT_BICYCLE
-	jr z, .dontHaveBike
+	jr z, BikeShopClerkText.dontHaveBike
 	ld hl, BikeShopClerkHowDoYouLikeYourBicycleText
 	call PrintText
-	jp .Done
-.dontHaveBike
+	jp BikeShopClerkText.Done
+BikeShopClerkText.dontHaveBike
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
-	jr z, .dontHaveVoucher
+	jr z, BikeShopClerkText.dontHaveVoucher
 	ld hl, BikeShopClerkOhThatsAVoucherText
 	call PrintText
-	lb bc, BICYCLE, 1
+	lb "bc", BICYCLE, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, BikeShopClerkText.BagFull
 	ld a, BIKE_VOUCHER
-	ldh [hItemToRemoveID], a
+	ldh [lobyte(hItemToRemoveID)], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopExchangedVoucherText
 	call PrintText
-	jr .Done
-.BagFull
+	jr BikeShopClerkText.Done
+BikeShopClerkText.BagFull
 	ld hl, BikeShopBagFullText
 	call PrintText
-	jr .Done
-.dontHaveVoucher
+	jr BikeShopClerkText.Done
+BikeShopClerkText.dontHaveVoucher
 	ld hl, BikeShopClerkWelcomeText
 	call PrintText
 	xor a
@@ -65,84 +65,84 @@ BikeShopClerkText:
 	call PrintText
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .cancel
+	jr nz, BikeShopClerkText.cancel
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .cancel
+	jr nz, BikeShopClerkText.cancel
 	ld hl, BikeShopCantAffordText
 	call PrintText
-.cancel
+BikeShopClerkText.cancel
 	ld hl, BikeShopComeAgainText
 	call PrintText
-.Done
+BikeShopClerkText.Done
 	jp TextScriptEnd
 
 BikeShopMenuText:
-	db   "BICYCLE"
+		.STRINGMAP pokemon, "BICYCLE"
 	next "CANCEL@"
 
 BikeShopMenuPrice:
-	db "¥1000000@"
+		.STRINGMAP pokemon, "¥1000000@"
 
 BikeShopClerkWelcomeText:
-	text_far _BikeShopClerkWelcomeText
+	text_far WLA_GLOBAL_BikeShopClerkWelcomeText
 	text_end
 
 BikeShopClerkDoYouLikeItText:
-	text_far _BikeShopClerkDoYouLikeItText
+	text_far WLA_GLOBAL_BikeShopClerkDoYouLikeItText
 	text_end
 
 BikeShopCantAffordText:
-	text_far _BikeShopCantAffordText
+	text_far WLA_GLOBAL_BikeShopCantAffordText
 	text_end
 
 BikeShopClerkOhThatsAVoucherText:
-	text_far _BikeShopClerkOhThatsAVoucherText
+	text_far WLA_GLOBAL_BikeShopClerkOhThatsAVoucherText
 	text_end
 
 BikeShopExchangedVoucherText:
-	text_far _BikeShopExchangedVoucherText
+	text_far WLA_GLOBAL_BikeShopExchangedVoucherText
 	sound_get_key_item
 	text_end
 
 BikeShopComeAgainText:
-	text_far _BikeShopComeAgainText
+	text_far WLA_GLOBAL_BikeShopComeAgainText
 	text_end
 
 BikeShopClerkHowDoYouLikeYourBicycleText:
-	text_far _BikeShopClerkHowDoYouLikeYourBicycleText
+	text_far WLA_GLOBAL_BikeShopClerkHowDoYouLikeYourBicycleText
 	text_end
 
 BikeShopBagFullText:
-	text_far _BikeShopBagFullText
+	text_far WLA_GLOBAL_BikeShopBagFullText
 	text_end
 
 BikeShopMiddleAgedWomanText:
 	text_asm
-	ld hl, .Text
+	ld hl, BikeShopMiddleAgedWomanText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _BikeShopMiddleAgedWomanText
+BikeShopMiddleAgedWomanText.Text:
+	text_far WLA_GLOBAL_BikeShopMiddleAgedWomanText
 	text_end
 
 BikeShopYoungsterText:
 	text_asm
 	CheckEvent EVENT_GOT_BICYCLE
-	ld hl, .CoolBikeText
-	jr nz, .gotBike
-	ld hl, .TheseBikesAreExpensiveText
-.gotBike
+	ld hl, BikeShopYoungsterText.CoolBikeText
+	jr nz, BikeShopYoungsterText.gotBike
+	ld hl, BikeShopYoungsterText.TheseBikesAreExpensiveText
+BikeShopYoungsterText.gotBike
 	call PrintText
 	jp TextScriptEnd
 
-.TheseBikesAreExpensiveText:
-	text_far _BikeShopYoungsterTheseBikesAreExpensiveText
+BikeShopYoungsterText.TheseBikesAreExpensiveText:
+	text_far WLA_GLOBAL_BikeShopYoungsterTheseBikesAreExpensiveText
 	text_end
 
-.CoolBikeText:
-	text_far _BikeShopYoungsterCoolBikeText
+BikeShopYoungsterText.CoolBikeText:
+	text_far WLA_GLOBAL_BikeShopYoungsterCoolBikeText
 	text_end

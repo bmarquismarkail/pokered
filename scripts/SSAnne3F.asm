@@ -6,5 +6,5 @@ SSAnne3F_TextPointers:
 	dw_const SSAnne3FSailorText, TEXT_SSANNE3F_SAILOR
 
 SSAnne3FSailorText:
-	text_far _SSAnne3FSailorText
+	text_far WLA_GLOBAL_SSAnne3FSailorText
 	text_end

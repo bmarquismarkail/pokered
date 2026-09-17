@@ -5,6 +5,6 @@ DisplayOakLabEmailText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump OakLabEmailText
 
-OakLabEmailText::
-	text_far _OakLabEmailText
+OakLabEmailText:
+	text_far WLA_GLOBAL_OakLabEmailText
 	text_end

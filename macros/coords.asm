@@ -1,114 +1,138 @@
-MACRO? validate_coords
-	IF _NARG >= 4
-		IF \1 >= \3
-			fail "x coord out of range"
-		ENDC
-		IF \2 >= \4
-			fail "y coord out of range"
-		ENDC
-	ELSE
+.MACRO validate_coords
+	.IF NARGS >= 4
+		.IF \1 >= \3
+			.FAIL "x coord out of range"
+		.ENDIF
+		.IF \2 >= \4
+			.FAIL "y coord out of range"
+		.ENDIF
+	.ELSE
 		validate_coords \1, \2, SCREEN_WIDTH, SCREEN_HEIGHT
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-MACRO? hlcoord
-	coord hl, \#
-ENDM
+.MACRO hlcoord
+	.IF NARGS >= 3
+		coord "hl", \1, \2, \3
+	.ELSE
+		coord "hl", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? bccoord
-	coord bc, \#
-ENDM
+.MACRO bccoord
+	.IF NARGS >= 3
+		coord "bc", \1, \2, \3
+	.ELSE
+		coord "bc", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? decoord
-	coord de, \#
-ENDM
+.MACRO decoord
+	.IF NARGS >= 3
+		coord "de", \1, \2, \3
+	.ELSE
+		coord "de", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? coord
+.MACRO coord
 ; register, x, y[, origin]
 	validate_coords \2, \3
-	IF _NARG >= 4
+	.IF NARGS >= 4
 		ld \1, (\3) * SCREEN_WIDTH + (\2) + \4
-	ELSE
+	.ELSE
 		ld \1, (\3) * SCREEN_WIDTH + (\2) + wTileMap
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-MACRO? hlbgcoord
-	bgcoord hl, \#
-ENDM
+.MACRO hlbgcoord
+	.IF NARGS >= 3
+		bgcoord "hl", \1, \2, \3
+	.ELSE
+		bgcoord "hl", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? bcbgcoord
-	bgcoord bc, \#
-ENDM
+.MACRO bcbgcoord
+	.IF NARGS >= 3
+		bgcoord "bc", \1, \2, \3
+	.ELSE
+		bgcoord "bc", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? debgcoord
-	bgcoord de, \#
-ENDM
+.MACRO debgcoord
+	.IF NARGS >= 3
+		bgcoord "de", \1, \2, \3
+	.ELSE
+		bgcoord "de", \1, \2
+	.ENDIF
+.ENDM
 
-MACRO? bgcoord
+.MACRO bgcoord
 ; register, x, y[, origin]
 	validate_coords \2, \3, TILEMAP_WIDTH, TILEMAP_HEIGHT
-	IF _NARG >= 4
+	.IF NARGS >= 4
 		ld \1, (\3) * TILEMAP_WIDTH + (\2) + \4
-	ELSE
+	.ELSE
 		ld \1, (\3) * TILEMAP_WIDTH + (\2) + vBGMap0
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-MACRO? hlowcoord
-	owcoord hl, \#
-ENDM
+.MACRO hlowcoord
+	owcoord "hl", \1, \2, \3
+.ENDM
 
-MACRO? bcowcoord
-	owcoord bc, \#
-ENDM
+.MACRO bcowcoord
+	owcoord "bc", \1, \2, \3
+.ENDM
 
-MACRO? deowcoord
-	owcoord de, \#
-ENDM
+.MACRO deowcoord
+	owcoord "de", \1, \2, \3
+.ENDM
 
-MACRO? owcoord
+.MACRO owcoord
 ; register, x, y, map width
 	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
-ENDM
+.ENDM
 
-MACRO? event_displacement
+.MACRO event_displacement
 ; map width, x blocks, y blocks
-	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\3) >> 1) + ((\2) >> 1))
-	db \3, \2
-ENDM
+	.DW (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\3) >> 1) + ((\2) >> 1))
+	.DB \3, \2
+.ENDM
 
-MACRO? dwcoord
+.MACRO dwcoord
 ; x, y
 	validate_coords \1, \2
-	IF _NARG >= 3
-		dw (\2) * SCREEN_WIDTH + (\1) + \3
-	ELSE
-		dw (\2) * SCREEN_WIDTH + (\1) + wTileMap
-	ENDC
-ENDM
+	.IF NARGS >= 3
+		.DW (\2) * SCREEN_WIDTH + (\1) + \3
+	.ELSE
+		.DW (\2) * SCREEN_WIDTH + (\1) + wTileMap
+	.ENDIF
+.ENDM
 
-MACRO? ldcoord_a
+.MACRO ldcoord_a
 ; x, y[, origin]
 	validate_coords \1, \2
-	IF _NARG >= 3
+	.IF NARGS >= 3
 		ld [(\2) * SCREEN_WIDTH + (\1) + \3], a
-	ELSE
+	.ELSE
 		ld [(\2) * SCREEN_WIDTH + (\1) + wTileMap], a
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-MACRO? lda_coord
+.MACRO lda_coord
 ; x, y[, origin]
 	validate_coords \1, \2
-	IF _NARG >= 3
+	.IF NARGS >= 3
 		ld a, [(\2) * SCREEN_WIDTH + (\1) + \3]
-	ELSE
+	.ELSE
 		ld a, [(\2) * SCREEN_WIDTH + (\1) + wTileMap]
-	ENDC
-ENDM
+	.ENDIF
+.ENDM
 
-MACRO? dbmapcoord
+.MACRO dbmapcoord
 ; x, y
-	db \2, \1
-ENDM
+	.DB \2, \1
+.ENDM

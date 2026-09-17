@@ -9,13 +9,13 @@ CeladonMart4F_TextPointers:
 	dw_const CeladonMart4FCurrentFloorSignText, TEXT_CELADONMART4F_CURRENT_FLOOR_SIGN
 
 CeladonMart4FSuperNerdText:
-	text_far _CeladonMart4FSuperNerdText
+	text_far WLA_GLOBAL_CeladonMart4FSuperNerdText
 	text_end
 
 CeladonMart4FYoungsterText:
-	text_far _CeladonMart4FYoungsterText
+	text_far WLA_GLOBAL_CeladonMart4FYoungsterText
 	text_end
 
 CeladonMart4FCurrentFloorSignText:
-	text_far _CeladonMart4FCurrentFloorSignText
+	text_far WLA_GLOBAL_CeladonMart4FCurrentFloorSignText
 	text_end

@@ -13,55 +13,55 @@ SilphCo5FGateCallbackScript:
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
-	ld hl, .GateCoordinates
+	ld hl, SilphCo5FGateCallbackScript.GateCoordinates
 	call SilphCo4F_SetCardKeyDoorYScript
 	call SilphCo5F_SetUnlockedSilphCoDoorsScript
 	CheckEvent EVENT_SILPH_CO_5_UNLOCKED_DOOR1
-	jr nz, .unlock_door1
+	jr nz, SilphCo5FGateCallbackScript.unlock_door1
 	push af
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 2, 3
+	lb "bc", 2, 3
 	predef ReplaceTileBlock
 	pop af
-.unlock_door1
+SilphCo5FGateCallbackScript.unlock_door1
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_5_UNLOCKED_DOOR2, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
-	jr nz, .unlock_door2
+	jr nz, SilphCo5FGateCallbackScript.unlock_door2
 	push af
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 6, 3
+	lb "bc", 6, 3
 	predef ReplaceTileBlock
 	pop af
-.unlock_door2
+SilphCo5FGateCallbackScript.unlock_door2
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR2
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	lb bc, 5, 7
+	lb "bc", 5, 7
 	predef_jump ReplaceTileBlock
 
-.GateCoordinates:
+SilphCo5FGateCallbackScript.GateCoordinates:
 	dbmapcoord  3,  2
 	dbmapcoord  3,  6
 	dbmapcoord  7,  5
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo5F_SetUnlockedSilphCoDoorsScript:
-	EventFlagAddress hl, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
-	ldh a, [hUnlockedSilphCoDoors]
+	EventFlagAddress "hl", EVENT_SILPH_CO_5_UNLOCKED_DOOR1
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	cp $1
-	jr nz, .unlock_door1
+	jr nz, SilphCo5F_SetUnlockedSilphCoDoorsScript.unlock_door1
 	SetEventReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
-.unlock_door1
+SilphCo5F_SetUnlockedSilphCoDoorsScript.unlock_door1
 	cp $2
-	jr nz, .unlock_door2
+	jr nz, SilphCo5F_SetUnlockedSilphCoDoorsScript.unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR2, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
-.unlock_door2
+SilphCo5F_SetUnlockedSilphCoDoorsScript.unlock_door2
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
 
@@ -95,21 +95,21 @@ SilphCo5TrainerHeader2:
 	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_2, 4, SilphCo5FRockerBattleText, SilphCo5FRockerEndBattleText, SilphCo5FRockerAfterBattleText
 SilphCo5TrainerHeader3:
 	trainer EVENT_BEAT_SILPH_CO_5F_TRAINER_3, 3, SilphCo5FRocket2BattleText, SilphCo5FRocket2EndBattleText, SilphCo5FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo5FSilphWorkerMText:
 	text_asm
-	ld hl, .ThatsYouRightText
-	ld de, .YoureOurHeroText
+	ld hl, SilphCo5FSilphWorkerMText.ThatsYouRightText
+	ld de, SilphCo5FSilphWorkerMText.YoureOurHeroText
 	call SilphCo6FBeatGiovanniPrintDEOrPrintHLScript
 	jp TextScriptEnd
 
-.ThatsYouRightText:
-	text_far _SilphCo5FSilphWorkerMThatsYouRightText
+SilphCo5FSilphWorkerMText.ThatsYouRightText:
+	text_far WLA_GLOBAL_SilphCo5FSilphWorkerMThatsYouRightText
 	text_end
 
-.YoureOurHeroText:
-	text_far _SilphCo5FSilphWorkerMYoureOurHeroText
+SilphCo5FSilphWorkerMText.YoureOurHeroText:
+	text_far WLA_GLOBAL_SilphCo5FSilphWorkerMYoureOurHeroText
 	text_end
 
 SilphCo5FRocket1Text:
@@ -119,15 +119,15 @@ SilphCo5FRocket1Text:
 	jp TextScriptEnd
 
 SilphCo5FRocket1BattleText:
-	text_far _SilphCo5FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket1BattleText
 	text_end
 
 SilphCo5FRocket1EndBattleText:
-	text_far _SilphCo5FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket1EndBattleText
 	text_end
 
 SilphCo5FRocket1AfterBattleText:
-	text_far _SilphCo5FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket1AfterBattleText
 	text_end
 
 SilphCo5FScientistText:
@@ -137,15 +137,15 @@ SilphCo5FScientistText:
 	jp TextScriptEnd
 
 SilphCo5FScientistBattleText:
-	text_far _SilphCo5FScientistBattleText
+	text_far WLA_GLOBAL_SilphCo5FScientistBattleText
 	text_end
 
 SilphCo5FScientistEndBattleText:
-	text_far _SilphCo5FScientistEndBattleText
+	text_far WLA_GLOBAL_SilphCo5FScientistEndBattleText
 	text_end
 
 SilphCo5FScientistAfterBattleText:
-	text_far _SilphCo5FScientistAfterBattleText
+	text_far WLA_GLOBAL_SilphCo5FScientistAfterBattleText
 	text_end
 
 SilphCo5FRockerText:
@@ -155,15 +155,15 @@ SilphCo5FRockerText:
 	jp TextScriptEnd
 
 SilphCo5FRockerBattleText:
-	text_far _SilphCo5FRockerBattleText
+	text_far WLA_GLOBAL_SilphCo5FRockerBattleText
 	text_end
 
 SilphCo5FRockerEndBattleText:
-	text_far _SilphCo5FRockerEndBattleText
+	text_far WLA_GLOBAL_SilphCo5FRockerEndBattleText
 	text_end
 
 SilphCo5FRockerAfterBattleText:
-	text_far _SilphCo5FRockerAfterBattleText
+	text_far WLA_GLOBAL_SilphCo5FRockerAfterBattleText
 	text_end
 
 SilphCo5FRocket2Text:
@@ -173,25 +173,25 @@ SilphCo5FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo5FRocket2BattleText:
-	text_far _SilphCo5FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket2BattleText
 	text_end
 
 SilphCo5FRocket2EndBattleText:
-	text_far _SilphCo5FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket2EndBattleText
 	text_end
 
 SilphCo5FRocket2AfterBattleText:
-	text_far _SilphCo5FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo5FRocket2AfterBattleText
 	text_end
 
 SilphCo5FPokemonReport1Text:
-	text_far _SilphCo5FPokemonReport1Text
+	text_far WLA_GLOBAL_SilphCo5FPokemonReport1Text
 	text_end
 
 SilphCo5FPokemonReport2Text:
-	text_far _SilphCo5FPokemonReport2Text
+	text_far WLA_GLOBAL_SilphCo5FPokemonReport2Text
 	text_end
 
 SilphCo5FPokemonReport3Text:
-	text_far _SilphCo5FPokemonReport3Text
+	text_far WLA_GLOBAL_SilphCo5FPokemonReport3Text
 	text_end

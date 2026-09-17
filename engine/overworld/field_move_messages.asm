@@ -7,7 +7,7 @@ PrintStrengthText:
 	jp PrintText
 
 UsedStrengthText:
-	text_far _UsedStrengthText
+	text_far WLA_GLOBAL_UsedStrengthText
 	text_asm
 	ld a, [wCurPartySpecies]
 	call PlayCry
@@ -15,7 +15,7 @@ UsedStrengthText:
 	jp TextScriptEnd
 
 CanMoveBouldersText:
-	text_far _CanMoveBouldersText
+	text_far WLA_GLOBAL_CanMoveBouldersText
 	text_end
 
 IsSurfingAllowed:
@@ -26,7 +26,7 @@ IsSurfingAllowed:
 	set BIT_SURF_ALLOWED, [hl]
 	ld a, [wStatusFlags6]
 	bit BIT_ALWAYS_ON_BIKE, a
-	jr nz, .forcedToRideBike
+	jr nz, IsSurfingAllowed.forcedToRideBike
 	ld a, [wCurMap]
 	cp SEAFOAM_ISLANDS_B4F
 	ret nz
@@ -39,7 +39,7 @@ IsSurfingAllowed:
 	res BIT_SURF_ALLOWED, [hl]
 	ld hl, CurrentTooFastText
 	jp PrintText
-.forcedToRideBike
+IsSurfingAllowed.forcedToRideBike
 	ld hl, wStatusFlags1
 	res BIT_SURF_ALLOWED, [hl]
 	ld hl, CyclingIsFunText
@@ -47,12 +47,12 @@ IsSurfingAllowed:
 
 SeafoamIslandsB4FStairsCoords:
 	dbmapcoord  7, 11
-	db -1 ; end
+	.DB -1 ; end
 
 CurrentTooFastText:
-	text_far _CurrentTooFastText
+	text_far WLA_GLOBAL_CurrentTooFastText
 	text_end
 
 CyclingIsFunText:
-	text_far _CyclingIsFunText
+	text_far WLA_GLOBAL_CyclingIsFunText
 	text_end

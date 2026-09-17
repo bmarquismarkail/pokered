@@ -1,6 +1,6 @@
 ; Compare strings, c bytes in length, at de and hl.
 ; Often used to compare big endian numbers in battle calculations.
-StringCmp::
+StringCmp:
 	ld a, [de]
 	cp [hl]
 	ret nz

@@ -1,17 +1,17 @@
-	db DEX_GOLBAT ; pokedex id
+	.DB DEX_GOLBAT ; pokedex id
 
-	db  75,  80,  70,  90,  75
+	.DB  75,  80,  70,  90,  75
 	;   hp  atk  def  spd  spc
 
-	db POISON, FLYING ; type
-	db 90 ; catch rate
-	db 171 ; base exp
+	.DB POISON, FLYING ; type
+	.DB 90 ; catch rate
+	.DB 171 ; base exp
 
-	INCBIN "gfx/pokemon/front/golbat.pic", 0, 1 ; sprite dimensions
-	dw GolbatPicFront, GolbatPicBack
+	.INCBIN "gfx/pokemon/front/golbat.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GolbatPicFront, GolbatPicBack
 
-	db LEECH_LIFE, SCREECH, BITE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB LEECH_LIFE, SCREECH, BITE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -19,4 +19,4 @@
 	     BIDE,         SWIFT,        REST,         SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

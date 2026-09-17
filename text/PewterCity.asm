@@ -1,4 +1,5 @@
-_PewterCityCooltrainerFText::
+_PewterCityCooltrainerFText:
+WLA_GLOBAL_PewterCityCooltrainerFText:
 	text "It's rumored that"
 	line "CLEFAIRYs came"
 	cont "from the moon!"
@@ -8,7 +9,8 @@ _PewterCityCooltrainerFText::
 	cont "fell on MT.MOON."
 	done
 
-_PewterCityCooltrainerMText::
+_PewterCityCooltrainerMText:
+WLA_GLOBAL_PewterCityCooltrainerMText:
 	text "There aren't many"
 	line "serious #MON"
 	cont "trainers here!"
@@ -20,24 +22,28 @@ _PewterCityCooltrainerMText::
 	cont "into it!"
 	done
 
-_PewterCitySuperNerd1DidYouCheckOutMuseumText::
+_PewterCitySuperNerd1DidYouCheckOutMuseumText:
+WLA_GLOBAL_PewterCitySuperNerd1DidYouCheckOutMuseumText:
 	text "Did you check out"
 	line "the MUSEUM?"
 	done
 
-_PewterCitySuperNerd1WerentThoseFossilsAmazingText::
+_PewterCitySuperNerd1WerentThoseFossilsAmazingText:
+WLA_GLOBAL_PewterCitySuperNerd1WerentThoseFossilsAmazingText:
 	text "Weren't those"
 	line "fossils from MT."
 	cont "MOON amazing?"
 	done
 
-_PewterCitySuperNerd1YouHaveToGoText::
+_PewterCitySuperNerd1YouHaveToGoText:
+WLA_GLOBAL_PewterCitySuperNerd1YouHaveToGoText:
 	text "Really?"
 	line "You absolutely"
 	cont "have to go!"
 	done
 
-_PewterCitySuperNerd1ItsRightHereText::
+_PewterCitySuperNerd1ItsRightHereText:
+WLA_GLOBAL_PewterCitySuperNerd1ItsRightHereText:
 	text "It's right here!"
 	line "You have to pay"
 	cont "to get in, but"
@@ -45,24 +51,28 @@ _PewterCitySuperNerd1ItsRightHereText::
 	cont "See you around!"
 	done
 
-_PewterCitySuperNerd2DoYouKnowWhatImDoingText::
+_PewterCitySuperNerd2DoYouKnowWhatImDoingText:
+WLA_GLOBAL_PewterCitySuperNerd2DoYouKnowWhatImDoingText:
 	text "Psssst!"
 	line "Do you know what"
 	cont "I'm doing?"
 	done
 
-_PewterCitySuperNerd2ThatsRightText::
+_PewterCitySuperNerd2ThatsRightText:
+WLA_GLOBAL_PewterCitySuperNerd2ThatsRightText:
 	text "That's right!"
 	line "It's hard work!"
 	done
 
-_PewterCitySuperNerd2ImSprayingRepelText::
+_PewterCitySuperNerd2ImSprayingRepelText:
+WLA_GLOBAL_PewterCitySuperNerd2ImSprayingRepelText:
 	text "I'm spraying REPEL"
 	line "to keep #MON"
 	cont "out of my garden!"
 	done
 
-_PewterCityYoungsterYoureATrainerFollowMeText::
+_PewterCityYoungsterYoureATrainerFollowMeText:
+WLA_GLOBAL_PewterCityYoungsterYoureATrainerFollowMeText:
 	text "You're a trainer"
 	line "right? BROCK's"
 	cont "looking for new"
@@ -70,13 +80,15 @@ _PewterCityYoungsterYoureATrainerFollowMeText::
 	cont "Follow me!"
 	done
 
-_PewterCityYoungsterGoTakeOnBrockText::
+_PewterCityYoungsterGoTakeOnBrockText:
+WLA_GLOBAL_PewterCityYoungsterGoTakeOnBrockText:
 	text "If you have the"
 	line "right stuff, go"
 	cont "take on BROCK!"
 	done
 
-_PewterCityTrainerTipsText::
+_PewterCityTrainerTipsText:
+WLA_GLOBAL_PewterCityTrainerTipsText:
 	text "TRAINER TIPS"
 
 	para "Any #MON that"
@@ -85,7 +97,8 @@ _PewterCityTrainerTipsText::
 	cont "short, earns EXP!"
 	done
 
-_PewterCityPoliceNoticeSignText::
+_PewterCityPoliceNoticeSignText:
+WLA_GLOBAL_PewterCityPoliceNoticeSignText:
 	text "NOTICE!"
 
 	para "Thieves have been"
@@ -96,12 +109,14 @@ _PewterCityPoliceNoticeSignText::
 	cont "with any info!"
 	done
 
-_PewterCityMuseumSignText::
+_PewterCityMuseumSignText:
+WLA_GLOBAL_PewterCityMuseumSignText:
 	text "PEWTER MUSEUM"
 	line "OF SCIENCE"
 	done
 
-_PewterCityGymSignText::
+_PewterCityGymSignText:
+WLA_GLOBAL_PewterCityGymSignText:
 	text "PEWTER CITY"
 	line "#MON GYM"
 	cont "LEADER: BROCK"
@@ -110,7 +125,8 @@ _PewterCityGymSignText::
 	line "#MON Trainer!"
 	done
 
-_PewterCitySignText::
+_PewterCitySignText:
+WLA_GLOBAL_PewterCitySignText:
 	text "PEWTER CITY"
 	line "A Stone Gray"
 	cont "City"

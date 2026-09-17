@@ -1,4 +1,5 @@
-_CeladonMart1FReceptionistText::
+_CeladonMart1FReceptionistText:
+WLA_GLOBAL_CeladonMart1FReceptionistText:
 	text "Hello! Welcome to"
 	line "CELADON DEPT."
 	cont "STORE."
@@ -8,7 +9,8 @@ _CeladonMart1FReceptionistText::
 	cont "the store layout."
 	done
 
-_CeladonMart1FDirectorySignText::
+_CeladonMart1FDirectorySignText:
+WLA_GLOBAL_CeladonMart1FDirectorySignText:
 	text "1F: SERVICE"
 	line "    COUNTER"
 
@@ -25,7 +27,8 @@ _CeladonMart1FDirectorySignText::
 	line "VENDING MACHINES"
 	done
 
-_CeladonMart1FCurrentFloorSignText::
+_CeladonMart1FCurrentFloorSignText:
+WLA_GLOBAL_CeladonMart1FCurrentFloorSignText:
 	text "1F: SERVICE"
 	line "    COUNTER"
 	done

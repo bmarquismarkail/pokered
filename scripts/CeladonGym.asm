@@ -2,7 +2,7 @@ CeladonGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
-	call nz, .LoadNames
+	call nz, CeladonGym_Script.LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGymTrainerHeaders
 	ld de, CeladonGym_ScriptPointers
@@ -11,16 +11,16 @@ CeladonGym_Script:
 	ld [wCeladonGymCurScript], a
 	ret
 
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
+CeladonGym_Script.LoadNames:
+	ld hl, CeladonGym_Script.CityName
+	ld de, CeladonGym_Script.LeaderName
 	jp LoadGymLeaderAndCityName
 
-.CityName:
-	db "CELADON CITY@"
+CeladonGym_Script.CityName:
+		.STRINGMAP pokemon, "CELADON CITY@"
 
-.LeaderName:
-	db "ERIKA@"
+CeladonGym_Script.LeaderName:
+		.STRINGMAP pokemon, "ERIKA@"
 
 CeladonGymResetScripts:
 	xor a ; SCRIPT_CELADONGYM_DEFAULT
@@ -45,22 +45,22 @@ CeladonGymErikaPostBattleScript:
 
 CeladonGymReceiveTM21:
 	ld a, TEXT_CELADONGYM_RAINBOWBADGE_INFO
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_ERIKA
-	lb bc, TM_MEGA_DRAIN, 1
+	lb "bc", TM_MEGA_DRAIN, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, CeladonGymReceiveTM21.BagFull
 	ld a, TEXT_CELADONGYM_RECEIVED_TM21
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM21
-	jr .gymVictory
-.BagFull
+	jr CeladonGymReceiveTM21.gymVictory
+CeladonGymReceiveTM21.BagFull
 	ld a, TEXT_CELADONGYM_TM21_NO_ROOM
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-.gymVictory
+CeladonGymReceiveTM21.gymVictory
 	ld hl, wObtainedBadges
 	set BIT_RAINBOWBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -101,31 +101,31 @@ CeladonGymTrainerHeader5:
 	trainer EVENT_BEAT_CELADON_GYM_TRAINER_5, 2, CeladonGymBattleText7, CeladonGymEndBattleText7, CeladonGymAfterBattleText7
 CeladonGymTrainerHeader6:
 	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
-	db -1 ; end
+	.DB -1 ; end
 
 CeladonGymErikaText:
 	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
-	jr z, .beforeBeat
+	jr z, CeladonGymErikaText.beforeBeat
 	CheckEventReuseA EVENT_GOT_TM21
-	jr nz, .afterBeat
+	jr nz, CeladonGymErikaText.afterBeat
 	call z, CeladonGymReceiveTM21
 	call DisableWaitingAfterTextDisplay
-	jr .done
-.afterBeat
-	ld hl, .PostBattleAdviceText
+	jr CeladonGymErikaText.done
+CeladonGymErikaText.afterBeat
+	ld hl, CeladonGymErikaText.PostBattleAdviceText
 	call PrintText
-	jr .done
-.beforeBeat
-	ld hl, .PreBattleText
+	jr CeladonGymErikaText.done
+CeladonGymErikaText.beforeBeat
+	ld hl, CeladonGymErikaText.PreBattleText
 	call PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
-	ld hl, .ReceivedRainbowBadgeText
-	ld de, .ReceivedRainbowBadgeText
+	ld hl, CeladonGymErikaText.ReceivedRainbowBadgeText
+	ld de, CeladonGymErikaText.ReceivedRainbowBadgeText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -134,33 +134,33 @@ CeladonGymErikaText:
 	ld a, SCRIPT_CELADONGYM_ERIKA_POST_BATTLE
 	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
-.done
+CeladonGymErikaText.done
 	jp TextScriptEnd
 
-.PreBattleText:
-	text_far _CeladonGymErikaPreBattleText
+CeladonGymErikaText.PreBattleText:
+	text_far WLA_GLOBAL_CeladonGymErikaPreBattleText
 	text_end
 
-.ReceivedRainbowBadgeText:
-	text_far _CeladonGymErikaReceivedRainbowBadgeText
+CeladonGymErikaText.ReceivedRainbowBadgeText:
+	text_far WLA_GLOBAL_CeladonGymErikaReceivedRainbowBadgeText
 	text_end
 
-.PostBattleAdviceText:
-	text_far _CeladonGymErikaPostBattleAdviceText
+CeladonGymErikaText.PostBattleAdviceText:
+	text_far WLA_GLOBAL_CeladonGymErikaPostBattleAdviceText
 	text_end
 
 CeladonGymRainbowBadgeInfoText:
-	text_far _CeladonGymRainbowBadgeInfoText
+	text_far WLA_GLOBAL_CeladonGymRainbowBadgeInfoText
 	text_end
 
 CeladonGymReceivedTM21Text:
-	text_far _CeladonGymReceivedTM21Text
+	text_far WLA_GLOBAL_CeladonGymReceivedTM21Text
 	sound_get_item_1
-	text_far _TM21ExplanationText
+	text_far WLA_GLOBAL_TM21ExplanationText
 	text_end
 
 CeladonGymTM21NoRoomText:
-	text_far _CeladonGymTM21NoRoomText
+	text_far WLA_GLOBAL_CeladonGymTM21NoRoomText
 	text_end
 
 CeladonGymCooltrainerF1Text:
@@ -170,15 +170,15 @@ CeladonGymCooltrainerF1Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText2:
-	text_far _CeladonGymBattleText2
+	text_far WLA_GLOBAL_CeladonGymBattleText2
 	text_end
 
 CeladonGymEndBattleText2:
-	text_far _CeladonGymEndBattleText2
+	text_far WLA_GLOBAL_CeladonGymEndBattleText2
 	text_end
 
 CeladonGymAfterBattleText2:
-	text_far _CeladonGymAfterBattleText2
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText2
 	text_end
 
 CeladonGymBeauty1Text:
@@ -188,15 +188,15 @@ CeladonGymBeauty1Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText3:
-	text_far _CeladonGymBattleText3
+	text_far WLA_GLOBAL_CeladonGymBattleText3
 	text_end
 
 CeladonGymEndBattleText3:
-	text_far _CeladonGymEndBattleText3
+	text_far WLA_GLOBAL_CeladonGymEndBattleText3
 	text_end
 
 CeladonGymAfterBattleText3:
-	text_far _CeladonGymAfterBattleText3
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText3
 	text_end
 
 CeladonGymCooltrainerF2Text:
@@ -206,15 +206,15 @@ CeladonGymCooltrainerF2Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText4:
-	text_far _CeladonGymBattleText4
+	text_far WLA_GLOBAL_CeladonGymBattleText4
 	text_end
 
 CeladonGymEndBattleText4:
-	text_far _CeladonGymEndBattleText4
+	text_far WLA_GLOBAL_CeladonGymEndBattleText4
 	text_end
 
 CeladonGymAfterBattleText4:
-	text_far _CeladonGymAfterBattleText4
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText4
 	text_end
 
 CeladonGymBeauty2Text:
@@ -224,15 +224,15 @@ CeladonGymBeauty2Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText5:
-	text_far _CeladonGymBattleText5
+	text_far WLA_GLOBAL_CeladonGymBattleText5
 	text_end
 
 CeladonGymEndBattleText5:
-	text_far _CeladonGymEndBattleText5
+	text_far WLA_GLOBAL_CeladonGymEndBattleText5
 	text_end
 
 CeladonGymAfterBattleText5:
-	text_far _CeladonGymAfterBattleText5
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText5
 	text_end
 
 CeladonGymCooltrainerF3Text:
@@ -242,15 +242,15 @@ CeladonGymCooltrainerF3Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText6:
-	text_far _CeladonGymBattleText6
+	text_far WLA_GLOBAL_CeladonGymBattleText6
 	text_end
 
 CeladonGymEndBattleText6:
-	text_far _CeladonGymEndBattleText6
+	text_far WLA_GLOBAL_CeladonGymEndBattleText6
 	text_end
 
 CeladonGymAfterBattleText6:
-	text_far _CeladonGymAfterBattleText6
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText6
 	text_end
 
 CeladonGymBeauty3Text:
@@ -260,15 +260,15 @@ CeladonGymBeauty3Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText7:
-	text_far _CeladonGymBattleText7
+	text_far WLA_GLOBAL_CeladonGymBattleText7
 	text_end
 
 CeladonGymEndBattleText7:
-	text_far _CeladonGymEndBattleText7
+	text_far WLA_GLOBAL_CeladonGymEndBattleText7
 	text_end
 
 CeladonGymAfterBattleText7:
-	text_far _CeladonGymAfterBattleText7
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText7
 	text_end
 
 CeladonGymCooltrainerF4Text:
@@ -278,13 +278,13 @@ CeladonGymCooltrainerF4Text:
 	jp TextScriptEnd
 
 CeladonGymBattleText8:
-	text_far _CeladonGymBattleText8
+	text_far WLA_GLOBAL_CeladonGymBattleText8
 	text_end
 
 CeladonGymEndBattleText8:
-	text_far _CeladonGymEndBattleText8
+	text_far WLA_GLOBAL_CeladonGymEndBattleText8
 	text_end
 
 CeladonGymAfterBattleText8:
-	text_far _CeladonGymAfterBattleText8
+	text_far WLA_GLOBAL_CeladonGymAfterBattleText8
 	text_end

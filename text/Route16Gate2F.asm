@@ -1,15 +1,18 @@
-_Route16Gate2FLittleBoyText::
+_Route16Gate2FLittleBoyText:
+WLA_GLOBAL_Route16Gate2FLittleBoyText:
 	text "I'm going for a"
 	line "ride with my girl"
 	cont "friend!"
 	done
 
-_Route16Gate2FLittleGirlText::
+_Route16Gate2FLittleGirlText:
+WLA_GLOBAL_Route16Gate2FLittleGirlText:
 	text "We're going"
 	line "riding together!"
 	done
 
-_Route16Gate2FLeftBinocularsText::
+_Route16Gate2FLeftBinocularsText:
+WLA_GLOBAL_Route16Gate2FLeftBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 
@@ -17,7 +20,8 @@ _Route16Gate2FLeftBinocularsText::
 	line "STORE!"
 	done
 
-_Route16Gate2FRightBinocularsText::
+_Route16Gate2FRightBinocularsText:
+WLA_GLOBAL_Route16Gate2FRightBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 

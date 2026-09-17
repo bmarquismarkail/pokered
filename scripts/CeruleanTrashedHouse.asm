@@ -13,28 +13,28 @@ CeruleanTrashedHouseFishingGuruText:
 	ld b, TM_DIG
 	predef GetQuantityOfItemInBag
 	and b
-	jr z, .no_dig_tm
-	ld hl, .WhatsLostIsLostText
+	jr z, CeruleanTrashedHouseFishingGuruText.no_dig_tm
+	ld hl, CeruleanTrashedHouseFishingGuruText.WhatsLostIsLostText
 	call PrintText
-	jr .done
-.no_dig_tm
-	ld hl, .TheyStoleATMText
+	jr CeruleanTrashedHouseFishingGuruText.done
+CeruleanTrashedHouseFishingGuruText.no_dig_tm
+	ld hl, CeruleanTrashedHouseFishingGuruText.TheyStoleATMText
 	call PrintText
-.done
+CeruleanTrashedHouseFishingGuruText.done
 	jp TextScriptEnd
 
-.TheyStoleATMText:
-	text_far _CeruleanTrashedHouseFishingGuruTheyStoleATMText
+CeruleanTrashedHouseFishingGuruText.TheyStoleATMText:
+	text_far WLA_GLOBAL_CeruleanTrashedHouseFishingGuruTheyStoleATMText
 	text_end
 
-.WhatsLostIsLostText:
-	text_far _CeruleanTrashedHouseFishingGuruWhatsLostIsLostText
+CeruleanTrashedHouseFishingGuruText.WhatsLostIsLostText:
+	text_far WLA_GLOBAL_CeruleanTrashedHouseFishingGuruWhatsLostIsLostText
 	text_end
 
 CeruleanTrashedHouseGirlText:
-	text_far _CeruleanTrashedHouseGirlText
+	text_far WLA_GLOBAL_CeruleanTrashedHouseGirlText
 	text_end
 
 CeruleanTrashedHouseWallHoleText:
-	text_far _CeruleanTrashedHouseWallHoleText
+	text_far WLA_GLOBAL_CeruleanTrashedHouseWallHoleText
 	text_end

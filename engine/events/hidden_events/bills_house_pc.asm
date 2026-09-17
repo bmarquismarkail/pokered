@@ -4,14 +4,14 @@ BillsHousePC:
 	cp SPRITE_FACING_UP
 	ret nz
 	CheckEvent EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
-	jr nz, .displayBillsHousePokemonList
+	jr nz, BillsHousePC.displayBillsHousePokemonList
 	CheckEventReuseA EVENT_USED_CELL_SEPARATOR_ON_BILL
-	jr nz, .displayBillsHouseMonitorText
+	jr nz, BillsHousePC.displayBillsHouseMonitorText
 	CheckEventReuseA EVENT_BILL_SAID_USE_CELL_SEPARATOR
-	jr nz, .doCellSeparator
-.displayBillsHouseMonitorText
+	jr nz, BillsHousePC.doCellSeparator
+BillsHousePC.displayBillsHouseMonitorText
 	tx_pre_jump BillsHouseMonitorText
-.doCellSeparator
+BillsHousePC.doCellSeparator
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	tx_pre BillsHouseInitiatedText
@@ -38,18 +38,18 @@ BillsHousePC:
 	call PlayDefaultMusic
 	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret
-.displayBillsHousePokemonList
+BillsHousePC.displayBillsHousePokemonList
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	tx_pre BillsHousePokemonList
 	ret
 
-BillsHouseMonitorText::
-	text_far _BillsHouseMonitorText
+BillsHouseMonitorText:
+	text_far WLA_GLOBAL_BillsHouseMonitorText
 	text_end
 
-BillsHouseInitiatedText::
-	text_far _BillsHouseInitiatedText
+BillsHouseInitiatedText:
+	text_far WLA_GLOBAL_BillsHouseInitiatedText
 	text_promptbutton
 	text_asm
 	ld a, SFX_STOP_ALL_MUSIC
@@ -64,7 +64,7 @@ BillsHouseInitiatedText::
 	call DelayFrames
 	jp TextScriptEnd
 
-BillsHousePokemonList::
+BillsHousePokemonList:
 	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
@@ -81,7 +81,7 @@ BillsHousePokemonList::
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
-.billsPokemonLoop
+BillsHousePokemonList.billsPokemonLoop
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
@@ -96,39 +96,39 @@ BillsHousePokemonList::
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .cancel
+	jr nz, BillsHousePokemonList.cancel
 	ld a, [wCurrentMenuItem]
 	add EEVEE
 	cp EEVEE
-	jr z, .displayPokedex
+	jr z, BillsHousePokemonList.displayPokedex
 	cp FLAREON
-	jr z, .displayPokedex
+	jr z, BillsHousePokemonList.displayPokedex
 	cp JOLTEON
-	jr z, .displayPokedex
+	jr z, BillsHousePokemonList.displayPokedex
 	cp VAPOREON
-	jr z, .displayPokedex
-	jr .cancel
-.displayPokedex
+	jr z, BillsHousePokemonList.displayPokedex
+	jr BillsHousePokemonList.cancel
+BillsHousePokemonList.displayPokedex
 	call DisplayPokedex
 	call LoadScreenTilesFromBuffer2
-	jr .billsPokemonLoop
-.cancel
+	jr BillsHousePokemonList.billsPokemonLoop
+BillsHousePokemonList.cancel
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
 
 BillsHousePokemonListText1:
-	text_far _BillsHousePokemonListText1
+	text_far WLA_GLOBAL_BillsHousePokemonListText1
 	text_end
 
 BillsMonListText:
-	db   "EEVEE"
+		.STRINGMAP pokemon, "EEVEE"
 	next "FLAREON"
 	next "JOLTEON"
 	next "VAPOREON"
 	next "CANCEL@"
 
 BillsHousePokemonListText2:
-	text_far _BillsHousePokemonListText2
+	text_far WLA_GLOBAL_BillsHousePokemonListText2
 	text_end

@@ -1,4 +1,4 @@
-Music_PokeFluteInBattle::
+Music_PokeFluteInBattle:
 	; begin playing the "caught mon" sound effect
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent

@@ -3,18 +3,23 @@
 	const_export SAFARIZONEGATE_SAFARI_ZONE_WORKER2
 
 SafariZoneGate_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event  3,  5, LAST_MAP, 5
 	warp_event  4,  5, LAST_MAP, 5
 	warp_event  3,  0, SAFARI_ZONE_CENTER, 1
 	warp_event  4,  0, SAFARI_ZONE_CENTER, 2
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 2
 	object_event  6,  2, SPRITE_SAFARI_ZONE_WORKER, STAY, LEFT, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER1
 	object_event  1,  4, SPRITE_SAFARI_ZONE_WORKER, STAY, RIGHT, TEXT_SAFARIZONEGATE_SAFARI_ZONE_WORKER2
 
-	def_warps_to SAFARI_ZONE_GATE
+	event_displacement SAFARI_ZONE_GATE_WIDTH, 3, 5
+
+	event_displacement SAFARI_ZONE_GATE_WIDTH, 4, 5
+
+	event_displacement SAFARI_ZONE_GATE_WIDTH, 3, 0
+
+	event_displacement SAFARI_ZONE_GATE_WIDTH, 4, 0

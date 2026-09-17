@@ -5,18 +5,19 @@
 	const_export CELADONPOKECENTER_LINK_RECEPTIONIST
 
 CeladonPokecenter_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  7, LAST_MAP, 6
 	warp_event  4,  7, LAST_MAP, 6
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 4
 	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_CELADONPOKECENTER_NURSE
 	object_event  7,  3, SPRITE_GENTLEMAN, WALK, LEFT_RIGHT, TEXT_CELADONPOKECENTER_GENTLEMAN
 	object_event 10,  5, SPRITE_BEAUTY, WALK, ANY_DIR, TEXT_CELADONPOKECENTER_BEAUTY
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_CELADONPOKECENTER_LINK_RECEPTIONIST
 
-	def_warps_to CELADON_POKECENTER
+	event_displacement CELADON_POKECENTER_WIDTH, 3, 7
+
+	event_displacement CELADON_POKECENTER_WIDTH, 4, 7

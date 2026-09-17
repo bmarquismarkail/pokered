@@ -6,20 +6,20 @@
 	const_export MUSEUM2F_HIKER
 
 Museum2F_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 1
 	warp_event  7,  7, MUSEUM_1F, 5
 
-	def_bg_events
+	.DB 2
 	bg_event 11,  2, TEXT_MUSEUM2F_SPACE_SHUTTLE_SIGN
 	bg_event  2,  5, TEXT_MUSEUM2F_MOON_STONE_SIGN
 
-	def_object_events
+	.DB 5
 	object_event  1,  7, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, TEXT_MUSEUM2F_YOUNGSTER
 	object_event  0,  5, SPRITE_GRAMPS, STAY, DOWN, TEXT_MUSEUM2F_GRAMPS
 	object_event  7,  5, SPRITE_SCIENTIST, STAY, DOWN, TEXT_MUSEUM2F_SCIENTIST
 	object_event 11,  5, SPRITE_BRUNETTE_GIRL, STAY, NONE, TEXT_MUSEUM2F_BRUNETTE_GIRL
 	object_event 12,  5, SPRITE_HIKER, STAY, DOWN, TEXT_MUSEUM2F_HIKER
 
-	def_warps_to MUSEUM_2F
+	event_displacement MUSEUM_2F_WIDTH, 7, 7

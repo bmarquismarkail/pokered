@@ -1,6 +1,6 @@
-MACRO hidden_coin
-	db \1, \3, \2
-ENDM
+.MACRO hidden_coin
+	.DB \1, \3, \2
+.ENDM
 
 HiddenCoinCoords:
 	table_width 3
@@ -18,4 +18,4 @@ HiddenCoinCoords:
 	hidden_coin GAME_CORNER, 15,  8
 	hidden_coin GAME_CORNER, 12, 15
 	assert_max_table_length MAX_HIDDEN_COINS
-	db -1 ; end
+	.DB -1 ; end

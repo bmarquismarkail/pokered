@@ -1,55 +1,55 @@
 PrintBeginningBattleText:
 	ld a, [wIsInBattle]
 	dec a
-	jr nz, .trainerBattle
+	jr nz, PrintBeginningBattleText.trainerBattle
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_3F
-	jr c, .notPokemonTower
+	jr c, PrintBeginningBattleText.notPokemonTower
 	cp POKEMON_TOWER_7F + 1
-	jr c, .pokemonTower
-.notPokemonTower
+	jr c, PrintBeginningBattleText.pokemonTower
+PrintBeginningBattleText.notPokemonTower
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText
 	ld a, [wMoveMissed]
 	and a
-	jr z, .notFishing
+	jr z, PrintBeginningBattleText.notFishing
 	ld hl, HookedMonAttackedText
-.notFishing
-	jr .wildBattle
-.trainerBattle
-	call .playSFX
+PrintBeginningBattleText.notFishing
+	jr PrintBeginningBattleText.wildBattle
+PrintBeginningBattleText.trainerBattle
+	call PrintBeginningBattleText.playSFX
 	ld c, 20
 	call DelayFrames
 	ld hl, TrainerWantsToFightText
-.wildBattle
+PrintBeginningBattleText.wildBattle
 	push hl
 	callfar DrawAllPokeballs
 	pop hl
 	call PrintText
-	jr .done
-.pokemonTower
+	jr PrintBeginningBattleText.done
+PrintBeginningBattleText.pokemonTower
 	ld b, SILPH_SCOPE
 	call IsItemInBag
 	ld a, [wEnemyMonSpecies2]
 	ld [wCurPartySpecies], a
 	cp RESTLESS_SOUL
-	jr z, .isMarowak
+	jr z, PrintBeginningBattleText.isMarowak
 	ld a, b
 	and a
-	jr z, .noSilphScope
+	jr z, PrintBeginningBattleText.noSilphScope
 	callfar LoadEnemyMonData
-	jr .notPokemonTower
-.noSilphScope
+	jr PrintBeginningBattleText.notPokemonTower
+PrintBeginningBattleText.noSilphScope
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, GhostCantBeIDdText
 	call PrintText
-	jr .done
-.isMarowak
+	jr PrintBeginningBattleText.done
+PrintBeginningBattleText.isMarowak
 	ld a, b
 	and a
-	jr z, .noSilphScope
+	jr z, PrintBeginningBattleText.noSilphScope
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, UnveiledGhostText
@@ -59,7 +59,7 @@ PrintBeginningBattleText:
 	ld hl, WildMonAppearedText
 	call PrintText
 
-.playSFX
+PrintBeginningBattleText.playSFX
 	xor a
 	ld [wFrequencyModifier], a
 	ld a, $80
@@ -67,31 +67,31 @@ PrintBeginningBattleText:
 	ld a, SFX_TRAINER_APPEARED
 	call PlaySound
 	jp WaitForSoundToFinish
-.done
+PrintBeginningBattleText.done
 	ret
 
 WildMonAppearedText:
-	text_far _WildMonAppearedText
+	text_far WLA_GLOBAL_WildMonAppearedText
 	text_end
 
 HookedMonAttackedText:
-	text_far _HookedMonAttackedText
+	text_far WLA_GLOBAL_HookedMonAttackedText
 	text_end
 
 EnemyAppearedText:
-	text_far _EnemyAppearedText
+	text_far WLA_GLOBAL_EnemyAppearedText
 	text_end
 
 TrainerWantsToFightText:
-	text_far _TrainerWantsToFightText
+	text_far WLA_GLOBAL_TrainerWantsToFightText
 	text_end
 
 UnveiledGhostText:
-	text_far _UnveiledGhostText
+	text_far WLA_GLOBAL_UnveiledGhostText
 	text_end
 
 GhostCantBeIDdText:
-	text_far _GhostCantBeIDdText
+	text_far WLA_GLOBAL_GhostCantBeIDdText
 	text_end
 
 PrintSendOutMonMessage:
@@ -99,18 +99,18 @@ PrintSendOutMonMessage:
 	ld a, [hli]
 	or [hl]
 	ld hl, GoText
-	jr z, .printText
+	jr z, PrintSendOutMonMessage.printText
 	xor a
-	ldh [hMultiplicand], a
+	ldh [lobyte(hMultiplicand)], a
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wLastSwitchInEnemyMonHP], a
-	ldh [hMultiplicand + 1], a
+	ldh [lobyte(hMultiplicand + 1)], a
 	ld a, [hl]
 	ld [wLastSwitchInEnemyMonHP + 1], a
-	ldh [hMultiplicand + 2], a
+	ldh [lobyte(hMultiplicand + 2)], a
 	ld a, 25
-	ldh [hMultiplier], a
+	ldh [lobyte(hMultiplier)], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -121,39 +121,39 @@ PrintSendOutMonMessage:
 	rr b
 	ld a, b
 	ld b, 4
-	ldh [hDivisor], a ; enemy mon max HP divided by 4
+	ldh [lobyte(hDivisor)], a ; enemy mon max HP divided by 4
 	call Divide
-	ldh a, [hQuotient + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
+	ldh a, [lobyte(hQuotient + 3)] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
 	ld hl, GoText ; 70% or greater
 	cp 70
-	jr nc, .printText
+	jr nc, PrintSendOutMonMessage.printText
 	ld hl, DoItText ; 40% - 69%
 	cp 40
-	jr nc, .printText
+	jr nc, PrintSendOutMonMessage.printText
 	ld hl, GetmText ; 10% - 39%
 	cp 10
-	jr nc, .printText
+	jr nc, PrintSendOutMonMessage.printText
 	ld hl, EnemysWeakText ; 0% - 9%
-.printText
+PrintSendOutMonMessage.printText
 	jp PrintText
 
 GoText:
-	text_far _GoText
+	text_far WLA_GLOBAL_GoText
 	text_asm
 	jr PrintPlayerMon1Text
 
 DoItText:
-	text_far _DoItText
+	text_far WLA_GLOBAL_DoItText
 	text_asm
 	jr PrintPlayerMon1Text
 
 GetmText:
-	text_far _GetmText
+	text_far WLA_GLOBAL_GetmText
 	text_asm
 	jr PrintPlayerMon1Text
 
 EnemysWeakText:
-	text_far _EnemysWeakText
+	text_far WLA_GLOBAL_EnemysWeakText
 	text_asm
 
 PrintPlayerMon1Text:
@@ -161,7 +161,7 @@ PrintPlayerMon1Text:
 	ret
 
 PlayerMon1Text:
-	text_far _PlayerMon1Text
+	text_far WLA_GLOBAL_PlayerMon1Text
 	text_end
 
 RetreatMon:
@@ -169,7 +169,7 @@ RetreatMon:
 	jp PrintText
 
 PlayerMon2Text:
-	text_far _PlayerMon2Text
+	text_far WLA_GLOBAL_PlayerMon2Text
 	text_asm
 	push de
 	push bc
@@ -179,14 +179,14 @@ PlayerMon2Text:
 	dec hl
 	ld a, [de]
 	sub b
-	ldh [hMultiplicand + 2], a
+	ldh [lobyte(hMultiplicand + 2)], a
 	dec de
 	ld b, [hl]
 	ld a, [de]
 	sbc b
-	ldh [hMultiplicand + 1], a
+	ldh [lobyte(hMultiplicand + 1)], a
 	ld a, 25
-	ldh [hMultiplier], a
+	ldh [lobyte(hMultiplier)], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -197,11 +197,11 @@ PlayerMon2Text:
 	rr b
 	ld a, b
 	ld b, 4
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	call Divide
 	pop bc
 	pop de
-	ldh a, [hQuotient + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
+	ldh a, [lobyte(hQuotient + 3)] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
 ; Assuming that the enemy mon hasn't gained HP since the last switch in,
 ; a approximates the percentage that the enemy mon's total HP has decreased
 ; since the last switch in.
@@ -220,17 +220,17 @@ PlayerMon2Text:
 	ret
 
 EnoughText:
-	text_far _EnoughText
+	text_far WLA_GLOBAL_EnoughText
 	text_asm
 	jr PrintComeBackText
 
 OKExclamationText:
-	text_far _OKExclamationText
+	text_far WLA_GLOBAL_OKExclamationText
 	text_asm
 	jr PrintComeBackText
 
 GoodText:
-	text_far _GoodText
+	text_far WLA_GLOBAL_GoodText
 	text_asm
 	jr PrintComeBackText
 
@@ -239,5 +239,5 @@ PrintComeBackText:
 	ret
 
 ComeBackText:
-	text_far _ComeBackText
+	text_far WLA_GLOBAL_ComeBackText
 	text_end

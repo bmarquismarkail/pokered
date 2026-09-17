@@ -10,70 +10,70 @@ Route12Gate2F_TextPointers:
 Route12Gate2FBrunetteGirlText:
 	text_asm
 	CheckEvent EVENT_GOT_TM39, 1
-	jr c, .got_item
-	ld hl, .YouCanHaveThisText
+	jr c, Route12Gate2FBrunetteGirlText.got_item
+	ld hl, Route12Gate2FBrunetteGirlText.YouCanHaveThisText
 	call PrintText
-	lb bc, TM_SWIFT, 1
+	lb "bc", TM_SWIFT, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedTM39Text
+	jr nc, Route12Gate2FBrunetteGirlText.bag_full
+	ld hl, Route12Gate2FBrunetteGirlText.ReceivedTM39Text
 	call PrintText
 	SetEvent EVENT_GOT_TM39
-	jr .done
-.bag_full
-	ld hl, .TM39NoRoomText
+	jr Route12Gate2FBrunetteGirlText.done
+Route12Gate2FBrunetteGirlText.bag_full
+	ld hl, Route12Gate2FBrunetteGirlText.TM39NoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .TM39ExplanationText
+	jr Route12Gate2FBrunetteGirlText.done
+Route12Gate2FBrunetteGirlText.got_item
+	ld hl, Route12Gate2FBrunetteGirlText.TM39ExplanationText
 	call PrintText
-.done
+Route12Gate2FBrunetteGirlText.done
 	jp TextScriptEnd
 
-.YouCanHaveThisText:
-	text_far _Route12Gate2FBrunetteGirlYouCanHaveThisText
+Route12Gate2FBrunetteGirlText.YouCanHaveThisText:
+	text_far WLA_GLOBAL_Route12Gate2FBrunetteGirlYouCanHaveThisText
 	text_end
 
-.ReceivedTM39Text:
-	text_far _Route12Gate2FBrunetteGirlReceivedTM39Text
+Route12Gate2FBrunetteGirlText.ReceivedTM39Text:
+	text_far WLA_GLOBAL_Route12Gate2FBrunetteGirlReceivedTM39Text
 	sound_get_item_1
 	text_end
 
-.TM39ExplanationText:
-	text_far _Route12Gate2FBrunetteGirlTM39ExplanationText
+Route12Gate2FBrunetteGirlText.TM39ExplanationText:
+	text_far WLA_GLOBAL_Route12Gate2FBrunetteGirlTM39ExplanationText
 	text_end
 
-.TM39NoRoomText:
-	text_far _Route12Gate2FBrunetteGirlTM39NoRoomText
+Route12Gate2FBrunetteGirlText.TM39NoRoomText:
+	text_far WLA_GLOBAL_Route12Gate2FBrunetteGirlTM39NoRoomText
 	text_end
 
 Route12Gate2FLeftBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route12Gate2FLeftBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route12Gate2FLeftBinocularsText
+Route12Gate2FLeftBinocularsText.Text:
+	text_far WLA_GLOBAL_Route12Gate2FLeftBinocularsText
 	text_end
 
 Route12Gate2FRightBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route12Gate2FRightBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route12Gate2FRightBinocularsText
+Route12Gate2FRightBinocularsText.Text:
+	text_far WLA_GLOBAL_Route12Gate2FRightBinocularsText
 	text_end
 
 GateUpstairsScript_PrintIfFacingUp:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	jr z, .up
+	jr z, GateUpstairsScript_PrintIfFacingUp.up
 	ld a, TRUE
-	jr .done
-.up
+	jr GateUpstairsScript_PrintIfFacingUp.done
+GateUpstairsScript_PrintIfFacingUp.up
 	call PrintText
 	xor a
-.done
+GateUpstairsScript_PrintIfFacingUp.done
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd

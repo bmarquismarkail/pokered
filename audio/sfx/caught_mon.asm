@@ -7,16 +7,16 @@ SFX_Caught_Mon_Ch5:
 	note_type 6, 11, 2
 	octave 3
 	note E_, 2
-	note F#, 2
-	note G#, 2
-	note G#, 1
-	note G#, 1
+	note F_SHARP, 2
+	note G_SHARP, 2
+	note G_SHARP, 1
+	note G_SHARP, 1
 	note B_, 2
 	octave 4
-	note C#, 2
-	note D#, 2
-	note D#, 1
-	note D#, 1
+	note C_SHARP, 2
+	note D_SHARP, 2
+	note D_SHARP, 1
+	note D_SHARP, 1
 	note_type 6, 11, 5
 	note E_, 8
 	sound_ret
@@ -26,9 +26,9 @@ SFX_Caught_Mon_Ch6:
 	duty_cycle 2
 	note_type 6, 12, 2
 	octave 4
-	note G#, 2
-	note G#, 1
-	note G#, 1
+	note G_SHARP, 2
+	note G_SHARP, 1
+	note G_SHARP, 1
 	note E_, 2
 	note E_, 1
 	note E_, 1
@@ -39,7 +39,7 @@ SFX_Caught_Mon_Ch6:
 	note A_, 1
 	note A_, 1
 	note_type 6, 12, 5
-	note G#, 8
+	note G_SHARP, 8
 	sound_ret
 
 SFX_Caught_Mon_Ch7:
@@ -49,11 +49,11 @@ SFX_Caught_Mon_Ch7:
 	note B_, 2
 	rest 2
 	octave 5
-	note C#, 2
+	note C_SHARP, 2
 	rest 2
-	note D#, 2
+	note D_SHARP, 2
 	rest 2
-	note F#, 2
+	note F_SHARP, 2
 	note G_, 2
-	note G#, 4
+	note G_SHARP, 4
 	sound_ret

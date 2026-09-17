@@ -11,21 +11,21 @@ CinnabarLab_TextPointers:
 	dw_const CinnabarLabTestingRoomSignText, TEXT_CINNABARLAB_TESTING_ROOM_SIGN
 
 CinnabarLabFishingGuruText:
-	text_far _CinnabarLabFishingGuruText
+	text_far WLA_GLOBAL_CinnabarLabFishingGuruText
 	text_end
 
 CinnabarLabPhotoText:
-	text_far _CinnabarLabPhotoText
+	text_far WLA_GLOBAL_CinnabarLabPhotoText
 	text_end
 
 CinnabarLabMeetingRoomSignText:
-	text_far _CinnabarLabMeetingRoomSignText
+	text_far WLA_GLOBAL_CinnabarLabMeetingRoomSignText
 	text_end
 
 CinnabarLabRAndDSignText:
-	text_far _CinnabarLabRAndDSignText
+	text_far WLA_GLOBAL_CinnabarLabRAndDSignText
 	text_end
 
 CinnabarLabTestingRoomSignText:
-	text_far _CinnabarLabTestingRoomSignText
+	text_far WLA_GLOBAL_CinnabarLabTestingRoomSignText
 	text_end

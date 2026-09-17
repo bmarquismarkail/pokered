@@ -20,36 +20,36 @@ Route5GateDefaultScript:
 	ld a, [wStatusFlags1]
 	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
 	ret nz
-	ld hl, .PlayerInCoordsArray
+	ld hl, Route5GateDefaultScript.PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	farcall RemoveGuardDrink
-	ldh a, [hItemToRemoveID]
+	ldh a, [lobyte(hItemToRemoveID)]
 	and a
-	jr nz, .have_drink
+	jr nz, Route5GateDefaultScript.have_drink
 	ld a, TEXT_ROUTE5GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Route5GateMovePlayerUpScript
 	ld a, SCRIPT_ROUTE5GATE_PLAYER_MOVING
 	ld [wRoute5GateCurScript], a
 	ret
-.have_drink
+Route5GateDefaultScript.have_drink
 	ld a, TEXT_ROUTE5GATE_GUARD_GIVE_DRINK
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld hl, wStatusFlags1
 	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ret
 
-.PlayerInCoordsArray:
+Route5GateDefaultScript.PlayerInCoordsArray:
 	dbmapcoord  3,  3
 	dbmapcoord  4,  3
-	db -1 ; end
+	.DB -1 ; end
 
 Route5GatePlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -71,11 +71,11 @@ SaffronGateGuardText:
 	text_asm
 	ld a, [wStatusFlags1]
 	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
-	jr nz, .thanks_for_drink
+	jr nz, SaffronGateGuardText.thanks_for_drink
 	farcall RemoveGuardDrink
-	ldh a, [hItemToRemoveID]
+	ldh a, [lobyte(hItemToRemoveID)]
 	and a
-	jr nz, .have_drink
+	jr nz, SaffronGateGuardText.have_drink
 	ld hl, SaffronGateGuardGeeImThirstyText
 	call PrintText
 	call Route5GateMovePlayerUpScript
@@ -83,28 +83,28 @@ SaffronGateGuardText:
 	ld [wRoute5GateCurScript], a
 	jp TextScriptEnd
 
-.have_drink
+SaffronGateGuardText.have_drink
 	ld hl, SaffronGateGuardGiveDrinkText
 	call PrintText
 	ld hl, wStatusFlags1
 	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	jp TextScriptEnd
 
-.thanks_for_drink
+SaffronGateGuardText.thanks_for_drink
 	ld hl, SaffronGateGuardThanksForTheDrinkText
 	call PrintText
 	jp TextScriptEnd
 
 SaffronGateGuardGeeImThirstyText:
-	text_far _SaffronGateGuardGeeImThirstyText
+	text_far WLA_GLOBAL_SaffronGateGuardGeeImThirstyText
 	text_end
 
 SaffronGateGuardGiveDrinkText:
-	text_far _SaffronGateGuardImParchedText
+	text_far WLA_GLOBAL_SaffronGateGuardImParchedText
 	sound_get_key_item
-	text_far _SaffronGateGuardYouCanGoOnThroughText
+	text_far WLA_GLOBAL_SaffronGateGuardYouCanGoOnThroughText
 	text_end
 
 SaffronGateGuardThanksForTheDrinkText:
-	text_far _SaffronGateGuardThanksForTheDrinkText
+	text_far WLA_GLOBAL_SaffronGateGuardThanksForTheDrinkText
 	text_end

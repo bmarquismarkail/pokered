@@ -1,66 +1,66 @@
-MACRO ATTR_BLK
+.MACRO ATTR_BLK
 ; This is a command macro.
 ; Use ATTR_BLK_DATA for data sets.
-	db ($4 << 3) + ((\1 * 6) / 16 + 1)
-	db \1
-ENDM
+	.DB ($4 << 3) + ((\1 * 6) / 16 + 1)
+	.DB \1
+.ENDM
 
-MACRO ATTR_BLK_DATA
-	db \1 ; which regions are affected
-	db \2 + (\3 << 2) + (\4 << 4) ; palette for each region
-	db \5, \6, \7, \8 ; x1, y1, x2, y2
-ENDM
+.MACRO ATTR_BLK_DATA
+	.DB \1 ; which regions are affected
+	.DB \2 + (\3 << 2) + (\4 << 4) ; palette for each region
+	.DB \5, \6, \7, \8 ; x1, y1, x2, y2
+.ENDM
 
-MACRO PAL_SET
-	db ($a << 3) + 1
-	dw \1, \2, \3, \4
-	ds 7, 0
-ENDM
+.MACRO PAL_SET
+	.DB ($a << 3) + 1
+	.DW \1, \2, \3, \4
+	.DSB 7, 0
+.ENDM
 
-MACRO PAL_TRN
-	db ($b << 3) + 1
-	ds 15, 0
-ENDM
+.MACRO PAL_TRN
+	.DB ($b << 3) + 1
+	.DSB 15, 0
+.ENDM
 
-MACRO MLT_REQ
-	db ($11 << 3) + 1
-	db \1 - 1
-	ds 14, 0
-ENDM
+.MACRO MLT_REQ
+	.DB ($11 << 3) + 1
+	.DB \1 - 1
+	.DSB 14, 0
+.ENDM
 
-MACRO CHR_TRN
-	db ($13 << 3) + 1
-	db \1 + (\2 << 1)
-	ds 14, 0
-ENDM
+.MACRO CHR_TRN
+	.DB ($13 << 3) + 1
+	.DB \1 + (\2 << 1)
+	.DSB 14, 0
+.ENDM
 
-MACRO PCT_TRN
-	db ($14 << 3) + 1
-	ds 15, 0
-ENDM
+.MACRO PCT_TRN
+	.DB ($14 << 3) + 1
+	.DSB 15, 0
+.ENDM
 
-MACRO MASK_EN
-	db ($17 << 3) + 1
-	db \1
-	ds 14, 0
-ENDM
+.MACRO MASK_EN
+	.DB ($17 << 3) + 1
+	.DB \1
+	.DSB 14, 0
+.ENDM
 
-MACRO DATA_SND
-	db ($f << 3) + 1
-	dw \1 ; address
-	db \2 ; bank
-	db \3 ; length (1-11)
-ENDM
+.MACRO DATA_SND
+	.DB ($f << 3) + 1
+	.DW \1 ; address
+	.DB \2 ; bank
+	.DB \3 ; length (1-11)
+.ENDM
 
 
 BlkPacket_WholeScreen:
 	ATTR_BLK 1
 	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,17
-	ds 8, 0
+	.DSB 8, 0
 
 ; unused
-	db $03, 00,00, 19,17, $00
-	db $00
+	.DB $03, 00,00, 19,17, $00
+	.DB $00
 
 BlkPacket_Battle:
 	ATTR_BLK 5
@@ -71,38 +71,38 @@ BlkPacket_Battle:
 	ATTR_BLK_DATA %011, 3,3,0, 11,00, 19,06 ; enemy mon : pal 3
 
 ; unused
-	db $03, 00,00, 19,11, $00
-	db $03, 00,12, 19,17, $02
-	db $03, 01,00, 10,03, $01
-	db $03, 10,08, 19,10, $00
-	db $03, 00,04, 08,11, $02
-	db $03, 11,00, 19,07, $03
-	db $00
+	.DB $03, 00,00, 19,11, $00
+	.DB $03, 00,12, 19,17, $02
+	.DB $03, 01,00, 10,03, $01
+	.DB $03, 10,08, 19,10, $00
+	.DB $03, 00,04, 08,11, $02
+	.DB $03, 11,00, 19,07, $03
+	.DB $00
 
 BlkPacket_StatusScreen:
 	ATTR_BLK 1
 	ATTR_BLK_DATA %111, 1,1,0, 01,00, 07,06 ; mon: pal 1, HP bar: pal 0
-	ds 8, 0
+	.DSB 8, 0
 
 ; unused
-	db $02, 00,00, 17,00
-	db $03, 01,00, 07,06, $01
-	db $03, 01,07, 19,17, $00
-	db $03, 08,00, 19,06, $00
-	db $00
+	.DB $02, 00,00, 17,00
+	.DB $03, 01,00, 07,06, $01
+	.DB $03, 01,07, 19,17, $00
+	.DB $03, 08,00, 19,06, $00
+	.DB $00
 
 BlkPacket_Pokedex:
 	ATTR_BLK 1
 	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08 ; mon: pal 1, everything else: pal 0
-	ds 8, 0
+	.DSB 8, 0
 
 ; unused
-	db $02, 00,00, 17,00
-	db $01, 00,01, 19,00
-	db $03, 01,01, 08,08, $01
-	db $03, 01,09, 08,17, $00
-	db $03, 09,01, 19,17, $00
-	db $00
+	.DB $02, 00,00, 17,00
+	.DB $01, 00,01, 19,00
+	.DB $03, 01,01, 08,08, $01
+	.DB $03, 01,09, 08,17, $00
+	.DB $03, 09,01, 19,17, $00
+	.DB $00
 
 BlkPacket_Slots:
 	ATTR_BLK 5
@@ -113,38 +113,38 @@ BlkPacket_Slots:
 	ATTR_BLK_DATA %011, 0,0,0, 00,12, 19,17 ; message box: pal 0
 
 ; unused
-	db $03, 00,00, 19,11, $01
-	db $03, 00,04, 19,09, $02
-	db $03, 00,06, 19,07, $03
-	db $03, 04,04, 15,09, $00
-	db $03, 00,12, 19,17, $00
-	db $00
+	.DB $03, 00,00, 19,11, $01
+	.DB $03, 00,04, 19,09, $02
+	.DB $03, 00,06, 19,07, $03
+	.DB $03, 04,04, 15,09, $00
+	.DB $03, 00,12, 19,17, $00
+	.DB $00
 
 BlkPacket_Titlescreen:
 	ATTR_BLK 3
 	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07 ; pokemon logo: pal 0
 	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09 ; version text: pal 1
 	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17 ; player, mon, copyright text: pal 2
-	ds 12, 0
+	.DSB 12, 0
 
 ; unused
-	db $03, 00,00, 19,07, $00
-	db $03, 00,08, 19,09, $01
-	db $03, 00,10, 19,17, $02
-	db $00
+	.DB $03, 00,00, 19,07, $00
+	.DB $03, 00,08, 19,09, $01
+	.DB $03, 00,10, 19,17, $02
+	.DB $00
 
 BlkPacket_NidorinoIntro:
 	ATTR_BLK 3
 	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,03 ; upper black bar: pal 1
 	ATTR_BLK_DATA %011, 0,0,0, 00,04, 19,13 ; letterbox: pal 0
 	ATTR_BLK_DATA %011, 1,1,0, 00,14, 19,17 ; lower black bar: pal 1
-	ds 12, 0
+	.DSB 12, 0
 
 ; unused
-	db $03, 00,00, 19,03, $01
-	db $03, 00,04, 19,13, $00
-	db $03, 00,14, 19,17, $01
-	db $00
+	.DB $03, 00,00, 19,03, $01
+	.DB $03, 00,04, 19,13, $00
+	.DB $03, 00,14, 19,17, $01
+	.DB $00
 
 BlkPacket_PartyMenu:
 	ATTR_BLK 7
@@ -155,20 +155,20 @@ BlkPacket_PartyMenu:
 	ATTR_BLK_DATA %010, 0,0,0, 05,07, 11,07 ; HP bar 3: pal set dynamically
 	ATTR_BLK_DATA %010, 0,0,0, 05,09, 11,09 ; HP bar 4: pal set dynamically
 	ATTR_BLK_DATA %010, 0,0,0, 05,11, 11,11 ; HP bar 5: pal set dynamically
-	ds 4, 0
+	.DSB 4, 0
 
 ; unused
-	db $02, 00,00, 17,01
-	db $03, 01,00, 02,12, $00
-	db $03, 01,13, 02,17, $01
-	db $03, 03,00, 19,17, $01
-	db $03, 12,00, 18,01, $00
-	db $03, 12,02, 18,03, $00
-	db $03, 12,04, 18,05, $00
-	db $03, 12,06, 18,07, $00
-	db $03, 12,08, 18,09, $00
-	db $03, 12,10, 18,11, $00
-	db $00
+	.DB $02, 00,00, 17,01
+	.DB $03, 01,00, 02,12, $00
+	.DB $03, 01,13, 02,17, $01
+	.DB $03, 03,00, 19,17, $01
+	.DB $03, 12,00, 18,01, $00
+	.DB $03, 12,02, 18,03, $00
+	.DB $03, 12,04, 18,05, $00
+	.DB $03, 12,06, 18,07, $00
+	.DB $03, 12,08, 18,09, $00
+	.DB $03, 12,10, 18,11, $00
+	.DB $00
 
 BlkPacket_TrainerCard:
 	ATTR_BLK 10
@@ -182,37 +182,37 @@ BlkPacket_TrainerCard:
 	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16 ; Marsh Badge
 	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16 ; Volcano Badge
 	ATTR_BLK_DATA %010, 1,1,0, 15,15, 16,16 ; Earth Badge
-	ds 2, 0
+	.DSB 2, 0
 
 ; unused
-	db $03, 03,12, 04,13, $00
-	db $03, 07,12, 08,13, $01
-	db $03, 11,12, 12,13, $03
-	db $03, 16,11, 17,12, $02
-	db $03, 14,13, 15,14, $01
-	db $03, 16,13, 17,14, $03
-	db $03, 03,15, 04,16, $02
-	db $03, 07,15, 08,16, $03
-	db $03, 11,15, 12,16, $02
-	db $03, 15,15, 16,16, $01
-	db $00
+	.DB $03, 03,12, 04,13, $00
+	.DB $03, 07,12, 08,13, $01
+	.DB $03, 11,12, 12,13, $03
+	.DB $03, 16,11, 17,12, $02
+	.DB $03, 14,13, 15,14, $01
+	.DB $03, 16,13, 17,14, $03
+	.DB $03, 03,15, 04,16, $02
+	.DB $03, 07,15, 08,16, $03
+	.DB $03, 11,15, 12,16, $02
+	.DB $03, 15,15, 16,16, $01
+	.DB $00
 
 BlkPacket_GameFreakIntro:
 	ATTR_BLK 3
 	ATTR_BLK_DATA %111, 1,1,0, 05,11, 07,13 ; falling stars (left): pal 1, GameFreak logo: pal 0
 	ATTR_BLK_DATA %010, 2,2,0, 08,11, 09,13 ; falling stars (middle): pal 2
 	ATTR_BLK_DATA %011, 3,3,0, 12,11, 14,13 ; falling stars (right): pal 3
-	ds 12, 0
+	.DSB 12, 0
 
 ; unused
-	db $03, 00,00, 19,10, $00
-	db $03, 00,11, 04,13, $00
-	db $03, 05,11, 07,13, $01
-	db $03, 08,11, 19,13, $00
-	db $03, 00,14, 19,17, $00
-	db $03, 08,11, 09,13, $02
-	db $03, 12,11, 14,13, $03
-	db $00
+	.DB $03, 00,00, 19,10, $00
+	.DB $03, 00,11, 04,13, $00
+	.DB $03, 05,11, 07,13, $01
+	.DB $03, 08,11, 19,13, $00
+	.DB $03, 00,14, 19,17, $00
+	.DB $03, 08,11, 09,13, $02
+	.DB $03, 12,11, 14,13, $03
+	.DB $00
 
 
 PalPacket_Empty:          PAL_SET 0, 0, 0, 0
@@ -243,80 +243,80 @@ MaskEnCancelPacket: MASK_EN 0
 
 DataSndPacket1:
 	DATA_SND $85d, $0, 11
-	db  $8C                 ; cpx #$8c (2)
-	db  $D0, $F4            ; bne -$0c
-	db  $60                 ; rts
-	ds  7, 0
+	.DB  $8C                 ; cpx #$8c (2)
+	.DB  $D0, $F4            ; bne -$0c
+	.DB  $60                 ; rts
+	.DSB  7, 0
 
 DataSndPacket2:
 	DATA_SND $852, $0, 11
-	db  $A9, $E7            ; lda #$e7
-	db  $9F, $01, $C0, $7E  ; sta $7ec001, x
-	db  $E8                 ; inx
-	db  $E8                 ; inx
-	db  $E8                 ; inx
-	db  $E8                 ; inx
-	db  $E0                 ; cpx #$8c (1)
+	.DB  $A9, $E7            ; lda #$e7
+	.DB  $9F, $01, $C0, $7E  ; sta $7ec001, x
+	.DB  $E8                 ; inx
+	.DB  $E8                 ; inx
+	.DB  $E8                 ; inx
+	.DB  $E8                 ; inx
+	.DB  $E0                 ; cpx #$8c (1)
 
 DataSndPacket3:
 	DATA_SND $847, $0, 11
-	db  $C4                 ; cmp #$c4 (2)
-	db  $D0, $16            ; bne +$16
-	db  $A5                 ; lda dp
-	db  $CB                 ; wai
-	db  $C9, $05            ; cmp #$05
-	db  $D0, $10            ; bne +$10
-	db  $A2, $28            ; ldx #$28
+	.DB  $C4                 ; cmp #$c4 (2)
+	.DB  $D0, $16            ; bne +$16
+	.DB  $A5                 ; lda dp
+	.DB  $CB                 ; wai
+	.DB  $C9, $05            ; cmp #$05
+	.DB  $D0, $10            ; bne +$10
+	.DB  $A2, $28            ; ldx #$28
 
 DataSndPacket4:
 	DATA_SND $83c, $0, 11
-	db  $F0, $12            ; beq +$12
-	db  $A5                 ; lda dp
-	db  $C9, $C9            ; cmp #$c9
-	db  $C8                 ; iny
-	db  $D0, $1C            ; bne +$1c
-	db  $A5                 ; lda dp
-	db  $CA                 ; dex
-	db  $C9                 ; cmp #$c4 (1)
+	.DB  $F0, $12            ; beq +$12
+	.DB  $A5                 ; lda dp
+	.DB  $C9, $C9            ; cmp #$c9
+	.DB  $C8                 ; iny
+	.DB  $D0, $1C            ; bne +$1c
+	.DB  $A5                 ; lda dp
+	.DB  $CA                 ; dex
+	.DB  $C9                 ; cmp #$c4 (1)
 
 DataSndPacket5:
 	DATA_SND $831, $0, 11
 	dbw $0C, $CAA5          ; tsb $caa5
-	db  $C9, $7E            ; cmp #$7e
-	db  $D0, $06            ; bne +$06
-	db  $A5                 ; lda dp
-	db  $CB                 ; wai
-	db  $C9, $7E            ; cmp #$7e
+	.DB  $C9, $7E            ; cmp #$7e
+	.DB  $D0, $06            ; bne +$06
+	.DB  $A5                 ; lda dp
+	.DB  $CB                 ; wai
+	.DB  $C9, $7E            ; cmp #$7e
 
 DataSndPacket6:
 	DATA_SND $826, $0, 11
-	db  $39                 ; bne +$39 (2)
+	.DB  $39                 ; bne +$39 (2)
 	dbw $CD, $C48           ; cmp $c48
-	db  $D0, $34            ; bne +$34
-	db  $A5                 ; lda dp
-	db  $C9, $C9            ; cmp #$c9
-	db  $80, $D0            ; bra -$30
+	.DB  $D0, $34            ; bne +$34
+	.DB  $A5                 ; lda dp
+	.DB  $C9, $C9            ; cmp #$c9
+	.DB  $80, $D0            ; bra -$30
 
 DataSndPacket7:
 	DATA_SND $81b, $0, 11
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
 	                        ; $820:
-	db  $A9,$01             ; lda #01
+	.DB  $A9,$01             ; lda #01
 	dbw $CD,$C4F            ; cmp $c4f
-	db  $D0                 ; bne +$39 (1)
+	.DB  $D0                 ; bne +$39 (1)
 
 DataSndPacket8:
 	DATA_SND $810, $0, 11
 	dbw $4C, $820           ; jmp $820
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $EA                 ; nop
-	db  $60                 ; rts
-	db  $EA                 ; nop
-	db  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop
+	.DB  $60                 ; rts
+	.DB  $EA                 ; nop
+	.DB  $EA                 ; nop

@@ -2,7 +2,7 @@ VictoryRoad1F_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_1, [hl]
 	res BIT_CUR_MAP_LOADED_1, [hl]
-	call nz, .next
+	call nz, VictoryRoad1F_Script.next
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad1TrainerHeaders
 	ld de, VictoryRoad1F_ScriptPointers
@@ -10,12 +10,12 @@ VictoryRoad1F_Script:
 	call ExecuteCurMapScriptInTable
 	ld [wVictoryRoad1FCurScript], a
 	ret
-.next
+VictoryRoad1F_Script.next
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret z
 	ld a, $1d
 	ld [wNewTileBlockID], a
-	lb bc, 6, 4
+	lb "bc", 6, 4
 	predef_jump ReplaceTileBlock
 
 VictoryRoad1F_ScriptPointers:
@@ -27,7 +27,7 @@ VictoryRoad1F_ScriptPointers:
 VictoryRoad1FDefaultScript:
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	jp nz, CheckFightingMapTrainers
-	ld hl, .SwitchCoords
+	ld hl, VictoryRoad1FDefaultScript.SwitchCoords
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, wCurrentMapScriptFlags
@@ -35,9 +35,9 @@ VictoryRoad1FDefaultScript:
 	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret
 
-.SwitchCoords:
+VictoryRoad1FDefaultScript.SwitchCoords:
 	dbmapcoord 17, 13
-	db -1 ; end
+	.DB -1 ; end
 
 VictoryRoad1F_TextPointers:
 	def_text_pointers
@@ -55,7 +55,7 @@ VictoryRoad1TrainerHeader0:
 	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0, 2, VictoryRoad1FCooltrainerFBattleText, VictoryRoad1FCooltrainerFEndBattleText, VictoryRoad1FCooltrainerFAfterBattleText
 VictoryRoad1TrainerHeader1:
 	trainer EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1, 2, VictoryRoad1FCooltrainerMBattleText, VictoryRoad1FCooltrainerMEndBattleText, VictoryRoad1FCooltrainerMAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 VictoryRoad1FCooltrainerFText:
 	text_asm
@@ -70,25 +70,25 @@ VictoryRoad1FCooltrainerMText:
 	jp TextScriptEnd
 
 VictoryRoad1FCooltrainerFBattleText:
-	text_far _VictoryRoad1FCooltrainerFBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerFBattleText
 	text_end
 
 VictoryRoad1FCooltrainerFEndBattleText:
-	text_far _VictoryRoad1FCooltrainerFEndBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerFEndBattleText
 	text_end
 
 VictoryRoad1FCooltrainerFAfterBattleText:
-	text_far _VictoryRoad1FCooltrainerFAfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerFAfterBattleText
 	text_end
 
 VictoryRoad1FCooltrainerMBattleText:
-	text_far _VictoryRoad1FCooltrainerMBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerMBattleText
 	text_end
 
 VictoryRoad1FCooltrainerMEndBattleText:
-	text_far _VictoryRoad1FCooltrainerMEndBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerMEndBattleText
 	text_end
 
 VictoryRoad1FCooltrainerMAfterBattleText:
-	text_far _VictoryRoad1FCooltrainerMAfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad1FCooltrainerMAfterBattleText
 	text_end

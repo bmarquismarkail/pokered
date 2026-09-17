@@ -1,15 +1,18 @@
-_RocketHideoutB4FGiovanniImpressedYouGotHereText::
+_RocketHideoutB4FGiovanniImpressedYouGotHereText:
+WLA_GLOBAL_RocketHideoutB4FGiovanniImpressedYouGotHereText:
 	text "So! I must say, I"
 	line "am impressed you"
 	cont "got here!"
 	done
 
-_RocketHideoutB4FGiovanniWhatCannotBeText::
+_RocketHideoutB4FGiovanniWhatCannotBeText:
+WLA_GLOBAL_RocketHideoutB4FGiovanniWhatCannotBeText:
 	text "WHAT!"
 	line "This cannot be!"
 	prompt
 
-_RocketHideoutB4FGiovanniHopeWeMeetAgainText::
+_RocketHideoutB4FGiovanniHopeWeMeetAgainText:
+WLA_GLOBAL_RocketHideoutB4FGiovanniHopeWeMeetAgainText:
 	text "I see that you"
 	line "raise #MON"
 	cont "with utmost care."
@@ -26,49 +29,58 @@ _RocketHideoutB4FGiovanniHopeWeMeetAgainText::
 	line "again..."
 	done
 
-_RocketHideoutB4FRocket1BattleText::
+_RocketHideoutB4FRocket1BattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket1BattleText:
 	text "I know you! You"
 	line "ruined our plans"
 	cont "at MT.MOON!"
 	done
 
-_RocketHideoutB4FRocket1EndBattleText::
+_RocketHideoutB4FRocket1EndBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket1EndBattleText:
 	text "Burned"
 	line "again!"
 	prompt
 
-_RocketHideoutB4FRocket1AfterBattleText::
+_RocketHideoutB4FRocket1AfterBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket1AfterBattleText:
 	text "Do you have"
 	line "something against"
 	cont "TEAM ROCKET?"
 	done
 
-_RocketHideoutB4FRocket2BattleText::
+_RocketHideoutB4FRocket2BattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket2BattleText:
 	text "How can you not"
 	line "see the beauty of"
 	cont "our evil?"
 	done
 
-_RocketHideoutB4FRocket2EndBattleText::
+_RocketHideoutB4FRocket2EndBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket2EndBattleText:
 	text "Ayaya!"
 	prompt
 
-_RocketHideoutB4FRocket2AfterBattleText::
+_RocketHideoutB4FRocket2AfterBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket2AfterBattleText:
 	text "BOSS! I'm sorry I"
 	line "failed you!"
 	done
 
-_RocketHideoutB4FRocket3BattleText::
+_RocketHideoutB4FRocket3BattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket3BattleText:
 	text "The elevator"
 	line "doesn't work? Who"
 	cont "has the LIFT KEY?"
 	done
 
-_RocketHideoutB4FRocket3EndBattleText::
+_RocketHideoutB4FRocket3EndBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket3EndBattleText:
 	text "No!"
 	prompt
 
-_RocketHideoutB4FRocket3AfterBattleText::
+_RocketHideoutB4FRocket3AfterBattleText:
+WLA_GLOBAL_RocketHideoutB4FRocket3AfterBattleText:
 	text "Oh no! I dropped"
 	line "the LIFT KEY!"
 	done

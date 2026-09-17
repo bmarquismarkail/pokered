@@ -9,20 +9,20 @@ SaffronPidgeyHouse_TextPointers:
 	dw_const SaffronPidgeyHousePaperText,        TEXT_SAFFRONPIDGEYHOUSE_PAPER
 
 SaffronPidgeyHouseBrunetteGirlText:
-	text_far _SaffronPidgeyHouseBrunetteGirlText
+	text_far WLA_GLOBAL_SaffronPidgeyHouseBrunetteGirlText
 	text_end
 
 SaffronPidgeyHousePidgeyText:
-	text_far _SaffronPidgeyHousePidgeyText
+	text_far WLA_GLOBAL_SaffronPidgeyHousePidgeyText
 	text_asm
 	ld a, PIDGEY
 	call PlayCry
 	jp TextScriptEnd
 
 SaffronPidgeyHouseYoungsterText:
-	text_far _SaffronPidgeyHouseYoungsterText
+	text_far WLA_GLOBAL_SaffronPidgeyHouseYoungsterText
 	text_end
 
 SaffronPidgeyHousePaperText:
-	text_far _SaffronPidgeyHousePaperText
+	text_far WLA_GLOBAL_SaffronPidgeyHousePaperText
 	text_end

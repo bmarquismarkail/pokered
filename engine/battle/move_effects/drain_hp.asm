@@ -7,19 +7,19 @@ DrainHPEffect_:
 	rr a
 	ld [hld], a
 	or [hl] ; is damage 0?
-	jr nz, .getAttackerHP
+	jr nz, DrainHPEffect_.getAttackerHP
 ; if damage is 0, increase to 1 so that the attacker gains at least 1 HP
 	inc hl
 	inc [hl]
-.getAttackerHP
+DrainHPEffect_.getAttackerHP
 	ld hl, wBattleMonHP
 	ld de, wBattleMonMaxHP
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
-	jp z, .addDamageToAttackerHP
+	jp z, DrainHPEffect_.addDamageToAttackerHP
 	ld hl, wEnemyMonHP
 	ld de, wEnemyMonMaxHP
-.addDamageToAttackerHP
+DrainHPEffect_.addDamageToAttackerHP
 	ld bc, wHPBarOldHP+1
 ; copy current HP to wHPBarOldHP
 	ld a, [hli]
@@ -46,7 +46,7 @@ DrainHPEffect_:
 	adc b
 	ld [hli], a
 	ld [wHPBarNewHP+1], a
-	jr c, .capToMaxHP ; if HP > 65,535, cap to max HP
+	jr c, DrainHPEffect_.capToMaxHP ; if HP > 65,535, cap to max HP
 ; compare HP with max HP
 	ld a, [hld]
 	ld b, a
@@ -58,8 +58,8 @@ DrainHPEffect_:
 	ld a, [de]
 	inc de
 	sbc b
-	jr nc, .next
-.capToMaxHP
+	jr nc, DrainHPEffect_.next
+DrainHPEffect_.capToMaxHP
 	ld a, [de]
 	ld [hld], a
 	ld [wHPBarNewHP], a
@@ -68,37 +68,37 @@ DrainHPEffect_:
 	ld [hli], a
 	ld [wHPBarNewHP+1], a
 	inc de
-.next
-	ldh a, [hWhoseTurn]
+DrainHPEffect_.next
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	hlcoord 10, 9
 	ld a, $1
-	jr z, .next2
+	jr z, DrainHPEffect_.next2
 	hlcoord 2, 2
 	xor a
-.next2
+DrainHPEffect_.next2
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	predef DrawPlayerHUDAndHPBar
 	predef DrawEnemyHUDAndHPBar
 	callfar ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerMoveEffect]
-	jr z, .next3
+	jr z, DrainHPEffect_.next3
 	ld a, [wEnemyMoveEffect]
-.next3
+DrainHPEffect_.next3
 	cp DREAM_EATER_EFFECT
-	jr nz, .printText
+	jr nz, DrainHPEffect_.printText
 	ld hl, DreamWasEatenText
-.printText
+DrainHPEffect_.printText
 	jp PrintText
 
 SuckedHealthText:
-	text_far _SuckedHealthText
+	text_far WLA_GLOBAL_SuckedHealthText
 	text_end
 
 DreamWasEatenText:
-	text_far _DreamWasEatenText
+	text_far WLA_GLOBAL_DreamWasEatenText
 	text_end

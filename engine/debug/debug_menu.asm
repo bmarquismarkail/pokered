@@ -1,5 +1,5 @@
 DebugMenu:
-IF DEF(_DEBUG)
+.IF defined(_DEBUG)
 	call ClearScreen
 
 	; These debug names are used for TestBattle.
@@ -60,20 +60,20 @@ IF DEF(_DEBUG)
 	jp StartNewGameDebug
 
 DebugBattlePlayerName:
-	db "Tom@"
+		.STRINGMAP pokemon, "Tom@"
 
 DebugBattleRivalName:
-	db "Juerry@"
+		.STRINGMAP pokemon, "Juerry@"
 
 DebugMenuOptions:
-	db   "FIGHT"
+		.STRINGMAP pokemon, "FIGHT"
 	next "DEBUG@"
-ELSE
+.ELSE
 	ret
-ENDC
+.ENDIF
 
 TestBattle: ; unreferenced except in _DEBUG
-.loop
+TestBattle.loop
 	call GBPalNormal
 
 	; Don't mess around with obedience.
@@ -116,5 +116,5 @@ TestBattle: ; unreferenced except in _DEBUG
 	; There are some graphical quirks in SGB mode.
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
-	ldh [hAutoBGTransferEnabled], a
-	jr .loop
+	ldh [lobyte(hAutoBGTransferEnabled)], a
+	jr TestBattle.loop

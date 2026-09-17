@@ -1,17 +1,17 @@
-	db DEX_MACHOKE ; pokedex id
+	.DB DEX_MACHOKE ; pokedex id
 
-	db  80, 100,  70,  45,  50
+	.DB  80, 100,  70,  45,  50
 	;   hp  atk  def  spd  spc
 
-	db FIGHTING, FIGHTING ; type
-	db 90 ; catch rate
-	db 146 ; base exp
+	.DB FIGHTING, FIGHTING ; type
+	.DB 90 ; catch rate
+	.DB 146 ; base exp
 
-	INCBIN "gfx/pokemon/front/machoke.pic", 0, 1 ; sprite dimensions
-	dw MachokePicFront, MachokePicBack
+	.INCBIN "gfx/pokemon/front/machoke.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MachokePicFront, MachokePicBack
 
-	db KARATE_CHOP, LOW_KICK, LEER, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB KARATE_CHOP, LOW_KICK, LEER, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

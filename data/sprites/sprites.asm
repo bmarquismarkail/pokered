@@ -1,8 +1,8 @@
-MACRO overworld_sprite
-	dw \1
-	db \2 tiles
-	db BANK(\1)
-ENDM
+.MACRO overworld_sprite
+	.DW \1
+	.DB \2 * TILE_SIZE
+	.DB bank(\1)
+.ENDM
 
 SpriteSheetPointerTable:
 	table_width 4

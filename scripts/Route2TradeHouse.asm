@@ -7,7 +7,7 @@ Route2TradeHouse_TextPointers:
 	dw_const Route2TradeHouseGameboyKidText, TEXT_ROUTE2TRADEHOUSE_GAMEBOY_KID
 
 Route2TradeHouseScientistText:
-	text_far _Route2TradeHouseScientistText
+	text_far WLA_GLOBAL_Route2TradeHouseScientistText
 	text_end
 
 Route2TradeHouseGameboyKidText:

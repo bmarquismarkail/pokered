@@ -7,20 +7,20 @@ CheckIfMoveIsKnown:
 	ld a, [wMoveNum]
 	ld b, a
 	ld c, NUM_MOVES
-.loop
+CheckIfMoveIsKnown.loop
 	ld a, [hli]
 	cp b
-	jr z, .alreadyKnown ; found a match
+	jr z, CheckIfMoveIsKnown.alreadyKnown ; found a match
 	dec c
-	jr nz, .loop
+	jr nz, CheckIfMoveIsKnown.loop
 	and a
 	ret
-.alreadyKnown
+CheckIfMoveIsKnown.alreadyKnown
 	ld hl, AlreadyKnowsText
 	call PrintText
 	scf
 	ret
 
 AlreadyKnowsText:
-	text_far _AlreadyKnowsText
+	text_far WLA_GLOBAL_AlreadyKnowsText
 	text_end

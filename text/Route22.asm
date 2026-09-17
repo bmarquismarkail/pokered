@@ -1,4 +1,5 @@
-_Route22RivalBeforeBattleText1::
+_Route22RivalBeforeBattleText1:
+WLA_GLOBAL_Route22RivalBeforeBattleText1:
 	text "<RIVAL>: Hey!"
 	line "<PLAYER>!"
 
@@ -17,7 +18,8 @@ _Route22RivalBeforeBattleText1::
 	cont "get any stronger?"
 	done
 
-_Route22RivalAfterBattleText1::
+_Route22RivalAfterBattleText1:
+WLA_GLOBAL_Route22RivalAfterBattleText1:
 	text "I heard #MON"
 	line "LEAGUE has many"
 	cont "tough trainers!"
@@ -31,13 +33,15 @@ _Route22RivalAfterBattleText1::
 	cont "a move on!"
 	done
 
-_Route22Rival1DefeatedText::
+_Route22Rival1DefeatedText:
+WLA_GLOBAL_Route22Rival1DefeatedText:
 	text "Awww!"
 	line "You just lucked"
 	cont "out!"
 	prompt
 
-_Route22Rival1VictoryText::
+_Route22Rival1VictoryText:
+WLA_GLOBAL_Route22Rival1VictoryText:
 	text "<RIVAL>: What?"
 	line "Why do I have 2"
 	cont "#MON?"
@@ -46,7 +50,8 @@ _Route22Rival1VictoryText::
 	cont "some more too!"
 	prompt
 
-_Route22RivalBeforeBattleText2::
+_Route22RivalBeforeBattleText2:
+WLA_GLOBAL_Route22RivalBeforeBattleText2:
 	text "<RIVAL>: What?"
 	line "<PLAYER>! What a"
 	cont "surprise to see"
@@ -67,7 +72,8 @@ _Route22RivalBeforeBattleText2::
 	para "Come on!"
 	done
 
-_Route22RivalAfterBattleText2::
+_Route22RivalAfterBattleText2:
+WLA_GLOBAL_Route22RivalAfterBattleText2:
 	text "That loosened me"
 	line "up! I'm ready for"
 	cont "#MON LEAGUE!"
@@ -80,14 +86,16 @@ _Route22RivalAfterBattleText2::
 	cont "here. Smell ya!"
 	done
 
-_Route22Rival2DefeatedText::
+_Route22Rival2DefeatedText:
+WLA_GLOBAL_Route22Rival2DefeatedText:
 	text "What!?"
 
 	para "I was just"
 	line "careless!"
 	prompt
 
-_Route22Rival2VictoryText::
+_Route22Rival2VictoryText:
+WLA_GLOBAL_Route22Rival2VictoryText:
 	text "<RIVAL>: Hahaha!"
 	line "<PLAYER>! That's"
 	cont "your best? You're"
@@ -98,7 +106,8 @@ _Route22Rival2VictoryText::
 	line "more! You loser!"
 	prompt
 
-_Route22PokemonLeagueSignText::
+_Route22PokemonLeagueSignText:
+WLA_GLOBAL_Route22PokemonLeagueSignText:
 	text "#MON LEAGUE"
 	line "Front Gate"
 	done

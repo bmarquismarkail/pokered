@@ -1,17 +1,17 @@
-	db DEX_SLOWPOKE ; pokedex id
+	.DB DEX_SLOWPOKE ; pokedex id
 
-	db  90,  65,  65,  15,  40
+	.DB  90,  65,  65,  15,  40
 	;   hp  atk  def  spd  spc
 
-	db WATER, PSYCHIC_TYPE ; type
-	db 190 ; catch rate
-	db 99 ; base exp
+	.DB WATER, PSYCHIC_TYPE ; type
+	.DB 190 ; catch rate
+	.DB 99 ; base exp
 
-	INCBIN "gfx/pokemon/front/slowpoke.pic", 0, 1 ; sprite dimensions
-	dw SlowpokePicFront, SlowpokePicBack
+	.INCBIN "gfx/pokemon/front/slowpoke.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW SlowpokePicFront, SlowpokePicBack
 
-	db CONFUSION, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB CONFUSION, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -22,4 +22,4 @@
 	     TRI_ATTACK,   SUBSTITUTE,   SURF,         STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

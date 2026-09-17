@@ -1,4 +1,5 @@
-_BrunoBeforeBattleText::
+_BrunoBeforeBattleText:
+WLA_GLOBAL_BrunoBeforeBattleText:
 	text "I am BRUNO of"
 	line "the ELITE FOUR!"
 
@@ -20,18 +21,21 @@ _BrunoBeforeBattleText::
 	para "Hoo hah!"
 	done
 
-_BrunoEndBattleText::
+_BrunoEndBattleText:
+WLA_GLOBAL_BrunoEndBattleText:
 	text "Why?"
 	line "How could I lose?"
 	prompt
 
-_BrunoAfterBattleText::
+_BrunoAfterBattleText:
+WLA_GLOBAL_BrunoAfterBattleText:
 	text "My job is done!"
 	line "Go face your next"
 	cont "challenge!"
 	done
 
-_BrunosRoomBrunoDontRunAwayText::
+_BrunosRoomBrunoDontRunAwayText:
+WLA_GLOBAL_BrunosRoomBrunoDontRunAwayText:
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

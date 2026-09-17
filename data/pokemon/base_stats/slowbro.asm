@@ -1,17 +1,17 @@
-	db DEX_SLOWBRO ; pokedex id
+	.DB DEX_SLOWBRO ; pokedex id
 
-	db  95,  75, 110,  30,  80
+	.DB  95,  75, 110,  30,  80
 	;   hp  atk  def  spd  spc
 
-	db WATER, PSYCHIC_TYPE ; type
-	db 75 ; catch rate
-	db 164 ; base exp
+	.DB WATER, PSYCHIC_TYPE ; type
+	.DB 75 ; catch rate
+	.DB 164 ; base exp
 
-	INCBIN "gfx/pokemon/front/slowbro.pic", 0, 1 ; sprite dimensions
-	dw SlowbroPicFront, SlowbroPicBack
+	.INCBIN "gfx/pokemon/front/slowbro.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW SlowbroPicFront, SlowbroPicBack
 
-	db CONFUSION, DISABLE, HEADBUTT, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB CONFUSION, DISABLE, HEADBUTT, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -24,4 +24,4 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

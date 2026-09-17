@@ -25,35 +25,35 @@ Route8GateDefaultScript:
 	ld a, [wStatusFlags1]
 	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
 	ret nz
-	ld hl, .PlayerInCoordsArray
+	ld hl, Route8GateDefaultScript.PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	farcall RemoveGuardDrink
-	ldh a, [hItemToRemoveID]
+	ldh a, [lobyte(hItemToRemoveID)]
 	and a
-	jr nz, .have_drink
+	jr nz, Route8GateDefaultScript.have_drink
 	ld a, TEXT_ROUTE8GATE_GUARD_GEE_IM_THIRSTY
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call Route8GateMovePlayerRightScript
 	ld a, SCRIPT_ROUTE8GATE_PLAYER_MOVING
 	ld [wRoute8GateCurScript], a
 	ret
-.have_drink
+Route8GateDefaultScript.have_drink
 	ld hl, wStatusFlags1
 	set BIT_GAVE_SAFFRON_GUARDS_DRINK, [hl]
 	ld a, TEXT_ROUTE8GATE_GUARD_GIVE_DRINK
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
-.PlayerInCoordsArray:
+Route8GateDefaultScript.PlayerInCoordsArray:
 	dbmapcoord  2,  3
 	dbmapcoord  2,  4
-	db -1 ; end
+	.DB -1 ; end
 
 Route8GatePlayerMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]

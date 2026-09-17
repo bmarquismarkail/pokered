@@ -54,7 +54,7 @@ Route17TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_17_TRAINER_8, 3, Route17Biker9BattleText, Route17Biker9EndBattleText, Route17Biker9AfterBattleText
 Route17TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_17_TRAINER_9, 4, Route17Biker10BattleText, Route17Biker10EndBattleText, Route17Biker10AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route17Biker1Text:
 	text_asm
@@ -63,15 +63,15 @@ Route17Biker1Text:
 	jp TextScriptEnd
 
 Route17Biker1BattleText:
-	text_far _Route17Biker1BattleText
+	text_far WLA_GLOBAL_Route17Biker1BattleText
 	text_end
 
 Route17Biker1EndBattleText:
-	text_far _Route17Biker1EndBattleText
+	text_far WLA_GLOBAL_Route17Biker1EndBattleText
 	text_end
 
 Route17Biker1AfterBattleText:
-	text_far _Route17Biker1AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker1AfterBattleText
 	text_end
 
 Route17Biker2Text:
@@ -81,15 +81,15 @@ Route17Biker2Text:
 	jp TextScriptEnd
 
 Route17Biker2BattleText:
-	text_far _Route17Biker2BattleText
+	text_far WLA_GLOBAL_Route17Biker2BattleText
 	text_end
 
 Route17Biker2EndBattleText:
-	text_far _Route17Biker2EndBattleText
+	text_far WLA_GLOBAL_Route17Biker2EndBattleText
 	text_end
 
 Route17Biker2AfterBattleText:
-	text_far _Route17Biker2AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker2AfterBattleText
 	text_end
 
 Route17Biker3Text:
@@ -99,15 +99,15 @@ Route17Biker3Text:
 	jp TextScriptEnd
 
 Route17Biker3BattleText:
-	text_far _Route17Biker3BattleText
+	text_far WLA_GLOBAL_Route17Biker3BattleText
 	text_end
 
 Route17Biker3EndBattleText:
-	text_far _Route17Biker3EndBattleText
+	text_far WLA_GLOBAL_Route17Biker3EndBattleText
 	text_end
 
 Route17Biker3AfterBattleText:
-	text_far _Route17Biker3AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker3AfterBattleText
 	text_end
 
 Route17Biker4Text:
@@ -117,15 +117,15 @@ Route17Biker4Text:
 	jp TextScriptEnd
 
 Route17Biker4BattleText:
-	text_far _Route17Biker4BattleText
+	text_far WLA_GLOBAL_Route17Biker4BattleText
 	text_end
 
 Route17Biker4EndBattleText:
-	text_far _Route17Biker4EndBattleText
+	text_far WLA_GLOBAL_Route17Biker4EndBattleText
 	text_end
 
 Route17Biker4AfterBattleText:
-	text_far _Route17Biker4AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker4AfterBattleText
 	text_end
 
 Route17Biker5Text:
@@ -135,15 +135,15 @@ Route17Biker5Text:
 	jp TextScriptEnd
 
 Route17Biker5BattleText:
-	text_far _Route17Biker5BattleText
+	text_far WLA_GLOBAL_Route17Biker5BattleText
 	text_end
 
 Route17Biker5EndBattleText:
-	text_far _Route17Biker5EndBattleText
+	text_far WLA_GLOBAL_Route17Biker5EndBattleText
 	text_end
 
 Route17Biker5AfterBattleText:
-	text_far _Route17Biker5AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker5AfterBattleText
 	text_end
 
 Route17Biker6Text:
@@ -153,15 +153,15 @@ Route17Biker6Text:
 	jp TextScriptEnd
 
 Route17Biker6BattleText:
-	text_far _Route17Biker6BattleText
+	text_far WLA_GLOBAL_Route17Biker6BattleText
 	text_end
 
 Route17Biker6EndBattleText:
-	text_far _Route17Biker6EndBattleText
+	text_far WLA_GLOBAL_Route17Biker6EndBattleText
 	text_end
 
 Route17Biker6AfterBattleText:
-	text_far _Route17Biker6AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker6AfterBattleText
 	text_end
 
 Route17Biker7Text:
@@ -171,15 +171,15 @@ Route17Biker7Text:
 	jp TextScriptEnd
 
 Route17Biker7BattleText:
-	text_far _Route17Biker7BattleText
+	text_far WLA_GLOBAL_Route17Biker7BattleText
 	text_end
 
 Route17Biker7EndBattleText:
-	text_far _Route17Biker7EndBattleText
+	text_far WLA_GLOBAL_Route17Biker7EndBattleText
 	text_end
 
 Route17Biker7AfterBattleText:
-	text_far _Route17Biker7AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker7AfterBattleText
 	text_end
 
 Route17Biker8Text:
@@ -189,15 +189,15 @@ Route17Biker8Text:
 	jp TextScriptEnd
 
 Route17Biker8BattleText:
-	text_far _Route17Biker8BattleText
+	text_far WLA_GLOBAL_Route17Biker8BattleText
 	text_end
 
 Route17Biker8EndBattleText:
-	text_far _Route17Biker8EndBattleText
+	text_far WLA_GLOBAL_Route17Biker8EndBattleText
 	text_end
 
 Route17Biker8AfterBattleText:
-	text_far _Route17Biker8AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker8AfterBattleText
 	text_end
 
 Route17Biker9Text:
@@ -207,15 +207,15 @@ Route17Biker9Text:
 	jp TextScriptEnd
 
 Route17Biker9BattleText:
-	text_far _Route17Biker9BattleText
+	text_far WLA_GLOBAL_Route17Biker9BattleText
 	text_end
 
 Route17Biker9EndBattleText:
-	text_far _Route17Biker9EndBattleText
+	text_far WLA_GLOBAL_Route17Biker9EndBattleText
 	text_end
 
 Route17Biker9AfterBattleText:
-	text_far _Route17Biker9AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker9AfterBattleText
 	text_end
 
 Route17Biker10Text:
@@ -225,37 +225,37 @@ Route17Biker10Text:
 	jp TextScriptEnd
 
 Route17Biker10BattleText:
-	text_far _Route17Biker10BattleText
+	text_far WLA_GLOBAL_Route17Biker10BattleText
 	text_end
 
 Route17Biker10EndBattleText:
-	text_far _Route17Biker10EndBattleText
+	text_far WLA_GLOBAL_Route17Biker10EndBattleText
 	text_end
 
 Route17Biker10AfterBattleText:
-	text_far _Route17Biker10AfterBattleText
+	text_far WLA_GLOBAL_Route17Biker10AfterBattleText
 	text_end
 
 Route17NoticeSign1Text:
-	text_far _Route17NoticeSign1Text
+	text_far WLA_GLOBAL_Route17NoticeSign1Text
 	text_end
 
 Route17TrainerTips1Text:
-	text_far _Route17TrainerTips1Text
+	text_far WLA_GLOBAL_Route17TrainerTips1Text
 	text_end
 
 Route17TrainerTips2Text:
-	text_far _Route17TrainerTips2Text
+	text_far WLA_GLOBAL_Route17TrainerTips2Text
 	text_end
 
 Route17SignText:
-	text_far _Route17SignText
+	text_far WLA_GLOBAL_Route17SignText
 	text_end
 
 Route17NoticeSign2Text:
-	text_far _Route17NoticeSign2Text
+	text_far WLA_GLOBAL_Route17NoticeSign2Text
 	text_end
 
 Route17CyclingRoadEndsSignText:
-	text_far _Route17CyclingRoadEndsSignText
+	text_far WLA_GLOBAL_Route17CyclingRoadEndsSignText
 	text_end

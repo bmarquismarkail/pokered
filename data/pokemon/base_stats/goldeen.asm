@@ -1,17 +1,17 @@
-	db DEX_GOLDEEN ; pokedex id
+	.DB DEX_GOLDEEN ; pokedex id
 
-	db  45,  67,  60,  63,  50
+	.DB  45,  67,  60,  63,  50
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 225 ; catch rate
-	db 111 ; base exp
+	.DB WATER, WATER ; type
+	.DB 225 ; catch rate
+	.DB 111 ; base exp
 
-	INCBIN "gfx/pokemon/front/goldeen.pic", 0, 1 ; sprite dimensions
-	dw GoldeenPicFront, GoldeenPicBack
+	.INCBIN "gfx/pokemon/front/goldeen.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GoldeenPicFront, GoldeenPicBack
 
-	db PECK, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB PECK, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

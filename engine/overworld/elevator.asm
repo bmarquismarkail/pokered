@@ -1,4 +1,4 @@
-ShakeElevator::
+ShakeElevator:
 	ld de, -$20
 	call ShakeElevatorRedrawRow
 	ld de, SCREEN_HEIGHT * $20
@@ -6,36 +6,36 @@ ShakeElevator::
 	call Delay3
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ldh a, [hSCY]
+	ldh a, [lobyte(hSCY)]
 	ld d, a
 	ld e, $1
 	ld b, 100
-.shakeLoop ; scroll the BG up and down and play a sound effect
+ShakeElevator.shakeLoop ; scroll the BG up and down and play a sound effect
 	ld a, e
 	xor $fe
 	ld e, a
 	add d
-	ldh [hSCY], a
+	ldh [lobyte(hSCY)], a
 	push bc
-	ld c, BANK(SFX_Collision_1)
+	ld c, bank(SFX_Collision_1)
 	ld a, SFX_COLLISION
 	call PlayMusic
 	pop bc
 	ld c, 2
 	call DelayFrames
 	dec b
-	jr nz, .shakeLoop
+	jr nz, ShakeElevator.shakeLoop
 	ld a, d
-	ldh [hSCY], a
+	ldh [lobyte(hSCY)], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld c, BANK(SFX_Safari_Zone_PA)
+	ld c, bank(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
-.musicLoop
+ShakeElevator.musicLoop
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_SAFARI_ZONE_PA
-	jr z, .musicLoop
+	jr z, ShakeElevator.musicLoop
 	call UpdateSprites
 	jp PlayDefaultMusic
 
@@ -56,7 +56,7 @@ ShakeElevatorRedrawRow:
 	add hl, de
 	ld a, h
 	and $3
-	or HIGH(vBGMap0)
+	or hibyte(vBGMap0)
 	ld d, a
 	ld a, l
 	pop hl

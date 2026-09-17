@@ -1,17 +1,17 @@
-	db DEX_CHANSEY ; pokedex id
+	.DB DEX_CHANSEY ; pokedex id
 
-	db 250,   5,   5,  50, 105
+	.DB 250,   5,   5,  50, 105
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 30 ; catch rate
-	db 255 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 30 ; catch rate
+	.DB 255 ; base exp
 
-	INCBIN "gfx/pokemon/front/chansey.pic", 0, 1 ; sprite dimensions
-	dw ChanseyPicFront, ChanseyPicBack
+	.INCBIN "gfx/pokemon/front/chansey.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ChanseyPicFront, ChanseyPicBack
 
-	db POUND, DOUBLESLAP, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_FAST ; growth rate
+	.DB POUND, DOUBLESLAP, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -24,4 +24,4 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

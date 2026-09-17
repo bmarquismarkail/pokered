@@ -1,25 +1,25 @@
 ; does nothing since no stats are ever selected (barring glitches)
 DoubleSelectedStats:
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerStatsToDouble]
 	ld hl, wBattleMonAttack + 1
-	jr z, .notEnemyTurn
+	jr z, DoubleSelectedStats.notEnemyTurn
 	ld a, [wEnemyStatsToDouble]
 	ld hl, wEnemyMonAttack + 1
-.notEnemyTurn
+DoubleSelectedStats.notEnemyTurn
 	ld c, 4
 	ld b, a
-.loop
+DoubleSelectedStats.loop
 	srl b
-	call c, .doubleStat
+	call c, DoubleSelectedStats.doubleStat
 	inc hl
 	inc hl
 	dec c
 	ret z
-	jr .loop
+	jr DoubleSelectedStats.loop
 
-.doubleStat
+DoubleSelectedStats.doubleStat
 	ld a, [hl]
 	add a
 	ld [hld], a
@@ -30,33 +30,33 @@ DoubleSelectedStats:
 
 ; does nothing since no stats are ever selected (barring glitches)
 HalveSelectedStats:
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wPlayerStatsToHalve]
 	ld hl, wBattleMonAttack
-	jr z, .notEnemyTurn
+	jr z, HalveSelectedStats.notEnemyTurn
 	ld a, [wEnemyStatsToHalve]
 	ld hl, wEnemyMonAttack
-.notEnemyTurn
+HalveSelectedStats.notEnemyTurn
 	ld c, 4
 	ld b, a
-.loop
+HalveSelectedStats.loop
 	srl b
-	call c, .halveStat
+	call c, HalveSelectedStats.halveStat
 	inc hl
 	inc hl
 	dec c
 	ret z
-	jr .loop
+	jr HalveSelectedStats.loop
 
-.halveStat
+HalveSelectedStats.halveStat
 	ld a, [hl]
 	srl a
 	ld [hli], a
 	rr [hl]
 	or [hl]
-	jr nz, .nonzeroStat
+	jr nz, HalveSelectedStats.nonzeroStat
 	ld [hl], 1
-.nonzeroStat
+HalveSelectedStats.nonzeroStat
 	dec hl
 	ret

@@ -1,17 +1,17 @@
-	db DEX_KANGASKHAN ; pokedex id
+	.DB DEX_KANGASKHAN ; pokedex id
 
-	db 105,  95,  80,  90,  40
+	.DB 105,  95,  80,  90,  40
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 45 ; catch rate
-	db 175 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 45 ; catch rate
+	.DB 175 ; base exp
 
-	INCBIN "gfx/pokemon/front/kangaskhan.pic", 0, 1 ; sprite dimensions
-	dw KangaskhanPicFront, KangaskhanPicBack
+	.INCBIN "gfx/pokemon/front/kangaskhan.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW KangaskhanPicFront, KangaskhanPicBack
 
-	db COMET_PUNCH, RAGE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB COMET_PUNCH, RAGE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

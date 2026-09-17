@@ -47,7 +47,7 @@ Route9TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_7, 2, Route9Hiker3BattleText, Route9Hiker3EndBattleText, Route9Hiker3AfterBattleText
 Route9TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_8, 2, Route9Youngster2BattleText, Route9Youngster2EndBattleText, Route9Youngster2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route9CooltrainerF1Text:
 	text_asm
@@ -97,113 +97,113 @@ Route9TalkToTrainer:
 	jp TextScriptEnd
 
 Route9CooltrainerF1BattleText:
-	text_far _Route9CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF1BattleText
 	text_end
 
 Route9CooltrainerF1EndBattleText:
-	text_far _Route9CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF1EndBattleText
 	text_end
 
 Route9CooltrainerF1AfterBattleText:
-	text_far _Route9CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF1AfterBattleText
 	text_end
 
 Route9CooltrainerM1BattleText:
-	text_far _Route9CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM1BattleText
 	text_end
 
 Route9CooltrainerM1EndBattleText:
-	text_far _Route9CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM1EndBattleText
 	text_end
 
 Route9CooltrainerM1AfterBattleText:
-	text_far _Route9CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM1AfterBattleText
 	text_end
 
 Route9CooltrainerM2BattleText:
-	text_far _Route9CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM2BattleText
 	text_end
 
 Route9CooltrainerM2EndBattleText:
-	text_far _Route9CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM2EndBattleText
 	text_end
 
 Route9CooltrainerM2AfterBattleText:
-	text_far _Route9CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerM2AfterBattleText
 	text_end
 
 Route9CooltrainerF2BattleText:
-	text_far _Route9CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF2BattleText
 	text_end
 
 Route9CooltrainerF2EndBattleText:
-	text_far _Route9CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF2EndBattleText
 	text_end
 
 Route9CooltrainerF2AfterBattleText:
-	text_far _Route9CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route9CooltrainerF2AfterBattleText
 	text_end
 
 Route9Hiker1BattleText:
-	text_far _Route9Hiker1BattleText
+	text_far WLA_GLOBAL_Route9Hiker1BattleText
 	text_end
 
 Route9Hiker1EndBattleText:
-	text_far _Route9Hiker1EndBattleText
+	text_far WLA_GLOBAL_Route9Hiker1EndBattleText
 	text_end
 
 Route9Hiker1AfterBattleText:
-	text_far _Route9Hiker1AfterBattleText
+	text_far WLA_GLOBAL_Route9Hiker1AfterBattleText
 	text_end
 
 Route9Hiker2BattleText:
-	text_far _Route9Hiker2BattleText
+	text_far WLA_GLOBAL_Route9Hiker2BattleText
 	text_end
 
 Route9Hiker2EndBattleText:
-	text_far _Route9Hiker2EndBattleText
+	text_far WLA_GLOBAL_Route9Hiker2EndBattleText
 	text_end
 
 Route9Hiker2AfterBattleText:
-	text_far _Route9Hiker2AfterBattleText
+	text_far WLA_GLOBAL_Route9Hiker2AfterBattleText
 	text_end
 
 Route9Youngster1BattleText:
-	text_far _Route9Youngster1BattleText
+	text_far WLA_GLOBAL_Route9Youngster1BattleText
 	text_end
 
 Route9Youngster1EndBattleText:
-	text_far _Route9Youngster1EndBattleText
+	text_far WLA_GLOBAL_Route9Youngster1EndBattleText
 	text_end
 
 Route9Youngster1AfterBattleText:
-	text_far _Route9Youngster1AfterBattleText
+	text_far WLA_GLOBAL_Route9Youngster1AfterBattleText
 	text_end
 
 Route9Hiker3BattleText:
-	text_far _Route9Hiker3BattleText
+	text_far WLA_GLOBAL_Route9Hiker3BattleText
 	text_end
 
 Route9Hiker3EndBattleText:
-	text_far _Route9Hiker3EndBattleText
+	text_far WLA_GLOBAL_Route9Hiker3EndBattleText
 	text_end
 
 Route9Hiker3AfterBattleText:
-	text_far _Route9Hiker3AfterBattleText
+	text_far WLA_GLOBAL_Route9Hiker3AfterBattleText
 	text_end
 
 Route9Youngster2BattleText:
-	text_far _Route9Youngster2BattleText
+	text_far WLA_GLOBAL_Route9Youngster2BattleText
 	text_end
 
 Route9Youngster2EndBattleText:
-	text_far _Route9Youngster2EndBattleText
+	text_far WLA_GLOBAL_Route9Youngster2EndBattleText
 	text_end
 
 Route9Youngster2AfterBattleText:
-	text_far _Route9Youngster2AfterBattleText
+	text_far WLA_GLOBAL_Route9Youngster2AfterBattleText
 	text_end
 
 Route9SignText:
-	text_far _Route9SignText
+	text_far WLA_GLOBAL_Route9SignText
 	text_end

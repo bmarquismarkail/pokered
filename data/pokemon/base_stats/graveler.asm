@@ -1,17 +1,17 @@
-	db DEX_GRAVELER ; pokedex id
+	.DB DEX_GRAVELER ; pokedex id
 
-	db  55,  95, 115,  35,  45
+	.DB  55,  95, 115,  35,  45
 	;   hp  atk  def  spd  spc
 
-	db ROCK, GROUND ; type
-	db 120 ; catch rate
-	db 134 ; base exp
+	.DB ROCK, GROUND ; type
+	.DB 120 ; catch rate
+	.DB 134 ; base exp
 
-	INCBIN "gfx/pokemon/front/graveler.pic", 0, 1 ; sprite dimensions
-	dw GravelerPicFront, GravelerPicBack
+	.INCBIN "gfx/pokemon/front/graveler.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GravelerPicFront, GravelerPicBack
 
-	db TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -21,4 +21,4 @@
 	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -78,183 +78,183 @@ RocketHideout2ArrowTilePlayerMovement:
 	map_coord_movement 16, 18, RocketHideout2ArrowMovement34
 	map_coord_movement 17, 10, RocketHideout2ArrowMovement35
 	map_coord_movement 17, 11, RocketHideout2ArrowMovement36
-	db -1 ; end
+	.DB -1 ; end
 
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
 RocketHideout2ArrowMovement1:
-	db PAD_LEFT, 2
-	db -1 ; end
+	.DB PAD_LEFT, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement2:
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement3:
-	db PAD_UP, 4
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_UP, 4
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement4:
-	db PAD_UP, 4
-	db PAD_RIGHT, 4
-	db PAD_UP, 1
-	db -1 ; end
+	.DB PAD_UP, 4
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 1
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement5:
-	db PAD_LEFT, 2
-	db PAD_UP, 3
-	db -1 ; end
+	.DB PAD_LEFT, 2
+	.DB PAD_UP, 3
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement6:
-	db PAD_DOWN, 2
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement7:
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement8:
-	db PAD_UP, 4
-	db -1 ; end
+	.DB PAD_UP, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement9:
-	db PAD_LEFT, 6
-	db -1 ; end
+	.DB PAD_LEFT, 6
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement10:
-	db PAD_UP, 1
-	db -1 ; end
+	.DB PAD_UP, 1
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement11:
-	db PAD_LEFT, 6
-	db PAD_UP, 4
-	db -1 ; end
+	.DB PAD_LEFT, 6
+	.DB PAD_UP, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement12:
-	db PAD_DOWN, 2
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement13:
-	db PAD_LEFT, 8
-	db -1 ; end
+	.DB PAD_LEFT, 8
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement14:
-	db PAD_LEFT, 8
-	db PAD_UP, 1
-	db -1 ; end
+	.DB PAD_LEFT, 8
+	.DB PAD_UP, 1
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement15:
-	db PAD_LEFT, 8
-	db PAD_UP, 6
-	db -1 ; end
+	.DB PAD_LEFT, 8
+	.DB PAD_UP, 6
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement16:
-	db PAD_UP, 2
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement17:
-	db PAD_UP, 2
-	db PAD_RIGHT, 4
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement18:
-	db PAD_DOWN, 2
-	db PAD_RIGHT, 4
-	db PAD_DOWN, 2
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_RIGHT, 4
+	.DB PAD_DOWN, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement19:
-	db PAD_DOWN, 2
-	db PAD_RIGHT, 4
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_RIGHT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement20:
-	db PAD_LEFT, 10
-	db -1 ; end
+	.DB PAD_LEFT, 10
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement21:
-	db PAD_LEFT, 10
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_LEFT, 10
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement22:
-	db PAD_LEFT, 10
-	db PAD_UP, 4
-	db -1 ; end
+	.DB PAD_LEFT, 10
+	.DB PAD_UP, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement23:
-	db PAD_UP, 2
-	db PAD_RIGHT, 2
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement24:
-	db PAD_RIGHT, 1
-	db PAD_DOWN, 2
-	db -1 ; end
+	.DB PAD_RIGHT, 1
+	.DB PAD_DOWN, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement25:
-	db PAD_RIGHT, 1
-	db -1 ; end
+	.DB PAD_RIGHT, 1
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement26:
-	db PAD_DOWN, 2
-	db PAD_RIGHT, 2
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_RIGHT, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement27:
-	db PAD_DOWN, 2
-	db PAD_LEFT, 2
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_LEFT, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement28:
-	db PAD_UP, 2
-	db PAD_RIGHT, 4
-	db PAD_UP, 2
-	db PAD_LEFT, 3
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 4
+	.DB PAD_UP, 2
+	.DB PAD_LEFT, 3
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement29:
-	db PAD_DOWN, 2
-	db PAD_LEFT, 4
-	db -1 ; end
+	.DB PAD_DOWN, 2
+	.DB PAD_LEFT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement30:
-	db PAD_LEFT, 6
-	db PAD_UP, 4
-	db PAD_LEFT, 5
-	db -1 ; end
+	.DB PAD_LEFT, 6
+	.DB PAD_UP, 4
+	.DB PAD_LEFT, 5
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement31:
-	db PAD_UP, 2
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement32:
-	db PAD_UP, 1
-	db -1 ; end
+	.DB PAD_UP, 1
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement33:
-	db PAD_UP, 3
-	db -1 ; end
+	.DB PAD_UP, 3
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement34:
-	db PAD_UP, 5
-	db -1 ; end
+	.DB PAD_UP, 5
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement35:
-	db PAD_RIGHT, 1
-	db PAD_DOWN, 2
-	db PAD_LEFT, 4
-	db -1 ; end
+	.DB PAD_RIGHT, 1
+	.DB PAD_DOWN, 2
+	.DB PAD_LEFT, 4
+	.DB -1 ; end
 
 RocketHideout2ArrowMovement36:
-	db PAD_LEFT, 10
-	db PAD_UP, 2
-	db PAD_LEFT, 5
-	db -1 ; end
+	.DB PAD_LEFT, 10
+	.DB PAD_UP, 2
+	.DB PAD_LEFT, 5
+	.DB -1 ; end
 
 RocketHideoutB2FPlayerSpinningScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -268,7 +268,7 @@ RocketHideoutB2FPlayerSpinningScript:
 	ld [wCurMapScript], a
 	ret
 
-INCLUDE "engine/overworld/spinners.asm"
+.INCLUDE "engine/overworld/spinners.asm"
 
 RocketHideoutB2F_TextPointers:
 	def_text_pointers
@@ -282,7 +282,7 @@ RocketHideout2TrainerHeaders:
 	def_trainers
 RocketHideout2TrainerHeader0:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0, 4, RocketHideoutB2FRocketBattleText, RocketHideoutB2FRocketEndBattleText, RocketHideoutB2FRocketAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 RocketHideoutB2FRocketText:
 	text_asm
@@ -291,13 +291,13 @@ RocketHideoutB2FRocketText:
 	jp TextScriptEnd
 
 RocketHideoutB2FRocketBattleText:
-	text_far _RocketHideoutB2FRocketBattleText
+	text_far WLA_GLOBAL_RocketHideoutB2FRocketBattleText
 	text_end
 
 RocketHideoutB2FRocketEndBattleText:
-	text_far _RocketHideoutB2FRocketEndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB2FRocketEndBattleText
 	text_end
 
 RocketHideoutB2FRocketAfterBattleText:
-	text_far _RocketHideoutB2FRocketAfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB2FRocketAfterBattleText
 	text_end

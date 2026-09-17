@@ -1,4 +1,5 @@
-_DisplayPokedex::
+_DisplayPokedex:
+WLA_GLOBAL_DisplayPokedex:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	predef ShowPokedexData

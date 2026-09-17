@@ -51,7 +51,7 @@ Route13TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_13_TRAINER_8, 2, Route13BikerBattleText, Route13BikerEndBattleText, Route13BikerAfterBattleText
 Route13TrainerHeader9:
 	trainer EVENT_BEAT_ROUTE_13_TRAINER_9, 4, Route13CooltrainerM3BattleText, Route13CooltrainerM3EndBattleText, Route13CooltrainerM3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route13CooltrainerM1Text:
 	text_asm
@@ -60,15 +60,15 @@ Route13CooltrainerM1Text:
 	jp TextScriptEnd
 
 Route13CooltrainerM1BattleText:
-	text_far _Route13CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM1BattleText
 	text_end
 
 Route13CooltrainerM1EndBattleText:
-	text_far _Route13CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM1EndBattleText
 	text_end
 
 Route13CooltrainerM1AfterBattleText:
-	text_far _Route13CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM1AfterBattleText
 	text_end
 
 Route13CooltrainerF1Text:
@@ -78,15 +78,15 @@ Route13CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route13CooltrainerF1BattleText:
-	text_far _Route13CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF1BattleText
 	text_end
 
 Route13CooltrainerF1EndBattleText:
-	text_far _Route13CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF1EndBattleText
 	text_end
 
 Route13CooltrainerF1AfterBattleText:
-	text_far _Route13CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF1AfterBattleText
 	text_end
 
 Route13CooltrainerF2Text:
@@ -96,15 +96,15 @@ Route13CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route13CooltrainerF2BattleText:
-	text_far _Route13CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF2BattleText
 	text_end
 
 Route13CooltrainerF2EndBattleText:
-	text_far _Route13CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF2EndBattleText
 	text_end
 
 Route13CooltrainerF2AfterBattleText:
-	text_far _Route13CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF2AfterBattleText
 	text_end
 
 Route13CooltrainerF3Text:
@@ -114,15 +114,15 @@ Route13CooltrainerF3Text:
 	jp TextScriptEnd
 
 Route13CooltrainerF3BattleText:
-	text_far _Route13CooltrainerF3BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF3BattleText
 	text_end
 
 Route13CooltrainerF3EndBattleText:
-	text_far _Route13CooltrainerF3EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF3EndBattleText
 	text_end
 
 Route13CooltrainerF3AfterBattleText:
-	text_far _Route13CooltrainerF3AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF3AfterBattleText
 	text_end
 
 Route13CooltrainerF4Text:
@@ -132,15 +132,15 @@ Route13CooltrainerF4Text:
 	jp TextScriptEnd
 
 Route13CooltrainerF4BattleText:
-	text_far _Route13CooltrainerF4BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF4BattleText
 	text_end
 
 Route13CooltrainerF4EndBattleText:
-	text_far _Route13CooltrainerF4EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF4EndBattleText
 	text_end
 
 Route13CooltrainerF4AfterBattleText:
-	text_far _Route13CooltrainerF4AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerF4AfterBattleText
 	text_end
 
 Route13CooltrainerM2Text:
@@ -150,15 +150,15 @@ Route13CooltrainerM2Text:
 	jp TextScriptEnd
 
 Route13CooltrainerM2BattleText:
-	text_far _Route13CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM2BattleText
 	text_end
 
 Route13CooltrainerM2EndBattleText:
-	text_far _Route13CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM2EndBattleText
 	text_end
 
 Route13CooltrainerM2AfterBattleText:
-	text_far _Route13CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM2AfterBattleText
 	text_end
 
 Route13Beauty1Text:
@@ -168,15 +168,15 @@ Route13Beauty1Text:
 	jp TextScriptEnd
 
 Route13Beauty1BattleText:
-	text_far _Route13Beauty1BattleText
+	text_far WLA_GLOBAL_Route13Beauty1BattleText
 	text_end
 
 Route13Beauty1EndBattleText:
-	text_far _Route13Beauty1EndBattleText
+	text_far WLA_GLOBAL_Route13Beauty1EndBattleText
 	text_end
 
 Route13Beauty1AfterBattleText:
-	text_far _Route13Beauty1AfterBattleText
+	text_far WLA_GLOBAL_Route13Beauty1AfterBattleText
 	text_end
 
 Route13Beauty2Text:
@@ -186,15 +186,15 @@ Route13Beauty2Text:
 	jp TextScriptEnd
 
 Route13Beauty2BattleText:
-	text_far _Route13Beauty2BattleText
+	text_far WLA_GLOBAL_Route13Beauty2BattleText
 	text_end
 
 Route13Beauty2EndBattleText:
-	text_far _Route13Beauty2EndBattleText
+	text_far WLA_GLOBAL_Route13Beauty2EndBattleText
 	text_end
 
 Route13Beauty2AfterBattleText:
-	text_far _Route13Beauty2AfterBattleText
+	text_far WLA_GLOBAL_Route13Beauty2AfterBattleText
 	text_end
 
 Route13BikerText:
@@ -204,15 +204,15 @@ Route13BikerText:
 	jp TextScriptEnd
 
 Route13BikerBattleText:
-	text_far _Route13BikerBattleText
+	text_far WLA_GLOBAL_Route13BikerBattleText
 	text_end
 
 Route13BikerEndBattleText:
-	text_far _Route13BikerEndBattleText
+	text_far WLA_GLOBAL_Route13BikerEndBattleText
 	text_end
 
 Route13BikerAfterBattleText:
-	text_far _Route13BikerAfterBattleText
+	text_far WLA_GLOBAL_Route13BikerAfterBattleText
 	text_end
 
 Route13CooltrainerM3Text:
@@ -222,25 +222,25 @@ Route13CooltrainerM3Text:
 	jp TextScriptEnd
 
 Route13CooltrainerM3BattleText:
-	text_far _Route13CooltrainerM3BattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM3BattleText
 	text_end
 
 Route13CooltrainerM3EndBattleText:
-	text_far _Route13CooltrainerM3EndBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM3EndBattleText
 	text_end
 
 Route13CooltrainerM3AfterBattleText:
-	text_far _Route13CooltrainerM3AfterBattleText
+	text_far WLA_GLOBAL_Route13CooltrainerM3AfterBattleText
 	text_end
 
 Route13TrainerTips1Text:
-	text_far _Route13TrainerTips1Text
+	text_far WLA_GLOBAL_Route13TrainerTips1Text
 	text_end
 
 Route13TrainerTips2Text:
-	text_far _Route13TrainerTips2Text
+	text_far WLA_GLOBAL_Route13TrainerTips2Text
 	text_end
 
 Route13SignText:
-	text_far _Route13SignText
+	text_far WLA_GLOBAL_Route13SignText
 	text_end

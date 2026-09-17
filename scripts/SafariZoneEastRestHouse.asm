@@ -9,13 +9,13 @@ SafariZoneEastRestHouse_TextPointers:
 	dw_const SafariZoneEastRestHouseSilphWorkerMText, TEXT_SAFARIZONEEASTRESTHOUSE_SILPH_WORKER_M
 
 SafariZoneEastRestHouseScientistText:
-	text_far _SafariZoneEastRestHouseScientistText
+	text_far WLA_GLOBAL_SafariZoneEastRestHouseScientistText
 	text_end
 
 SafariZoneEastRestHouseRockerText:
-	text_far _SafariZoneEastRestHouseRockerText
+	text_far WLA_GLOBAL_SafariZoneEastRestHouseRockerText
 	text_end
 
 SafariZoneEastRestHouseSilphWorkerMText:
-	text_far _SafariZoneEastRestHouseSilphWorkerMText
+	text_far WLA_GLOBAL_SafariZoneEastRestHouseSilphWorkerMText
 	text_end

@@ -1,4 +1,5 @@
-_Route12Gate2FBrunetteGirlYouCanHaveThisText::
+_Route12Gate2FBrunetteGirlYouCanHaveThisText:
+WLA_GLOBAL_Route12Gate2FBrunetteGirlYouCanHaveThisText:
 	text "My #MON's"
 	line "ashes are stored"
 	cont "in #MON TOWER."
@@ -8,12 +9,14 @@ _Route12Gate2FBrunetteGirlYouCanHaveThisText::
 	cont "it any more..."
 	prompt
 
-_Route12Gate2FBrunetteGirlReceivedTM39Text::
+_Route12Gate2FBrunetteGirlReceivedTM39Text:
+WLA_GLOBAL_Route12Gate2FBrunetteGirlReceivedTM39Text:
 	text "<PLAYER> received"
 	line "TM39!@"
 	text_end
 
-_Route12Gate2FBrunetteGirlTM39ExplanationText::
+_Route12Gate2FBrunetteGirlTM39ExplanationText:
+WLA_GLOBAL_Route12Gate2FBrunetteGirlTM39ExplanationText:
 	text "TM39 is a move"
 	line "called SWIFT."
 
@@ -23,19 +26,22 @@ _Route12Gate2FBrunetteGirlTM39ExplanationText::
 	cont "afford to lose."
 	done
 
-_Route12Gate2FBrunetteGirlTM39NoRoomText::
+_Route12Gate2FBrunetteGirlTM39NoRoomText:
+WLA_GLOBAL_Route12Gate2FBrunetteGirlTM39NoRoomText:
 	text "You don't have"
 	line "room for this."
 	done
 
-_Route12Gate2FLeftBinocularsText::
+_Route12Gate2FLeftBinocularsText:
+WLA_GLOBAL_Route12Gate2FLeftBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 
 	para "A man fishing!"
 	done
 
-_Route12Gate2FRightBinocularsText::
+_Route12Gate2FRightBinocularsText:
+WLA_GLOBAL_Route12Gate2FRightBinocularsText:
 	text "Looked into the"
 	line "binoculars."
 

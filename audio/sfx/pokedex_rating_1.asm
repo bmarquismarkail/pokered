@@ -32,7 +32,7 @@ SFX_Pokedex_Rating_1_Ch6:
 	note C_, 1
 	rest 1
 	octave 4
-	note A#, 2
+	note A_SHARP, 2
 	octave 5
 	note C_, 2
 	note D_, 2
@@ -54,7 +54,7 @@ SFX_Pokedex_Rating_1_Ch7:
 	note C_, 1
 	rest 1
 	octave 4
-	note A#, 1
+	note A_SHARP, 1
 	rest 1
 	note A_, 1
 	rest 1

@@ -2,22 +2,22 @@ PrintFightingDojoText2:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump EnemiesOnEverySideText
 
-EnemiesOnEverySideText::
-	text_far _EnemiesOnEverySideText
+EnemiesOnEverySideText:
+	text_far WLA_GLOBAL_EnemiesOnEverySideText
 	text_end
 
 PrintFightingDojoText3:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump WhatGoesAroundComesAroundText
 
-WhatGoesAroundComesAroundText::
-	text_far _WhatGoesAroundComesAroundText
+WhatGoesAroundComesAroundText:
+	text_far WLA_GLOBAL_WhatGoesAroundComesAroundText
 	text_end
 
 PrintFightingDojoText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump FightingDojoText
 
-FightingDojoText::
-	text_far _FightingDojoText
+FightingDojoText:
+	text_far WLA_GLOBAL_FightingDojoText
 	text_end

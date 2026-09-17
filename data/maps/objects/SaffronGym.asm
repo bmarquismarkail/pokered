@@ -10,9 +10,9 @@
 	const_export SAFFRONGYM_GYM_GUIDE
 
 SaffronGym_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 32
 	warp_event  8, 17, LAST_MAP, 3
 	warp_event  9, 17, LAST_MAP, 3
 	warp_event  1,  3, SAFFRON_GYM, 23
@@ -46,9 +46,8 @@ SaffronGym_Object:
 	warp_event 15, 17, SAFFRON_GYM, 12
 	warp_event 19, 17, SAFFRON_GYM, 20
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 9
 	object_event  9,  8, SPRITE_GIRL, STAY, DOWN, TEXT_SAFFRONGYM_SABRINA, OPP_SABRINA, 1
 	object_event 10,  1, SPRITE_CHANNELER, STAY, DOWN, TEXT_SAFFRONGYM_CHANNELER1, OPP_CHANNELER, 22
 	object_event 17,  1, SPRITE_YOUNGSTER, STAY, DOWN, TEXT_SAFFRONGYM_YOUNGSTER1, OPP_PSYCHIC_TR, 1
@@ -59,4 +58,66 @@ SaffronGym_Object:
 	object_event  3,  1, SPRITE_YOUNGSTER, STAY, DOWN, TEXT_SAFFRONGYM_YOUNGSTER4, OPP_PSYCHIC_TR, 4
 	object_event 10, 15, SPRITE_GYM_GUIDE, STAY, DOWN, TEXT_SAFFRONGYM_GYM_GUIDE
 
-	def_warps_to SAFFRON_GYM
+	event_displacement SAFFRON_GYM_WIDTH, 8, 17
+
+	event_displacement SAFFRON_GYM_WIDTH, 9, 17
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 9
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 9
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 11
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 11
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 15
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 15
+
+	event_displacement SAFFRON_GYM_WIDTH, 1, 17
+
+	event_displacement SAFFRON_GYM_WIDTH, 5, 17
+
+	event_displacement SAFFRON_GYM_WIDTH, 9, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 11, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 9, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 11, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 11, 11
+
+	event_displacement SAFFRON_GYM_WIDTH, 11, 15
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 3
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 5
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 9
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 9
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 11
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 11
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 15
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 15
+
+	event_displacement SAFFRON_GYM_WIDTH, 15, 17
+
+	event_displacement SAFFRON_GYM_WIDTH, 19, 17

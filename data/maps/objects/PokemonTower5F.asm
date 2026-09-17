@@ -7,15 +7,14 @@
 	const_export POKEMONTOWER5F_NUGGET
 
 PokemonTower5F_Object:
-	db $1 ; border block
+	.DB $1 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  9, POKEMON_TOWER_4F, 1
 	warp_event 18,  9, POKEMON_TOWER_6F, 1
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 6
 	object_event 12,  8, SPRITE_CHANNELER, STAY, NONE, TEXT_POKEMONTOWER5F_CHANNELER1
 	object_event 17,  7, SPRITE_CHANNELER, STAY, LEFT, TEXT_POKEMONTOWER5F_CHANNELER2, OPP_CHANNELER, 14
 	object_event 14,  3, SPRITE_CHANNELER, STAY, LEFT, TEXT_POKEMONTOWER5F_CHANNELER3, OPP_CHANNELER, 16
@@ -23,4 +22,6 @@ PokemonTower5F_Object:
 	object_event  9, 16, SPRITE_CHANNELER, STAY, RIGHT, TEXT_POKEMONTOWER5F_CHANNELER5, OPP_CHANNELER, 18
 	object_event  6, 14, SPRITE_POKE_BALL, STAY, NONE, TEXT_POKEMONTOWER5F_NUGGET, NUGGET
 
-	def_warps_to POKEMON_TOWER_5F
+	event_displacement POKEMON_TOWER_5F_WIDTH, 3, 9
+
+	event_displacement POKEMON_TOWER_5F_WIDTH, 18, 9

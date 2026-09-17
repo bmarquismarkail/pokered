@@ -1,4 +1,5 @@
-_CinnabarPokecenterCooltrainerFText::
+_CinnabarPokecenterCooltrainerFText:
+WLA_GLOBAL_CinnabarPokecenterCooltrainerFText:
 	text "You can cancel"
 	line "evolution."
 
@@ -8,7 +9,8 @@ _CinnabarPokecenterCooltrainerFText::
 	cont "it the way it is."
 	done
 
-_CinnabarPokecenterGentlemanText::
+_CinnabarPokecenterGentlemanText:
+WLA_GLOBAL_CinnabarPokecenterGentlemanText:
 	text "Do you have any"
 	line "friends?"
 

@@ -7,7 +7,7 @@ CeruleanTradeHouse_TextPointers:
 	dw_const CeruleanTradeHouseGamblerText, TEXT_CERULEANTRADEHOUSE_GAMBLER
 
 CeruleanTradeHouseGrannyText:
-	text_far _CeruleanTradeHouseGrannyText
+	text_far WLA_GLOBAL_CeruleanTradeHouseGrannyText
 	text_end
 
 CeruleanTradeHouseGamblerText:

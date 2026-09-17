@@ -2,8 +2,8 @@ DisplayOakLabLeftPoster:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump PushStartText
 
-PushStartText::
-	text_far _PushStartText
+PushStartText:
+	text_far WLA_GLOBAL_PushStartText
 	text_end
 
 DisplayOakLabRightPoster:
@@ -14,16 +14,16 @@ DisplayOakLabRightPoster:
 	ld a, [wNumSetBits]
 	cp 2
 	tx_pre_id SaveOptionText
-	jr c, .ownLessThanTwo
+	jr c, DisplayOakLabRightPoster.ownLessThanTwo
 	; own two or more mon
 	tx_pre_id StrengthsAndWeaknessesText
-.ownLessThanTwo
+DisplayOakLabRightPoster.ownLessThanTwo
 	jp PrintPredefTextID
 
-SaveOptionText::
-	text_far _SaveOptionText
+SaveOptionText:
+	text_far WLA_GLOBAL_SaveOptionText
 	text_end
 
-StrengthsAndWeaknessesText::
-	text_far _StrengthsAndWeaknessesText
+StrengthsAndWeaknessesText:
+	text_far WLA_GLOBAL_StrengthsAndWeaknessesText
 	text_end

@@ -12,8 +12,8 @@ SFX_Level_Up_Ch5:
 	note F_, 2
 	note C_, 2
 	note_type 6, 11, 3
-	note D#, 2
-	note D#, 2
+	note D_SHARP, 2
+	note D_SHARP, 2
 	note E_, 2
 	note_type 6, 11, 4
 	note F_, 8
@@ -31,9 +31,9 @@ SFX_Level_Up_Ch6:
 	note A_, 2
 	note A_, 2
 	note_type 6, 12, 4
-	note A#, 2
-	note A#, 2
-	note A#, 2
+	note A_SHARP, 2
+	note A_SHARP, 2
+	note A_SHARP, 2
 	note_type 6, 12, 4
 	note A_, 8
 	sound_ret
@@ -53,7 +53,7 @@ SFX_Level_Up_Ch7:
 	note_type 6, 1, 0
 	note G_, 1
 	rest 1
-	note D#, 1
+	note D_SHARP, 1
 	rest 1
 	note G_, 1
 	rest 1

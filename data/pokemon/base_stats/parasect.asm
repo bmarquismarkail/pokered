@@ -1,17 +1,17 @@
-	db DEX_PARASECT ; pokedex id
+	.DB DEX_PARASECT ; pokedex id
 
-	db  60,  95,  80,  30,  80
+	.DB  60,  95,  80,  30,  80
 	;   hp  atk  def  spd  spc
 
-	db BUG, GRASS ; type
-	db 75 ; catch rate
-	db 128 ; base exp
+	.DB BUG, GRASS ; type
+	.DB 75 ; catch rate
+	.DB 128 ; base exp
 
-	INCBIN "gfx/pokemon/front/parasect.pic", 0, 1 ; sprite dimensions
-	dw ParasectPicFront, ParasectPicBack
+	.INCBIN "gfx/pokemon/front/parasect.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ParasectPicFront, ParasectPicBack
 
-	db SCRATCH, STUN_SPORE, LEECH_LIFE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, STUN_SPORE, LEECH_LIFE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     REST,         SUBSTITUTE,   CUT
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -1,12 +1,12 @@
-MarkTownVisitedAndLoadToggleableObjects::
+MarkTownVisitedAndLoadToggleableObjects:
 	ld a, [wCurMap]
 	cp FIRST_ROUTE_MAP
-	jr nc, .notInTown
+	jr nc, MarkTownVisitedAndLoadToggleableObjects.notInTown
 	ld c, a
 	ld b, FLAG_SET
 	ld hl, wTownVisitedFlag   ; mark town as visited (for flying)
 	predef FlagActionPredef
-.notInTown
+MarkTownVisitedAndLoadToggleableObjects.notInTown
 	ld hl, ToggleableObjectMapPointers
 	ld a, [wCurMap]
 	ld b, $0
@@ -20,37 +20,37 @@ MarkTownVisitedAndLoadToggleableObjects::
 	ld de, ToggleableObjectStates ; calculate difference between out pointer and the base pointer
 	ld a, l
 	sub e
-	jr nc, .noCarry
+	jr nc, MarkTownVisitedAndLoadToggleableObjects.noCarry
 	dec h
-.noCarry
+MarkTownVisitedAndLoadToggleableObjects.noCarry
 	ld l, a
 	ld a, h
 	sub d
 	ld h, a
 	; divide difference by 3, resulting in the global offset (number of toggleable items before ours)
 	ld a, h
-	ldh [hDividend], a
+	ldh [lobyte(hDividend)], a
 	ld a, l
-	ldh [hDividend+1], a
+	ldh [lobyte(hDividend+1)], a
 	xor a
-	ldh [hDividend+2], a
-	ldh [hDividend+3], a
+	ldh [lobyte(hDividend+2)], a
+	ldh [lobyte(hDividend+3)], a
 	ld a, $3
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld b, $2
 	call Divide
 	ld a, [wCurMap]
 	ld b, a
-	ldh a, [hDividend+3]
+	ldh a, [lobyte(hDividend+3)]
 	ld c, a                    ; store global offset in c
 	ld de, wToggleableObjectList
 	pop hl
-.writeToggleableObjectsListLoop
+MarkTownVisitedAndLoadToggleableObjects.writeToggleableObjectsListLoop
 	ld a, [hli]
 	cp -1
-	jr z, .done     ; end of list
+	jr z, MarkTownVisitedAndLoadToggleableObjects.done     ; end of list
 	cp b
-	jr nz, .done    ; not for current map anymore
+	jr nz, MarkTownVisitedAndLoadToggleableObjects.done    ; not for current map anymore
 	ld a, [hli]
 	inc hl
 	ld [de], a                 ; write (map-local) sprite ID
@@ -59,8 +59,8 @@ MarkTownVisitedAndLoadToggleableObjects::
 	inc c
 	ld [de], a                 ; write (global) toggleable object index
 	inc de
-	jr .writeToggleableObjectsListLoop
-.done
+	jr MarkTownVisitedAndLoadToggleableObjects.writeToggleableObjectsListLoop
+MarkTownVisitedAndLoadToggleableObjects.done
 	ld a, -1
 	ld [de], a                 ; write sentinel
 	ret
@@ -73,7 +73,7 @@ InitializeToggleableObjectsFlags:
 	ld hl, ToggleableObjectStates
 	xor a
 	ld [wToggleableObjectCounter], a
-.toggleableObjectsLoop
+InitializeToggleableObjectsFlags.toggleableObjectsLoop
 	ld a, [hli]
 	cp -1 ; end of list
 	ret z
@@ -81,44 +81,44 @@ InitializeToggleableObjectsFlags:
 	inc hl
 	ld a, [hl]
 	cp OFF
-	jr nz, .skip
+	jr nz, InitializeToggleableObjectsFlags.skip
 	ld hl, wToggleableObjectFlags
 	ld a, [wToggleableObjectCounter]
 	ld c, a
 	ld b, FLAG_SET
 	call ToggleableObjectFlagAction ; set flag if object is toggled off
-.skip
+InitializeToggleableObjectsFlags.skip
 	ld hl, wToggleableObjectCounter
 	inc [hl]
 	pop hl
 	inc hl
 	inc hl
-	jr .toggleableObjectsLoop
+	jr InitializeToggleableObjectsFlags.toggleableObjectsLoop
 
 ; tests if current object is toggled off/has been hidden
 IsObjectHidden:
-	ldh a, [hCurrentSpriteOffset]
+	ldh a, [lobyte(hCurrentSpriteOffset)]
 	swap a
 	ld b, a
 	ld hl, wToggleableObjectList
-.loop
+IsObjectHidden.loop
 	ld a, [hli]
 	cp -1
-	jr z, .notHidden ; not toggleable -> not hidden
+	jr z, IsObjectHidden.notHidden ; not toggleable -> not hidden
 	cp b
 	ld a, [hli]
-	jr nz, .loop
+	jr nz, IsObjectHidden.loop
 	ld c, a
 	ld b, FLAG_TEST
 	ld hl, wToggleableObjectFlags
 	call ToggleableObjectFlagAction
 	ld a, c
 	and a
-	jr nz, .hidden
-.notHidden
+	jr nz, IsObjectHidden.hidden
+IsObjectHidden.notHidden
 	xor a
-.hidden
-	ldh [hIsToggleableObjectOff], a
+IsObjectHidden.hidden
+	ldh [lobyte(hIsToggleableObjectOff)], a
 	ret
 
 ; adds toggleable object (items, leg. pokemon, etc.) to the map
@@ -162,25 +162,25 @@ ToggleableObjectFlagAction:
 	srl a
 	add l
 	ld l, a
-	jr nc, .ok
+	jr nc, ToggleableObjectFlagAction.ok
 	inc h
-.ok
+ToggleableObjectFlagAction.ok
 
 	; d = 1 << e (bitmask)
 	inc e
 	ld d, 1
-.shift
+ToggleableObjectFlagAction.shift
 	dec e
-	jr z, .shifted
+	jr z, ToggleableObjectFlagAction.shifted
 	sla d
-	jr .shift
-.shifted
+	jr ToggleableObjectFlagAction.shift
+ToggleableObjectFlagAction.shifted
 
 	ld a, b
 	and a
-	jr z, .reset
+	jr z, ToggleableObjectFlagAction.reset
 	cp FLAG_TEST
-	jr z, .read
+	jr z, ToggleableObjectFlagAction.read
 
 ; set
 	ld a, [hl]
@@ -188,24 +188,24 @@ ToggleableObjectFlagAction:
 	ld a, d
 	or b
 	ld [hl], a
-	jr .done
+	jr ToggleableObjectFlagAction.done
 
-.reset
+ToggleableObjectFlagAction.reset
 	ld a, [hl]
 	ld b, a
 	ld a, d
 	xor $ff
 	and b
 	ld [hl], a
-	jr .done
+	jr ToggleableObjectFlagAction.done
 
-.read
+ToggleableObjectFlagAction.read
 	ld a, [hl]
 	ld b, a
 	ld a, d
 	and b
 
-.done
+ToggleableObjectFlagAction.done
 	pop bc
 	pop de
 	pop hl

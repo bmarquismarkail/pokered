@@ -14,14 +14,14 @@ AskName:
 	ld hl, DoYouWantToNicknameText
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	pop hl
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .declinedNickname
+	jr nz, AskName.declinedNickname
 	ld a, [wUpdateSpritesEnabled]
 	push af
 	xor a
@@ -32,17 +32,17 @@ AskName:
 	call DisplayNamingScreen
 	ld a, [wIsInBattle]
 	and a
-	jr nz, .inBattle
+	jr nz, AskName.inBattle
 	call ReloadMapSpriteTilePatterns
-.inBattle
+AskName.inBattle
 	call LoadScreenTilesFromBuffer1
 	pop hl
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	ld a, [wStringBuffer]
-	cp '@'
+	cp $50
 	ret nz
-.declinedNickname
+AskName.declinedNickname
 	ld d, h
 	ld e, l
 	ld hl, wNameBuffer
@@ -50,10 +50,10 @@ AskName:
 	jp CopyData
 
 DoYouWantToNicknameText:
-	text_far _DoYouWantToNicknameText
+	text_far WLA_GLOBAL_DoYouWantToNicknameText
 	text_end
 
-DisplayNameRaterScreen::
+DisplayNameRaterScreen:
 	ld hl, wBuffer
 	xor a
 	ld [wUpdateSpritesEnabled], a
@@ -64,8 +64,8 @@ DisplayNameRaterScreen::
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wStringBuffer]
-	cp '@'
-	jr z, .playerCancelled
+	cp $50
+	jr z, DisplayNameRaterScreen.playerCancelled
 	ld hl, wPartyMonNicks
 	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
@@ -77,7 +77,7 @@ DisplayNameRaterScreen::
 	call CopyData
 	and a
 	ret
-.playerCancelled
+DisplayNameRaterScreen.playerCancelled
 	scf
 	ret
 
@@ -108,43 +108,43 @@ DisplayNamingScreen:
 	ld [wMenuWatchedKeys], a
 	ld a, 7
 	ld [wMaxMenuItem], a
-	ld a, '@'
+	ld a, $50
 	ld [wStringBuffer], a
 	xor a
 	ld hl, wNamingScreenSubmitName
 	ld [hli], a
 	ld [hli], a
 	ld [wAnimCounter], a
-.selectReturnPoint
+DisplayNamingScreen.selectReturnPoint
 	call PrintAlphabet
 	call GBPalNormal
-.ABStartReturnPoint
+DisplayNamingScreen.ABStartReturnPoint
 	ld a, [wNamingScreenSubmitName]
 	and a
-	jr nz, .submitNickname
+	jr nz, DisplayNamingScreen.submitNickname
 	call PrintNicknameAndUnderscores
-.dPadReturnPoint
+DisplayNamingScreen.dPadReturnPoint
 	call PlaceMenuCursor
-.inputLoop
+DisplayNamingScreen.inputLoop
 	ld a, [wCurrentMenuItem]
 	push af
 	farcall AnimatePartyMon_ForceSpeed1
 	pop af
 	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
-	ldh a, [hJoyPressed]
+	ldh a, [lobyte(hJoyPressed)]
 	and a
-	jr z, .inputLoop
-	ld hl, .namingScreenButtonFunctions
-.checkForPressedButton
+	jr z, DisplayNamingScreen.inputLoop
+	ld hl, DisplayNamingScreen.namingScreenButtonFunctions
+DisplayNamingScreen.checkForPressedButton
 	sla a
-	jr c, .foundPressedButton
+	jr c, DisplayNamingScreen.foundPressedButton
 	inc hl
 	inc hl
 	inc hl
 	inc hl
-	jr .checkForPressedButton
-.foundPressedButton
+	jr DisplayNamingScreen.checkForPressedButton
+DisplayNamingScreen.foundPressedButton
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -155,7 +155,7 @@ DisplayNamingScreen:
 	push de
 	jp hl
 
-.submitNickname
+DisplayNamingScreen.submitNickname
 	pop de
 	ld hl, wStringBuffer
 	ld bc, NAME_LENGTH
@@ -174,54 +174,54 @@ DisplayNamingScreen:
 	jp z, LoadTextBoxTilePatterns
 	jpfar LoadHudTilePatterns
 
-.namingScreenButtonFunctions
-	dw .dPadReturnPoint
-	dw .pressedDown
-	dw .dPadReturnPoint
-	dw .pressedUp
-	dw .dPadReturnPoint
-	dw .pressedLeft
-	dw .dPadReturnPoint
-	dw .pressedRight
-	dw .ABStartReturnPoint
-	dw .pressedStart
-	dw .selectReturnPoint
-	dw .pressedSelect
-	dw .ABStartReturnPoint
-	dw .pressedB
-	dw .ABStartReturnPoint
-	dw .pressedA
+DisplayNamingScreen.namingScreenButtonFunctions
+	.DW DisplayNamingScreen.dPadReturnPoint
+	.DW DisplayNamingScreen.pressedDown
+	.DW DisplayNamingScreen.dPadReturnPoint
+	.DW DisplayNamingScreen.pressedUp
+	.DW DisplayNamingScreen.dPadReturnPoint
+	.DW DisplayNamingScreen.pressedLeft
+	.DW DisplayNamingScreen.dPadReturnPoint
+	.DW DisplayNamingScreen.pressedRight
+	.DW DisplayNamingScreen.ABStartReturnPoint
+	.DW DisplayNamingScreen.pressedStart
+	.DW DisplayNamingScreen.selectReturnPoint
+	.DW DisplayNamingScreen.pressedSelect
+	.DW DisplayNamingScreen.ABStartReturnPoint
+	.DW DisplayNamingScreen.pressedB
+	.DW DisplayNamingScreen.ABStartReturnPoint
+	.DW DisplayNamingScreen.pressedA
 
-.pressedA_changedCase
+DisplayNamingScreen.pressedA_changedCase
 	pop de
-	ld de, .selectReturnPoint
+	ld de, DisplayNamingScreen.selectReturnPoint
 	push de
-.pressedSelect
+DisplayNamingScreen.pressedSelect
 	ld a, [wAlphabetCase]
 	xor $1
 	ld [wAlphabetCase], a
 	ret
 
-.pressedStart
+DisplayNamingScreen.pressedStart
 	ld a, 1
 	ld [wNamingScreenSubmitName], a
 	ret
 
-.pressedA
+DisplayNamingScreen.pressedA
 	ld a, [wCurrentMenuItem]
 	cp $5 ; "ED" row
-	jr nz, .didNotPressED
+	jr nz, DisplayNamingScreen.didNotPressED
 	ld a, [wTopMenuItemX]
 	cp $11 ; "ED" column
-	jr z, .pressedStart
-.didNotPressED
+	jr z, DisplayNamingScreen.pressedStart
+DisplayNamingScreen.didNotPressED
 	ld a, [wCurrentMenuItem]
 	cp $6 ; case switch row
-	jr nz, .didNotPressCaseSwitch
+	jr nz, DisplayNamingScreen.didNotPressCaseSwitch
 	ld a, [wTopMenuItemX]
 	cp $1 ; case switch column
-	jr z, .pressedA_changedCase
-.didNotPressCaseSwitch
+	jr z, DisplayNamingScreen.pressedA_changedCase
+DisplayNamingScreen.didNotPressCaseSwitch
 	ld hl, wMenuCursorLocation
 	ld a, [hli]
 	ld h, [hl]
@@ -231,72 +231,72 @@ DisplayNamingScreen:
 	ld [wNamingScreenLetter], a
 	call CalcStringLength
 	ld a, [wNamingScreenLetter]
-	cp 'ﾞ'
+	cp $e5
 	ld de, Dakutens
-	jr z, .dakutensAndHandakutens
-	cp 'ﾟ'
+	jr z, DisplayNamingScreen.dakutensAndHandakutens
+	cp $e4
 	ld de, Handakutens
-	jr z, .dakutensAndHandakutens
+	jr z, DisplayNamingScreen.dakutensAndHandakutens
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	jr nc, .checkMonNameLength
+	jr nc, DisplayNamingScreen.checkMonNameLength
 	ld a, [wNamingScreenNameLength]
 	cp PLAYER_NAME_LENGTH - 1
-	jr .checkNameLength
-.checkMonNameLength
+	jr DisplayNamingScreen.checkNameLength
+DisplayNamingScreen.checkMonNameLength
 	ld a, [wNamingScreenNameLength]
 	cp NAME_LENGTH - 1
-.checkNameLength
-	jr c, .addLetter
+DisplayNamingScreen.checkNameLength
+	jr c, DisplayNamingScreen.addLetter
 	ret
 
-.dakutensAndHandakutens
+DisplayNamingScreen.dakutensAndHandakutens
 	push hl
 	call DakutensAndHandakutens
 	pop hl
 	ret nc
 	dec hl
-.addLetter
+DisplayNamingScreen.addLetter
 	ld a, [wNamingScreenLetter]
 	ld [hli], a
-	ld [hl], '@'
+	ld [hl], $50
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
-.pressedB
+DisplayNamingScreen.pressedB
 	ld a, [wNamingScreenNameLength]
 	and a
 	ret z
 	call CalcStringLength
 	dec hl
-	ld [hl], '@'
+	ld [hl], $50
 	ret
-.pressedRight
+DisplayNamingScreen.pressedRight
 	ld a, [wCurrentMenuItem]
 	cp $6
 	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
 	cp $11 ; max
-	jp z, .wrapToFirstColumn
+	jp z, DisplayNamingScreen.wrapToFirstColumn
 	inc a
 	inc a
-	jr .done
-.wrapToFirstColumn
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.wrapToFirstColumn
 	ld a, $1
-	jr .done
-.pressedLeft
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.pressedLeft
 	ld a, [wCurrentMenuItem]
 	cp $6
 	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
 	dec a
-	jp z, .wrapToLastColumn
+	jp z, DisplayNamingScreen.wrapToLastColumn
 	dec a
-	jr .done
-.wrapToLastColumn
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.wrapToLastColumn
 	ld a, $11 ; max
-	jr .done
-.pressedUp
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.pressedUp
 	ld a, [wCurrentMenuItem]
 	dec a
 	ld [wCurrentMenuItem], a
@@ -305,73 +305,73 @@ DisplayNamingScreen:
 	ld a, $6 ; wrap to bottom row
 	ld [wCurrentMenuItem], a
 	ld a, $1 ; force left column
-	jr .done
-.pressedDown
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.pressedDown
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld [wCurrentMenuItem], a
 	cp $7
-	jr nz, .wrapToTopRow
+	jr nz, DisplayNamingScreen.wrapToTopRow
 	ld a, $1
 	ld [wCurrentMenuItem], a
-	jr .done
-.wrapToTopRow
+	jr DisplayNamingScreen.done
+DisplayNamingScreen.wrapToTopRow
 	cp $6
 	ret nz
 	ld a, $1
-.done
+DisplayNamingScreen.done
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
 LoadEDTile:
 	ld de, ED_Tile
-	ld hl, vFont tile $70
-	; BUG: BANK("Home") should be BANK(ED_Tile), although it coincidentally works as-is
-	lb bc, BANK("Home"), (ED_TileEnd - ED_Tile) / TILE_1BPP_SIZE
+	ld hl, vFont + TILE_SIZE * $70
+	; BUG: bank("Home") should be bank(ED_Tile), although it coincidentally works as-is
+	lb "bc", 0, (ED_TileEnd - ED_Tile) / TILE_1BPP_SIZE
 	jp CopyVideoDataDouble
 
 ED_Tile:
-	INCBIN "gfx/font/ED.1bpp"
+	.INCBIN "gfx/font/ED.1bpp"
 ED_TileEnd:
 
 PrintAlphabet:
 	xor a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
-	jr nz, .lowercase
+	jr nz, PrintAlphabet.lowercase
 	ld de, UpperCaseAlphabet
-.lowercase
+PrintAlphabet.lowercase
 	hlcoord 2, 5
-	lb bc, 5, 9 ; 5 rows, 9 columns
-.outerLoop
+	lb "bc", 5, 9 ; 5 rows, 9 columns
+PrintAlphabet.outerLoop
 	push bc
-.innerLoop
+PrintAlphabet.innerLoop
 	ld a, [de]
 	ld [hli], a
 	inc hl
 	inc de
 	dec c
-	jr nz, .innerLoop
+	jr nz, PrintAlphabet.innerLoop
 	ld bc, SCREEN_WIDTH + 2
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .outerLoop
+	jr nz, PrintAlphabet.outerLoop
 	call PlaceString
 	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	jp Delay3
 
-INCLUDE "data/text/alphabets.asm"
+.INCLUDE "data/text/alphabets.asm"
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
 	ld [wNamingScreenNameLength], a
 	hlcoord 10, 2
-	lb bc, 1, 10
+	lb "bc", 1, 10
 	call ClearScreenArea
 	hlcoord 10, 2
 	ld de, wStringBuffer
@@ -379,29 +379,29 @@ PrintNicknameAndUnderscores:
 	hlcoord 10, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	jr nc, .pokemon
+	jr nc, PrintNicknameAndUnderscores.pokemon
 ; player or rival
 	ld b, PLAYER_NAME_LENGTH - 1
-	jr .gotUnderscoreCount
-.pokemon
+	jr PrintNicknameAndUnderscores.gotUnderscoreCount
+PrintNicknameAndUnderscores.pokemon
 	ld b, NAME_LENGTH - 1
-.gotUnderscoreCount
+PrintNicknameAndUnderscores.gotUnderscoreCount
 	ld a, $76 ; underscore tile id
-.placeUnderscoreLoop
+PrintNicknameAndUnderscores.placeUnderscoreLoop
 	ld [hli], a
 	dec b
-	jr nz, .placeUnderscoreLoop
+	jr nz, PrintNicknameAndUnderscores.placeUnderscoreLoop
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	ld a, [wNamingScreenNameLength]
-	jr nc, .pokemon2
+	jr nc, PrintNicknameAndUnderscores.pokemon2
 ; player or rival
 	cp PLAYER_NAME_LENGTH - 1
-	jr .checkEmptySpaces
-.pokemon2
+	jr PrintNicknameAndUnderscores.checkEmptySpaces
+PrintNicknameAndUnderscores.pokemon2
 	cp NAME_LENGTH - 1
-.checkEmptySpaces
-	jr nz, .placeRaisedUnderscore ; jump if empty spaces remain
+PrintNicknameAndUnderscores.checkEmptySpaces
+	jr nz, PrintNicknameAndUnderscores.placeRaisedUnderscore ; jump if empty spaces remain
 	; when all spaces are filled, force the cursor onto the ED tile,
 	; and keep the last underscore raised
 	call EraseMenuCursor
@@ -412,9 +412,9 @@ PrintNicknameAndUnderscores:
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	ld a, NAME_LENGTH - 2
-	jr nc, .placeRaisedUnderscore
+	jr nc, PrintNicknameAndUnderscores.placeRaisedUnderscore
 	ld a, PLAYER_NAME_LENGTH - 2
-.placeRaisedUnderscore
+PrintNicknameAndUnderscores.placeRaisedUnderscore
 	ld c, a
 	ld b, $0
 	hlcoord 10, 3
@@ -436,29 +436,29 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-INCLUDE "data/text/dakutens.asm"
+.INCLUDE "data/text/dakutens.asm"
 
 ; calculates the length of the string at wStringBuffer and stores it in c
 CalcStringLength:
 	ld hl, wStringBuffer
 	ld c, $0
-.loop
+CalcStringLength.loop
 	ld a, [hl]
-	cp '@'
+	cp $50
 	ret z
 	inc hl
 	inc c
-	jr .loop
+	jr CalcStringLength.loop
 
 PrintNamingText:
 	hlcoord 0, 1
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
-	jr z, .notNickname
+	jr z, PrintNamingText.notNickname
 	ld de, RivalsTextString
 	dec a
-	jr z, .notNickname
+	jr z, PrintNamingText.notNickname
 	ld a, [wCurPartySpecies]
 	ld [wMonPartySpriteSpecies], a
 	push af
@@ -470,26 +470,26 @@ PrintNamingText:
 	call PlaceString
 	ld hl, $1
 	add hl, bc
-	ld [hl], 'の' ; leftover from Japanese version; blank tile $c9 in English
+	ld [hl], $c9 ; leftover from Japanese version; blank tile $c9 in English
 	hlcoord 1, 3
 	ld de, NicknameTextString
-	jr .placeString
-.notNickname
+	jr PrintNamingText.placeString
+PrintNamingText.notNickname
 	call PlaceString
 	ld l, c
 	ld h, b
 	ld de, NameTextString
-.placeString
+PrintNamingText.placeString
 	jp PlaceString
 
 YourTextString:
-	db "YOUR @"
+		.STRINGMAP pokemon, "YOUR @"
 
 RivalsTextString:
-	db "RIVAL's @"
+		.STRINGMAP pokemon, "RIVAL's @"
 
 NameTextString:
-	db "NAME?@"
+		.STRINGMAP pokemon, "NAME?@"
 
 NicknameTextString:
-	db "NICKNAME?@"
+		.STRINGMAP pokemon, "NICKNAME?@"

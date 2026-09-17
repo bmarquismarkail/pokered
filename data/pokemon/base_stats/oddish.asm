@@ -1,17 +1,17 @@
-	db DEX_ODDISH ; pokedex id
+	.DB DEX_ODDISH ; pokedex id
 
-	db  45,  50,  55,  30,  75
+	.DB  45,  50,  55,  30,  75
 	;   hp  atk  def  spd  spc
 
-	db GRASS, POISON ; type
-	db 255 ; catch rate
-	db 78 ; base exp
+	.DB GRASS, POISON ; type
+	.DB 255 ; catch rate
+	.DB 78 ; base exp
 
-	INCBIN "gfx/pokemon/front/oddish.pic", 0, 1 ; sprite dimensions
-	dw OddishPicFront, OddishPicBack
+	.INCBIN "gfx/pokemon/front/oddish.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW OddishPicFront, OddishPicBack
 
-	db ABSORB, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB ABSORB, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
@@ -19,4 +19,4 @@
 	     BIDE,         REST,         SUBSTITUTE,   CUT
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

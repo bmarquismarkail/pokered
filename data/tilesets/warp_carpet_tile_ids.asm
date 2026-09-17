@@ -1,24 +1,25 @@
 WarpTileListPointers:
-	dw .FacingDownWarpTiles
-	dw .FacingUpWarpTiles
-	dw .FacingLeftWarpTiles
-	dw .FacingRightWarpTiles
+	.DW WarpTileListPointers.FacingDownWarpTiles
+	.DW WarpTileListPointers.FacingUpWarpTiles
+	.DW WarpTileListPointers.FacingLeftWarpTiles
+	.DW WarpTileListPointers.FacingRightWarpTiles
 
-MACRO warp_carpet_tiles
-	IF _NARG
-		db \# ; all args
-	ENDC
-	db -1 ; end
-ENDM
+.MACRO warp_carpet_tiles
+	.REPT NARGS
+		.DB \1 ; all args
+		.SHIFT
+	.ENDR
+	.DB -1 ; end
+.ENDM
 
-.FacingDownWarpTiles:
+WarpTileListPointers.FacingDownWarpTiles:
 	warp_carpet_tiles $01, $12, $17, $3D, $04, $18, $33
 
-.FacingUpWarpTiles:
+WarpTileListPointers.FacingUpWarpTiles:
 	warp_carpet_tiles $01, $5C
 
-.FacingLeftWarpTiles:
+WarpTileListPointers.FacingLeftWarpTiles:
 	warp_carpet_tiles $1A, $4B
 
-.FacingRightWarpTiles:
+WarpTileListPointers.FacingRightWarpTiles:
 	warp_carpet_tiles $0F, $4E

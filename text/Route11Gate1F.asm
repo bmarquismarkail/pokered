@@ -1,4 +1,5 @@
-_Route11Gate1FGuardText::
+_Route11Gate1FGuardText:
+WLA_GLOBAL_Route11Gate1FGuardText:
 	text "When you catch"
 	line "lots of #MON,"
 	cont "isn't it hard to"

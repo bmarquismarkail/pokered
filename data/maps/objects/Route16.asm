@@ -8,9 +8,9 @@
 	const_export ROUTE16_SNORLAX
 
 Route16_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 9
 	warp_event 17, 10, ROUTE_16_GATE_1F, 1
 	warp_event 17, 11, ROUTE_16_GATE_1F, 2
 	warp_event 24, 10, ROUTE_16_GATE_1F, 3
@@ -21,11 +21,11 @@ Route16_Object:
 	warp_event 24,  5, ROUTE_16_GATE_1F, 8
 	warp_event  7,  5, ROUTE_16_FLY_HOUSE, 1
 
-	def_bg_events
+	.DB 2
 	bg_event 27, 11, TEXT_ROUTE16_CYCLING_ROAD_SIGN
 	bg_event  5, 17, TEXT_ROUTE16_SIGN
 
-	def_object_events
+	.DB 7
 	object_event 17, 12, SPRITE_BIKER, STAY, LEFT, TEXT_ROUTE16_BIKER1, OPP_BIKER, 5
 	object_event 14, 13, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE16_BIKER2, OPP_CUE_BALL, 1
 	object_event 11, 12, SPRITE_BIKER, STAY, UP, TEXT_ROUTE16_BIKER3, OPP_CUE_BALL, 2
@@ -34,4 +34,20 @@ Route16_Object:
 	object_event  3, 12, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE16_BIKER6, OPP_BIKER, 7
 	object_event 26, 10, SPRITE_SNORLAX, STAY, DOWN, TEXT_ROUTE16_SNORLAX
 
-	def_warps_to ROUTE_16
+	event_displacement ROUTE_16_WIDTH, 17, 10
+
+	event_displacement ROUTE_16_WIDTH, 17, 11
+
+	event_displacement ROUTE_16_WIDTH, 24, 10
+
+	event_displacement ROUTE_16_WIDTH, 24, 11
+
+	event_displacement ROUTE_16_WIDTH, 17, 4
+
+	event_displacement ROUTE_16_WIDTH, 17, 5
+
+	event_displacement ROUTE_16_WIDTH, 24, 4
+
+	event_displacement ROUTE_16_WIDTH, 24, 5
+
+	event_displacement ROUTE_16_WIDTH, 7, 5

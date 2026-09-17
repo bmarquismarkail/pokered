@@ -1,98 +1,98 @@
-SoftReset::
+SoftReset:
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, 32
 	call DelayFrames
 	; fallthrough
 
-Init::
+Init:
 ;  Program init.
 	di
 
 	xor a
-	ldh [rIF], a
-	ldh [rIE], a
-	ldh [rSCX], a
-	ldh [rSCY], a
-	ldh [rSB], a
-	ldh [rSC], a
-	ldh [rWX], a
-	ldh [rWY], a
-	ldh [rTMA], a
-	ldh [rTAC], a
-	ldh [rBGP], a
-	ldh [rOBP0], a
-	ldh [rOBP1], a
+	ldh [lobyte(rIF)], a
+	ldh [lobyte(rIE)], a
+	ldh [lobyte(rSCX)], a
+	ldh [lobyte(rSCY)], a
+	ldh [lobyte(rSB)], a
+	ldh [lobyte(rSC)], a
+	ldh [lobyte(rWX)], a
+	ldh [lobyte(rWY)], a
+	ldh [lobyte(rTMA)], a
+	ldh [lobyte(rTAC)], a
+	ldh [lobyte(rBGP)], a
+	ldh [lobyte(rOBP0)], a
+	ldh [lobyte(rOBP1)], a
 
 	ld a, LCDC_ON
-	ldh [rLCDC], a
+	ldh [lobyte(rLCDC)], a
 	call DisableLCD
 
 	ld sp, wStack
 
-	ld hl, STARTOF(WRAM0)
-	ld bc, SIZEOF(WRAM0)
-.loop
+	ld hl, $c000
+	ld bc, $2000
+Init.loop
 	ld [hl], 0
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, .loop
+	jr nz, Init.loop
 
 	call ClearVram
 
-	ld hl, STARTOF(HRAM)
-	ld bc, SIZEOF(HRAM)
+	ld hl, $ff80
+	ld bc, $007f
 	call FillMemory
 
 	call ClearSprites
 
-	ld a, BANK(WriteDMACodeToHRAM)
-	ldh [hLoadedROMBank], a
+	ld a, bank(WriteDMACodeToHRAM)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call WriteDMACodeToHRAM
 
 	xor a
-	ldh [hTileAnimations], a
-	ldh [rSTAT], a
-	ldh [hSCX], a
-	ldh [hSCY], a
-	ldh [rIF], a
+	ldh [lobyte(hTileAnimations)], a
+	ldh [lobyte(rSTAT)], a
+	ldh [lobyte(hSCX)], a
+	ldh [lobyte(hSCY)], a
+	ldh [lobyte(rIF)], a
 	ld a, IE_VBLANK | IE_TIMER | IE_SERIAL
-	ldh [rIE], a
+	ldh [lobyte(rIE)], a
 
 	ld a, 144 ; move the window off-screen
-	ldh [hWY], a
-	ldh [rWY], a
+	ldh [lobyte(hWY)], a
+	ldh [lobyte(rWY)], a
 	ld a, 7
-	ldh [rWX], a
+	ldh [lobyte(rWX)], a
 
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hSerialConnectionStatus], a
+	ldh [lobyte(hSerialConnectionStatus)], a
 
-	ld h, HIGH(vBGMap0)
+	ld h, hibyte(vBGMap0)
 	call ClearBgMap
-	ld h, HIGH(vBGMap1)
+	ld h, hibyte(vBGMap1)
 	call ClearBgMap
 
 	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
+	ldh [lobyte(rLCDC)], a
 	ld a, 16
-	ldh [hSoftReset], a
+	ldh [lobyte(hSoftReset)], a
 	call StopAllSounds
 
 	ei
 
 	predef LoadSGB
 
-	ld a, BANK(SFX_Shooting_Star)
+	ld a, bank(SFX_Shooting_Star)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
-	ld a, HIGH(vBGMap1)
-	ldh [hAutoBGTransferDest + 1], a
+	ld a, hibyte(vBGMap1)
+	ldh [lobyte(hAutoBGTransferDest + 1)], a
 	xor a
-	ldh [hAutoBGTransferDest], a
+	ldh [lobyte(hAutoBGTransferDest)], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 
@@ -103,19 +103,19 @@ Init::
 	call GBPalNormal
 	call ClearSprites
 	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
+	ldh [lobyte(rLCDC)], a
 
 	jp PrepareTitleScreen
 
-ClearVram::
-	ld hl, STARTOF(VRAM)
-	ld bc, SIZEOF(VRAM)
+ClearVram:
+	ld hl, $8000
+	ld bc, $2000
 	xor a
 	jp FillMemory
 
 
-StopAllSounds::
-	ld a, BANK("Audio Engine 1")
+StopAllSounds:
+	ld a, $02
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	xor a

@@ -1,17 +1,17 @@
-	db DEX_CHARIZARD ; pokedex id
+	.DB DEX_CHARIZARD ; pokedex id
 
-	db  78,  84,  78, 100,  85
+	.DB  78,  84,  78, 100,  85
 	;   hp  atk  def  spd  spc
 
-	db FIRE, FLYING ; type
-	db 45 ; catch rate
-	db 209 ; base exp
+	.DB FIRE, FLYING ; type
+	.DB 45 ; catch rate
+	.DB 209 ; base exp
 
-	INCBIN "gfx/pokemon/front/charizard.pic", 0, 1 ; sprite dimensions
-	dw CharizardPicFront, CharizardPicBack
+	.INCBIN "gfx/pokemon/front/charizard.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW CharizardPicFront, CharizardPicBack
 
-	db SCRATCH, GROWL, EMBER, LEER ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB SCRATCH, GROWL, EMBER, LEER ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \
@@ -22,4 +22,4 @@
 	     CUT,          STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

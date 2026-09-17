@@ -1,15 +1,18 @@
-_PokemartGreetingText::
+_PokemartGreetingText:
+WLA_GLOBAL_PokemartGreetingText:
 	text "Hi there!"
 	next "May I help you?"
 	done
 
-_PokemonFaintedText::
+_PokemonFaintedText:
+WLA_GLOBAL_PokemonFaintedText:
 	text_ram wNameBuffer
 	text_start
 	line "fainted!"
 	done
 
-_PlayerBlackedOutText::
+_PlayerBlackedOutText:
+WLA_GLOBAL_PlayerBlackedOutText:
 	text "<PLAYER> is out of"
 	line "useable #MON!"
 
@@ -17,16 +20,19 @@ _PlayerBlackedOutText::
 	line "out!"
 	prompt
 
-_RepelWoreOffText::
+_RepelWoreOffText:
+WLA_GLOBAL_RepelWoreOffText:
 	text "REPEL's effect"
 	line "wore off."
 	done
 
-_PokemartBuyingGreetingText::
+_PokemartBuyingGreetingText:
+WLA_GLOBAL_PokemartBuyingGreetingText:
 	text "Take your time."
 	done
 
-_PokemartTellBuyPriceText::
+_PokemartTellBuyPriceText:
+WLA_GLOBAL_PokemartTellBuyPriceText:
 	text_ram wStringBuffer
 	text "?"
 	line "That will be"
@@ -35,53 +41,63 @@ _PokemartTellBuyPriceText::
 	text ". OK?"
 	done
 
-_PokemartBoughtItemText::
+_PokemartBoughtItemText:
+WLA_GLOBAL_PokemartBoughtItemText:
 	text "Here you are!"
 	line "Thank you!"
 	prompt
 
-_PokemartNotEnoughMoneyText::
+_PokemartNotEnoughMoneyText:
+WLA_GLOBAL_PokemartNotEnoughMoneyText:
 	text "You don't have"
 	line "enough money."
 	prompt
 
-_PokemartItemBagFullText::
+_PokemartItemBagFullText:
+WLA_GLOBAL_PokemartItemBagFullText:
 	text "You can't carry"
 	line "any more items."
 	prompt
 
-_PokemonSellingGreetingText::
+_PokemonSellingGreetingText:
+WLA_GLOBAL_PokemonSellingGreetingText:
 	text "What would you"
 	line "like to sell?"
 	done
 
-_PokemartTellSellPriceText::
+_PokemartTellSellPriceText:
+WLA_GLOBAL_PokemartTellSellPriceText:
 	text "I can pay you"
 	line "¥@"
 	text_bcd hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
 	text " for that."
 	done
 
-_PokemartItemBagEmptyText::
+_PokemartItemBagEmptyText:
+WLA_GLOBAL_PokemartItemBagEmptyText:
 	text "You don't have"
 	line "anything to sell."
 	prompt
 
-_PokemartUnsellableItemText::
+_PokemartUnsellableItemText:
+WLA_GLOBAL_PokemartUnsellableItemText:
 	text "I can't put a"
 	line "price on that."
 	prompt
 
-_PokemartThankYouText::
+_PokemartThankYouText:
+WLA_GLOBAL_PokemartThankYouText:
 	text "Thank you!"
 	done
 
-_PokemartAnythingElseText::
+_PokemartAnythingElseText:
+WLA_GLOBAL_PokemartAnythingElseText:
 	text "Is there anything"
 	line "else I can do?"
 	done
 
-_LearnedMove1Text::
+_LearnedMove1Text:
+WLA_GLOBAL_LearnedMove1Text:
 	text_ram wLearnMoveMonName
 	text " learned"
 	line "@"
@@ -89,19 +105,22 @@ _LearnedMove1Text::
 	text "!@"
 	text_end
 
-_WhichMoveToForgetText::
+_WhichMoveToForgetText:
+WLA_GLOBAL_WhichMoveToForgetText:
 	text "Which move should"
 	next "be forgotten?"
 	done
 
-_AbandonLearningText::
+_AbandonLearningText:
+WLA_GLOBAL_AbandonLearningText:
 	text "Abandon learning"
 	line "@"
 	text_ram wStringBuffer
 	text "?"
 	done
 
-_DidNotLearnText::
+_DidNotLearnText:
+WLA_GLOBAL_DidNotLearnText:
 	text_ram wLearnMoveMonName
 	text_start
 	line "did not learn"
@@ -110,7 +129,8 @@ _DidNotLearnText::
 	text "!"
 	prompt
 
-_TryingToLearnText::
+_TryingToLearnText:
+WLA_GLOBAL_TryingToLearnText:
 	text_ram wLearnMoveMonName
 	text " is"
 	line "trying to learn"
@@ -131,15 +151,18 @@ _TryingToLearnText::
 	text "?"
 	done
 
-_OneTwoAndText::
+_OneTwoAndText:
+WLA_GLOBAL_OneTwoAndText:
 	text "1, 2 and...@"
 	text_end
 
-_PoofText::
+_PoofText:
+WLA_GLOBAL_PoofText:
 	text " Poof!@"
 	text_end
 
-_ForgotAndText::
+_ForgotAndText:
+WLA_GLOBAL_ForgotAndText:
 	text_start
 	para "@"
 	text_ram wLearnMoveMonName
@@ -151,12 +174,14 @@ _ForgotAndText::
 	para "And..."
 	prompt
 
-_HMCantDeleteText::
+_HMCantDeleteText:
+WLA_GLOBAL_HMCantDeleteText:
 	text "HM techniques"
 	line "can't be deleted!"
 	prompt
 
-_PokemonCenterWelcomeText::
+_PokemonCenterWelcomeText:
+WLA_GLOBAL_PokemonCenterWelcomeText:
 	text "Welcome to our"
 	line "#MON CENTER!"
 
@@ -165,40 +190,47 @@ _PokemonCenterWelcomeText::
 	cont "perfect health!"
 	prompt
 
-_ShallWeHealYourPokemonText::
+_ShallWeHealYourPokemonText:
+WLA_GLOBAL_ShallWeHealYourPokemonText:
 	text "Shall we heal your"
 	line "#MON?"
 	done
 
-_NeedYourPokemonText::
+_NeedYourPokemonText:
+WLA_GLOBAL_NeedYourPokemonText:
 	text "OK. We'll need"
 	line "your #MON."
 	done
 
-_PokemonFightingFitText::
+_PokemonFightingFitText:
+WLA_GLOBAL_PokemonFightingFitText:
 	text "Thank you!"
 	line "Your #MON are"
 	cont "fighting fit!"
 	prompt
 
-_PokemonCenterFarewellText::
+_PokemonCenterFarewellText:
+WLA_GLOBAL_PokemonCenterFarewellText:
 	text "We hope to see"
 	line "you again!"
 	done
 
-_CableClubNPCAreaReservedFor2FriendsLinkedByCableText::
+_CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
+WLA_GLOBAL_CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
 	text "This area is"
 	line "reserved for 2"
 	cont "friends who are"
 	cont "linked by cable."
 	done
 
-_CableClubNPCWelcomeText::
+_CableClubNPCWelcomeText:
+WLA_GLOBAL_CableClubNPCWelcomeText:
 	text "Welcome to the"
 	line "Cable Club!"
 	done
 
-_CableClubNPCPleaseApplyHereHaveToSaveText::
+_CableClubNPCPleaseApplyHereHaveToSaveText:
+WLA_GLOBAL_CableClubNPCPleaseApplyHereHaveToSaveText:
 	text "Please apply here."
 
 	para "Before opening"
@@ -206,23 +238,25 @@ _CableClubNPCPleaseApplyHereHaveToSaveText::
 	cont "to save the game."
 	done
 
-_CableClubNPCPleaseWaitText::
+_CableClubNPCPleaseWaitText:
+WLA_GLOBAL_CableClubNPCPleaseWaitText:
 	text "Please wait.@"
 	text_end
 
-_CableClubNPCLinkClosedBecauseOfInactivityText::
+_CableClubNPCLinkClosedBecauseOfInactivityText:
+WLA_GLOBAL_CableClubNPCLinkClosedBecauseOfInactivityText:
 	vc_patch Change_link_closed_inactivity_message
-IF DEF(_RED_VC) || DEF(_BLUE_VC)
+.IF defined(_RED_VC) || defined(_BLUE_VC)
 	text "Please come again!"
 	done
 	text_start
-	db   "osed because of"
+		.STRINGMAP pokemon, "osed because of"
 	cont "inactivity."
-ELSE
+.ELSE
 	text "The link has been"
 	line "closed because of"
 	cont "inactivity."
-ENDC
+.ENDIF
 	vc_patch_end
 
 	para "Please contact"

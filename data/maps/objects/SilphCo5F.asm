@@ -12,9 +12,9 @@
 	const_export SILPHCO5F_POKEMON_REPORT3
 
 SilphCo5F_Object:
-	db $2e ; border block
+	.DB $2e ; border block
 
-	def_warp_events
+	.DB 7
 	warp_event 24,  0, SILPH_CO_6F, 2
 	warp_event 26,  0, SILPH_CO_4F, 2
 	warp_event 20,  0, SILPH_CO_ELEVATOR, 1
@@ -23,9 +23,8 @@ SilphCo5F_Object:
 	warp_event 11,  5, SILPH_CO_3F, 5
 	warp_event  3, 15, SILPH_CO_3F, 6
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 11
 	object_event 13,  9, SPRITE_SILPH_WORKER_M, STAY, NONE, TEXT_SILPHCO5F_SILPH_WORKER_M
 	object_event  8, 16, SPRITE_ROCKET, STAY, RIGHT, TEXT_SILPHCO5F_ROCKET1, OPP_ROCKET, 28
 	object_event  8,  3, SPRITE_SCIENTIST, STAY, RIGHT, TEXT_SILPHCO5F_SCIENTIST, OPP_SCIENTIST, 6
@@ -38,4 +37,16 @@ SilphCo5F_Object:
 	object_event 25, 10, SPRITE_CLIPBOARD, STAY, NONE, TEXT_SILPHCO5F_POKEMON_REPORT2
 	object_event 24,  6, SPRITE_CLIPBOARD, STAY, NONE, TEXT_SILPHCO5F_POKEMON_REPORT3
 
-	def_warps_to SILPH_CO_5F
+	event_displacement SILPH_CO_5F_WIDTH, 24, 0
+
+	event_displacement SILPH_CO_5F_WIDTH, 26, 0
+
+	event_displacement SILPH_CO_5F_WIDTH, 20, 0
+
+	event_displacement SILPH_CO_5F_WIDTH, 27, 3
+
+	event_displacement SILPH_CO_5F_WIDTH, 9, 15
+
+	event_displacement SILPH_CO_5F_WIDTH, 11, 5
+
+	event_displacement SILPH_CO_5F_WIDTH, 3, 15

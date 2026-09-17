@@ -7,19 +7,19 @@ SetLastBlackoutMap:
 	ld hl, SafariZoneRestHouses
 	ld a, [wCurMap]
 	ld b, a
-.loop
+SetLastBlackoutMap.loop
 	ld a, [hli]
 	cp -1
-	jr z, .notresthouse
+	jr z, SetLastBlackoutMap.notresthouse
 	cp b
-	jr nz, .loop
-	jr .done
+	jr nz, SetLastBlackoutMap.loop
+	jr SetLastBlackoutMap.done
 
-.notresthouse
+SetLastBlackoutMap.notresthouse
 	ld a, [wLastMap]
 	ld [wLastBlackoutMap], a
-.done
+SetLastBlackoutMap.done
 	pop hl
 	ret
 
-INCLUDE "data/maps/rest_house_maps.asm"
+.INCLUDE "data/maps/rest_house_maps.asm"

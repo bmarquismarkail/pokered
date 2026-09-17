@@ -42,7 +42,7 @@ PrepareOakSpeech:
 OakSpeech:
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld a, BANK(Music_Routes2)
+	ld a, bank(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
 	call PlayMusic
@@ -60,12 +60,12 @@ OakSpeech:
 	ld [wDestinationMap], a
 	call PrepareForSpecialWarp
 	xor a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	ld a, [wStatusFlags6]
 	bit BIT_DEBUG_MODE, a
-	jp nz, .skipSpeech
+	jp nz, OakSpeech.skipSpeech
 	ld de, ProfOakPic
-	lb bc, BANK(ProfOakPic), $00
+	lb "bc", bank(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
@@ -84,7 +84,7 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
-	lb bc, BANK(RedPicFront), $00
+	lb "bc", bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
@@ -93,26 +93,26 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, Rival1Pic
-	lb bc, BANK(Rival1Pic), $00
+	lb "bc", bank(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, IntroduceRivalText
 	call PrintText
 	call ChooseRivalName
-.skipSpeech
+OakSpeech.skipSpeech
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
-	lb bc, BANK(RedPicFront), $00
+	lb "bc", bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a, [wStatusFlags3]
 	and a ; ???
-	jr nz, .next
+	jr nz, OakSpeech.next
 	ld hl, OakSpeechText3
 	call PrintText
-.next
-	ldh a, [hLoadedROMBank]
+OakSpeech.next
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	ld a, SFX_SHRINK
 	call PlaySound
@@ -120,26 +120,26 @@ OakSpeech:
 ; bug: switching ROM Bank should not happen outside of Home Bank
 ; This code does nothing, as PlaySound does all necessary Bank switch
 ; It looks like a leftover from an early development stage
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ld c, 4
 	call DelayFrames
 	ld de, RedSprite
 	ld hl, vSprites
-	lb bc, BANK(RedSprite), $0C
+	lb "bc", bank(RedSprite), $0C
 	call CopyVideoData
 	ld de, ShrinkPic1
-	lb bc, BANK(ShrinkPic1), $00
+	lb "bc", bank(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c, 4
 	call DelayFrames
 	ld de, ShrinkPic2
-	lb bc, BANK(ShrinkPic2), $00
+	lb "bc", bank(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
-	ld a, BANK(Music_PalletTown)
+	ld a, bank(Music_PalletTown)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, 10
@@ -149,7 +149,7 @@ OakSpeech:
 	call PlaySound
 	pop af
 ; bug: switching ROM Bank should not happen outside of Home Bank
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ld c, 20
 	call DelayFrames
@@ -166,38 +166,38 @@ OakSpeech:
 	jp ClearScreen
 
 OakSpeechText1:
-	text_far _OakSpeechText1
+	text_far WLA_GLOBAL_OakSpeechText1
 	text_end
 
 OakSpeechText2:
-	text_far _OakSpeechText2A
+	text_far WLA_GLOBAL_OakSpeechText2A
 	; BUG: The cry played does not match the sprite displayed.
 	sound_cry_nidorina
-	text_far _OakSpeechText2B
+	text_far WLA_GLOBAL_OakSpeechText2B
 	text_end
 
 IntroducePlayerText:
-	text_far _IntroducePlayerText
+	text_far WLA_GLOBAL_IntroducePlayerText
 	text_end
 
 IntroduceRivalText:
-	text_far _IntroduceRivalText
+	text_far WLA_GLOBAL_IntroduceRivalText
 	text_end
 
 OakSpeechText3:
-	text_far _OakSpeechText3
+	text_far WLA_GLOBAL_OakSpeechText3
 	text_end
 
 FadeInIntroPic:
 	ld hl, IntroFadePalettes
 	ld b, 6
-.next
+FadeInIntroPic.next
 	ld a, [hli]
-	ldh [rBGP], a
+	ldh [lobyte(rBGP)], a
 	ld c, 10
 	call DelayFrames
 	dec b
-	jr nz, .next
+	jr nz, FadeInIntroPic.next
 	ret
 
 IntroFadePalettes:
@@ -210,19 +210,19 @@ IntroFadePalettes:
 
 MovePicLeft:
 	ld a, 119
-	ldh [rWX], a
+	ldh [lobyte(rWX)], a
 	call DelayFrame
 
 	ld a, %11100100
-	ldh [rBGP], a
-.next
+	ldh [lobyte(rBGP)], a
+MovePicLeft.next
 	call DelayFrame
-	ldh a, [rWX]
+	ldh a, [lobyte(rWX)]
 	sub 8
 	cp $FF
 	ret z
-	ldh [rWX], a
-	jr .next
+	ldh [lobyte(rWX)], a
+	jr MovePicLeft.next
 
 DisplayPicCenteredOrUpperRight:
 	call GetPredefRegisters
@@ -243,9 +243,9 @@ IntroDisplayPicCenteredOrUpperRight:
 	ld a, c
 	and a
 	hlcoord 15, 1
-	jr nz, .next
+	jr nz, IntroDisplayPicCenteredOrUpperRight.next
 	hlcoord 6, 4
-.next
+IntroDisplayPicCenteredOrUpperRight.next
 	xor a
-	ldh [hStartTileID], a
+	ldh [lobyte(hStartTileID)], a
 	predef_jump CopyUncompressedPicToTilemap

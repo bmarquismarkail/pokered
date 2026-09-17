@@ -1,4 +1,4 @@
-LoadMonData_::
+LoadMonData_:
 ; Load monster [wWhichPokemon] from list [wMonDataLocation]:
 ;  0: partymon
 ;  1: enemymon
@@ -11,13 +11,13 @@ LoadMonData_::
 	ld [wCurPartySpecies], a
 	ld a, [wMonDataLocation]
 	cp DAYCARE_DATA
-	jr z, .GetMonHeader
+	jr z, LoadMonData_.GetMonHeader
 
 	ld a, [wWhichPokemon]
 	ld e, a
 	callfar GetMonSpecies
 
-.GetMonHeader
+LoadMonData_.GetMonHeader
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	call GetMonHeader
@@ -26,24 +26,24 @@ LoadMonData_::
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMonDataLocation]
 	cp ENEMY_PARTY_DATA
-	jr c, .getMonEntry
+	jr c, LoadMonData_.getMonEntry
 
 	ld hl, wEnemyMons
-	jr z, .getMonEntry
+	jr z, LoadMonData_.getMonEntry
 
 	cp BOX_DATA
 	ld hl, wBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
-	jr z, .getMonEntry
+	jr z, LoadMonData_.getMonEntry
 
 	ld hl, wDayCareMon
-	jr .copyMonData
+	jr LoadMonData_.copyMonData
 
-.getMonEntry
+LoadMonData_.getMonEntry
 	ld a, [wWhichPokemon]
 	call AddNTimes
 
-.copyMonData
+LoadMonData_.copyMonData
 	ld de, wLoadedMon
 	ld bc, PARTYMON_STRUCT_LENGTH
 	jp CopyData

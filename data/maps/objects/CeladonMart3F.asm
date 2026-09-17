@@ -6,14 +6,14 @@
 	const_export CELADONMART3F_LITTLE_BOY
 
 CeladonMart3F_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 3
 	warp_event 12,  1, CELADON_MART_4F, 1
 	warp_event 16,  1, CELADON_MART_2F, 2
 	warp_event  1,  1, CELADON_MART_ELEVATOR, 1
 
-	def_bg_events
+	.DB 12
 	bg_event  2,  4, TEXT_CELADONMART3F_SNES1
 	bg_event  3,  4, TEXT_CELADONMART3F_RPG
 	bg_event  5,  4, TEXT_CELADONMART3F_SNES2
@@ -27,11 +27,15 @@ CeladonMart3F_Object:
 	bg_event  6,  1, TEXT_CELADONMART3F_POKEMON_POSTER2
 	bg_event 10,  1, TEXT_CELADONMART3F_POKEMON_POSTER3
 
-	def_object_events
+	.DB 5
 	object_event 16,  5, SPRITE_CLERK, STAY, NONE, TEXT_CELADONMART3F_CLERK
 	object_event 11,  6, SPRITE_GAMEBOY_KID, STAY, RIGHT, TEXT_CELADONMART3F_GAMEBOY_KID1
 	object_event  7,  2, SPRITE_GAMEBOY_KID, STAY, DOWN, TEXT_CELADONMART3F_GAMEBOY_KID2
 	object_event  8,  2, SPRITE_GAMEBOY_KID, STAY, DOWN, TEXT_CELADONMART3F_GAMEBOY_KID3
 	object_event  2,  5, SPRITE_LITTLE_BOY, STAY, UP, TEXT_CELADONMART3F_LITTLE_BOY
 
-	def_warps_to CELADON_MART_3F
+	event_displacement CELADON_MART_3F_WIDTH, 12, 1
+
+	event_displacement CELADON_MART_3F_WIDTH, 16, 1
+
+	event_displacement CELADON_MART_3F_WIDTH, 1, 1

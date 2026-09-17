@@ -1,4 +1,5 @@
-_BikeShopClerkWelcomeText::
+_BikeShopClerkWelcomeText:
+WLA_GLOBAL_BikeShopClerkWelcomeText:
 	text "Hi! Welcome to"
 	line "our BIKE SHOP."
 
@@ -6,17 +7,20 @@ _BikeShopClerkWelcomeText::
 	line "the BIKE for you!"
 	prompt
 
-_BikeShopClerkDoYouLikeItText::
+_BikeShopClerkDoYouLikeItText:
+WLA_GLOBAL_BikeShopClerkDoYouLikeItText:
 	text "It's a cool BIKE!"
 	line "Do you want it?"
 	done
 
-_BikeShopCantAffordText::
+_BikeShopCantAffordText:
+WLA_GLOBAL_BikeShopCantAffordText:
 	text "Sorry! You can't"
 	line "afford it!"
 	prompt
 
-_BikeShopClerkOhThatsAVoucherText::
+_BikeShopClerkOhThatsAVoucherText:
+WLA_GLOBAL_BikeShopClerkOhThatsAVoucherText:
 	text "Oh, that's..."
 
 	para "A BIKE VOUCHER!"
@@ -24,18 +28,21 @@ _BikeShopClerkOhThatsAVoucherText::
 	para "OK! Here you go!"
 	prompt
 
-_BikeShopExchangedVoucherText::
+_BikeShopExchangedVoucherText:
+WLA_GLOBAL_BikeShopExchangedVoucherText:
 	text "<PLAYER> exchanged"
 	line "the BIKE VOUCHER"
 	cont "for a BICYCLE.@"
 	text_end
 
-_BikeShopComeAgainText::
+_BikeShopComeAgainText:
+WLA_GLOBAL_BikeShopComeAgainText:
 	text "Come back again"
 	line "some time!"
 	done
 
-_BikeShopClerkHowDoYouLikeYourBicycleText::
+_BikeShopClerkHowDoYouLikeYourBicycleText:
+WLA_GLOBAL_BikeShopClerkHowDoYouLikeYourBicycleText:
 	text "How do you like"
 	line "your new BICYCLE?"
 
@@ -44,12 +51,14 @@ _BikeShopClerkHowDoYouLikeYourBicycleText::
 	cont "and in caves!"
 	done
 
-_BikeShopBagFullText::
+_BikeShopBagFullText:
+WLA_GLOBAL_BikeShopBagFullText:
 	text "You better make"
 	line "room for this!"
 	done
 
-_BikeShopMiddleAgedWomanText::
+_BikeShopMiddleAgedWomanText:
+WLA_GLOBAL_BikeShopMiddleAgedWomanText:
 	text "A plain city BIKE"
 	line "is good enough"
 	cont "for me!"
@@ -59,13 +68,15 @@ _BikeShopMiddleAgedWomanText::
 	cont "on an MTB!"
 	done
 
-_BikeShopYoungsterTheseBikesAreExpensiveText::
+_BikeShopYoungsterTheseBikesAreExpensiveText:
+WLA_GLOBAL_BikeShopYoungsterTheseBikesAreExpensiveText:
 	text "These BIKEs are"
 	line "cool, but they're"
 	cont "way expensive!"
 	done
 
-_BikeShopYoungsterCoolBikeText::
+_BikeShopYoungsterCoolBikeText:
+WLA_GLOBAL_BikeShopYoungsterCoolBikeText:
 	text "Wow. Your BIKE is"
 	line "really cool!"
 	done

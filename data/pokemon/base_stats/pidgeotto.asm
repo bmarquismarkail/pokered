@@ -1,17 +1,17 @@
-	db DEX_PIDGEOTTO ; pokedex id
+	.DB DEX_PIDGEOTTO ; pokedex id
 
-	db  63,  60,  55,  71,  50
+	.DB  63,  60,  55,  71,  50
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, FLYING ; type
-	db 120 ; catch rate
-	db 113 ; base exp
+	.DB NORMAL, FLYING ; type
+	.DB 120 ; catch rate
+	.DB 113 ; base exp
 
-	INCBIN "gfx/pokemon/front/pidgeotto.pic", 0, 1 ; sprite dimensions
-	dw PidgeottoPicFront, PidgeottoPicBack
+	.INCBIN "gfx/pokemon/front/pidgeotto.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PidgeottoPicFront, PidgeottoPicBack
 
-	db GUST, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB GUST, SAND_ATTACK, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -19,4 +19,4 @@
 	     SWIFT,        SKY_ATTACK,   REST,         SUBSTITUTE,   FLY
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

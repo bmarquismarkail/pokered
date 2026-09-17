@@ -9,31 +9,31 @@ GymStatues:
 	ld hl, MapBadgeFlags
 	ld a, [wCurMap]
 	ld b, a
-.loop
+GymStatues.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .match
+	jr z, GymStatues.match
 	inc hl
-	jr .loop
-.match
+	jr GymStatues.loop
+GymStatues.match
 	ld b, [hl]
 	ld a, [wBeatGymFlags]
 	and b
 	cp b
 	tx_pre_id GymStatueText2
-	jr z, .haveBadge
+	jr z, GymStatues.haveBadge
 	tx_pre_id GymStatueText1
-.haveBadge
+GymStatues.haveBadge
 	jp PrintPredefTextID
 
-INCLUDE "data/maps/badge_maps.asm"
+.INCLUDE "data/maps/badge_maps.asm"
 
-GymStatueText1::
-	text_far _GymStatueText1
+GymStatueText1:
+	text_far WLA_GLOBAL_GymStatueText1
 	text_end
 
-GymStatueText2::
-	text_far _GymStatueText2
+GymStatueText2:
+	text_far WLA_GLOBAL_GymStatueText2
 	text_end

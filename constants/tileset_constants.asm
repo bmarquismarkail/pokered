@@ -1,4 +1,4 @@
-DEF MAP_TILESET_SIZE EQU $60 ; tiles
+.DEFINE MAP_TILESET_SIZE $60 ; tiles
 
 ; tileset ids
 ; Tilesets indexes (see data/tilesets/tileset_headers.asm)
@@ -27,4 +27,4 @@ DEF MAP_TILESET_SIZE EQU $60 ; tiles
 	const CLUB         ; 21
 	const FACILITY     ; 22
 	const PLATEAU      ; 23
-DEF NUM_TILESETS EQU const_value
+.DEFINE NUM_TILESETS const_value

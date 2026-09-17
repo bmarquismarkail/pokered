@@ -1,4 +1,5 @@
-_FuchsiaMartMiddleAgedManText::
+_FuchsiaMartMiddleAgedManText:
+WLA_GLOBAL_FuchsiaMartMiddleAgedManText:
 	text "Do you have a"
 	line "SAFARI ZONE flag?"
 
@@ -6,7 +7,8 @@ _FuchsiaMartMiddleAgedManText::
 	line "or calendars?"
 	done
 
-_FuchsiaMartCooltrainerFText::
+_FuchsiaMartCooltrainerFText:
+WLA_GLOBAL_FuchsiaMartCooltrainerFText:
 	text "Did you try X"
 	line "SPEED? It speeds"
 	cont "up a #MON in"

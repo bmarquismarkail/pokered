@@ -1,8 +1,10 @@
-_Museum1FScientist1ComeAgainText::
+_Museum1FScientist1ComeAgainText:
+WLA_GLOBAL_Museum1FScientist1ComeAgainText:
 	text "Come again!"
 	done
 
-_Museum1FScientist1WouldYouLikeToComeInText::
+_Museum1FScientist1WouldYouLikeToComeInText:
+WLA_GLOBAL_Museum1FScientist1WouldYouLikeToComeInText:
 	text "It's ¥50 for a"
 	line "child's ticket."
 
@@ -10,17 +12,20 @@ _Museum1FScientist1WouldYouLikeToComeInText::
 	line "come in?"
 	done
 
-_Museum1FScientist1ThankYouText::
+_Museum1FScientist1ThankYouText:
+WLA_GLOBAL_Museum1FScientist1ThankYouText:
 	text "Right, ¥50!"
 	line "Thank you!"
 	done
 
-_Museum1FScientist1DontHaveEnoughMoneyText::
+_Museum1FScientist1DontHaveEnoughMoneyText:
+WLA_GLOBAL_Museum1FScientist1DontHaveEnoughMoneyText:
 	text "You don't have"
 	line "enough money."
 	prompt
 
-_Museum1FScientist1DoYouKnowWhatAmberIsText::
+_Museum1FScientist1DoYouKnowWhatAmberIsText:
+WLA_GLOBAL_Museum1FScientist1DoYouKnowWhatAmberIsText:
 	text "You can't sneak"
 	line "in the back way!"
 
@@ -29,7 +34,8 @@ _Museum1FScientist1DoYouKnowWhatAmberIsText::
 	cont "AMBER is?"
 	done
 
-_Museum1FScientist1TheresALabSomewhereText::
+_Museum1FScientist1TheresALabSomewhereText:
+WLA_GLOBAL_Museum1FScientist1TheresALabSomewhereText:
 	text "There's a lab"
 	line "somewhere trying"
 	cont "to resurrect"
@@ -37,28 +43,33 @@ _Museum1FScientist1TheresALabSomewhereText::
 	cont "from AMBER."
 	done
 
-_Museum1FScientist1AmberIsFossilizedTreeSapText::
+_Museum1FScientist1AmberIsFossilizedTreeSapText:
+WLA_GLOBAL_Museum1FScientist1AmberIsFossilizedTreeSapText:
 	text "AMBER is fossil-"
 	line "ized tree sap."
 	done
 
-_Museum1FScientist1GoToOtherSideText::
+_Museum1FScientist1GoToOtherSideText:
+WLA_GLOBAL_Museum1FScientist1GoToOtherSideText:
 	text "Please go to the"
 	line "other side!"
 	done
 
-_Museum1FScientist1TakePlentyOfTimeText::
+_Museum1FScientist1TakePlentyOfTimeText:
+WLA_GLOBAL_Museum1FScientist1TakePlentyOfTimeText:
 	text "Take plenty of"
 	line "time to look!"
 	done
 
-_Museum1FGamblerText::
+_Museum1FGamblerText:
+WLA_GLOBAL_Museum1FGamblerText:
 	text "That is one"
 	line "magnificent"
 	cont "fossil!"
 	done
 
-_Museum1FScientist2TakeThisToAPokemonLabText::
+_Museum1FScientist2TakeThisToAPokemonLabText:
+WLA_GLOBAL_Museum1FScientist2TakeThisToAPokemonLabText:
 	text "Ssh! I think that"
 	line "this chunk of"
 	cont "AMBER contains"
@@ -80,29 +91,34 @@ _Museum1FScientist2TakeThisToAPokemonLabText::
 	cont "get it examined!"
 	prompt
 
-_Museum1FScientist2ReceivedOldAmberText::
+_Museum1FScientist2ReceivedOldAmberText:
+WLA_GLOBAL_Museum1FScientist2ReceivedOldAmberText:
 	text "<PLAYER> received"
 	line "OLD AMBER!@"
 	text_end
 
-_Museum1FScientist2GetTheOldAmberCheckText::
+_Museum1FScientist2GetTheOldAmberCheckText:
+WLA_GLOBAL_Museum1FScientist2GetTheOldAmberCheckText:
 	text "Ssh! Get the OLD"
 	line "AMBER checked!"
 	done
 
-_Museum1FScientist2YouDontHaveSpaceText::
+_Museum1FScientist2YouDontHaveSpaceText:
+WLA_GLOBAL_Museum1FScientist2YouDontHaveSpaceText:
 	text "You don't have"
 	line "space for this!"
 	done
 
-_Museum1FScientist3Text::
+_Museum1FScientist3Text:
+WLA_GLOBAL_Museum1FScientist3Text:
 	text "We are proud of 2"
 	line "fossils of very"
 	cont "rare, prehistoric"
 	cont "#MON!"
 	done
 
-_Museum1FOldAmberText::
+_Museum1FOldAmberText:
+WLA_GLOBAL_Museum1FOldAmberText:
 	text "The AMBER is"
 	line "clear and gold!"
 	done

@@ -1,15 +1,18 @@
-_CeladonMansion3FProgrammerText::
+_CeladonMansion3FProgrammerText:
+WLA_GLOBAL_CeladonMansion3FProgrammerText:
 	text "Me? I'm the"
 	line "programmer!"
 	done
 
-_CeladonMansion3FGraphicArtistText::
+_CeladonMansion3FGraphicArtistText:
+WLA_GLOBAL_CeladonMansion3FGraphicArtistText:
 	text "I'm the graphic"
 	line "artist!"
 	cont "I drew you!"
 	done
 
-_CeladonMansion3FWriterText::
+_CeladonMansion3FWriterText:
+WLA_GLOBAL_CeladonMansion3FWriterText:
 	text "I wrote the story!"
 	line "Isn't ERIKA cute?"
 
@@ -20,7 +23,8 @@ _CeladonMansion3FWriterText::
 	line "I like her!"
 	done
 
-_CeladonMansion3FGameDesignerText::
+_CeladonMansion3FGameDesignerText:
+WLA_GLOBAL_CeladonMansion3FGameDesignerText:
 	text "Is that right?"
 
 	para "I'm the game"
@@ -34,7 +38,8 @@ _CeladonMansion3FGameDesignerText::
 	line "come tell me!"
 	done
 
-_CeladonMansion3FGameDesignerCompletedDexText::
+_CeladonMansion3FGameDesignerCompletedDexText:
+WLA_GLOBAL_CeladonMansion3FGameDesignerCompletedDexText:
 	text "Wow! Excellent!"
 	line "You completed"
 	cont "your #DEX!"
@@ -42,26 +47,30 @@ _CeladonMansion3FGameDesignerCompletedDexText::
 	cont "...@"
 	text_end
 
-_CeladonMansion3FGameProgramPCText::
+_CeladonMansion3FGameProgramPCText:
+WLA_GLOBAL_CeladonMansion3FGameProgramPCText:
 	text "It's the game"
 	line "program! Messing"
 	cont "with it could bug"
 	cont "out the game!"
 	done
 
-_CeladonMansion3FPlayingGamePCText::
+_CeladonMansion3FPlayingGamePCText:
+WLA_GLOBAL_CeladonMansion3FPlayingGamePCText:
 	text "Someone's playing"
 	line "a game instead of"
 	cont "working!"
 	done
 
-_CeladonMansion3FGameScriptPCText::
+_CeladonMansion3FGameScriptPCText:
+WLA_GLOBAL_CeladonMansion3FGameScriptPCText:
 	text "It's the script!"
 	line "Better not look"
 	cont "at the ending!"
 	done
 
-_CeladonMansion3FDevRoomSignText::
+_CeladonMansion3FDevRoomSignText:
+WLA_GLOBAL_CeladonMansion3FDevRoomSignText:
 	text "GAME FREAK"
 	line "Development Room"
 	done

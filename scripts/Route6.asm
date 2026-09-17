@@ -37,7 +37,7 @@ Route6TrainerHeader4:
 	trainer EVENT_BEAT_ROUTE_6_TRAINER_4, 3, Route6CooltrainerF2BattleText, Route6CooltrainerF2EndBattleText, Route6CooltrainerF2AfterBattleText
 Route6TrainerHeader5:
 	trainer EVENT_BEAT_ROUTE_6_TRAINER_5, 3, Route6Youngster2BattleText, Route6Youngster2EndBattleText, Route6Youngster2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route6CooltrainerM1Text:
 	text_asm
@@ -46,15 +46,15 @@ Route6CooltrainerM1Text:
 	jp TextScriptEnd
 
 Route6CooltrainerM1BattleText:
-	text_far _Route6CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route6CooltrainerM1BattleText
 	text_end
 
 Route6CooltrainerM1EndBattleText:
-	text_far _Route6CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerM1EndBattleText
 	text_end
 
 Route6CooltrainerAfterBattleText: ; used by both COOLTRAINER_M1 and COOLTRAINER_F1
-	text_far _Route6CooltrainerAfterBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerAfterBattleText
 	text_end
 
 Route6CooltrainerF1Text:
@@ -64,11 +64,11 @@ Route6CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route6CooltrainerF1BattleText:
-	text_far _Route6CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route6CooltrainerF1BattleText
 	text_end
 
 Route6CooltrainerF1EndBattleText:
-	text_far _Route6CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerF1EndBattleText
 	text_end
 
 Route6Youngster1Text:
@@ -78,15 +78,15 @@ Route6Youngster1Text:
 	jp TextScriptEnd
 
 Route6Youngster1BattleText:
-	text_far _Route6Youngster1BattleText
+	text_far WLA_GLOBAL_Route6Youngster1BattleText
 	text_end
 
 Route6Youngster1EndBattleText:
-	text_far _Route6Youngster1EndBattleText
+	text_far WLA_GLOBAL_Route6Youngster1EndBattleText
 	text_end
 
 Route6Youngster1AfterBattleText:
-	text_far _Route6Youngster1AfterBattleText
+	text_far WLA_GLOBAL_Route6Youngster1AfterBattleText
 	text_end
 
 Route6CooltrainerM2Text:
@@ -96,15 +96,15 @@ Route6CooltrainerM2Text:
 	jp TextScriptEnd
 
 Route6CooltrainerM2BattleText:
-	text_far _Route6CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route6CooltrainerM2BattleText
 	text_end
 
 Route6CooltrainerM2EndBattleText:
-	text_far _Route6CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerM2EndBattleText
 	text_end
 
 Route6CooltrainerM2AfterBattleText:
-	text_far _Route6CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerM2AfterBattleText
 	text_end
 
 Route6CooltrainerF2Text:
@@ -114,15 +114,15 @@ Route6CooltrainerF2Text:
 	jp TextScriptEnd
 
 Route6CooltrainerF2BattleText:
-	text_far _Route6CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route6CooltrainerF2BattleText
 	text_end
 
 Route6CooltrainerF2EndBattleText:
-	text_far _Route6CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerF2EndBattleText
 	text_end
 
 Route6CooltrainerF2AfterBattleText:
-	text_far _Route6CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route6CooltrainerF2AfterBattleText
 	text_end
 
 Route6Youngster2Text:
@@ -132,17 +132,17 @@ Route6Youngster2Text:
 	jp TextScriptEnd
 
 Route6Youngster2BattleText:
-	text_far _Route6Youngster2BattleText
+	text_far WLA_GLOBAL_Route6Youngster2BattleText
 	text_end
 
 Route6Youngster2EndBattleText:
-	text_far _Route6Youngster2EndBattleText
+	text_far WLA_GLOBAL_Route6Youngster2EndBattleText
 	text_end
 
 Route6Youngster2AfterBattleText:
-	text_far _Route6Youngster2AfterBattleText
+	text_far WLA_GLOBAL_Route6Youngster2AfterBattleText
 	text_end
 
 Route6UndergroundPathSignText:
-	text_far _Route6UndergroundPathSignText
+	text_far WLA_GLOBAL_Route6UndergroundPathSignText
 	text_end

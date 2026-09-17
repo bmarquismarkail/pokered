@@ -1,10 +1,13 @@
-_Start::
+_Start:
+WLA_GLOBAL_Start:
 	cp BOOTUP_A_CGB
-	jr z, .cgb
+	jr z, WLA_GLOBAL_Start__cgb
 	xor a
-	jr .ok
-.cgb
+	jr WLA_GLOBAL_Start__ok
+_Start.cgb:
+WLA_GLOBAL_Start__cgb:
 	ld a, FALSE
-.ok
+_Start.ok:
+WLA_GLOBAL_Start__ok:
 	ld [wOnCGB], a
 	jp Init

@@ -8,9 +8,9 @@ SaffronMart_TextPointers:
 	dw_const SaffronMartCooltrainerFText, TEXT_SAFFRONMART_COOLTRAINER_F
 
 SaffronMartSuperNerdText:
-	text_far _SaffronMartSuperNerdText
+	text_far WLA_GLOBAL_SaffronMartSuperNerdText
 	text_end
 
 SaffronMartCooltrainerFText:
-	text_far _SaffronMartCooltrainerFText
+	text_far WLA_GLOBAL_SaffronMartCooltrainerFText
 	text_end

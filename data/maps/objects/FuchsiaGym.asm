@@ -9,15 +9,14 @@
 	const_export FUCHSIAGYM_GYM_GUIDE
 
 FuchsiaGym_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  4, 17, LAST_MAP, 6
 	warp_event  5, 17, LAST_MAP, 6
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 8
 	object_event  4, 10, SPRITE_KOGA, STAY, DOWN, TEXT_FUCHSIAGYM_KOGA, OPP_KOGA, 1
 	object_event  8, 13, SPRITE_ROCKER, STAY, DOWN, TEXT_FUCHSIAGYM_ROCKER1, OPP_JUGGLER, 7
 	object_event  7,  8, SPRITE_ROCKER, STAY, RIGHT, TEXT_FUCHSIAGYM_ROCKER2, OPP_JUGGLER, 3
@@ -27,4 +26,6 @@ FuchsiaGym_Object:
 	object_event  2,  7, SPRITE_ROCKER, STAY, LEFT, TEXT_FUCHSIAGYM_ROCKER6, OPP_JUGGLER, 4
 	object_event  7, 15, SPRITE_GYM_GUIDE, STAY, DOWN, TEXT_FUCHSIAGYM_GYM_GUIDE
 
-	def_warps_to FUCHSIA_GYM
+	event_displacement FUCHSIA_GYM_WIDTH, 4, 17
+
+	event_displacement FUCHSIA_GYM_WIDTH, 5, 17

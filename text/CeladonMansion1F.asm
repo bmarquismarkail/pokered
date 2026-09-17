@@ -1,8 +1,10 @@
-_CeladonMansion1FMeowthText::
+_CeladonMansion1FMeowthText:
+WLA_GLOBAL_CeladonMansion1FMeowthText:
 	text "MEOWTH: Meow!@"
 	text_end
 
-_CeladonMansion1FGrannyText::
+_CeladonMansion1FGrannyText:
+WLA_GLOBAL_CeladonMansion1FGrannyText:
 	text "My dear #MON"
 	line "keep me company."
 
@@ -10,17 +12,20 @@ _CeladonMansion1FGrannyText::
 	line "money home!"
 	done
 
-_CeladonMansion1FClefairyText::
+_CeladonMansion1FClefairyText:
+WLA_GLOBAL_CeladonMansion1FClefairyText:
 	text "CLEFAIRY: Pi"
 	line "pippippi!@"
 	text_end
 
-_CeladonMansion1FNidoranFText::
+_CeladonMansion1FNidoranFText:
+WLA_GLOBAL_CeladonMansion1FNidoranFText:
 	text "NIDORAN: Kya"
 	line "kyaoo!@"
 	text_end
 
-_CeladonMansion1FManagersSuiteSignText::
+_CeladonMansion1FManagersSuiteSignText:
+WLA_GLOBAL_CeladonMansion1FManagersSuiteSignText:
 	text "CELADON MANSION"
 	line "Manager's Suite"
 	done

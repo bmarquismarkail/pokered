@@ -8,9 +8,9 @@
 	const_export ROCKTUNNEL1F_COOLTRAINER_F3
 
 RockTunnel1F_Object:
-	db $3 ; border block
+	.DB $3 ; border block
 
-	def_warp_events
+	.DB 8
 	warp_event 15,  3, LAST_MAP, 2
 	warp_event 15,  0, LAST_MAP, 2
 	warp_event 15, 33, LAST_MAP, 3
@@ -20,10 +20,10 @@ RockTunnel1F_Object:
 	warp_event 17, 11, ROCK_TUNNEL_B1F, 3
 	warp_event 37, 17, ROCK_TUNNEL_B1F, 4
 
-	def_bg_events
+	.DB 1
 	bg_event 11, 29, TEXT_ROCKTUNNEL1F_SIGN
 
-	def_object_events
+	.DB 7
 	object_event  7,  5, SPRITE_HIKER, STAY, DOWN, TEXT_ROCKTUNNEL1F_HIKER1, OPP_HIKER, 12
 	object_event  5, 16, SPRITE_HIKER, STAY, DOWN, TEXT_ROCKTUNNEL1F_HIKER2, OPP_HIKER, 13
 	object_event 17, 15, SPRITE_HIKER, STAY, LEFT, TEXT_ROCKTUNNEL1F_HIKER3, OPP_HIKER, 14
@@ -32,4 +32,18 @@ RockTunnel1F_Object:
 	object_event 22, 24, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_ROCKTUNNEL1F_COOLTRAINER_F2, OPP_JR_TRAINER_F, 18
 	object_event 32, 24, SPRITE_COOLTRAINER_F, STAY, RIGHT, TEXT_ROCKTUNNEL1F_COOLTRAINER_F3, OPP_JR_TRAINER_F, 19
 
-	def_warps_to ROCK_TUNNEL_1F
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 15, 3
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 15, 0
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 15, 33
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 15, 35
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 37, 3
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 5, 3
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 17, 11
+
+	event_displacement ROCK_TUNNEL_1F_WIDTH, 37, 17

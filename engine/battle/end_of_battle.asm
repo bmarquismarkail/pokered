@@ -1,7 +1,7 @@
 EndOfBattle:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jr nz, .notLinkBattle
+	jr nz, EndOfBattle.notLinkBattle
 ; link battle
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
@@ -14,36 +14,36 @@ EndOfBattle:
 	ld a, [wBattleResult]
 	cp $1
 	ld de, YouWinText
-	jr c, .placeWinOrLoseString
+	jr c, EndOfBattle.placeWinOrLoseString
 	ld de, YouLoseText
-	jr z, .placeWinOrLoseString
+	jr z, EndOfBattle.placeWinOrLoseString
 	ld de, DrawText
-.placeWinOrLoseString
+EndOfBattle.placeWinOrLoseString
 	hlcoord 6, 8
 	call PlaceString
 	ld c, 200
 	call DelayFrames
-	jr .evolution
-.notLinkBattle
+	jr EndOfBattle.evolution
+EndOfBattle.notLinkBattle
 	ld a, [wBattleResult]
 	and a
-	jr nz, .resetVariables
+	jr nz, EndOfBattle.resetVariables
 	ld hl, wTotalPayDayMoney
 	ld a, [hli]
 	or [hl]
 	inc hl
 	or [hl]
-	jr z, .evolution ; if pay day money is 0, jump
+	jr z, EndOfBattle.evolution ; if pay day money is 0, jump
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef AddBCDPredef
 	ld hl, PickUpPayDayMoneyText
 	call PrintText
-.evolution
+EndOfBattle.evolution
 	xor a
 	ld [wForceEvolution], a
 	predef EvolutionAfterBattle
-.resetVariables
+EndOfBattle.resetVariables
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	ld [wChannelSoundIDs + CHAN5], a
@@ -62,10 +62,10 @@ EndOfBattle:
 	ld [wListScrollOffset], a
 	ld hl, wBattleStatusData
 	ld b, wBattleStatusDataEnd - wBattleStatusData
-.loop
+EndOfBattle.loop
 	ld [hli], a
 	dec b
-	jr nz, .loop
+	jr nz, EndOfBattle.loop
 	ld hl, wStatusFlags2
 	set BIT_WILD_ENCOUNTER_COOLDOWN, [hl]
 	call WaitForSoundToFinish
@@ -75,14 +75,14 @@ EndOfBattle:
 	ret
 
 YouWinText:
-	db "YOU WIN@"
+		.STRINGMAP pokemon, "YOU WIN@"
 
 YouLoseText:
-	db "YOU LOSE@"
+		.STRINGMAP pokemon, "YOU LOSE@"
 
 DrawText:
-	db "  DRAW@"
+		.STRINGMAP pokemon, "  DRAW@"
 
 PickUpPayDayMoneyText:
-	text_far _PickUpPayDayMoneyText
+	text_far WLA_GLOBAL_PickUpPayDayMoneyText
 	text_end

@@ -1,4 +1,5 @@
-_Route15Gate1FGuardText::
+_Route15Gate1FGuardText:
+WLA_GLOBAL_Route15Gate1FGuardText:
 	text "Are you working"
 	line "on a #DEX?"
 

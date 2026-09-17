@@ -1,4 +1,4 @@
-PrintNumber::
+PrintNumber:
 ; Print the c-digit, b-byte value at de.
 ; Allows 2 to 7 digits. For 1-digit numbers, add
 ; the value to char "0" instead of calling PrintNumber.
@@ -6,39 +6,39 @@ PrintNumber::
 ; in bits 7 and 6 of b respectively.
 	push bc
 	xor a
-	ldh [hPastLeadingZeros], a
-	ldh [hNumToPrint], a
-	ldh [hNumToPrint + 1], a
+	ldh [lobyte(hPastLeadingZeros)], a
+	ldh [lobyte(hNumToPrint)], a
+	ldh [lobyte(hNumToPrint + 1)], a
 	ld a, b
 	and $f
 	cp 1
-	jr z, .byte
+	jr z, PrintNumber.byte
 	cp 2
-	jr z, .word
-.long
+	jr z, PrintNumber.word
+PrintNumber.long
 	ld a, [de]
-	ldh [hNumToPrint], a
+	ldh [lobyte(hNumToPrint)], a
 	inc de
 	ld a, [de]
-	ldh [hNumToPrint + 1], a
+	ldh [lobyte(hNumToPrint + 1)], a
 	inc de
 	ld a, [de]
-	ldh [hNumToPrint + 2], a
-	jr .start
+	ldh [lobyte(hNumToPrint + 2)], a
+	jr PrintNumber.start
 
-.word
+PrintNumber.word
 	ld a, [de]
-	ldh [hNumToPrint + 1], a
+	ldh [lobyte(hNumToPrint + 1)], a
 	inc de
 	ld a, [de]
-	ldh [hNumToPrint + 2], a
-	jr .start
+	ldh [lobyte(hNumToPrint + 2)], a
+	jr PrintNumber.start
 
-.byte
+PrintNumber.byte
 	ld a, [de]
-	ldh [hNumToPrint + 2], a
+	ldh [lobyte(hNumToPrint + 2)], a
 
-.start
+PrintNumber.start
 	push de
 
 	ld d, b
@@ -49,77 +49,77 @@ PrintNumber::
 	ld a, b
 
 	cp 2
-	jr z, .tens
+	jr z, PrintNumber.tens
 	cp 3
-	jr z, .hundreds
+	jr z, PrintNumber.hundreds
 	cp 4
-	jr z, .thousands
+	jr z, PrintNumber.thousands
 	cp 5
-	jr z, .ten_thousands
+	jr z, PrintNumber.ten_thousands
 	cp 6
-	jr z, .hundred_thousands
+	jr z, PrintNumber.hundred_thousands
 
-MACRO print_digit
+.MACRO print_digit
 
-	IF (\1) / $10000
-		ld a, \1 / $10000 % $100
-	ELSE
+	.IF (\1) / $10000
+		ld a, \1 / $10000 # $100
+	.ELSE
 		xor a
-	ENDC
-	ldh [hPowerOf10 + 0], a
+	.ENDIF
+	ldh [lobyte(hPowerOf10 + 0)], a
 
-	IF (\1) / $100
-		ld a, \1 / $100   % $100
-	ELSE
+	.IF (\1) / $100
+		ld a, \1 / $100   # $100
+	.ELSE
 		xor a
-	ENDC
-	ldh [hPowerOf10 + 1], a
+	.ENDIF
+	ldh [lobyte(hPowerOf10 + 1)], a
 
-	ld a, \1 / $1     % $100
-	ldh [hPowerOf10 + 2], a
+	ld a, \1 / $1     # $100
+	ldh [lobyte(hPowerOf10 + 2)], a
 
-	call .PrintDigit
-	call .NextDigit
-ENDM
+	call PrintNumber.PrintDigit
+	call PrintNumber.NextDigit
+.ENDM
 
 ; millions
 	print_digit 1000000
-.hundred_thousands
+PrintNumber.hundred_thousands
 	print_digit 100000
-.ten_thousands
+PrintNumber.ten_thousands
 	print_digit 10000
-.thousands
+PrintNumber.thousands
 	print_digit 1000
-.hundreds
+PrintNumber.hundreds
 	print_digit 100
 
-.tens
+PrintNumber.tens
 	ld c, 0
-	ldh a, [hNumToPrint + 2]
-.mod
+	ldh a, [lobyte(hNumToPrint + 2)]
+PrintNumber.mod
 	cp 10
-	jr c, .ok
+	jr c, PrintNumber.ok
 	sub 10
 	inc c
-	jr .mod
-.ok
+	jr PrintNumber.mod
+PrintNumber.ok
 
 	ld b, a
-	ldh a, [hPastLeadingZeros]
+	ldh a, [lobyte(hPastLeadingZeros)]
 	or c
-	ldh [hPastLeadingZeros], a
-	jr nz, .past
-	call .PrintLeadingZero
-	jr .next
-.past
-	ld a, '0'
+	ldh [lobyte(hPastLeadingZeros)], a
+	jr nz, PrintNumber.past
+	call PrintNumber.PrintLeadingZero
+	jr PrintNumber.next
+PrintNumber.past
+	ld a, $f6
 	add c
 	ld [hl], a
-.next
+PrintNumber.next
 
-	call .NextDigit
+	call PrintNumber.NextDigit
 ; ones
-	ld a, '0'
+	ld a, $f6
 	add b
 	ld [hli], a
 	pop de
@@ -127,98 +127,98 @@ ENDM
 	pop bc
 	ret
 
-.PrintDigit:
+PrintNumber.PrintDigit:
 ; Divide by the current decimal place.
 ; Print the quotient, and keep the modulus.
 	ld c, 0
-.loop
-	ldh a, [hPowerOf10]
+PrintNumber.loop
+	ldh a, [lobyte(hPowerOf10)]
 	ld b, a
-	ldh a, [hNumToPrint]
-	ldh [hSavedNumToPrint], a
+	ldh a, [lobyte(hNumToPrint)]
+	ldh [lobyte(hSavedNumToPrint)], a
 	cp b
-	jr c, .underflow0
+	jr c, PrintNumber.underflow0
 	sub b
-	ldh [hNumToPrint], a
-	ldh a, [hPowerOf10 + 1]
+	ldh [lobyte(hNumToPrint)], a
+	ldh a, [lobyte(hPowerOf10 + 1)]
 	ld b, a
-	ldh a, [hNumToPrint + 1]
-	ldh [hSavedNumToPrint + 1], a
+	ldh a, [lobyte(hNumToPrint + 1)]
+	ldh [lobyte(hSavedNumToPrint + 1)], a
 	cp b
-	jr nc, .noborrow1
+	jr nc, PrintNumber.noborrow1
 
-	ldh a, [hNumToPrint]
+	ldh a, [lobyte(hNumToPrint)]
 	or 0
-	jr z, .underflow1
+	jr z, PrintNumber.underflow1
 	dec a
-	ldh [hNumToPrint], a
-	ldh a, [hNumToPrint + 1]
-.noborrow1
+	ldh [lobyte(hNumToPrint)], a
+	ldh a, [lobyte(hNumToPrint + 1)]
+PrintNumber.noborrow1
 
 	sub b
-	ldh [hNumToPrint + 1], a
-	ldh a, [hPowerOf10 + 2]
+	ldh [lobyte(hNumToPrint + 1)], a
+	ldh a, [lobyte(hPowerOf10 + 2)]
 	ld b, a
-	ldh a, [hNumToPrint + 2]
-	ldh [hSavedNumToPrint + 2], a
+	ldh a, [lobyte(hNumToPrint + 2)]
+	ldh [lobyte(hSavedNumToPrint + 2)], a
 	cp b
-	jr nc, .noborrow2
+	jr nc, PrintNumber.noborrow2
 
-	ldh a, [hNumToPrint + 1]
+	ldh a, [lobyte(hNumToPrint + 1)]
 	and a
-	jr nz, .borrowed
+	jr nz, PrintNumber.borrowed
 
-	ldh a, [hNumToPrint]
+	ldh a, [lobyte(hNumToPrint)]
 	and a
-	jr z, .underflow2
+	jr z, PrintNumber.underflow2
 	dec a
-	ldh [hNumToPrint], a
+	ldh [lobyte(hNumToPrint)], a
 	xor a
-.borrowed
+PrintNumber.borrowed
 
 	dec a
-	ldh [hNumToPrint + 1], a
-	ldh a, [hNumToPrint + 2]
-.noborrow2
+	ldh [lobyte(hNumToPrint + 1)], a
+	ldh a, [lobyte(hNumToPrint + 2)]
+PrintNumber.noborrow2
 	sub b
-	ldh [hNumToPrint + 2], a
+	ldh [lobyte(hNumToPrint + 2)], a
 	inc c
-	jr .loop
+	jr PrintNumber.loop
 
-.underflow2
-	ldh a, [hSavedNumToPrint + 1]
-	ldh [hNumToPrint + 1], a
-.underflow1
-	ldh a, [hSavedNumToPrint]
-	ldh [hNumToPrint], a
-.underflow0
-	ldh a, [hPastLeadingZeros]
+PrintNumber.underflow2
+	ldh a, [lobyte(hSavedNumToPrint + 1)]
+	ldh [lobyte(hNumToPrint + 1)], a
+PrintNumber.underflow1
+	ldh a, [lobyte(hSavedNumToPrint)]
+	ldh [lobyte(hNumToPrint)], a
+PrintNumber.underflow0
+	ldh a, [lobyte(hPastLeadingZeros)]
 	or c
-	jr z, .PrintLeadingZero
+	jr z, PrintNumber.PrintLeadingZero
 
-	ld a, '0'
+	ld a, $f6
 	add c
 	ld [hl], a
-	ldh [hPastLeadingZeros], a
+	ldh [lobyte(hPastLeadingZeros)], a
 	ret
 
-.PrintLeadingZero:
+PrintNumber.PrintLeadingZero:
 	bit BIT_LEADING_ZEROES, d
 	ret z
-	ld [hl], '0'
+	ld [hl], $f6
 	ret
 
-.NextDigit:
+PrintNumber.NextDigit:
 ; Increment unless the number is left-aligned,
 ; leading zeroes are not printed, and no digits
 ; have been printed yet.
 	bit BIT_LEADING_ZEROES, d
-	jr nz, .inc
+	jr nz, PrintNumber.inc
 	bit BIT_LEFT_ALIGN, d
-	jr z, .inc
-	ldh a, [hPastLeadingZeros]
+	jr z, PrintNumber.inc
+	ldh a, [lobyte(hPastLeadingZeros)]
 	and a
 	ret z
-.inc
+PrintNumber.inc
 	inc hl
 	ret

@@ -7,9 +7,9 @@ ViridianForestSouthGate_TextPointers:
 	dw_const ViridianForestSouthGateLittleGirlText, TEXT_VIRIDIANFORESTSOUTHGATE_LITTLE_GIRL
 
 ViridianForestSouthGateGirlText:
-	text_far _ViridianForestSouthGateGirlText
+	text_far WLA_GLOBAL_ViridianForestSouthGateGirlText
 	text_end
 
 ViridianForestSouthGateLittleGirlText:
-	text_far _ViridianForestSouthGateLittleGirlText
+	text_far WLA_GLOBAL_ViridianForestSouthGateLittleGirlText
 	text_end

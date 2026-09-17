@@ -1,24 +1,24 @@
-VBlank::
+VBlank:
 
 	push af
 	push bc
 	push de
 	push hl
 
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wVBlankSavedROMBank], a
 
-	ldh a, [hSCX]
-	ldh [rSCX], a
-	ldh a, [hSCY]
-	ldh [rSCY], a
+	ldh a, [lobyte(hSCX)]
+	ldh [lobyte(rSCX)], a
+	ldh a, [lobyte(hSCY)]
+	ldh [lobyte(rSCY)], a
 
 	ld a, [wDisableVBlankWYUpdate]
 	and a
-	jr nz, .ok
-	ldh a, [hWY]
-	ldh [rWY], a
-.ok
+	jr nz, VBlank.ok
+	ldh a, [lobyte(hWY)]
+	ldh [lobyte(rWY)], a
+VBlank.ok
 
 	call AutoBgMapTransfer
 	call VBlankCopyBgMap
@@ -27,8 +27,8 @@ VBlank::
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
 	call hDMARoutine
-	ld a, BANK(PrepareOAMData)
-	ldh [hLoadedROMBank], a
+	ld a, bank(PrepareOAMData)
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	call PrepareOAMData
 
@@ -36,50 +36,50 @@ VBlank::
 
 	call Random
 
-	ldh a, [hVBlankOccurred]
+	ldh a, [lobyte(hVBlankOccurred)]
 	and a
-	jr z, .skipZeroing
+	jr z, VBlank.skipZeroing
 	xor a
-	ldh [hVBlankOccurred], a
+	ldh [lobyte(hVBlankOccurred)], a
 
-.skipZeroing
-	ldh a, [hFrameCounter]
+VBlank.skipZeroing
+	ldh a, [lobyte(hFrameCounter)]
 	and a
-	jr z, .skipDec
+	jr z, VBlank.skipDec
 	dec a
-	ldh [hFrameCounter], a
+	ldh [lobyte(hFrameCounter)], a
 
-.skipDec
+VBlank.skipDec
 	call FadeOutAudio
 
 	ld a, [wAudioROMBank] ; music ROM bank
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
-	cp BANK(Audio1_UpdateMusic)
-	jr nz, .checkForAudio2
-.audio1
+	cp bank(Audio1_UpdateMusic)
+	jr nz, VBlank.checkForAudio2
+VBlank.audio1
 	call Audio1_UpdateMusic
-	jr .afterMusic
-.checkForAudio2
-	cp BANK(Audio2_UpdateMusic)
-	jr nz, .audio3
-.audio2
+	jr VBlank.afterMusic
+VBlank.checkForAudio2
+	cp bank(Audio2_UpdateMusic)
+	jr nz, VBlank.audio3
+VBlank.audio2
 	call Music_DoLowHealthAlarm
 	call Audio2_UpdateMusic
-	jr .afterMusic
-.audio3
+	jr VBlank.afterMusic
+VBlank.audio3
 	call Audio3_UpdateMusic
-.afterMusic
+VBlank.afterMusic
 
 	farcall TrackPlayTime ; keep track of time played
 
-	ldh a, [hDisableJoypadPolling]
+	ldh a, [lobyte(hDisableJoypadPolling)]
 	and a
 	call z, ReadJoypad
 
 	ld a, [wVBlankSavedROMBank]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 
 	pop hl
@@ -89,17 +89,17 @@ VBlank::
 	reti
 
 
-DelayFrame::
+DelayFrame:
 ; Wait for the next vblank interrupt.
 ; As a bonus, this saves battery.
 
-DEF NOT_VBLANKED EQU 1
+.DEFINE NOT_VBLANKED 1
 
 	ld a, NOT_VBLANKED
-	ldh [hVBlankOccurred], a
-.halt
+	ldh [lobyte(hVBlankOccurred)], a
+DelayFrame.halt
 	halt
-	ldh a, [hVBlankOccurred]
+	ldh a, [lobyte(hVBlankOccurred)]
 	and a
-	jr nz, .halt
+	jr nz, DelayFrame.halt
 	ret

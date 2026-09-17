@@ -16,17 +16,17 @@ Route18Gate1F_ScriptPointers:
 Route18Gate1FDefaultScript:
 	call Route16Gate1FIsBicycleInBagScript
 	ret nz
-	ld hl, .StopsPlayerCoords
+	ld hl, Route18Gate1FDefaultScript.StopsPlayerCoords
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, TEXT_ROUTE18GATE1F_GUARD_EXCUSE_ME
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, [wCoordIndex]
 	cp $1
-	jr z, .next_to_counter
+	jr z, Route18Gate1FDefaultScript.next_to_counter
 	ld a, [wCoordIndex]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -39,17 +39,17 @@ Route18Gate1FDefaultScript:
 	ld a, SCRIPT_ROUTE18GATE1F_PLAYER_MOVING_UP
 	ld [wRoute18Gate1FCurScript], a
 	ret
-.next_to_counter
+Route18Gate1FDefaultScript.next_to_counter
 	ld a, SCRIPT_ROUTE18GATE1F_GUARD
 	ld [wRoute18Gate1FCurScript], a
 	ret
 
-.StopsPlayerCoords:
+Route18Gate1FDefaultScript.StopsPlayerCoords:
 	dbmapcoord  4,  3
 	dbmapcoord  4,  4
 	dbmapcoord  4,  5
 	dbmapcoord  4,  6
-	db -1 ; end
+	.DB -1 ; end
 
 Route18Gate1FPlayerMovingUpScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -60,7 +60,7 @@ Route18Gate1FPlayerMovingUpScript:
 
 Route18Gate1FGuardScript:
 	ld a, TEXT_ROUTE18GATE1F_GUARD
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -91,24 +91,24 @@ Route18Gate1F_TextPointers:
 Route18Gate1FGuardText:
 	text_asm
 	call Route16Gate1FIsBicycleInBagScript
-	jr z, .no_bike
-	ld hl, .CyclingRoadUphillText
+	jr z, Route18Gate1FGuardText.no_bike
+	ld hl, Route18Gate1FGuardText.CyclingRoadUphillText
 	call PrintText
-	jr .text_script_end
-.no_bike
-	ld hl, .YouNeedABicycleText
+	jr Route18Gate1FGuardText.text_script_end
+Route18Gate1FGuardText.no_bike
+	ld hl, Route18Gate1FGuardText.YouNeedABicycleText
 	call PrintText
-.text_script_end
+Route18Gate1FGuardText.text_script_end
 	jp TextScriptEnd
 
-.YouNeedABicycleText:
-	text_far _Route18Gate1FGuardYouNeedABicycleText
+Route18Gate1FGuardText.YouNeedABicycleText:
+	text_far WLA_GLOBAL_Route18Gate1FGuardYouNeedABicycleText
 	text_end
 
-.CyclingRoadUphillText:
-	text_far _Route18Gate1FGuardCyclingRoadUphillText
+Route18Gate1FGuardText.CyclingRoadUphillText:
+	text_far WLA_GLOBAL_Route18Gate1FGuardCyclingRoadUphillText
 	text_end
 
 Route18Gate1FGuardExcuseMeText:
-	text_far _Route18Gate1FGuardExcuseMeText
+	text_far WLA_GLOBAL_Route18Gate1FGuardExcuseMeText
 	text_end

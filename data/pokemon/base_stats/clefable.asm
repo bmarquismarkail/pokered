@@ -1,17 +1,17 @@
-	db DEX_CLEFABLE ; pokedex id
+	.DB DEX_CLEFABLE ; pokedex id
 
-	db  95,  70,  73,  60,  85
+	.DB  95,  70,  73,  60,  85
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 25 ; catch rate
-	db 129 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 25 ; catch rate
+	.DB 129 ; base exp
 
-	INCBIN "gfx/pokemon/front/clefable.pic", 0, 1 ; sprite dimensions
-	dw ClefablePicFront, ClefablePicBack
+	.INCBIN "gfx/pokemon/front/clefable.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ClefablePicFront, ClefablePicBack
 
-	db SING, DOUBLESLAP, MINIMIZE, METRONOME ; level 1 learnset
-	db GROWTH_FAST ; growth rate
+	.DB SING, DOUBLESLAP, MINIMIZE, METRONOME ; level 1 learnset
+	.DB GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -23,4 +23,4 @@
 	     TRI_ATTACK,   SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

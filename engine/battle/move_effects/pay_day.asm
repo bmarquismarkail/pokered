@@ -2,36 +2,36 @@ PayDayEffect_:
 	xor a
 	ld hl, wPayDayMoney
 	ld [hli], a
-	ldh a, [hWhoseTurn]
+	ldh a, [lobyte(hWhoseTurn)]
 	and a
 	ld a, [wBattleMonLevel]
-	jr z, .payDayEffect
+	jr z, PayDayEffect_.payDayEffect
 	ld a, [wEnemyMonLevel]
-.payDayEffect
+PayDayEffect_.payDayEffect
 ; level * 2
 	add a
-	ldh [hDividend + 3], a
+	ldh [lobyte(hDividend + 3)], a
 	xor a
-	ldh [hDividend], a
-	ldh [hDividend + 1], a
-	ldh [hDividend + 2], a
+	ldh [lobyte(hDividend)], a
+	ldh [lobyte(hDividend + 1)], a
+	ldh [lobyte(hDividend + 2)], a
 ; convert to BCD
 	ld a, 100
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld b, $4
 	call Divide
-	ldh a, [hQuotient + 3]
+	ldh a, [lobyte(hQuotient + 3)]
 	ld [hli], a ; wPayDayMoney + 1
-	ldh a, [hRemainder]
-	ldh [hDividend + 3], a
+	ldh a, [lobyte(hRemainder)]
+	ldh [lobyte(hDividend + 3)], a
 	ld a, 10
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld b, $4
 	call Divide
-	ldh a, [hQuotient + 3]
+	ldh a, [lobyte(hQuotient + 3)]
 	swap a
 	ld b, a
-	ldh a, [hRemainder]
+	ldh a, [lobyte(hRemainder)]
 	add b
 	ld [hl], a ; wPayDayMoney + 2
 	ld de, wTotalPayDayMoney + 2
@@ -41,5 +41,5 @@ PayDayEffect_:
 	jp PrintText
 
 CoinsScatteredText:
-	text_far _CoinsScatteredText
+	text_far WLA_GLOBAL_CoinsScatteredText
 	text_end

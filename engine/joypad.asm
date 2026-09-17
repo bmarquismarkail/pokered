@@ -1,30 +1,32 @@
-_Joypad::
+JoypadCore:
+_Joypad:
+WLA_GLOBAL_Joypad:
 ; hJoyReleased: (hJoyLast ^ hJoyInput) & hJoyLast
 ; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
 
-	ldh a, [hJoyInput]
+	ldh a, [lobyte(hJoyInput)]
 	cp PAD_BUTTONS ; soft reset
 	jp z, TrySoftReset
 
 	ld b, a
-	ldh a, [hJoyLast]
+	ldh a, [lobyte(hJoyLast)]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ldh [hJoyReleased], a
+	ldh [lobyte(hJoyReleased)], a
 	ld a, d
 	and b
-	ldh [hJoyPressed], a
+	ldh [lobyte(hJoyPressed)], a
 	ld a, b
-	ldh [hJoyLast], a
+	ldh [lobyte(hJoyLast)], a
 
 	ld a, [wStatusFlags5]
 	bit BIT_DISABLE_JOYPAD, a
 	jr nz, DiscardButtonPresses
 
-	ldh a, [hJoyLast]
-	ldh [hJoyHeld], a
+	ldh a, [lobyte(hJoyLast)]
+	ldh [lobyte(hJoyHeld)], a
 
 	ld a, [wJoyIgnore]
 	and a
@@ -32,19 +34,19 @@ _Joypad::
 
 	cpl
 	ld b, a
-	ldh a, [hJoyHeld]
+	ldh a, [lobyte(hJoyHeld)]
 	and b
-	ldh [hJoyHeld], a
-	ldh a, [hJoyPressed]
+	ldh [lobyte(hJoyHeld)], a
+	ldh a, [lobyte(hJoyPressed)]
 	and b
-	ldh [hJoyPressed], a
+	ldh [lobyte(hJoyPressed)], a
 	ret
 
 DiscardButtonPresses:
 	xor a
-	ldh [hJoyHeld], a
-	ldh [hJoyPressed], a
-	ldh [hJoyReleased], a
+	ldh [lobyte(hJoyHeld)], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyReleased)], a
 	ret
 
 TrySoftReset:
@@ -52,7 +54,7 @@ TrySoftReset:
 
 	; deselect (redundant)
 	ld a, $30
-	ldh [rJOYP], a
+	ldh [lobyte(rJOYP)], a
 
 	ld hl, hSoftReset
 	dec [hl]

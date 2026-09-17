@@ -11,18 +11,18 @@
 ; bits 0-4: length of BCD number in bytes
 ; Note that bits 5 and 7 are modified during execution. The above reflects
 ; their meaning at the beginning of the functions's execution.
-PrintBCDNumber::
+PrintBCDNumber:
 	ld b, c ; save flags in b
 	res BIT_LEADING_ZEROES, c
 	res BIT_LEFT_ALIGN, c
 	res BIT_MONEY_SIGN, c ; c now holds the length
 	bit BIT_MONEY_SIGN, b
-	jr z, .loop
+	jr z, PrintBCDNumber.loop
 	bit BIT_LEADING_ZEROES, b
-	jr nz, .loop
-	ld [hl], '¥'
+	jr nz, PrintBCDNumber.loop
+	ld [hl], $f0
 	inc hl
-.loop
+PrintBCDNumber.loop
 	ld a, [de]
 	swap a
 	call PrintBCDDigit ; print upper digit
@@ -30,47 +30,47 @@ PrintBCDNumber::
 	call PrintBCDDigit ; print lower digit
 	inc de
 	dec c
-	jr nz, .loop
+	jr nz, PrintBCDNumber.loop
 	bit BIT_LEADING_ZEROES, b ; were any non-zero digits printed?
-	jr z, .done ; if so, we are done
+	jr z, PrintBCDNumber.done ; if so, we are done
 ; if every digit of the BCD number is zero, print the last 0
 	bit BIT_LEFT_ALIGN, b
-	jr nz, .skipRightAlignmentAdjustment
+	jr nz, PrintBCDNumber.skipRightAlignmentAdjustment
 	dec hl ; if the string is right-aligned, it needs to be moved back one space
-.skipRightAlignmentAdjustment
+PrintBCDNumber.skipRightAlignmentAdjustment
 	bit BIT_MONEY_SIGN, b
-	jr z, .skipCurrencySymbol
-	ld [hl], '¥'
+	jr z, PrintBCDNumber.skipCurrencySymbol
+	ld [hl], $f0
 	inc hl
-.skipCurrencySymbol
-	ld [hl], '0'
+PrintBCDNumber.skipCurrencySymbol
+	ld [hl], $f6
 	call PrintLetterDelay
 	inc hl
-.done
+PrintBCDNumber.done
 	ret
 
-PrintBCDDigit::
+PrintBCDDigit:
 	and $f
 	and a
-	jr z, .zeroDigit
-.nonzeroDigit
+	jr z, PrintBCDDigit.zeroDigit
+PrintBCDDigit.nonzeroDigit
 	bit BIT_LEADING_ZEROES, b
-	jr z, .outputDigit
+	jr z, PrintBCDDigit.outputDigit
 ; if bit 7 is set, then no numbers have been printed yet
 	bit BIT_MONEY_SIGN, b
-	jr z, .skipCurrencySymbol
-	ld [hl], '¥'
+	jr z, PrintBCDDigit.skipCurrencySymbol
+	ld [hl], $f0
 	inc hl
 	res BIT_MONEY_SIGN, b
-.skipCurrencySymbol
+PrintBCDDigit.skipCurrencySymbol
 	res BIT_LEADING_ZEROES, b
-.outputDigit
-	add '0'
+PrintBCDDigit.outputDigit
+	add $f6
 	ld [hli], a
 	jp PrintLetterDelay
-.zeroDigit
+PrintBCDDigit.zeroDigit
 	bit BIT_LEADING_ZEROES, b
-	jr z, .outputDigit ; if so, print a zero digit
+	jr z, PrintBCDDigit.outputDigit ; if so, print a zero digit
 	bit BIT_LEFT_ALIGN, b
 	ret nz
 	inc hl ; if right-aligned, "print" a space by advancing the pointer

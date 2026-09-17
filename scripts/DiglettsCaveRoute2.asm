@@ -8,5 +8,5 @@ DiglettsCaveRoute2_TextPointers:
 	dw_const DiglettsCaveRoute2FishingGuruText, TEXT_DIGLETTSCAVEROUTE2_FISHING_GURU
 
 DiglettsCaveRoute2FishingGuruText:
-	text_far _DiglettsCaveRoute2FishingGuruText
+	text_far WLA_GLOBAL_DiglettsCaveRoute2FishingGuruText
 	text_end

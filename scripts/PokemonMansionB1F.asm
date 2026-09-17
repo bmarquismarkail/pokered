@@ -14,43 +14,43 @@ MansionB1FCheckReplaceSwitchDoorBlocks:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .switchTurnedOn
+	jr nz, MansionB1FCheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $e
-	lb bc, 8, 13
+	lb "bc", 8, 13
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 11, 6
+	lb "bc", 11, 6
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	lb bc, 3, 4
+	lb "bc", 3, 4
 	call Mansion2ReplaceBlock
 	ld a, $54
-	lb bc, 8, 8
+	lb "bc", 8, 8
 	call Mansion2ReplaceBlock
 	ret
-.switchTurnedOn
+MansionB1FCheckReplaceSwitchDoorBlocks.switchTurnedOn
 	ld a, $2d
-	lb bc, 8, 13
+	lb "bc", 8, 13
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	lb bc, 11, 6
+	lb "bc", 11, 6
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 3, 4
+	lb "bc", 3, 4
 	call Mansion2ReplaceBlock
 	ld a, $e
-	lb bc, 8, 8
+	lb "bc", 8, 8
 	call Mansion2ReplaceBlock
 	ret
 
-Mansion4Script_Switches::
+Mansion4Script_Switches:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_POKEMONMANSIONB1F_SWITCH
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 PokemonMansionB1F_ScriptPointers:
@@ -77,7 +77,7 @@ Mansion4TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, PokemonMansionB1FBurglarBattleText, PokemonMansionB1FBurglarEndBattleText, PokemonMansionB1FBurglarAfterBattleText
 Mansion4TrainerHeader1:
 	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, PokemonMansionB1FScientistBattleText, PokemonMansionB1FScientistEndBattleText, PokemonMansionB1FScientistAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonMansionB1FBurglarText:
 	text_asm
@@ -92,29 +92,29 @@ PokemonMansionB1FScientistText:
 	jp TextScriptEnd
 
 PokemonMansionB1FBurglarBattleText:
-	text_far _PokemonMansionB1FBurglarBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FBurglarBattleText
 	text_end
 
 PokemonMansionB1FBurglarEndBattleText:
-	text_far _PokemonMansionB1FBurglarEndBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FBurglarEndBattleText
 	text_end
 
 PokemonMansionB1FBurglarAfterBattleText:
-	text_far _PokemonMansionB1FBurglarAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FBurglarAfterBattleText
 	text_end
 
 PokemonMansionB1FScientistBattleText:
-	text_far _PokemonMansionB1FScientistBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FScientistBattleText
 	text_end
 
 PokemonMansionB1FScientistEndBattleText:
-	text_far _PokemonMansionB1FScientistEndBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FScientistEndBattleText
 	text_end
 
 PokemonMansionB1FScientistAfterBattleText:
-	text_far _PokemonMansionB1FScientistAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansionB1FScientistAfterBattleText
 	text_end
 
 PokemonMansionB1FDiaryText:
-	text_far _PokemonMansionB1FDiaryText
+	text_far WLA_GLOBAL_PokemonMansionB1FDiaryText
 	text_end

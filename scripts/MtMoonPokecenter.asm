@@ -15,18 +15,18 @@ MtMoonPokecenterNurseText:
 	script_pokecenter_nurse
 
 MtMoonPokecenterYoungsterText:
-	text_far _MtMoonPokecenterYoungsterText
+	text_far WLA_GLOBAL_MtMoonPokecenterYoungsterText
 	text_end
 
 MtMoonPokecenterGentlemanText:
-	text_far _MtMoonPokecenterGentlemanText
+	text_far WLA_GLOBAL_MtMoonPokecenterGentlemanText
 	text_end
 
 MtMoonPokecenterMagikarpSalesmanText:
 	text_asm
 	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
-	jp c, .alreadyBoughtMagikarp
-	ld hl, .IGotADealText
+	jp c, MtMoonPokecenterMagikarpSalesmanText.alreadyBoughtMagikarp
+	ld hl, MtMoonPokecenterMagikarpSalesmanText.IGotADealText
 	call PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -34,19 +34,19 @@ MtMoonPokecenterMagikarpSalesmanText:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jp nz, .choseNo
-	ldh [hMoney], a
-	ldh [hMoney + 2], a
+	jp nz, MtMoonPokecenterMagikarpSalesmanText.choseNo
+	ldh [lobyte(hMoney)], a
+	ldh [lobyte(hMoney + 2)], a
 	ld a, $5
-	ldh [hMoney + 1], a
+	ldh [lobyte(hMoney + 1)], a
 	call HasEnoughMoney
-	jr nc, .enoughMoney
-	ld hl, .NoMoneyText
-	jr .printText
-.enoughMoney
-	lb bc, MAGIKARP, 5
+	jr nc, MtMoonPokecenterMagikarpSalesmanText.enoughMoney
+	ld hl, MtMoonPokecenterMagikarpSalesmanText.NoMoneyText
+	jr MtMoonPokecenterMagikarpSalesmanText.printText
+MtMoonPokecenterMagikarpSalesmanText.enoughMoney
+	lb "bc", MAGIKARP, 5
 	call GivePokemon
-	jr nc, .done
+	jr nc, MtMoonPokecenterMagikarpSalesmanText.done
 	xor a
 	ld [wPriceTemp], a
 	ld [wPriceTemp + 2], a
@@ -60,35 +60,35 @@ MtMoonPokecenterMagikarpSalesmanText:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	SetEvent EVENT_BOUGHT_MAGIKARP
-	jr .done
-.choseNo
-	ld hl, .NoText
-	jr .printText
-.alreadyBoughtMagikarp
-	ld hl, .NoRefundsText
-.printText
+	jr MtMoonPokecenterMagikarpSalesmanText.done
+MtMoonPokecenterMagikarpSalesmanText.choseNo
+	ld hl, MtMoonPokecenterMagikarpSalesmanText.NoText
+	jr MtMoonPokecenterMagikarpSalesmanText.printText
+MtMoonPokecenterMagikarpSalesmanText.alreadyBoughtMagikarp
+	ld hl, MtMoonPokecenterMagikarpSalesmanText.NoRefundsText
+MtMoonPokecenterMagikarpSalesmanText.printText
 	call PrintText
-.done
+MtMoonPokecenterMagikarpSalesmanText.done
 	jp TextScriptEnd
 
-.IGotADealText
-	text_far _MtMoonPokecenterMagikarpSalesmanIGotADealText
+MtMoonPokecenterMagikarpSalesmanText.IGotADealText
+	text_far WLA_GLOBAL_MtMoonPokecenterMagikarpSalesmanIGotADealText
 	text_end
 
-.NoText
-	text_far _MtMoonPokecenterMagikarpSalesmanNoText
+MtMoonPokecenterMagikarpSalesmanText.NoText
+	text_far WLA_GLOBAL_MtMoonPokecenterMagikarpSalesmanNoText
 	text_end
 
-.NoMoneyText
-	text_far _MtMoonPokecenterMagikarpSalesmanNoMoneyText
+MtMoonPokecenterMagikarpSalesmanText.NoMoneyText
+	text_far WLA_GLOBAL_MtMoonPokecenterMagikarpSalesmanNoMoneyText
 	text_end
 
-.NoRefundsText
-	text_far _MtMoonPokecenterMagikarpSalesmanNoRefundsText
+MtMoonPokecenterMagikarpSalesmanText.NoRefundsText
+	text_far WLA_GLOBAL_MtMoonPokecenterMagikarpSalesmanNoRefundsText
 	text_end
 
 MtMoonPokecenterClipboardText:
-	text_far _MtMoonPokecenterClipboardText
+	text_far WLA_GLOBAL_MtMoonPokecenterClipboardText
 	text_end
 
 MtMoonPokecenterLinkReceptionistText:

@@ -1,28 +1,28 @@
 Route22WildMons:
 	def_grass_wildmons 25 ; encounter rate
-	db  3, RATTATA
-IF DEF(_RED)
-	db  3, NIDORAN_M
-	db  4, RATTATA
-	db  4, NIDORAN_M
-	db  2, RATTATA
-	db  2, NIDORAN_M
-	db  3, SPEAROW
-	db  5, SPEAROW
-	db  3, NIDORAN_F
-	db  4, NIDORAN_F
-ENDC
-IF DEF(_BLUE)
-	db  3, NIDORAN_F
-	db  4, RATTATA
-	db  4, NIDORAN_F
-	db  2, RATTATA
-	db  2, NIDORAN_F
-	db  3, SPEAROW
-	db  5, SPEAROW
-	db  3, NIDORAN_M
-	db  4, NIDORAN_M
-ENDC
+	.DB  3, RATTATA
+.IF defined(_RED)
+	.DB  3, NIDORAN_M
+	.DB  4, RATTATA
+	.DB  4, NIDORAN_M
+	.DB  2, RATTATA
+	.DB  2, NIDORAN_M
+	.DB  3, SPEAROW
+	.DB  5, SPEAROW
+	.DB  3, NIDORAN_F
+	.DB  4, NIDORAN_F
+.ENDIF
+.IF defined(_BLUE)
+	.DB  3, NIDORAN_F
+	.DB  4, RATTATA
+	.DB  4, NIDORAN_F
+	.DB  2, RATTATA
+	.DB  2, NIDORAN_F
+	.DB  3, SPEAROW
+	.DB  5, SPEAROW
+	.DB  3, NIDORAN_M
+	.DB  4, NIDORAN_M
+.ENDIF
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

@@ -1,10 +1,10 @@
-DisplayPokemartDialogue_::
+DisplayPokemartDialogue_:
 	ld a, [wListScrollOffset]
 	ld [wSavedListScrollOffset], a
 	call UpdateSprites
 	xor a
 	ld [wBoughtOrSoldItemInMart], a
-.loop
+DisplayPokemartDialogue_.loop
 	xor a
 	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
@@ -27,15 +27,15 @@ DisplayPokemartDialogue_::
 
 	ld a, [wMenuExitMethod]
 	cp CANCELLED_MENU
-	jp z, .done
+	jp z, DisplayPokemartDialogue_.done
 	ld a, [wChosenMenuItem]
 	and a ; buying?
-	jp z, .buyMenu
+	jp z, DisplayPokemartDialogue_.buyMenu
 	dec a ; selling?
-	jp z, .sellMenu
+	jp z, DisplayPokemartDialogue_.sellMenu
 	dec a ; quitting?
-	jp z, .done
-.sellMenu
+	jp z, DisplayPokemartDialogue_.done
+DisplayPokemartDialogue_.sellMenu
 
 ; the same variables are set again below, so this code has no effect
 	xor a
@@ -46,11 +46,11 @@ DisplayPokemartDialogue_::
 
 	ld a, [wNumBagItems]
 	and a
-	jp z, .bagEmpty
+	jp z, DisplayPokemartDialogue_.bagEmpty
 	ld hl, PokemonSellingGreetingText
 	call PrintText
 	call SaveScreenTilesToBuffer1 ; save screen
-.sellMenuLoop
+DisplayPokemartDialogue_.sellMenuLoop
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -66,60 +66,60 @@ DisplayPokemartDialogue_::
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jp c, .returnToMainPokemartMenu ; if the player closed the menu
-.confirmItemSale ; if the player is trying to sell a specific item
+	jp c, DisplayPokemartDialogue_.returnToMainPokemartMenu ; if the player closed the menu
+DisplayPokemartDialogue_.confirmItemSale ; if the player is trying to sell a specific item
 	call IsKeyItem
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .unsellableItem
+	jr nz, DisplayPokemartDialogue_.unsellableItem
 	ld a, [wCurItem]
 	call IsItemHM
-	jr c, .unsellableItem
+	jr c, DisplayPokemartDialogue_.unsellableItem
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ldh [hHalveItemPrices], a ; halve prices when selling
+	ldh [lobyte(hHalveItemPrices)], a ; halve prices when selling
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, DisplayPokemartDialogue_.sellMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld hl, PokemartTellSellPriceText
-	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
+	lb "bc", 14, 1 ; location that PrintText always prints to, this is useless
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jr z, .sellMenuLoop ; if the player chose No or pressed the B button
+	jr z, DisplayPokemartDialogue_.sellMenuLoop ; if the player chose No or pressed the B button
 
 ; The following code is supposed to check if the player chose No, but the above
 ; check already catches it.
 	ld a, [wChosenMenuItem]
 	dec a
-	jr z, .sellMenuLoop
+	jr z, DisplayPokemartDialogue_.sellMenuLoop
 
 ; sell item
 	ld a, [wBoughtOrSoldItemInMart]
 	and a
-	jr nz, .skipSettingFlag1
+	jr nz, DisplayPokemartDialogue_.skipSettingFlag1
 	inc a
 	ld [wBoughtOrSoldItemInMart], a
-.skipSettingFlag1
+DisplayPokemartDialogue_.skipSettingFlag1
 	call AddAmountSoldToMoney
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
-	jp .sellMenuLoop
-.unsellableItem
+	jp DisplayPokemartDialogue_.sellMenuLoop
+DisplayPokemartDialogue_.unsellableItem
 	ld hl, PokemartUnsellableItemText
 	call PrintText
-	jp .returnToMainPokemartMenu
-.bagEmpty
+	jp DisplayPokemartDialogue_.returnToMainPokemartMenu
+DisplayPokemartDialogue_.bagEmpty
 	ld hl, PokemartItemBagEmptyText
 	call PrintText
 	call SaveScreenTilesToBuffer1
-	jp .returnToMainPokemartMenu
-.buyMenu
+	jp DisplayPokemartDialogue_.returnToMainPokemartMenu
+DisplayPokemartDialogue_.buyMenu
 
 ; the same variables are set again below, so this code has no effect
 	ld a, 1
@@ -131,7 +131,7 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartBuyingGreetingText
 	call PrintText
 	call SaveScreenTilesToBuffer1
-.buyMenuLoop
+DisplayPokemartDialogue_.buyMenuLoop
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -148,14 +148,14 @@ DisplayPokemartDialogue_::
 	inc a ; a = 2 (PRICEDITEMLISTMENU)
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jr c, .returnToMainPokemartMenu ; if the player closed the menu
+	jr c, DisplayPokemartDialogue_.returnToMainPokemartMenu ; if the player closed the menu
 	ld a, 99
 	ld [wMaxItemQuantity], a
 	xor a
-	ldh [hHalveItemPrices], a ; don't halve item prices when buying
+	ldh [lobyte(hHalveItemPrices)], a ; don't halve item prices when buying
 	call DisplayChooseQuantityMenu
 	inc a
-	jr z, .buyMenuLoop ; if the player closed the choose quantity menu with the B button
+	jr z, DisplayPokemartDialogue_.buyMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld a, [wCurItem]
 	ld [wNamedObjectIndex], a
 	call GetItemName
@@ -163,61 +163,61 @@ DisplayPokemartDialogue_::
 	ld hl, PokemartTellBuyPriceText
 	call PrintText
 	hlcoord 14, 7
-	lb bc, 8, 15
+	lb "bc", 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
 	ld a, [wMenuExitMethod]
 	cp CHOSE_SECOND_ITEM
-	jp z, .buyMenuLoop ; if the player chose No or pressed the B button
+	jp z, DisplayPokemartDialogue_.buyMenuLoop ; if the player chose No or pressed the B button
 
 ; The following code is supposed to check if the player chose No, but the above
 ; check already catches it.
 	ld a, [wChosenMenuItem]
 	dec a
-	jr z, .buyMenuLoop
+	jr z, DisplayPokemartDialogue_.buyMenuLoop
 
 ; buy item
-	call .isThereEnoughMoney
-	jr c, .notEnoughMoney
+	call DisplayPokemartDialogue_.isThereEnoughMoney
+	jr c, DisplayPokemartDialogue_.notEnoughMoney
 	ld hl, wNumBagItems
 	call AddItemToInventory
-	jr nc, .bagFull
+	jr nc, DisplayPokemartDialogue_.bagFull
 	call SubtractAmountPaidFromMoney
 	ld a, [wBoughtOrSoldItemInMart]
 	and a
-	jr nz, .skipSettingFlag2
+	jr nz, DisplayPokemartDialogue_.skipSettingFlag2
 	ld a, 1
 	ld [wBoughtOrSoldItemInMart], a
-.skipSettingFlag2
+DisplayPokemartDialogue_.skipSettingFlag2
 	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld hl, PokemartBoughtItemText
 	call PrintText
-	jp .buyMenuLoop
-.returnToMainPokemartMenu
+	jp DisplayPokemartDialogue_.buyMenuLoop
+DisplayPokemartDialogue_.returnToMainPokemartMenu
 	call LoadScreenTilesFromBuffer1
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, PokemartAnythingElseText
 	call PrintText
-	jp .loop
-.isThereEnoughMoney
+	jp DisplayPokemartDialogue_.loop
+DisplayPokemartDialogue_.isThereEnoughMoney
 	ld de, wPlayerMoney
 	ld hl, hMoney
 	ld c, 3 ; length of money in bytes
 	jp StringCmp
-.notEnoughMoney
+DisplayPokemartDialogue_.notEnoughMoney
 	ld hl, PokemartNotEnoughMoneyText
 	call PrintText
-	jr .returnToMainPokemartMenu
-.bagFull
+	jr DisplayPokemartDialogue_.returnToMainPokemartMenu
+DisplayPokemartDialogue_.bagFull
 	ld hl, PokemartItemBagFullText
 	call PrintText
-	jr .returnToMainPokemartMenu
-.done
+	jr DisplayPokemartDialogue_.returnToMainPokemartMenu
+DisplayPokemartDialogue_.done
 	ld hl, PokemartThankYouText
 	call PrintText
 	ld a, 1
@@ -228,45 +228,45 @@ DisplayPokemartDialogue_::
 	ret
 
 PokemartBuyingGreetingText:
-	text_far _PokemartBuyingGreetingText
+	text_far WLA_GLOBAL_PokemartBuyingGreetingText
 	text_end
 
 PokemartTellBuyPriceText:
-	text_far _PokemartTellBuyPriceText
+	text_far WLA_GLOBAL_PokemartTellBuyPriceText
 	text_end
 
 PokemartBoughtItemText:
-	text_far _PokemartBoughtItemText
+	text_far WLA_GLOBAL_PokemartBoughtItemText
 	text_end
 
 PokemartNotEnoughMoneyText:
-	text_far _PokemartNotEnoughMoneyText
+	text_far WLA_GLOBAL_PokemartNotEnoughMoneyText
 	text_end
 
 PokemartItemBagFullText:
-	text_far _PokemartItemBagFullText
+	text_far WLA_GLOBAL_PokemartItemBagFullText
 	text_end
 
 PokemonSellingGreetingText:
-	text_far _PokemonSellingGreetingText
+	text_far WLA_GLOBAL_PokemonSellingGreetingText
 	text_end
 
 PokemartTellSellPriceText:
-	text_far _PokemartTellSellPriceText
+	text_far WLA_GLOBAL_PokemartTellSellPriceText
 	text_end
 
 PokemartItemBagEmptyText:
-	text_far _PokemartItemBagEmptyText
+	text_far WLA_GLOBAL_PokemartItemBagEmptyText
 	text_end
 
 PokemartUnsellableItemText:
-	text_far _PokemartUnsellableItemText
+	text_far WLA_GLOBAL_PokemartUnsellableItemText
 	text_end
 
 PokemartThankYouText:
-	text_far _PokemartThankYouText
+	text_far WLA_GLOBAL_PokemartThankYouText
 	text_end
 
 PokemartAnythingElseText:
-	text_far _PokemartAnythingElseText
+	text_far WLA_GLOBAL_PokemartAnythingElseText
 	text_end

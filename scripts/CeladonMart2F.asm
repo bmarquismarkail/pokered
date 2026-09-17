@@ -10,13 +10,13 @@ CeladonMart2F_TextPointers:
 	dw_const CeladonMart2FCurrentFloorSignText, TEXT_CELADONMART2F_CURRENT_FLOOR_SIGN
 
 CeladonMart2FMiddleAgedManText:
-	text_far _CeladonMart2FMiddleAgedManText
+	text_far WLA_GLOBAL_CeladonMart2FMiddleAgedManText
 	text_end
 
 CeladonMart2FGirlText:
-	text_far _CeladonMart2FGirlText
+	text_far WLA_GLOBAL_CeladonMart2FGirlText
 	text_end
 
 CeladonMart2FCurrentFloorSignText:
-	text_far _CeladonMart2FCurrentFloorSignText
+	text_far WLA_GLOBAL_CeladonMart2FCurrentFloorSignText
 	text_end

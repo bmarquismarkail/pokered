@@ -10,13 +10,11 @@
 	const_export ROUTE21_FISHER4
 
 Route21_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
-
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 0
+	.DB 9
 	object_event  4, 24, SPRITE_FISHER, STAY, LEFT, TEXT_ROUTE21_FISHER1, OPP_FISHER, 7
 	object_event  6, 25, SPRITE_FISHER, STAY, DOWN, TEXT_ROUTE21_FISHER2, OPP_FISHER, 9
 	object_event 10, 31, SPRITE_SWIMMER, STAY, UP, TEXT_ROUTE21_SWIMMER1, OPP_SWIMMER, 12
@@ -26,5 +24,3 @@ Route21_Object:
 	object_event 15, 71, SPRITE_SWIMMER, STAY, LEFT, TEXT_ROUTE21_SWIMMER5, OPP_SWIMMER, 15
 	object_event 14, 56, SPRITE_FISHER, STAY, LEFT, TEXT_ROUTE21_FISHER3, OPP_FISHER, 8
 	object_event 17, 57, SPRITE_FISHER, STAY, RIGHT, TEXT_ROUTE21_FISHER4, OPP_FISHER, 10
-
-	def_warps_to ROUTE_21

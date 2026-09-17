@@ -7,15 +7,14 @@
 	const_export MTMOONPOKECENTER_LINK_RECEPTIONIST
 
 MtMoonPokecenter_Object:
-	db $0 ; border block
+	.DB $0 ; border block
 
-	def_warp_events
+	.DB 2
 	warp_event  3,  7, LAST_MAP, 1
 	warp_event  4,  7, LAST_MAP, 1
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 6
 	object_event  3,  1, SPRITE_NURSE, STAY, DOWN, TEXT_MTMOONPOKECENTER_NURSE
 	object_event  4,  3, SPRITE_YOUNGSTER, STAY, UP, TEXT_MTMOONPOKECENTER_YOUNGSTER
 	object_event  7,  3, SPRITE_GENTLEMAN, STAY, UP, TEXT_MTMOONPOKECENTER_GENTLEMAN
@@ -23,4 +22,6 @@ MtMoonPokecenter_Object:
 	object_event  7,  2, SPRITE_CLIPBOARD, STAY, NONE, TEXT_MTMOONPOKECENTER_CLIPBOARD
 	object_event 11,  2, SPRITE_LINK_RECEPTIONIST, STAY, DOWN, TEXT_MTMOONPOKECENTER_LINK_RECEPTIONIST
 
-	def_warps_to MT_MOON_POKECENTER
+	event_displacement MT_MOON_POKECENTER_WIDTH, 3, 7
+
+	event_displacement MT_MOON_POKECENTER_WIDTH, 4, 7

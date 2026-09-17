@@ -1,4 +1,4 @@
-GiveFossilToCinnabarLab::
+GiveFossilToCinnabarLab:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	xor a
@@ -28,72 +28,72 @@ GiveFossilToCinnabarLab::
 	res BIT_NO_TEXT_DELAY, [hl]
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .cancelledGivingFossil
+	jr nz, GiveFossilToCinnabarLab.cancelledGivingFossil
 	ld hl, wFilteredBagItems
 	ld a, [wCurrentMenuItem]
 	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ldh [hItemToRemoveID], a
+	ldh [lobyte(hItemToRemoveID)], a
 	cp DOME_FOSSIL
-	jr z, .choseDomeFossil
+	jr z, GiveFossilToCinnabarLab.choseDomeFossil
 	cp HELIX_FOSSIL
-	jr z, .choseHelixFossil
+	jr z, GiveFossilToCinnabarLab.choseHelixFossil
 	ld b, AERODACTYL
-	jr .fossilSelected
-.choseHelixFossil
+	jr GiveFossilToCinnabarLab.fossilSelected
+GiveFossilToCinnabarLab.choseHelixFossil
 	ld b, OMANYTE
-	jr .fossilSelected
-.choseDomeFossil
+	jr GiveFossilToCinnabarLab.fossilSelected
+GiveFossilToCinnabarLab.choseDomeFossil
 	ld b, KABUTO
-.fossilSelected
+GiveFossilToCinnabarLab.fossilSelected
 	ld [wFossilItem], a
 	ld a, b
 	ld [wFossilMon], a
 	call LoadFossilItemAndMonName
-	ld hl, .ScientistSeesFossilText
+	ld hl, GiveFossilToCinnabarLab.ScientistSeesFossilText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .cancelledGivingFossil
-	ld hl, .ScientistTakesFossilText
+	jr nz, GiveFossilToCinnabarLab.cancelledGivingFossil
+	ld hl, GiveFossilToCinnabarLab.ScientistTakesFossilText
 	call PrintText
 	ld a, [wFossilItem]
-	ldh [hItemToRemoveID], a
+	ldh [lobyte(hItemToRemoveID)], a
 	farcall RemoveItemByID
-	ld hl, .GoForAWalkText
+	ld hl, GiveFossilToCinnabarLab.GoForAWalkText
 	call PrintText
 	SetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL
 	ret
-.cancelledGivingFossil
-	ld hl, .ComeAgainText
+GiveFossilToCinnabarLab.cancelledGivingFossil
+	ld hl, GiveFossilToCinnabarLab.ComeAgainText
 	call PrintText
 	ret
 
-.ScientistSeesFossilText:
-	text_far _CinnabarLabFossilRoomScientist1SeesFossilText
+GiveFossilToCinnabarLab.ScientistSeesFossilText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1SeesFossilText
 	text_end
 
-.ScientistTakesFossilText:
-	text_far _CinnabarLabFossilRoomScientist1TakesFossilText
+GiveFossilToCinnabarLab.ScientistTakesFossilText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1TakesFossilText
 	text_end
 
-.GoForAWalkText:
-	text_far _CinnabarLabFossilRoomScientist1GoForAWalkText2
+GiveFossilToCinnabarLab.GoForAWalkText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1GoForAWalkText2
 	text_end
 
-.ComeAgainText:
-	text_far _CinnabarLabFossilRoomScientist1ComeAgainText
+GiveFossilToCinnabarLab.ComeAgainText:
+	text_far WLA_GLOBAL_CinnabarLabFossilRoomScientist1ComeAgainText
 	text_end
 
 PrintFossilsInBag:
 ; Prints each fossil in the player's bag on a separate line in the menu.
 	ld hl, wFilteredBagItems
 	xor a
-	ldh [hItemCounter], a
-.loop
+	ldh [lobyte(hItemCounter)], a
+PrintFossilsInBag.loop
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -101,7 +101,7 @@ PrintFossilsInBag:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	hlcoord 2, 2
-	ldh a, [hItemCounter]
+	ldh a, [lobyte(hItemCounter)]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wNameBuffer
@@ -109,10 +109,10 @@ PrintFossilsInBag:
 	ld hl, hItemCounter
 	inc [hl]
 	pop hl
-	jr .loop
+	jr PrintFossilsInBag.loop
 
 ; loads the names of the fossil item and the resulting mon
-LoadFossilItemAndMonName::
+LoadFossilItemAndMonName:
 	ld a, [wFossilMon]
 	ld [wNamedObjectIndex], a
 	call GetMonName

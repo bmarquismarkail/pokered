@@ -1,4 +1,4 @@
-IsPlayerOnDungeonWarp::
+IsPlayerOnDungeonWarp:
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wStatusFlags3]
@@ -15,7 +15,7 @@ IsPlayerOnDungeonWarp::
 	ret
 
 ; if a hidden event was found, stores $00 in [hDidntFindAnyHiddenEvent], else stores $ff
-CheckForHiddenEvent::
+CheckForHiddenEvent:
 	ld hl, hItemAlreadyFound
 	xor a
 	ld [hli], a ; [hItemAlreadyFound]
@@ -24,18 +24,18 @@ CheckForHiddenEvent::
 	ld [hl], a  ; [hDidntFindAnyHiddenEvent]
 	ld de, $0
 	ld hl, HiddenEventMaps
-.hiddenMapLoop
+CheckForHiddenEvent.hiddenMapLoop
 	ld a, [hli]
 	ld b, a
 	cp $ff
-	jr z, .noMatch
+	jr z, CheckForHiddenEvent.noMatch
 	ld a, [wCurMap]
 	cp b
-	jr z, .foundMatchingMap
+	jr z, CheckForHiddenEvent.foundMatchingMap
 	inc de
 	inc de
-	jr .hiddenMapLoop
-.foundMatchingMap
+	jr CheckForHiddenEvent.hiddenMapLoop
+CheckForHiddenEvent.foundMatchingMap
 	ld hl, HiddenEventPointers
 	add hl, de
 	ld a, [hli]
@@ -48,19 +48,19 @@ CheckForHiddenEvent::
 	ld [hli], a
 	ld [hl], a
 	pop hl
-.hiddenEventLoop
+CheckForHiddenEvent.hiddenEventLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .noMatch
+	jr z, CheckForHiddenEvent.noMatch
 	ld [wHiddenEventY], a
 	ld b, a
 	ld a, [hli]
 	ld [wHiddenEventX], a
 	ld c, a
 	call CheckIfCoordsInFrontOfPlayerMatch
-	ldh a, [hCoordsInFrontOfPlayerMatch]
+	ldh a, [lobyte(hCoordsInFrontOfPlayerMatch)]
 	and a
-	jr z, .foundMatchingEvent
+	jr z, CheckForHiddenEvent.foundMatchingEvent
 	inc hl
 	inc hl
 	inc hl
@@ -69,8 +69,8 @@ CheckForHiddenEvent::
 	ld hl, wHiddenEventIndex
 	inc [hl]
 	pop hl
-	jr .hiddenEventLoop
-.foundMatchingEvent
+	jr CheckForHiddenEvent.hiddenEventLoop
+CheckForHiddenEvent.foundMatchingEvent
 	ld a, [hli]
 	ld [wHiddenEventFunctionArgument], a
 	ld a, [hli]
@@ -79,9 +79,9 @@ CheckForHiddenEvent::
 	ld h, [hl]
 	ld l, a
 	ret
-.noMatch
+CheckForHiddenEvent.noMatch
 	ld a, $ff
-	ldh [hDidntFindAnyHiddenEvent], a
+	ldh [lobyte(hDidntFindAnyHiddenEvent)], a
 	ret
 
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
@@ -89,45 +89,45 @@ CheckForHiddenEvent::
 CheckIfCoordsInFrontOfPlayerMatch:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	jr z, .facingUp
+	jr z, CheckIfCoordsInFrontOfPlayerMatch.facingUp
 	cp SPRITE_FACING_LEFT
-	jr z, .facingLeft
+	jr z, CheckIfCoordsInFrontOfPlayerMatch.facingLeft
 	cp SPRITE_FACING_RIGHT
-	jr z, .facingRight
+	jr z, CheckIfCoordsInFrontOfPlayerMatch.facingRight
 ; facing down
 	ld a, [wYCoord]
 	inc a
-	jr .upDownCommon
-.facingUp
+	jr CheckIfCoordsInFrontOfPlayerMatch.upDownCommon
+CheckIfCoordsInFrontOfPlayerMatch.facingUp
 	ld a, [wYCoord]
 	dec a
-.upDownCommon
+CheckIfCoordsInFrontOfPlayerMatch.upDownCommon
 	cp b
-	jr nz, .didNotMatch
+	jr nz, CheckIfCoordsInFrontOfPlayerMatch.didNotMatch
 	ld a, [wXCoord]
 	cp c
-	jr nz, .didNotMatch
-	jr .matched
-.facingLeft
+	jr nz, CheckIfCoordsInFrontOfPlayerMatch.didNotMatch
+	jr CheckIfCoordsInFrontOfPlayerMatch.matched
+CheckIfCoordsInFrontOfPlayerMatch.facingLeft
 	ld a, [wXCoord]
 	dec a
-	jr .leftRightCommon
-.facingRight
+	jr CheckIfCoordsInFrontOfPlayerMatch.leftRightCommon
+CheckIfCoordsInFrontOfPlayerMatch.facingRight
 	ld a, [wXCoord]
 	inc a
-.leftRightCommon
+CheckIfCoordsInFrontOfPlayerMatch.leftRightCommon
 	cp c
-	jr nz, .didNotMatch
+	jr nz, CheckIfCoordsInFrontOfPlayerMatch.didNotMatch
 	ld a, [wYCoord]
 	cp b
-	jr nz, .didNotMatch
-.matched
+	jr nz, CheckIfCoordsInFrontOfPlayerMatch.didNotMatch
+CheckIfCoordsInFrontOfPlayerMatch.matched
 	xor a
-	jr .done
-.didNotMatch
+	jr CheckIfCoordsInFrontOfPlayerMatch.done
+CheckIfCoordsInFrontOfPlayerMatch.didNotMatch
 	ld a, $ff
-.done
-	ldh [hCoordsInFrontOfPlayerMatch], a
+CheckIfCoordsInFrontOfPlayerMatch.done
+	ldh [lobyte(hCoordsInFrontOfPlayerMatch)], a
 	ret
 
-INCLUDE "data/events/hidden_events.asm"
+.INCLUDE "data/events/hidden_events.asm"

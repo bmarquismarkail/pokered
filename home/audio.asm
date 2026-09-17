@@ -1,4 +1,4 @@
-PlayDefaultMusic::
+PlayDefaultMusic:
 	call WaitForSoundToFinish
 	xor a
 	ld c, a
@@ -6,7 +6,7 @@ PlayDefaultMusic::
 	ld [wLastMusicSoundID], a
 	jr PlayDefaultMusicCommon
 
-PlayDefaultMusicFadeOutCurrent::
+PlayDefaultMusicFadeOutCurrent:
 ; Fade out the current music and then play the default music.
 	ld c, 10
 	ld d, 0
@@ -18,47 +18,47 @@ PlayDefaultMusicFadeOutCurrent::
 	ld c, 8
 	ld d, c
 
-PlayDefaultMusicCommon::
+PlayDefaultMusicCommon:
 	ld a, [wWalkBikeSurfState]
 	and a
-	jr z, .walking
+	jr z, PlayDefaultMusicCommon.walking
 	cp $2
-	jr z, .surfing
+	jr z, PlayDefaultMusicCommon.surfing
 	ld a, MUSIC_BIKE_RIDING
-	jr .next
+	jr PlayDefaultMusicCommon.next
 
-.surfing
+PlayDefaultMusicCommon.surfing
 	ld a, MUSIC_SURFING
 
-.next
+PlayDefaultMusicCommon.next
 	ld b, a
 	ld a, d
 	and a ; should current music be faded out first?
-	ld a, BANK(Music_BikeRiding)
-	jr nz, .next2
+	ld a, bank(Music_BikeRiding)
+	jr nz, PlayDefaultMusicCommon.next2
 
 ; Only change the audio ROM bank if the current music isn't going to be faded
 ; out before the default music begins.
 	ld [wAudioROMBank], a
 
-.next2
+PlayDefaultMusicCommon.next2
 ; [wAudioSavedROMBank] will be copied to [wAudioROMBank] after fading out the
 ; current music (if the current music is faded out).
 	ld [wAudioSavedROMBank], a
-	jr .next3
+	jr PlayDefaultMusicCommon.next3
 
-.walking
+PlayDefaultMusicCommon.walking
 	ld a, [wMapMusicSoundID]
 	ld b, a
 	call CompareMapMusicBankWithCurrentBank
-	jr c, .next4
+	jr c, PlayDefaultMusicCommon.next4
 
-.next3
+PlayDefaultMusicCommon.next3
 	ld a, [wLastMusicSoundID]
 	cp b ; is the default music already playing?
 	ret z ; if so, do nothing
 
-.next4
+PlayDefaultMusicCommon.next4
 	ld a, c
 	ld [wAudioFadeOutControl], a
 	ld a, b
@@ -66,40 +66,40 @@ PlayDefaultMusicCommon::
 	ld [wNewSoundID], a
 	jp PlaySound
 
-UpdateMusic6Times::
+UpdateMusic6Times:
 ; This is called when entering a map, before fading out the current music and
 ; playing the default music (i.e. the map's music or biking/surfing music).
 	ld a, [wAudioROMBank]
 	ld b, a
-	cp BANK(Audio1_UpdateMusic)
-	jr nz, .checkForAudio2
+	cp bank(Audio1_UpdateMusic)
+	jr nz, UpdateMusic6Times.checkForAudio2
 ; audio 1
 	ld hl, Audio1_UpdateMusic
-	jr .next
+	jr UpdateMusic6Times.next
 
-.checkForAudio2
-	cp BANK(Audio2_UpdateMusic)
-	jr nz, .audio3
+UpdateMusic6Times.checkForAudio2
+	cp bank(Audio2_UpdateMusic)
+	jr nz, UpdateMusic6Times.audio3
 ; audio 2
 	ld hl, Audio2_UpdateMusic
-	jr .next
+	jr UpdateMusic6Times.next
 
-.audio3
+UpdateMusic6Times.audio3
 	ld hl, Audio3_UpdateMusic
 
-.next
+UpdateMusic6Times.next
 	ld c, 6
-.loop
+UpdateMusic6Times.loop
 	push bc
 	push hl
 	call Bankswitch
 	pop hl
 	pop bc
 	dec c
-	jr nz, .loop
+	jr nz, UpdateMusic6Times.loop
 	ret
 
-CompareMapMusicBankWithCurrentBank::
+CompareMapMusicBankWithCurrentBank:
 ; Compares the map music's audio ROM bank with the current audio ROM bank
 ; and updates the audio ROM bank variables.
 ; Returns whether the banks are different in carry.
@@ -107,26 +107,26 @@ CompareMapMusicBankWithCurrentBank::
 	ld e, a
 	ld a, [wAudioROMBank]
 	cp e
-	jr nz, .differentBanks
+	jr nz, CompareMapMusicBankWithCurrentBank.differentBanks
 	ld [wAudioSavedROMBank], a
 	and a
 	ret
-.differentBanks
+CompareMapMusicBankWithCurrentBank.differentBanks
 	ld a, c ; this is a fade-out counter value and it's always non-zero
 	and a
 	ld a, e
-	jr nz, .next
+	jr nz, CompareMapMusicBankWithCurrentBank.next
 ; If the fade-counter is non-zero, we don't change the audio ROM bank because
 ; it's needed to keep playing the music as it fades out. The FadeOutAudio
 ; routine will take care of copying [wAudioSavedROMBank] to [wAudioROMBank]
 ; when the music has faded out.
 	ld [wAudioROMBank], a
-.next
+CompareMapMusicBankWithCurrentBank.next
 	ld [wAudioSavedROMBank], a
 	scf
 	ret
 
-PlayMusic::
+PlayMusic:
 	ld b, a
 	ld [wNewSoundID], a
 	xor a
@@ -137,68 +137,68 @@ PlayMusic::
 	ld a, b
 
 ; plays music specified by a. If value is $ff, music is stopped
-PlaySound::
+PlaySound:
 	push hl
 	push de
 	push bc
 	ld b, a
 	ld a, [wNewSoundID]
 	and a
-	jr z, .next
+	jr z, PlaySound.next
 	xor a
 	ld [wChannelSoundIDs + CHAN5], a
 	ld [wChannelSoundIDs + CHAN6], a
 	ld [wChannelSoundIDs + CHAN7], a
 	ld [wChannelSoundIDs + CHAN8], a
-.next
+PlaySound.next
 	ld a, [wAudioFadeOutControl]
 	and a ; has a fade-out length been specified?
-	jr z, .noFadeOut
+	jr z, PlaySound.noFadeOut
 	ld a, [wNewSoundID]
 	and a ; is the new sound ID 0?
-	jr z, .done ; if so, do nothing
+	jr z, PlaySound.done ; if so, do nothing
 	xor a
 	ld [wNewSoundID], a
 	ld a, [wLastMusicSoundID]
 	cp $ff ; has the music been stopped?
-	jr nz, .fadeOut ; if not, fade out the current music
+	jr nz, PlaySound.fadeOut ; if not, fade out the current music
 ; If it has been stopped, start playing the new music immediately.
 	xor a
 	ld [wAudioFadeOutControl], a
-.noFadeOut
+PlaySound.noFadeOut
 	xor a
 	ld [wNewSoundID], a
-	ldh a, [hLoadedROMBank]
-	ldh [hSavedROMBank], a
+	ldh a, [lobyte(hLoadedROMBank)]
+	ldh [lobyte(hSavedROMBank)], a
 	ld a, [wAudioROMBank]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-	cp BANK(Audio1_PlaySound)
-	jr nz, .checkForAudio2
+	cp bank(Audio1_PlaySound)
+	jr nz, PlaySound.checkForAudio2
 ; audio 1
 	ld a, b
 	call Audio1_PlaySound
-	jr .next2
+	jr PlaySound.next2
 
-.checkForAudio2
-	cp BANK(Audio2_PlaySound)
-	jr nz, .audio3
+PlaySound.checkForAudio2
+	cp bank(Audio2_PlaySound)
+	jr nz, PlaySound.audio3
 ; audio 2
 	ld a, b
 	call Audio2_PlaySound
-	jr .next2
+	jr PlaySound.next2
 
-.audio3
+PlaySound.audio3
 	ld a, b
 	call Audio3_PlaySound
 
-.next2
-	ldh a, [hSavedROMBank]
-	ldh [hLoadedROMBank], a
+PlaySound.next2
+	ldh a, [lobyte(hSavedROMBank)]
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-	jr .done
+	jr PlaySound.done
 
-.fadeOut
+PlaySound.fadeOut
 	ld a, b
 	ld [wLastMusicSoundID], a
 	ld a, [wAudioFadeOutControl]
@@ -207,7 +207,7 @@ PlaySound::
 	ld a, b
 	ld [wAudioFadeOutControl], a
 
-.done
+PlaySound.done
 	pop bc
 	pop de
 	pop hl

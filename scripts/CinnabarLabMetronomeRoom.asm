@@ -12,51 +12,51 @@ CinnabarLabMetronomeRoom_TextPointers:
 CinnabarLabMetronomeRoomScientist1Text:
 	text_asm
 	CheckEvent EVENT_GOT_TM35
-	jr nz, .got_item
-	ld hl, .Text
+	jr nz, CinnabarLabMetronomeRoomScientist1Text.got_item
+	ld hl, CinnabarLabMetronomeRoomScientist1Text.Text
 	call PrintText
-	lb bc, TM_METRONOME, 1
+	lb "bc", TM_METRONOME, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedTM35Text
+	jr nc, CinnabarLabMetronomeRoomScientist1Text.bag_full
+	ld hl, CinnabarLabMetronomeRoomScientist1Text.ReceivedTM35Text
 	call PrintText
 	SetEvent EVENT_GOT_TM35
-	jr .done
-.bag_full
-	ld hl, .TM35NoRoomText
+	jr CinnabarLabMetronomeRoomScientist1Text.done
+CinnabarLabMetronomeRoomScientist1Text.bag_full
+	ld hl, CinnabarLabMetronomeRoomScientist1Text.TM35NoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .TM35ExplanationText
+	jr CinnabarLabMetronomeRoomScientist1Text.done
+CinnabarLabMetronomeRoomScientist1Text.got_item
+	ld hl, CinnabarLabMetronomeRoomScientist1Text.TM35ExplanationText
 	call PrintText
-.done
+CinnabarLabMetronomeRoomScientist1Text.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _CinnabarLabMetronomeRoomScientist1Text
+CinnabarLabMetronomeRoomScientist1Text.Text:
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1Text
 	text_end
 
-.ReceivedTM35Text:
-	text_far _CinnabarLabMetronomeRoomScientist1ReceivedTM35Text
+CinnabarLabMetronomeRoomScientist1Text.ReceivedTM35Text:
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1ReceivedTM35Text
 	sound_get_item_1
 	text_end
 
-.TM35ExplanationText:
-	text_far _CinnabarLabMetronomeRoomScientist1TM35ExplanationText
+CinnabarLabMetronomeRoomScientist1Text.TM35ExplanationText:
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1TM35ExplanationText
 	text_end
 
-.TM35NoRoomText:
-	text_far _CinnabarLabMetronomeRoomScientist1TM35NoRoomText
+CinnabarLabMetronomeRoomScientist1Text.TM35NoRoomText:
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomScientist1TM35NoRoomText
 	text_end
 
 CinnabarLabMetronomeRoomScientist2Text:
-	text_far _CinnabarLabMetronomeRoomScientist2Text
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomScientist2Text
 	text_end
 
 CinnabarLabMetronomeRoomPCText:
-	text_far _CinnabarLabMetronomeRoomPCText
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomPCText
 	text_end
 
 CinnabarLabMetronomeRoomAmberPipeText:
-	text_far _CinnabarLabMetronomeRoomAmberPipeText
+	text_far WLA_GLOBAL_CinnabarLabMetronomeRoomAmberPipeText
 	text_end

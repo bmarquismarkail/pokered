@@ -8,5 +8,5 @@ UndergroundPathRoute6_TextPointers:
 	dw_const UndergroundPathRoute6GirlText, TEXT_UNDERGROUNDPATHROUTE6_GIRL
 
 UndergroundPathRoute6GirlText:
-	text_far _UndergroundPathRoute6GirlText
+	text_far WLA_GLOBAL_UndergroundPathRoute6GirlText
 	text_end

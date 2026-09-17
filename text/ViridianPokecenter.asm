@@ -1,4 +1,5 @@
-_ViridianPokecenterGentlemanText::
+_ViridianPokecenterGentlemanText:
+WLA_GLOBAL_ViridianPokecenterGentlemanText:
 	text "You can use that"
 	line "PC in the corner."
 
@@ -6,7 +7,8 @@ _ViridianPokecenterGentlemanText::
 	line "told me. So kind!"
 	done
 
-_ViridianPokecenterCooltrainerMText::
+_ViridianPokecenterCooltrainerMText:
+WLA_GLOBAL_ViridianPokecenterCooltrainerMText:
 	text "There's a #MON"
 	line "CENTER in every"
 	cont "town ahead."

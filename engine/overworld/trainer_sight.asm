@@ -1,27 +1,29 @@
-_GetSpritePosition1::
+_GetSpritePosition1:
+WLA_GLOBAL_GetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, SPRITESTATEDATA1_YPIXELS
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; x#SPRITESTATEDATA1_YPIXELS
-	ldh [hSpriteScreenYCoord], a
+	ldh [lobyte(hSpriteScreenYCoord)], a
 	inc hl
 	ld a, [hl] ; x#SPRITESTATEDATA1_XPIXELS
-	ldh [hSpriteScreenXCoord], a
+	ldh [lobyte(hSpriteScreenXCoord)], a
 	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [hli] ; x#SPRITESTATEDATA2_MAPY
-	ldh [hSpriteMapYCoord], a
+	ldh [lobyte(hSpriteMapYCoord)], a
 	ld a, [hl] ; x#SPRITESTATEDATA2_MAPX
-	ldh [hSpriteMapXCoord], a
+	ldh [lobyte(hSpriteMapXCoord)], a
 	ret
 
-_GetSpritePosition2::
+_GetSpritePosition2:
+WLA_GLOBAL_GetSpritePosition2:
 	ld hl, wSpriteStateData1
 	ld de, SPRITESTATEDATA1_YPIXELS
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; x#SPRITESTATEDATA1_YPIXELS
 	ld [wSavedSpriteScreenY], a
@@ -36,30 +38,32 @@ _GetSpritePosition2::
 	ld [wSavedSpriteMapX], a
 	ret
 
-_SetSpritePosition1::
+_SetSpritePosition1:
+WLA_GLOBAL_SetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, SPRITESTATEDATA1_YPIXELS
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call GetSpriteDataPointer
-	ldh a, [hSpriteScreenYCoord] ; x#SPRITESTATEDATA1_YPIXELS
+	ldh a, [lobyte(hSpriteScreenYCoord)] ; x#SPRITESTATEDATA1_YPIXELS
 	ld [hli], a
 	inc hl
-	ldh a, [hSpriteScreenXCoord] ; x#SPRITESTATEDATA1_XPIXELS
+	ldh a, [lobyte(hSpriteScreenXCoord)] ; x#SPRITESTATEDATA1_XPIXELS
 	ld [hl], a
 	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
-	ldh a, [hSpriteMapYCoord] ; x#SPRITESTATEDATA2_MAPY
+	ldh a, [lobyte(hSpriteMapYCoord)] ; x#SPRITESTATEDATA2_MAPY
 	ld [hli], a
-	ldh a, [hSpriteMapXCoord] ; x#SPRITESTATEDATA2_MAPX
+	ldh a, [lobyte(hSpriteMapXCoord)] ; x#SPRITESTATEDATA2_MAPX
 	ld [hl], a
 	ret
 
-_SetSpritePosition2::
+_SetSpritePosition2:
+WLA_GLOBAL_SetSpritePosition2:
 	ld hl, wSpriteStateData1
 	ld de, SPRITESTATEDATA1_YPIXELS
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call GetSpriteDataPointer
 	ld a, [wSavedSpriteScreenY]
 	ld [hli], a ; x#SPRITESTATEDATA1_YPIXELS
@@ -74,20 +78,20 @@ _SetSpritePosition2::
 	ld [hl], a ; x#SPRITESTATEDATA2_MAPX
 	ret
 
-TrainerWalkUpToPlayer::
+TrainerWalkUpToPlayer:
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a
 	call ReadTrainerScreenPosition
 	ld a, [wTrainerFacingDirection]
 	and a ; SPRITE_FACING_DOWN
-	jr z, .facingDown
+	jr z, TrainerWalkUpToPlayer.facingDown
 	cp SPRITE_FACING_UP
-	jr z, .facingUp
+	jr z, TrainerWalkUpToPlayer.facingUp
 	cp SPRITE_FACING_LEFT
-	jr z, .facingLeft
-	jr .facingRight
-.facingDown
+	jr z, TrainerWalkUpToPlayer.facingLeft
+	jr TrainerWalkUpToPlayer.facingRight
+TrainerWalkUpToPlayer.facingDown
 	ld a, [wTrainerScreenY]
 	ld b, a
 	ld a, $3c           ; (fixed) player screen Y pos
@@ -99,8 +103,8 @@ TrainerWalkUpToPlayer::
 	ld c, a             ; bc = steps yet to go to reach player
 	xor a ; NPC_MOVEMENT_DOWN
 	ld b, a
-	jr .writeWalkScript
-.facingUp
+	jr TrainerWalkUpToPlayer.writeWalkScript
+TrainerWalkUpToPlayer.facingUp
 	ld a, [wTrainerScreenY]
 	ld b, a
 	ld a, $3c           ; (fixed) player screen Y pos
@@ -112,8 +116,8 @@ TrainerWalkUpToPlayer::
 	ld c, a             ; bc = steps yet to go to reach player
 	ld b, $0
 	ld a, NPC_MOVEMENT_UP
-	jr .writeWalkScript
-.facingRight
+	jr TrainerWalkUpToPlayer.writeWalkScript
+TrainerWalkUpToPlayer.facingRight
 	ld a, [wTrainerScreenX]
 	ld b, a
 	ld a, $40           ; (fixed) player screen X pos
@@ -125,8 +129,8 @@ TrainerWalkUpToPlayer::
 	ld c, a             ; bc = steps yet to go to reach player
 	ld b, $0
 	ld a, NPC_MOVEMENT_RIGHT
-	jr .writeWalkScript
-.facingLeft
+	jr TrainerWalkUpToPlayer.writeWalkScript
+TrainerWalkUpToPlayer.facingLeft
 	ld a, [wTrainerScreenX]
 	ld b, a
 	ld a, $40           ; (fixed) player screen X pos
@@ -138,13 +142,13 @@ TrainerWalkUpToPlayer::
 	ld c, a             ; bc = steps yet to go to reach player
 	ld b, $0
 	ld a, NPC_MOVEMENT_LEFT
-.writeWalkScript
+TrainerWalkUpToPlayer.writeWalkScript
 	ld hl, wNPCMovementDirections2
 	ld de, wNPCMovementDirections2
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
@@ -152,7 +156,7 @@ TrainerWalkUpToPlayer::
 GetSpriteDataPointer:
 	push de
 	add hl, de
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	swap a
 	ld d, $0
 	ld e, a
@@ -172,9 +176,9 @@ TrainerEngage:
 	add hl, de
 	ld a, [hl]             ; x#SPRITESTATEDATA1_IMAGEINDEX
 	sub $ff
-	jr nz, .spriteOnScreen ; test if sprite is on screen
-	jp .noEngage
-.spriteOnScreen
+	jr nz, TrainerEngage.spriteOnScreen ; test if sprite is on screen
+	jp TrainerEngage.noEngage
+TrainerEngage.spriteOnScreen
 	ld a, [wTrainerSpriteOffset]
 	add SPRITESTATEDATA1_FACINGDIRECTION
 	ld d, $0
@@ -188,44 +192,44 @@ TrainerEngage:
 	ld b, a
 	ld a, $3c
 	cp b
-	jr z, .linedUpY
+	jr z, TrainerEngage.linedUpY
 	ld a, [wTrainerScreenX]          ; sprite screen X pos
 	ld b, a
 	ld a, $40
 	cp b
-	jr z, .linedUpX
+	jr z, TrainerEngage.linedUpX
 	xor a
-	jp .noEngage
-.linedUpY
+	jp TrainerEngage.noEngage
+TrainerEngage.linedUpY
 	ld a, [wTrainerScreenX]        ; sprite screen X pos
 	ld b, a
 	ld a, $40            ; (fixed) player X position
 	call CalcDifference  ; calc distance
-	jr z, .noEngage      ; exact same position as player
+	jr z, TrainerEngage.noEngage      ; exact same position as player
 	call CheckSpriteCanSeePlayer
-	jr c, .engage
+	jr c, TrainerEngage.engage
 	xor a
-	jr .noEngage
-.linedUpX
+	jr TrainerEngage.noEngage
+TrainerEngage.linedUpX
 	ld a, [wTrainerScreenY]        ; sprite screen Y pos
 	ld b, a
 	ld a, $3c            ; (fixed) player Y position
 	call CalcDifference  ; calc distance
-	jr z, .noEngage      ; exact same position as player
+	jr z, TrainerEngage.noEngage      ; exact same position as player
 	call CheckSpriteCanSeePlayer
-	jr c, .engage
+	jr c, TrainerEngage.engage
 	xor a
-	jp .noEngage
-.engage
+	jp TrainerEngage.noEngage
+TrainerEngage.engage
 	call CheckPlayerIsInFrontOfSprite
 	ld a, [wTrainerSpriteOffset]
 	and a
-	jr z, .noEngage
+	jr z, TrainerEngage.noEngage
 	ld hl, wMiscFlags
 	set BIT_SEEN_BY_TRAINER, [hl]
 	call EngageMapTrainer
 	ld a, $ff
-.noEngage
+TrainerEngage.noEngage
 	ld [wTrainerSpriteOffset], a
 	pop de
 	pop hl
@@ -258,34 +262,34 @@ CheckSpriteCanSeePlayer:
 	ld b, a
 	ld a, [wTrainerEngageDistance] ; how far the trainer can see
 	cp b
-	jr nc, .checkIfLinedUp
-	jr .notInLine         ; player too far away
-.checkIfLinedUp
+	jr nc, CheckSpriteCanSeePlayer.checkIfLinedUp
+	jr CheckSpriteCanSeePlayer.notInLine         ; player too far away
+CheckSpriteCanSeePlayer.checkIfLinedUp
 	ld a, [wTrainerFacingDirection]         ; sprite facing direction
 	cp SPRITE_FACING_DOWN
-	jr z, .checkXCoord
+	jr z, CheckSpriteCanSeePlayer.checkXCoord
 	cp SPRITE_FACING_UP
-	jr z, .checkXCoord
+	jr z, CheckSpriteCanSeePlayer.checkXCoord
 	cp SPRITE_FACING_LEFT
-	jr z, .checkYCoord
+	jr z, CheckSpriteCanSeePlayer.checkYCoord
 	cp SPRITE_FACING_RIGHT
-	jr z, .checkYCoord
-	jr .notInLine
-.checkXCoord
+	jr z, CheckSpriteCanSeePlayer.checkYCoord
+	jr CheckSpriteCanSeePlayer.notInLine
+CheckSpriteCanSeePlayer.checkXCoord
 	ld a, [wTrainerScreenX]         ; sprite screen X position
 	ld b, a
 	cp $40
-	jr z, .inLine
-	jr .notInLine
-.checkYCoord
+	jr z, CheckSpriteCanSeePlayer.inLine
+	jr CheckSpriteCanSeePlayer.notInLine
+CheckSpriteCanSeePlayer.checkYCoord
 	ld a, [wTrainerScreenY]         ; sprite screen Y position
 	ld b, a
 	cp $3c
-	jr nz, .notInLine
-.inLine
+	jr nz, CheckSpriteCanSeePlayer.notInLine
+CheckSpriteCanSeePlayer.inLine
 	scf
 	ret
-.notInLine
+CheckSpriteCanSeePlayer.notInLine
 	and a
 	ret
 
@@ -293,7 +297,7 @@ CheckSpriteCanSeePlayer:
 CheckPlayerIsInFrontOfSprite:
 	ld a, [wCurMap]
 	cp POWER_PLANT
-	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work
+	jp z, CheckPlayerIsInFrontOfSprite.engage       ; bypass this for power plant to get voltorb fake items to work
 	ld a, [wTrainerSpriteOffset]
 	add SPRITESTATEDATA1_YPIXELS
 	ld d, $0
@@ -302,9 +306,9 @@ CheckPlayerIsInFrontOfSprite:
 	add hl, de
 	ld a, [hl]          ; x#SPRITESTATEDATA1_YPIXELS
 	cp $fc
-	jr nz, .notOnTopmostTile ; special case if sprite is on topmost tile (Y = $fc (-4)), make it come down a block
+	jr nz, CheckPlayerIsInFrontOfSprite.notOnTopmostTile ; special case if sprite is on topmost tile (Y = $fc (-4)), make it come down a block
 	ld a, $c
-.notOnTopmostTile
+CheckPlayerIsInFrontOfSprite.notOnTopmostTile
 	ld [wTrainerScreenY], a
 	ld a, [wTrainerSpriteOffset]
 	add SPRITESTATEDATA1_XPIXELS
@@ -316,34 +320,34 @@ CheckPlayerIsInFrontOfSprite:
 	ld [wTrainerScreenX], a
 	ld a, [wTrainerFacingDirection]       ; facing direction
 	cp SPRITE_FACING_DOWN
-	jr nz, .notFacingDown
+	jr nz, CheckPlayerIsInFrontOfSprite.notFacingDown
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
-	jr c, .engage       ; sprite above player
-	jr .noEngage        ; sprite below player
-.notFacingDown
+	jr c, CheckPlayerIsInFrontOfSprite.engage       ; sprite above player
+	jr CheckPlayerIsInFrontOfSprite.noEngage        ; sprite below player
+CheckPlayerIsInFrontOfSprite.notFacingDown
 	cp SPRITE_FACING_UP
-	jr nz, .notFacingUp
+	jr nz, CheckPlayerIsInFrontOfSprite.notFacingUp
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
-	jr nc, .engage      ; sprite below player
-	jr .noEngage        ; sprite above player
-.notFacingUp
+	jr nc, CheckPlayerIsInFrontOfSprite.engage      ; sprite below player
+	jr CheckPlayerIsInFrontOfSprite.noEngage        ; sprite above player
+CheckPlayerIsInFrontOfSprite.notFacingUp
 	cp SPRITE_FACING_LEFT
-	jr nz, .notFacingLeft
+	jr nz, CheckPlayerIsInFrontOfSprite.notFacingLeft
 	ld a, [wTrainerScreenX]       ; sprite screen X pos
 	cp $40
-	jr nc, .engage      ; sprite right of player
-	jr .noEngage        ; sprite left of player
-.notFacingLeft
+	jr nc, CheckPlayerIsInFrontOfSprite.engage      ; sprite right of player
+	jr CheckPlayerIsInFrontOfSprite.noEngage        ; sprite left of player
+CheckPlayerIsInFrontOfSprite.notFacingLeft
 	ld a, [wTrainerScreenX]       ; sprite screen X pos
 	cp $40
-	jr nc, .noEngage    ; sprite right of player
-.engage
+	jr nc, CheckPlayerIsInFrontOfSprite.noEngage    ; sprite right of player
+CheckPlayerIsInFrontOfSprite.engage
 	ld a, $ff
-	jr .done
-.noEngage
+	jr CheckPlayerIsInFrontOfSprite.done
+CheckPlayerIsInFrontOfSprite.noEngage
 	xor a
-.done
+CheckPlayerIsInFrontOfSprite.done
 	ld [wTrainerSpriteOffset], a
 	ret

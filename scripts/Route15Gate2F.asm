@@ -9,11 +9,11 @@ Route15Gate2F_TextPointers:
 Route15Gate2FOaksAideText:
 	text_asm
 	CheckEvent EVENT_GOT_EXP_ALL
-	jr nz, .got_item
+	jr nz, Route15Gate2FOaksAideText.got_item
 	ld a, 50
-	ldh [hOaksAideRequirement], a
+	ldh [lobyte(hOaksAideRequirement)], a
 	ld a, EXP_ALL
-	ldh [hOaksAideRewardItem], a
+	ldh [lobyte(hOaksAideRewardItem)], a
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	ld hl, wNameBuffer
@@ -21,25 +21,25 @@ Route15Gate2FOaksAideText:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ldh a, [hOaksAideResult]
+	ldh a, [lobyte(hOaksAideResult)]
 	cp OAKS_AIDE_GOT_ITEM
-	jr nz, .no_item
+	jr nz, Route15Gate2FOaksAideText.no_item
 	SetEvent EVENT_GOT_EXP_ALL
-.got_item
-	ld hl, .ExpAllText
+Route15Gate2FOaksAideText.got_item
+	ld hl, Route15Gate2FOaksAideText.ExpAllText
 	call PrintText
-.no_item
+Route15Gate2FOaksAideText.no_item
 	jp TextScriptEnd
 
-.ExpAllText:
-	text_far _Route15Gate2FOaksAideExpAllText
+Route15Gate2FOaksAideText.ExpAllText:
+	text_far WLA_GLOBAL_Route15Gate2FOaksAideExpAllText
 	text_end
 
 Route15Gate2FBinocularsText:
 	text_asm
-	ld hl, .Text
+	ld hl, Route15Gate2FBinocularsText.Text
 	jp GateUpstairsScript_PrintIfFacingUp
 
-.Text:
-	text_far _Route15Gate2FBinocularsText
+Route15Gate2FBinocularsText.Text:
+	text_far WLA_GLOBAL_Route15Gate2FBinocularsText
 	text_end

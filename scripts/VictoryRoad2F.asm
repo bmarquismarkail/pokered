@@ -20,17 +20,17 @@ VictoryRoad2FResetBoulderEventScript:
 ; fallthrough
 VictoryRoad2FCheckBoulderEventScript:
 	CheckEvent EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
-	jr z, .not_on_switch
+	jr z, VictoryRoad2FCheckBoulderEventScript.not_on_switch
 	push af
 	ld a, $15
-	lb bc, 4, 3
+	lb "bc", 4, 3
 	call VictoryRoad2FReplaceTileBlockScript
 	pop af
-.not_on_switch
+VictoryRoad2FCheckBoulderEventScript.not_on_switch
 	CheckEventReuseA EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ret z
 	ld a, $1d
-	lb bc, 7, 11
+	lb "bc", 7, 11
 VictoryRoad2FReplaceTileBlockScript:
 	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
@@ -43,30 +43,30 @@ VictoryRoad2F_ScriptPointers:
 	dw_const EndTrainerBattle,                      SCRIPT_VICTORYROAD2F_END_BATTLE
 
 VictoryRoad2FDefaultScript:
-	ld hl, .SwitchCoords
+	ld hl, VictoryRoad2FDefaultScript.SwitchCoords
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
-	EventFlagAddress hl, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
+	EventFlagAddress "hl", EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	ld a, [wCoordIndex]
 	cp $2
-	jr z, .second_switch
+	jr z, VictoryRoad2FDefaultScript.second_switch
 	CheckEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	SetEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	ret nz
-	jr .set_script_flag
-.second_switch
+	jr VictoryRoad2FDefaultScript.set_script_flag
+VictoryRoad2FDefaultScript.second_switch
 	CheckEventAfterBranchReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	SetEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ret nz
-.set_script_flag
+VictoryRoad2FDefaultScript.set_script_flag
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	ret
 
-.SwitchCoords:
+VictoryRoad2FDefaultScript.SwitchCoords:
 	dbmapcoord  1, 16
 	dbmapcoord  9, 16
-	db -1 ; end
+	.DB -1 ; end
 
 VictoryRoad2F_TextPointers:
 	def_text_pointers
@@ -98,7 +98,7 @@ VictoryRoad2TrainerHeader4:
 	trainer EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4, 3, VictoryRoad2FSuperNerd3BattleText, VictoryRoad2FSuperNerd3EndBattleText, VictoryRoad2FSuperNerd3AfterBattleText
 MoltresTrainerHeader:
 	trainer EVENT_BEAT_MOLTRES, 0, VictoryRoad2FMoltresBattleText, VictoryRoad2FMoltresBattleText, VictoryRoad2FMoltresBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 VictoryRoad2FHikerText:
 	text_asm
@@ -137,7 +137,7 @@ VictoryRoad2FMoltresText:
 	jp TextScriptEnd
 
 VictoryRoad2FMoltresBattleText:
-	text_far _VictoryRoad2FMoltresBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FMoltresBattleText
 	text_asm
 	ld a, MOLTRES
 	call PlayCry
@@ -145,61 +145,61 @@ VictoryRoad2FMoltresBattleText:
 	jp TextScriptEnd
 
 VictoryRoad2FHikerBattleText:
-	text_far _VictoryRoad2FHikerBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FHikerBattleText
 	text_end
 
 VictoryRoad2FHikerEndBattleText:
-	text_far _VictoryRoad2FHikerEndBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FHikerEndBattleText
 	text_end
 
 VictoryRoad2FHikerAfterBattleText:
-	text_far _VictoryRoad2FHikerAfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FHikerAfterBattleText
 	text_end
 
 VictoryRoad2FSuperNerd1BattleText:
-	text_far _VictoryRoad2FSuperNerd1BattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd1BattleText
 	text_end
 
 VictoryRoad2FSuperNerd1EndBattleText:
-	text_far _VictoryRoad2FSuperNerd1EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd1EndBattleText
 	text_end
 
 VictoryRoad2FSuperNerd1AfterBattleText:
-	text_far _VictoryRoad2FSuperNerd1AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd1AfterBattleText
 	text_end
 
 VictoryRoad2FCooltrainerMBattleText:
-	text_far _VictoryRoad2FCooltrainerMBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FCooltrainerMBattleText
 	text_end
 
 VictoryRoad2FCooltrainerMEndBattleText:
-	text_far _VictoryRoad2FCooltrainerMEndBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FCooltrainerMEndBattleText
 	text_end
 
 VictoryRoad2FCooltrainerMAfterBattleText:
-	text_far _VictoryRoad2FCooltrainerMAfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FCooltrainerMAfterBattleText
 	text_end
 
 VictoryRoad2FSuperNerd2BattleText:
-	text_far _VictoryRoad2FSuperNerd2BattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd2BattleText
 	text_end
 
 VictoryRoad2FSuperNerd2EndBattleText:
-	text_far _VictoryRoad2FSuperNerd2EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd2EndBattleText
 	text_end
 
 VictoryRoad2FSuperNerd2AfterBattleText:
-	text_far _VictoryRoad2FSuperNerd2AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd2AfterBattleText
 	text_end
 
 VictoryRoad2FSuperNerd3BattleText:
-	text_far _VictoryRoad2FSuperNerd3BattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd3BattleText
 	text_end
 
 VictoryRoad2FSuperNerd3EndBattleText:
-	text_far _VictoryRoad2FSuperNerd3EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd3EndBattleText
 	text_end
 
 VictoryRoad2FSuperNerd3AfterBattleText:
-	text_far _VictoryRoad2FSuperNerd3AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad2FSuperNerd3AfterBattleText
 	text_end

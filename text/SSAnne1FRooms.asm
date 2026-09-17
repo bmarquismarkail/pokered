@@ -1,9 +1,11 @@
-_SSAnne1FRoomsWigglytuffText::
+_SSAnne1FRoomsWigglytuffText:
+WLA_GLOBAL_SSAnne1FRoomsWigglytuffText:
 	text "WIGGLYTUFF: Puup"
 	line "pupuu!@"
 	text_end
 
-_SSAnne1FRoomsGentleman1BattleText::
+_SSAnne1FRoomsGentleman1BattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman1BattleText:
 	text "I travel alone"
 	line "on my journeys!"
 
@@ -11,42 +13,50 @@ _SSAnne1FRoomsGentleman1BattleText::
 	line "only friends!"
 	done
 
-_SSAnne1FRoomsGentleman1EndBattleText::
+_SSAnne1FRoomsGentleman1EndBattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman1EndBattleText:
 	text "My, my"
 	line "friends..."
 	prompt
 
-_SSAnne1FRoomsGentleman1AfterBattleText::
+_SSAnne1FRoomsGentleman1AfterBattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman1AfterBattleText:
 	text "You should be"
 	line "nice to friends!"
 	done
 
-_SSAnne1FRoomsGentleman2BattleText::
+_SSAnne1FRoomsGentleman2BattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman2BattleText:
 	text "You pup! How dare"
 	line "you barge in!"
 	done
 
-_SSAnne1FRoomsGentleman2EndBattleText::
+_SSAnne1FRoomsGentleman2EndBattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman2EndBattleText:
 	text "Humph!"
 	line "You rude child!"
 	prompt
 
-_SSAnne1FRoomsGentleman2AfterBattleText::
+_SSAnne1FRoomsGentleman2AfterBattleText:
+WLA_GLOBAL_SSAnne1FRoomsGentleman2AfterBattleText:
 	text "I wish to be left"
 	line "alone! Get out!"
 	done
 
-_SSAnne1FRoomsYoungsterBattleText::
+_SSAnne1FRoomsYoungsterBattleText:
+WLA_GLOBAL_SSAnne1FRoomsYoungsterBattleText:
 	text "I love #MON!"
 	line "Do you?"
 	done
 
-_SSAnne1FRoomsYoungsterEndBattleText::
+_SSAnne1FRoomsYoungsterEndBattleText:
+WLA_GLOBAL_SSAnne1FRoomsYoungsterEndBattleText:
 	text "Wow! "
 	line "You're great!"
 	prompt
 
-_SSAnne1FRoomsYoungsterAfterBattleText::
+_SSAnne1FRoomsYoungsterAfterBattleText:
+WLA_GLOBAL_SSAnne1FRoomsYoungsterAfterBattleText:
 	text "Let me be your"
 	line "friend, OK?"
 
@@ -54,19 +64,22 @@ _SSAnne1FRoomsYoungsterAfterBattleText::
 	line "#MON!"
 	done
 
-_SSAnne1FRoomsCooltrainerFBattleText::
+_SSAnne1FRoomsCooltrainerFBattleText:
+WLA_GLOBAL_SSAnne1FRoomsCooltrainerFBattleText:
 	text "I collected these"
 	line "#MON from all"
 	cont "around the world!"
 	done
 
-_SSAnne1FRoomsCooltrainerFEndBattleText::
+_SSAnne1FRoomsCooltrainerFEndBattleText:
+WLA_GLOBAL_SSAnne1FRoomsCooltrainerFEndBattleText:
 	text "Oh no!"
 	line "I went around the"
 	cont "world for these!"
 	prompt
 
-_SSAnne1FRoomsCooltrainerFAfterBattleText::
+_SSAnne1FRoomsCooltrainerFAfterBattleText:
+WLA_GLOBAL_SSAnne1FRoomsCooltrainerFAfterBattleText:
 	text "You hurt my poor"
 	line "worldly #MON!"
 
@@ -75,28 +88,33 @@ _SSAnne1FRoomsCooltrainerFAfterBattleText::
 	cont "#MON CENTER!"
 	done
 
-_SSAnne1FRoomsGirl1Text::
+_SSAnne1FRoomsGirl1Text:
+WLA_GLOBAL_SSAnne1FRoomsGirl1Text:
 	text "Waiter, I would"
 	line "like a cherry pie"
 	cont "please!"
 	done
 
-_SSAnne1FRoomsMiddleAgedManText::
+_SSAnne1FRoomsMiddleAgedManText:
+WLA_GLOBAL_SSAnne1FRoomsMiddleAgedManText:
 	text "A cruise is so"
 	line "elegant yet cozy!"
 	done
 
-_SSAnne1FRoomsLittleGirlText::
+_SSAnne1FRoomsLittleGirlText:
+WLA_GLOBAL_SSAnne1FRoomsLittleGirlText:
 	text "I always travel"
 	line "with WIGGLYTUFF!"
 	done
 
-_SSAnne1FRoomsGirl2Text::
+_SSAnne1FRoomsGirl2Text:
+WLA_GLOBAL_SSAnne1FRoomsGirl2Text:
 	text "We are cruising"
 	line "around the world."
 	done
 
-_SSAnne1FRoomsGentleman3Text::
+_SSAnne1FRoomsGentleman3Text:
+WLA_GLOBAL_SSAnne1FRoomsGentleman3Text:
 	text "Ssh! I'm a GLOBAL"
 	line "POLICE agent!"
 

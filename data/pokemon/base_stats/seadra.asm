@@ -1,17 +1,17 @@
-	db DEX_SEADRA ; pokedex id
+	.DB DEX_SEADRA ; pokedex id
 
-	db  55,  65,  95,  85,  95
+	.DB  55,  65,  95,  85,  95
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 75 ; catch rate
-	db 155 ; base exp
+	.DB WATER, WATER ; type
+	.DB 75 ; catch rate
+	.DB 155 ; base exp
 
-	INCBIN "gfx/pokemon/front/seadra.pic", 0, 1 ; sprite dimensions
-	dw SeadraPicFront, SeadraPicBack
+	.INCBIN "gfx/pokemon/front/seadra.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW SeadraPicFront, SeadraPicBack
 
-	db BUBBLE, SMOKESCREEN, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB BUBBLE, SMOKESCREEN, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    \
@@ -20,4 +20,4 @@
 	     SUBSTITUTE,   SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

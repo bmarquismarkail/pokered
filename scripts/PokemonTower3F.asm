@@ -28,7 +28,7 @@ PokemonTower3TrainerHeader1:
 	trainer EVENT_BEAT_POKEMONTOWER_3_TRAINER_1, 3, PokemonTower3FChanneler2BattleText, PokemonTower3FChanneler2EndBattleText, PokemonTower3FChanneler2AfterBattleText
 PokemonTower3TrainerHeader2:
 	trainer EVENT_BEAT_POKEMONTOWER_3_TRAINER_2, 2, PokemonTower3FChanneler3BattleText, PokemonTower3FChanneler3EndBattleText, PokemonTower3FChanneler3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonTower3FChanneler1Text:
 	text_asm
@@ -49,37 +49,37 @@ PokemonTower3FChanneler3Text:
 	jp TextScriptEnd
 
 PokemonTower3FChanneler1BattleText:
-	text_far _PokemonTower3FChanneler1BattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler1BattleText
 	text_end
 
 PokemonTower3FChanneler1EndBattleText:
-	text_far _PokemonTower3FChanneler1EndBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler1EndBattleText
 	text_end
 
 PokemonTower3FChanneler1AfterBattleText:
-	text_far _PokemonTower3FChanneler1AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler1AfterBattleText
 	text_end
 
 PokemonTower3FChanneler2BattleText:
-	text_far _PokemonTower3FChanneler2BattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler2BattleText
 	text_end
 
 PokemonTower3FChanneler2EndBattleText:
-	text_far _PokemonTower3FChanneler2EndBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler2EndBattleText
 	text_end
 
 PokemonTower3FChanneler2AfterBattleText:
-	text_far _PokemonTower3FChanneler2AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler2AfterBattleText
 	text_end
 
 PokemonTower3FChanneler3BattleText:
-	text_far _PokemonTower3FChanneler3BattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler3BattleText
 	text_end
 
 PokemonTower3FChanneler3EndBattleText:
-	text_far _PokemonTower3FChanneler3EndBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler3EndBattleText
 	text_end
 
 PokemonTower3FChanneler3AfterBattleText:
-	text_far _PokemonTower3FChanneler3AfterBattleText
+	text_far WLA_GLOBAL_PokemonTower3FChanneler3AfterBattleText
 	text_end

@@ -8,5 +8,5 @@ UndergroundPathRoute7_TextPointers:
 	dw_const UndergroundPathRoute7MiddleAgedManText, TEXT_UNDERGROUNDPATHROUTE7_MIDDLE_AGED_MAN
 
 UndergroundPathRoute7MiddleAgedManText:
-	text_far _UndergroundPathRoute7MiddleAgedManText
+	text_far WLA_GLOBAL_UndergroundPathRoute7MiddleAgedManText
 	text_end

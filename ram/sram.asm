@@ -1,55 +1,59 @@
-SECTION "Sprite Buffers", SRAM
+.RAMSECTION "Sprite Buffers" BANK 0 SLOT 3
 
-sSpriteBuffer0:: ds SPRITEBUFFERSIZE
-sSpriteBuffer1:: ds SPRITEBUFFERSIZE
-sSpriteBuffer2:: ds SPRITEBUFFERSIZE
+sSpriteBuffer0: ds SPRITEBUFFERSIZE
+sSpriteBuffer1: ds SPRITEBUFFERSIZE
+sSpriteBuffer2: ds SPRITEBUFFERSIZE
 
-	ds $100
+	__wla_sram_padding_000: ds $100
 
-sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY
-
-
-SECTION "Save Data", SRAM
-
-	ds $598
-
-sGameData::
-sPlayerName::  ds NAME_LENGTH
-sMainData::    ds wMainDataEnd - wMainDataStart
-sSpriteData::  ds wSpriteDataEnd - wSpriteDataStart
-sPartyData::   ds wPartyDataEnd - wPartyDataStart
-sCurBoxData::  ds wBoxDataEnd - wBoxDataStart
-sTileAnimations:: db
-sGameDataEnd::
-sMainDataCheckSum:: db
+sHallOfFame: ds HOF_TEAM * HOF_TEAM_CAPACITY
 
 
-; The PC boxes will not fit into one SRAM bank,
-; so they use multiple SECTIONs
-DEF box_n = 0
-MACRO boxes
-	REPT \1
-		DEF box_n += 1
-	sBox{d:box_n}:: ds wBoxDataEnd - wBoxDataStart
-	ENDR
-ENDM
+.ENDS
 
-SECTION "Saved Boxes 1", SRAM
+.RAMSECTION "Save Data" BANK 1 SLOT 3
+
+	__wla_sram_padding_001: ds $598
+
+sGameData: ds 0
+sPlayerName:  ds NAME_LENGTH
+sMainData:    ds wMainDataEnd - wMainDataStart
+sSpriteData:  ds wSpriteDataEnd - wSpriteDataStart
+sPartyData:   ds wPartyDataEnd - wPartyDataStart
+sCurBoxData:  ds wBoxDataEnd - wBoxDataStart
+sTileAnimations: db
+sGameDataEnd: ds 0
+sMainDataCheckSum: db
+
+
+; The PC boxes will not fit into one SRAM bank, so they use two banks.
+
+.ENDS
+
+.RAMSECTION "Saved Boxes 1" BANK 2 SLOT 3
 
 ; sBox1 - sBox6
-	boxes 6
-sBank2AllBoxesChecksum:: db
-sBank2IndividualBoxChecksums:: ds 6
+sBox1: ds wBoxDataEnd - wBoxDataStart
+sBox2: ds wBoxDataEnd - wBoxDataStart
+sBox3: ds wBoxDataEnd - wBoxDataStart
+sBox4: ds wBoxDataEnd - wBoxDataStart
+sBox5: ds wBoxDataEnd - wBoxDataStart
+sBox6: ds wBoxDataEnd - wBoxDataStart
+sBank2AllBoxesChecksum: db
+sBank2IndividualBoxChecksums: ds 6
 
-SECTION "Saved Boxes 2", SRAM
+.ENDS
+
+.RAMSECTION "Saved Boxes 2" BANK 3 SLOT 3
 
 ; sBox7 - sBox12
-	boxes 6
-sBank3AllBoxesChecksum:: db
-sBank3IndividualBoxChecksums:: ds 6
+sBox7: ds wBoxDataEnd - wBoxDataStart
+sBox8: ds wBoxDataEnd - wBoxDataStart
+sBox9: ds wBoxDataEnd - wBoxDataStart
+sBox10: ds wBoxDataEnd - wBoxDataStart
+sBox11: ds wBoxDataEnd - wBoxDataStart
+sBox12: ds wBoxDataEnd - wBoxDataStart
+sBank3AllBoxesChecksum: db
+sBank3IndividualBoxChecksums: ds 6
 
-; All 12 boxes fit within 2 SRAM banks
-	ASSERT box_n == NUM_BOXES, \
-		"boxes: Expected {d:NUM_BOXES} total boxes, got {d:box_n}"
-
-ENDSECTION
+.ENDS

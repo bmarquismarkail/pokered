@@ -1,17 +1,17 @@
-	db DEX_KOFFING ; pokedex id
+	.DB DEX_KOFFING ; pokedex id
 
-	db  40,  65,  95,  35,  60
+	.DB  40,  65,  95,  35,  60
 	;   hp  atk  def  spd  spc
 
-	db POISON, POISON ; type
-	db 190 ; catch rate
-	db 114 ; base exp
+	.DB POISON, POISON ; type
+	.DB 190 ; catch rate
+	.DB 114 ; base exp
 
-	INCBIN "gfx/pokemon/front/koffing.pic", 0, 1 ; sprite dimensions
-	dw KoffingPicFront, KoffingPicBack
+	.INCBIN "gfx/pokemon/front/koffing.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW KoffingPicFront, KoffingPicBack
 
-	db TACKLE, SMOG, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SMOG, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        RAGE,         THUNDERBOLT,  THUNDER,      MIMIC,        \
@@ -19,4 +19,4 @@
 	     EXPLOSION,    SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

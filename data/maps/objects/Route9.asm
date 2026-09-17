@@ -11,14 +11,13 @@
 	const_export ROUTE9_TM_TELEPORT
 
 Route9_Object:
-	db $2c ; border block
+	.DB $2c ; border block
 
-	def_warp_events
-
-	def_bg_events
+	.DB 0
+	.DB 1
 	bg_event 25,  7, TEXT_ROUTE9_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 13, 10, SPRITE_COOLTRAINER_F, STAY, LEFT, TEXT_ROUTE9_COOLTRAINER_F1, OPP_JR_TRAINER_F, 5
 	object_event 24,  7, SPRITE_COOLTRAINER_M, STAY, LEFT, TEXT_ROUTE9_COOLTRAINER_M1, OPP_JR_TRAINER_M, 7
 	object_event 31,  7, SPRITE_COOLTRAINER_M, STAY, RIGHT, TEXT_ROUTE9_COOLTRAINER_M2, OPP_JR_TRAINER_M, 8
@@ -29,5 +28,3 @@ Route9_Object:
 	object_event 45, 15, SPRITE_HIKER, STAY, RIGHT, TEXT_ROUTE9_HIKER3, OPP_HIKER, 5
 	object_event 40,  8, SPRITE_YOUNGSTER, STAY, RIGHT, TEXT_ROUTE9_YOUNGSTER2, OPP_BUG_CATCHER, 14
 	object_event 10, 15, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE9_TM_TELEPORT, TM_TELEPORT
-
-	def_warps_to ROUTE_9

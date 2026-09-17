@@ -1,33 +1,32 @@
-SECTION "VRAM", VRAM
+.RAMSECTION "VRAM" BANK 0 SLOT 2
 
-UNION
+.UNION
 ; generic
-vChars0:: ds $80 tiles
-vChars1:: ds $80 tiles
-vChars2:: ds $80 tiles
-vBGMap0:: ds TILEMAP_AREA
-vBGMap1:: ds TILEMAP_AREA
+vChars0: ds $80 * TILE_SIZE
+vChars1: ds $80 * TILE_SIZE
+vChars2: ds $80 * TILE_SIZE
+vBGMap0: ds TILEMAP_AREA
+vBGMap1: ds TILEMAP_AREA
 
-NEXTU
+.NEXTU
 ; battle/menu
-vSprites::  ds $80 tiles
-vFont::     ds $80 tiles
-vFrontPic:: ds PIC_SIZE tiles
-vBackPic::  ds PIC_SIZE tiles
+vSprites:  ds $80 * TILE_SIZE
+vFont:     ds $80 * TILE_SIZE
+vFrontPic: ds PIC_SIZE * TILE_SIZE
+vBackPic:  ds PIC_SIZE * TILE_SIZE
 
-NEXTU
+.NEXTU
 ; overworld
-vNPCSprites::  ds $80 tiles
-vNPCSprites2:: ds $80 tiles
-vTileset::     ds $80 tiles
+vNPCSprites:  ds $80 * TILE_SIZE
+vNPCSprites2: ds $80 * TILE_SIZE
+vTileset:     ds $80 * TILE_SIZE
 
-NEXTU
+.NEXTU
 ; title
-	ds $80 tiles
-vTitleLogo::  ds $80 tiles
-	ds PIC_SIZE tiles
-vTitleLogo2:: ds 30 tiles
+	__wla_vram_padding_000: ds $80 * TILE_SIZE
+vTitleLogo:  ds $80 * TILE_SIZE
+	__wla_vram_padding_001: ds PIC_SIZE * TILE_SIZE
+vTitleLogo2: ds 30 * TILE_SIZE
 
-ENDU
-
-ENDSECTION
+.ENDU
+.ENDS

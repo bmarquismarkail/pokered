@@ -9,26 +9,26 @@ ViridianNicknameHouse_TextPointers:
 	dw_const ViridianNicknameHouseSpearySignText, TEXT_VIRIDIANNICKNAMEHOUSE_SPEARY_SIGN
 
 ViridianNicknameHouseBaldingGuyText:
-	text_far _ViridianNicknameHouseBaldingGuyText
+	text_far WLA_GLOBAL_ViridianNicknameHouseBaldingGuyText
 	text_end
 
 ViridianNicknameHouseLittleGirlText:
-	text_far _ViridianNicknameHouseLittleGirlText
+	text_far WLA_GLOBAL_ViridianNicknameHouseLittleGirlText
 	text_end
 
 ViridianNicknameHouseSpearowText:
 	text_asm
-	ld hl, .Text
+	ld hl, ViridianNicknameHouseSpearowText.Text
 	call PrintText
 	ld a, SPEAROW
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-.Text:
-	text_far _ViridianNicknameHouseSpearowText
+ViridianNicknameHouseSpearowText.Text:
+	text_far WLA_GLOBAL_ViridianNicknameHouseSpearowText
 	text_end
 
 ViridianNicknameHouseSpearySignText:
-	text_far _ViridianNicknameHouseSpearySignText
+	text_far WLA_GLOBAL_ViridianNicknameHouseSpearySignText
 	text_end

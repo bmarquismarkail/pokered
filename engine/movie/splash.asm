@@ -1,19 +1,19 @@
 LoadShootingStarGraphics:
 	ld a, $f9
-	ldh [rOBP0], a
+	ldh [lobyte(rOBP0)], a
 	ld a, $a4
-	ldh [rOBP1], a
-	ld de, MoveAnimationTiles1 tile 3 ; star tile (top left quadrant)
-	ld hl, vChars1 tile $20
-	lb bc, BANK(MoveAnimationTiles1), 1
+	ldh [lobyte(rOBP1)], a
+	ld de, MoveAnimationTiles1 + TILE_SIZE * 3 ; star + TILE_SIZE * (top left quadrant)
+	ld hl, vChars1 + TILE_SIZE * $20
+	lb "bc", bank(MoveAnimationTiles1), 1
 	call CopyVideoData
-	ld de, MoveAnimationTiles1 tile 19 ; star tile (bottom left quadrant)
-	ld hl, vChars1 tile $21
-	lb bc, BANK(MoveAnimationTiles1), 1
+	ld de, MoveAnimationTiles1 + TILE_SIZE * 19 ; star + TILE_SIZE * (bottom left quadrant)
+	ld hl, vChars1 + TILE_SIZE * $21
+	lb "bc", bank(MoveAnimationTiles1), 1
 	call CopyVideoData
 	ld de, FallingStar
-	ld hl, vChars1 tile $22
-	lb bc, BANK(FallingStar), (FallingStarEnd - FallingStar) / TILE_SIZE
+	ld hl, vChars1 + TILE_SIZE * $22
+	lb "bc", bank(FallingStar), (FallingStarEnd - FallingStar) / TILE_SIZE
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData
 	ld de, wShadowOAMSprite24
@@ -31,11 +31,11 @@ AnimateShootingStar:
 
 ; Move the big star down and left across the screen.
 	ld hl, wShadowOAM
-	lb bc, $a0, $4
-.bigStarLoop
+	lb "bc", $a0, $4
+AnimateShootingStar.bigStarLoop
 	push hl
 	push bc
-.bigStarInnerLoop
+AnimateShootingStar.bigStarInnerLoop
 	ld a, [hl] ; Y
 	add 4
 	ld [hli], a
@@ -45,7 +45,7 @@ AnimateShootingStar:
 	inc hl
 	inc hl
 	dec c
-	jr nz, .bigStarInnerLoop
+	jr nz, AnimateShootingStar.bigStarInnerLoop
 	ld c, 1
 	call CheckForUserInterruption
 	pop bc
@@ -53,25 +53,25 @@ AnimateShootingStar:
 	ret c
 	ld a, [hl]
 	cp 80
-	jr nz, .next
-	jr .bigStarLoop
-.next
+	jr nz, AnimateShootingStar.next
+	jr AnimateShootingStar.bigStarLoop
+AnimateShootingStar.next
 	cp b
-	jr nz, .bigStarLoop
+	jr nz, AnimateShootingStar.bigStarLoop
 
 ; Clear big star OAM.
 	ld hl, wShadowOAMSprite00YCoord
 	ld c, 4
 	ld de, OBJ_SIZE
-.clearOAMLoop
+AnimateShootingStar.clearOAMLoop
 	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec c
-	jr nz, .clearOAMLoop
+	jr nz, AnimateShootingStar.clearOAMLoop
 
 ; Make Gamefreak logo flash.
 	ld b, 3
-.flashLogoLoop
+AnimateShootingStar.flashLogoLoop
 	ld hl, rOBP0
 	rrc [hl]
 	rrc [hl]
@@ -79,27 +79,27 @@ AnimateShootingStar:
 	call CheckForUserInterruption
 	ret c
 	dec b
-	jr nz, .flashLogoLoop
+	jr nz, AnimateShootingStar.flashLogoLoop
 
 ; Copy 24 instances of the small stars OAM data.
 ; Note that their coordinates put them off-screen.
 	ld de, wShadowOAM
 	ld a, 24
-.initSmallStarsOAMLoop
+AnimateShootingStar.initSmallStarsOAMLoop
 	push af
 	ld hl, SmallStarsOAM
 	ld bc, SmallStarsOAMEnd - SmallStarsOAM
 	call CopyData
 	pop af
 	dec a
-	jr nz, .initSmallStarsOAMLoop
+	jr nz, AnimateShootingStar.initSmallStarsOAMLoop
 
 ; Animate the small stars falling from the Gamefreak logo.
 	xor a
 	ld [wMoveDownSmallStarsOAMCount], a
 	ld hl, SmallStarsWaveCoordsPointerTable
 	ld c, 6
-.smallStarsLoop
+AnimateShootingStar.smallStarsLoop
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -108,10 +108,10 @@ AnimateShootingStar:
 	push hl
 	ld hl, wShadowOAMSprite20
 	ld c, 4
-.smallStarsInnerLoop ; introduce new wave of 4 small stars OAM entries
+AnimateShootingStar.smallStarsInnerLoop ; introduce new wave of 4 small stars OAM entries
 	ld a, [de]
 	cp -1
-	jr z, .next2
+	jr z, AnimateShootingStar.next2
 	ld [hli], a ; Y
 	inc de
 	ld a, [de]
@@ -120,13 +120,13 @@ AnimateShootingStar:
 	inc hl
 	inc hl
 	dec c
-	jr nz, .smallStarsInnerLoop
+	jr nz, AnimateShootingStar.smallStarsInnerLoop
 	ld a, [wMoveDownSmallStarsOAMCount]
 	cp 24
-	jr z, .next2
+	jr z, AnimateShootingStar.next2
 	add 6 ; should be 4, but the extra 2 aren't visible on screen
 	ld [wMoveDownSmallStarsOAMCount], a
-.next2
+AnimateShootingStar.next2
 	call MoveDownSmallStars
 	push af
 
@@ -141,7 +141,7 @@ AnimateShootingStar:
 	pop bc
 	ret c
 	dec c
-	jr nz, .smallStarsLoop
+	jr nz, AnimateShootingStar.smallStarsLoop
 	and a
 	ret
 
@@ -150,62 +150,62 @@ SmallStarsOAM:
 SmallStarsOAMEnd:
 
 SmallStarsWaveCoordsPointerTable:
-	dw SmallStarsWave1Coords
-	dw SmallStarsWave2Coords
-	dw SmallStarsWave3Coords
-	dw SmallStarsWave4Coords
-	dw SmallStarsEmptyWave
-	dw SmallStarsEmptyWave
+	.DW SmallStarsWave1Coords
+	.DW SmallStarsWave2Coords
+	.DW SmallStarsWave3Coords
+	.DW SmallStarsWave4Coords
+	.DW SmallStarsEmptyWave
+	.DW SmallStarsEmptyWave
 
 ; The stars that fall from the Gamefreak logo come in 4 waves of 4 OAM entries.
 ; These arrays contain the Y and X coordinates of each OAM entry.
 
 SmallStarsWave1Coords:
-	db $68, $30
-	db $68, $40
-	db $68, $58
-	db $68, $78
+	.DB $68, $30
+	.DB $68, $40
+	.DB $68, $58
+	.DB $68, $78
 SmallStarsWave2Coords:
-	db $68, $38
-	db $68, $48
-	db $68, $60
-	db $68, $70
+	.DB $68, $38
+	.DB $68, $48
+	.DB $68, $60
+	.DB $68, $70
 SmallStarsWave3Coords:
-	db $68, $34
-	db $68, $4C
-	db $68, $54
-	db $68, $64
+	.DB $68, $34
+	.DB $68, $4C
+	.DB $68, $54
+	.DB $68, $64
 SmallStarsWave4Coords:
-	db $68, $3C
-	db $68, $5C
-	db $68, $6C
-	db $68, $74
+	.DB $68, $3C
+	.DB $68, $5C
+	.DB $68, $6C
+	.DB $68, $74
 SmallStarsEmptyWave:
-	db -1 ; end
+	.DB -1 ; end
 
 MoveDownSmallStars:
 	ld b, 8
-.loop
+MoveDownSmallStars.loop
 	ld hl, wShadowOAMSprite23
 	ld a, [wMoveDownSmallStarsOAMCount]
 	ld de, -4
 	ld c, a
-.innerLoop
+MoveDownSmallStars.innerLoop
 	inc [hl] ; Y
 	add hl, de
 	dec c
-	jr nz, .innerLoop
-; Toggle the palette so that the lower star in the small stars tile blinks in
+	jr nz, MoveDownSmallStars.innerLoop
+; Toggle the palette so that the lower star in the small stars + TILE_SIZE * blinks in
 ; and out.
-	ldh a, [rOBP1]
+	ldh a, [lobyte(rOBP1)]
 	xor %10100000
-	ldh [rOBP1], a
+	ldh [lobyte(rOBP1)], a
 
 	ld c, 3
 	call CheckForUserInterruption
 	ret c
 	dec b
-	jr nz, .loop
+	jr nz, MoveDownSmallStars.loop
 	ret
 
 GameFreakLogoOAMData:
@@ -235,5 +235,5 @@ GameFreakShootingStarOAMData:
 GameFreakShootingStarOAMDataEnd:
 
 FallingStar:
-	INCBIN "gfx/splash/falling_star.2bpp"
+	.INCBIN "gfx/splash/falling_star.2bpp"
 FallingStarEnd:

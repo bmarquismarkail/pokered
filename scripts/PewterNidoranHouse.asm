@@ -8,7 +8,7 @@ PewterNidoranHouse_TextPointers:
 	dw_const PewterNidoranHouseMiddleAgedManText, TEXT_PEWTERNIDORANHOUSE_MIDDLE_AGED_MAN
 
 PewterNidoranHouseNidoranText:
-	text_far _PewterNidoranHouseNidoranText
+	text_far WLA_GLOBAL_PewterNidoranHouseNidoranText
 	text_asm
 	ld a, NIDORAN_M
 	call PlayCry
@@ -16,9 +16,9 @@ PewterNidoranHouseNidoranText:
 	jp TextScriptEnd
 
 PewterNidoranHouseLittleBoyText:
-	text_far _PewterNidoranHouseLittleBoyText
+	text_far WLA_GLOBAL_PewterNidoranHouseLittleBoyText
 	text_end
 
 PewterNidoranHouseMiddleAgedManText:
-	text_far _PewterNidoranHouseMiddleAgedManText
+	text_far WLA_GLOBAL_PewterNidoranHouseMiddleAgedManText
 	text_end

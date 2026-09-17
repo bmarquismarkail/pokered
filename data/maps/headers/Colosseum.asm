@@ -1,2 +1,2 @@
-	map_header Colosseum, COLOSSEUM, CLUB
+	map_header "Colosseum", COLOSSEUM, CLUB
 	end_map_header

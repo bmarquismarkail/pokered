@@ -11,9 +11,9 @@
 	const_export FUCHSIACITY_FOSSIL
 
 FuchsiaCity_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 9
 	warp_event  5, 13, FUCHSIA_MART, 1
 	warp_event 11, 27, FUCHSIA_BILLS_GRANDPAS_HOUSE, 1
 	warp_event 19, 27, FUCHSIA_POKECENTER, 1
@@ -24,7 +24,7 @@ FuchsiaCity_Object:
 	warp_event 31, 27, FUCHSIA_GOOD_ROD_HOUSE, 2
 	warp_event 31, 24, FUCHSIA_GOOD_ROD_HOUSE, 1
 
-	def_bg_events
+	.DB 14
 	bg_event 15, 23, TEXT_FUCHSIACITY_SIGN1
 	bg_event 25, 15, TEXT_FUCHSIACITY_SIGN2
 	bg_event 17,  5, TEXT_FUCHSIACITY_SAFARI_GAME_SIGN
@@ -40,7 +40,7 @@ FuchsiaCity_Object:
 	bg_event 13, 15, TEXT_FUCHSIACITY_LAPRAS_SIGN
 	bg_event  7,  7, TEXT_FUCHSIACITY_FOSSIL_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 10, 12, SPRITE_YOUNGSTER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_YOUNGSTER1
 	object_event 28, 17, SPRITE_GAMBLER, WALK, LEFT_RIGHT, TEXT_FUCHSIACITY_GAMBLER
 	object_event 30, 14, SPRITE_FISHER, STAY, DOWN, TEXT_FUCHSIACITY_ERIK
@@ -52,4 +52,20 @@ FuchsiaCity_Object:
 	object_event  8, 17, SPRITE_SEEL, WALK, ANY_DIR, TEXT_FUCHSIACITY_LAPRAS
 	object_event  6,  5, SPRITE_FOSSIL, STAY, NONE, TEXT_FUCHSIACITY_FOSSIL
 
-	def_warps_to FUCHSIA_CITY
+	event_displacement FUCHSIA_CITY_WIDTH, 5, 13
+
+	event_displacement FUCHSIA_CITY_WIDTH, 11, 27
+
+	event_displacement FUCHSIA_CITY_WIDTH, 19, 27
+
+	event_displacement FUCHSIA_CITY_WIDTH, 27, 27
+
+	event_displacement FUCHSIA_CITY_WIDTH, 18, 3
+
+	event_displacement FUCHSIA_CITY_WIDTH, 5, 27
+
+	event_displacement FUCHSIA_CITY_WIDTH, 22, 13
+
+	event_displacement FUCHSIA_CITY_WIDTH, 31, 27
+
+	event_displacement FUCHSIA_CITY_WIDTH, 31, 24

@@ -1,5 +1,5 @@
 ; calculates the difference |a-b|, setting carry flag if a<b
-CalcDifference::
+CalcDifference:
 	sub b
 	ret nc
 	cpl
@@ -7,11 +7,11 @@ CalcDifference::
 	scf
 	ret
 
-MoveSprite::
+MoveSprite:
 ; move the sprite [hSpriteIndex] with the movement pointed to by de
 ; actually only copies the movement data to wNPCMovementDirections for later
 	call SetSpriteMovementBytesToFF
-MoveSprite_::
+MoveSprite_:
 	push hl
 	push bc
 	call GetSpriteMovementByte1Pointer
@@ -20,13 +20,13 @@ MoveSprite_::
 	ld hl, wNPCMovementDirections
 	ld c, 0
 
-.loop
+MoveSprite_.loop
 	ld a, [de]
 	ld [hli], a
 	inc de
 	inc c
 	cp -1 ; have we reached the end of the movement data?
-	jr nz, .loop
+	jr nz, MoveSprite_.loop
 
 	ld a, c
 	ld [wNPCNumScriptedSteps], a ; number of steps taken
@@ -44,22 +44,22 @@ MoveSprite_::
 	ret
 
 ; divides [hDividend2] by [hDivisor2] and stores the quotient in [hQuotient2]
-DivideBytes::
+DivideBytes:
 	push hl
 	ld hl, hQuotient2
 	xor a
 	ld [hld], a
 	ld a, [hld]
 	and a
-	jr z, .done
+	jr z, DivideBytes.done
 	ld a, [hli]
-.loop
+DivideBytes.loop
 	sub [hl]
-	jr c, .done
+	jr c, DivideBytes.done
 	inc hl
 	inc [hl]
 	dec hl
-	jr .loop
-.done
+	jr DivideBytes.loop
+DivideBytes.done
 	pop hl
 	ret

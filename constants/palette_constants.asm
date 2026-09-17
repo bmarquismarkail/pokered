@@ -16,8 +16,8 @@
 	const SET_PAL_GAME_FREAK_INTRO     ; $0C
 	const SET_PAL_TRAINER_CARD         ; $0D
 
-DEF SET_PAL_PARTY_MENU_HP_BARS EQU $fc
-DEF SET_PAL_DEFAULT EQU $ff
+.DEFINE SET_PAL_PARTY_MENU_HP_BARS $fc
+.DEFINE SET_PAL_DEFAULT $ff
 
 ; sgb palettes
 ; SuperPalettes indexes (see data/sgb/sgb_palettes.asm)
@@ -59,4 +59,4 @@ DEF SET_PAL_DEFAULT EQU $ff
 	const PAL_BADGE     ; $22
 	const PAL_CAVE      ; $23
 	const PAL_GAMEFREAK ; $24
-DEF NUM_SGB_PALS EQU const_value
+.DEFINE NUM_SGB_PALS const_value

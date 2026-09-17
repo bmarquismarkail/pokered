@@ -1,7 +1,7 @@
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
-UncompressMonSprite::
+UncompressMonSprite:
 	ld bc, wMonHeader
 	add hl, bc
 	ld a, [hli]
@@ -19,34 +19,34 @@ UncompressMonSprite::
 	ld a, [wCurPartySpecies]
 	ld b, a
 	cp MEW
-	ld a, BANK(MewPicFront)
-	jr z, .GotBank
+	ld a, bank(MewPicFront)
+	jr z, UncompressMonSprite.GotBank
 	ld a, b
 	cp FOSSIL_KABUTOPS
-	ld a, BANK(FossilKabutopsPic)
-	jr z, .GotBank
+	ld a, bank(FossilKabutopsPic)
+	jr z, UncompressMonSprite.GotBank
 	ld a, b
 	cp TANGELA + 1
-	ld a, BANK("Pics 1")
-	jr c, .GotBank
+	ld a, 9
+	jr c, UncompressMonSprite.GotBank
 	ld a, b
 	cp MOLTRES + 1
-	ld a, BANK("Pics 2")
-	jr c, .GotBank
+	ld a, 10
+	jr c, UncompressMonSprite.GotBank
 	ld a, b
 	cp BEEDRILL + 2
-	ld a, BANK("Pics 3")
-	jr c, .GotBank
+	ld a, 11
+	jr c, UncompressMonSprite.GotBank
 	ld a, b
 	cp STARMIE + 1
-	ld a, BANK("Pics 4")
-	jr c, .GotBank
-	ld a, BANK("Pics 5")
-.GotBank
+	ld a, 12
+	jr c, UncompressMonSprite.GotBank
+	ld a, 13
+UncompressMonSprite.GotBank
 	jp UncompressSpriteData
 
 ; de: destination location
-LoadMonFrontSprite::
+LoadMonFrontSprite:
 	push de
 	ld hl, wMonHFrontSprite - wMonHeader
 	call UncompressMonSprite
@@ -60,10 +60,10 @@ LoadMonFrontSprite::
 ; calculates alignment parameters to place both sprite chunks in the center of the 7*7 tile sprite buffers
 ; de: destination location
 ; a,c:  sprite dimensions (in tiles of 8x8 each)
-LoadUncompressedSpriteData::
+LoadUncompressedSpriteData:
 	push de
 	and $f
-	ldh [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
+	ldh [lobyte(hSpriteWidth)], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
 	ld b, a
 	ld a, $7
 	sub b      ; 7-w
@@ -74,7 +74,7 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	sub b      ; 7*((8-w)/2) ; skip for horizontal center (in tiles)
-	ldh [hSpriteOffset], a
+	ldh [lobyte(hSpriteOffset)], a
 	ld a, c
 	swap a
 	and $f
@@ -82,16 +82,16 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	add a     ; 8*tiles is height in bytes
-	ldh [hSpriteHeight], a
+	ldh [lobyte(hSpriteHeight)], a
 	ld a, $7
 	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
-	ldh a, [hSpriteOffset]
+	ldh a, [lobyte(hSpriteOffset)]
 	add b     ; 7*((8-w)/2) + 7-h ; combined overall offset (in tiles)
 	add a
 	add a
 	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
-	ldh [hSpriteOffset], a
+	ldh [lobyte(hSpriteOffset)], a
 	xor a
 	ld [rRAMB], a
 	ld hl, sSpriteBuffer0
@@ -108,48 +108,48 @@ LoadUncompressedSpriteData::
 	jp InterlaceMergeSpriteBuffers
 
 ; copies and aligns the sprite data properly inside the sprite buffer
-; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
-AlignSpriteDataCentered::
-	ldh a, [hSpriteOffset]
+; sprite buffers are 7*7 * TILE_SIZE in size, the loaded sprite is centered within this area
+AlignSpriteDataCentered:
+	ldh a, [lobyte(hSpriteOffset)]
 	ld b, $0
 	ld c, a
 	add hl, bc
-	ldh a, [hSpriteWidth]
-.columnLoop
+	ldh a, [lobyte(hSpriteWidth)]
+AlignSpriteDataCentered.columnLoop
 	push af
 	push hl
-	ldh a, [hSpriteHeight]
+	ldh a, [lobyte(hSpriteHeight)]
 	ld c, a
-.columnInnerLoop
+AlignSpriteDataCentered.columnInnerLoop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .columnInnerLoop
+	jr nz, AlignSpriteDataCentered.columnInnerLoop
 	pop hl
 	ld bc, 7 * TILE_1BPP_SIZE
 	add hl, bc ; advance one full column
 	pop af
 	dec a
-	jr nz, .columnLoop
+	jr nz, AlignSpriteDataCentered.columnLoop
 	ret
 
 ; fills the sprite buffer (pointed to in hl) with zeros
-ZeroSpriteBuffer::
+ZeroSpriteBuffer:
 	ld bc, SPRITEBUFFERSIZE
-.nextByteLoop
+ZeroSpriteBuffer.nextByteLoop
 	xor a
 	ld [hli], a
 	dec bc
 	ld a, b
 	or c
-	jr nz, .nextByteLoop
+	jr nz, ZeroSpriteBuffer.nextByteLoop
 	ret
 
-; combines the (7*7 tiles, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
+; combines the (7*7 * TILE_SIZE, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
 ; in the resulting sprite, the rows of the two source sprites are interlaced
 ; de: output address
-InterlaceMergeSpriteBuffers::
+InterlaceMergeSpriteBuffers:
 	xor a
 	ld [rRAMB], a
 	push de
@@ -157,8 +157,8 @@ InterlaceMergeSpriteBuffers::
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
 	ld bc, sSpriteBuffer0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
 	ld a, SPRITEBUFFERSIZE / 2
-	ldh [hSpriteInterlaceCounter], a
-.interlaceLoop
+	ldh [lobyte(hSpriteInterlaceCounter)], a
+InterlaceMergeSpriteBuffers.interlaceLoop
 	ld a, [de]
 	dec de
 	ld [hld], a   ; write byte of source 2
@@ -171,26 +171,26 @@ InterlaceMergeSpriteBuffers::
 	ld a, [bc]
 	dec bc
 	ld [hld], a   ; write byte of source 1
-	ldh a, [hSpriteInterlaceCounter]
+	ldh a, [lobyte(hSpriteInterlaceCounter)]
 	dec a
-	ldh [hSpriteInterlaceCounter], a
-	jr nz, .interlaceLoop
+	ldh [lobyte(hSpriteInterlaceCounter)], a
+	jr nz, InterlaceMergeSpriteBuffers.interlaceLoop
 	ld a, [wSpriteFlipped]
 	and a
-	jr z, .notFlipped
+	jr z, InterlaceMergeSpriteBuffers.notFlipped
 	ld bc, 2 * SPRITEBUFFERSIZE
 	ld hl, sSpriteBuffer1
-.swapLoop
+InterlaceMergeSpriteBuffers.swapLoop
 	swap [hl]    ; if flipped swap nybbles in all bytes
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, .swapLoop
-.notFlipped
+	jr nz, InterlaceMergeSpriteBuffers.swapLoop
+InterlaceMergeSpriteBuffers.notFlipped
 	pop hl ; hl = output address
 	ld de, sSpriteBuffer1
 	ld c, PIC_SIZE ; tiles
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld b, a
 	jp CopyVideoData

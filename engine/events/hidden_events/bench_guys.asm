@@ -3,16 +3,16 @@ PrintBenchGuyText:
 	ld hl, BenchGuyTextPointers
 	ld a, [wCurMap]
 	ld b, a
-.loop
+PrintBenchGuyText.loop
 	ld a, [hli]
 	cp -1
 	ret z
 	cp b
-	jr z, .match
+	jr z, PrintBenchGuyText.match
 	inc hl
 	inc hl
-	jr .loop
-.match
+	jr PrintBenchGuyText.loop
+PrintBenchGuyText.match
 	ld a, [hli]
 	ld b, a
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -26,82 +26,82 @@ PrintBenchGuyText:
 	; It seems that it will only return after starting to read data from VRAM
 	; (According to Pan Docs, during PPU mode 3, reads return garbage value,
 	; usually $FF).
-	jr nz, .loop ; player isn't facing the bench guy
+	jr nz, PrintBenchGuyText.loop ; player isn't facing the bench guy
 	ld a, [hl]
 	jp PrintPredefTextID
 
-INCLUDE "data/events/bench_guys.asm"
+.INCLUDE "data/events/bench_guys.asm"
 
-ViridianCityPokecenterBenchGuyText::
-	text_far _ViridianCityPokecenterGuyText
+ViridianCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_ViridianCityPokecenterGuyText
 	text_end
 
-PewterCityPokecenterBenchGuyText::
-	text_far _PewterCityPokecenterGuyText
+PewterCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_PewterCityPokecenterGuyText
 	text_end
 
-CeruleanCityPokecenterBenchGuyText::
-	text_far _CeruleanPokecenterGuyText
+CeruleanCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_CeruleanPokecenterGuyText
 	text_end
 
-LavenderCityPokecenterBenchGuyText::
-	text_far _LavenderPokecenterGuyText
+LavenderCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_LavenderPokecenterGuyText
 	text_end
 
-MtMoonPokecenterBenchGuyText::
-	text_far _MtMoonPokecenterBenchGuyText
+MtMoonPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_MtMoonPokecenterBenchGuyText
 	text_end
 
-RockTunnelPokecenterBenchGuyText::
-	text_far _RockTunnelPokecenterGuyText
+RockTunnelPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_RockTunnelPokecenterGuyText
 	text_end
 
-UnusedBenchGuyText1::
-	text_far _UnusedBenchGuyText1
+UnusedBenchGuyText1:
+	text_far WLA_GLOBAL_UnusedBenchGuyText1
 	text_end
 
-UnusedBenchGuyText2::
-	text_far _UnusedBenchGuyText2
+UnusedBenchGuyText2:
+	text_far WLA_GLOBAL_UnusedBenchGuyText2
 	text_end
 
-UnusedBenchGuyText3::
-	text_far _UnusedBenchGuyText3
+UnusedBenchGuyText3:
+	text_far WLA_GLOBAL_UnusedBenchGuyText3
 	text_end
 
-VermilionCityPokecenterBenchGuyText::
-	text_far _VermilionPokecenterGuyText
+VermilionCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_VermilionPokecenterGuyText
 	text_end
 
-CeladonCityPokecenterBenchGuyText::
-	text_far _CeladonCityPokecenterGuyText
+CeladonCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_CeladonCityPokecenterGuyText
 	text_end
 
-FuchsiaCityPokecenterBenchGuyText::
-	text_far _FuchsiaCityPokecenterGuyText
+FuchsiaCityPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_FuchsiaCityPokecenterGuyText
 	text_end
 
-CinnabarIslandPokecenterBenchGuyText::
-	text_far _CinnabarPokecenterGuyText
+CinnabarIslandPokecenterBenchGuyText:
+	text_far WLA_GLOBAL_CinnabarPokecenterGuyText
 	text_end
 
-SaffronCityPokecenterBenchGuyText::
+SaffronCityPokecenterBenchGuyText:
 	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SaffronCityPokecenterBenchGuyText2
-	jr nz, .printText
+	jr nz, SaffronCityPokecenterBenchGuyText.printText
 	ld hl, SaffronCityPokecenterBenchGuyText1
-.printText
+SaffronCityPokecenterBenchGuyText.printText
 	call PrintText
 	jp TextScriptEnd
 
 SaffronCityPokecenterBenchGuyText1:
-	text_far _SaffronCityPokecenterGuyText1
+	text_far WLA_GLOBAL_SaffronCityPokecenterGuyText1
 	text_end
 
 SaffronCityPokecenterBenchGuyText2:
-	text_far _SaffronCityPokecenterGuyText2
+	text_far WLA_GLOBAL_SaffronCityPokecenterGuyText2
 	text_end
 
-CeladonCityHotelText::
-	text_far _CeladonCityHotelText
+CeladonCityHotelText:
+	text_far WLA_GLOBAL_CeladonCityHotelText
 	text_end

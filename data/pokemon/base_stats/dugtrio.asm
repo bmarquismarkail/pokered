@@ -1,17 +1,17 @@
-	db DEX_DUGTRIO ; pokedex id
+	.DB DEX_DUGTRIO ; pokedex id
 
-	db  35,  80,  50, 120,  70
+	.DB  35,  80,  50, 120,  70
 	;   hp  atk  def  spd  spc
 
-	db GROUND, GROUND ; type
-	db 50 ; catch rate
-	db 153 ; base exp
+	.DB GROUND, GROUND ; type
+	.DB 50 ; catch rate
+	.DB 153 ; base exp
 
-	INCBIN "gfx/pokemon/front/dugtrio.pic", 0, 1 ; sprite dimensions
-	dw DugtrioPicFront, DugtrioPicBack
+	.INCBIN "gfx/pokemon/front/dugtrio.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW DugtrioPicFront, DugtrioPicBack
 
-	db SCRATCH, GROWL, DIG, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, GROWL, DIG, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
@@ -19,4 +19,4 @@
 	     DOUBLE_TEAM,  BIDE,         REST,         ROCK_SLIDE,   SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

@@ -11,11 +11,10 @@
 	const_export ROUTE17_BIKER10
 
 Route17_Object:
-	db $43 ; border block
+	.DB $43 ; border block
 
-	def_warp_events
-
-	def_bg_events
+	.DB 0
+	.DB 6
 	bg_event  9, 51, TEXT_ROUTE17_NOTICE_SIGN1
 	bg_event  9, 63, TEXT_ROUTE17_TRAINER_TIPS1
 	bg_event  9, 75, TEXT_ROUTE17_TRAINER_TIPS2
@@ -23,7 +22,7 @@ Route17_Object:
 	bg_event  9, 111, TEXT_ROUTE17_NOTICE_SIGN2
 	bg_event  9, 141, TEXT_ROUTE17_CYCLING_ROAD_ENDS_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 12, 19, SPRITE_BIKER, STAY, LEFT, TEXT_ROUTE17_BIKER1, OPP_CUE_BALL, 4
 	object_event 11, 16, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE17_BIKER2, OPP_CUE_BALL, 5
 	object_event  4, 18, SPRITE_BIKER, STAY, UP, TEXT_ROUTE17_BIKER3, OPP_BIKER, 8
@@ -34,5 +33,3 @@ Route17_Object:
 	object_event 14, 98, SPRITE_BIKER, STAY, RIGHT, TEXT_ROUTE17_BIKER8, OPP_CUE_BALL, 8
 	object_event  5, 98, SPRITE_BIKER, STAY, LEFT, TEXT_ROUTE17_BIKER9, OPP_BIKER, 11
 	object_event 10, 118, SPRITE_BIKER, STAY, DOWN, TEXT_ROUTE17_BIKER10, OPP_BIKER, 12
-
-	def_warps_to ROUTE_17

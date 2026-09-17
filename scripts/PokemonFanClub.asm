@@ -25,145 +25,145 @@ PokemonFanClub_TextPointers:
 PokemonFanClubPikachuFanText:
 	text_asm
 	CheckEvent EVENT_PIKACHU_FAN_BOAST
-	jr nz, .mineisbetter
-	ld hl, .NormalText
+	jr nz, PokemonFanClubPikachuFanText.mineisbetter
+	ld hl, PokemonFanClubPikachuFanText.NormalText
 	call PrintText
 	SetEvent EVENT_SEEL_FAN_BOAST
-	jr .done
-.mineisbetter
-	ld hl, .BetterText
+	jr PokemonFanClubPikachuFanText.done
+PokemonFanClubPikachuFanText.mineisbetter
+	ld hl, PokemonFanClubPikachuFanText.BetterText
 	call PrintText
 	ResetEvent EVENT_PIKACHU_FAN_BOAST
-.done
+PokemonFanClubPikachuFanText.done
 	jp TextScriptEnd
 
-.NormalText:
-	text_far _PokemonFanClubPikachuFanNormalText
+PokemonFanClubPikachuFanText.NormalText:
+	text_far WLA_GLOBAL_PokemonFanClubPikachuFanNormalText
 	text_end
 
-.BetterText:
-	text_far _PokemonFanClubPikachuFanBetterText
+PokemonFanClubPikachuFanText.BetterText:
+	text_far WLA_GLOBAL_PokemonFanClubPikachuFanBetterText
 	text_end
 
 PokemonFanClubSeelFanText:
 	text_asm
 	CheckEvent EVENT_SEEL_FAN_BOAST
-	jr nz, .mineisbetter
-	ld hl, .NormalText
+	jr nz, PokemonFanClubSeelFanText.mineisbetter
+	ld hl, PokemonFanClubSeelFanText.NormalText
 	call PrintText
 	SetEvent EVENT_PIKACHU_FAN_BOAST
-	jr .done
-.mineisbetter
-	ld hl, .BetterText
+	jr PokemonFanClubSeelFanText.done
+PokemonFanClubSeelFanText.mineisbetter
+	ld hl, PokemonFanClubSeelFanText.BetterText
 	call PrintText
 	ResetEvent EVENT_SEEL_FAN_BOAST
-.done
+PokemonFanClubSeelFanText.done
 	jp TextScriptEnd
 
-.NormalText:
-	text_far _PokemonFanClubSeelFanNormalText
+PokemonFanClubSeelFanText.NormalText:
+	text_far WLA_GLOBAL_PokemonFanClubSeelFanNormalText
 	text_end
 
-.BetterText:
-	text_far _PokemonFanClubSeelFanBetterText
+PokemonFanClubSeelFanText.BetterText:
+	text_far WLA_GLOBAL_PokemonFanClubSeelFanBetterText
 	text_end
 
 PokemonFanClubPikachuText:
 	text_asm
-	ld hl, .Text
+	ld hl, PokemonFanClubPikachuText.Text
 	call PrintText
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-.Text
-	text_far _PokemonFanClubPikachuText
+PokemonFanClubPikachuText.Text
+	text_far WLA_GLOBAL_PokemonFanClubPikachuText
 	text_end
 
 PokemonFanClubSeelText:
 	text_asm
-	ld hl, .Text
+	ld hl, PokemonFanClubSeelText.Text
 	call PrintText
 	ld a, SEEL
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-.Text:
-	text_far _PokemonFanClubSeelText
+PokemonFanClubSeelText.Text:
+	text_far WLA_GLOBAL_PokemonFanClubSeelText
 	text_end
 
 PokemonFanClubChairmanText:
 	text_asm
 	call PokemonFanClub_CheckBikeInBag
-	jr nz, .nothingleft
+	jr nz, PokemonFanClubChairmanText.nothingleft
 
-	ld hl, .IntroText
+	ld hl, PokemonFanClubChairmanText.IntroText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .nothanks
+	jr nz, PokemonFanClubChairmanText.nothanks
 
 	; tell the story
-	ld hl, .StoryText
+	ld hl, PokemonFanClubChairmanText.StoryText
 	call PrintText
-	lb bc, BIKE_VOUCHER, 1
+	lb "bc", BIKE_VOUCHER, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .BikeVoucherText
+	jr nc, PokemonFanClubChairmanText.bag_full
+	ld hl, PokemonFanClubChairmanText.BikeVoucherText
 	call PrintText
 	SetEvent EVENT_GOT_BIKE_VOUCHER
-	jr .done
-.bag_full
-	ld hl, .BagFullText
+	jr PokemonFanClubChairmanText.done
+PokemonFanClubChairmanText.bag_full
+	ld hl, PokemonFanClubChairmanText.BagFullText
 	call PrintText
-	jr .done
-.nothanks
-	ld hl, .NoStoryText
+	jr PokemonFanClubChairmanText.done
+PokemonFanClubChairmanText.nothanks
+	ld hl, PokemonFanClubChairmanText.NoStoryText
 	call PrintText
-	jr .done
-.nothingleft
-	ld hl, .FinalText
+	jr PokemonFanClubChairmanText.done
+PokemonFanClubChairmanText.nothingleft
+	ld hl, PokemonFanClubChairmanText.FinalText
 	call PrintText
-.done
+PokemonFanClubChairmanText.done
 	jp TextScriptEnd
 
-.IntroText:
-	text_far _PokemonFanClubChairmanIntroText
+PokemonFanClubChairmanText.IntroText:
+	text_far WLA_GLOBAL_PokemonFanClubChairmanIntroText
 	text_end
 
-.StoryText:
-	text_far _PokemonFanClubChairmanStoryText
+PokemonFanClubChairmanText.StoryText:
+	text_far WLA_GLOBAL_PokemonFanClubChairmanStoryText
 	text_end
 
-.BikeVoucherText:
-	text_far _PokemonFanClubReceivedBikeVoucherText
+PokemonFanClubChairmanText.BikeVoucherText:
+	text_far WLA_GLOBAL_PokemonFanClubReceivedBikeVoucherText
 	sound_get_key_item
-	text_far _PokemonFanClubExplainBikeVoucherText
+	text_far WLA_GLOBAL_PokemonFanClubExplainBikeVoucherText
 	text_end
 
-.NoStoryText:
-	text_far _PokemonFanClubNoStoryText
+PokemonFanClubChairmanText.NoStoryText:
+	text_far WLA_GLOBAL_PokemonFanClubNoStoryText
 	text_end
 
-.FinalText:
-	text_far _PokemonFanClubChairFinalText
+PokemonFanClubChairmanText.FinalText:
+	text_far WLA_GLOBAL_PokemonFanClubChairFinalText
 	text_end
 
-.BagFullText:
-	text_far _PokemonFanClubBagFullText
+PokemonFanClubChairmanText.BagFullText:
+	text_far WLA_GLOBAL_PokemonFanClubBagFullText
 	text_end
 
 PokemonFanClubReceptionistText:
-	text_far _PokemonFanClubReceptionistText
+	text_far WLA_GLOBAL_PokemonFanClubReceptionistText
 	text_end
 
 PokemonFanClubSign1Text:
-	text_far _PokemonFanClubSign1Text
+	text_far WLA_GLOBAL_PokemonFanClubSign1Text
 	text_end
 
 PokemonFanClubSign2Text:
-	text_far _PokemonFanClubSign2Text
+	text_far WLA_GLOBAL_PokemonFanClubSign2Text
 	text_end

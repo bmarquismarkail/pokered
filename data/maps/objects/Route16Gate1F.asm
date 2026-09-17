@@ -3,9 +3,9 @@
 	const_export ROUTE16GATE1F_GAMBLER
 
 Route16Gate1F_Object:
-	db $a ; border block
+	.DB $a ; border block
 
-	def_warp_events
+	.DB 9
 	warp_event  0,  8, LAST_MAP, 1
 	warp_event  0,  9, LAST_MAP, 2
 	warp_event  7,  8, LAST_MAP, 3
@@ -16,10 +16,25 @@ Route16Gate1F_Object:
 	warp_event  7,  3, LAST_MAP, 8
 	warp_event  6, 12, ROUTE_16_GATE_2F, 1
 
-	def_bg_events
-
-	def_object_events
+	.DB 0
+	.DB 2
 	object_event  4,  5, SPRITE_GUARD, STAY, DOWN, TEXT_ROUTE16GATE1F_GUARD
 	object_event  4,  3, SPRITE_GAMBLER, STAY, NONE, TEXT_ROUTE16GATE1F_GAMBLER
 
-	def_warps_to ROUTE_16_GATE_1F
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 0, 8
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 0, 9
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 7, 8
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 7, 9
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 0, 2
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 0, 3
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 7, 2
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 7, 3
+
+	event_displacement ROUTE_16_GATE_1F_WIDTH, 6, 12

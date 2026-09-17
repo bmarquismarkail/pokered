@@ -1,6 +1,6 @@
-MACRO force_bike_surf
-	db \1, \3, \2
-ENDM
+.MACRO force_bike_surf
+	.DB \1, \3, \2
+.ENDM
 
 ForcedBikeOrSurfMaps:
 	; map id, x, y
@@ -12,4 +12,4 @@ ForcedBikeOrSurfMaps:
 	force_bike_surf SEAFOAM_ISLANDS_B3F, 19,  7
 	force_bike_surf SEAFOAM_ISLANDS_B4F,  4, 14
 	force_bike_surf SEAFOAM_ISLANDS_B4F,  5, 14
-	db -1 ; end
+	.DB -1 ; end

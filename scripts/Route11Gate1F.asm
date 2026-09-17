@@ -6,5 +6,5 @@ Route11Gate1F_TextPointers:
 	dw_const Route11Gate1FGuardText, TEXT_ROUTE11GATE1F_GUARD
 
 Route11Gate1FGuardText:
-	text_far _Route11Gate1FGuardText
+	text_far WLA_GLOBAL_Route11Gate1FGuardText
 	text_end

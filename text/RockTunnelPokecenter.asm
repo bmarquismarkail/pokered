@@ -1,4 +1,5 @@
-_RockTunnelPokecenterGentlemanText::
+_RockTunnelPokecenterGentlemanText:
+WLA_GLOBAL_RockTunnelPokecenterGentlemanText:
 	text "The element types"
 	line "of #MON make"
 	cont "them stronger"
@@ -7,7 +8,8 @@ _RockTunnelPokecenterGentlemanText::
 	cont "others!"
 	done
 
-_RockTunnelPokecenterFisherText::
+_RockTunnelPokecenterFisherText:
+WLA_GLOBAL_RockTunnelPokecenterFisherText:
 	text "I sold a useless"
 	line "NUGGET for ¥5000!"
 	done

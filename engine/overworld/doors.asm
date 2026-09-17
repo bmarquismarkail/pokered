@@ -6,23 +6,23 @@ IsPlayerStandingOnDoorTile:
 	ld de, $3
 	call IsInArray
 	pop de
-	jr nc, .notStandingOnDoor
+	jr nc, IsPlayerStandingOnDoorTile.notStandingOnDoor
 	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	lda_coord 8, 9 ; a = lower left background tile under player's sprite
 	ld b, a
-.loop
+IsPlayerStandingOnDoorTile.loop
 	ld a, [hli]
 	and a
-	jr z, .notStandingOnDoor
+	jr z, IsPlayerStandingOnDoorTile.notStandingOnDoor
 	cp b
-	jr nz, .loop
+	jr nz, IsPlayerStandingOnDoorTile.loop
 	scf
 	ret
-.notStandingOnDoor
+IsPlayerStandingOnDoorTile.notStandingOnDoor
 	and a
 	ret
 
-INCLUDE "data/tilesets/door_tile_ids.asm"
+.INCLUDE "data/tilesets/door_tile_ids.asm"

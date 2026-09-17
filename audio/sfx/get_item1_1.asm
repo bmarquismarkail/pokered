@@ -7,9 +7,9 @@ SFX_Get_Item1_1_Ch5:
 	toggle_perfect_pitch
 	note_type 4, 11, 1
 	octave 3
-	note G#, 2
-	note G#, 2
-	note G#, 2
+	note G_SHARP, 2
+	note G_SHARP, 2
+	note G_SHARP, 2
 	note_type 12, 11, 3
 	octave 4
 	note E_, 4

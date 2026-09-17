@@ -1,5 +1,5 @@
 ; function to draw various text boxes
-DisplayTextBoxID_::
+DisplayTextBoxID_:
 	ld a, [wTextBoxID]
 	cp TWO_OPTION_MENU
 	jp z, DisplayTwoOptionMenu
@@ -7,30 +7,30 @@ DisplayTextBoxID_::
 	ld hl, TextBoxFunctionTable
 	ld de, 3
 	call SearchTextBoxTable
-	jr c, .functionTableMatch
+	jr c, DisplayTextBoxID_.functionTableMatch
 	ld hl, TextBoxCoordTable
 	ld de, 5
 	call SearchTextBoxTable
-	jr c, .coordTableMatch
+	jr c, DisplayTextBoxID_.coordTableMatch
 	ld hl, TextBoxTextAndCoordTable
 	ld de, 9
 	call SearchTextBoxTable
-	jr c, .textAndCoordTableMatch
-.done
+	jr c, DisplayTextBoxID_.textAndCoordTableMatch
+DisplayTextBoxID_.done
 	ret
-.functionTableMatch
+DisplayTextBoxID_.functionTableMatch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; hl = address of function
-	ld de, .done
+	ld de, DisplayTextBoxID_.done
 	push de
 	jp hl ; jump to the function
-.coordTableMatch
+DisplayTextBoxID_.coordTableMatch
 	call GetTextBoxIDCoords
 	call GetAddressOfScreenCoords
 	call TextBoxBorder
 	ret
-.textAndCoordTableMatch
+DisplayTextBoxID_.textAndCoordTableMatch
 	call GetTextBoxIDCoords
 	push hl
 	call GetAddressOfScreenCoords
@@ -52,17 +52,17 @@ DisplayTextBoxID_::
 ; sets carry flag if a match is found and clears carry flag if not
 SearchTextBoxTable:
 	dec de
-.loop
+SearchTextBoxTable.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .notFound
+	jr z, SearchTextBoxTable.notFound
 	cp c
-	jr z, .found
+	jr z, SearchTextBoxTable.found
 	add hl, de
-	jr .loop
-.found
+	jr SearchTextBoxTable.loop
+SearchTextBoxTable.found
 	scf
-.notFound
+SearchTextBoxTable.notFound
 	ret
 
 ; function to load coordinates from the TextBoxCoordTable or the TextBoxTextAndCoordTable
@@ -113,19 +113,19 @@ GetAddressOfScreenCoords:
 	push bc
 	hlcoord 0, 0
 	ld bc, 20
-.loop ; loop to add d rows to the base address
+GetAddressOfScreenCoords.loop ; loop to add d rows to the base address
 	ld a, d
 	and a
-	jr z, .addedRows
+	jr z, GetAddressOfScreenCoords.addedRows
 	add hl, bc
 	dec d
-	jr .loop
-.addedRows
+	jr GetAddressOfScreenCoords.loop
+GetAddressOfScreenCoords.addedRows
 	pop bc
 	add hl, de
 	ret
 
-INCLUDE "data/text_boxes.asm"
+.INCLUDE "data/text_boxes.asm"
 
 DisplayMoneyBox:
 	ld hl, wStatusFlags5
@@ -146,7 +146,7 @@ DisplayMoneyBox:
 	ret
 
 CurrencyString:
-	db "      ¥@"
+		.STRINGMAP pokemon, "      ¥@"
 
 DoBuySellQuitMenu:
 	ld a, [wStatusFlags5]
@@ -175,13 +175,13 @@ DoBuySellQuitMenu:
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
 	bit B_PAD_A, a
-	jr nz, .pressedA
+	jr nz, DoBuySellQuitMenu.pressedA
 	bit B_PAD_B, a ; always true since only A/B are watched
-	jr z, .pressedA
+	jr z, DoBuySellQuitMenu.pressedA
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
-	jr .quit
-.pressedA
+	jr DoBuySellQuitMenu.quit
+DoBuySellQuitMenu.pressedA
 	ld a, CHOSE_MENU_ITEM
 	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
@@ -189,9 +189,9 @@ DoBuySellQuitMenu:
 	ld b, a
 	ld a, [wMaxMenuItem]
 	cp b
-	jr z, .quit
+	jr z, DoBuySellQuitMenu.quit
 	ret
-.quit
+DoBuySellQuitMenu.quit
 	ld a, CANCELLED_MENU
 	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
@@ -229,9 +229,9 @@ DisplayTwoOptionMenu:
 	ld hl, wTwoOptionMenuID
 	bit BIT_SECOND_MENU_OPTION_DEFAULT, [hl]
 	res BIT_SECOND_MENU_OPTION_DEFAULT, [hl]
-	jr z, .storeCurrentMenuItem
+	jr z, DisplayTwoOptionMenu.storeCurrentMenuItem
 	inc a
-.storeCurrentMenuItem
+DisplayTwoOptionMenu.storeCurrentMenuItem
 	ld [wCurrentMenuItem], a
 	pop hl
 	push hl
@@ -242,10 +242,10 @@ DisplayTwoOptionMenu:
 	ld e, a
 	ld d, $0
 	ld a, $5
-.menuStringLoop
+DisplayTwoOptionMenu.menuStringLoop
 	add hl, de
 	dec a
-	jr nz, .menuStringLoop
+	jr nz, DisplayTwoOptionMenu.menuStringLoop
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -256,20 +256,20 @@ DisplayTwoOptionMenu:
 	push de
 	ld a, [wTwoOptionMenuID]
 	cp TRADE_CANCEL_MENU
-	jr nz, .notTradeCancelMenu
+	jr nz, DisplayTwoOptionMenu.notTradeCancelMenu
 	call CableClub_TextBoxBorder
-	jr .afterTextBoxBorder
-.notTradeCancelMenu
+	jr DisplayTwoOptionMenu.afterTextBoxBorder
+DisplayTwoOptionMenu.notTradeCancelMenu
 	call TextBoxBorder
-.afterTextBoxBorder
+DisplayTwoOptionMenu.afterTextBoxBorder
 	call UpdateSprites
 	pop hl
 	ld a, [hli]
 	and a ; put blank line before first menu item?
 	ld bc, 20 + 2
-	jr z, .noBlankLine
+	jr z, DisplayTwoOptionMenu.noBlankLine
 	ld bc, 2 * 20 + 2
-.noBlankLine
+DisplayTwoOptionMenu.noBlankLine
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -281,7 +281,7 @@ DisplayTwoOptionMenu:
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wTwoOptionMenuID]
 	cp NO_YES_MENU
-	jr nz, .notNoYesMenu
+	jr nz, DisplayTwoOptionMenu.notNoYesMenu
 ; No/Yes menu
 ; this menu type ignores the B button
 ; it only seems to be used when confirming the deletion of a save file
@@ -294,28 +294,28 @@ DisplayTwoOptionMenu:
 	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
 	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	pop hl
-.noYesMenuInputLoop
+DisplayTwoOptionMenu.noYesMenuInputLoop
 	call HandleMenuInput
 	bit B_PAD_B, a
-	jr nz, .noYesMenuInputLoop ; try again if B was not pressed
+	jr nz, DisplayTwoOptionMenu.noYesMenuInputLoop ; try again if B was not pressed
 	pop af
 	pop hl
 	ld [wMiscFlags], a
 	ld a, SFX_PRESS_AB
 	call PlaySound
-	jr .pressedAButton
-.notNoYesMenu
+	jr DisplayTwoOptionMenu.pressedAButton
+DisplayTwoOptionMenu.notNoYesMenu
 	xor a
 	ld [wTwoOptionMenuID], a
 	call HandleMenuInput
 	pop hl
 	bit B_PAD_B, a
-	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
-.pressedAButton
+	jr nz, DisplayTwoOptionMenu.choseSecondMenuItem ; automatically choose the second option if B is pressed
+DisplayTwoOptionMenu.pressedAButton
 	ld a, [wCurrentMenuItem]
 	ld [wChosenMenuItem], a
 	and a
-	jr nz, .choseSecondMenuItem
+	jr nz, DisplayTwoOptionMenu.choseSecondMenuItem
 ; chose first menu item
 	ld a, CHOSE_FIRST_ITEM
 	ld [wMenuExitMethod], a
@@ -324,7 +324,7 @@ DisplayTwoOptionMenu:
 	call TwoOptionMenu_RestoreScreenTiles
 	and a
 	ret
-.choseSecondMenuItem
+DisplayTwoOptionMenu.choseSecondMenuItem
 	ld a, 1
 	ld [wCurrentMenuItem], a
 	ld [wChosenMenuItem], a
@@ -342,42 +342,42 @@ DisplayTwoOptionMenu:
 
 TwoOptionMenu_SaveScreenTiles:
 	ld de, wBuffer
-	lb bc, 5, 6
-.loop
+	lb "bc", 5, 6
+TwoOptionMenu_SaveScreenTiles.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .loop
+	jr nz, TwoOptionMenu_SaveScreenTiles.loop
 	push bc
 	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
 	ld c, $6
 	dec b
-	jr nz, .loop
+	jr nz, TwoOptionMenu_SaveScreenTiles.loop
 	ret
 
 TwoOptionMenu_RestoreScreenTiles:
 	ld de, wBuffer
-	lb bc, 5, 6
-.loop
+	lb "bc", 5, 6
+TwoOptionMenu_RestoreScreenTiles.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .loop
+	jr nz, TwoOptionMenu_RestoreScreenTiles.loop
 	push bc
 	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
 	ld c, 6
 	dec b
-	jr nz, .loop
+	jr nz, TwoOptionMenu_RestoreScreenTiles.loop
 	call UpdateSprites
 	ret
 
-INCLUDE "data/yes_no_menu_strings.asm"
+.INCLUDE "data/yes_no_menu_strings.asm"
 
 DisplayFieldMoveMonMenu:
 	xor a
@@ -391,7 +391,7 @@ DisplayFieldMoveMonMenu:
 	call GetMonFieldMoves
 	ld a, [wNumFieldMoves]
 	and a
-	jr nz, .fieldMovesExist
+	jr nz, DisplayFieldMoveMonMenu.fieldMovesExist
 
 ; no field moves
 	hlcoord 11, 11
@@ -400,12 +400,12 @@ DisplayFieldMoveMonMenu:
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 12
-	ldh [hFieldMoveMonMenuTopMenuItemX], a
+	ldh [lobyte(hFieldMoveMonMenuTopMenuItemX)], a
 	hlcoord 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
-.fieldMovesExist
+DisplayFieldMoveMonMenu.fieldMovesExist
 	push af
 
 ; Calculate the text box position and dimensions based on the leftmost X coord
@@ -425,12 +425,12 @@ DisplayFieldMoveMonMenu:
 ; For each field move, move the top of the text box up 2 rows while the leaving
 ; the bottom of the text box at the bottom of the screen.
 	ld de, -SCREEN_WIDTH * 2
-.textBoxHeightLoop
+DisplayFieldMoveMonMenu.textBoxHeightLoop
 	add hl, de
 	inc b
 	inc b
 	dec a
-	jr nz, .textBoxHeightLoop
+	jr nz, DisplayFieldMoveMonMenu.textBoxHeightLoop
 
 ; Make space for an extra blank row above the top field move.
 	ld de, -SCREEN_WIDTH
@@ -449,31 +449,31 @@ DisplayFieldMoveMonMenu:
 	add hl, de
 	ld de, -SCREEN_WIDTH * 2
 	ld a, [wNumFieldMoves]
-.calcFirstFieldMoveYLoop
+DisplayFieldMoveMonMenu.calcFirstFieldMoveYLoop
 	add hl, de
 	dec a
-	jr nz, .calcFirstFieldMoveYLoop
+	jr nz, DisplayFieldMoveMonMenu.calcFirstFieldMoveYLoop
 
 	xor a
 	ld [wNumFieldMoves], a
 	ld de, wFieldMoves
-.printNamesLoop
+DisplayFieldMoveMonMenu.printNamesLoop
 	push hl
 	ld hl, FieldMoveNames
 	ld a, [de]
 	and a
-	jr z, .donePrintingNames
+	jr z, DisplayFieldMoveMonMenu.donePrintingNames
 	inc de
 	ld b, a ; index of name
-.skipNamesLoop ; skip past names before the name we want
+DisplayFieldMoveMonMenu.skipNamesLoop ; skip past names before the name we want
 	dec b
-	jr z, .reachedName
-.skipNameLoop ; skip past current name
+	jr z, DisplayFieldMoveMonMenu.reachedName
+DisplayFieldMoveMonMenu.skipNameLoop ; skip past current name
 	ld a, [hli]
-	cp '@'
-	jr nz, .skipNameLoop
-	jr .skipNamesLoop
-.reachedName
+	cp $50
+	jr nz, DisplayFieldMoveMonMenu.skipNameLoop
+	jr DisplayFieldMoveMonMenu.skipNamesLoop
+DisplayFieldMoveMonMenu.reachedName
 	ld b, h
 	ld c, l
 	pop hl
@@ -484,12 +484,12 @@ DisplayFieldMoveMonMenu:
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
-	jr .printNamesLoop
+	jr DisplayFieldMoveMonMenu.printNamesLoop
 
-.donePrintingNames
+DisplayFieldMoveMonMenu.donePrintingNames
 	pop hl
 	ld a, [wFieldMovesLeftmostXCoord]
-	ldh [hFieldMoveMonMenuTopMenuItemX], a
+	ldh [lobyte(hFieldMoveMonMenuTopMenuItemX)], a
 	hlcoord 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
@@ -499,10 +499,10 @@ DisplayFieldMoveMonMenu:
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
-INCLUDE "data/moves/field_move_names.asm"
+.INCLUDE "data/moves/field_move_names.asm"
 
 PokemonMenuEntries:
-	db   "STATS"
+		.STRINGMAP pokemon, "STATS"
 	next "SWITCH"
 	next "CANCEL@"
 
@@ -515,27 +515,27 @@ GetMonFieldMoves:
 	ld e, l
 	ld c, NUM_MOVES + 1
 	ld hl, wFieldMoves
-.loop
+GetMonFieldMoves.loop
 	push hl
-.nextMove
+GetMonFieldMoves.nextMove
 	dec c
-	jr z, .done
+	jr z, GetMonFieldMoves.done
 	ld a, [de] ; move ID
 	and a
-	jr z, .done
+	jr z, GetMonFieldMoves.done
 	ld b, a
 	inc de
 	ld hl, FieldMoveDisplayData
-.fieldMoveLoop
+GetMonFieldMoves.fieldMoveLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .nextMove ; if the move is not a field move
+	jr z, GetMonFieldMoves.nextMove ; if the move is not a field move
 	cp b
-	jr z, .foundFieldMove
+	jr z, GetMonFieldMoves.foundFieldMove
 	inc hl
 	inc hl
-	jr .fieldMoveLoop
-.foundFieldMove
+	jr GetMonFieldMoves.fieldMoveLoop
+GetMonFieldMoves.foundFieldMove
 	ld a, b
 	ld [wLastFieldMoveID], a
 	ld a, [hli] ; field move name index
@@ -547,15 +547,15 @@ GetMonFieldMoves:
 	ld [wNumFieldMoves], a
 	ld a, [wFieldMovesLeftmostXCoord]
 	cp b
-	jr c, .skipUpdatingLeftmostXCoord
+	jr c, GetMonFieldMoves.skipUpdatingLeftmostXCoord
 	ld a, b
 	ld [wFieldMovesLeftmostXCoord], a
-.skipUpdatingLeftmostXCoord
+GetMonFieldMoves.skipUpdatingLeftmostXCoord
 	ld a, [wLastFieldMoveID]
 	ld b, a
-	jr .loop
-.done
+	jr GetMonFieldMoves.loop
+GetMonFieldMoves.done
 	pop hl
 	ret
 
-INCLUDE "data/moves/field_moves.asm"
+.INCLUDE "data/moves/field_moves.asm"

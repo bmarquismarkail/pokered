@@ -1,6 +1,6 @@
-DEF NOT_VISITED EQU $fe
+.DEFINE NOT_VISITED $fe
 
-DEF BIRD_BASE_TILE EQU $04
+.DEFINE BIRD_BASE_TILE $04
 
 DisplayTownMap:
 	call LoadTownMap
@@ -10,7 +10,7 @@ DisplayTownMap:
 	ld [hl], $ff
 	push hl
 	ld a, $1
-	ldh [hJoy7], a
+	ldh [lobyte(hJoy7)], a
 	ld a, [wCurMap]
 	push af
 	ld b, $0
@@ -22,18 +22,18 @@ DisplayTownMap:
 	ld de, wShadowOAMBackupSprite00
 	ld bc, OBJ_SIZE * 4
 	call CopyData
-	ld hl, vSprites tile BIRD_BASE_TILE
+	ld hl, vSprites + TILE_SIZE * BIRD_BASE_TILE
 	ld de, TownMapCursor
-	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
+	lb "bc", bank(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
 	pop af
-	jr .enterLoop
+	jr DisplayTownMap.enterLoop
 
-.townMapLoop
+DisplayTownMap.townMapLoop
 	hlcoord 0, 0
-	lb bc, 1, 20
+	lb "bc", 1, 20
 	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
@@ -41,7 +41,7 @@ DisplayTownMap:
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-.enterLoop
+DisplayTownMap.enterLoop
 	ld de, wTownMapCoords
 	call LoadTownMapEntry
 	ld a, [de]
@@ -53,12 +53,12 @@ DisplayTownMap:
 	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
 	ld de, wNameBuffer
-.copyMapName
+DisplayTownMap.copyMapName
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp '@'
-	jr nz, .copyMapName
+	cp $50
+	jr nz, DisplayTownMap.copyMapName
 	hlcoord 1, 0
 	ld de, wNameBuffer
 	call PlaceString
@@ -66,51 +66,51 @@ DisplayTownMap:
 	ld de, wShadowOAMBackupSprite04
 	ld bc, OBJ_SIZE * 4
 	call CopyData
-.inputLoop
+DisplayTownMap.inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	ld b, a
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
-	jr z, .inputLoop
+	jr z, DisplayTownMap.inputLoop
 	ld a, SFX_TINK
 	call PlaySound
 	bit B_PAD_UP, b
-	jr nz, .pressedUp
+	jr nz, DisplayTownMap.pressedUp
 	bit B_PAD_DOWN, b
-	jr nz, .pressedDown
+	jr nz, DisplayTownMap.pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
-	ldh [hJoy7], a
+	ldh [lobyte(hJoy7)], a
 	ld [wAnimCounter], a
 	call ExitTownMap
 	pop hl
 	pop af
 	ld [hl], a
 	ret
-.pressedUp
+DisplayTownMap.pressedUp
 	ld a, [wWhichTownMapLocation]
 	inc a
 	cp TownMapOrderEnd - TownMapOrder ; number of list items + 1
-	jr nz, .noOverflow
+	jr nz, DisplayTownMap.noOverflow
 	xor a
-.noOverflow
+DisplayTownMap.noOverflow
 	ld [wWhichTownMapLocation], a
-	jp .townMapLoop
-.pressedDown
+	jp DisplayTownMap.townMapLoop
+DisplayTownMap.pressedDown
 	ld a, [wWhichTownMapLocation]
 	dec a
 	cp -1
-	jr nz, .noUnderflow
+	jr nz, DisplayTownMap.noUnderflow
 	ld a, TownMapOrderEnd - TownMapOrder - 1 ; number of list items
-.noUnderflow
+DisplayTownMap.noUnderflow
 	ld [wWhichTownMapLocation], a
-	jp .townMapLoop
+	jp DisplayTownMap.townMapLoop
 
-INCLUDE "data/maps/town_map_order.asm"
+.INCLUDE "data/maps/town_map_order.asm"
 
 TownMapCursor:
-	INCBIN "gfx/town_map/town_map_cursor.1bpp"
+	.INCBIN "gfx/town_map/town_map_cursor.1bpp"
 TownMapCursorEnd:
 
 LoadTownMap_Nest:
@@ -136,20 +136,20 @@ LoadTownMap_Nest:
 	ret
 
 MonsNestText:
-	db "'s NEST@"
+		.STRINGMAP pokemon, "'s NEST@"
 
-LoadTownMap_Fly::
+LoadTownMap_Fly:
 	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite
-	ld hl, vSprites tile BIRD_BASE_TILE
-	lb bc, BANK(BirdSprite), 12
+	ld hl, vSprites + TILE_SIZE * BIRD_BASE_TILE
+	lb "bc", bank(BirdSprite), 12
 	call CopyVideoData
 	ld de, TownMapUpArrow
-	ld hl, vChars1 tile $6d
-	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / TILE_1BPP_SIZE
+	ld hl, vChars1 + TILE_SIZE * $6d
+	lb "bc", bank(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -165,13 +165,13 @@ LoadTownMap_Fly::
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
 	decoord 18, 0
-.townMapFlyLoop
-	ld a, ' '
+LoadTownMap_Fly.townMapFlyLoop
+	ld a, $7f
 	ld [de], a
 	push hl
 	push hl
 	hlcoord 3, 0
-	lb bc, 1, 15
+	lb "bc", 1, 15
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
@@ -183,39 +183,38 @@ LoadTownMap_Fly::
 	ld c, 15
 	call DelayFrames
 	hlcoord 18, 0
-	ld [hl], '▲'
+	ld [hl], $ed
 	hlcoord 19, 0
-	ld [hl], '▼'
+	ld [hl], $ee
 	pop hl
-.inputLoop
+LoadTownMap_Fly.inputLoop
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [lobyte(hJoy5)]
 	ld b, a
 	pop hl
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
-	jr z, .inputLoop
+	jr z, LoadTownMap_Fly.inputLoop
 	bit B_PAD_A, b
-	jr nz, .pressedA
+	jr nz, LoadTownMap_Fly.pressedA
 	ld a, SFX_TINK
 	call PlaySound
 	bit B_PAD_UP, b
-	jr nz, .pressedUp
+	jr nz, LoadTownMap_Fly.pressedUp
 	bit B_PAD_DOWN, b
-	jr nz, .pressedDown
-	jr .pressedB
-.pressedA
+	jr nz, LoadTownMap_Fly.pressedDown
+	jr LoadTownMap_Fly.pressedB
+LoadTownMap_Fly.pressedA
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
 	ld a, [hl]
 	ld [wDestinationMap], a
 	ld hl, wStatusFlags6
 	set BIT_FLY_WARP, [hl]
-	ASSERT wStatusFlags6 + 1 == wStatusFlags7
 	inc hl
 	set BIT_USED_FLY, [hl]
-.pressedB
+LoadTownMap_Fly.pressedB
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOutWithDelay3
@@ -223,33 +222,33 @@ LoadTownMap_Fly::
 	pop af
 	ld [hl], a
 	ret
-.pressedUp
+LoadTownMap_Fly.pressedUp
 	decoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jr z, .wrapToStartOfList
+	jr z, LoadTownMap_Fly.wrapToStartOfList
 	cp NOT_VISITED
-	jr z, .pressedUp ; skip past unvisited towns
-	jp .townMapFlyLoop
-.wrapToStartOfList
+	jr z, LoadTownMap_Fly.pressedUp ; skip past unvisited towns
+	jp LoadTownMap_Fly.townMapFlyLoop
+LoadTownMap_Fly.wrapToStartOfList
 	ld hl, wFlyLocationsList
-	jp .townMapFlyLoop
-.pressedDown
+	jp LoadTownMap_Fly.townMapFlyLoop
+LoadTownMap_Fly.pressedDown
 	decoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
-	jr z, .wrapToEndOfList
+	jr z, LoadTownMap_Fly.wrapToEndOfList
 	cp NOT_VISITED
-	jr z, .pressedDown ; skip past unvisited towns
-	jp .townMapFlyLoop
-.wrapToEndOfList
+	jr z, LoadTownMap_Fly.pressedDown ; skip past unvisited towns
+	jp LoadTownMap_Fly.townMapFlyLoop
+LoadTownMap_Fly.wrapToEndOfList
 	ld hl, wFlyLocationsList + NUM_CITY_MAPS
-	jr .pressedDown
+	jr LoadTownMap_Fly.pressedDown
 
 ToText:
-	db "To@"
+		.STRINGMAP pokemon, "To@"
 
 BuildFlyLocationsList:
 	ld hl, wFlyAnimUsingCoordList
@@ -259,24 +258,24 @@ BuildFlyLocationsList:
 	ld e, a
 	ld a, [wTownVisitedFlag + 1]
 	ld d, a
-	lb bc, 0, NUM_CITY_MAPS
-.loop
+	lb "bc", 0, NUM_CITY_MAPS
+BuildFlyLocationsList.loop
 	srl d
 	rr e
 	ld a, NOT_VISITED
-	jr nc, .notVisited
+	jr nc, BuildFlyLocationsList.notVisited
 	ld a, b ; store the map number of the town if it has been visited
-.notVisited
+BuildFlyLocationsList.notVisited
 	ld [hl], a
 	inc hl
 	inc b
 	dec c
-	jr nz, .loop
+	jr nz, BuildFlyLocationsList.loop
 	ld [hl], $ff
 	ret
 
 TownMapUpArrow:
-	INCBIN "gfx/town_map/up_arrow.1bpp"
+	.INCBIN "gfx/town_map/up_arrow.1bpp"
 TownMapUpArrowEnd:
 
 LoadTownMap:
@@ -289,21 +288,21 @@ LoadTownMap:
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
-	ld de, vChars2 tile $60
+	ld de, vChars2 + TILE_SIZE * $60
 	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
-	ld a, BANK(WorldMapTileGraphics)
+	ld a, bank(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon
-	ld de, vSprites tile $04
+	ld de, vSprites + TILE_SIZE * $04
 	ld bc, MonNestIconEnd - MonNestIcon
-	ld a, BANK(MonNestIcon)
+	ld a, bank(MonNestIcon)
 	call FarCopyDataDouble
 	hlcoord 0, 0
 	ld de, CompressedMap
-.nextTile
+LoadTownMap.nextTile
 	ld a, [de]
 	and a
-	jr z, .done
+	jr z, LoadTownMap.done
 	ld b, a
 	and $f
 	ld c, a
@@ -311,13 +310,13 @@ LoadTownMap:
 	swap a
 	and $f
 	add $60
-.writeRunLoop
+LoadTownMap.writeRunLoop
 	ld [hli], a
 	dec c
-	jr nz, .writeRunLoop
+	jr nz, LoadTownMap.writeRunLoop
 	inc de
-	jr .nextTile
-.done
+	jr LoadTownMap.nextTile
+LoadTownMap.done
 	call EnableLCD
 	ld b, SET_PAL_TOWN_MAP
 	call RunPaletteCommand
@@ -330,7 +329,7 @@ LoadTownMap:
 	ret
 
 CompressedMap:
-	INCBIN "gfx/town_map/town_map.rle"
+	.INCBIN "gfx/town_map/town_map.rle"
 
 ExitTownMap:
 ; clear town map graphics data and load usual graphics data
@@ -359,12 +358,12 @@ DrawPlayerOrBirdSprite:
 	call WritePlayerOrBirdSpriteOAM
 	pop hl
 	ld de, wNameBuffer
-.loop
+DrawPlayerOrBirdSprite.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp '@'
-	jr nz, .loop
+	cp $50
+	jr nz, DrawPlayerOrBirdSprite.loop
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
 	ld bc, OAM_COUNT * 4
@@ -375,30 +374,30 @@ DisplayWildLocations:
 	call ZeroOutDuplicatesInList
 	ld hl, wShadowOAM
 	ld de, wTownMapCoords
-.loop
+DisplayWildLocations.loop
 	ld a, [de]
 	cp $ff
-	jr z, .exitLoop
+	jr z, DisplayWildLocations.exitLoop
 	and a
-	jr z, .nextEntry
+	jr z, DisplayWildLocations.nextEntry
 	push hl
 	call LoadTownMapEntry
 	pop hl
 	ld a, [de]
 	cp $19 ; Cerulean Cave's coordinates
-	jr z, .nextEntry ; skip Cerulean Cave
+	jr z, DisplayWildLocations.nextEntry ; skip Cerulean Cave
 	call TownMapCoordsToOAMCoords
-	ld a, $4 ; nest icon tile no.
+	ld a, $4 ; nest icon + TILE_SIZE * no.
 	ld [hli], a
 	xor a
 	ld [hli], a
-.nextEntry
+DisplayWildLocations.nextEntry
 	inc de
-	jr .loop
-.exitLoop
+	jr DisplayWildLocations.loop
+DisplayWildLocations.exitLoop
 	ld a, l
 	and a ; were any OAM entries written?
-	jr nz, .drawPlayerSprite
+	jr nz, DisplayWildLocations.drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
 	hlcoord 1, 7
 	ld b, 2
@@ -407,19 +406,19 @@ DisplayWildLocations:
 	hlcoord 2, 9
 	ld de, AreaUnknownText
 	call PlaceString
-	jr .done
-.drawPlayerSprite
+	jr DisplayWildLocations.done
+DisplayWildLocations.drawPlayerSprite
 	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
-.done
+DisplayWildLocations.done
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
 	ld bc, OAM_COUNT * 4
 	jp CopyData
 
 AreaUnknownText:
-	db " AREA UNKNOWN@"
+		.STRINGMAP pokemon, " AREA UNKNOWN@"
 
 TownMapCoordsToOAMCoords:
 ; in: lower nybble of a = x, upper nybble of a = y
@@ -451,7 +450,7 @@ WriteTownMapSpriteOAM:
 
 ; Subtract 4 from c (X coord) and 4 from b (Y coord). However, the carry from c
 ; is added to b, so the net result is that only 3 is subtracted from b.
-	lb hl, -4, -4
+	lb "hl", -4, -4
 	add hl, bc
 
 	ld b, h
@@ -461,11 +460,11 @@ WriteTownMapSpriteOAM:
 WriteAsymmetricMonPartySpriteOAM:
 ; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
-	lb de, 2, 2
-.loop
+	lb "de", 2, 2
+WriteAsymmetricMonPartySpriteOAM.loop
 	push de
 	push bc
-.innerLoop
+WriteAsymmetricMonPartySpriteOAM.innerLoop
 	ld a, b
 	ld [hli], a
 	ld a, c
@@ -481,28 +480,28 @@ WriteAsymmetricMonPartySpriteOAM:
 	add c
 	ld c, a
 	dec e
-	jr nz, .innerLoop
+	jr nz, WriteAsymmetricMonPartySpriteOAM.innerLoop
 	pop bc
 	pop de
 	ld a, 8
 	add b
 	ld b, a
 	dec d
-	jr nz, .loop
+	jr nz, WriteAsymmetricMonPartySpriteOAM.loop
 	ret
 
 WriteSymmetricMonPartySpriteOAM:
 ; Writes 4 OAM blocks for a mon party sprite other than a helix. All the
 ; sprites other than the helix one have a vertical line of symmetry which allows
-; the X-flip OAM bit to be used so that only 2 rather than 4 tile patterns are
+; the X-flip OAM bit to be used so that only 2 rather than 4 + TILE_SIZE * patterns are
 ; needed.
 	xor a
 	ld [wSymmetricSpriteOAMAttributes], a
-	lb de, 2, 2
-.loop
+	lb "de", 2, 2
+WriteSymmetricMonPartySpriteOAM.loop
 	push de
 	push bc
-.innerLoop
+WriteSymmetricMonPartySpriteOAM.innerLoop
 	ld a, b
 	ld [hli], a ; Y
 	ld a, c
@@ -518,7 +517,7 @@ WriteSymmetricMonPartySpriteOAM:
 	add c
 	ld c, a
 	dec e
-	jr nz, .innerLoop
+	jr nz, WriteSymmetricMonPartySpriteOAM.innerLoop
 	pop bc
 	pop de
 	push hl
@@ -530,13 +529,13 @@ WriteSymmetricMonPartySpriteOAM:
 	add b
 	ld b, a
 	dec d
-	jr nz, .loop
+	jr nz, WriteSymmetricMonPartySpriteOAM.loop
 	ret
 
 ZeroOutDuplicatesInList:
 ; replace duplicate bytes in the list of wild pokemon locations with 0
 	ld de, wBuffer
-.loop
+ZeroOutDuplicatesInList.loop
 	ld a, [de]
 	inc de
 	cp $ff
@@ -544,41 +543,41 @@ ZeroOutDuplicatesInList:
 	ld c, a
 	ld l, e
 	ld h, d
-.zeroDuplicatesLoop
+ZeroOutDuplicatesInList.zeroDuplicatesLoop
 	ld a, [hl]
 	cp $ff
-	jr z, .loop
+	jr z, ZeroOutDuplicatesInList.loop
 	cp c
-	jr nz, .skipZeroing
+	jr nz, ZeroOutDuplicatesInList.skipZeroing
 	xor a
 	ld [hl], a
-.skipZeroing
+ZeroOutDuplicatesInList.skipZeroing
 	inc hl
-	jr .zeroDuplicatesLoop
+	jr ZeroOutDuplicatesInList.zeroDuplicatesLoop
 
 LoadTownMapEntry:
 ; in: a = map number
 ; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
 	cp FIRST_INDOOR_MAP
-	jr c, .external
+	jr c, LoadTownMapEntry.external
 	ld bc, 4
 	ld hl, InternalMapEntries
-.loop
+LoadTownMapEntry.loop
 	cp [hl]
-	jr c, .foundEntry
+	jr c, LoadTownMapEntry.foundEntry
 	add hl, bc
-	jr .loop
-.foundEntry
+	jr LoadTownMapEntry.loop
+LoadTownMapEntry.foundEntry
 	inc hl
-	jr .readEntry
-.external
+	jr LoadTownMapEntry.readEntry
+LoadTownMapEntry.external
 	ld hl, ExternalMapEntries
 	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc
-.readEntry
+LoadTownMapEntry.readEntry
 	ld a, [hli]
 	ld [de], a
 	ld a, [hli]
@@ -586,38 +585,38 @@ LoadTownMapEntry:
 	ld l, a
 	ret
 
-INCLUDE "data/maps/town_map_entries.asm"
+.INCLUDE "data/maps/town_map_entries.asm"
 
-INCLUDE "data/maps/names.asm"
+.INCLUDE "data/maps/names.asm"
 
 MonNestIcon:
-	INCBIN "gfx/town_map/mon_nest_icon.1bpp"
+	.INCBIN "gfx/town_map/mon_nest_icon.1bpp"
 MonNestIconEnd:
 
-TownMapSpriteBlinkingAnimation::
+TownMapSpriteBlinkingAnimation:
 	ld a, [wAnimCounter]
 	inc a
 	cp 25
-	jr z, .hideSprites
+	jr z, TownMapSpriteBlinkingAnimation.hideSprites
 	cp 50
-	jr nz, .done
+	jr nz, TownMapSpriteBlinkingAnimation.done
 ; show sprites when the counter reaches 50
 	ld hl, wShadowOAMBackup
 	ld de, wShadowOAM
 	ld bc, (OAM_COUNT - 4) * 4
 	call CopyData
 	xor a
-	jr .done
-.hideSprites
+	jr TownMapSpriteBlinkingAnimation.done
+TownMapSpriteBlinkingAnimation.hideSprites
 	ld hl, wShadowOAMSprite00YCoord
 	ld b, OAM_COUNT - 4
 	ld de, OBJ_SIZE
-.hideSpritesLoop
+TownMapSpriteBlinkingAnimation.hideSpritesLoop
 	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec b
-	jr nz, .hideSpritesLoop
+	jr nz, TownMapSpriteBlinkingAnimation.hideSpritesLoop
 	ld a, 25
-.done
+TownMapSpriteBlinkingAnimation.done
 	ld [wAnimCounter], a
 	jp DelayFrame

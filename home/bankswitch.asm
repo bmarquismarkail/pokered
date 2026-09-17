@@ -1,35 +1,35 @@
-BankswitchHome::
+BankswitchHome:
 ; switches to bank # in a
 ; Only use this when in the home bank!
 	ld [wBankswitchHomeTemp], a
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wBankswitchHomeSavedROMBank], a
 	ld a, [wBankswitchHomeTemp]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-BankswitchBack::
+BankswitchBack:
 ; returns from BankswitchHome
 	ld a, [wBankswitchHomeSavedROMBank]
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret
 
-Bankswitch::
+Bankswitch:
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	push af
 	ld a, b
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
-	ld bc, .Return
+	ld bc, Bankswitch.Return
 	push bc
 	jp hl
-.Return
+Bankswitch.Return
 	pop bc
 	ld a, b
-	ldh [hLoadedROMBank], a
+	ldh [lobyte(hLoadedROMBank)], a
 	ld [rROMB], a
 	ret

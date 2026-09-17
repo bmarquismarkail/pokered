@@ -12,20 +12,20 @@ PewterMart_TextPointers:
 
 PewterMartYoungsterText:
 	text_asm
-	ld hl, .Text
+	ld hl, PewterMartYoungsterText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _PewterMartYoungsterText
+PewterMartYoungsterText.Text:
+	text_far WLA_GLOBAL_PewterMartYoungsterText
 	text_end
 
 PewterMartSuperNerdText:
 	text_asm
-	ld hl, .Text
+	ld hl, PewterMartSuperNerdText.Text
 	call PrintText
 	jp TextScriptEnd
 
-.Text:
-	text_far _PewterMartSuperNerdText
+PewterMartSuperNerdText.Text:
+	text_far WLA_GLOBAL_PewterMartSuperNerdText
 	text_end

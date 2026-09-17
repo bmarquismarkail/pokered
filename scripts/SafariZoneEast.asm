@@ -12,13 +12,13 @@ SafariZoneEast_TextPointers:
 	dw_const SafariZoneEastSignText,          TEXT_SAFARIZONEEAST_SIGN
 
 SafariZoneEastRestHouseSignText:
-	text_far _SafariZoneEastRestHouseSignText
+	text_far WLA_GLOBAL_SafariZoneEastRestHouseSignText
 	text_end
 
 SafariZoneEastTrainerTipsText:
-	text_far _SafariZoneEastTrainerTipsText
+	text_far WLA_GLOBAL_SafariZoneEastTrainerTipsText
 	text_end
 
 SafariZoneEastSignText:
-	text_far _SafariZoneEastSignText
+	text_far WLA_GLOBAL_SafariZoneEastSignText
 	text_end

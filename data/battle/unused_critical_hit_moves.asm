@@ -1,6 +1,6 @@
 UnusedHighCriticalMoves:
-	db KARATE_CHOP
-	db RAZOR_LEAF
-	db CRABHAMMER
-	db SLASH
-	db -1 ; end
+	.DB KARATE_CHOP
+	.DB RAZOR_LEAF
+	.DB CRABHAMMER
+	.DB SLASH
+	.DB -1 ; end

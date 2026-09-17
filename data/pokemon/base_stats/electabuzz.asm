@@ -1,17 +1,17 @@
-	db DEX_ELECTABUZZ ; pokedex id
+	.DB DEX_ELECTABUZZ ; pokedex id
 
-	db  65,  83,  57, 105,  85
+	.DB  65,  83,  57, 105,  85
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 45 ; catch rate
-	db 156 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 45 ; catch rate
+	.DB 156 ; base exp
 
-	INCBIN "gfx/pokemon/front/electabuzz.pic", 0, 1 ; sprite dimensions
-	dw ElectabuzzPicFront, ElectabuzzPicBack
+	.INCBIN "gfx/pokemon/front/electabuzz.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ElectabuzzPicFront, ElectabuzzPicBack
 
-	db QUICK_ATTACK, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB QUICK_ATTACK, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -22,4 +22,4 @@
 	     SUBSTITUTE,   STRENGTH,     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

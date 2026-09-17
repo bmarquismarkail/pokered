@@ -45,7 +45,7 @@ Route21TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_21_TRAINER_7, 0, Route21Fisher3BattleText, Route21Fisher3EndBattleText, Route21Fisher3AfterBattleText
 Route21TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_21_TRAINER_8, 0, Route21Fisher4BattleText, Route21Fisher4EndBattleText, Route21Fisher4AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route21Fisher1Text:
 	text_asm
@@ -102,109 +102,109 @@ Route21Fisher4Text:
 	jp TextScriptEnd
 
 Route21Fisher1BattleText:
-	text_far _Route21Fisher1BattleText
+	text_far WLA_GLOBAL_Route21Fisher1BattleText
 	text_end
 
 Route21Fisher1EndBattleText:
-	text_far _Route21Fisher1EndBattleText
+	text_far WLA_GLOBAL_Route21Fisher1EndBattleText
 	text_end
 
 Route21Fisher1AfterBattleText:
-	text_far _Route21Fisher1AfterBattleText
+	text_far WLA_GLOBAL_Route21Fisher1AfterBattleText
 	text_end
 
 Route21Fisher2BattleText:
-	text_far _Route21Fisher2BattleText
+	text_far WLA_GLOBAL_Route21Fisher2BattleText
 	text_end
 
 Route21Fisher2EndBattleText:
-	text_far _Route21Fisher2EndBattleText
+	text_far WLA_GLOBAL_Route21Fisher2EndBattleText
 	text_end
 
 Route21Fisher2AfterBattleText:
-	text_far _Route21Fisher2AfterBattleText
+	text_far WLA_GLOBAL_Route21Fisher2AfterBattleText
 	text_end
 
 Route21Swimmer1BattleText:
-	text_far _Route21Swimmer1BattleText
+	text_far WLA_GLOBAL_Route21Swimmer1BattleText
 	text_end
 
 Route21Swimmer1EndBattleText:
-	text_far _Route21Swimmer1EndBattleText
+	text_far WLA_GLOBAL_Route21Swimmer1EndBattleText
 	text_end
 
 Route21Swimmer1AfterBattleText:
-	text_far _Route21Swimmer1AfterBattleText
+	text_far WLA_GLOBAL_Route21Swimmer1AfterBattleText
 	text_end
 
 Route21Swimmer2BattleText:
-	text_far _Route21Swimmer2BattleText
+	text_far WLA_GLOBAL_Route21Swimmer2BattleText
 	text_end
 
 Route21Swimmer2EndBattleText:
-	text_far _Route21Swimmer2EndBattleText
+	text_far WLA_GLOBAL_Route21Swimmer2EndBattleText
 	text_end
 
 Route21Swimmer2AfterBattleText:
-	text_far _Route21Swimmer2AfterBattleText
+	text_far WLA_GLOBAL_Route21Swimmer2AfterBattleText
 	text_end
 
 Route21Swimmer3BattleText:
-	text_far _Route21Swimmer3BattleText
+	text_far WLA_GLOBAL_Route21Swimmer3BattleText
 	text_end
 
 Route21Swimmer3EndBattleText:
-	text_far _Route21Swimmer3EndBattleText
+	text_far WLA_GLOBAL_Route21Swimmer3EndBattleText
 	text_end
 
 Route21Swimmer3AfterBattleText:
-	text_far _Route21Swimmer3AfterBattleText
+	text_far WLA_GLOBAL_Route21Swimmer3AfterBattleText
 	text_end
 
 Route21Swimmer4BattleText:
-	text_far _Route21Swimmer4BattleText
+	text_far WLA_GLOBAL_Route21Swimmer4BattleText
 	text_end
 
 Route21Swimmer4EndBattleText:
-	text_far _Route21Swimmer4EndBattleText
+	text_far WLA_GLOBAL_Route21Swimmer4EndBattleText
 	text_end
 
 Route21Swimmer4AfterBattleText:
-	text_far _Route21Swimmer4AfterBattleText
+	text_far WLA_GLOBAL_Route21Swimmer4AfterBattleText
 	text_end
 
 Route21Swimmer5BattleText:
-	text_far _Route21Swimmer5BattleText
+	text_far WLA_GLOBAL_Route21Swimmer5BattleText
 	text_end
 
 Route21Swimmer5EndBattleText:
-	text_far _Route21Swimmer5EndBattleText
+	text_far WLA_GLOBAL_Route21Swimmer5EndBattleText
 	text_end
 
 Route21Swimmer5AfterBattleText:
-	text_far _Route21Swimmer5AfterBattleText
+	text_far WLA_GLOBAL_Route21Swimmer5AfterBattleText
 	text_end
 
 Route21Fisher3BattleText:
-	text_far _Route21Fisher3BattleText
+	text_far WLA_GLOBAL_Route21Fisher3BattleText
 	text_end
 
 Route21Fisher3EndBattleText:
-	text_far _Route21Fisher3EndBattleText
+	text_far WLA_GLOBAL_Route21Fisher3EndBattleText
 	text_end
 
 Route21Fisher3AfterBattleText:
-	text_far _Route21Fisher3AfterBattleText
+	text_far WLA_GLOBAL_Route21Fisher3AfterBattleText
 	text_end
 
 Route21Fisher4BattleText:
-	text_far _Route21Fisher4BattleText
+	text_far WLA_GLOBAL_Route21Fisher4BattleText
 	text_end
 
 Route21Fisher4EndBattleText:
-	text_far _Route21Fisher4EndBattleText
+	text_far WLA_GLOBAL_Route21Fisher4EndBattleText
 	text_end
 
 Route21Fisher4AfterBattleText:
-	text_far _Route21Fisher4AfterBattleText
+	text_far WLA_GLOBAL_Route21Fisher4AfterBattleText
 	text_end

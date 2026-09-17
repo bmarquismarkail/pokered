@@ -1,17 +1,17 @@
-	db DEX_PINSIR ; pokedex id
+	.DB DEX_PINSIR ; pokedex id
 
-	db  65, 125, 100,  85,  55
+	.DB  65, 125, 100,  85,  55
 	;   hp  atk  def  spd  spc
 
-	db BUG, BUG ; type
-	db 45 ; catch rate
-	db 200 ; base exp
+	.DB BUG, BUG ; type
+	.DB 45 ; catch rate
+	.DB 200 ; base exp
 
-	INCBIN "gfx/pokemon/front/pinsir.pic", 0, 1 ; sprite dimensions
-	dw PinsirPicFront, PinsirPicBack
+	.INCBIN "gfx/pokemon/front/pinsir.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PinsirPicFront, PinsirPicBack
 
-	db VICEGRIP, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB VICEGRIP, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

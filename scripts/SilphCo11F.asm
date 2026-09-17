@@ -20,12 +20,12 @@ SilphCo11FGateCallbackScript:
 	ret nz
 	ld a, $20
 	ld [wNewTileBlockID], a
-	lb bc, 6, 3
+	lb "bc", 6, 3
 	predef_jump ReplaceTileBlock
 
 SilphCo11GateCoords:
 	dbmapcoord  3,  6
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo11F_SetCardKeyDoorYScript:
 	push hl
@@ -35,55 +35,55 @@ SilphCo11F_SetCardKeyDoorYScript:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	pop hl
-.loop_check_doors
+SilphCo11F_SetCardKeyDoorYScript.loop_check_doors
 	ld a, [hli]
 	cp $ff
-	jr z, .exit_loop
+	jr z, SilphCo11F_SetCardKeyDoorYScript.exit_loop
 	push hl
 	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .check_y_coord
+	jr z, SilphCo11F_SetCardKeyDoorYScript.check_y_coord
 	inc hl
-	jr .loop_check_doors
-.check_y_coord
+	jr SilphCo11F_SetCardKeyDoorYScript.loop_check_doors
+SilphCo11F_SetCardKeyDoorYScript.check_y_coord
 	ld a, [hli]
 	cp c
-	jr nz, .loop_check_doors
+	jr nz, SilphCo11F_SetCardKeyDoorYScript.loop_check_doors
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ret
-.exit_loop
+SilphCo11F_SetCardKeyDoorYScript.exit_loop
 	xor a
-	ldh [hUnlockedSilphCoDoors], a
+	ldh [lobyte(hUnlockedSilphCoDoors)], a
 	ret
 
 SilphCo11FSetUnlockedDoorEventScript:
-	ldh a, [hUnlockedSilphCoDoors]
+	ldh a, [lobyte(hUnlockedSilphCoDoors)]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret
 
 SilphCo11FTeamRocketLeavesScript:
-	ld hl, .HideToggleableObjectIDs
-.hide_loop
+	ld hl, SilphCo11FTeamRocketLeavesScript.HideToggleableObjectIDs
+SilphCo11FTeamRocketLeavesScript.hide_loop
 	ld a, [hli]
 	cp $ff
-	jr z, .done_hiding
+	jr z, SilphCo11FTeamRocketLeavesScript.done_hiding
 	push hl
 	ld [wToggleableObjectIndex], a
 	predef HideObject
 	pop hl
-	jr .hide_loop
-.done_hiding
-	ld hl, .ShowToggleableObjectIDs
-.show_loop
+	jr SilphCo11FTeamRocketLeavesScript.hide_loop
+SilphCo11FTeamRocketLeavesScript.done_hiding
+	ld hl, SilphCo11FTeamRocketLeavesScript.ShowToggleableObjectIDs
+SilphCo11FTeamRocketLeavesScript.show_loop
 	ld a, [hli]
 	cp -1
 	ret z
@@ -91,59 +91,59 @@ SilphCo11FTeamRocketLeavesScript:
 	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	pop hl
-	jr .show_loop
+	jr SilphCo11FTeamRocketLeavesScript.show_loop
 
-.ShowToggleableObjectIDs:
-	db TOGGLE_SAFFRON_CITY_8
-	db TOGGLE_SAFFRON_CITY_9
-	db TOGGLE_SAFFRON_CITY_A
-	db TOGGLE_SAFFRON_CITY_B
-	db TOGGLE_SAFFRON_CITY_C
-	db TOGGLE_SAFFRON_CITY_D
-	db -1 ; end
+SilphCo11FTeamRocketLeavesScript.ShowToggleableObjectIDs:
+	.DB TOGGLE_SAFFRON_CITY_8
+	.DB TOGGLE_SAFFRON_CITY_9
+	.DB TOGGLE_SAFFRON_CITY_A
+	.DB TOGGLE_SAFFRON_CITY_B
+	.DB TOGGLE_SAFFRON_CITY_C
+	.DB TOGGLE_SAFFRON_CITY_D
+	.DB -1 ; end
 
-.HideToggleableObjectIDs:
-	db TOGGLE_SAFFRON_CITY_1
-	db TOGGLE_SAFFRON_CITY_2
-	db TOGGLE_SAFFRON_CITY_3
-	db TOGGLE_SAFFRON_CITY_4
-	db TOGGLE_SAFFRON_CITY_5
-	db TOGGLE_SAFFRON_CITY_6
-	db TOGGLE_SAFFRON_CITY_7
-	db TOGGLE_SAFFRON_CITY_E
-	db TOGGLE_SAFFRON_CITY_F
-	db TOGGLE_SILPH_CO_2F_2
-	db TOGGLE_SILPH_CO_2F_3
-	db TOGGLE_SILPH_CO_2F_4
-	db TOGGLE_SILPH_CO_2F_5
-	db TOGGLE_SILPH_CO_3F_1
-	db TOGGLE_SILPH_CO_3F_2
-	db TOGGLE_SILPH_CO_4F_1
-	db TOGGLE_SILPH_CO_4F_2
-	db TOGGLE_SILPH_CO_4F_3
-	db TOGGLE_SILPH_CO_5F_1
-	db TOGGLE_SILPH_CO_5F_2
-	db TOGGLE_SILPH_CO_5F_3
-	db TOGGLE_SILPH_CO_5F_4
-	db TOGGLE_SILPH_CO_6F_1
-	db TOGGLE_SILPH_CO_6F_2
-	db TOGGLE_SILPH_CO_6F_3
-	db TOGGLE_SILPH_CO_7F_1
-	db TOGGLE_SILPH_CO_7F_2
-	db TOGGLE_SILPH_CO_7F_3
-	db TOGGLE_SILPH_CO_7F_4
-	db TOGGLE_SILPH_CO_8F_1
-	db TOGGLE_SILPH_CO_8F_2
-	db TOGGLE_SILPH_CO_8F_3
-	db TOGGLE_SILPH_CO_9F_1
-	db TOGGLE_SILPH_CO_9F_2
-	db TOGGLE_SILPH_CO_9F_3
-	db TOGGLE_SILPH_CO_10F_1
-	db TOGGLE_SILPH_CO_10F_2
-	db TOGGLE_SILPH_CO_11F_1
-	db TOGGLE_SILPH_CO_11F_2
-	db TOGGLE_SILPH_CO_11F_3
-	db -1 ; end
+SilphCo11FTeamRocketLeavesScript.HideToggleableObjectIDs:
+	.DB TOGGLE_SAFFRON_CITY_1
+	.DB TOGGLE_SAFFRON_CITY_2
+	.DB TOGGLE_SAFFRON_CITY_3
+	.DB TOGGLE_SAFFRON_CITY_4
+	.DB TOGGLE_SAFFRON_CITY_5
+	.DB TOGGLE_SAFFRON_CITY_6
+	.DB TOGGLE_SAFFRON_CITY_7
+	.DB TOGGLE_SAFFRON_CITY_E
+	.DB TOGGLE_SAFFRON_CITY_F
+	.DB TOGGLE_SILPH_CO_2F_2
+	.DB TOGGLE_SILPH_CO_2F_3
+	.DB TOGGLE_SILPH_CO_2F_4
+	.DB TOGGLE_SILPH_CO_2F_5
+	.DB TOGGLE_SILPH_CO_3F_1
+	.DB TOGGLE_SILPH_CO_3F_2
+	.DB TOGGLE_SILPH_CO_4F_1
+	.DB TOGGLE_SILPH_CO_4F_2
+	.DB TOGGLE_SILPH_CO_4F_3
+	.DB TOGGLE_SILPH_CO_5F_1
+	.DB TOGGLE_SILPH_CO_5F_2
+	.DB TOGGLE_SILPH_CO_5F_3
+	.DB TOGGLE_SILPH_CO_5F_4
+	.DB TOGGLE_SILPH_CO_6F_1
+	.DB TOGGLE_SILPH_CO_6F_2
+	.DB TOGGLE_SILPH_CO_6F_3
+	.DB TOGGLE_SILPH_CO_7F_1
+	.DB TOGGLE_SILPH_CO_7F_2
+	.DB TOGGLE_SILPH_CO_7F_3
+	.DB TOGGLE_SILPH_CO_7F_4
+	.DB TOGGLE_SILPH_CO_8F_1
+	.DB TOGGLE_SILPH_CO_8F_2
+	.DB TOGGLE_SILPH_CO_8F_3
+	.DB TOGGLE_SILPH_CO_9F_1
+	.DB TOGGLE_SILPH_CO_9F_2
+	.DB TOGGLE_SILPH_CO_9F_3
+	.DB TOGGLE_SILPH_CO_10F_1
+	.DB TOGGLE_SILPH_CO_10F_2
+	.DB TOGGLE_SILPH_CO_11F_1
+	.DB TOGGLE_SILPH_CO_11F_2
+	.DB TOGGLE_SILPH_CO_11F_3
+	.DB -1 ; end
 
 SilphCo11FResetCurScript:
 	xor a
@@ -166,43 +166,43 @@ SilphCo11F_ScriptPointers:
 SilphCo11FDefaultScript:
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ret nz
-	ld hl, .PlayerCoordsArray
+	ld hl, SilphCo11FDefaultScript.PlayerCoordsArray
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	ld a, [wCoordIndex]
 	ld [wSavedCoordIndex], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_SILPHCO11F_GIOVANNI
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SILPHCO11F_GIOVANNI
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call SetSpriteMovementBytesToFF
-	ld de, .GiovanniMovement
+	ld de, SilphCo11FDefaultScript.GiovanniMovement
 	call MoveSprite
 	ld a, SCRIPT_SILPHCO11F_GIOVANNI_FACING
 	jp SilphCo11FSetCurScript
 
-.PlayerCoordsArray:
+SilphCo11FDefaultScript.PlayerCoordsArray:
 	dbmapcoord  6, 13
 	dbmapcoord  7, 12
-	db -1 ; end
+	.DB -1 ; end
 
-.GiovanniMovement:
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_DOWN
-	db -1 ; end
+SilphCo11FDefaultScript.GiovanniMovement:
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB NPC_MOVEMENT_DOWN
+	.DB -1 ; end
 
 SilphCo11FSetPlayerAndSpriteFacingDirectionScript:
 	ld [wPlayerMovingDirection], a
 	ld a, SILPHCO11F_GIOVANNI
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, b
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11FGiovanniAfterBattleScript:
@@ -211,19 +211,19 @@ SilphCo11FGiovanniAfterBattleScript:
 	jp z, SilphCo11FResetCurScript
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, upper-right entry in SilphCo11FDefaultScript.PlayerCoordsArray
-	jr z, .face_player_up
+	jr z, SilphCo11FGiovanniAfterBattleScript.face_player_up
 	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
-	jr .continue
-.face_player_up
+	jr SilphCo11FGiovanniAfterBattleScript.continue
+SilphCo11FGiovanniAfterBattleScript.face_player_up
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
-.continue
+SilphCo11FGiovanniAfterBattleScript.continue
 	call SilphCo11FSetPlayerAndSpriteFacingDirectionScript
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_SILPHCO11F_GIOVANNI_YOU_RUINED_OUR_PLANS
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	call SilphCo11FTeamRocketLeavesScript
@@ -240,18 +240,18 @@ SilphCo11FGiovanniBattleFacingScript:
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, SILPHCO11F_GIOVANNI
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, upper-right entry in SilphCo11FDefaultScript.PlayerCoordsArray
-	jr z, .face_player_up
+	jr z, SilphCo11FGiovanniBattleFacingScript.face_player_up
 	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
-	jr .continue
-.face_player_up
+	jr SilphCo11FGiovanniBattleFacingScript.continue
+SilphCo11FGiovanniBattleFacingScript.face_player_up
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
-.continue
+SilphCo11FGiovanniBattleFacingScript.continue
 	call SilphCo11FSetPlayerAndSpriteFacingDirectionScript
 	call Delay3
 	ld a, SCRIPT_SILPHCO11F_GIOVANNI_START_BATTLE
@@ -264,7 +264,7 @@ SilphCo11FGiovanniStartBattleScript:
 	ld hl, SilphCo10FGiovanniILostAgainText
 	ld de, SilphCo10FGiovanniILostAgainText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -288,62 +288,63 @@ SilphCo11TrainerHeader0:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_0, 4, SilphCo11FRocket1BattleText, SilphCo11FRocket1EndBattleText, SilphCo11FRocket1AfterBattleText
 SilphCo11TrainerHeader1:
 	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_1, 3, SilphCo11FRocket2BattleText, SilphCo11FRocket2EndBattleText, SilphCo11FRocket2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SilphCo11FSilphPresidentText:
 	text_asm
 	CheckEvent EVENT_GOT_MASTER_BALL
-	jp nz, .got_item
-	ld hl, .Text
+	jp nz, SilphCo11FSilphPresidentText.got_item
+	ld hl, SilphCo11FSilphPresidentText.Text
 	call PrintText
-	lb bc, MASTER_BALL, 1
+	lb "bc", MASTER_BALL, 1
 	call GiveItem
-	jr nc, .bag_full
-	ld hl, .ReceivedMasterBallText
+	jr nc, SilphCo11FSilphPresidentText.bag_full
+	ld hl, SilphCo11FSilphPresidentText.ReceivedMasterBallText
 	call PrintText
 	SetEvent EVENT_GOT_MASTER_BALL
-	jr .done
-.bag_full
-	ld hl, .NoRoomText
+	jr SilphCo11FSilphPresidentText.done
+SilphCo11FSilphPresidentText.bag_full
+	ld hl, SilphCo11FSilphPresidentText.NoRoomText
 	call PrintText
-	jr .done
-.got_item
-	ld hl, .MasterBallDescriptionText
+	jr SilphCo11FSilphPresidentText.done
+SilphCo11FSilphPresidentText.got_item
+	ld hl, SilphCo11FSilphPresidentText.MasterBallDescriptionText
 	call PrintText
-.done
+SilphCo11FSilphPresidentText.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _SilphCo11FSilphPresidentText
+SilphCo11FSilphPresidentText.Text:
+	text_far WLA_GLOBAL_SilphCo11FSilphPresidentText
 	text_end
 
-.ReceivedMasterBallText:
-	text_far _SilphCo11FSilphPresidentReceivedMasterBallText
+SilphCo11FSilphPresidentText.ReceivedMasterBallText:
+	text_far WLA_GLOBAL_SilphCo11FSilphPresidentReceivedMasterBallText
 	sound_get_key_item
 	text_end
 
-.MasterBallDescriptionText:
-	text_far _SilphCo11FSilphPresidentMasterBallDescriptionText
+SilphCo11FSilphPresidentText.MasterBallDescriptionText:
+	text_far WLA_GLOBAL_SilphCo11FSilphPresidentMasterBallDescriptionText
 	text_end
 
-.NoRoomText:
-	text_far _SilphCo11FSilphPresidentNoRoomText
+SilphCo11FSilphPresidentText.NoRoomText:
+	text_far WLA_GLOBAL_SilphCo11FSilphPresidentNoRoomText
 	text_end
 
 SilphCo11FBeautyText:
-	text_far _SilphCo11FBeautyText
+	text_far WLA_GLOBAL_SilphCo11FBeautyText
 	text_end
 
 SilphCo11FGiovanniText:
-	text_far _SilphCo11FGiovanniText
+	text_far WLA_GLOBAL_SilphCo11FGiovanniText
 	text_end
 
+SilphCo11FGiovanniILostAgainText:
 SilphCo10FGiovanniILostAgainText:
-	text_far _SilphCo10FGiovanniILostAgainText
+	text_far WLA_GLOBAL_SilphCo10FGiovanniILostAgainText
 	text_end
 
 SilphCo11FGiovanniYouRuinedOurPlansText:
-	text_far _SilphCo11FGiovanniYouRuinedOurPlansText
+	text_far WLA_GLOBAL_SilphCo11FGiovanniYouRuinedOurPlansText
 	text_end
 
 SilphCo11FRocket1Text:
@@ -353,15 +354,15 @@ SilphCo11FRocket1Text:
 	jp TextScriptEnd
 
 SilphCo11FRocket1BattleText:
-	text_far _SilphCo11FRocket1BattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket1BattleText
 	text_end
 
 SilphCo11FRocket1EndBattleText:
-	text_far _SilphCo11FRocket1EndBattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket1EndBattleText
 	text_end
 
 SilphCo11FRocket1AfterBattleText:
-	text_far _SilphCo11FRocket1AfterBattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket1AfterBattleText
 	text_end
 
 SilphCo11FRocket2Text:
@@ -371,25 +372,27 @@ SilphCo11FRocket2Text:
 	jp TextScriptEnd
 
 SilphCo11FRocket2BattleText:
-	text_far _SilphCo11FRocket2BattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket2BattleText
 	text_end
 
 SilphCo11FRocket2EndBattleText:
-	text_far _SilphCo11FRocket2EndBattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket2EndBattleText
 	text_end
 
 SilphCo11FRocket2AfterBattleText:
-	text_far _SilphCo11FRocket2AfterBattleText
+	text_far WLA_GLOBAL_SilphCo11FRocket2AfterBattleText
 	text_end
 
-SilphCo10FPorygonText: ; unreferenced
+SilphCo11FPorygonText: ; unreferenced
+SilphCo10FPorygonText:
 	text_asm
-	ld hl, .Text
+	ld hl, SilphCo10FPorygonText.Text
 	call PrintText
 	ld a, PORYGON
 	call DisplayPokedex
 	jp TextScriptEnd
 
-.Text:
-	text_far _SilphCo10FPorygonText
+SilphCo11FPorygonText.Text:
+SilphCo10FPorygonText.Text:
+	text_far WLA_GLOBAL_SilphCo10FPorygonText
 	text_end

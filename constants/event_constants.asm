@@ -715,7 +715,7 @@
 
 ; Indigo Plateau events
 	const_next $8E0
-DEF INDIGO_PLATEAU_EVENTS_START EQU const_value
+.DEFINE INDIGO_PLATEAU_EVENTS_START const_value
 	const_skip
 	const EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	const_skip 4
@@ -737,7 +737,7 @@ DEF INDIGO_PLATEAU_EVENTS_START EQU const_value
 	const EVENT_BEAT_CHAMPION_RIVAL
 	const_skip 5
 	const_skip
-DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
+.DEFINE INDIGO_PLATEAU_EVENTS_END const_value - 1
 
 ; Victory Road 1F events
 	const_next $910
@@ -774,4 +774,4 @@ DEF INDIGO_PLATEAU_EVENTS_END EQU const_value - 1
 
 ; End of events
 	const_next $A00
-DEF NUM_EVENTS EQU const_value
+.DEFINE NUM_EVENTS const_value

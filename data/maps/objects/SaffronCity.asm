@@ -16,9 +16,9 @@
 	const_export SAFFRONCITY_ROCKET9
 
 SaffronCity_Object:
-	db $f ; border block
+	.DB $f ; border block
 
-	def_warp_events
+	.DB 8
 	warp_event  7,  5, COPYCATS_HOUSE_1F, 1
 	warp_event 26,  3, FIGHTING_DOJO, 1
 	warp_event 34,  3, SAFFRON_GYM, 1
@@ -28,7 +28,7 @@ SaffronCity_Object:
 	warp_event  9, 29, SAFFRON_POKECENTER, 1
 	warp_event 29, 29, MR_PSYCHICS_HOUSE, 1
 
-	def_bg_events
+	.DB 10
 	bg_event 17,  5, TEXT_SAFFRONCITY_SIGN
 	bg_event 27,  5, TEXT_SAFFRONCITY_FIGHTING_DOJO_SIGN
 	bg_event 35,  5, TEXT_SAFFRONCITY_GYM_SIGN
@@ -40,7 +40,7 @@ SaffronCity_Object:
 	bg_event 27, 29, TEXT_SAFFRONCITY_MR_PSYCHICS_HOUSE_SIGN
 	bg_event  1, 19, TEXT_SAFFRONCITY_SILPH_CO_LATEST_PRODUCT_SIGN
 
-	def_object_events
+	.DB 15
 	object_event  7,  6, SPRITE_ROCKET, STAY, NONE, TEXT_SAFFRONCITY_ROCKET1
 	object_event 20,  8, SPRITE_ROCKET, WALK, LEFT_RIGHT, TEXT_SAFFRONCITY_ROCKET2
 	object_event 34,  4, SPRITE_ROCKET, STAY, NONE, TEXT_SAFFRONCITY_ROCKET3
@@ -57,4 +57,18 @@ SaffronCity_Object:
 	object_event 18, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_SAFFRONCITY_ROCKET8
 	object_event 19, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_SAFFRONCITY_ROCKET9
 
-	def_warps_to SAFFRON_CITY
+	event_displacement SAFFRON_CITY_WIDTH, 7, 5
+
+	event_displacement SAFFRON_CITY_WIDTH, 26, 3
+
+	event_displacement SAFFRON_CITY_WIDTH, 34, 3
+
+	event_displacement SAFFRON_CITY_WIDTH, 13, 11
+
+	event_displacement SAFFRON_CITY_WIDTH, 25, 11
+
+	event_displacement SAFFRON_CITY_WIDTH, 18, 21
+
+	event_displacement SAFFRON_CITY_WIDTH, 9, 29
+
+	event_displacement SAFFRON_CITY_WIDTH, 29, 29

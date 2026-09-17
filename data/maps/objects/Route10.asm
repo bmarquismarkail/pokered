@@ -7,21 +7,21 @@
 	const_export ROUTE10_COOLTRAINER_F2
 
 Route10_Object:
-	db $2c ; border block
+	.DB $2c ; border block
 
-	def_warp_events
+	.DB 4
 	warp_event 11, 19, ROCK_TUNNEL_POKECENTER, 1
 	warp_event  8, 17, ROCK_TUNNEL_1F, 1
 	warp_event  8, 53, ROCK_TUNNEL_1F, 3
 	warp_event  6, 39, POWER_PLANT, 1
 
-	def_bg_events
+	.DB 4
 	bg_event  7, 19, TEXT_ROUTE10_ROCKTUNNEL_NORTH_SIGN
 	bg_event 12, 19, TEXT_ROUTE10_POKECENTER_SIGN
 	bg_event  9, 55, TEXT_ROUTE10_ROCKTUNNEL_SOUTH_SIGN
 	bg_event  5, 41, TEXT_ROUTE10_POWERPLANT_SIGN
 
-	def_object_events
+	.DB 6
 	object_event 10, 44, SPRITE_SUPER_NERD, STAY, LEFT, TEXT_ROUTE10_SUPER_NERD1, OPP_POKEMANIAC, 1
 	object_event  3, 57, SPRITE_HIKER, STAY, UP, TEXT_ROUTE10_HIKER1, OPP_HIKER, 7
 	object_event 14, 64, SPRITE_SUPER_NERD, STAY, LEFT, TEXT_ROUTE10_SUPER_NERD2, OPP_POKEMANIAC, 2
@@ -29,4 +29,10 @@ Route10_Object:
 	object_event  3, 61, SPRITE_HIKER, STAY, DOWN, TEXT_ROUTE10_HIKER2, OPP_HIKER, 8
 	object_event  7, 54, SPRITE_COOLTRAINER_F, STAY, DOWN, TEXT_ROUTE10_COOLTRAINER_F2, OPP_JR_TRAINER_F, 8
 
-	def_warps_to ROUTE_10
+	event_displacement ROUTE_10_WIDTH, 11, 19
+
+	event_displacement ROUTE_10_WIDTH, 8, 17
+
+	event_displacement ROUTE_10_WIDTH, 8, 53
+
+	event_displacement ROUTE_10_WIDTH, 6, 39

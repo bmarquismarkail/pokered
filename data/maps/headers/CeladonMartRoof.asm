@@ -1,2 +1,2 @@
-	map_header CeladonMartRoof, CELADON_MART_ROOF, LOBBY
+	map_header "CeladonMartRoof", CELADON_MART_ROOF, LOBBY
 	end_map_header

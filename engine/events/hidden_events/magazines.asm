@@ -3,6 +3,6 @@ PrintMagazinesText:
 	tx_pre MagazinesText
 	ret
 
-MagazinesText::
-	text_far _MagazinesText
+MagazinesText:
+	text_far WLA_GLOBAL_MagazinesText
 	text_end

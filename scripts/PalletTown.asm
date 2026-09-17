@@ -1,8 +1,8 @@
 PalletTown_Script:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
-	jr z, .next
+	jr z, PalletTown_Script.next
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
-.next
+PalletTown_Script.next
 	call EnableAutoTextBoxDrawing
 	ld hl, PalletTown_ScriptPointers
 	ld a, [wPalletTownCurScript]
@@ -25,12 +25,12 @@ PalletTownDefaultScript:
 	cp 1 ; is player near north exit?
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld a, BANK(Music_MeetProfOak)
+	ld a, bank(Music_MeetProfOak)
 	ld c, a
 	ld a, MUSIC_MEET_PROF_OAK ; "oak appears" music
 	call PlayMusic
@@ -47,7 +47,7 @@ PalletTownOakHeyWaitScript:
 	xor a
 	ld [wOakWalkedToPlayer], a
 	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
@@ -62,25 +62,25 @@ PalletTownOakHeyWaitScript:
 
 PalletTownOakWalksToPlayerScript:
 	ld a, PALLETTOWN_OAK
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld a, SPRITE_FACING_UP
-	ldh [hSpriteFacingDirection], a
+	ldh [lobyte(hSpriteFacingDirection)], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a, 1
 	ld [wYCoord], a
 	ld a, 1
-	ldh [hNPCPlayerRelativePosPerspective], a
+	ldh [lobyte(hNPCPlayerRelativePosPerspective)], a
 	ld a, 1
 	swap a
-	ldh [hNPCSpriteOffset], a
+	ldh [lobyte(hNPCSpriteOffset)], a
 	predef CalcPositionOfPlayerRelativeToNPC
 	ld hl, hNPCPlayerYDistance
 	dec [hl]
 	predef FindPathToPlayer ; load Oak's movement into wNPCMovementDirections2
 	ld de, wNPCMovementDirections2
 	ld a, PALLETTOWN_OAK
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	call MoveSprite
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
@@ -101,7 +101,7 @@ PalletTownOakNotSafeComeWithMeScript:
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld a, TEXT_PALLETTOWN_OAK
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 ; set up movement script that causes the player to follow Oak to his lab
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
@@ -112,7 +112,7 @@ PalletTownOakNotSafeComeWithMeScript:
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, 1
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [hLoadedROMBank]
+	ldh a, [lobyte(hLoadedROMBank)]
 	ld [wNPCMovementScriptBank], a
 
 	; trigger the next script
@@ -132,9 +132,9 @@ PalletTownPlayerFollowsOakScript:
 
 PalletTownDaisyScript:
 	CheckEvent EVENT_DAISY_WALKING
-	jr nz, .next
+	jr nz, PalletTownDaisyScript.next
 	CheckBothEventsSet EVENT_GOT_TOWN_MAP, EVENT_ENTERED_BLUES_HOUSE, 1
-	jr nz, .next
+	jr nz, PalletTownDaisyScript.next
 	SetEvent EVENT_DAISY_WALKING
 	ld a, TOGGLE_DAISY_SITTING
 	ld [wToggleableObjectIndex], a
@@ -142,7 +142,7 @@ PalletTownDaisyScript:
 	ld a, TOGGLE_DAISY_WALKING
 	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
-.next
+PalletTownDaisyScript.next
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
@@ -163,19 +163,19 @@ PalletTownOakText:
 	text_asm
 	ld a, [wOakWalkedToPlayer]
 	and a
-	jr nz, .next
+	jr nz, PalletTownOakText.next
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .HeyWaitDontGoOutText
-	jr .done
-.next
-	ld hl, .ItsUnsafeText
-.done
+	ld hl, PalletTownOakText.HeyWaitDontGoOutText
+	jr PalletTownOakText.done
+PalletTownOakText.next
+	ld hl, PalletTownOakText.ItsUnsafeText
+PalletTownOakText.done
 	call PrintText
 	jp TextScriptEnd
 
-.HeyWaitDontGoOutText:
-	text_far _PalletTownOakHeyWaitDontGoOutText
+PalletTownOakText.HeyWaitDontGoOutText:
+	text_far WLA_GLOBAL_PalletTownOakHeyWaitDontGoOutText
 	text_asm
 	ld c, 10
 	call DelayFrames
@@ -187,30 +187,30 @@ PalletTownOakText:
 	ld [wPlayerMovingDirection], a
 	jp TextScriptEnd
 
-.ItsUnsafeText:
-	text_far _PalletTownOakItsUnsafeText
+PalletTownOakText.ItsUnsafeText:
+	text_far WLA_GLOBAL_PalletTownOakItsUnsafeText
 	text_end
 
 PalletTownGirlText:
-	text_far _PalletTownGirlText
+	text_far WLA_GLOBAL_PalletTownGirlText
 	text_end
 
 PalletTownFisherText:
-	text_far _PalletTownFisherText
+	text_far WLA_GLOBAL_PalletTownFisherText
 	text_end
 
 PalletTownOaksLabSignText:
-	text_far _PalletTownOaksLabSignText
+	text_far WLA_GLOBAL_PalletTownOaksLabSignText
 	text_end
 
 PalletTownSignText:
-	text_far _PalletTownSignText
+	text_far WLA_GLOBAL_PalletTownSignText
 	text_end
 
 PalletTownPlayersHouseSignText:
-	text_far _PalletTownPlayersHouseSignText
+	text_far WLA_GLOBAL_PalletTownPlayersHouseSignText
 	text_end
 
 PalletTownRivalsHouseSignText:
-	text_far _PalletTownRivalsHouseSignText
+	text_far WLA_GLOBAL_PalletTownRivalsHouseSignText
 	text_end

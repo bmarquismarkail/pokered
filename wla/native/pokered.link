@@ -1,0 +1,10 @@
+[objects]
+wla/build/native-home.o
+wla/build/native-main.o
+wla/build/native-maps.o
+wla/build/native-audio.o
+wla/build/native-text.o
+wla/build/native-gfx-pics.o
+wla/build/native-gfx-sprites.o
+wla/build/native-gfx-tilesets.o
+wla/build/native-ram.o

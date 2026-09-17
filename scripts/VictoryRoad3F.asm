@@ -17,7 +17,7 @@ VictoryRoad3FCheckBoulderEventScript:
 	ret z
 	ld a, $1d
 	ld [wNewTileBlockID], a
-	lb bc, 5, 3
+	lb "bc", 5, 3
 	predef_jump ReplaceTileBlock
 
 VictoryRoad3F_ScriptPointers:
@@ -30,20 +30,20 @@ VictoryRoad3FDefaultScript:
 	ld hl, wMiscFlags
 	bit BIT_PUSHED_BOULDER, [hl]
 	res BIT_PUSHED_BOULDER, [hl]
-	jp z, .check_switch_hole
-	ld hl, .SwitchOrHoleCoords
+	jp z, VictoryRoad3FDefaultScript.check_switch_hole
+	ld hl, VictoryRoad3FDefaultScript.SwitchOrHoleCoords
 	call CheckBoulderCoords
-	jp nc, .check_switch_hole
+	jp nc, VictoryRoad3FDefaultScript.check_switch_hole
 	ld a, [wCoordIndex]
 	cp $1
-	jr nz, .handle_hole
+	jr nz, VictoryRoad3FDefaultScript.handle_hole
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret
-.handle_hole
+VictoryRoad3FDefaultScript.handle_hole
 	CheckAndSetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
-	jr nz, .check_switch_hole
+	jr nz, VictoryRoad3FDefaultScript.check_switch_hole
 	ld a, TOGGLE_VICTORY_ROAD_3F_BOULDER
 	ld [wToggleableObjectIndex], a
 	predef HideObject
@@ -51,25 +51,25 @@ VictoryRoad3FDefaultScript:
 	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
 
-.SwitchOrHoleCoords:
+VictoryRoad3FDefaultScript.SwitchOrHoleCoords:
 	dbmapcoord  3,  5 ; switch
 	dbmapcoord 23, 15 ; hole
-	db -1 ; end
+	.DB -1 ; end
 
-.check_switch_hole
+VictoryRoad3FDefaultScript.check_switch_hole
 	ld a, VICTORY_ROAD_2F
 	ld [wDungeonWarpDestinationMap], a
-	ld hl, .SwitchOrHoleCoords
+	ld hl, VictoryRoad3FDefaultScript.SwitchOrHoleCoords
 	call IsPlayerOnDungeonWarp
 	ld a, [wCoordIndex]
 	cp $1
-	jr nz, .hole
+	jr nz, VictoryRoad3FDefaultScript.hole
 	ld hl, wStatusFlags3
 	res BIT_ON_DUNGEON_WARP, [hl]
 	ld hl, wStatusFlags6
 	res BIT_DUNGEON_WARP, [hl]
 	ret
-.hole
+VictoryRoad3FDefaultScript.hole
 	ld a, [wStatusFlags3]
 	bit BIT_ON_DUNGEON_WARP, a
 	jp z, CheckFightingMapTrainers
@@ -98,7 +98,7 @@ VictoryRoad3TrainerHeader2:
 	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2, 4, VictoryRoad3FCooltrainerM2BattleText, VictoryRoad3FCooltrainerM2EndBattleText, VictoryRoad3FCooltrainerM2AfterBattleText
 VictoryRoad3TrainerHeader3:
 	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3, 4, VictoryRoad3FCooltrainerF2BattleText, VictoryRoad3FCooltrainerF2EndBattleText, VictoryRoad3FCooltrainerF2AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 VictoryRoad3FCooltrainerM1Text:
 	text_asm
@@ -125,49 +125,49 @@ VictoryRoad3FCooltrainerF2Text:
 	jp TextScriptEnd
 
 VictoryRoad3FCooltrainerM1BattleText:
-	text_far _VictoryRoad3FCooltrainerM1BattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM1BattleText
 	text_end
 
 VictoryRoad3FCooltrainerM1EndBattleText:
-	text_far _VictoryRoad3FCooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM1EndBattleText
 	text_end
 
 VictoryRoad3FCooltrainerM1AfterBattleText:
-	text_far _VictoryRoad3FCooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM1AfterBattleText
 	text_end
 
 VictoryRoad3FCooltrainerF1BattleText:
-	text_far _VictoryRoad3FCooltrainerF1BattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF1BattleText
 	text_end
 
 VictoryRoad3FCooltrainerF1EndBattleText:
-	text_far _VictoryRoad3FCooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF1EndBattleText
 	text_end
 
 VictoryRoad3FCooltrainerF1AfterBattleText:
-	text_far _VictoryRoad3FCooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF1AfterBattleText
 	text_end
 
 VictoryRoad3FCooltrainerM2BattleText:
-	text_far _VictoryRoad3FCooltrainerM2BattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM2BattleText
 	text_end
 
 VictoryRoad3FCooltrainerM2EndBattleText:
-	text_far _VictoryRoad3FCooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM2EndBattleText
 	text_end
 
 VictoryRoad3FCooltrainerM2AfterBattleText:
-	text_far _VictoryRoad3FCooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerM2AfterBattleText
 	text_end
 
 VictoryRoad3FCooltrainerF2BattleText:
-	text_far _VictoryRoad3FCooltrainerF2BattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF2BattleText
 	text_end
 
 VictoryRoad3FCooltrainerF2EndBattleText:
-	text_far _VictoryRoad3FCooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF2EndBattleText
 	text_end
 
 VictoryRoad3FCooltrainerF2AfterBattleText:
-	text_far _VictoryRoad3FCooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_VictoryRoad3FCooltrainerF2AfterBattleText
 	text_end

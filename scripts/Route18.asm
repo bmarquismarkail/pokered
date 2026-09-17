@@ -29,7 +29,7 @@ Route18TrainerHeader1:
 	trainer EVENT_BEAT_ROUTE_18_TRAINER_1, 3, Route18CooltrainerM2BattleText, Route18CooltrainerM2EndBattleText, Route18CooltrainerM2AfterBattleText
 Route18TrainerHeader2:
 	trainer EVENT_BEAT_ROUTE_18_TRAINER_2, 4, Route18CooltrainerM3BattleText, Route18CooltrainerM3EndBattleText, Route18CooltrainerM3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route18CooltrainerM1Text:
 	text_asm
@@ -38,15 +38,15 @@ Route18CooltrainerM1Text:
 	jp TextScriptEnd
 
 Route18CooltrainerM1BattleText:
-	text_far _Route18CooltrainerM1BattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM1BattleText
 	text_end
 
 Route18CooltrainerM1EndBattleText:
-	text_far _Route18CooltrainerM1EndBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM1EndBattleText
 	text_end
 
 Route18CooltrainerM1AfterBattleText:
-	text_far _Route18CooltrainerM1AfterBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM1AfterBattleText
 	text_end
 
 Route18CooltrainerM2Text:
@@ -56,15 +56,15 @@ Route18CooltrainerM2Text:
 	jp TextScriptEnd
 
 Route18CooltrainerM2BattleText:
-	text_far _Route18CooltrainerM2BattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM2BattleText
 	text_end
 
 Route18CooltrainerM2EndBattleText:
-	text_far _Route18CooltrainerM2EndBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM2EndBattleText
 	text_end
 
 Route18CooltrainerM2AfterBattleText:
-	text_far _Route18CooltrainerM2AfterBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM2AfterBattleText
 	text_end
 
 Route18CooltrainerM3Text:
@@ -74,21 +74,21 @@ Route18CooltrainerM3Text:
 	jp TextScriptEnd
 
 Route18CooltrainerM3BattleText:
-	text_far _Route18CooltrainerM3BattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM3BattleText
 	text_end
 
 Route18CooltrainerM3EndBattleText:
-	text_far _Route18CooltrainerM3EndBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM3EndBattleText
 	text_end
 
 Route18CooltrainerM3AfterBattleText:
-	text_far _Route18CooltrainerM3AfterBattleText
+	text_far WLA_GLOBAL_Route18CooltrainerM3AfterBattleText
 	text_end
 
 Route18SignText:
-	text_far _Route18SignText
+	text_far WLA_GLOBAL_Route18SignText
 	text_end
 
 Route18CyclingRoadSignText:
-	text_far _Route18CyclingRoadSignText
+	text_far WLA_GLOBAL_Route18CyclingRoadSignText
 	text_end

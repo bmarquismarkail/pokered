@@ -1,17 +1,17 @@
-	db DEX_GOLEM ; pokedex id
+	.DB DEX_GOLEM ; pokedex id
 
-	db  80, 110, 130,  45,  55
+	.DB  80, 110, 130,  45,  55
 	;   hp  atk  def  spd  spc
 
-	db ROCK, GROUND ; type
-	db 45 ; catch rate
-	db 177 ; base exp
+	.DB ROCK, GROUND ; type
+	.DB 45 ; catch rate
+	.DB 177 ; base exp
 
-	INCBIN "gfx/pokemon/front/golem.pic", 0, 1 ; sprite dimensions
-	dw GolemPicFront, GolemPicBack
+	.INCBIN "gfx/pokemon/front/golem.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW GolemPicFront, GolemPicBack
 
-	db TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_SLOW ; growth rate
+	.DB TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     REST,         EXPLOSION,    ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

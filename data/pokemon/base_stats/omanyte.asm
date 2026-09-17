@@ -1,17 +1,17 @@
-	db DEX_OMANYTE ; pokedex id
+	.DB DEX_OMANYTE ; pokedex id
 
-	db  35,  40, 100,  35,  90
+	.DB  35,  40, 100,  35,  90
 	;   hp  atk  def  spd  spc
 
-	db ROCK, WATER ; type
-	db 45 ; catch rate
-	db 120 ; base exp
+	.DB ROCK, WATER ; type
+	.DB 45 ; catch rate
+	.DB 120 ; base exp
 
-	INCBIN "gfx/pokemon/front/omanyte.pic", 0, 1 ; sprite dimensions
-	dw OmanytePicFront, OmanytePicBack
+	.INCBIN "gfx/pokemon/front/omanyte.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW OmanytePicFront, OmanytePicBack
 
-	db WATER_GUN, WITHDRAW, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB WATER_GUN, WITHDRAW, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
@@ -20,4 +20,4 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

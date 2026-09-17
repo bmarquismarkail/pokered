@@ -1,17 +1,17 @@
-	db DEX_HITMONCHAN ; pokedex id
+	.DB DEX_HITMONCHAN ; pokedex id
 
-	db  50, 105,  79,  76,  35
+	.DB  50, 105,  79,  76,  35
 	;   hp  atk  def  spd  spc
 
-	db FIGHTING, FIGHTING ; type
-	db 45 ; catch rate
-	db 140 ; base exp
+	.DB FIGHTING, FIGHTING ; type
+	.DB 45 ; catch rate
+	.DB 140 ; base exp
 
-	INCBIN "gfx/pokemon/front/hitmonchan.pic", 0, 1 ; sprite dimensions
-	dw HitmonchanPicFront, HitmonchanPicBack
+	.INCBIN "gfx/pokemon/front/hitmonchan.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW HitmonchanPicFront, HitmonchanPicBack
 
-	db COMET_PUNCH, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB COMET_PUNCH, AGILITY, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -20,4 +20,4 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

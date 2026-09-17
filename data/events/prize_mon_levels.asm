@@ -1,19 +1,19 @@
 PrizeMonLevelDictionary:
-IF DEF(_RED)
-	db ABRA,      9
-	db CLEFAIRY,  8
-	db NIDORINA, 17
+.IF defined(_RED)
+	.DB ABRA,      9
+	.DB CLEFAIRY,  8
+	.DB NIDORINA, 17
 
-	db DRATINI,  18
-	db SCYTHER,  25
-	db PORYGON,  26
-ENDC
-IF DEF(_BLUE)
-	db ABRA,      6
-	db CLEFAIRY, 12
-	db NIDORINO, 17
+	.DB DRATINI,  18
+	.DB SCYTHER,  25
+	.DB PORYGON,  26
+.ENDIF
+.IF defined(_BLUE)
+	.DB ABRA,      6
+	.DB CLEFAIRY, 12
+	.DB NIDORINO, 17
 
-	db PINSIR,   20
-	db DRATINI,  24
-	db PORYGON,  18
-ENDC
+	.DB PINSIR,   20
+	.DB DRATINI,  24
+	.DB PORYGON,  18
+.ENDIF

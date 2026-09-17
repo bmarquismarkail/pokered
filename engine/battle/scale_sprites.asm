@@ -12,9 +12,9 @@ ScaleSpriteByTwo:
 
 ScaleFirstThreeSpriteColumnsByTwo:
 	ld b, $3 ; 3 tile columns
-.columnLoop
-	ld c, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
-.columnInnerLoop
+ScaleFirstThreeSpriteColumnsByTwo.columnLoop
+	ld c, 4*8 - 4 ; $1c, 4 * TILE_SIZE minus 4 unused rows
+ScaleFirstThreeSpriteColumnsByTwo.columnInnerLoop
 	push bc
 	ld a, [de]
 	ld bc, -(7*8)+1       ; -$37, scale lower nybble and seek to previous output column
@@ -26,7 +26,7 @@ ScaleFirstThreeSpriteColumnsByTwo:
 	call ScalePixelsByTwo
 	pop bc
 	dec c
-	jr nz, .columnInnerLoop
+	jr nz, ScaleFirstThreeSpriteColumnsByTwo.columnInnerLoop
 	dec de
 	dec de
 	dec de
@@ -36,22 +36,22 @@ ScaleFirstThreeSpriteColumnsByTwo:
 	add hl, bc
 	ld b, a
 	dec b
-	jr nz, .columnLoop
+	jr nz, ScaleFirstThreeSpriteColumnsByTwo.columnLoop
 	ret
 
 ScaleLastSpriteColumnByTwo:
-	ld a, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
-	ldh [hSpriteInterlaceCounter], a
+	ld a, 4*8 - 4 ; $1c, 4 * TILE_SIZE minus 4 unused rows
+	ldh [lobyte(hSpriteInterlaceCounter)], a
 	ld bc, -1
-.columnInnerLoop
+ScaleLastSpriteColumnByTwo.columnInnerLoop
 	ld a, [de]
 	dec de
 	swap a                    ; only high nybble contains information
 	call ScalePixelsByTwo
-	ldh a, [hSpriteInterlaceCounter]
+	ldh a, [lobyte(hSpriteInterlaceCounter)]
 	dec a
-	ldh [hSpriteInterlaceCounter], a
-	jr nz, .columnInnerLoop
+	ldh [lobyte(hSpriteInterlaceCounter)], a
+	jr nz, ScaleLastSpriteColumnByTwo.columnInnerLoop
 	dec de                    ; skip last 4 rows of new column
 	dec de
 	dec de
@@ -67,9 +67,9 @@ ScalePixelsByTwo:
 	ld hl, DuplicateBitsTable
 	add l
 	ld l, a
-	jr nc, .noCarry
+	jr nc, ScalePixelsByTwo.noCarry
 	inc h
-.noCarry
+ScalePixelsByTwo.noCarry
 	ld a, [hl]
 	pop hl
 	ld [hld], a  ; write output byte twice to make it 2 pixels high
@@ -79,6 +79,6 @@ ScalePixelsByTwo:
 
 ; repeats each input bit twice, e.g. DuplicateBitsTable[%0101] = %00110011
 DuplicateBitsTable:
-FOR n, 16
-	db (n & 1) * 3 + (n & 2) * 6 + (n & 4) * 12 + (n & 8) * 24
-ENDR
+.REPEAT 16 INDEX n
+	.DB (n & 1) * 3 + (n & 2) * 6 + (n & 4) * 12 + (n & 8) * 24
+.ENDR

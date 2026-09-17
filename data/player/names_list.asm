@@ -1,17 +1,19 @@
 ; see constants/player_constants.asm
 
 DefaultNamesPlayerList:
-	db "NEW NAME@"
+		.STRINGMAP pokemon, "NEW NAME@"
+DefaultNamesPlayerList._list_start_u3:
 	list_start PLAYER_NAME_LENGTH - 1
-FOR n, 1, NUM_PLAYER_NAMES + 1
-	li #PLAYERNAME{d:n}
-ENDR
+.REPEAT NUM_PLAYER_NAMES START 1 INDEX n
+	li PLAYERNAME{n}
+.ENDR
 	assert_list_length NUM_PLAYER_NAMES
 
 DefaultNamesRivalList:
-	db "NEW NAME@"
+		.STRINGMAP pokemon, "NEW NAME@"
+DefaultNamesRivalList._list_start_u4:
 	list_start PLAYER_NAME_LENGTH - 1
-FOR n, 1, NUM_PLAYER_NAMES + 1
-	li #RIVALNAME{d:n}
-ENDR
+.REPEAT NUM_PLAYER_NAMES START 1 INDEX n
+	li RIVALNAME{n}
+.ENDR
 	assert_list_length NUM_PLAYER_NAMES

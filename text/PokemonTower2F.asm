@@ -1,4 +1,5 @@
-_PokemonTower2FRivalWhatBringsYouHereText::
+_PokemonTower2FRivalWhatBringsYouHereText:
+WLA_GLOBAL_PokemonTower2FRivalWhatBringsYouHereText:
 	text "<RIVAL>: Hey,"
 	line "<PLAYER>! What"
 	cont "brings you here?"
@@ -10,7 +11,8 @@ _PokemonTower2FRivalWhatBringsYouHereText::
 	cont "Let's go, pal!"
 	done
 
-_PokemonTower2FRivalDefeatedText::
+_PokemonTower2FRivalDefeatedText:
+WLA_GLOBAL_PokemonTower2FRivalDefeatedText:
 	text "What?"
 	line "You stinker!"
 
@@ -18,7 +20,8 @@ _PokemonTower2FRivalDefeatedText::
 	line "you too!"
 	prompt
 
-_PokemonTower2FRivalVictoryText::
+_PokemonTower2FRivalVictoryText:
+WLA_GLOBAL_PokemonTower2FRivalVictoryText:
 	text "<RIVAL>: Well,"
 	line "look at all your"
 	cont "wimpy #MON!"
@@ -27,7 +30,8 @@ _PokemonTower2FRivalVictoryText::
 	line "bit more!"
 	prompt
 
-_PokemonTower2FRivalHowsYourDexText::
+_PokemonTower2FRivalHowsYourDexText:
+WLA_GLOBAL_PokemonTower2FRivalHowsYourDexText:
 	text "How's your #DEX"
 	line "coming, pal?"
 	cont "I just caught a"
@@ -46,7 +50,8 @@ _PokemonTower2FRivalHowsYourDexText::
 	para "Smell ya later!"
 	done
 
-_PokemonTower2FChannelerText::
+_PokemonTower2FChannelerText:
+WLA_GLOBAL_PokemonTower2FChannelerText:
 	text "Even we could not"
 	line "identify the"
 	cont "wayward GHOSTs!"

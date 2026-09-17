@@ -10,35 +10,35 @@ AIEnemyTrainerChooseMoves:
 	ld a, [wEnemyDisabledMove] ; forbid disabled move (if any)
 	swap a
 	and $f
-	jr z, .noMoveDisabled
+	jr z, AIEnemyTrainerChooseMoves.noMoveDisabled
 	ld hl, wBuffer
 	dec a
 	ld c, a
 	ld b, $0
 	add hl, bc    ; advance pointer to forbidden move
 	ld [hl], $50  ; forbid (highly discourage) disabled move
-.noMoveDisabled
+AIEnemyTrainerChooseMoves.noMoveDisabled
 	ld hl, TrainerClassMoveChoiceModifications
 	ld a, [wTrainerClass]
 	ld b, a
-.loopTrainerClasses
+AIEnemyTrainerChooseMoves.loopTrainerClasses
 	dec b
-	jr z, .readTrainerClassData
-.loopTrainerClassData
+	jr z, AIEnemyTrainerChooseMoves.readTrainerClassData
+AIEnemyTrainerChooseMoves.loopTrainerClassData
 	ld a, [hli]
 	and a
-	jr nz, .loopTrainerClassData
-	jr .loopTrainerClasses
-.readTrainerClassData
+	jr nz, AIEnemyTrainerChooseMoves.loopTrainerClassData
+	jr AIEnemyTrainerChooseMoves.loopTrainerClasses
+AIEnemyTrainerChooseMoves.readTrainerClassData
 	ld a, [hl]
 	and a
-	jp z, .useOriginalMoveSet
+	jp z, AIEnemyTrainerChooseMoves.useOriginalMoveSet
 	push hl
-.nextMoveChoiceModification
+AIEnemyTrainerChooseMoves.nextMoveChoiceModification
 	pop hl
 	ld a, [hli]
 	and a
-	jr z, .loopFindMinimumEntries
+	jr z, AIEnemyTrainerChooseMoves.loopFindMinimumEntries
 	push hl
 	ld hl, AIMoveChoiceModificationFunctionPointers
 	dec a
@@ -49,65 +49,65 @@ AIEnemyTrainerChooseMoves:
 	ld a, [hli]   ; read pointer into hl
 	ld h, [hl]
 	ld l, a
-	ld de, .nextMoveChoiceModification  ; set return address
+	ld de, AIEnemyTrainerChooseMoves.nextMoveChoiceModification  ; set return address
 	push de
 	jp hl         ; execute modification function
-.loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
+AIEnemyTrainerChooseMoves.loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
 	ld hl, wBuffer  ; temp move selection array
 	ld de, wEnemyMonMoves  ; enemy moves
 	ld c, NUM_MOVES
-.loopDecrementEntries
+AIEnemyTrainerChooseMoves.loopDecrementEntries
 	ld a, [de]
 	inc de
 	and a
-	jr z, .loopFindMinimumEntries
+	jr z, AIEnemyTrainerChooseMoves.loopFindMinimumEntries
 	dec [hl]
-	jr z, .minimumEntriesFound
+	jr z, AIEnemyTrainerChooseMoves.minimumEntriesFound
 	inc hl
 	dec c
-	jr z, .loopFindMinimumEntries
-	jr .loopDecrementEntries
-.minimumEntriesFound
+	jr z, AIEnemyTrainerChooseMoves.loopFindMinimumEntries
+	jr AIEnemyTrainerChooseMoves.loopDecrementEntries
+AIEnemyTrainerChooseMoves.minimumEntriesFound
 	ld a, c
-.loopUndoPartialIteration ; undo last (partial) loop iteration
+AIEnemyTrainerChooseMoves.loopUndoPartialIteration ; undo last (partial) loop iteration
 	inc [hl]
 	dec hl
 	inc a
 	cp NUM_MOVES + 1
-	jr nz, .loopUndoPartialIteration
+	jr nz, AIEnemyTrainerChooseMoves.loopUndoPartialIteration
 	ld hl, wBuffer  ; temp move selection array
 	ld de, wEnemyMonMoves  ; enemy moves
 	ld c, NUM_MOVES
-.filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
+AIEnemyTrainerChooseMoves.filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
 	ld a, [de]
 	and a
-	jr nz, .moveExisting
+	jr nz, AIEnemyTrainerChooseMoves.moveExisting
 	ld [hl], a
-.moveExisting
+AIEnemyTrainerChooseMoves.moveExisting
 	ld a, [hl]
 	dec a
-	jr z, .slotWithMinimalValue
+	jr z, AIEnemyTrainerChooseMoves.slotWithMinimalValue
 	xor a
 	ld [hli], a     ; disable move slot
-	jr .next
-.slotWithMinimalValue
+	jr AIEnemyTrainerChooseMoves.next
+AIEnemyTrainerChooseMoves.slotWithMinimalValue
 	ld a, [de]
 	ld [hli], a     ; enable move slot
-.next
+AIEnemyTrainerChooseMoves.next
 	inc de
 	dec c
-	jr nz, .filterMinimalEntries
+	jr nz, AIEnemyTrainerChooseMoves.filterMinimalEntries
 	ld hl, wBuffer    ; use created temporary array as move set
 	ret
-.useOriginalMoveSet
+AIEnemyTrainerChooseMoves.useOriginalMoveSet
 	ld hl, wEnemyMonMoves    ; use original move set
 	ret
 
 AIMoveChoiceModificationFunctionPointers:
-	dw AIMoveChoiceModification1
-	dw AIMoveChoiceModification2
-	dw AIMoveChoiceModification3
-	dw AIMoveChoiceModification4 ; unused, does nothing
+	.DW AIMoveChoiceModification1
+	.DW AIMoveChoiceModification2
+	.DW AIMoveChoiceModification3
+	.DW AIMoveChoiceModification4 ; unused, does nothing
 
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one
 AIMoveChoiceModification1:
@@ -117,7 +117,7 @@ AIMoveChoiceModification1:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
-.nextMove
+AIMoveChoiceModification1.nextMove
 	dec b
 	ret z ; processed all 4 moves
 	inc hl
@@ -128,7 +128,7 @@ AIMoveChoiceModification1:
 	call ReadMove
 	ld a, [wEnemyMovePower]
 	and a
-	jr nz, .nextMove
+	jr nz, AIMoveChoiceModification1.nextMove
 	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
@@ -139,18 +139,18 @@ AIMoveChoiceModification1:
 	pop bc
 	pop de
 	pop hl
-	jr nc, .nextMove
+	jr nc, AIMoveChoiceModification1.nextMove
 	ld a, [hl]
 	add $5 ; heavily discourage move
 	ld [hl], a
-	jr .nextMove
+	jr AIMoveChoiceModification1.nextMove
 
 StatusAilmentMoveEffects:
-	db EFFECT_01 ; unused sleep effect
-	db SLEEP_EFFECT
-	db POISON_EFFECT
-	db PARALYZE_EFFECT
-	db -1 ; end
+	.DB EFFECT_01 ; unused sleep effect
+	.DB SLEEP_EFFECT
+	.DB POISON_EFFECT
+	.DB PARALYZE_EFFECT
+	.DB -1 ; end
 
 ; slightly encourage moves with specific effects.
 ; in particular, stat-modifying moves and other move effects
@@ -162,7 +162,7 @@ AIMoveChoiceModification2:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
-.nextMove
+AIMoveChoiceModification2.nextMove
 	dec b
 	ret z ; processed all 4 moves
 	inc hl
@@ -173,17 +173,17 @@ AIMoveChoiceModification2:
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
 	cp ATTACK_UP1_EFFECT
-	jr c, .nextMove
+	jr c, AIMoveChoiceModification2.nextMove
 	cp BIDE_EFFECT
-	jr c, .preferMove
+	jr c, AIMoveChoiceModification2.preferMove
 	cp ATTACK_UP2_EFFECT
-	jr c, .nextMove
+	jr c, AIMoveChoiceModification2.nextMove
 	cp POISON_EFFECT
-	jr c, .preferMove
-	jr .nextMove
-.preferMove
+	jr c, AIMoveChoiceModification2.preferMove
+	jr AIMoveChoiceModification2.nextMove
+AIMoveChoiceModification2.preferMove
 	dec [hl] ; slightly encourage this move
-	jr .nextMove
+	jr AIMoveChoiceModification2.nextMove
 
 ; encourages moves that are effective against the player's mon (even if non-damaging).
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
@@ -192,7 +192,7 @@ AIMoveChoiceModification3:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
-.nextMove
+AIMoveChoiceModification3.nextMove
 	dec b
 	ret z ; processed all 4 moves
 	inc hl
@@ -210,11 +210,11 @@ AIMoveChoiceModification3:
 	pop hl
 	ld a, [wTypeEffectiveness]
 	cp $10
-	jr z, .nextMove
-	jr c, .notEffectiveMove
+	jr z, AIMoveChoiceModification3.nextMove
+	jr c, AIMoveChoiceModification3.notEffectiveMove
 	dec [hl] ; slightly encourage this move
-	jr .nextMove
-.notEffectiveMove ; discourages non-effective moves if better moves are available
+	jr AIMoveChoiceModification3.nextMove
+AIMoveChoiceModification3.notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
 	push de
 	push bc
@@ -223,38 +223,38 @@ AIMoveChoiceModification3:
 	ld hl, wEnemyMonMoves  ; enemy moves
 	ld b, NUM_MOVES + 1
 	ld c, $0
-.loopMoves
+AIMoveChoiceModification3.loopMoves
 	dec b
-	jr z, .done
+	jr z, AIMoveChoiceModification3.done
 	ld a, [hli]
 	and a
-	jr z, .done
+	jr z, AIMoveChoiceModification3.done
 	call ReadMove
 	ld a, [wEnemyMoveEffect]
 	cp SUPER_FANG_EFFECT
-	jr z, .betterMoveFound ; Super Fang is considered to be a better move
+	jr z, AIMoveChoiceModification3.betterMoveFound ; Super Fang is considered to be a better move
 	cp SPECIAL_DAMAGE_EFFECT
-	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
+	jr z, AIMoveChoiceModification3.betterMoveFound ; any special damage moves are considered to be better moves
 	cp FLY_EFFECT
-	jr z, .betterMoveFound ; Fly is considered to be a better move
+	jr z, AIMoveChoiceModification3.betterMoveFound ; Fly is considered to be a better move
 	ld a, [wEnemyMoveType]
 	cp d
-	jr z, .loopMoves
+	jr z, AIMoveChoiceModification3.loopMoves
 	ld a, [wEnemyMovePower]
 	and a
-	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
-	jr .loopMoves
-.betterMoveFound
+	jr nz, AIMoveChoiceModification3.betterMoveFound ; damaging moves of a different type are considered to be better moves
+	jr AIMoveChoiceModification3.loopMoves
+AIMoveChoiceModification3.betterMoveFound
 	ld c, a
-.done
+AIMoveChoiceModification3.done
 	ld a, c
 	pop bc
 	pop de
 	pop hl
 	and a
-	jr z, .nextMove
+	jr z, AIMoveChoiceModification3.nextMove
 	inc [hl] ; slightly discourage this move
-	jr .nextMove
+	jr AIMoveChoiceModification3.nextMove
 AIMoveChoiceModification4:
 	ret
 
@@ -273,19 +273,19 @@ ReadMove:
 	pop hl
 	ret
 
-INCLUDE "data/trainers/move_choices.asm"
+.INCLUDE "data/trainers/move_choices.asm"
 
-INCLUDE "data/trainers/pic_pointers_money.asm"
+.INCLUDE "data/trainers/pic_pointers_money.asm"
 
-INCLUDE "data/trainers/names.asm"
+.INCLUDE "data/trainers/names.asm"
 
-INCLUDE "engine/battle/misc.asm"
+.INCLUDE "engine/battle/misc.asm"
 
-INCLUDE "engine/battle/read_trainer_party.asm"
+.INCLUDE "engine/battle/read_trainer_party.asm"
 
-INCLUDE "data/trainers/special_moves.asm"
+.INCLUDE "data/trainers/special_moves.asm"
 
-INCLUDE "data/trainers/parties.asm"
+.INCLUDE "data/trainers/parties.asm"
 
 TrainerAI:
 	and a
@@ -308,43 +308,43 @@ TrainerAI:
 	ret z ; if no AI uses left, we're done here
 	inc hl
 	inc a
-	jr nz, .getpointer
+	jr nz, TrainerAI.getpointer
 	dec hl
 	ld a, [hli]
 	ld [wAICount], a
-.getpointer
+TrainerAI.getpointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	call Random
 	jp hl
 
-INCLUDE "data/trainers/ai_pointers.asm"
+.INCLUDE "data/trainers/ai_pointers.asm"
 
 JugglerAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AISwitchIfEnoughMons
 
 BlackbeltAI:
-	cp 13 percent - 1
+	cp (13 * $ff / 100) - 1
 	ret nc
 	jp AIUseXAttack
 
 GiovanniAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseGuardSpec
 
 CooltrainerMAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseXAttack
 
 CooltrainerFAI:
 	; The intended 25% chance to consider switching will not apply.
 	; Uncomment the line below to fix this.
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	; ret nc
 	ld a, 10
 	call AICheckIfHPBelowFraction
@@ -362,17 +362,17 @@ BrockAI:
 	jp AIUseFullHeal
 
 MistyAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseXDefend
 
 LtSurgeAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseXSpeed
 
 ErikaAI:
-	cp 50 percent + 1
+	cp (50 * $ff / 100) + 1
 	ret nc
 	ld a, 10
 	call AICheckIfHPBelowFraction
@@ -380,17 +380,17 @@ ErikaAI:
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseXAttack
 
 BlaineAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseSuperPotion
 
 SabrinaAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	ld a, 10
 	call AICheckIfHPBelowFraction
@@ -398,7 +398,7 @@ SabrinaAI:
 	jp AIUseHyperPotion
 
 Rival2AI:
-	cp 13 percent - 1
+	cp (13 * $ff / 100) - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -406,7 +406,7 @@ Rival2AI:
 	jp AIUsePotion
 
 Rival3AI:
-	cp 13 percent - 1
+	cp (13 * $ff / 100) - 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -414,7 +414,7 @@ Rival3AI:
 	jp AIUseFullRestore
 
 LoreleiAI:
-	cp 50 percent + 1
+	cp (50 * $ff / 100) + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -422,14 +422,14 @@ LoreleiAI:
 	jp AIUseSuperPotion
 
 BrunoAI:
-	cp 25 percent + 1
+	cp (25 * $ff / 100) + 1
 	ret nc
 	jp AIUseXDefend
 
 AgathaAI:
-	cp 8 percent
+	cp (8 * $ff / 100)
 	jp c, AISwitchIfEnoughMons
-	cp 50 percent + 1
+	cp (50 * $ff / 100) + 1
 	ret nc
 	ld a, 4
 	call AICheckIfHPBelowFraction
@@ -437,7 +437,7 @@ AgathaAI:
 	jp AIUseSuperPotion
 
 LanceAI:
-	cp 50 percent + 1
+	cp (50 * $ff / 100) + 1
 	ret nc
 	ld a, 5
 	call AICheckIfHPBelowFraction
@@ -514,11 +514,11 @@ AIRecoverHP:
 	ld a, [hl]
 	ld [wHPBarOldHP+1], a
 	ld [wHPBarNewHP+1], a
-	jr nc, .next
+	jr nc, AIRecoverHP.next
 	inc a
 	ld [hl], a
 	ld [wHPBarNewHP+1], a
-.next
+AIRecoverHP.next
 	inc hl
 	ld a, [hld]
 	ld b, a
@@ -560,20 +560,20 @@ AISwitchIfEnoughMons:
 	ld d, 0 ; keep count of unfainted monsters
 
 	; count how many monsters haven't fainted yet
-.loop
+AISwitchIfEnoughMons.loop
 	ld a, [hli]
 	ld b, a
 	ld a, [hld]
 	or b
-	jr z, .Fainted ; has monster fainted?
+	jr z, AISwitchIfEnoughMons.Fainted ; has monster fainted?
 	inc d
-.Fainted
+AISwitchIfEnoughMons.Fainted
 	push bc
 	ld bc, PARTYMON_STRUCT_LENGTH
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .loop
+	jr nz, AISwitchIfEnoughMons.loop
 
 	ld a, d ; how many available monsters are there?
 	cp 2    ; don't bother if only 1
@@ -613,7 +613,7 @@ SwitchEnemyMon:
 	ret
 
 AIBattleWithdrawText:
-	text_far _AIBattleWithdrawText
+	text_far WLA_GLOBAL_AIBattleWithdrawText
 	text_end
 
 AIUseFullHeal:
@@ -658,17 +658,17 @@ AIUseDireHit: ; unreferenced
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
-	ldh [hDivisor], a
+	ldh [lobyte(hDivisor)], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ldh [hDividend], a
+	ldh [lobyte(hDividend)], a
 	ld a, [hl]
-	ldh [hDividend + 1], a
+	ldh [lobyte(hDividend + 1)], a
 	ld b, 2
 	call Divide
-	ldh a, [hQuotient + 3]
+	ldh a, [lobyte(hQuotient + 3)]
 	ld c, a
-	ldh a, [hQuotient + 2]
+	ldh a, [lobyte(hQuotient + 2)]
 	ld b, a
 	ld hl, wEnemyMonHP + 1
 	ld a, [hld]
@@ -738,5 +738,5 @@ AIPrintItemUse_:
 	jp PrintText
 
 AIBattleUseItemText:
-	text_far _AIBattleUseItemText
+	text_far WLA_GLOBAL_AIBattleUseItemText
 	text_end

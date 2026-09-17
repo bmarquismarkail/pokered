@@ -11,15 +11,15 @@
 	const_export ROUTE25_TM_SEISMIC_TOSS
 
 Route25_Object:
-	db $2c ; border block
+	.DB $2c ; border block
 
-	def_warp_events
+	.DB 1
 	warp_event 45,  3, BILLS_HOUSE, 1
 
-	def_bg_events
+	.DB 1
 	bg_event 43,  3, TEXT_ROUTE25_BILL_SIGN
 
-	def_object_events
+	.DB 10
 	object_event 14,  2, SPRITE_YOUNGSTER, STAY, DOWN, TEXT_ROUTE25_YOUNGSTER1, OPP_YOUNGSTER, 5
 	object_event 18,  5, SPRITE_YOUNGSTER, STAY, UP, TEXT_ROUTE25_YOUNGSTER2, OPP_YOUNGSTER, 6
 	object_event 24,  4, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_ROUTE25_COOLTRAINER_M, OPP_JR_TRAINER_M, 2
@@ -31,4 +31,4 @@ Route25_Object:
 	object_event 13,  7, SPRITE_HIKER, STAY, RIGHT, TEXT_ROUTE25_HIKER3, OPP_HIKER, 4
 	object_event 22,  2, SPRITE_POKE_BALL, STAY, NONE, TEXT_ROUTE25_TM_SEISMIC_TOSS, TM_SEISMIC_TOSS
 
-	def_warps_to ROUTE_25
+	event_displacement ROUTE_25_WIDTH, 45, 3

@@ -17,14 +17,14 @@ DrawHP_:
 	ld a, [wLoadedMonHP + 1]
 	ld c, a
 	or b
-	jr nz, .nonzeroHP
+	jr nz, DrawHP_.nonzeroHP
 	xor a
 	ld c, a
 	ld e, a
 	ld a, $6
 	ld d, a
-	jp .drawHPBarAndPrintFraction
-.nonzeroHP
+	jp DrawHP_.drawHPBarAndPrintFraction
+DrawHP_.nonzeroHP
 	ld a, [wLoadedMonMaxHP]
 	ld d, a
 	ld a, [wLoadedMonMaxHP + 1]
@@ -33,29 +33,29 @@ DrawHP_:
 	ld a, $6
 	ld d, a
 	ld c, a
-.drawHPBarAndPrintFraction
+DrawHP_.drawHPBarAndPrintFraction
 	pop hl
 	push de
 	push hl
 	push hl
 	call DrawHPBar
 	pop hl
-	ldh a, [hUILayoutFlags]
+	ldh a, [lobyte(hUILayoutFlags)]
 	bit BIT_PARTY_MENU_HP_BAR, a
-	jr z, .printFractionBelowBar
+	jr z, DrawHP_.printFractionBelowBar
 	ld bc, $9 ; right of bar
-	jr .printFraction
-.printFractionBelowBar
+	jr DrawHP_.printFraction
+DrawHP_.printFractionBelowBar
 	ld bc, SCREEN_WIDTH + 1 ; below bar
-.printFraction
+DrawHP_.printFraction
 	add hl, bc
 	ld de, wLoadedMonHP
-	lb bc, 2, 3
+	lb "bc", 2, 3
 	call PrintNumber
-	ld a, '/'
+	ld a, $f3
 	ld [hli], a
 	ld de, wLoadedMonMaxHP
-	lb bc, 2, 3
+	lb "bc", 2, 3
 	call PrintNumber
 	pop hl
 	pop de
@@ -65,7 +65,7 @@ StatusScreen:
 	call LoadMonData
 	ld a, [wMonDataLocation]
 	cp BOX_DATA
-	jr c, .DontRecalculate
+	jr c, StatusScreen.DontRecalculate
 ; mon is in a box or daycare
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
@@ -74,45 +74,45 @@ StatusScreen:
 	ld de, wLoadedMonStats
 	ld b, $1
 	call CalcStats
-.DontRecalculate
+StatusScreen.DontRecalculate
 	ld hl, wStatusFlags2
 	set BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $33
-	ldh [rAUDVOL], a ; Reduce the volume
+	ldh [lobyte(rAUDVOL)], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; source
-	ld hl, vChars2 tile $6d ; dest
-	lb bc, BANK(BattleHudTiles1), 3
+	ld hl, vChars2 + TILE_SIZE * $6d ; dest
+	lb "bc", bank(BattleHudTiles1), 3
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2
-	ld hl, vChars2 tile $78
-	lb bc, BANK(BattleHudTiles2), 1
+	ld hl, vChars2 + TILE_SIZE * $78
+	lb "bc", bank(BattleHudTiles2), 1
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3
-	ld hl, vChars2 tile $76
-	lb bc, BANK(BattleHudTiles3), 2
+	ld hl, vChars2 + TILE_SIZE * $76
+	lb "bc", bank(BattleHudTiles3), 2
 	call CopyVideoDataDouble ; ─ ┘
 	ld de, PTile
-	ld hl, vChars2 tile $72
-	lb bc, BANK(PTile), 1
+	ld hl, vChars2 + TILE_SIZE * $72
+	lb "bc", bank(PTile), 1
 	call CopyVideoDataDouble ; bold P (for PP)
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	push af
 	xor a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	hlcoord 19, 1
-	lb bc, 6, 10
+	lb "bc", 6, 10
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, -6
 	add hl, de
-	ld [hl], '<DOT>'
+	ld [hl], $f2
 	dec hl
-	ld [hl], '№'
+	ld [hl], $74
 	hlcoord 19, 9
-	lb bc, 8, 6
+	lb "bc", 8, 6
 	call DrawLineBox ; Draws the box around types, ID No. and OT
 	hlcoord 10, 9
 	ld de, TypesIDNoOTText
@@ -126,11 +126,11 @@ StatusScreen:
 	hlcoord 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
-	jr nz, .StatusWritten
+	jr nz, StatusScreen.StatusWritten
 	hlcoord 16, 6
 	ld de, OKText
 	call PlaceString ; "OK"
-.StatusWritten
+StatusScreen.StatusWritten
 	hlcoord 9, 6
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
@@ -142,25 +142,25 @@ StatusScreen:
 	predef IndexToPokedex
 	hlcoord 3, 7
 	ld de, wPokedexNum
-	lb bc, LEADING_ZEROES | 1, 3
+	lb "bc", LEADING_ZEROES | 1, 3
 	call PrintNumber ; Pokémon no.
 	hlcoord 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
-	call .GetStringPointer
+	call StatusScreen.GetStringPointer
 	ld d, h
 	ld e, l
 	hlcoord 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
-	call .GetStringPointer
+	call StatusScreen.GetStringPointer
 	ld d, h
 	ld e, l
 	hlcoord 12, 16
 	call PlaceString ; OT
 	hlcoord 12, 14
 	ld de, wLoadedMonOTID
-	lb bc, LEADING_ZEROES | 2, 5
+	lb "bc", LEADING_ZEROES | 2, 5
 	call PrintNumber ; ID Number
 	ld d, STATUS_SCREEN_STATS_BOX
 	call PrintStatsBox
@@ -172,10 +172,10 @@ StatusScreen:
 	call PlayCry
 	call WaitForTextScrollButtonPress
 	pop af
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	ret
 
-.GetStringPointer
+StatusScreen.GetStringPointer
 	ld a, [wMonDataLocation]
 	add a
 	ld c, a
@@ -191,88 +191,88 @@ StatusScreen:
 	jp SkipFixedLengthTextEntries
 
 OTPointers:
-	dw wPartyMonOT
-	dw wEnemyMonOT
-	dw wBoxMonOT
-	dw wDayCareMonOT
+	.DW wPartyMonOT
+	.DW wEnemyMonOT
+	.DW wBoxMonOT
+	.DW wDayCareMonOT
 
 NamePointers2:
-	dw wPartyMonNicks
-	dw wEnemyMonNicks
-	dw wBoxMonNicks
-	dw wDayCareMonName
+	.DW wPartyMonNicks
+	.DW wEnemyMonNicks
+	.DW wBoxMonNicks
+	.DW wDayCareMonName
 
 TypesIDNoOTText:
-	db   "TYPE1/"
+		.STRINGMAP pokemon, "TYPE1/"
 	next "TYPE2/"
 	next "<ID>№/"
 	next "OT/"
 	next "@"
 
 StatusText:
-	db "STATUS/@"
+		.STRINGMAP pokemon, "STATUS/@"
 
 OKText:
-	db "OK@"
+		.STRINGMAP pokemon, "OK@"
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox:
 	ld de, SCREEN_WIDTH ; New line
-.PrintVerticalLine
+DrawLineBox.PrintVerticalLine
 	ld [hl], $78 ; │
 	add hl, de
 	dec b
-	jr nz, .PrintVerticalLine
+	jr nz, DrawLineBox.PrintVerticalLine
 	ld [hl], $77 ; ┘
 	dec hl
-.PrintHorizLine
+DrawLineBox.PrintHorizLine
 	ld [hl], $76 ; ─
 	dec hl
 	dec c
-	jr nz, .PrintHorizLine
+	jr nz, DrawLineBox.PrintHorizLine
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
-PTile: INCBIN "gfx/font/P.1bpp"
+PTile: .INCBIN "gfx/font/P.1bpp"
 
 PrintStatsBox:
 	ld a, d
-	ASSERT STATUS_SCREEN_STATS_BOX == 0
+	.ASSERT ((STATUS_SCREEN_STATS_BOX)-(0)) < 1 && ((STATUS_SCREEN_STATS_BOX)-(0)) > -1
 	and a
-	jr nz, .LevelUpStatsBox ; battle or Rare Candy
+	jr nz, PrintStatsBox.LevelUpStatsBox ; battle or Rare Candy
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 8
 	call TextBoxBorder
 	hlcoord 1, 9
 	ld bc, SCREEN_WIDTH + 5 ; one row down and 5 columns right
-	jr .PrintStats
-.LevelUpStatsBox
+	jr PrintStatsBox.PrintStats
+PrintStatsBox.LevelUpStatsBox
 	hlcoord 9, 2
 	ld b, 8
 	ld c, 9
 	call TextBoxBorder
 	hlcoord 11, 3
 	ld bc, SCREEN_WIDTH + 4 ; one row down and 4 columns right
-.PrintStats
+PrintStatsBox.PrintStats
 	push bc
 	push hl
-	ld de, .StatsText
+	ld de, PrintStatsBox.StatsText
 	call PlaceString
 	pop hl
 	pop bc
 	add hl, bc
 	ld de, wLoadedMonAttack
-	lb bc, 2, 3
-	call .PrintStat
+	lb "bc", 2, 3
+	call PrintStatsBox.PrintStat
 	ld de, wLoadedMonDefense
-	call .PrintStat
+	call PrintStatsBox.PrintStat
 	ld de, wLoadedMonSpeed
-	call .PrintStat
+	call PrintStatsBox.PrintStat
 	ld de, wLoadedMonSpecial
 	jp PrintNumber
 
-.PrintStat:
+PrintStatsBox.PrintStat:
 	push hl
 	call PrintNumber
 	pop hl
@@ -280,18 +280,18 @@ PrintStatsBox:
 	add hl, de
 	ret
 
-.StatsText:
-	db   "ATTACK"
+PrintStatsBox.StatsText:
+		.STRINGMAP pokemon, "ATTACK"
 	next "DEFENSE"
 	next "SPEED"
 	next "SPECIAL@"
 
 StatusScreen2:
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	push af
 	xor a
-	ldh [hTileAnimations], a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hTileAnimations)], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
 	call FillMemory
@@ -301,7 +301,7 @@ StatusScreen2:
 	call CopyData
 	callfar FormatMovesString
 	hlcoord 9, 2
-	lb bc, 5, 10
+	lb "bc", 5, 10
 	call ClearScreenArea ; Clear under name
 	hlcoord 19, 3
 	ld [hl], $78
@@ -320,22 +320,22 @@ StatusScreen2:
 	ld b, a ; number of blank moves
 	hlcoord 11, 10
 	ld de, SCREEN_WIDTH * 2
-	ld a, '<BOLD_P>'
+	ld a, $72
 	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
-	jr z, .InitPP
+	jr z, StatusScreen2.InitPP
 	ld c, a
-	ld a, '-'
+	ld a, $e3
 	call StatusScreen_PrintPP ; Fill the rest with --
-.InitPP
+StatusScreen2.InitPP
 	ld hl, wLoadedMonMoves
 	decoord 14, 10
 	ld b, 0
-.PrintPP
+StatusScreen2.PrintPP
 	ld a, [hli]
 	and a
-	jr z, .PPDone
+	jr z, StatusScreen2.PPDone
 	push bc
 	push hl
 	push de
@@ -361,12 +361,12 @@ StatusScreen2:
 	ld l, e
 	push hl
 	ld de, wStatusScreenCurrentPP
-	lb bc, 1, 2
+	lb "bc", 1, 2
 	call PrintNumber
-	ld a, '/'
+	ld a, $f3
 	ld [hli], a
 	ld de, wMaxPP
-	lb bc, 1, 2
+	lb "bc", 1, 2
 	call PrintNumber
 	pop hl
 	ld de, SCREEN_WIDTH * 2
@@ -378,20 +378,20 @@ StatusScreen2:
 	inc b
 	ld a, b
 	cp NUM_MOVES
-	jr nz, .PrintPP
-.PPDone
+	jr nz, StatusScreen2.PrintPP
+StatusScreen2.PPDone
 	hlcoord 9, 3
 	ld de, StatusScreenExpText
 	call PlaceString
 	ld a, [wLoadedMonLevel]
 	push af
 	cp MAX_LEVEL
-	jr z, .Level100
+	jr z, StatusScreen2.Level100
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
-.Level100
+StatusScreen2.Level100
 	hlcoord 14, 6
-	ld [hl], '<to>'
+	ld [hl], $70
 	inc hl
 	inc hl
 	call PrintLevel
@@ -399,12 +399,12 @@ StatusScreen2:
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
 	hlcoord 12, 4
-	lb bc, 3, 7
+	lb "bc", 3, 7
 	call PrintNumber ; exp
 	call CalcExpToLevelUp
 	ld de, wLoadedMonExp
 	hlcoord 7, 6
-	lb bc, 3, 7
+	lb "bc", 3, 7
 	call PrintNumber ; exp needed to level up
 
 	; unneeded, this clears the diacritic characters in JPN versions
@@ -419,37 +419,37 @@ StatusScreen2:
 	hlcoord 9, 1
 	call PlaceString
 	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	call Delay3
 	call WaitForTextScrollButtonPress
 	pop af
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	ld hl, wStatusFlags2
 	res BIT_NO_AUDIO_FADE_OUT, [hl]
 	ld a, $77
-	ldh [rAUDVOL], a
+	ldh [lobyte(rAUDVOL)], a
 	call GBPalWhiteOut
 	jp ClearScreen
 
 CalcExpToLevelUp:
 	ld a, [wLoadedMonLevel]
 	cp MAX_LEVEL
-	jr z, .atMaxLevel
+	jr z, CalcExpToLevelUp.atMaxLevel
 	inc a
 	ld d, a
 	callfar CalcExperience
 	ld hl, wLoadedMonExp + 2
-	ldh a, [hExperience + 2]
+	ldh a, [lobyte(hExperience + 2)]
 	sub [hl]
 	ld [hld], a
-	ldh a, [hExperience + 1]
+	ldh a, [lobyte(hExperience + 1)]
 	sbc [hl]
 	ld [hld], a
-	ldh a, [hExperience]
+	ldh a, [lobyte(hExperience)]
 	sbc [hl]
 	ld [hld], a
 	ret
-.atMaxLevel
+CalcExpToLevelUp.atMaxLevel
 	ld hl, wLoadedMonExp
 	xor a
 	ld [hli], a
@@ -458,12 +458,12 @@ CalcExpToLevelUp:
 	ret
 
 StatusScreenExpText:
-	db   "EXP POINTS"
+		.STRINGMAP pokemon, "EXP POINTS"
 	next "LEVEL UP@"
 
 StatusScreen_ClearName:
 	ld bc, NAME_LENGTH - 1
-	ld a, ' '
+	ld a, $7f
 	jp FillMemory
 
 StatusScreen_PrintPP:

@@ -14,23 +14,23 @@ Mansion1CheckReplaceSwitchDoorBlocks:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_MANSION_SWITCH_ON
-	jr nz, .switchTurnedOn
-	lb bc, 6, 12
+	jr nz, Mansion1CheckReplaceSwitchDoorBlocks.switchTurnedOn
+	lb "bc", 6, 12
 	call Mansion1LoadEmptyFloorTileBlock
-	lb bc, 3, 8
+	lb "bc", 3, 8
 	call Mansion1LoadHorizontalGateBlock
-	lb bc, 8, 10
+	lb "bc", 8, 10
 	call Mansion1LoadHorizontalGateBlock
-	lb bc, 13, 13
+	lb "bc", 13, 13
 	jp Mansion1LoadHorizontalGateBlock
-.switchTurnedOn
-	lb bc, 6, 12
+Mansion1CheckReplaceSwitchDoorBlocks.switchTurnedOn
+	lb "bc", 6, 12
 	call Mansion1LoadHorizontalGateBlock
-	lb bc, 3, 8
+	lb "bc", 3, 8
 	call Mansion1LoadEmptyFloorTileBlock
-	lb bc, 8, 10
+	lb "bc", 8, 10
 	call Mansion1LoadEmptyFloorTileBlock
-	lb bc, 13, 13
+	lb "bc", 13, 13
 	jp Mansion1LoadEmptyFloorTileBlock
 
 Mansion1LoadHorizontalGateBlock:
@@ -45,14 +45,14 @@ Mansion1ReplaceBlock:
 	predef ReplaceTileBlock
 	ret
 
-Mansion1Script_Switches::
+Mansion1Script_Switches:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, TEXT_POKEMONMANSION1F_SWITCH
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	jp DisplayTextID
 
 PokemonMansion1F_ScriptPointers:
@@ -72,7 +72,7 @@ Mansion1TrainerHeaders:
 	def_trainers
 Mansion1TrainerHeader0:
 	trainer EVENT_BEAT_MANSION_1_TRAINER_0, 3, PokemonMansion1FScientistBattleText, PokemonMansion1FScientistEndBattleText, PokemonMansion1FScientistAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 PokemonMansion1FScientistText:
 	text_asm
@@ -81,51 +81,51 @@ PokemonMansion1FScientistText:
 	jp TextScriptEnd
 
 PokemonMansion1FScientistBattleText:
-	text_far _PokemonMansion1FScientistBattleText
+	text_far WLA_GLOBAL_PokemonMansion1FScientistBattleText
 	text_end
 
 PokemonMansion1FScientistEndBattleText:
-	text_far _PokemonMansion1FScientistEndBattleText
+	text_far WLA_GLOBAL_PokemonMansion1FScientistEndBattleText
 	text_end
 
 PokemonMansion1FScientistAfterBattleText:
-	text_far _PokemonMansion1FScientistAfterBattleText
+	text_far WLA_GLOBAL_PokemonMansion1FScientistAfterBattleText
 	text_end
 
 PokemonMansion1FSwitchText:
 	text_asm
-	ld hl, .Text
+	ld hl, PokemonMansion1FSwitchText.Text
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .not_pressed
+	jr nz, PokemonMansion1FSwitchText.not_pressed
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
-	ld hl, .PressedText
+	ld hl, PokemonMansion1FSwitchText.PressedText
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
-	jr z, .done
+	jr z, PokemonMansion1FSwitchText.done
 	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
-	jr .done
-.not_pressed
-	ld hl, .NotPressedText
+	jr PokemonMansion1FSwitchText.done
+PokemonMansion1FSwitchText.not_pressed
+	ld hl, PokemonMansion1FSwitchText.NotPressedText
 	call PrintText
-.done
+PokemonMansion1FSwitchText.done
 	jp TextScriptEnd
 
-.Text:
-	text_far _PokemonMansion1FSwitchText
+PokemonMansion1FSwitchText.Text:
+	text_far WLA_GLOBAL_PokemonMansion1FSwitchText
 	text_end
 
-.PressedText:
-	text_far _PokemonMansion1FSwitchPressedText
+PokemonMansion1FSwitchText.PressedText:
+	text_far WLA_GLOBAL_PokemonMansion1FSwitchPressedText
 	text_end
 
-.NotPressedText:
-	text_far _PokemonMansion1FSwitchNotPressedText
+PokemonMansion1FSwitchText.NotPressedText:
+	text_far WLA_GLOBAL_PokemonMansion1FSwitchNotPressedText
 	text_end

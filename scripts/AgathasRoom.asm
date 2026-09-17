@@ -15,14 +15,14 @@ AgathaShowOrHideExitBlock:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
-	jr z, .blockExitToNextRoom
+	jr z, AgathaShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $e
-	jp .setExitBlock
-.blockExitToNextRoom
+	jp AgathaShowOrHideExitBlock.setExitBlock
+AgathaShowOrHideExitBlock.blockExitToNextRoom
 	ld a, $3b
-.setExitBlock
+AgathaShowOrHideExitBlock.setExitBlock
 	ld [wNewTileBlockID], a
-	lb bc, 0, 2
+	lb "bc", 0, 2
 	predef_jump ReplaceTileBlock
 
 ResetAgathaScript:
@@ -64,18 +64,18 @@ AgathasRoomDefaultScript:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyPressed)], a
+	ldh [lobyte(hJoyHeld)], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing one tile above the exit?
-	jr c, .stopPlayerFromLeaving
+	jr c, AgathasRoomDefaultScript.stopPlayerFromLeaving
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_AGATHAS_ROOM
 	jr z, AgathaScriptWalkIntoRoom
-.stopPlayerFromLeaving
+AgathasRoomDefaultScript.stopPlayerFromLeaving
 	ld a, TEXT_AGATHASROOM_AGATHA_DONT_RUN_AWAY
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, PAD_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -92,7 +92,7 @@ AgathaEntranceCoords:
 	dbmapcoord  5, 10
 	dbmapcoord  4, 11
 	dbmapcoord  5, 11
-	db -1 ; end
+	.DB -1 ; end
 
 AgathasRoomPlayerIsMovingScript:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -111,7 +111,7 @@ AgathasRoomAgathaEndBattleScript:
 	cp $ff
 	jp z, ResetAgathaScript
 	ld a, TEXT_AGATHASROOM_AGATHA
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	ld a, SCRIPT_CHAMPIONSROOM_PLAYER_ENTERS
 	ld [wChampionsRoomCurScript], a
@@ -126,7 +126,7 @@ AgathasRoomTrainerHeaders:
 	def_trainers
 AgathasRoomTrainerHeader0:
 	trainer EVENT_BEAT_AGATHAS_ROOM_TRAINER_0, 0, AgathaBeforeBattleText, AgathaEndBattleText, AgathaAfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 AgathasRoomAgathaText:
 	text_asm
@@ -135,17 +135,17 @@ AgathasRoomAgathaText:
 	jp TextScriptEnd
 
 AgathaBeforeBattleText:
-	text_far _AgathaBeforeBattleText
+	text_far WLA_GLOBAL_AgathaBeforeBattleText
 	text_end
 
 AgathaEndBattleText:
-	text_far _AgathaEndBattleText
+	text_far WLA_GLOBAL_AgathaEndBattleText
 	text_end
 
 AgathaAfterBattleText:
-	text_far _AgathaAfterBattleText
+	text_far WLA_GLOBAL_AgathaAfterBattleText
 	text_end
 
 AgathasRoomAgathaDontRunAwayText:
-	text_far _AgathasRoomAgathaDontRunAwayText
+	text_far WLA_GLOBAL_AgathasRoomAgathaDontRunAwayText
 	text_end

@@ -1,16 +1,19 @@
-_MrFujisHouseSuperNerdMrFujiIsntHereText::
+_MrFujisHouseSuperNerdMrFujiIsntHereText:
+WLA_GLOBAL_MrFujisHouseSuperNerdMrFujiIsntHereText:
 	text "That's odd, MR.FUJI"
 	line "isn't here."
 	cont "Where'd he go?"
 	done
 
-_MrFujisHouseSuperNerdMrFujiHadBeenPrayingText::
+_MrFujisHouseSuperNerdMrFujiHadBeenPrayingText:
+WLA_GLOBAL_MrFujisHouseSuperNerdMrFujiHadBeenPrayingText:
 	text "MR.FUJI had been"
 	line "praying alone for"
 	cont "CUBONE's mother."
 	done
 
-_MrFujisHouseLittleGirlThisIsMrFujisHouseText::
+_MrFujisHouseLittleGirlThisIsMrFujisHouseText:
+WLA_GLOBAL_MrFujisHouseLittleGirlThisIsMrFujisHouseText:
 	text "This is really"
 	line "MR.FUJI's house."
 
@@ -21,21 +24,25 @@ _MrFujisHouseLittleGirlThisIsMrFujisHouseText::
 	cont "orphaned #MON!"
 	done
 
-_MrFujisHouseLittleGirlPokemonAreNiceToHugText::
+_MrFujisHouseLittleGirlPokemonAreNiceToHugText:
+WLA_GLOBAL_MrFujisHouseLittleGirlPokemonAreNiceToHugText:
 	text "It's so warm!"
 	line "#MON are so"
 	cont "nice to hug!"
 	done
 
-_MrFujisHousePsyduckText::
+_MrFujisHousePsyduckText:
+WLA_GLOBAL_MrFujisHousePsyduckText:
 	text "PSYDUCK: Gwappa!@"
 	text_end
 
-_MrFujisHouseNidorinoText::
+_MrFujisHouseNidorinoText:
+WLA_GLOBAL_MrFujisHouseNidorinoText:
 	text "NIDORINO: Gaoo!@"
 	text_end
 
-_MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText::
+_MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText:
+WLA_GLOBAL_MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText:
 	text "MR.FUJI: <PLAYER>."
 
 	para "Your #DEX quest"
@@ -47,14 +54,16 @@ _MrFujisHouseMrFujiIThinkThisMayHelpYourQuestText::
 	line "help your quest."
 	prompt
 
-_MrFujisHouseMrFujiReceivedPokeFluteText::
+_MrFujisHouseMrFujiReceivedPokeFluteText:
+WLA_GLOBAL_MrFujisHouseMrFujiReceivedPokeFluteText:
 	text "<PLAYER> received"
 	line "a @"
 	text_ram wStringBuffer
 	text "!@"
 	text_end
 
-_MrFujisHouseMrFujiPokeFluteExplanationText::
+_MrFujisHouseMrFujiPokeFluteExplanationText:
+WLA_GLOBAL_MrFujisHouseMrFujiPokeFluteExplanationText:
 	text_start
 
 	para "Upon hearing #"
@@ -66,17 +75,20 @@ _MrFujisHouseMrFujiPokeFluteExplanationText::
 	line "sleeping #MON."
 	done
 
-_MrFujisHouseMrFujiPokeFluteNoRoomText::
+_MrFujisHouseMrFujiPokeFluteNoRoomText:
+WLA_GLOBAL_MrFujisHouseMrFujiPokeFluteNoRoomText:
 	text "You must make"
 	line "room for this!"
 	done
 
-_MrFujisHouseMrFujiHasMyFluteHelpedYouText::
+_MrFujisHouseMrFujiHasMyFluteHelpedYouText:
+WLA_GLOBAL_MrFujisHouseMrFujiHasMyFluteHelpedYouText:
 	text "MR.FUJI: Has my"
 	line "FLUTE helped you?"
 	done
 
-_MrFujisHouseMrFujiPokedexText::
+_MrFujisHouseMrFujiPokedexText:
+WLA_GLOBAL_MrFujisHouseMrFujiPokedexText:
 	text "#MON Monthly"
 	line "Grand Prize"
 	cont "Drawing!"

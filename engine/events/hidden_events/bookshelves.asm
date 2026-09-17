@@ -1,39 +1,39 @@
 ; prints text for bookshelves in buildings without sign events
-PrintBookshelfText::
+PrintBookshelfText:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
-	jr nz, .noMatch
+	jr nz, PrintBookshelfText.noMatch
 ; facing up
 	ld a, [wCurMapTileset]
 	ld b, a
 	lda_coord 8, 7
 	ld c, a
 	ld hl, BookshelfTileIDs
-.loop
+PrintBookshelfText.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .noMatch
+	jr z, PrintBookshelfText.noMatch
 	cp b
-	jr nz, .nextBookshelfEntry1
+	jr nz, PrintBookshelfText.nextBookshelfEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .nextBookshelfEntry2
+	jr nz, PrintBookshelfText.nextBookshelfEntry2
 	ld a, [hl]
 	push af
 	call EnableAutoTextBoxDrawing
 	pop af
 	call PrintPredefTextID
 	xor a
-	ldh [hInteractedWithBookshelf], a
+	ldh [lobyte(hInteractedWithBookshelf)], a
 	ret
-.nextBookshelfEntry1
+PrintBookshelfText.nextBookshelfEntry1
 	inc hl
-.nextBookshelfEntry2
+PrintBookshelfText.nextBookshelfEntry2
 	inc hl
-	jr .loop
-.noMatch
+	jr PrintBookshelfText.loop
+PrintBookshelfText.noMatch
 	ld a, $ff
-	ldh [hInteractedWithBookshelf], a
+	ldh [lobyte(hInteractedWithBookshelf)], a
 	farjp PrintCardKeyText
 
-INCLUDE "data/tilesets/bookshelf_tile_ids.asm"
+.INCLUDE "data/tilesets/bookshelf_tile_ids.asm"

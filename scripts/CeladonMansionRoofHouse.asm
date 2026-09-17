@@ -7,16 +7,16 @@ CeladonMansionRoofHouse_TextPointers:
 	dw_const CeladonMansionRoofHouseEeveePokeballText, TEXT_CELADONMANSION_ROOF_HOUSE_EEVEE_POKEBALL
 
 CeladonMansionRoofHouseHikerText:
-	text_far _CeladonMansionRoofHouseHikerText
+	text_far WLA_GLOBAL_CeladonMansionRoofHouseHikerText
 	text_end
 
 CeladonMansionRoofHouseEeveePokeballText:
 	text_asm
-	lb bc, EEVEE, 25
+	lb "bc", EEVEE, 25
 	call GivePokemon
-	jr nc, .party_full
+	jr nc, CeladonMansionRoofHouseEeveePokeballText.party_full
 	ld a, TOGGLE_CELADON_MANSION_EEVEE_GIFT
 	ld [wToggleableObjectIndex], a
 	predef HideObject
-.party_full
+CeladonMansionRoofHouseEeveePokeballText.party_full
 	jp TextScriptEnd

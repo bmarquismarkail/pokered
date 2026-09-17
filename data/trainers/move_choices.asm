@@ -1,12 +1,13 @@
-DEF __move_choices__ = 0
+.DEFINE __move_choices__ 0
 
-MACRO move_choices
-	IF _NARG
-		db \# ; all args
-	ENDC
-	db 0 ; end
-	DEF __move_choices__ += 1
-ENDM
+.MACRO move_choices
+	.REPT NARGS
+		.DB \1 ; all args
+		.SHIFT
+	.ENDR
+	.DB 0 ; end
+	.REDEFINE __move_choices__ __move_choices__ + (1)
+.ENDM
 
 ; move choice modification methods that are applied for each trainer class
 TrainerClassMoveChoiceModifications:
@@ -57,5 +58,4 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; CHANNELER
 	move_choices 1       ; AGATHA
 	move_choices 1, 3    ; LANCE
-	assert __move_choices__ == NUM_TRAINERS, \
-		"TrainerClassMoveChoiceModifications: expected {d:NUM_TRAINERS} entries, got {d:__move_choices__}"
+	.ASSERT ((__move_choices__)-(NUM_TRAINERS)) < 1 && ((__move_choices__)-(NUM_TRAINERS)) > -1

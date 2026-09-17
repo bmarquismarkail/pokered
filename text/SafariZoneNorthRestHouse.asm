@@ -1,4 +1,5 @@
-_SafariZoneNorthRestHouseScientistText::
+_SafariZoneNorthRestHouseScientistText:
+WLA_GLOBAL_SafariZoneNorthRestHouseScientistText:
 	text "You can keep any"
 	line "item you find on"
 	cont "the ground here."
@@ -9,14 +10,16 @@ _SafariZoneNorthRestHouseScientistText::
 	cont "of them at once!"
 	done
 
-_SafariZoneNorthRestHouseSafariZoneWorkerText::
+_SafariZoneNorthRestHouseSafariZoneWorkerText:
+WLA_GLOBAL_SafariZoneNorthRestHouseSafariZoneWorkerText:
 	text "Go to the deepest"
 	line "part of the"
 	cont "SAFARI ZONE. You"
 	cont "will win a prize!"
 	done
 
-_SafariZoneNorthRestHouseGentlemanText::
+_SafariZoneNorthRestHouseGentlemanText:
+WLA_GLOBAL_SafariZoneNorthRestHouseGentlemanText:
 	text "My EEVEE evolved"
 	line "into FLAREON!"
 

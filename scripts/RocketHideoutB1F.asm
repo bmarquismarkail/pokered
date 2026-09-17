@@ -14,21 +14,21 @@ RocketHideoutB1FDoorCallbackScript:
 	res BIT_CUR_MAP_LOADED_1, [hl]
 	ret z
 	CheckEvent EVENT_ENTERED_ROCKET_HIDEOUT
-	jr nz, .door_open
+	jr nz, RocketHideoutB1FDoorCallbackScript.door_open
 	CheckEventReuseA EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
-	jr nz, .play_sound_door_open
+	jr nz, RocketHideoutB1FDoorCallbackScript.play_sound_door_open
 	ld a, $54 ; Door Block
-	jr .set_door_block
-.play_sound_door_open
+	jr RocketHideoutB1FDoorCallbackScript.set_door_block
+RocketHideoutB1FDoorCallbackScript.play_sound_door_open
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	; BUG: should be SetEvent to avoid the SFX playing every time you enter the map
 	CheckEventHL EVENT_ENTERED_ROCKET_HIDEOUT
-.door_open
+RocketHideoutB1FDoorCallbackScript.door_open
 	ld a, $e ; Floor Block
-.set_door_block
+RocketHideoutB1FDoorCallbackScript.set_door_block
 	ld [wNewTileBlockID], a
-	lb bc, 8, 12
+	lb "bc", 8, 12
 	predef_jump ReplaceTileBlock
 
 RocketHideoutB1F_ScriptPointers:
@@ -59,7 +59,7 @@ RocketHideout1TrainerHeader3:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3, 3, RocketHideoutB1FRocket4BattleText, RocketHideoutB1FRocket4EndBattleText, RocketHideoutB1FRocket4AfterBattleText
 RocketHideout1TrainerHeader4:
 	trainer EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4, 3, RocketHideoutB1FRocket5BattleText, RocketHideoutB1FRocket5EndBattleText, RocketHideoutB1FRocket5AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 RocketHideoutB1FRocket1Text:
 	text_asm
@@ -92,68 +92,68 @@ RocketHideoutB1FRocket5Text:
 	jp TextScriptEnd
 
 RocketHideoutB1FRocket5EndBattleText:
-	text_far _RocketHideoutB1FRocket5EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket5EndBattleText
 	text_asm
 	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
-	ld hl, .prompt_end
+	ld hl, RocketHideoutB1FRocket5EndBattleText.prompt_end
 	ret
 
-.prompt_end:
+RocketHideoutB1FRocket5EndBattleText.prompt_end:
 	text_promptbutton
 	text_end
 
 RocketHideoutB1FRocket1BattleText:
-	text_far _RocketHideoutB1FRocket1BattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket1BattleText
 	text_end
 
 RocketHideoutB1FRocket1EndBattleText:
-	text_far _RocketHideoutB1FRocket1EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket1EndBattleText
 	text_end
 
 RocketHideoutB1FRocket1AfterBattleText:
-	text_far _RocketHideoutB1FRocket1AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket1AfterBattleText
 	text_end
 
 RocketHideoutB1FRocket2BattleText:
-	text_far _RocketHideoutB1FRocket2BattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket2BattleText
 	text_end
 
 RocketHideoutB1FRocket2EndBattleText:
-	text_far _RocketHideoutB1FRocket2EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket2EndBattleText
 	text_end
 
 RocketHideoutB1FRocket2AfterBattleText:
-	text_far _RocketHideoutB1FRocket2AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket2AfterBattleText
 	text_end
 
 RocketHideoutB1FRocket3BattleText:
-	text_far _RocketHideoutB1FRocket3BattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket3BattleText
 	text_end
 
 RocketHideoutB1FRocket3EndBattleText:
-	text_far _RocketHideoutB1FRocket3EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket3EndBattleText
 	text_end
 
 RocketHideoutB1FRocket3AfterBattleText:
-	text_far _RocketHideoutB1FRocket3AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket3AfterBattleText
 	text_end
 
 RocketHideoutB1FRocket4BattleText:
-	text_far _RocketHideoutB1FRocket4BattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket4BattleText
 	text_end
 
 RocketHideoutB1FRocket4EndBattleText:
-	text_far _RocketHideoutB1FRocket4EndBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket4EndBattleText
 	text_end
 
 RocketHideoutB1FRocket4AfterBattleText:
-	text_far _RocketHideoutB1FRocket4AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket4AfterBattleText
 	text_end
 
 RocketHideoutB1FRocket5BattleText:
-	text_far _RocketHideoutB1FRocket5BattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket5BattleText
 	text_end
 
 RocketHideoutB1FRocket5AfterBattleText:
-	text_far _RocketHideoutB1FRocket5AfterBattleText
+	text_far WLA_GLOBAL_RocketHideoutB1FRocket5AfterBattleText
 	text_end

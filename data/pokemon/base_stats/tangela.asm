@@ -1,17 +1,17 @@
-	db DEX_TANGELA ; pokedex id
+	.DB DEX_TANGELA ; pokedex id
 
-	db  65,  55, 115,  60, 100
+	.DB  65,  55, 115,  60, 100
 	;   hp  atk  def  spd  spc
 
-	db GRASS, GRASS ; type
-	db 45 ; catch rate
-	db 166 ; base exp
+	.DB GRASS, GRASS ; type
+	.DB 45 ; catch rate
+	.DB 166 ; base exp
 
-	INCBIN "gfx/pokemon/front/tangela.pic", 0, 1 ; sprite dimensions
-	dw TangelaPicFront, TangelaPicBack
+	.INCBIN "gfx/pokemon/front/tangela.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW TangelaPicFront, TangelaPicBack
 
-	db CONSTRICT, BIND, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB CONSTRICT, BIND, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     CUT
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

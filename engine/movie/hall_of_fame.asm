@@ -8,7 +8,7 @@ AnimateHallOfFame:
 	call DisableLCD
 	ld hl, vBGMap0
 	ld bc, 2 * TILEMAP_AREA
-	ld a, ' '
+	ld a, $7f
 	call FillMemory
 	call EnableLCD
 	ld hl, rLCDC
@@ -19,29 +19,29 @@ AnimateHallOfFame:
 	call FillMemory
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 	ld [wSpriteFlipped], a
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon
 	inc a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld hl, wNumHoFTeams
 	ld a, [hl]
 	inc a
-	jr z, .skipInc ; don't wrap around to 0
+	jr z, AnimateHallOfFame.skipInc ; don't wrap around to 0
 	inc [hl]
-.skipInc
+AnimateHallOfFame.skipInc
 	ld a, $90
-	ldh [hWY], a
-	ld c, BANK(Music_HallOfFame)
+	ldh [lobyte(hWY)], a
+	ld c, bank(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
 	ld hl, wPartySpecies
 	ld c, $ff
-.partyMonLoop
+AnimateHallOfFame.partyMonLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .doneShowingParty
+	jr z, AnimateHallOfFame.doneShowingParty
 	inc c
 	push hl
 	push bc
@@ -69,8 +69,8 @@ AnimateHallOfFame:
 	call GBFadeOutToWhite
 	pop bc
 	pop hl
-	jr .partyMonLoop
-.doneShowingParty
+	jr AnimateHallOfFame.partyMonLoop
+AnimateHallOfFame.doneShowingParty
 	ld a, c
 	inc a
 	ld hl, wHallOfFame
@@ -86,20 +86,20 @@ AnimateHallOfFame:
 	call HoFDisplayPlayerStats
 	call HoFFadeOutScreenAndMusic
 	xor a
-	ldh [hWY], a
+	ldh [lobyte(hWY)], a
 	ld hl, rLCDC
 	res B_LCDC_BG_MAP, [hl]
 	ret
 
 HallOfFameText:
-	db "HALL OF FAME@"
+		.STRINGMAP pokemon, "HALL OF FAME@"
 
 HoFShowMonOrPlayer:
 	call ClearScreen
 	ld a, $d0
-	ldh [hSCY], a
+	ldh [lobyte(hSCY)], a
 	ld a, $c0
-	ldh [hSCX], a
+	ldh [lobyte(hSCX)], a
 	ld a, [wHoFMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -107,46 +107,46 @@ HoFShowMonOrPlayer:
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [wHoFMonOrPlayer]
 	and a
-	jr z, .showMon
+	jr z, HoFShowMonOrPlayer.showMon
 ; show player
 	call HoFLoadPlayerPics
-	jr .next1
-.showMon
+	jr HoFShowMonOrPlayer.next1
+HoFShowMonOrPlayer.showMon
 	hlcoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
-.next1
+HoFShowMonOrPlayer.next1
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0
 	call RunPaletteCommand
 	ld a, %11100100
-	ldh [rBGP], a
+	ldh [lobyte(rBGP)], a
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, $a0
 	ld e, 4
 	ld a, [wOnSGB]
 	and a
-	jr z, .next2
+	jr z, HoFShowMonOrPlayer.next2
 	sla e ; scroll more slowly on SGB
-.next2
-	call .ScrollPic ; scroll back pic left
+HoFShowMonOrPlayer.next2
+	call HoFShowMonOrPlayer.ScrollPic ; scroll back pic left
 	xor a
-	ldh [hSCY], a
+	ldh [lobyte(hSCY)], a
 	ld c, a ; front pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, 0
 	ld e, -4
 ; scroll front pic right
 
-.ScrollPic
+HoFShowMonOrPlayer.ScrollPic
 	call DelayFrame
-	ldh a, [hSCX]
+	ldh a, [lobyte(hSCX)]
 	add e
-	ldh [hSCX], a
+	ldh [lobyte(hSCX)], a
 	cp d
-	jr nz, .ScrollPic
+	jr nz, HoFShowMonOrPlayer.ScrollPic
 	ret
 
 HoFDisplayAndRecordMonInfo:
@@ -178,13 +178,13 @@ HoFDisplayMonInfo:
 	jp PlayCry
 
 HoFMonInfoText:
-	db   "LEVEL/"
+		.STRINGMAP pokemon, "LEVEL/"
 	next "TYPE1/"
 	next "TYPE2/@"
 
 HoFLoadPlayerPics:
 	ld de, RedPicFront
-	ld a, BANK(RedPicFront)
+	ld a, bank(RedPicFront)
 	call UncompressSpriteFromDE
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
@@ -193,7 +193,7 @@ HoFLoadPlayerPics:
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld de, RedPicBack
-	ld a, BANK(RedPicBack)
+	ld a, bank(RedPicBack)
 	call UncompressSpriteFromDE
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
@@ -225,12 +225,12 @@ HoFDisplayPlayerStats:
 	call PlaceString
 	hlcoord 5, 7
 	ld de, wPlayTimeHours
-	lb bc, 1, 3
+	lb "bc", 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, wPlayTimeMinutes
-	lb bc, LEADING_ZEROES | 1, 2
+	lb "bc", LEADING_ZEROES | 1, 2
 	call PrintNumber
 	hlcoord 1, 9
 	ld de, HoFMoneyText
@@ -251,17 +251,17 @@ HoFPrintTextAndDelay:
 	jp DelayFrames
 
 HoFPlayTimeText:
-	db "PLAY TIME@"
+		.STRINGMAP pokemon, "PLAY TIME@"
 
 HoFMoneyText:
-	db "MONEY@"
+		.STRINGMAP pokemon, "MONEY@"
 
 DexSeenOwnedText:
-	text_far _DexSeenOwnedText
+	text_far WLA_GLOBAL_DexSeenOwnedText
 	text_end
 
 DexRatingText:
-	text_far _DexRatingText
+	text_far WLA_GLOBAL_DexRatingText
 	text_end
 
 HoFRecordMonInfo:

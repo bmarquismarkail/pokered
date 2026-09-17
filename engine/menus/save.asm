@@ -3,14 +3,14 @@ TryLoadSaveFile:
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call LoadMainData
-	jr c, .badsum
+	jr c, TryLoadSaveFile.badsum
 	call LoadCurrentBoxData
-	jr c, .badsum
+	jr c, TryLoadSaveFile.badsum
 	call LoadPartyAndDexData
-	jr c, .badsum
+	jr c, TryLoadSaveFile.badsum
 	ld a, $2 ; good checksum
-	jr .done
-.badsum
+	jr TryLoadSaveFile.done
+TryLoadSaveFile.badsum
 	ld hl, wStatusFlags5
 	push hl
 	set BIT_NO_TEXT_DELAY, [hl]
@@ -21,12 +21,12 @@ TryLoadSaveFile:
 	pop hl
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, $1 ; bad checksum
-.done
+TryLoadSaveFile.done
 	ld [wSaveFileStatus], a
 	ret
 
 FileDataDestroyedText:
-	text_far _FileDataDestroyedText
+	text_far WLA_GLOBAL_FileDataDestroyedText
 	text_end
 
 LoadMainData:
@@ -34,7 +34,6 @@ LoadMainData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 ; This vc_hook does not have to be in any particular location.
 ; It is defined here because it refers to the same labels as the two lines below.
@@ -45,7 +44,7 @@ LoadMainData:
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jp z, .checkSumMatched
+	jp z, LoadMainData.checkSumMatched
 
 ; If the computed checksum didn't match the saved on, try again.
 	ld hl, sGameData
@@ -56,7 +55,7 @@ LoadMainData:
 	cp c
 	jp nz, CheckSumFailed
 
-.checkSumMatched
+LoadMainData.checkSumMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -72,7 +71,7 @@ LoadMainData:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld a, [sTileAnimations]
-	ldh [hTileAnimations], a
+	ldh [lobyte(hTileAnimations)], a
 
 ; this part is redundant, LoadCurrentBoxData is always called next
 	ld hl, sCurBoxData
@@ -88,7 +87,6 @@ LoadCurrentBoxData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -109,7 +107,6 @@ LoadPartyAndDexData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -136,7 +133,7 @@ CheckSumFailed:
 GoodCheckSum:
 	ld a, BMODE_SIMPLE ; preserve flags
 	ld [rBMODE], a
-	ASSERT RAMG_SRAM_DISABLE == BMODE_SIMPLE
+	.ASSERT ((RAMG_SRAM_DISABLE)-(BMODE_SIMPLE)) < 1 && ((RAMG_SRAM_DISABLE)-(BMODE_SIMPLE)) > -1
 	ld [rRAMG], a
 	ret
 
@@ -155,17 +152,17 @@ SaveMenu:
 	ret nz
 	ld a, [wSaveFileStatus]
 	dec a
-	jr z, .save
+	jr z, SaveMenu.save
 	call CheckPreviousSaveFile
-	jr z, .save
+	jr z, SaveMenu.save
 	ld hl, OlderFileWillBeErasedText
 	call SaveTheGame_YesOrNo
 	and a
 	ret nz
-.save
+SaveMenu.save
 	call SaveGameData
 	hlcoord 1, 13
-	lb bc, 4, 18
+	lb "bc", 4, 18
 	call ClearScreenArea
 	hlcoord 1, 14
 	ld de, NowSavingString
@@ -181,12 +178,12 @@ SaveMenu:
 	jp DelayFrames
 
 NowSavingString:
-	db "Now saving...@"
+		.STRINGMAP pokemon, "Now saving...@"
 
 SaveTheGame_YesOrNo:
 	call PrintText
 	hlcoord 0, 7
-	lb bc, 8, 1
+	lb "bc", 8, 1
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -194,15 +191,15 @@ SaveTheGame_YesOrNo:
 	ret
 
 WouldYouLikeToSaveText:
-	text_far _WouldYouLikeToSaveText
+	text_far WLA_GLOBAL_WouldYouLikeToSaveText
 	text_end
 
 GameSavedText:
-	text_far _GameSavedText
+	text_far WLA_GLOBAL_GameSavedText
 	text_end
 
 OlderFileWillBeErasedText:
-	text_far _OlderFileWillBeErasedText
+	text_far WLA_GLOBAL_OlderFileWillBeErasedText
 	text_end
 
 SaveMainData:
@@ -210,7 +207,6 @@ SaveMainData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 
 	ld hl, wPlayerName
@@ -232,7 +228,7 @@ SaveMainData:
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 
-	ldh a, [hTileAnimations]
+	ldh a, [lobyte(hTileAnimations)]
 	ld [sTileAnimations], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -248,7 +244,6 @@ SaveCurrentBoxData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
@@ -268,7 +263,6 @@ SavePartyAndDexData:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld hl, wPartyDataStart
 	ld de, sPartyData
@@ -287,7 +281,7 @@ SavePartyAndDexData:
 	ld [rRAMG], a
 	ret
 
-SaveGameData::
+SaveGameData:
 	ld a, $2
 	ld [wSaveFileStatus], a
 	call SaveMainData
@@ -297,14 +291,14 @@ SaveGameData::
 CalcCheckSum:
 ;Check Sum (result[1 byte] is complemented)
 	ld d, 0
-.loop
+CalcCheckSum.loop
 	ld a, [hli]
 	add d
 	ld d, a
 	dec bc
 	ld a, b
 	or c
-	jr nz, .loop
+	jr nz, CalcCheckSum.loop
 	ld a, d
 	cpl
 	ret
@@ -313,7 +307,7 @@ CalcIndividualBoxCheckSums:
 	ld hl, sBox1 ; sBox7
 	ld de, sBank2IndividualBoxChecksums ; sBank3IndividualBoxChecksums
 	ld b, NUM_BOXES / 2
-.loop
+CalcIndividualBoxCheckSums.loop
 	push bc
 	push de
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -323,7 +317,7 @@ CalcIndividualBoxCheckSums:
 	inc de
 	pop bc
 	dec b
-	jr nz, .loop
+	jr nz, CalcIndividualBoxCheckSums.loop
 	ret
 
 GetBoxSRAMLocation:
@@ -334,10 +328,10 @@ GetBoxSRAMLocation:
 	and BOX_NUM_MASK
 	cp NUM_BOXES / 2
 	ld b, 2
-	jr c, .next
+	jr c, GetBoxSRAMLocation.next
 	inc b
 	sub NUM_BOXES / 2
-.next
+GetBoxSRAMLocation.next
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -348,14 +342,14 @@ GetBoxSRAMLocation:
 	ret
 
 BoxSRAMPointerTable:
-	dw sBox1 ; sBox7
-	dw sBox2 ; sBox8
-	dw sBox3 ; sBox9
-	dw sBox4 ; sBox10
-	dw sBox5 ; sBox11
-	dw sBox6 ; sBox12
+	.DW sBox1 ; sBox7
+	.DW sBox2 ; sBox8
+	.DW sBox3 ; sBox9
+	.DW sBox4 ; sBox10
+	.DW sBox5 ; sBox11
+	.DW sBox6 ; sBox12
 
-ChangeBox::
+ChangeBox:
 	ld hl, WhenYouChangeBoxText
 	call PrintText
 	call YesNoChoice
@@ -402,7 +396,7 @@ ChangeBox::
 	ret
 
 WhenYouChangeBoxText:
-	text_far _WhenYouChangeBoxText
+	text_far WLA_GLOBAL_WhenYouChangeBoxText
 	text_end
 
 CopyBoxToOrFromSRAM:
@@ -436,7 +430,7 @@ CopyBoxToOrFromSRAM:
 
 DisplayChangeBoxMenu:
 	xor a
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -471,15 +465,15 @@ DisplayChangeBoxMenu:
 	ld a, [wCurrentBoxNum]
 	and BOX_NUM_MASK
 	cp 9
-	jr c, .singleDigitBoxNum
+	jr c, DisplayChangeBoxMenu.singleDigitBoxNum
 	sub 9
 	hlcoord 8, 2
-	ld [hl], '1'
-	add '0'
-	jr .next
-.singleDigitBoxNum
-	add '1'
-.next
+	ld [hl], $f7
+	add $f6
+	jr DisplayChangeBoxMenu.next
+DisplayChangeBoxMenu.singleDigitBoxNum
+	add $f7
+DisplayChangeBoxMenu.next
 	ldcoord_a 9, 2
 	hlcoord 1, 2
 	ld de, BoxNoText
@@ -489,28 +483,28 @@ DisplayChangeBoxMenu:
 	ld de, wBoxMonCounts
 	ld bc, SCREEN_WIDTH
 	ld a, NUM_BOXES
-.loop
+DisplayChangeBoxMenu.loop
 	push af
 	ld a, [de]
 	and a ; is the box empty?
-	jr z, .skipPlacingPokeball
+	jr z, DisplayChangeBoxMenu.skipPlacingPokeball
 	ld [hl], $78 ; place pokeball tile next to box name if box not empty
-.skipPlacingPokeball
+DisplayChangeBoxMenu.skipPlacingPokeball
 	add hl, bc
 	inc de
 	pop af
 	dec a
-	jr nz, .loop
+	jr nz, DisplayChangeBoxMenu.loop
 	ld a, 1
-	ldh [hAutoBGTransferEnabled], a
+	ldh [lobyte(hAutoBGTransferEnabled)], a
 	ret
 
 ChooseABoxText:
-	text_far _ChooseABoxText
+	text_far WLA_GLOBAL_ChooseABoxText
 	text_end
 
 BoxNames:
-	db   "BOX 1"
+		.STRINGMAP pokemon, "BOX 1"
 	next "BOX 2"
 	next "BOX 3"
 	next "BOX 4"
@@ -524,7 +518,7 @@ BoxNames:
 	next "BOX12@"
 
 BoxNoText:
-	db "BOX No.@"
+		.STRINGMAP pokemon, "BOX No.@"
 
 EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the
@@ -533,10 +527,10 @@ EmptyAllSRAMBoxes:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ld a, BANK("Saved Boxes 1")
+	ld a, 2
 	ld [rRAMB], a
 	call EmptySRAMBoxesInBank
-	ld a, BANK("Saved Boxes 2")
+	ld a, 3
 	ld [rRAMB], a
 	call EmptySRAMBoxesInBank
 	xor a
@@ -579,10 +573,10 @@ GetMonCountsForAllBoxes:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ld a, BANK("Saved Boxes 1")
+	ld a, 2
 	ld [rRAMB], a
 	call GetMonCountsForBoxesInBank
-	ld a, BANK("Saved Boxes 2")
+	ld a, 3
 	ld [rRAMB], a
 	call GetMonCountsForBoxesInBank
 	xor a
@@ -624,31 +618,30 @@ CheckPreviousSaveFile:
 	ld [rRAMG], a
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
-	ASSERT BANK("Save Data") == BMODE_ADVANCED
 	ld [rRAMB], a
 	ld a, [sPlayerName]
 	and a
-	jr z, .next
+	jr z, CheckPreviousSaveFile.next
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jr nz, .next ; return z set if save data is corrupted
+	jr nz, CheckPreviousSaveFile.next ; return z set if save data is corrupted
 	ld hl, sMainData + (wPlayerID - wMainDataStart) ; player ID
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [wPlayerID]
 	cp l
-	jr nz, .next
+	jr nz, CheckPreviousSaveFile.next
 	ld a, [wPlayerID + 1]
 	cp h
-.next
+CheckPreviousSaveFile.next
 	ld a, BMODE_SIMPLE
 	ld [rBMODE], a
-	ASSERT RAMG_SRAM_DISABLE == BMODE_SIMPLE
+	.ASSERT ((RAMG_SRAM_DISABLE)-(BMODE_SIMPLE)) < 1 && ((RAMG_SRAM_DISABLE)-(BMODE_SIMPLE)) > -1
 	ld [rRAMG], a
 	ret
 
@@ -656,7 +649,7 @@ SaveHallOfFameTeams:
 	ld a, [wNumHoFTeams]
 	dec a
 	cp HOF_TEAM_CAPACITY
-	jr nc, .shiftHOFTeams
+	jr nc, SaveHallOfFameTeams.shiftHOFTeams
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
 	call AddNTimes
@@ -666,7 +659,7 @@ SaveHallOfFameTeams:
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
-.shiftHOFTeams
+SaveHallOfFameTeams.shiftHOFTeams
 ; if the space designated for HOF teams is full, then shift all HOF teams to the next slot, making space for the new HOF team
 ; this deletes the last HOF team though
 	ld hl, sHallOfFame + HOF_TEAM
@@ -707,21 +700,21 @@ ClearAllSRAMBanks:
 	ld a, BMODE_ADVANCED
 	ld [rBMODE], a
 	xor a
-	call .PadSRAM_FF
+	call ClearAllSRAMBanks.PadSRAM_FF
 	ld a, 1
-	call .PadSRAM_FF
+	call ClearAllSRAMBanks.PadSRAM_FF
 	ld a, 2
-	call .PadSRAM_FF
+	call ClearAllSRAMBanks.PadSRAM_FF
 	ld a, 3
-	call .PadSRAM_FF
+	call ClearAllSRAMBanks.PadSRAM_FF
 	xor a
 	ld [rBMODE], a
 	ld [rRAMG], a
 	ret
 
-.PadSRAM_FF
+ClearAllSRAMBanks.PadSRAM_FF
 	ld [rRAMB], a
-	ld hl, STARTOF(SRAM)
-	ld bc, SIZEOF(SRAM)
+	ld hl, $a000
+	ld bc, $2000
 	ld a, $ff
 	jp FillMemory

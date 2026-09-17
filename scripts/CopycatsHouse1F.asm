@@ -8,15 +8,15 @@ CopycatsHouse1F_TextPointers:
 	dw_const CopycatsHouse1FChanseyText,         TEXT_COPYCATSHOUSE1F_CHANSEY
 
 CopycatsHouse1FMiddleAgedWomanText:
-	text_far _CopycatsHouse1FMiddleAgedWomanText
+	text_far WLA_GLOBAL_CopycatsHouse1FMiddleAgedWomanText
 	text_end
 
 CopycatsHouse1FMiddleAgedManText:
-	text_far _CopycatsHouse1FMiddleAgedManText
+	text_far WLA_GLOBAL_CopycatsHouse1FMiddleAgedManText
 	text_end
 
 CopycatsHouse1FChanseyText:
-	text_far _CopycatsHouse1FChanseyText
+	text_far WLA_GLOBAL_CopycatsHouse1FChanseyText
 	text_asm
 	ld a, CHANSEY
 	call PlayCry

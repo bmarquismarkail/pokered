@@ -2,7 +2,7 @@ CeruleanGym_Script:
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
-	call nz, .LoadNames
+	call nz, CeruleanGym_Script.LoadNames
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeaders
 	ld de, CeruleanGym_ScriptPointers
@@ -11,16 +11,16 @@ CeruleanGym_Script:
 	ld [wCeruleanGymCurScript], a
 	ret
 
-.LoadNames:
-	ld hl, .CityName
-	ld de, .LeaderName
+CeruleanGym_Script.LoadNames:
+	ld hl, CeruleanGym_Script.CityName
+	ld de, CeruleanGym_Script.LeaderName
 	jp LoadGymLeaderAndCityName
 
-.CityName:
-	db "CERULEAN CITY@"
+CeruleanGym_Script.CityName:
+		.STRINGMAP pokemon, "CERULEAN CITY@"
 
-.LeaderName:
-	db "MISTY@"
+CeruleanGym_Script.LeaderName:
+		.STRINGMAP pokemon, "MISTY@"
 
 CeruleanGymResetScripts:
 	xor a ; SCRIPT_CERULEANGYM_DEFAULT
@@ -45,22 +45,22 @@ CeruleanGymMistyPostBattleScript:
 
 CeruleanGymReceiveTM11:
 	ld a, TEXT_CERULEANGYM_MISTY_CASCADE_BADGE_INFO
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_MISTY
-	lb bc, TM_BUBBLEBEAM, 1
+	lb "bc", TM_BUBBLEBEAM, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, CeruleanGymReceiveTM11.BagFull
 	ld a, TEXT_CERULEANGYM_MISTY_RECEIVED_TM11
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM11
-	jr .gymVictory
-.BagFull
+	jr CeruleanGymReceiveTM11.gymVictory
+CeruleanGymReceiveTM11.BagFull
 	ld a, TEXT_CERULEANGYM_MISTY_TM11_NO_ROOM
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
-.gymVictory
+CeruleanGymReceiveTM11.gymVictory
 	ld hl, wObtainedBadges
 	set BIT_CASCADEBADGE, [hl]
 	ld hl, wBeatGymFlags
@@ -87,23 +87,23 @@ CeruleanGymTrainerHeader0:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
 CeruleanGymTrainerHeader1:
 	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
-	db -1 ; end
+	.DB -1 ; end
 
 CeruleanGymMistyText:
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
-	jr z, .beforeBeat
+	jr z, CeruleanGymMistyText.beforeBeat
 	CheckEventReuseA EVENT_GOT_TM11
-	jr nz, .afterBeat
+	jr nz, CeruleanGymMistyText.afterBeat
 	call z, CeruleanGymReceiveTM11
 	call DisableWaitingAfterTextDisplay
-	jr .done
-.afterBeat
-	ld hl, .TM11ExplanationText
+	jr CeruleanGymMistyText.done
+CeruleanGymMistyText.afterBeat
+	ld hl, CeruleanGymMistyText.TM11ExplanationText
 	call PrintText
-	jr .done
-.beforeBeat
-	ld hl, .PreBattleText
+	jr CeruleanGymMistyText.done
+CeruleanGymMistyText.beforeBeat
+	ld hl, CeruleanGymMistyText.PreBattleText
 	call PrintText
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
@@ -111,42 +111,42 @@ CeruleanGymMistyText:
 	ld hl, CeruleanGymMistyReceivedCascadeBadgeText
 	ld de, CeruleanGymMistyReceivedCascadeBadgeText
 	call SaveEndBattleTextPointers
-	ldh a, [hSpriteIndex]
+	ldh a, [lobyte(hSpriteIndex)]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $2
 	ld [wGymLeaderNo], a
 	xor a
-	ldh [hJoyHeld], a
+	ldh [lobyte(hJoyHeld)], a
 	ld a, SCRIPT_CERULEANGYM_MISTY_POST_BATTLE
 	ld [wCeruleanGymCurScript], a
-.done
+CeruleanGymMistyText.done
 	jp TextScriptEnd
 
-.PreBattleText:
-	text_far _CeruleanGymMistyPreBattleText
+CeruleanGymMistyText.PreBattleText:
+	text_far WLA_GLOBAL_CeruleanGymMistyPreBattleText
 	text_end
 
-.TM11ExplanationText:
-	text_far _CeruleanGymMistyTM11ExplanationText
+CeruleanGymMistyText.TM11ExplanationText:
+	text_far WLA_GLOBAL_CeruleanGymMistyTM11ExplanationText
 	text_end
 
 CeruleanGymMistyCascadeBadgeInfoText:
-	text_far _CeruleanGymMistyCascadeBadgeInfoText
+	text_far WLA_GLOBAL_CeruleanGymMistyCascadeBadgeInfoText
 	text_end
 
 CeruleanGymMistyReceivedTM11Text:
-	text_far _CeruleanGymMistyReceivedTM11Text
+	text_far WLA_GLOBAL_CeruleanGymMistyReceivedTM11Text
 	sound_get_item_1
 	text_end
 
 CeruleanGymMistyTM11NoRoomText:
-	text_far _CeruleanGymMistyTM11NoRoomText
+	text_far WLA_GLOBAL_CeruleanGymMistyTM11NoRoomText
 	text_end
 
 CeruleanGymMistyReceivedCascadeBadgeText:
-	text_far _CeruleanGymMistyReceivedCascadeBadgeText
+	text_far WLA_GLOBAL_CeruleanGymMistyReceivedCascadeBadgeText
 	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
 	text_promptbutton
 	text_end
@@ -158,15 +158,15 @@ CeruleanGymCooltrainerFText:
 	jp TextScriptEnd
 
 CeruleanGymBattleText1:
-	text_far _CeruleanGymBattleText1
+	text_far WLA_GLOBAL_CeruleanGymBattleText1
 	text_end
 
 CeruleanGymEndBattleText1:
-	text_far _CeruleanGymEndBattleText1
+	text_far WLA_GLOBAL_CeruleanGymEndBattleText1
 	text_end
 
 CeruleanGymAfterBattleText1:
-	text_far _CeruleanGymAfterBattleText1
+	text_far WLA_GLOBAL_CeruleanGymAfterBattleText1
 	text_end
 
 CeruleanGymSwimmerText:
@@ -176,34 +176,34 @@ CeruleanGymSwimmerText:
 	jp TextScriptEnd
 
 CeruleanGymBattleText2:
-	text_far _CeruleanGymBattleText2
+	text_far WLA_GLOBAL_CeruleanGymBattleText2
 	text_end
 
 CeruleanGymEndBattleText2:
-	text_far _CeruleanGymEndBattleText2
+	text_far WLA_GLOBAL_CeruleanGymEndBattleText2
 	text_end
 
 CeruleanGymAfterBattleText2:
-	text_far _CeruleanGymAfterBattleText2
+	text_far WLA_GLOBAL_CeruleanGymAfterBattleText2
 	text_end
 
 CeruleanGymGymGuideText:
 	text_asm
 	CheckEvent EVENT_BEAT_MISTY
-	jr nz, .afterBeat
-	ld hl, .ChampInMakingText
+	jr nz, CeruleanGymGymGuideText.afterBeat
+	ld hl, CeruleanGymGymGuideText.ChampInMakingText
 	call PrintText
-	jr .done
-.afterBeat
-	ld hl, .BeatMistyText
+	jr CeruleanGymGymGuideText.done
+CeruleanGymGymGuideText.afterBeat
+	ld hl, CeruleanGymGymGuideText.BeatMistyText
 	call PrintText
-.done
+CeruleanGymGymGuideText.done
 	jp TextScriptEnd
 
-.ChampInMakingText:
-	text_far _CeruleanGymGymGuideChampInMakingText
+CeruleanGymGymGuideText.ChampInMakingText:
+	text_far WLA_GLOBAL_CeruleanGymGymGuideChampInMakingText
 	text_end
 
-.BeatMistyText:
-	text_far _CeruleanGymGymGuideBeatMistyText
+CeruleanGymGymGuideText.BeatMistyText:
+	text_far WLA_GLOBAL_CeruleanGymGymGuideBeatMistyText
 	text_end

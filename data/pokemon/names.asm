@@ -1,4 +1,4 @@
-MonsterNames::
+MonsterNames:
 	table_width NAME_LENGTH - 1
 	dname "RHYDON"
 	dname "KANGASKHAN"

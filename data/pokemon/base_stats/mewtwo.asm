@@ -1,17 +1,17 @@
-	db DEX_MEWTWO ; pokedex id
+	.DB DEX_MEWTWO ; pokedex id
 
-	db 106, 110,  90, 130, 154
+	.DB 106, 110,  90, 130, 154
 	;   hp  atk  def  spd  spc
 
-	db PSYCHIC_TYPE, PSYCHIC_TYPE ; type
-	db 3 ; catch rate
-	db 220 ; base exp
+	.DB PSYCHIC_TYPE, PSYCHIC_TYPE ; type
+	.DB 3 ; catch rate
+	.DB 220 ; base exp
 
-	INCBIN "gfx/pokemon/front/mewtwo.pic", 0, 1 ; sprite dimensions
-	dw MewtwoPicFront, MewtwoPicBack
+	.INCBIN "gfx/pokemon/front/mewtwo.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW MewtwoPicFront, MewtwoPicBack
 
-	db CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB CONFUSION, DISABLE, SWIFT, PSYCHIC_M ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -24,4 +24,4 @@
 	     FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

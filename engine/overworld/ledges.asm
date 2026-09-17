@@ -1,4 +1,4 @@
-HandleLedges::
+HandleLedges:
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
 	ret nz
@@ -13,30 +13,30 @@ HandleLedges::
 	ld a, [wTileInFrontOfPlayer]
 	ld d, a
 	ld hl, LedgeTiles
-.loop
+HandleLedges.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr nz, .nextLedgeTile1
+	jr nz, HandleLedges.nextLedgeTile1
 	ld a, [hli]
 	cp c
-	jr nz, .nextLedgeTile2
+	jr nz, HandleLedges.nextLedgeTile2
 	ld a, [hli]
 	cp d
-	jr nz, .nextLedgeTile3
+	jr nz, HandleLedges.nextLedgeTile3
 	ld a, [hl]
 	ld e, a
-	jr .foundMatch
-.nextLedgeTile1
+	jr HandleLedges.foundMatch
+HandleLedges.nextLedgeTile1
 	inc hl
-.nextLedgeTile2
+HandleLedges.nextLedgeTile2
 	inc hl
-.nextLedgeTile3
+HandleLedges.nextLedgeTile3
 	inc hl
-	jr .loop
-.foundMatch
-	ldh a, [hJoyHeld]
+	jr HandleLedges.loop
+HandleLedges.foundMatch
+	ldh a, [lobyte(hJoyHeld)]
 	and e
 	ret z
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
@@ -54,26 +54,26 @@ HandleLedges::
 	call PlaySound
 	ret
 
-INCLUDE "data/tilesets/ledge_tiles.asm"
+.INCLUDE "data/tilesets/ledge_tiles.asm"
 
 LoadHoppingShadowOAM:
-	ld hl, vChars1 tile $7f
+	ld hl, vChars1 + TILE_SIZE * $7f
 	ld de, LedgeHoppingShadow
-	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / TILE_1BPP_SIZE
+	lb "bc", bank(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	ld a, $9
-	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
+	lb "bc", $54, $48 ; b, c = y, x coordinates of shadow
 	ld de, LedgeHoppingShadowOAMBlock
 	call WriteOAMBlock
 	ret
 
 LedgeHoppingShadow:
-	INCBIN "gfx/overworld/shadow.1bpp"
+	.INCBIN "gfx/overworld/shadow.1bpp"
 LedgeHoppingShadowEnd:
 
 LedgeHoppingShadowOAMBlock:
 ; tile ID, attributes
-	db $ff, OAM_PAL1
-	db $ff, OAM_XFLIP
-	db $ff, OAM_YFLIP
-	db $ff, OAM_XFLIP | OAM_YFLIP
+	.DB $ff, OAM_PAL1
+	.DB $ff, OAM_XFLIP
+	.DB $ff, OAM_YFLIP
+	.DB $ff, OAM_XFLIP | OAM_YFLIP

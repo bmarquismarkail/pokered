@@ -1,4 +1,4 @@
-SafariZoneCheck::
+SafariZoneCheck:
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [wNumSafariBalls]
@@ -6,11 +6,11 @@ SafariZoneCheck::
 	jr z, SafariZoneGameOver
 	jr SafariZoneGameStillGoing
 
-SafariZoneCheckSteps::
-IF DEF(_DEBUG)
+SafariZoneCheckSteps:
+.IF defined(_DEBUG)
 	call DebugPressedOrHeldB
 	ret nz
-ENDC
+.ENDIF
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]
@@ -33,20 +33,20 @@ SafariZoneGameOver:
 	ld [wAudioFadeOutControl], a
 	dec a ; SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld c, BANK(SFX_Safari_Zone_PA)
+	ld c, bank(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
-.waitForMusicToPlay
+SafariZoneGameOver.waitForMusicToPlay
 	ld a, [wChannelSoundIDs + CHAN5]
 	cp SFX_SAFARI_ZONE_PA
-	jr nz, .waitForMusicToPlay
+	jr nz, SafariZoneGameOver.waitForMusicToPlay
 	ld a, TEXT_SAFARI_GAME_OVER
-	ldh [hTextID], a
+	ldh [lobyte(hTextID)], a
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_GATE
-	ldh [hWarpDestinationMap], a
+	ldh [lobyte(hWarpDestinationMap)], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, SCRIPT_SAFARIZONEGATE_LEAVING_SAFARI
@@ -56,7 +56,7 @@ SafariZoneGameOver:
 	ld [wSafariZoneGameOver], a
 	ret
 
-PrintSafariGameOverText::
+PrintSafariGameOverText:
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, SafariGameOverText
@@ -66,18 +66,18 @@ SafariGameOverText:
 	text_asm
 	ld a, [wNumSafariBalls]
 	and a
-	jr z, .noMoreSafariBalls
+	jr z, SafariGameOverText.noMoreSafariBalls
 	ld hl, TimesUpText
 	call PrintText
-.noMoreSafariBalls
+SafariGameOverText.noMoreSafariBalls
 	ld hl, GameOverText
 	call PrintText
 	jp TextScriptEnd
 
 TimesUpText:
-	text_far _TimesUpText
+	text_far WLA_GLOBAL_TimesUpText
 	text_end
 
 GameOverText:
-	text_far _GameOverText
+	text_far WLA_GLOBAL_GameOverText
 	text_end

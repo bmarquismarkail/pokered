@@ -8,7 +8,7 @@ CinnabarLabTradeRoom_TextPointers:
 	dw_const CinnabarLabTradeRoomBeautyText,    TEXT_CINNABARLABTRADEROOM_BEAUTY
 
 CinnabarLabTradeRoomSuperNerdText:
-	text_far _CinnabarLabTradeRoomSuperNerdText
+	text_far WLA_GLOBAL_CinnabarLabTradeRoomSuperNerdText
 	text_end
 
 CinnabarLabTradeRoomGrampsText:

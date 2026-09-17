@@ -1,8 +1,8 @@
-PlayerStepOutFromDoor::
+PlayerStepOutFromDoor:
 	ld hl, wStatusFlags5
 	res BIT_UNKNOWN_5_1, [hl]
 	call IsPlayerStandingOnDoorTile
-	jr nc, .notStandingOnDoor
+	jr nc, PlayerStepOutFromDoor.notStandingOnDoor
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	ld hl, wMovementFlags
@@ -15,7 +15,7 @@ PlayerStepOutFromDoor::
 	ld [wSpritePlayerStateData1ImageIndex], a
 	call StartSimulatingJoypadStates
 	ret
-.notStandingOnDoor
+PlayerStepOutFromDoor.notStandingOnDoor
 	xor a
 	ld [wUnusedOverrideSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -27,7 +27,8 @@ PlayerStepOutFromDoor::
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ret
 
-_EndNPCMovementScript::
+_EndNPCMovementScript:
+WLA_GLOBAL_EndNPCMovementScript:
 	ld hl, wStatusFlags5
 	res BIT_SCRIPTED_MOVEMENT_STATE, [hl]
 	ld hl, wStatusFlags4
@@ -44,18 +45,18 @@ _EndNPCMovementScript::
 	ld [wSimulatedJoypadStatesEnd], a
 	ret
 
-PalletMovementScriptPointerTable::
-	dw PalletMovementScript_OakMoveLeft
-	dw PalletMovementScript_PlayerMoveLeft
-	dw PalletMovementScript_WaitAndWalkToLab
-	dw PalletMovementScript_WalkToLab
-	dw PalletMovementScript_Done
+PalletMovementScriptPointerTable:
+	.DW PalletMovementScript_OakMoveLeft
+	.DW PalletMovementScript_PlayerMoveLeft
+	.DW PalletMovementScript_WaitAndWalkToLab
+	.DW PalletMovementScript_WalkToLab
+	.DW PalletMovementScript_Done
 
 PalletMovementScript_OakMoveLeft:
 	ld a, [wXCoord]
 	sub $a
 	ld [wNumStepsToTake], a
-	jr z, .playerOnLeftTile
+	jr z, PalletMovementScript_OakMoveLeft.playerOnLeftTile
 ; The player is on the right tile of the northern path out of Pallet Town and
 ; Prof. Oak is below.
 ; Make Prof. Oak step to the left.
@@ -66,19 +67,19 @@ PalletMovementScript_OakMoveLeft:
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
-	jr .done
+	jr PalletMovementScript_OakMoveLeft.done
 ; The player is on the left tile of the northern path out of Pallet Town and
 ; Prof. Oak is below.
 ; Prof. Oak is already where he needs to be.
-.playerOnLeftTile
+PalletMovementScript_OakMoveLeft.playerOnLeftTile
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
-.done
+PalletMovementScript_OakMoveLeft.done
 	ld hl, wStatusFlags7
 	set BIT_NO_MAP_MUSIC, [hl]
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD
@@ -91,7 +92,7 @@ PalletMovementScript_PlayerMoveLeft:
 	ret nz ; return if Oak is still moving
 	ld a, [wNumStepsToTake]
 	ld [wSimulatedJoypadStatesIndex], a
-	ldh [hNPCMovementDirections2Index], a
+	ldh [lobyte(hNPCMovementDirections2Index)], a
 	predef ConvertNPCMovementDirectionsToJoypadMasks
 	call StartSimulatingJoypadStates
 	ld a, $2
@@ -128,21 +129,21 @@ PalletMovementScript_WalkToLab:
 	ret
 
 RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_LEFT, 1
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_RIGHT, 3
-	db NPC_MOVEMENT_UP, 1
-	db NPC_CHANGE_FACING, 1
-	db -1 ; end
+	.DB NPC_MOVEMENT_DOWN, 5
+	.DB NPC_MOVEMENT_LEFT, 1
+	.DB NPC_MOVEMENT_DOWN, 5
+	.DB NPC_MOVEMENT_RIGHT, 3
+	.DB NPC_MOVEMENT_UP, 1
+	.DB NPC_CHANGE_FACING, 1
+	.DB -1 ; end
 
 RLEList_PlayerWalkToLab:
-	db PAD_UP, 2
-	db PAD_RIGHT, 3
-	db PAD_DOWN, 5
-	db PAD_LEFT, 1
-	db PAD_DOWN, 6
-	db -1 ; end
+	.DB PAD_UP, 2
+	.DB PAD_RIGHT, 3
+	.DB PAD_DOWN, 5
+	.DB PAD_LEFT, 1
+	.DB PAD_DOWN, 6
+	.DB -1 ; end
 
 PalletMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -157,12 +158,12 @@ PalletMovementScript_Done:
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	jp EndNPCMovementScript
 
-PewterMuseumGuyMovementScriptPointerTable::
-	dw PewterMovementScript_WalkToMuseum
-	dw PewterMovementScript_Done
+PewterMuseumGuyMovementScriptPointerTable:
+	.DW PewterMovementScript_WalkToMuseum
+	.DW PewterMovementScript_Done
 
 PewterMovementScript_WalkToMuseum:
-	ld a, BANK(Music_MuseumGuy)
+	ld a, bank(Music_MuseumGuy)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
@@ -190,18 +191,18 @@ PewterMovementScript_WalkToMuseum:
 	ret
 
 RLEList_PewterMuseumPlayer:
-	db NO_INPUT, 1
-	db PAD_UP, 3
-	db PAD_LEFT, 13
-	db PAD_UP, 6
-	db -1 ; end
+	.DB NO_INPUT, 1
+	.DB PAD_UP, 3
+	.DB PAD_LEFT, 13
+	.DB PAD_UP, 6
+	.DB -1 ; end
 
 RLEList_PewterMuseumGuy:
-	db NPC_MOVEMENT_UP, 6
-	db NPC_MOVEMENT_LEFT, 13
-	db NPC_MOVEMENT_UP, 3
-	db NPC_MOVEMENT_LEFT, 1
-	db -1 ; end
+	.DB NPC_MOVEMENT_UP, 6
+	.DB NPC_MOVEMENT_LEFT, 13
+	.DB NPC_MOVEMENT_UP, 3
+	.DB NPC_MOVEMENT_LEFT, 1
+	.DB -1 ; end
 
 PewterMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -213,12 +214,12 @@ PewterMovementScript_Done:
 	res BIT_INIT_SCRIPTED_MOVEMENT, [hl]
 	jp EndNPCMovementScript
 
-PewterGymGuyMovementScriptPointerTable::
-	dw PewterMovementScript_WalkToGym
-	dw PewterMovementScript_Done
+PewterGymGuyMovementScriptPointerTable:
+	.DW PewterMovementScript_WalkToGym
+	.DW PewterMovementScript_Done
 
 PewterMovementScript_WalkToGym:
-	ld a, BANK(Music_MuseumGuy)
+	ld a, bank(Music_MuseumGuy)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
@@ -249,44 +250,44 @@ PewterMovementScript_WalkToGym:
 	ret
 
 RLEList_PewterGymPlayer:
-	db NO_INPUT, 1
-	db PAD_RIGHT, 2
-	db PAD_DOWN, 5
-	db PAD_LEFT, 11
-	db PAD_UP, 5
-	db PAD_LEFT, 15
-	db -1 ; end
+	.DB NO_INPUT, 1
+	.DB PAD_RIGHT, 2
+	.DB PAD_DOWN, 5
+	.DB PAD_LEFT, 11
+	.DB PAD_UP, 5
+	.DB PAD_LEFT, 15
+	.DB -1 ; end
 
 RLEList_PewterGymGuy:
-	db NPC_MOVEMENT_DOWN, 2
-	db NPC_MOVEMENT_LEFT, 15
-	db NPC_MOVEMENT_UP, 5
-	db NPC_MOVEMENT_LEFT, 11
-	db NPC_MOVEMENT_DOWN, 5
-	db NPC_MOVEMENT_RIGHT, 3
-	db -1 ; end
+	.DB NPC_MOVEMENT_DOWN, 2
+	.DB NPC_MOVEMENT_LEFT, 15
+	.DB NPC_MOVEMENT_UP, 5
+	.DB NPC_MOVEMENT_LEFT, 11
+	.DB NPC_MOVEMENT_DOWN, 5
+	.DB NPC_MOVEMENT_RIGHT, 3
+	.DB -1 ; end
 
-SetEnemyTrainerToStayAndFaceAnyDirection::
+SetEnemyTrainerToStayAndFaceAnyDirection:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_7F
 	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't set them
 	ld hl, RivalIDs
 	ld a, [wEngagedTrainerClass]
 	ld b, a
-.loop
+SetEnemyTrainerToStayAndFaceAnyDirection.loop
 	ld a, [hli]
 	cp -1
-	jr z, .notRival
+	jr z, SetEnemyTrainerToStayAndFaceAnyDirection.notRival
 	cp b
 	ret z ; the rival leaves after battling, so don't set him
-	jr .loop
-.notRival
+	jr SetEnemyTrainerToStayAndFaceAnyDirection.loop
+SetEnemyTrainerToStayAndFaceAnyDirection.notRival
 	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
+	ldh [lobyte(hSpriteIndex)], a
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs:
-	db OPP_RIVAL1
-	db OPP_RIVAL2
-	db OPP_RIVAL3
-	db -1 ; end
+	.DB OPP_RIVAL1
+	.DB OPP_RIVAL2
+	.DB OPP_RIVAL3
+	.DB -1 ; end

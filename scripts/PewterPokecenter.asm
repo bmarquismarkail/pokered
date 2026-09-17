@@ -13,14 +13,14 @@ PewterPokecenterNurseText:
 	script_pokecenter_nurse
 
 PewterPokecenterGentlemanText:
-	text_far _PewterPokecenterGentlemanText
+	text_far WLA_GLOBAL_PewterPokecenterGentlemanText
 	text_end
 
 PewterPokecenterJigglypuffText:
 	text_asm
 	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .Text
+	ld hl, PewterPokecenterJigglypuffText.Text
 	call PrintText
 
 	ld a, SFX_STOP_ALL_MUSIC
@@ -28,33 +28,33 @@ PewterPokecenterJigglypuffText:
 	ld c, 32
 	call DelayFrames
 
-	ld hl, .FacingDirections
+	ld hl, PewterPokecenterJigglypuffText.FacingDirections
 	ld de, wJigglypuffFacingDirections
-	ld bc, .FacingDirectionsEnd - .FacingDirections
+	ld bc, PewterPokecenterJigglypuffText.FacingDirectionsEnd - PewterPokecenterJigglypuffText.FacingDirections
 	call CopyData
 
 	ld a, [wSprite03StateData1ImageIndex]
 	ld hl, wJigglypuffFacingDirections
-.findMatchingFacingDirectionLoop
+PewterPokecenterJigglypuffText.findMatchingFacingDirectionLoop
 	cp [hl]
 	inc hl
-	jr nz, .findMatchingFacingDirectionLoop
+	jr nz, PewterPokecenterJigglypuffText.findMatchingFacingDirectionLoop
 	dec hl
 
 	push hl
-	ld c, BANK(Music_JigglypuffSong)
+	ld c, bank(Music_JigglypuffSong)
 	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
 
-.spinMovementLoop
+PewterPokecenterJigglypuffText.spinMovementLoop
 	ld a, [hl]
 	ld [wSprite03StateData1ImageIndex], a
 ; rotate the array
 	push hl
 	ld hl, wJigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections - 1
-	ld bc, .FacingDirectionsEnd - .FacingDirections
+	ld bc, PewterPokecenterJigglypuffText.FacingDirectionsEnd - PewterPokecenterJigglypuffText.FacingDirections
 	call CopyData
 	ld a, [wJigglypuffFacingDirections - 1]
 	ld [wJigglypuffFacingDirections + 3], a
@@ -65,23 +65,23 @@ PewterPokecenterJigglypuffText:
 	ld b, a
 	ld a, [wChannelSoundIDs + CHAN2]
 	or b
-	jr nz, .spinMovementLoop
+	jr nz, PewterPokecenterJigglypuffText.spinMovementLoop
 
 	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic
 	jp TextScriptEnd
 
-.Text:
-	text_far _PewterPokecenterJigglypuffText
+PewterPokecenterJigglypuffText.Text:
+	text_far WLA_GLOBAL_PewterPokecenterJigglypuffText
 	text_end
 
-.FacingDirections:
-	db $30 | SPRITE_FACING_DOWN
-	db $30 | SPRITE_FACING_LEFT
-	db $30 | SPRITE_FACING_UP
-	db $30 | SPRITE_FACING_RIGHT
-.FacingDirectionsEnd:
+PewterPokecenterJigglypuffText.FacingDirections:
+	.DB $30 | SPRITE_FACING_DOWN
+	.DB $30 | SPRITE_FACING_LEFT
+	.DB $30 | SPRITE_FACING_UP
+	.DB $30 | SPRITE_FACING_RIGHT
+PewterPokecenterJigglypuffText.FacingDirectionsEnd:
 
 PewterPokecenterLinkReceptionistText:
 	script_cable_club_receptionist

@@ -1,17 +1,17 @@
-	db DEX_TAUROS ; pokedex id
+	.DB DEX_TAUROS ; pokedex id
 
-	db  75, 100,  95, 110,  70
+	.DB  75, 100,  95, 110,  70
 	;   hp  atk  def  spd  spc
 
-	db NORMAL, NORMAL ; type
-	db 45 ; catch rate
-	db 211 ; base exp
+	.DB NORMAL, NORMAL ; type
+	.DB 45 ; catch rate
+	.DB 211 ; base exp
 
-	INCBIN "gfx/pokemon/front/tauros.pic", 0, 1 ; sprite dimensions
-	dw TaurosPicFront, TaurosPicBack
+	.INCBIN "gfx/pokemon/front/tauros.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW TaurosPicFront, TaurosPicBack
 
-	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -21,4 +21,4 @@
 	     STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

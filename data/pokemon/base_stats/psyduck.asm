@@ -1,17 +1,17 @@
-	db DEX_PSYDUCK ; pokedex id
+	.DB DEX_PSYDUCK ; pokedex id
 
-	db  50,  52,  48,  55,  50
+	.DB  50,  52,  48,  55,  50
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
-	db 190 ; catch rate
-	db 80 ; base exp
+	.DB WATER, WATER ; type
+	.DB 190 ; catch rate
+	.DB 80 ; base exp
 
-	INCBIN "gfx/pokemon/front/psyduck.pic", 0, 1 ; sprite dimensions
-	dw PsyduckPicFront, PsyduckPicBack
+	.INCBIN "gfx/pokemon/front/psyduck.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW PsyduckPicFront, PsyduckPicBack
 
-	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
@@ -21,4 +21,4 @@
 	     SKULL_BASH,   REST,         SUBSTITUTE,   SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

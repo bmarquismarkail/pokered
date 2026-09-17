@@ -1,53 +1,53 @@
-CableClubNPC::
+CableClubNPC:
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
 	CheckEvent EVENT_GOT_POKEDEX
-	jp nz, .receivedPokedex
+	jp nz, CableClubNPC.receivedPokedex
 ; if the player hasn't received the pokedex
 	ld c, 60
 	call DelayFrames
 	ld hl, CableClubNPCMakingPreparationsText
 	call PrintText
-	jp .didNotConnect
-.receivedPokedex
+	jp CableClubNPC.didNotConnect
+CableClubNPC.receivedPokedex
 	ld a, $1
 	ld [wMenuJoypadPollCount], a
 	ld a, 90
 	ld [wLinkTimeoutCounter], a
-.establishConnectionLoop
-	ldh a, [hSerialConnectionStatus]
+CableClubNPC.establishConnectionLoop
+	ldh a, [lobyte(hSerialConnectionStatus)]
 	cp USING_INTERNAL_CLOCK
-	jr z, .establishedConnection
+	jr z, CableClubNPC.establishedConnection
 	cp USING_EXTERNAL_CLOCK
-	jr z, .establishedConnection
+	jr z, CableClubNPC.establishedConnection
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hSerialConnectionStatus], a
+	ldh [lobyte(hSerialConnectionStatus)], a
 	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
-	ldh [rSB], a
+	ldh [lobyte(rSB)], a
 	xor a
-	ldh [hSerialReceiveData], a
+	ldh [lobyte(hSerialReceiveData)], a
 	ld a, SC_START | SC_EXTERNAL
 ; This vc_hook causes the Virtual Console to set [hSerialConnectionStatus] to
 ; USING_INTERNAL_CLOCK, which allows the player to proceed past the link
 ; receptionist's "Please wait." It assumes that hSerialConnectionStatus is at
 ; its original address.
 	vc_hook Link_fake_connection_status
-	vc_assert hSerialConnectionStatus == $ffaa, \
+	vc_assert hSerialConnectionStatus = $ffaa, \
 		"hSerialConnectionStatus is no longer located at 00:ffaa"
-	vc_assert USING_INTERNAL_CLOCK == $02, \
+	vc_assert USING_INTERNAL_CLOCK = $02, \
 		"USING_INTERNAL_CLOCK is no longer equal to $02."
-	ldh [rSC], a
+	ldh [lobyte(rSC)], a
 	ld a, [wLinkTimeoutCounter]
 	dec a
 	ld [wLinkTimeoutCounter], a
-	jr z, .failedToEstablishConnection
+	jr z, CableClubNPC.failedToEstablishConnection
 	ld a, ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK
-	ldh [rSB], a
+	ldh [lobyte(rSB)], a
 	ld a, SC_START | SC_INTERNAL
-	ldh [rSC], a
+	ldh [lobyte(rSC)], a
 	call DelayFrame
-	jr .establishConnectionLoop
-.establishedConnection
+	jr CableClubNPC.establishConnectionLoop
+CableClubNPC.establishedConnection
 	call Serial_SendZeroByte
 	call DelayFrame
 	call Serial_SendZeroByte
@@ -62,7 +62,7 @@ CableClubNPC::
 	ld [wMenuJoypadPollCount], a
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .choseNo
+	jr nz, CableClubNPC.choseNo
 	vc_hook Wireless_TryQuickSave_block_input
 	callfar SaveGameData
 	call WaitForSoundToFinish
@@ -75,7 +75,7 @@ CableClubNPC::
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ldh [hSerialReceivedNewData], a
+	ldh [lobyte(hSerialReceivedNewData)], a
 	vc_hook Wireless_prompt
 	ld [wSerialExchangeNybbleSendData], a
 	call Serial_SyncAndExchangeNybble
@@ -83,29 +83,29 @@ CableClubNPC::
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a
-	jr nz, .connected
+	jr nz, CableClubNPC.connected
 	ld a, [hl]
 	inc a
-	jr nz, .connected
+	jr nz, CableClubNPC.connected
 	ld b, 10
-.syncLoop
+CableClubNPC.syncLoop
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
-	jr nz, .syncLoop
+	jr nz, CableClubNPC.syncLoop
 	call CloseLinkConnection
 	ld hl, CableClubNPCLinkClosedBecauseOfInactivityText
 	call PrintText
-	jr .didNotConnect
-.failedToEstablishConnection
+	jr CableClubNPC.didNotConnect
+CableClubNPC.failedToEstablishConnection
 	ld hl, CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	call PrintText
-	jr .didNotConnect
-.choseNo
+	jr CableClubNPC.didNotConnect
+CableClubNPC.choseNo
 	call CloseLinkConnection
 	ld hl, CableClubNPCPleaseComeAgainText
 	call PrintText
-.didNotConnect
+CableClubNPC.didNotConnect
 	xor a
 	ld hl, wUnknownSerialCounter
 	ld [hli], a
@@ -115,49 +115,49 @@ CableClubNPC::
 	xor a
 	ld [wMenuJoypadPollCount], a
 	ret
-.connected
+CableClubNPC.connected
 	xor a
 	ld [hld], a
 	ld [hl], a
 	jpfar LinkMenu
 
 CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
-	text_far _CableClubNPCAreaReservedFor2FriendsLinkedByCableText
+	text_far WLA_GLOBAL_CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	text_end
 
 CableClubNPCWelcomeText:
-	text_far _CableClubNPCWelcomeText
+	text_far WLA_GLOBAL_CableClubNPCWelcomeText
 	text_end
 
 CableClubNPCPleaseApplyHereHaveToSaveText:
-	text_far _CableClubNPCPleaseApplyHereHaveToSaveText
+	text_far WLA_GLOBAL_CableClubNPCPleaseApplyHereHaveToSaveText
 	text_end
 
 CableClubNPCPleaseWaitText:
-	text_far _CableClubNPCPleaseWaitText
+	text_far WLA_GLOBAL_CableClubNPCPleaseWaitText
 	text_pause
 	text_end
 
 CableClubNPCLinkClosedBecauseOfInactivityText:
-	text_far _CableClubNPCLinkClosedBecauseOfInactivityText
+	text_far WLA_GLOBAL_CableClubNPCLinkClosedBecauseOfInactivityText
 	text_end
 
 CableClubNPCPleaseComeAgainText:
-	text_far _CableClubNPCPleaseComeAgainText
+	text_far WLA_GLOBAL_CableClubNPCPleaseComeAgainText
 	text_end
 
 CableClubNPCMakingPreparationsText:
-	text_far _CableClubNPCMakingPreparationsText
+	text_far WLA_GLOBAL_CableClubNPCMakingPreparationsText
 	text_end
 
 CloseLinkConnection:
 	call Delay3
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hSerialConnectionStatus], a
+	ldh [lobyte(hSerialConnectionStatus)], a
 	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
-	ldh [rSB], a
+	ldh [lobyte(rSB)], a
 	xor a
-	ldh [hSerialReceiveData], a
+	ldh [lobyte(hSerialReceiveData)], a
 	ld a, SC_START | SC_EXTERNAL
-	ldh [rSC], a
+	ldh [lobyte(rSC)], a
 	ret

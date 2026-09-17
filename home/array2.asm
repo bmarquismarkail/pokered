@@ -1,4 +1,4 @@
-CallFunctionInTable::
+CallFunctionInTable:
 ; Call function a in jumptable hl.
 ; de is not preserved.
 	push hl
@@ -11,37 +11,37 @@ CallFunctionInTable::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .returnAddress
+	ld de, CallFunctionInTable.returnAddress
 	push de
 	jp hl
-.returnAddress
+CallFunctionInTable.returnAddress
 	pop bc
 	pop de
 	pop hl
 	ret
 
-IsInArray::
+IsInArray:
 ; Search an array at hl for the value in a.
 ; Entry size is de bytes.
 ; Return count b and carry if found.
 	ld b, 0
 
-IsInRestOfArray::
+IsInRestOfArray:
 	ld c, a
-.loop
+IsInRestOfArray.loop
 	ld a, [hl]
 	cp -1
-	jr z, .notfound
+	jr z, IsInRestOfArray.notfound
 	cp c
-	jr z, .found
+	jr z, IsInRestOfArray.found
 	inc b
 	add hl, de
-	jr .loop
+	jr IsInRestOfArray.loop
 
-.notfound
+IsInRestOfArray.notfound
 	and a
 	ret
 
-.found
+IsInRestOfArray.found
 	scf
 	ret

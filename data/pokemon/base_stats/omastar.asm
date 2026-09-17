@@ -1,17 +1,17 @@
-	db DEX_OMASTAR ; pokedex id
+	.DB DEX_OMASTAR ; pokedex id
 
-	db  70,  60, 125,  55, 115
+	.DB  70,  60, 125,  55, 115
 	;   hp  atk  def  spd  spc
 
-	db ROCK, WATER ; type
-	db 45 ; catch rate
-	db 199 ; base exp
+	.DB ROCK, WATER ; type
+	.DB 45 ; catch rate
+	.DB 199 ; base exp
 
-	INCBIN "gfx/pokemon/front/omastar.pic", 0, 1 ; sprite dimensions
-	dw OmastarPicFront, OmastarPicBack
+	.INCBIN "gfx/pokemon/front/omastar.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW OmastarPicFront, OmastarPicBack
 
-	db WATER_GUN, WITHDRAW, HORN_ATTACK, NO_MOVE ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB WATER_GUN, WITHDRAW, HORN_ATTACK, NO_MOVE ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -21,4 +21,4 @@
 	     SURF
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

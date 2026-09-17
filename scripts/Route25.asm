@@ -16,12 +16,12 @@ Route25ToggleBillsScript:
 	CheckEventHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ret nz
 	CheckEventReuseHL EVENT_MET_BILL_2
-	jr nz, .met_bill
+	jr nz, Route25ToggleBillsScript.met_bill
 	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, TOGGLE_BILL_POKEMON
 	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
-.met_bill
+Route25ToggleBillsScript.met_bill
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
@@ -75,7 +75,7 @@ Route25TrainerHeader7:
 	trainer EVENT_BEAT_ROUTE_25_TRAINER_7, 2, Route25Hiker2BattleText, Route25Hiker2EndBattleText, Route25Hiker2AfterBattleText
 Route25TrainerHeader8:
 	trainer EVENT_BEAT_ROUTE_25_TRAINER_8, 2, Route25Hiker3BattleText, Route25Hiker3EndBattleText, Route25Hiker3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 Route25Youngster1Text:
 	text_asm
@@ -132,113 +132,113 @@ Route25Hiker3Text:
 	jp TextScriptEnd
 
 Route25Youngster1BattleText:
-	text_far _Route25Youngster1BattleText
+	text_far WLA_GLOBAL_Route25Youngster1BattleText
 	text_end
 
 Route25Youngster1EndBattleText:
-	text_far _Route25Youngster1EndBattleText
+	text_far WLA_GLOBAL_Route25Youngster1EndBattleText
 	text_end
 
 Route25Youngster1AfterBattleText:
-	text_far _Route25Youngster1AfterBattleText
+	text_far WLA_GLOBAL_Route25Youngster1AfterBattleText
 	text_end
 
 Route25Youngster2BattleText:
-	text_far _Route25Youngster2BattleText
+	text_far WLA_GLOBAL_Route25Youngster2BattleText
 	text_end
 
 Route25Youngster2EndBattleText:
-	text_far _Route25Youngster2EndBattleText
+	text_far WLA_GLOBAL_Route25Youngster2EndBattleText
 	text_end
 
 Route25Youngster2AfterBattleText:
-	text_far _Route25Youngster2AfterBattleText
+	text_far WLA_GLOBAL_Route25Youngster2AfterBattleText
 	text_end
 
 Route25CooltrainerMBattleText:
-	text_far _Route25CooltrainerMBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerMBattleText
 	text_end
 
 Route25CooltrainerMEndBattleText:
-	text_far _Route25CooltrainerMEndBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerMEndBattleText
 	text_end
 
 Route25CooltrainerMAfterBattleText:
-	text_far _Route25CooltrainerMAfterBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerMAfterBattleText
 	text_end
 
 Route25CooltrainerF1BattleText:
-	text_far _Route25CooltrainerF1BattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF1BattleText
 	text_end
 
 Route25CooltrainerF1EndBattleText:
-	text_far _Route25CooltrainerF1EndBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF1EndBattleText
 	text_end
 
 Route25CooltrainerF1AfterBattleText:
-	text_far _Route25CooltrainerF1AfterBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF1AfterBattleText
 	text_end
 
 Route25Youngster3BattleText:
-	text_far _Route25Youngster3BattleText
+	text_far WLA_GLOBAL_Route25Youngster3BattleText
 	text_end
 
 Route25Youngster3EndBattleText:
-	text_far _Route25Youngster3EndBattleText
+	text_far WLA_GLOBAL_Route25Youngster3EndBattleText
 	text_end
 
 Route25Youngster3AfterBattleText:
-	text_far _Route25Youngster3AfterBattleText
+	text_far WLA_GLOBAL_Route25Youngster3AfterBattleText
 	text_end
 
 Route25CooltrainerF2BattleText:
-	text_far _Route25CooltrainerF2BattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF2BattleText
 	text_end
 
 Route25CooltrainerF2EndBattleText:
-	text_far _Route25CooltrainerF2EndBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF2EndBattleText
 	text_end
 
 Route25CooltrainerF2AfterBattleText:
-	text_far _Route25CooltrainerF2AfterBattleText
+	text_far WLA_GLOBAL_Route25CooltrainerF2AfterBattleText
 	text_end
 
 Route25Hiker1BattleText:
-	text_far _Route25Hiker1BattleText
+	text_far WLA_GLOBAL_Route25Hiker1BattleText
 	text_end
 
 Route25Hiker1EndBattleText:
-	text_far _Route25Hiker1EndBattleText
+	text_far WLA_GLOBAL_Route25Hiker1EndBattleText
 	text_end
 
 Route25Hiker1AfterBattleText:
-	text_far _Route25Hiker1AfterBattleText
+	text_far WLA_GLOBAL_Route25Hiker1AfterBattleText
 	text_end
 
 Route25Hiker2BattleText:
-	text_far _Route25Hiker2BattleText
+	text_far WLA_GLOBAL_Route25Hiker2BattleText
 	text_end
 
 Route25Hiker2EndBattleText:
-	text_far _Route25Hiker2EndBattleText
+	text_far WLA_GLOBAL_Route25Hiker2EndBattleText
 	text_end
 
 Route25Hiker2AfterBattleText:
-	text_far _Route25Hiker2AfterBattleText
+	text_far WLA_GLOBAL_Route25Hiker2AfterBattleText
 	text_end
 
 Route25Hiker3BattleText:
-	text_far _Route25Hiker3BattleText
+	text_far WLA_GLOBAL_Route25Hiker3BattleText
 	text_end
 
 Route25Hiker3EndBattleText:
-	text_far _Route25Hiker3EndBattleText
+	text_far WLA_GLOBAL_Route25Hiker3EndBattleText
 	text_end
 
 Route25Hiker3AfterBattleText:
-	text_far _Route25Hiker3AfterBattleText
+	text_far WLA_GLOBAL_Route25Hiker3AfterBattleText
 	text_end
 
 Route25BillSignText:
-	text_far _Route25BillSignText
+	text_far WLA_GLOBAL_Route25BillSignText
 	text_end

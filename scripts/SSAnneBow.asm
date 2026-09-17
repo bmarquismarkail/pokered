@@ -27,18 +27,18 @@ SSAnne5TrainerHeader0:
 	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnneBowSailor2BattleText, SSAnneBowSailor2EndBattleText, SSAnneBowSailor2AfterBattleText
 SSAnne5TrainerHeader1:
 	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnneBowSailor3BattleText, SSAnneBowSailor3EndBattleText, SSAnneBowSailor3AfterBattleText
-	db -1 ; end
+	.DB -1 ; end
 
 SSAnneBowSuperNerdText:
-	text_far _SSAnneBowSuperNerdText
+	text_far WLA_GLOBAL_SSAnneBowSuperNerdText
 	text_end
 
 SSAnneBowSailor1Text:
-	text_far _SSAnneBowSailor1Text
+	text_far WLA_GLOBAL_SSAnneBowSailor1Text
 	text_end
 
 SSAnneBowCooltrainerMText:
-	text_far _SSAnneBowCooltrainerMText
+	text_far WLA_GLOBAL_SSAnneBowCooltrainerMText
 	text_end
 
 SSAnneBowSailor2Text:
@@ -48,15 +48,15 @@ SSAnneBowSailor2Text:
 	jp TextScriptEnd
 
 SSAnneBowSailor2BattleText:
-	text_far _SSAnneBowSailor2BattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor2BattleText
 	text_end
 
 SSAnneBowSailor2EndBattleText:
-	text_far _SSAnneBowSailor2EndBattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor2EndBattleText
 	text_end
 
 SSAnneBowSailor2AfterBattleText:
-	text_far _SSAnneBowSailor2AfterBattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor2AfterBattleText
 	text_end
 
 SSAnneBowSailor3Text:
@@ -66,13 +66,13 @@ SSAnneBowSailor3Text:
 	jp TextScriptEnd
 
 SSAnneBowSailor3BattleText:
-	text_far _SSAnneBowSailor3BattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor3BattleText
 	text_end
 
 SSAnneBowSailor3EndBattleText:
-	text_far _SSAnneBowSailor3EndBattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor3EndBattleText
 	text_end
 
 SSAnneBowSailor3AfterBattleText:
-	text_far _SSAnneBowSailor3AfterBattleText
+	text_far WLA_GLOBAL_SSAnneBowSailor3AfterBattleText
 	text_end

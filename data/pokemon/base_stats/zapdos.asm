@@ -1,17 +1,17 @@
-	db DEX_ZAPDOS ; pokedex id
+	.DB DEX_ZAPDOS ; pokedex id
 
-	db  90,  90,  85, 100, 125
+	.DB  90,  90,  85, 100, 125
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, FLYING ; type
-	db 3 ; catch rate
-	db 216 ; base exp
+	.DB ELECTRIC, FLYING ; type
+	.DB 3 ; catch rate
+	.DB 216 ; base exp
 
-	INCBIN "gfx/pokemon/front/zapdos.pic", 0, 1 ; sprite dimensions
-	dw ZapdosPicFront, ZapdosPicBack
+	.INCBIN "gfx/pokemon/front/zapdos.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW ZapdosPicFront, ZapdosPicBack
 
-	db THUNDERSHOCK, DRILL_PECK, NO_MOVE, NO_MOVE ; level 1 learnset
-	db GROWTH_SLOW ; growth rate
+	.DB THUNDERSHOCK, DRILL_PECK, NO_MOVE, NO_MOVE ; level 1 learnset
+	.DB GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \
@@ -20,4 +20,4 @@
 	     REST,         THUNDER_WAVE, SUBSTITUTE,   FLY,          FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding

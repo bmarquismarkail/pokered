@@ -1,4 +1,4 @@
-GetPredefPointer::
+GetPredefPointer:
 ; Back up the contents of the registers (hl, de, bc).
 ; Then put the bank and address of predef
 ; wPredefID in [wPredefBank] and hl.
@@ -14,7 +14,6 @@ GetPredefPointer::
 	ld a, e
 	ld [hli], a
 
-	ASSERT wPredefDE + 2 == wPredefBC
 	ld a, b
 	ld [hli], a
 	ld [hl], c
@@ -27,10 +26,10 @@ GetPredefPointer::
 	add a
 	add e
 	ld e, a
-	jr nc, .nocarry
+	jr nc, GetPredefPointer.nocarry
 	inc d
 
-.nocarry
+GetPredefPointer.nocarry
 	add hl, de
 	ld d, h
 	ld e, l
@@ -49,4 +48,4 @@ GetPredefPointer::
 
 	ret
 
-INCLUDE "data/predef_pointers.asm"
+.INCLUDE "data/predef_pointers.asm"

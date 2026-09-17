@@ -1,3 +1,3 @@
-PokemonStuffText::
-	text_far _PokemonStuffText
+PokemonStuffText:
+	text_far WLA_GLOBAL_PokemonStuffText
 	text_end

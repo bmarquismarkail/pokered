@@ -1,15 +1,15 @@
 ; see constants/player_constants.asm
 
 DefaultNamesPlayer:
-	db "NEW NAME"
-FOR n, 1, NUM_PLAYER_NAMES + 1
-	next #PLAYERNAME{d:n}
-ENDR
-	db "@"
+		.STRINGMAP pokemon, "NEW NAME"
+.REPEAT NUM_PLAYER_NAMES START 1 INDEX n
+	next PLAYERNAME{n}
+.ENDR
+		.STRINGMAP pokemon, "@"
 
 DefaultNamesRival:
-	db "NEW NAME"
-FOR n, 1, NUM_PLAYER_NAMES + 1
-	next #RIVALNAME{d:n}
-ENDR
-	db "@"
+		.STRINGMAP pokemon, "NEW NAME"
+.REPEAT NUM_PLAYER_NAMES START 1 INDEX n
+	next RIVALNAME{n}
+.ENDR
+		.STRINGMAP pokemon, "@"

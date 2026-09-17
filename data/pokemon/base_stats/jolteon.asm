@@ -1,17 +1,17 @@
-	db DEX_JOLTEON ; pokedex id
+	.DB DEX_JOLTEON ; pokedex id
 
-	db  65,  65,  60, 130, 110
+	.DB  65,  65,  60, 130, 110
 	;   hp  atk  def  spd  spc
 
-	db ELECTRIC, ELECTRIC ; type
-	db 45 ; catch rate
-	db 197 ; base exp
+	.DB ELECTRIC, ELECTRIC ; type
+	.DB 45 ; catch rate
+	.DB 197 ; base exp
 
-	INCBIN "gfx/pokemon/front/jolteon.pic", 0, 1 ; sprite dimensions
-	dw JolteonPicFront, JolteonPicBack
+	.INCBIN "gfx/pokemon/front/jolteon.pic" SKIP 0 READ 1 ; sprite dimensions
+	.DW JolteonPicFront, JolteonPicBack
 
-	db TACKLE, SAND_ATTACK, QUICK_ATTACK, THUNDERSHOCK ; level 1 learnset
-	db GROWTH_MEDIUM_FAST ; growth rate
+	.DB TACKLE, SAND_ATTACK, QUICK_ATTACK, THUNDERSHOCK ; level 1 learnset
+	.DB GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  HYPER_BEAM,   \
@@ -20,4 +20,4 @@
 	     THUNDER_WAVE, SUBSTITUTE,   FLASH
 	; end
 
-	db 0 ; padding
+	.DB 0 ; padding
